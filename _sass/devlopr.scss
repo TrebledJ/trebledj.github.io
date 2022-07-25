@@ -334,25 +334,25 @@ blockquote p {
 /* Scrollbar */
 
 /* width */
-::-webkit-scrollbar {
-    width: 10px;
-}
+// ::-webkit-scrollbar {
+//     width: 10px;
+// }
 
-/* Track */
-::-webkit-scrollbar-track {
-    background: rgb(28, 28, 30);
-    ;
-}
+// /* Track */
+// ::-webkit-scrollbar-track {
+//     background: rgb(28, 28, 30);
+//     ;
+// }
 
-/* Handle */
-::-webkit-scrollbar-thumb {
-    background: #212529;
-}
+// /* Handle */
+// ::-webkit-scrollbar-thumb {
+//     background: #212529;
+// }
 
-/* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
-    background: #333;
-}
+// /* Handle on hover */
+// ::-webkit-scrollbar-thumb:hover {
+//     background: #333;
+// }
 
 h1,
 h2,
