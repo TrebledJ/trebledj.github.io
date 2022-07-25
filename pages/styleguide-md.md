@@ -50,3 +50,37 @@ int main() {
   std::cout << "Lorem ipsum dolor sit amet" << std::endl;
 }
 ```
+
+```c
+#include <stdio.h>
+
+int main() {
+  printf("Hello there %.3f", 3.14159);
+}
+```
+
+```haskell
+fib :: Int -> Int
+fib n | n < 2 = 1
+      | otherwise = fib (n - 1) + fib (n - 2)
+```
+
+```rust
+fn main() {
+  let x: Vec<i32> = vec![1, 3, 5, 7, 9];
+  println!("{:?}", x);
+}
+```
+
+```python
+def factorial(n: int) -> int:
+  return 1 if n < 2 else n * factorial(n - 1)
+```
+
+```scala
+object Module {
+  def gauss(n: Int): Int = {
+    n * (n + 1) / 2
+  }
+}
+```
