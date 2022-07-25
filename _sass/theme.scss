@@ -1,0 +1,39 @@
+/*
+  color-theme: default
+  reference: https://tailwindcss.com/docs/customizing-colors
+
+  Minimal color options and variations.
+  Almost all color variations can be played based off the few.
+*/
+:root {
+    --color-primary: #3b82f6;
+    --color-secondary: #2563eb;
+    --color-accent: #fb923c;
+
+    --background-color: #fafafa;
+    --background-color-alt: #f4f4f5;
+    --background-color-highlight: #e4e4e7;
+
+    --text-color: #3f3f46;
+    --text-color-alt: #52525b;
+}
+
+[data-theme="dark"] {
+    --color-primary: #fb923c;
+    --color-secondary: #f59e0b;
+    --color-accent: #3b82f6;
+
+    --background-color: #52525b;
+    --background-color-alt: #3f3f46;
+    --background-color-highlight: #27272a;
+
+    --text-color: #e4e4e7;
+    --text-color-alt: #f4f4f5;
+}
+
+/* tbd: let's combined system preference with the mode */
+/*@media (prefers-color-scheme: dark) {
+    :root {
+      
+    }
+  }*/

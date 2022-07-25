@@ -1,16 +1,90 @@
 /* devlopr-jekyll styling */
 
 /* variables */
-$body-typeface:'Quicksand', sans-serif;
-$nav-typeface: "Gill sans";
-$mono-typeface: Menlo, Monaco, monospace;
+:root {
+    --font-family-sans:       system-ui, -apple-system, 'Segoe UI', 'Roboto', Ubuntu, Cantarell, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+    --font-family-serif:      'Iowan Old Style', 'Apple Garamond', Baskerville, 'Times New Roman', 'Droid Serif', Times, 'Source Serif Pro', serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+    --font-family-monospace:  Menlo, Consolas, Monaco, 'Liberation Mono', 'Courier New', monospace;
+    --font-family-cursive:    cursive;
+
+    /* an ideal reading width - 48rem - 768px based off 16px:1rem */
+    /* remember to set this to media-queries too if you are not handling it separately */
+    --body-width: 48rem;
+
+    /* default: minor third scale progression */
+    --typescale-body: 1.2;
+
+    /* headings:  major third scale progression */
+    --typescale-heading: 1.25;
+
+    /* spacings */
+    --spacing-heading: 1rem;
+
+
+    /* default: minor-third scale progression */
+    --space-ratio: 1.2;
+
+    --space-base: 1;
+    --space-base-px: 16px;
+    --space-base-em: 1em;
+    --space-base-rem: 1rem;
+
+    --spacescale0: 1;
+    --spacescale1: var(--space-ratio);                            /* 1.2   */
+    --spacescale2: calc(var(--space-ratio) * var(--spacescale1)); /* 1.44  */
+    --spacescale3: calc(var(--space-ratio) * var(--spacescale2)); /* 1.728 */
+    --spacescale4: calc(var(--space-ratio) * var(--spacescale3)); /* 2.074 */
+    --spacescale5: calc(var(--space-ratio) * var(--spacescale4)); /* 2.488 */
+    --spacescale6: calc(var(--space-ratio) * var(--spacescale5)); /* 2.986 */
+    --spacescale7: calc(var(--space-ratio) * var(--spacescale6)); /* 3.583 */
+
+    /* space - try to use these */
+    --space-base: var(--space-base-rem);
+    --space-half: calc(var(--space-base-rem) / 2);
+    --space-quarter: calc(var(--space-base-rem) / 4);
+    --space-double: calc(var(--space-base-rem) * 2);
+
+
+    /* typography */
+    --font-family: var(--font-family-sans);
+    --font-family-headings: var(--font-family-sans);
+
+    --font-size: 16px;
+    --font-size-small: 85%;
+    --font-size-smaller: 70%;
+    --font-size-smallest: 65%;
+    --font-size-large: 115%;
+    --font-size-larger: 130%;
+
+    --line-height: 1.618;
+    --line-height-heading: 1.25;
+
+    --border-width: 1px;
+    --border-width-alt: 3px;
+
+    --border-radius: 0.3rem;
+    --border-radius-high: 0.7rem;
+    --border-radius-round: 100%;
+
+    --opacity-no: 1;
+    --opacity-low: 0.9;
+    --opacity-lower: 0.75;
+    --opacity-lowest: 0.6;
+
+    --transition-duration: 0.4s;
+}
+
+// $body-typeface: 'Quicksand', sans-serif;
+// // $body-typeface: 'Segoe UI', sans-serif;
+// $nav-typeface: "Gill sans";
+// $mono-typeface: Menlo, Monaco, monospace;
 $text-width: 650px;
 
 html[data-theme="dark"] {
     --bold-color: rgb(188, 188, 188);
     --box-background-color: hsl(0, 0%, 20%);
     --highlight-color: hsl(0, 0%, 60%);
-    --light-border-color: hsl(0, 0%, 30%);
+    --light-border-color: hsl(253, 81%, 62%);
     --light-text-color: rgb(199, 199, 204);
     --link-color: #f69801;
     --link-color-visited: hsl(250, 100%, 60%);
@@ -51,7 +125,7 @@ html[data-theme="light"] {
         --bold-color: rgb(188, 188, 188);
         --box-background-color: hsl(0, 0%, 20%);
         --highlight-color: hsl(0, 0%, 60%);
-        --light-border-color: hsl(0, 0%, 30%);
+        --light-border-color: hsl(249, 78%, 60%);
         --light-text-color: rgb(199, 199, 204);
         --link-color: #f69801;
         --nav-color: #131313;
@@ -128,8 +202,9 @@ ol, ul {
 body {
     background-color: var(--main-background-color) !important;
     color: var(--main-text-color) !important;
-    font-family: 'Quicksand', sans-serif !important;
-    font-feature-settings: "kern"on;
+    // font-family: 'Quicksand', sans-serif !important;
+    font-family: var(--font-family);
+    font-feature-settings: "kern" on;
     font-size: 1.4rem;
     font-variant-numeric: oldstyle-nums;
     hanging-punctuation: first last;
@@ -166,12 +241,28 @@ pre {
     margin:35px;
 }
 
+// blockquote {
+//     margin: 2rem 1rem 1rem;
+//     padding: 3px;
+//     background: var(--main-background-color) !important;
+//     border: 1px solid;
+//     color: var(--bold-color);
+// }
+
 blockquote {
-    margin: 2rem 1rem 1rem;
-    padding: 3px;
-    background: var(--main-background-color) !important;
-    border: 1px solid;
-    color: var(--bold-color);
+    margin: var(--space-double) var(--space-base);
+    padding: var(--space-base) var(--space-base) var(--space-half) var(--space-double);
+    overflow: auto;
+    opacity: var(--opacity-low);
+
+    background: var(--card-background-color);
+    border-radius: var(--border-radius);
+    border: var(--border-width) solid var(--box-background-color);
+    border-left: var(--border-width-alt) solid var(--light-border-color);
+}
+
+blockquote p {
+    border-radius: var(--border-radius);
 }
 
 /* Scrollbar */
