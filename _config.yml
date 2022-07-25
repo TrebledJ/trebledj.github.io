@@ -14,8 +14,8 @@ urls:
       url: /posts
     - text: Music
       url: /music
-    - text: About Me
-      url: /about
+    - text: Profile
+      url: /profile
 
 
 # Edit Author details (For multi authors check _data/authors.yml)
