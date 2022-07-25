@@ -1,7 +1,7 @@
 ---
 layout: page
 title: Music
-permalink: /posts/tags/music/
+permalink: /tags/music/
 ---
 
 <h5> Posts by Tag: {{ page.title }} </h5>

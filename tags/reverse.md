@@ -1,7 +1,7 @@
 ---
 layout: page
 title: Reverse
-permalink: /posts/tags/reverse/
+permalink: /tags/reverse/
 ---
 
 <h5> Posts by Tag: {{ page.title }} </h5>

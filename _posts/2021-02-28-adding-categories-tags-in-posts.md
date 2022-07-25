@@ -32,7 +32,7 @@ Then to render this tag using link and pages. All we need to do is,
 ---
 layout: page
 title: Guides
-permalink: /posts/tags/your_category_name/
+permalink: /tags/your_category_name/
 ---
 
 <h5> Posts by Tag : {{ page.title }} </h5>
@@ -45,4 +45,4 @@ permalink: /posts/tags/your_category_name/
 ```
 
 Using the tag, all the posts associated with the tag will be listed on
-`http://localhost:4000/posts/tags/your_category_name`
+`http://localhost:4000/tags/your_category_name`

@@ -1,7 +1,7 @@
 ---
 layout: page
 title: CTF
-permalink: /posts/tags/ctf/
+permalink: /tags/ctf/
 ---
 
 <h5> Posts by Tag: {{ page.title }} </h5>

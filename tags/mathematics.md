@@ -1,7 +1,7 @@
 ---
 layout: page
 title: Mathematics
-permalink: /posts/tags/mathematics/
+permalink: /tags/mathematics/
 ---
 
 <h5> Posts by Tag: {{ page.title }} </h5>

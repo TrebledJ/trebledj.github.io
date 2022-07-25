@@ -1,7 +1,7 @@
 ---
 layout: page
 title: Programming
-permalink: /posts/tags/programming/
+permalink: /tags/programming/
 ---
 
 <h5> Posts by Tag: {{ page.title }} </h5>

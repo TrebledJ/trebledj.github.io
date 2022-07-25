@@ -1,7 +1,7 @@
 ---
 layout: page
 title: Computer Science
-permalink: /posts/tags/computer-science/
+permalink: /tags/computer-science/
 ---
 
 <h5> Posts by Tag: {{ page.title }} </h5>

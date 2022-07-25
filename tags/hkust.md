@@ -1,7 +1,7 @@
 ---
 layout: page
 title: HKUST
-permalink: /posts/tags/hkust/
+permalink: /tags/hkust/
 ---
 
 <h5> Posts by Tag: {{ page.title }} </h5>

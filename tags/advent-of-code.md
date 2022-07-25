@@ -1,7 +1,7 @@
 ---
 layout: page
 title: Advent of Code
-permalink: /posts/tags/advent-of-code/
+permalink: /tags/advent-of-code/
 ---
 
 <h5> Posts by Tag: {{ page.title }} </h5>

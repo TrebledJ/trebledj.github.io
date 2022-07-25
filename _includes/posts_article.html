@@ -23,7 +23,7 @@
             {% endif %}
             Tag:
             {% for tag in tags %}
-                <a href="{{site.baseurl}}/posts/tags/{{tag|slugize}}">{{tag}}</a>
+                <a href="{{site.baseurl}}/tags/{{tag|slugize}}">{{tag}}</a>
                 {% unless forloop.last %}&nbsp;
                 {% endunless %}
             {% endfor %}

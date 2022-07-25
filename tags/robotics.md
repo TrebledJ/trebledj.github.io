@@ -1,7 +1,7 @@
 ---
 layout: page
 title: Robotics
-permalink: /posts/tags/robotics/
+permalink: /tags/robotics/
 ---
 
 <h5> Posts by Tag: {{ page.title }} </h5>
