@@ -1,83 +1,18 @@
 ---
 layout: default
 ---
-<div class="col-lg-12">
-    <div class="row justify-content-center">
-        <div class="col-lg-8">
-            <ul>
-                <div class="row">
-                    {% for post in paginator.posts %}
-                        <div class="card posts">
-                            <img class="card-img-top" src="{{site.url}}{{site.baseurl}}{{ post.thumbnail }}" alt="{{ post.title }}">
-                            <div class="card-body center">
-                                <!-- <img src="{{site.url}}{{site.baseurl}}/assets/img/{{ site.author_logo }}" class="author-profile-img"> -->
-                                <h4 class="card-title">{{ post.title }}</h4>
+<div>
+    <ul id="track-list" style="list-style-type: none;">
+        <hr/>
+        {% for track in page.tracks limit:5 %}
+            <li>
+                <hr/>
+                <iframe allow="autoplay" frameborder="no" height="166" scrolling="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/{{track}}&color=%233e45c5&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true" width="100%"></iframe>
+            </li>
+        {% endfor %}
+    </ul>
 
-                                <h6 class="card-subtitle mb-2 text-muted">{{ post.date | date: "%b %-d, %Y" }}</h6>
-                                <p class="card-text">{{ post.summary }}
-                                </p>
+    <script src="{{site.url}}{{site.baseurl}}/assets/js/infinite-jekyll.js"></script>
 
-                                <a href="{{ post.url | prepend: site.baseurl }}" data-disqus-identifier="{{ post.url }}" class="btn btn-dark btn-lg">Read</a>
-                                <span class="disqus-comment-count" data-disqus-identifier="{{ post.url }}"></span>
-
-                            </div>
-                        </div>
-                    {% endfor %}
-                </div>
-            </ul>
-
-            <div class="row center">
-                <!-- Pagination links -->
-                {% if paginator.total_pages > 1 %}
-                    <ul class="pagination pagination-sm">
-                        {% if paginator.previous_page %}
-                            <li class="pagination-link">
-                                <a href="{{ paginator.previous_page_path | prepend: site.baseurl | replace: '//', '/' }}">&laquo;</a>
-                            </li>
-                        {% else %}
-                            <li class="pagination-link disabled">
-                                <span aria-hidden="true">&laquo;</span>
-                            </li>
-                        {% endif %}
-
-                        <li class="pagination-link">
-                            <a href="/posts">First</a>
-                        </li>
-
-                        {% for page in (1..paginator.total_pages) %}
-                            {% if page == paginator.page %}
-                                <li class="active pagination-link">
-                                    <a>{{ page }}<span class="sr-only">(current)</span>
-                                    </a>
-                                </li>
-                            {% elsif page == 1 %}
-                                <li class="pagination-link">
-                                    <a href="/posts">{{ page }}</a>
-                                </li>
-                            {% else %}
-                                <li class="pagination-link">
-                                    <a href="{{ site.paginate_path | prepend: site.baseurl | replace: '//', '/' | replace: ':num', page }}">{{ page }}</a>
-                                </li>
-                            {% endif %}
-                        {% endfor %}
-
-                        <li class="pagination-link">
-                            <a href="/posts/page/{{ paginator.total_pages }}/#/">Last</a>
-                        </li>
-
-                        {% if paginator.next_page %}
-                            <li class="pagination-link">
-                                <a href="{{ paginator.next_page_path | prepend: site.baseurl | replace: '//', '/' }}">&raquo;</a>
-                            </li>
-                        {% else %}
-                            <li class="disabled pagination-link">
-                                <span>&raquo;</span>
-                            </li>
-                        {% endif %}
-                    </ul>
-                {% endif %}
-            </div>
-
-        </div>
-    </div>
+    <div class="infinite-spinner"></div>
 </div>
