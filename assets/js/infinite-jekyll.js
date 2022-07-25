@@ -1,11 +1,9 @@
 $(function() {
-  
   let items,
       isFetchingPosts = false,
       shouldFetchPosts = true,
-      itemsToLoad = $("#track-list li").length,
-      loadedItems = itemsToLoad,
-      loadNewPostsThreshold = 3000;
+      itemsToLoad = $("#track-list li").length, // Count existing number of items.
+      loadedItems = itemsToLoad;
 
   // Load the JSON file containing all URLs
   $.getJSON('/assets/json/all-tracks.json', function(data) {
@@ -24,15 +22,9 @@ $(function() {
   $(window).on('scroll', function(e){
     if (!shouldFetchPosts || isFetchingPosts || loadedItems >= items.length) return;
     
-    var windowHeight = $(window).height(),
-        windowScrollPosition = $(window).scrollTop(),
-        bottomScrollPosition = windowHeight + windowScrollPosition,
-        documentHeight = $(document).height();
-    
     let scrollPercentage = 100 * $(window).scrollTop() / ($(document).height() - $(window).height());
 
     // If we've scrolled past the loadNewPostsThreshold, fetch items
-    // if ((documentHeight - loadNewPostsThreshold) < bottomScrollPosition) {
     if (scrollPercentage > 90) {
       fetchPosts();
     }
