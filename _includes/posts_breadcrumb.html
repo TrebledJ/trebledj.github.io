@@ -1,9 +1,12 @@
-
 <nav aria-label="breadcrumb" role="navigation">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item">
-                <a href="{{site.url}}{{site.baseurl}}/posts"><i class="fa fa-home" aria-hidden="true"></i></a>
-            </li>
-            <li class="breadcrumb-item active" aria-current="page"><a href="{{page.url}}">{{ page.title }}</a></li>
-        </ol>
-  </nav>
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a href="{{site.url}}{{site.baseurl}}/posts">
+                <i aria-hidden="true" class="fa fa-home"></i>
+            </a>
+        </li>
+        <li aria-current="page" class="breadcrumb-item active">
+            <a href="{{page.url}}">{{ page.title }}</a>
+        </li>
+    </ol>
+</nav>

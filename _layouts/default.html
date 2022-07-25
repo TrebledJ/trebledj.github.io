@@ -4,14 +4,14 @@ layout: compress
 
 <!DOCTYPE html>
 <html lang="{{ page.lang | default: site.lang | default: " en " }}">
-{%- include head.html -%}
-<body>
+    {%- include head.html -%}
+    <body>
         {%- include header.html -%}
         <div class="main-container">
             {{ content }}
         </div>
         {%- include footer.html -%}
-     <script>
+        <script>
             var options = {
                 classname: 'progressline',
                 id: 'my-id'
@@ -22,19 +22,19 @@ layout: compress
             nanobar.go(100);
         </script>
 
-   <div hidden id="snipcart" data-api-key="Y2I1NTAyNWYtMTNkMy00ODg0LWE4NDItNTZhYzUxNzJkZTI5NjM3MDI4NTUzNzYyMjQ4NzU0"></div>
-   <script src="https://cdn.snipcart.com/themes/v3.0.0-beta.3/default/snipcart.js" defer></script>
-   <script src="{{site.url}}{{site.baseurl}}/assets/js/mode-switcher.js"></script>
-   <script>
-    if (window.netlifyIdentity) {
-      window.netlifyIdentity.on("init", user => {
-        if (!user) {
-          window.netlifyIdentity.on("login", () => {
-            document.location.href = "/admin/";
-          });
-        }
-      });
-    }
-  </script>
+        <div data-api-key="Y2I1NTAyNWYtMTNkMy00ODg0LWE4NDItNTZhYzUxNzJkZTI5NjM3MDI4NTUzNzYyMjQ4NzU0" hidden id="snipcart"></div>
+        <script defer src="https://cdn.snipcart.com/themes/v3.0.0-beta.3/default/snipcart.js"></script>
+        <script src="{{site.url}}{{site.baseurl}}/assets/js/mode-switcher.js"></script>
+        <script>
+          if (window.netlifyIdentity) {
+            window.netlifyIdentity.on("init", user => {
+              if (!user) {
+                window.netlifyIdentity.on("login", () => {
+                  document.location.href = "/admin/";
+                });
+              }
+            });
+          }
+        </script>
   </body>
 </html>
