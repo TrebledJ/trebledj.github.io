@@ -7,59 +7,71 @@
 @import "devlopr";
 
 /* custom css goes below */
+:root {
+    --post-height: 240px;
+}
 
-// #search-bar {
-//     border: 1px solid #ccc;
-//     border-radius: 20px;
-//     padding: 0 20px;
-//     position: relative;
+.post {
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: 1.5rem;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: row;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    -webkit-box-align: stretch;
+    -webkit-align-items: stretch;
+    -ms-flex-align: stretch;
+    align-items: stretch;
+    max-height: var(--post-height);
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    border: 1px solid var(--light-border-color);
+    overflow: hidden;
+    -webkit-transition: all .3s ease;
+    -o-transition: all .3s ease;
+    transition: all .3s ease;
+    -webkit-box-shadow: 0 1px 1px 0 rgba(31, 35, 46, 0.15);
+    box-shadow: 0 1px 1px 0 rgba(31, 35, 46, 0.15);
+}
 
-//     & #search {
-//         width: calc(100% - 30px);
-//         border: none;
-//         line-height: 44px;
-//         outline: none;
-//         border-style: none;
-//     }
+.post-thumbnail {
+    width: 30%;
+    height: 100%;
+}
 
-//     & #search-result {
-//         display: none;
-//         position: absolute;
-//         top: 48px;
-//         width: 93%;
-//         max-height: 325px;
-//         overflow-y: auto;
-//         background-color: white;
-//         box-shadow: 0px 4px 8px 0 #ccc;
-//         z-index: 99999;
+.post-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; // Keeps aspect ratio.
+}
 
-//         & .result-item {
-//             display: block;
-//             padding: 8px 16px;
-//             text-decoration: none;
+.post-content {
+    padding: 1rem;
+    width: 70%;
+}
 
-//             & .title,
-//             .description {
-//                 width: 100%;
-//                 white-space: nowrap;
-//                 overflow: hidden;
-//                 text-overflow: ellipsis;
-//             }
+.post-summary {
+    font-size: 14px;
+}
 
-//             & .title {
-//                 color: #0f468d;
-//                 padding-bottom: 4px;
-//                 font-size: 16px;
-//             }
+.post-date,
+.post-tags,
+.post-words {
+    font-size: 12px;
+}
 
-//             & .description {
-//                 color: #757575;
-//                 font-size: 16px;
-//             }
+.post-title {
+    margin: 0 0 10px;
+    font-size: 30px;
+    font-weight: 400;
+}
 
-//             &:hover {
-//                 background-color: #e0edf1;
-//             }
-//         }
-//     }
-// }
+.post .post-content p {
+    margin-top: 0;
+}

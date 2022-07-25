@@ -93,7 +93,7 @@ html[data-theme="dark"] {
     --bold-color: rgb(188, 188, 188);
     --box-background-color: hsl(0, 0%, 20%);
     --highlight-color: hsl(0, 0%, 60%);
-    --light-border-color: hsl(253, 81%, 62%);
+    --light-border-color: hsl(255, 3%, 23%);
     --light-text-color: rgb(199, 199, 204);
     --link-color: #f69801;
     --link-color-visited: hsl(250, 100%, 60%);
@@ -135,7 +135,7 @@ html[data-theme="light"] {
         --bold-color: rgb(188, 188, 188);
         --box-background-color: hsl(0, 0%, 20%);
         --highlight-color: hsl(0, 0%, 60%);
-        --light-border-color: hsl(249, 78%, 60%);
+        --light-border-color: hsl(255, 3%, 23%);
         --light-text-color: rgb(199, 199, 204);
         --link-color: #f69801;
         --nav-color: #131313;
@@ -943,7 +943,7 @@ header {
 .posts {
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
     transition: all 0.3s cubic-bezier(.25, .8, .25, 1);
-    width: 45%;
+    // width: 45%;
     height: auto;
     margin: 20px auto !important;
 }
