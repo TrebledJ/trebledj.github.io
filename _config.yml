@@ -12,10 +12,10 @@ urls:
       url: /
     - text: Posts
       url: /posts
-    - text: About
+    - text: Music
+      url: /music
+    - text: About Me
       url: /about
-    - text: Contact
-      url : /contact
 
 
 # Edit Author details (For multi authors check _data/authors.yml)
@@ -118,9 +118,9 @@ paginate_path: "/posts/page/:num/"
 #     category: '/category/:name/'
 
 collections:
-  products:
+  posts:
     output: true
-  authors:
+  music:
     output: true
 
 defaults:

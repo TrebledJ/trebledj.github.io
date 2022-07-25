@@ -251,7 +251,7 @@ pre {
 
 blockquote {
     margin: var(--space-double) var(--space-base);
-    padding: var(--space-base) var(--space-base) var(--space-half) var(--space-double);
+    padding: calc(var(--space-base) * 1.2) var(--space-base) var(--space-base) var(--space-double);
     overflow: auto;
     opacity: var(--opacity-low);
 

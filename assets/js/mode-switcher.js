@@ -1,10 +1,9 @@
-// (() => {
-//   modeSwitcher();
-// })();
+(() => {
+  document.documentElement.setAttribute('data-theme', 'dark');
+  sessionStorage.setItem('theme', 'dark');
+})();
 
 function modeSwitcher() {
-  // document.documentElement.setAttribute('data-theme', 'dark');
-  // sessionStorage.setItem('theme', 'dark');
   let currentTheme = sessionStorage.getItem("theme");
   if (currentTheme === "dark") {
     document.documentElement.setAttribute("data-theme", "light");
