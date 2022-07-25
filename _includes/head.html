@@ -9,7 +9,7 @@
   {% if page.summary %}
     <meta name="description" content="{{ page.summary | escape }}- {% if {page.title %}{{ page.title }}{% else %}{{ site.description }}{% endif %}">
   {% endif %}
-   <meta name="keywords" content="{% if page.title %}{{ page.title }}, {{ site.title }}, {% for categ in page.categories %}{{ categ }}{% if forloop.last == false %}, {% endif %}{% endfor %}{% else %}{{ site.title }}, {% for category in site.categories %}{% capture categories_slug %}{{ category | first }}{% endcapture %}{% for categ in categories_slug %}{{ categ }}{% endfor %}{% if forloop.last == false %}, {% endif %}{% endfor %}{% endif %},{{ page.keywords | escape }}"/>
+   <meta name="keywords" content="{% if page.title %}{{ page.title }}, {{ site.title }}, {% for tag in page.tags %}{{ tag }}{% if forloop.last == false %}, {% endif %}{% endfor %}{% else %}{{ site.title }}, {% for tag in site.tags %}{% capture tags_slug %}{{ tag | first }}{% endcapture %}{% for tag in tags_slug %}{{ tag }}{% endfor %}{% if forloop.last == false %}, {% endif %}{% endfor %}{% endif %},{{ page.keywords | escape }}"/>
 
   <link
     rel="alternate"
@@ -41,9 +41,9 @@
   <meta content="{{ site.url }}/about/" property="article:author" />
   {% endif %} {% if page.thumbnail %}
   <meta content="{{ site.url }}{{ page.thumbnail }}" property="og:image" />
-  {% endif %} {% if page.categories %} {% for category in page.categories
+  {% endif %} {% if page.tags %} {% for tag in page.tags
   limit:1 %}
-  <meta content="{{ category }}" property="article:section" />
+  <meta content="{{ tag }}" property="article:section" />
   {% endfor %} {% endif %} {% if page.tags %} {% for tag in page.tags %}
   <meta content="{{ tag }}" property="article:tag" />
   {% endfor %} {% endif %}
