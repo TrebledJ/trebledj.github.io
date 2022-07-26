@@ -2,7 +2,7 @@ let items,
     itemsToLoad,
     isFetchingPosts = false,
     shouldFetchPosts = true,
-    loadedItems = itemsToLoad;
+    loadedItems = 0;
 
 let baseurl;
 
@@ -74,8 +74,7 @@ function fetchPostWithIndex(index) {
   let item = items[index];
   let tags = item.tags.map(t => `&nbsp;•&nbsp;&nbsp;<a class="post-tags" href="${baseurl}/tags/${t}">${t}</a>`).join("\n");
 
-  $([
-    ` <li>
+  $(` <li>
         <br/>
         <iframe allow="autoplay" frameborder="no" height="166" scrolling="no"
           src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/${item.track_id}&color=%233e45c5&auto_play=false&hide_related=true&show_comments=true&show_user=true&show_reposts=false&show_teaser=true"
@@ -86,8 +85,8 @@ function fetchPostWithIndex(index) {
           <a class="post-meta" href="${baseurl}${item.url}">Preface</a>
           ${tags}
         </div>
-      </li>`,
-  ]).appendTo("#track-list")
+      </li>`
+  ).appendTo("#track-list")
 }
 
 function disableFetching() {
