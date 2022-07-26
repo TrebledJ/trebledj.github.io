@@ -5,7 +5,7 @@ summary: "Woooooshhh intensifies."
 author: trebledj
 tags: music minimalist strings
 thumbnail: /assets/img/thumbnail.png
-keywords: music, composition
+keywords: music, composition, string, ensemble, string ensemble, emotional, peaceful, serene
 permalink: /posts/the-breath-of-life/
 track_id: 1199277217
 ---

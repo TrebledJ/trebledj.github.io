@@ -3,7 +3,7 @@ layout: post
 title:  "Joyride in D"
 summary: "A band piece derived from another band piece."
 author: trebledj
-tags: music guitars
+tags: music band
 thumbnail: /assets/img/thumbnail.png
 keywords: music, composition, band, guitars, drums, upbeat
 permalink: /posts/joyride-in-d/
