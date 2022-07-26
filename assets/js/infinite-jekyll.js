@@ -75,18 +75,22 @@ function fetchPostWithIndex(index) {
   let tags = item.tags.map(t => `&nbsp;•&nbsp;&nbsp;<a class="post-tags" href="${baseurl}/tags/${t}">${t}</a>`).join("\n");
 
   $(` <li>
-        <br/>
+        <hr/>
         <iframe allow="autoplay" frameborder="no" height="166" scrolling="no"
           src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/${item.track_id}&color=%233e45c5&auto_play=false&hide_related=true&show_comments=true&show_user=true&show_reposts=false&show_teaser=true"
           width="100%"></iframe>
         <div>
           <span class="post-date">${item.date}</span>
-          &nbsp;•&nbsp;
-          <a class="post-meta" href="${baseurl}${item.url}">Preface</a>
           ${tags}
+        </div>
+        <div class="post-meta">
+          <a href="${baseurl}${item.url}">Preface</a>:
+          <span>${item.summary}</span> 
+          <a href="${baseurl}${item.url}">(continue reading)</a>
         </div>
       </li>`
   ).appendTo("#track-list")
+  // &nbsp;•&nbsp; <a class="post-meta" href="${baseurl}${item.url}">read the preface</a>
 }
 
 function disableFetching() {
