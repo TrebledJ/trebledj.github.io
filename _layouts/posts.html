@@ -5,24 +5,9 @@ layout: default
     <div class="row justify-content-center">
         <div class="col-lg-8">
             <ul>
-                <div class="row" style="margin-top: 30px;">
+                <div class="post-preview-list" style="margin-top: 30px;">
                     {% for post in paginator.posts %}
-                        <article class="post">
-                            <a class="post-thumbnail" href="{{site.baseurl}}{{post.url}}">
-                                <img class="post-img" src="{{site.url}}{{site.baseurl}}{{post.thumbnail}}" alt="{{ post.title }}">
-                            </a>
-
-                            <div class="post-content">
-                                <h2 class="post-title">
-                                    <a href="{{post.url | prepend: site.baseurl}}">{{post.title}}</a>
-                                </h2>
-                                <div class="post-summary">
-                                    <p>{{ post.summary }}</p>
-                                </div>
-                                {% assign tag_limit = 1 %}
-                                {% include post_metadata.html %}
-                            </div>
-                        </article>
+                        {% include post_preview.html %}
                     {% endfor %}
                 </div>
             </ul>
