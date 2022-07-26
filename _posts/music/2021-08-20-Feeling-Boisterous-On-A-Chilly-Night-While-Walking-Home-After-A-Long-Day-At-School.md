@@ -3,9 +3,9 @@ layout: post
 title:  "Feeling Boisterous On A Chilly Night While Walking Home After A Long Day At School"
 summary: "...during winter ...in a silent neighbourhood ...and you have the road all to yourself."
 author: trebledj
-tag: [music, electronic]
+tags: music electronic project hkust
 thumbnail: /assets/img/thumbnail.png
-keywords: synth, electronic, guitar, drums
+keywords: music, composition, synth, electronic, guitar, drums
 permalink: /posts/feeling-boisterous-on-a-chilly-night-while-walking-home-after-a-long-day-at-school/
 track_id: 1146309223
 ---

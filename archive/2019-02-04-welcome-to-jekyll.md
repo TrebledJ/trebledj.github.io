@@ -7,8 +7,9 @@ date: '2019-05-22 14:35:23 +0530'
 tag: music
 thumbnail: /assets/img/thumbnail.png
 keywords: devlopr jekyll, how to use devlopr, devlopr, how to use devlopr-jekyll, devlopr-jekyll tutorial,best jekyll themes
-permalink: /posts/welcome-to-devlopr-jekyll/
 usemathjax: true
+permalink: /posts/welcome-to-devlopr-jekyll/
+published: false
 ---
 
 

@@ -10,6 +10,7 @@ thumbnail: /assets/img/posts/code.jpg
 keywords: devlopr jekyll, how to use devlopr, devlopr, how to use devlopr-jekyll, devlopr-jekyll tutorial,best jekyll themes, multi tags and tags
 usemathjax: false
 permalink: /posts/adding-tags-tags-in-posts/
+published: false
 ---
 
 ## Adding Multiple Tags in Posts
