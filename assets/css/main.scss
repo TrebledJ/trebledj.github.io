@@ -80,3 +80,18 @@
 .article-header .post-title {
     font-size: 40px;
 }
+
+.post a:hover, .tag-head a:hover {
+    color: var(--link-hover-color) !important;
+    text-decoration: none;
+}
+
+* {
+    transition: color 0.3s ease-in;
+    transition: background-color 0.3s ease-in;
+    transition: border-color 0.3s ease-in;
+}
+
+body, .card, #topNav {
+    transition: background-color 0.3s ease-in;
+}
