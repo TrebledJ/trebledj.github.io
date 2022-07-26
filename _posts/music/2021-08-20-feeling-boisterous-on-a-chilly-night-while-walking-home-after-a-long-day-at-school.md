@@ -5,7 +5,7 @@ summary: "...during winter ...in a silent neighbourhood ...at a time when you ha
 author: trebledj
 tags: music electronic project hkust
 thumbnail: /assets/img/thumbnail.png
-keywords: music, composition, synth, electronic, drums
+keywords: music, composition, synth, electronic, drums, edm
 permalink: /posts/feeling-boisterous-on-a-chilly-night-while-walking-home-after-a-long-day-at-school/
 track_id: 1146309223
 ---
