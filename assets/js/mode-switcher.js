@@ -12,6 +12,11 @@
   }
 })();
 
+function modeInit() {
+  // Set switch to correct setting on load.
+  $("#theme-toggle")[0].checked = (sessionStorage.getItem("theme") === "light");
+}
+
 function modeSwitcher() {
   let currentTheme = sessionStorage.getItem("theme");
   if (currentTheme === "dark") {
