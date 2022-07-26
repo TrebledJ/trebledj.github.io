@@ -1,4 +1,4 @@
-(() => {
+function modeInit() {
   let currentTheme = sessionStorage.getItem("theme");
   if (currentTheme === "dark") {
     document.documentElement.setAttribute("data-theme", "dark");
@@ -10,11 +10,9 @@
     document.documentElement.setAttribute("data-theme", "dark");
     sessionStorage.setItem("theme", "dark");
   }
-})();
 
-function modeInit() {
   // Set switch to correct setting on load.
-  $("#theme-toggle")[0].checked = (sessionStorage.getItem("theme") === "light");
+  $("#theme-toggle")[0].checked = (currentTheme === "light");
 }
 
 function modeSwitcher() {
