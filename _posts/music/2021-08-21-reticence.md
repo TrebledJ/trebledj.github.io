@@ -3,7 +3,7 @@ layout: post
 title:  "Reticence"
 summary: "Alternate title: sad.mp3."
 author: trebledj
-tags: music project hkust
+tags: music piano strings project hkust
 thumbnail: /assets/img/thumbnail.png
 keywords: music, composition, synth, electronic, piano, cello
 permalink: /posts/reticence/
