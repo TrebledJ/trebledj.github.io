@@ -1,0 +1,8 @@
+---
+layout: none
+---
+{
+    "url": "{{site.url}}",
+    "baseurl": "{{site.baseurl}}",
+    "fullurl": "{{site.url}}{{site.baseurl}}"
+}

@@ -1,9 +1,21 @@
+---
+layout: none
+---
+
 {
-  "tracks" : [
-    1199278825,
-    1199278129,
-    1199277217,
-    1146309253,
-    1146309223
+  "tracks": [
+    {% assign iter = 0 %}
+    {% for post in site.posts %}
+      {% if post.tags contains 'music' %}
+        {% if iter > 0 %},{% endif %}
+        {% assign iter = iter | plus: 1 %}
+        {
+          "track_id": {{post.track_id}},
+          "tags": ["{{post.tags | join: '", "'}}"],
+          "date": "{{post.date | date: '%Y-%m-%d'}}",
+          "url": "{{post.url}}"
+        }
+      {% endif %}
+    {% endfor %}
   ]
 }

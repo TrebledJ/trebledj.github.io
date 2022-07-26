@@ -4,15 +4,11 @@ layout: default
 <div>
     <ul id="track-list" style="list-style-type: none;">
         <hr/>
-        {% for track_id in page.tracks limit:5 %}
-            <li>
-                <hr/>
-                {%- include track.html -%}
-            </li>
-        {% endfor %}
     </ul>
 
-    <script src="{{site.url}}{{site.baseurl}}/assets/js/infinite-jekyll.js"></script>
-
     <div class="infinite-spinner"></div>
+    <script src="{{site.url}}{{site.baseurl}}/assets/js/infinite-jekyll.js"></script>
+    <script>
+        loadInfinite(5);
+    </script>
 </div>
