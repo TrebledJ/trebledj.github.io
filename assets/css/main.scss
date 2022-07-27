@@ -16,9 +16,18 @@
     text-decoration: none;
 }
 
-// a:hover {
-//     cursor: pointer !important;
-// }
+.post-tags {
+    display: inline-block;
+    margin: 3px 0px;
+    padding: 2px 4px;
+    background-color: transparent !important;
+    color: var(--main-text-color) !important;
+    border: 1px solid var(--main-text-color);
+    border-radius: 4px;
+}
+.post-tags:hover {
+    text-decoration: none;
+}
 
 * {
     transition: color 0.3s ease-in;
