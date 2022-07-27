@@ -1,5 +1,4 @@
 ---
-layout: tag_page
 title: Piano
 permalink: /tags/piano/
 ---

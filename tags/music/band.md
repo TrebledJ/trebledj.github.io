@@ -1,5 +1,4 @@
 ---
-layout: tag_page
 title: Band
 permalink: /tags/band/
 ---

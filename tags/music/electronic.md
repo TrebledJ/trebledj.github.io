@@ -1,5 +1,4 @@
 ---
-layout: tag_page
 title: Electronic
 permalink: /tags/electronic/
 ---

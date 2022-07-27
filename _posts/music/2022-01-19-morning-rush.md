@@ -1,12 +1,8 @@
 ---
-layout: post
 title:  "Morning Rush"
 summary: "\"Quickly! School starts in 15 minutes and you still haven't changed out of your pajamas!\""
-author: trebledj
 tags: music band
-thumbnail: /assets/img/thumbnail.png
 keywords: music, composition, band, guitars, drums, upbeat
-permalink: /posts/morning-rush/
 track_id: 1199278129
 ---
 

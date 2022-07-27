@@ -1,5 +1,4 @@
 ---
-layout: tag_page
 title: Fusion
 permalink: /tags/fusion/
 ---

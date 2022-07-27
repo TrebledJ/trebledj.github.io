@@ -1,12 +1,8 @@
 ---
-layout: post
 title:  "Reticence"
 summary: "Alternate title: sad.mp3."
-author: trebledj
 tags: music piano strings project hkust
-thumbnail: /assets/img/thumbnail.png
 keywords: music, composition, duet, piano, cello, emotional
-permalink: /posts/reticence/
 track_id: 1146309253
 ---
 

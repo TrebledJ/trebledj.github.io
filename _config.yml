@@ -1,5 +1,5 @@
 title: TrebledJ Pages
-subtitle: A Portfolio Jekyll Theme Built for Developers
+subtitle: 
 description: >- # this means to ignore newlines until "baseurl:"
   devlopr-jekyll is a beautiful Jekyll Theme Built For Developers, which is optimized for speed and readability.
 
@@ -21,9 +21,10 @@ urls:
 # Edit Author details (For multi authors check _data/authors.yml)
 
 author_logo: profile.png
-author: TrebledJ
-author_bio: Hi, ...
-author_email: ""
+author: Johnathan
+author_bio: >-
+  HKUST mathematics undergrad. Programming language enthusiast. Amateur composer.
+author_email: "trebledjjj@gmail.com"
 author_location:
 author_website_url: trebledj.github.io
 typewrite-text: I like pineapples on pizza.
@@ -57,15 +58,6 @@ author_project_details:
 
 # social links
 github_username: TrebledJ
-twitter_username: 
-facebook_username: 
-linkedin_username: 
-behance_username: 
-instagram_username: 
-medium_username: 
-telegram_username: 
-dribbble_username: 
-flickr_username: 
 
 #for comments ( we got Disqus and Hyvor Commenting, uncomment the one you want to use )
 
@@ -122,15 +114,23 @@ soundcloud_color: 2631c8
 collections:
   posts:
     output: true
-  music:
-    output: true
+    permalink: /posts/:title/
 
 defaults:
-  # -
-  #   scope:
-  #     path: "gallery"
-  #   values:
-  #     permalink: /:path/:basename:output_ext
+  -
+    scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
+      author: "trebledj"
+      thumbnail: "/assets/img/thumbnail.png"
+      include_thumbnail: false
+  -
+    scope:
+      path: "tags"
+    values:
+      layout: "tag_page"
   # -
   #   scope:
   #     path: ""

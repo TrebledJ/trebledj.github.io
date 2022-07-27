@@ -1,12 +1,8 @@
 ---
-layout: post
 title:  "The Breath of Life"
 summary: "Humans are complicated individuals even though we all start from two cells."
-author: trebledj
 tags: music minimalism fusion strings
-thumbnail: /assets/img/thumbnail.png
 keywords: music, composition, minimalism, fusion, string, ensemble, string ensemble, emotional, peaceful, serene
-permalink: /posts/the-breath-of-life/
 track_id: 1199277217
 ---
 
