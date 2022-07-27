@@ -4,11 +4,11 @@ let items,
     shouldFetchPosts = true,
     loadedItems = 0;
 
-let baseurl;
+let site;
 
 // Get site metadata.
 $.getJSON('/assets/json/metadata.json', data => {
-  baseurl = data['baseurl'];
+  site = data;
 })
 
 // Load the JSON file containing all URLs
@@ -72,25 +72,25 @@ function fetchPosts() {
 
 function fetchPostWithIndex(index) {
   let item = items[index];
-  let tags = item.tags.map(t => `&nbsp;•&nbsp;&nbsp;<a class="post-tags" href="${baseurl}/tags/${t}">${t}</a>`).join("\n");
+  let tags = item.tags.map(t => `&nbsp;•&nbsp;&nbsp;<a class="post-tags" href="${site['baseurl']}/tags/${t}">${t}</a>`).join("\n");
 
   $(` <li>
         <hr/>
         <iframe allow="autoplay" frameborder="no" height="166" scrolling="no"
-          src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/${item.track_id}&color=%233e45c5&auto_play=false&hide_related=true&show_comments=true&show_user=true&show_reposts=false&show_teaser=true"
+          src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/${item.track_id}&color=%23${site['soundcloud_color']}&auto_play=false&hide_related=true&show_comments=true&show_user=true&show_reposts=false&show_teaser=true"
           width="100%"></iframe>
         <div>
           <span class="post-date">${item.date}</span>
           ${tags}
         </div>
         <div class="post-meta">
-          <a href="${baseurl}${item.url}">Preface</a>:
+          <a href="${site['baseurl']}${item.url}">Preface</a>:
           <span>${item.summary}</span> 
-          <a href="${baseurl}${item.url}">(continue reading)</a>
+          <a href="${site['baseurl']}${item.url}">(continue reading)</a>
         </div>
       </li>`
   ).appendTo("#track-list")
-  // &nbsp;•&nbsp; <a class="post-meta" href="${baseurl}${item.url}">read the preface</a>
+  // &nbsp;•&nbsp; <a class="post-meta" href="${site['baseurl']}${item.url}">read the preface</a>
 }
 
 function disableFetching() {
