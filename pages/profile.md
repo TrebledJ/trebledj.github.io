@@ -1,5 +1,5 @@
 ---
 title: TrebledJ's Profile
-layout: about-me
+layout: profile
 permalink: /profile/
 ---
