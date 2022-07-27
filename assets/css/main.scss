@@ -23,18 +23,12 @@
     background-color: transparent !important;
     color: var(--main-text-color) !important;
     border: 1px solid var(--main-text-color);
-    border-radius: 4px;
+    border-radius: var(--border-radius-small);
 }
 .tag:hover {
     text-decoration: none;
 }
 
 * {
-    transition: color 0.3s ease-in;
-    transition: background-color 0.3s ease-in;
-    transition: border-color 0.3s ease-in;
-}
-
-body, .card, #topNav {
-    transition: background-color 0.3s ease-in;
+    transition: background-color 0.3s ease-in, border-color 0.3s ease-in;
 }

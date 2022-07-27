@@ -1,11 +1,10 @@
 {% assign tags = site.tags | sort %}
 {% for tag in tags %}
-    <span style="display: inline-block;">
+    <div style="display: inline-block;">
         {% assign tagsz = tag | last | size %}
         {% assign perc = tagsz | times: 4 | plus: 80 %}
-        {% assign val = tagsz | | divided_by: 8 | plus: 4 %}
-        <a href="/tags/{{ tag | first | slugify }}/" class="tag" style="font-size: {{perc}}%;">
+        <a class="tag" href="/tags/{{ tag | first | slugify }}/" style="font-size: {{perc}}%;">
             {{ tag[0] }}
         </a>
-    </span>
+    </div>
 {% endfor %}

@@ -71,8 +71,8 @@
     --border-width: 1px;
     --border-width-alt: 3px;
 
-    --border-radius: 0.3rem;
-    --border-radius-high: 0.7rem;
+    --border-radius: 10px;
+    --border-radius-small: 4px;
     --border-radius-round: 100%;
 
     --opacity-no: 1;
@@ -349,9 +349,8 @@ header {
 }
 
 .card {
-    // margin: 20px;
-    background-color: var(--card-background-color);
-    border-radius: var(--border-radius);
+    background-color: var(--card-background-color) !important;
+    border-radius: var(--border-radius) !important;
 }
 
 #topNav {
