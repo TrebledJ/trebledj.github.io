@@ -11,7 +11,6 @@ track_id: 1146309223
 ---
 
 {%- include track.html -%}
-<br/>
 
 This is that feeling when you boisterously walk (or bike, drive, swim, fly) home on a chilly night after a long day at school.
 

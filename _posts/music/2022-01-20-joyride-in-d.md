@@ -11,7 +11,6 @@ track_id: 1199278825
 ---
 
 {%- include track.html -%}
-<br/>
 
 This upbeat track is an offshoot of [Morning Rush](/posts/morning-rush/), spawned from a melody in the latter's interlude. Couldn't resist going ham on the drums.
 

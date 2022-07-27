@@ -11,7 +11,6 @@ track_id: 1199278129
 ---
 
 {%- include track.html -%}
-<br/>
 
 Do you feel the exhilaration of the morning air? The excitement of stepping out of bed? Chomping down breakfast? 
 

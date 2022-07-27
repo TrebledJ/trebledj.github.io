@@ -11,7 +11,6 @@ track_id: 1146309253
 ---
 
 {%- include track.html -%}
-<br/>
 
 Something about the past few years has been very poignant -- deep, memorable, touching yet almost hurting, somewhat close but also far, a bit cold but also evoking warm feelings.
 

@@ -11,7 +11,6 @@ track_id: 1199277217
 ---
 
 {%- include track.html -%}
-<br/>
 
 This piece seeks to paint a diverse set of feelings. Listen for the string ensemble easing in and out of the void, the solemn moments of silence, the lightheartedness of the syncopated pizzicato, the relentless cycle of tension and relief.
 
