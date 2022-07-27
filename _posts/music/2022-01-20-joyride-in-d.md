@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Joyride in D"
-summary: "A band piece derived from another band piece."
+summary: "Jetpack Joyride but without a jetpack, and in D."
 author: trebledj
 tags: music band
 thumbnail: /assets/img/thumbnail.png
