@@ -10,8 +10,6 @@ visibility: false
 
 <hr />
 
- <img src="/assets/img/styleguide.png" class="img-fluid">
-
 <p> Lets try the different text styles  <b> Bold </b> , <strong> Strong </strong>, <em> Emphasis </em>, <i> Italic </i> </p>
 
 
