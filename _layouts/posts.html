@@ -1,16 +1,14 @@
 ---
-layout: default
+layout: page
 ---
 <div class="col-lg-12">
-    <div class="row justify-content-center">
-        <div class="col-lg-8">
-            <ul>
-                <div class="post-preview-list" style="margin-top: 30px;">
-                    {% for post in paginator.posts %}
-                        {% include post_preview.html %}
-                    {% endfor %}
-                </div>
-            </ul>
+    <div class="row justify-content-center gx-1">
+        <div class="col-lg-9">
+            <div class="post-preview-list">
+                {% for post in paginator.posts %}
+                    {% include post_preview.html %}
+                {% endfor %}
+            </div>
 
             <div class="row center">
                 <!-- Pagination links -->

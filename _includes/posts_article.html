@@ -1,10 +1,10 @@
 <article class="card article" itemscope itemtype="http://schema.org/BlogPosting">
-    <div class="card-header article-header">
+    <div class="article-header">
         <h1 class="post-title" itemprop="name headline">{{ page.title }}</h1>
         <h5 class="post-meta">{{ page.summary }}</h5>
         {% include post_metadata.html %}
     </div>
-    <br/>
+    <hr/>
     <div class="card-body" itemprop="articleBody">
         {% if page.include_thumbnail %}
             <img class="card-img-top" src="{{site.url}}{{site.baseurl}}{{ page.thumbnail }}" alt="{{ post.title }}"/>
