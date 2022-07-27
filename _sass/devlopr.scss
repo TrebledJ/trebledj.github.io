@@ -2,7 +2,7 @@
 
 /* variables */
 :root {
-    --font-family-sans: system-ui, -apple-system, 'Segoe UI', 'Roboto', Ubuntu, Cantarell, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+    --font-family-sans: 'Segoe UI', 'Roboto', Ubuntu, Cantarell, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji', system-ui, -apple-system;
     --font-family-serif: 'Iowan Old Style', 'Apple Garamond', Baskerville, 'Times New Roman', 'Droid Serif', Times, 'Source Serif Pro', serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
     --font-family-monospace: Menlo, Consolas, Monaco, 'Liberation Mono', 'Courier New', monospace;
     --font-family-cursive: cursive;
@@ -157,12 +157,12 @@ ul {
 
 /* On scroll progress bar */
 #progress-bar {
-    background: linear-gradient(to right, #f69801 var(--progress), transparent 0);
+    background: linear-gradient(to right, var(--link-color) var(--progress), transparent 0);
     height: 5px;
     position: fixed;
     width: 100%;
     overflow: hidden;
-    z-index: 1;
+    z-index: 10;
     margin-top: 25px;
 }
 
@@ -354,7 +354,8 @@ header {
     padding-left: 15%;
     padding-right: 15%;
     background-color: var(--main-background-color) !important;
-    box-shadow: #000 0px 0px 8px;
+    border-bottom: 1px solid var(--light-border-color);
+    // box-shadow: #000 0px 0px 8px;
 }
 
 #navbar-hamburger,
