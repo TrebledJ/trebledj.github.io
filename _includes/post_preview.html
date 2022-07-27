@@ -3,12 +3,14 @@
         <img class="post-img" src="{{site.url}}{{site.baseurl}}{{post.thumbnail}}" alt="{{ post.title }}">
     </a>
 
-    <div class="post-content">
-        <h2 class="post-title">
-            <a href="{{post.url | prepend: site.baseurl}}">{{post.title | smartify}}</a>
-        </h2>
-        <div class="post-summary">
-            <p>{{ post.summary }}</p>
+    <div class="post-content d-flex flex-column justify-content-between">
+        <div>
+            <h2 class="post-title">
+                <a href="{{post.url | prepend: site.baseurl}}">{{post.title | smartify}}</a>
+            </h2>
+            <div class="post-summary">
+                <p>{{ post.summary }}</p>
+            </div>
         </div>
         {% assign tag_limit = 1 %}
         {% include post_metadata.html %}
