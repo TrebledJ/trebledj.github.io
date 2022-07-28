@@ -1,5 +1,7 @@
 /* devlopr-jekyll styling */
 
+@import "jumbotron";
+
 /* variables */
 :root {
     --font-family-sans: 'Segoe UI', 'Roboto', Ubuntu, Cantarell, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji', system-ui, -apple-system;
@@ -783,11 +785,11 @@ header {
     margin-top: 100px !important;
 }
 
-#recent-posts-header {
-    display: grid;
-    width: 100%;
-    grid-template-columns: 17fr 2fr;
-}
+// #recent-posts-header {
+//     display: grid;
+//     width: 100%;
+//     grid-template-columns: 17fr 2fr;
+// }
 
 #article-img,
 #article-link,
