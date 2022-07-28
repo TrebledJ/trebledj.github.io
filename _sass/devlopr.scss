@@ -156,7 +156,7 @@ ul {
 }
 
 /* On scroll progress bar */
-#progress-bar {
+#top-progress-bar {
     background: linear-gradient(to right, var(--link-color) var(--progress), transparent 0);
     height: 5px;
     position: fixed;
@@ -731,11 +731,11 @@ header {
     margin-bottom: 30px;
 }
 
-.lg-progress-bar .lg-progress {
-    background-color: #db980f !important;
-    height: 4px;
-    width: 0;
-}
+// .lg-progress-bar .lg-progress {
+//     background-color: #db980f !important;
+//     height: 4px;
+//     width: 0;
+// }
 
 
 /* Homepage project cards*/

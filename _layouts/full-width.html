@@ -51,5 +51,10 @@ layout: compress
         };
       </script>
       <script type="text/javascript" src="https://app.olvy.co/script.js" defer="defer"></script>
+      <script>
+        $(document).ready(_ => {
+          $("body").tooltip({ selector: '[data-toggle=tooltip]' });
+        })
+      </script>
     </body>
 </html>

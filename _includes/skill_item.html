@@ -1,0 +1,29 @@
+<div class="d-flex flex-row justify-content-between skill-item">
+    <p class="ps-{{pad}}">
+        {% if s.tag %}
+            <a href="{{site.baseurl}}/tags/{{s.tag}}">{{s.skill}}</a>
+        {% else %}
+            {{s.skill}}
+        {% endif %}
+        {% if s.desc %}
+            <span data-placement="top" data-toggle="tooltip" title="{{s.desc}}">
+                <i class="fas fa-question-circle"></i>
+            </span>
+        {% endif %}
+    </p>
+    <div style="width: 35%">
+        <!-- <p>{{s.strength}}</p> -->
+        {% assign prog = s.strength | times: 10 %}
+        <div class="mt-1">
+            {% if s.active %}
+                <div class="progress" data-placement="top" data-toggle="tooltip" title="{{s.active}}">
+                    <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: {{prog}}%" aria-valuenow="{{prog}}" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+            {% else %}
+                <div class="progress">
+                    <div class="progress-bar" role="progressbar" style="width: {{prog}}%" aria-valuenow="{{prog}}" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>

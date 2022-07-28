@@ -32,3 +32,21 @@
 * {
     transition: background-color 0.3s ease-in, border-color 0.3s ease-in;
 }
+
+// .skill-item .progress {
+//     background-color: var(--medium-text-color);
+//     height: 12px;
+// }
+.skill-item .progress-bar {
+    // background-color: var(--link-color);
+    -webkit-animation-direction: reverse;
+    -moz-animation-direction: reverse;
+    -ms-animation-direction: reverse;
+    -o-animation-direction: reverse;
+    animation-direction: reverse;
+}
+
+.skill-item a {
+    text-decoration: none;
+}
+

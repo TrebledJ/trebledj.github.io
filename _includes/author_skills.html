@@ -1,2 +1,10 @@
-<p>HTML , CSS , Javascript , PHP, Python, C</p>
-<p>Adobe XD, Inkscape, Git, Linux</p>
+{% for s in site.author_skills %}
+    {% assign pad = 0 %}
+    {% include skill_item.html %}
+    {% if s.subskills %}
+        {% for s in s.subskills %}
+            {% assign pad = 4 %}
+            {% include skill_item.html %}
+        {% endfor %}
+    {% endif %}
+{% endfor %}

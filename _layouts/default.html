@@ -34,5 +34,10 @@ layout: compress
             });
           }
         </script>
+        <script>
+          $(document).ready(_ => {
+            $("body").tooltip({ selector: '[data-toggle=tooltip]' });
+          })
+        </script>
   </body>
 </html>
