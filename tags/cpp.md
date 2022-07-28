@@ -3,4 +3,6 @@ title: C++
 permalink: /tags/cpp/
 ---
 
-A general-purpose programming language.
+A high-level general-purpose programming language.
+
+<!-- TODO -->
