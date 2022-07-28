@@ -12,3 +12,5 @@ _site/
 .bundle
 .bundle/
 vendor/
+
+assets/json/debug.json
