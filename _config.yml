@@ -111,6 +111,7 @@ soundcloud_color: 2631c8
 #   permalinks:
 #     category: '/category/:name/'
 
+collections_dir: collections
 collections:
   posts:
     output: true
