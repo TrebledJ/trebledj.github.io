@@ -1,10 +1,12 @@
 {% for s in site.author_skills %}
     {% assign pad = 0 %}
     {% include skill_item.html %}
-    {% if s.subskills %}
+    {% for s in s.subskills %}
+        {% assign pad = 4 %}
+        {% include skill_item.html %}
         {% for s in s.subskills %}
-            {% assign pad = 4 %}
+            {% assign pad = 5 %}
             {% include skill_item.html %}
         {% endfor %}
-    {% endif %}
+    {% endfor %}
 {% endfor %}

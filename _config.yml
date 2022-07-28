@@ -62,21 +62,32 @@ author_skills:
     skill: C++
     strength: 9.9
     desc: Language features (templates, classes, C++11 lambdas, parameter packs, template metaprogramming, type traits, constexpr and its variants, C++20 Big4), patterns, idioms, nuances, debugging.
+    active: Using in robotics.
     tag: cpp
+    icon: cplusplus/cplusplus-original
     subskills:
       -
         skill: CMake
         strength: 7
+        icon: cmake/cmake-original
       -
         skill: Qt
-        strength: 7.5
+        strength: 8.4
         desc: Development cycle, library modules, MVC concept, nuances.
         tag: qt
+        icon: qt/qt-original
+        subskills:
+          -
+            skill: QML
+            strength: 8.8
+            desc: Development cycle, library modules, language features (transitions, behaviours, attached properties), Felgo.
+            tag: qml
   -
     skill: Python
     strength: 9.8
     desc: Language features (classes, f-strings, decorators, args/kwargs, pattern matching), patterns, standard libraries (math, regex, collections, itertools, functools).
     tag: python
+    icon: python/python-original
     subskills:
       - 
         skill: numpy
@@ -98,24 +109,28 @@ author_skills:
     strength: 9.4
     desc: Language nuances, common vulnerabilities, patterns, idioms, macros.
     tag: c
+    icon: c/c-original
   - 
     skill: Haskell
     strength: 8.8
     active: Learning memoisation, lens.
     desc: Language constructs (control flow, typeclasses and instances, modules), functional programming, standard library (list, unordered containers, IO, Control.Monad), parser combinators, monads (IO, ST), language extensions (implicit params), build systems (cabal, stack), testing (hspec), benchmarking (criterion).
     tag: haskell
+    icon: haskell/haskell-original
   -
     skill: Rust
     strength: 5.1
     active: Learning standard library, concurrency.
     desc: Language features (borrowing, iterators, pattern matching, structs and ADTs, traits), build system (cargo).
     tag: rust
+    icon: rust/rust-plain
   - 
     skill: Scala
     strength: 7.5
     active: Using at work.
     desc: Scala 2, Scala 3, language features (ADTs, type bounds, implicit params), standard library (containers, filesystem), build system (maven, sbt).
     tag: scala
+    icon: scala/scala-original
     subskills:
       - 
         skill: Spark
@@ -124,65 +139,70 @@ author_skills:
         desc: Jobs, SQL, dataframes.
   - 
     skill: HTML/CSS
-    strength: 7.9
-    active: trebledj.github.io
+    strength: 7.2
+    active: Using to enhance this site.
     desc: Tags, attributes, flex, scss.
+    icon: html5/html5-original
     subskills:
       - 
         skill: Bootstrap
         strength: 7.1
-        active: trebledj.github.io
-  -
-    skill: QML
-    strength: 7.1
-    desc: Development cycle, library modules, language features (transitions, behaviours, attached properties).
-    tag: qml
+        active: Using to enhance this site.
+        icon: bootstrap/bootstrap-original
   - 
     skill: Javascript
-    strength: 6.4
-    active: trebledj.github.io
+    strength: 6.9
+    active: Using to enhance this site.
     desc: Basics, ES6 (classes syntax sugar, lambdas, rest parameters), DOM, JQuery.
+    icon: javascript/javascript-original
   -
     skill: Shell
     strength: 8
     desc: Shell scripting, unix commands (mv, ls, cp, scp, sudo), control flow, bash.
+    icon: bash/bash-original
   - 
     skill: SQL
     strength: 8.2
     active: Using at work.
     desc: CRUD operations, CTEs, Spark SQL, prepared statements, SQL injection.
+    tag: sql
   -
     skill: OOP
+    long: Object-Oriented Programming
     strength: 9.3
     desc: Classes, inheritance, interfaces, ABCs, polymorphism, encapsulation, virtual functions, design patterns.
   -
     skill: FP
+    long: Functional Programming
     strength: 9.1
     desc: Recursion, higher order functions (map, filter, fold), ADTs (sum types), functors, applicatives, monads.
+    active: Learning more about the ST monad, rank-N polymorphism, category theory.
   -
-    skill: Algo and DS
+    skill: Algos & DS
+    long: Algorithms and Data Structures
     strength: 7.8
     desc: Search/sorting algorithms, graph algorithms, algo design.
     active: Advent of Code
   -
     skill: Embedded
+    long: Embedded Programming and Systems
     strength: 7.2
     desc: Microcontrollers, core concepts (PWM, ADC), communication protocols (UART, CAN), FreeRTOS, STM32.
     tag: embedded
   -
     skill: Binary Pwn
     strength: 7.5
-    desc: Buffer overflow, ROP, ret2text, ret2libc.
+    desc: Buffer overflow, ROP, ret2text, ret2libc, gdb.
     tag: pwn
   -
     skill: Reverse
     strength: 8.4
-    desc: x86 assembly, objdump, decompilers (ghidra), symbolic execution (z3, angr).
+    desc: x86 assembly, objdump, decompilers (ghidra), gdb, symbolic execution (z3, angr).
     tag: reverse
   -
     skill: Mathematics
     strength: 0.4
-    active: \"Mathematics is everywhere.\"
+    active: Mathematics is everywhere.
     desc: The more I learn, the less I know.
     tag: mathematics
 

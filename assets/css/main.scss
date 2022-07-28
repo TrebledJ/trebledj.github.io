@@ -19,6 +19,10 @@ a:hover, a:active {
     color: var(--link-hover-color) !important;
 }
 
+abbr, abbr:visited, abbr:hover, abbr:active {
+    text-decoration: underline dotted;
+}
+
 .tag {
     display: inline-block;
     margin: 3px 0px;
@@ -40,5 +44,9 @@ a:hover, a:active {
     -ms-animation-direction: reverse;
     -o-animation-direction: reverse;
     animation-direction: reverse;
+}
+
+.skill-item .progress {
+    height: 12px;
 }
 
