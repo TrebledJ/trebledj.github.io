@@ -10,10 +10,13 @@
 
 /* custom css goes below */
 
+a, a:visited {
+    text-decoration: none !important;
+}
+
 // Color-shift links on hover.
-.post-preview a:hover, .tag-head a:hover {
+a:hover, a:active {
     color: var(--link-hover-color) !important;
-    text-decoration: none;
 }
 
 .tag {
@@ -25,18 +28,11 @@
     border: 1px solid var(--main-text-color);
     border-radius: var(--border-radius-small);
 }
-.tag:hover {
-    text-decoration: none;
-}
 
 * {
     transition: background-color 0.3s ease-in, border-color 0.3s ease-in;
 }
 
-// .skill-item .progress {
-//     background-color: var(--medium-text-color);
-//     height: 12px;
-// }
 .skill-item .progress-bar {
     // background-color: var(--link-color);
     -webkit-animation-direction: reverse;
@@ -44,9 +40,5 @@
     -ms-animation-direction: reverse;
     -o-animation-direction: reverse;
     animation-direction: reverse;
-}
-
-.skill-item a {
-    text-decoration: none;
 }
 

@@ -134,7 +134,7 @@ author_skills:
         active: trebledj.github.io
   -
     skill: QML
-    strength: 7.5
+    strength: 7.1
     desc: Development cycle, library modules, language features (transitions, behaviours, attached properties).
     tag: qml
   - 
@@ -163,6 +163,7 @@ author_skills:
     skill: Algo and DS
     strength: 7.8
     desc: Search/sorting algorithms, graph algorithms, algo design.
+    active: Advent of Code
   -
     skill: Embedded
     strength: 7.2
