@@ -177,19 +177,19 @@ author_skills:
         desc: Jobs, SQL, dataframes.
   - 
     skill: HTML/CSS
-    strength: 7.2
+    strength: 4.8
     active: Using to enhance this site.
     desc: Tags, attributes, flex, scss.
     icon: html5/html5-original
     subskills:
       - 
         skill: Bootstrap
-        strength: 7.1
+        strength: 6.8
         active: Using to enhance this site.
         icon: bootstrap/bootstrap-original
   - 
     skill: Javascript
-    strength: 6.9
+    strength: 6.1
     active: Using to enhance this site.
     desc: Basics, ES6 (classes syntax sugar, lambdas, rest parameters), DOM, JQuery.
     icon: javascript/javascript-original
@@ -364,6 +364,10 @@ jekyll_admin:
   #   - datafiles
   #   - configuration
   homepage: "posts"
+
+# SASS
+sass:
+  implementation: sass-embedded
 
 
 # Exclude from processing.
