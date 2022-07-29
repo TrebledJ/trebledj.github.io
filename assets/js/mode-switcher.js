@@ -2,7 +2,7 @@ let defaultTheme = "dark";
 
 function modeInit() {
   let currentTheme = sessionStorage.getItem("theme");
-  if (currentTheme === "light") {
+  if (currentTheme === "dark") {
     setMode("dark");
   } else if (currentTheme === "light") {
     setMode("light");
