@@ -1,14 +1,13 @@
+let defaultTheme = "dark";
+
 function modeInit() {
   let currentTheme = sessionStorage.getItem("theme");
-  if (currentTheme === "dark") {
-    document.documentElement.setAttribute("data-theme", "dark");
-    sessionStorage.setItem("theme", "dark");
+  if (currentTheme === "light") {
+    setMode("dark");
   } else if (currentTheme === "light") {
-    document.documentElement.setAttribute("data-theme", "light");
-    sessionStorage.setItem("theme", "light");
+    setMode("light");
   } else {
-    document.documentElement.setAttribute("data-theme", "dark");
-    sessionStorage.setItem("theme", "dark");
+    setMode(defaultTheme);
   }
 
   // Set switch to correct setting on load.
@@ -18,13 +17,20 @@ function modeInit() {
 function modeSwitcher() {
   let currentTheme = sessionStorage.getItem("theme");
   if (currentTheme === "dark") {
+    setMode("light");
+  } else if (currentTheme === "light") {
+    setMode("dark");
+  } else {
+    setMode(defaultTheme);
+  }
+}
+
+function setMode(mode) {
+  if (mode === "dark") {
+    document.documentElement.setAttribute("data-theme", "dark");
+    sessionStorage.setItem("theme", "dark");
+  } else if (mode === "light") {
     document.documentElement.setAttribute("data-theme", "light");
     sessionStorage.setItem("theme", "light");
-  } else if (currentTheme === "light") {
-    document.documentElement.setAttribute("data-theme", "dark");
-    sessionStorage.setItem("theme", "dark");
-  } else {
-    document.documentElement.setAttribute("data-theme", "dark");
-    sessionStorage.setItem("theme", "dark");
   }
 }
