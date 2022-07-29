@@ -1,11 +1,14 @@
-<article class="card article p-4" itemscope itemtype="http://schema.org/BlogPosting">
+<article class="card article p-5" itemscope itemtype="http://schema.org/BlogPosting">
     <div class="article-header">
         <h1 class="post-title" itemprop="name headline">{{ page.title }}</h1>
         <h5 class="post-meta">{{ page.summary }}</h5>
         {% include post_metadata.html %}
+        {% if page.updated %}
+            <div class="post-date mt-1 mb-n2"><i class="fas fa-calendar me-1" style="font-size: 14px;"></i>{{page.updated}} (updated)</div>
+        {% endif %}
     </div>
     <hr/>
-    <div class="card-body" itemprop="articleBody">
+    <div class="card-body p-0" itemprop="articleBody">
         {% if page.include_thumbnail %}
             <img class="card-img-top" src="{{site.url}}{{site.baseurl}}{{ page.thumbnail }}" alt="{{ post.title }}"/>
             <br/>

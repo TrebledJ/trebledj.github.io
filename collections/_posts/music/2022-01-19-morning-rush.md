@@ -1,6 +1,7 @@
 ---
 title:  "Morning Rush"
 summary: "\"Quickly! School starts in 15 minutes and you still haven't changed out of your pajamas!\""
+updated: "2022-07-28"
 tags: music band
 keywords: music, composition, band, guitars, drums, upbeat
 track_id: 1199278129
