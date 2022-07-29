@@ -3,6 +3,7 @@ title: Styleguide
 layout: page
 permalink: /styleguide/
 visibility: false
+feed: false
 ---
 
 

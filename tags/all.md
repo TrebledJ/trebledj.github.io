@@ -1,6 +1,8 @@
 ---
 layout: page
 permalink: /tags/
+feed: false
+visibility: false
 ---
 
 

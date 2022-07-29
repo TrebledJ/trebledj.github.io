@@ -3,6 +3,7 @@ title: Styleguide (Markdown)
 layout: page
 permalink: /styleguide-md/
 visibility: false
+feed: false
 ---
 
 
