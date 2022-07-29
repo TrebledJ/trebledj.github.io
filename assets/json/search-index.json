@@ -1,0 +1,28 @@
+---
+---
+{
+{% for post in site.posts %}
+    "{{post.url}}": {
+        "type": "post",
+        "title": "{{post.title}}",
+        "tags": "{{post.tags}}",
+        "content": {{post.content | strip_html | strip_newlines | jsonify}},
+        "url": "{{post.url}}"
+    },
+{% endfor %}
+{% assign first = true %}
+{% for page in site.pages %}
+    {% assign xs = page.permalink | split: '/' %}
+    {% assign xs_size = xs | size %}
+    {% if xs[1] == 'tags' and xs_size > 2 %}
+        {% unless first %},{% endunless %}
+        "{{xs[2]}}": {
+            "type": "tag",
+            "tag": "{{xs[2]}}",
+            "content": {{page.content | strip_html | strip_newlines | jsonify}},
+            "url": "{{page.url}}"
+        }
+        {% assign first = false %}
+    {% endif %}
+{% endfor %}
+}

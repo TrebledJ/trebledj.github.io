@@ -1,14 +1,15 @@
 <nav class="navbar navbar-expand-lg fixed-top navbar-dark" id="topNav">
-    <button aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-target="#navbarNav" data-toggle="collapse" type="button">
+    <button aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler"
+        data-target="#navbarNav" data-toggle="collapse" type="button">
         <span class="icono-hamburger" id="navbar-hamburger"></span>
     </button>
     <a class="navbar-brand" href="/">{{site.title}}</a>
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
             {% for i in site.urls %}
-                <li class="nav-item">
-                    <a class="nav-link" href="{{site.url}}{{site.baseurl}}{{i.url}}">{{ i.text }}</a>
-                </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{site.url}}{{site.baseurl}}{{i.url}}">{{ i.text }}</a>
+            </li>
             {% endfor %}
         </ul>
     </div>
@@ -19,7 +20,7 @@
               </a>
             </li> -->
         <li class="nav-item">
-            <a class="nav-link toggle-search-button" href="#search">
+            <a id="toggle-search-button" class="nav-link">
                 <i aria-hidden="true" class="fa fa-search search-icon"></i>
             </a>
         </li>
@@ -31,25 +32,14 @@
 </nav>
 <div id="top-progress-bar"></div>
 <!-- Search Form -->
-<div class="search-form-container">
-    <form class="search-form">
-        <fieldset class="search-form__fieldset">
-            <div class="row">
-                <div class="col-lg-8 offset-md-2">
-                    <input autofocus class="search-form__field" placeholder="Type to Search..."/>
-                    <input class="search-form__submit" type="submit" value="search"/>
-                </div>
+<div class="container-fluid">
+    <div class="search-form-container p-4">
+        <input autofocus type="search" class="search-box w-100 ps-2 pb-1"
+            placeholder="Type to search..." />
+
+        <div class="row w-100">
+            <div id="results-list" class="col-12">
             </div>
-        </fieldset>
-    </form>
-
-    <div class="row">
-        <div class="col-lg-8 offset-md-2 search-results">
-            <div class="card search-results"></div>
         </div>
-    </div>
-
-    <div class="close-search-button search-form-container__close">
-        <i class="fa fa-times icon"></i>
     </div>
 </div>
