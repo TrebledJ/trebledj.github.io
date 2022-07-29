@@ -1,8 +1,9 @@
 <style>
   /* change cover_img in config.yml */
   .jumbotron {
-    background-color: var(--main-background-color) !important;
-    background-image: url("/assets/img/{{site.hero_cover_img}}");
+    /* background-color: var(--main-background-color) !important; */
+    background-color: transparent !important;
+    /* background-image: url("/assets/img/{{site.hero_cover_img}}"); */
     text-align: center;
     /* background-attachment: fixed; */
     background-size: cover;
@@ -20,28 +21,56 @@
 </style>
 
 <!-- home hero section -->
-<div class="jumbotron">
-    <img class="author-profile-img" src="{{site.url}}{{site.baseurl}}/assets/img/{{site.author_logo}}"/>
-    <p class="jumbotron-heading mt-3">Welcome to my pages!</p>
-
-    <p class="lead mt-n2 mb-n2" id="typewriteText"></p>
-    <div class="jumbotron-btns">
-        <a href="{{site.baseurl}}/posts">
-            <button class="btn btn-md btn-warning">
-                <strong>Read Posts</strong>
-            </button>
-        </a>
-        <a href="{{site.baseurl}}/music">
-            <button class="btn btn-md btn-primary">
-                <strong>Browse Music</strong>
-            </button>
-        </a>
+<section class="hero-section">
+    <div class="hero"></div>
+    <div class="d-flex flex-column justify-content-evenly align-items-center hero-fg" style="height: 60vh">
+        <img class="author-profile-img" src="{{site.url}}{{site.baseurl}}/assets/img/{{site.author_logo}}"/>
+        <h1 class="mt-3">TrebledJ Pages</h1>
+        <h6 class="" id="typewriteText"></h6>
+        <div class="d-flex flex-row">
+            <a class="me-2" href="{{site.baseurl}}/posts">
+                <button class="btn btn-md btn-warning">
+                    <strong>Read Posts</strong>
+                </button>
+            </a>
+            <a href="{{site.baseurl}}/music">
+                <button class="btn btn-md btn-primary">
+                    <strong>Browse Music</strong>
+                </button>
+            </a>
+        </div>
     </div>
-</div>
+    <div class="night">
+        <div class="shooting_star"></div>
+        <div class="shooting_star"></div>
+        <div class="shooting_star"></div>
+        <div class="shooting_star"></div>
+        <div class="shooting_star"></div>
+        <div class="shooting_star"></div>
+        <div class="shooting_star"></div>
+        <div class="shooting_star"></div>
+        <div class="shooting_star"></div>
+    </div>
+</section>
 <script>
-  $(document).ready(function() {
-    $("#typewriteText").typewrite({
-      actions: [{ type: "{{site.typewrite-text}}" }]
+  $(document).ready(function () {
+    var typewriter = new Typewriter('#typewriteText', {
+      loop: true
     });
+
+    let strings = [
+      '(づ◔ ͜ʖ◔)づ',
+      '(∩ ﾟᎲ ﾟ)⊃━☆ﾟ.*',
+      'ʕ•ᴥ•ʔ',
+      '༼ つ ◕_◕ ༽つ',
+      '(╯ ͠° ͟ʖ ͡°)╯┻━┻',
+      'ᕕ( ᐛ )ᕗ'
+    ];
+
+    for (s of strings) {
+      typewriter.typeString(s).pauseFor(2500).deleteAll();
+    }
+
+    typewriter.start();
   });
 </script>
