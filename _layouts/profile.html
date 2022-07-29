@@ -18,20 +18,23 @@ layout: default
                     <a class="social-link" href="https://stackoverflow.com/users/10239789/trebledj">
                         <i class="fab fa-stack-overflow"></i>
                     </a>
+                    <a class="social-link" href="https://www.codingame.com/profile/8444100ecb9723c1ec542346b0630aaa2821532">
+                        <img class="svg-social-link" height="48" src="https://cdn.jsdelivr.net/npm/simple-icons@v7/icons/codingame.svg" width="48"/>
+                    </a>
                     <a class="social-link" href="https://soundcloud.com/trebledj">
                         <i class="fab fa-soundcloud"></i>
                     </a>
                     <a class="social-link" href="https://open.spotify.com/user/24i9exez29k1jr85olljuy94g?si=4213a229649f4ceb">
                         <i class="fab fa-spotify"></i>
                     </a>
-                    <a class="social-link">
-                        <i class="fab fa-discord"></i>
-                        TrebledJ#7595
-                    </a>
                     <!-- <a class="social-link" href="http://linkedin.com/in/">
                         <i class="fab fa-linkedin-in"></i>
                     </a> -->
                 </p>
+                <a class="social-link">
+                    <i class="fab fa-discord"></i>
+                    TrebledJ#7595
+                </a>
 
                 {% if site.author_email %}
                     <h6>
@@ -45,90 +48,42 @@ layout: default
                 {% endif %}
             </div>
 
+            <!-- ABOUT -->
+            <div class="card p-4 pb-3 mb-3">
+                <h2 class="card-title">About</h2>
+                <p>{{ site.author_bio }}</p>
+            </div>
+
+            <!-- SKILLZ -->
             <div class="card p-4 author-skills">
                 <h2 class="card-title">Skilltree</h2>
-                <!-- <div class="card-body"> -->
-                    {%- include author_skills.html -%}
-                <!-- </div> -->
+                {%- include author_skills.html -%}
             </div>
         </div>
         <div class="col-lg-8">
-            {% if site.author_bio %}
-                <div class="card p-4 mb-3">
-                    <h2 class="card-title">About</h2>
-                    <p>{{ site.author_bio }}</p>
+            <!-- PROJECTS -->
+            <div class="card p-4 mb-3" id="author_projects" style="height: 75vh">
+                <h2 class="card-title">Projects</h2>
+                <br/>
+                <div class="card-body m-0 ms-n2 overflow-auto">
+                    {% include author_projects.html %}
                 </div>
-            {% endif %}
-            {% if site.show_author_project_details == true %}
-                <div class="card p-4 mb-3" id="author_projects">
-                    <h2 class="card-title">Projects</h2>
-                    <br/>
-                    {% for project in site.author_project_details %}
-                        {% if project.visibility == true %}
-                            <div class="row" id="project-card">
-                                <div class="col-md-6">
-                                    <img src="{{site.url}}{{site.baseurl}}/assets/img/{{project.project_thumbnail}}" class="project-img"/>
-                                </div>
-                                <div class="col-md-4 center">
-                                    <h4 class="experience-title">{{ project.project_title }}</h4>
-                                    <h6 class="experience-info">{{ project.project_info}}</h6>
-                                    <p class="experience-desc">{{ project.project_description }}</p>
-                                    <p>
-                                        <a class="project-link" href="{{project.project_url}}">{{ project.project_url}}</a>
-                                    </p>
-                                </div>
-                            </div>
-                            <br/>
-                        {% endif %}
-                    {% endfor %}
+            </div>
+            <!-- WORK EXPERIENCES -->
+            <div class="card p-4 mb-3">
+                <h2 class="card-title">Work Experience</h2>
+                <br/>
+                <div class="card-body m-0 ms-n2 overflow-auto">
+                    {% include author_work_experiences.html %}
                 </div>
-            {% endif %}
-            {% if site.show_author_work_experiences == true %}
-                <div class="card p-4 mb-3">
-                    <h2 class="card-title">Work Experience</h2>
-                    <br/>
-                    {% for exp in site.author_work_experiences %}
-                        {% if exp.visibility == true %}
-                            <div class="row">
-                                <div class="col-md-2">
-                                    <img src="{{site.url}}{{site.baseurl}}/assets/img/{{ exp.company_logo }}" class="company-logo"/>
-                                </div>
-                                <div class="col-md-6">
-                                    <h4 class="experience-title">{{ exp.designation }}</h4>
-                                    <h6 class="experience-info">{{ exp.company_name}}</h6>
-                                    <p class="experience-desc">{{ exp.description }}</p>
-                                    <p>
-                                        <a href="{{exp.company_url}}">{{ exp.company_url}}</a>
-                                    </p>
-                                </div>
-                            </div>
-                        {% endif %}
-                    {% endfor %}
+            </div>
+            <div class="card p-4">
+                <h2 class="card-title">Education</h2>
+                <br/>
+                <div class="card-body m-0 ms-n2 overflow-auto">
+                    {% include author_education.html %}
                 </div>
-            {% endif %}
-            {% if site.show_author_education_details == true %}
-                <div class="card p-4">
-                    <h2 class="card-title">Education</h2>
-                    <br/>
-                    {% for detail in site.author_education_details %}
-                        {% if detail.visibility == true %}
-                            <div class="row">
-                                <div class="col-md-2">
-                                    <img src="{{site.url}}{{site.baseurl}}/assets/img/{{ detail.college_logo}}" class="company-logo"/>
-                                </div>
-                                <div class="col-md-6">
-                                    <h4 class="experience-title">{{detail.college_degree }}</h4>
-                                    <h6 class="experience-info">{{detail.college_name}}</h6>
-                                    <p class="experience-desc">{{detail.description}}</p>
-                                    <p>
-                                        <a href="{{detail.college_url}}">{{ detail.college_url}}</a>
-                                    </p>
-                                </div>
-                            </div>
-                        {% endif %}
-                    {% endfor %}
-                </div>
-            {% endif %}
+            </div>
         </div>
     </div>
 </div>

@@ -1,0 +1,18 @@
+<ul class="timeline">
+    {% for post in site.tags["project"] %}
+        <li class="timeline-item rounded ms-3 p-4 pb-3 shadow">
+            <div class="timeline-arrow"></div>
+            <h2 class="h5 mb-1"><a href="{{site.baseurl}}{{post.url}}">{{post.title}}</a></h2>
+            <span class="small text-gray">
+                <i class="fas fa-calendar"></i>
+                {{post.date | date: '%Y-%m-%d'}}
+                {% assign nonproj_tags = post.tags | where_exp: "tag", "tag != 'project'" %}
+                {% for tag in nonproj_tags limit:3 %}
+                    &nbsp;•&nbsp;
+                    {% include tag.html %}
+                {% endfor %}
+            </span>
+            <p class="text-small mt-2 font-weight-light">{{post.pitch}}</p>
+        </li>
+    {% endfor %}
+</ul>

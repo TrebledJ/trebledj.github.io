@@ -87,7 +87,7 @@
 
 html[data-theme="dark"] {
     --bold-color: rgb(188, 188, 188);
-    --box-background-color: hsl(0, 0%, 20%);
+    --box-background-color: hsl(0, 0%, 15%);
     --highlight-color: hsl(0, 0%, 60%);
     --light-border-color: hsl(255, 3%, 23%);
     --light-text-color: rgb(199, 199, 204);
@@ -110,7 +110,7 @@ html[data-theme="dark"] {
 html,
 html[data-theme="light"] {
     --bold-color: rgb(0, 0, 0);
-    --box-background-color: rgb(249, 249, 250);
+    --box-background-color: rgb(253, 253, 255);
     --highlight-color: hsl(0, 0%, 80%);
     --light-border-color: rgb(230, 230, 230);
     --light-text-color: rgb(72, 72, 74);
@@ -870,21 +870,12 @@ header {
 
 }
 
-#author_projects {
-    .project-img {
-        width: 300px;
-        height: 200px;
-    }
-
-    #project-card {
-        margin-top: 30px;
-    }
-
-    .project-link {
-        color: var(--link-color);
-    }
+html[data-theme="dark"] .svg-social-link {
+    // Turn svgs to white.
+    // https://stackoverflow.com/a/53336754/10239789
+    // https://codepen.io/sosuke/pen/Pjoqqp
+    filter: invert(100%) sepia(29%) saturate(2%) hue-rotate(67deg) brightness(108%) contrast(101%);
 }
-
 
 .company-logo {
     width: 100px;

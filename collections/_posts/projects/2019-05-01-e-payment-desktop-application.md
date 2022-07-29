@@ -1,7 +1,7 @@
 ---
 title:  E-Payment Desktop Application and System
 summary: An e-payment system which involves a cross-platform desktop application and careful planning.
-tags: project qt cpp sql
+tags: cpp qt sql project
 keywords: e-payment, desktop application, qt, gui, sql, c++
 pitch: Developed a desktop application for a new e-payment system in the school cafeteria. Collaborated with ICT staff in UI design and connecting the application with the school’s SQL Server database.
 ---
