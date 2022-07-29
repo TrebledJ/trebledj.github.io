@@ -14,7 +14,7 @@ layout: page_with_sidebar
 
     <br/>
     <div class="post-preview-list">
-        {% assign slug = page.title | slugify %}
+        {% assign slug = page.tag | default: page.title | slugify %}
         {% for post in site.tags[slug] %}
             {% include post_preview.html %}
         {% endfor %}
