@@ -21,7 +21,8 @@ urls:
 # Edit Author details (For multi authors check _data/authors.yml)
 
 author_logo: profile.png
-author: Johnathan
+author: TrebledJ
+author_name: Johnathan
 author_bio: >-
   HKUST mathematics undergrad. Programming language fanatic. Avid bedroom composer. Likes pineapples on pizza.
   

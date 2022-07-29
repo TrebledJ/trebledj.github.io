@@ -832,7 +832,7 @@ header {
     .profile-img {
         width: 150px;
         height: 150px;
-        margin-left: 20px;
+        // margin-left: 20px;
         border-radius: 50%;
     }
 
@@ -847,7 +847,7 @@ header {
 
     .social-link {
         color: var(--social-link-color) !important;
-        font-size: 15px;
+        font-size: 20px;
         padding: 5px;
         margin: 2px;
         text-decoration: none !important;
@@ -867,8 +867,17 @@ header {
         color: var(--main-text-color);
         font-weight: 600;
     }
-
 }
+
+.social-link>* {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.social-link>span {
+    color: var(--medium-text-color);
+}
+
 
 html[data-theme="dark"] .svg-social-link {
     // Turn svgs to white.
