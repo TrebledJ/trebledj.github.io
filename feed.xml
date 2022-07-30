@@ -24,9 +24,9 @@
         {% endfor %}
 
         {% for page in site.pages %}
-            {% assign chain = page | split: '/' %}
+            {% assign chain = page.permalink | split: "/" %}
             {% assign subdir = chain[1] %}
-            {% if subdir == 'tags' %}
+            {% if subdir == 'tags' and page.feed != false %}
                 <item>
                     <title>{{ page.title | xml_escape }}</title>
                     <description>{{ page.content | xml_escape }}</description>
