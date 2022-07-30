@@ -26,7 +26,7 @@
         {% for page in site.pages %}
             {% assign chain = page | split: '/' %}
             {% assign subdir = chain[1] %}
-            {% if chain == 'tags' %}
+            {% if subdir == 'tags' %}
                 <item>
                     <title>{{ page.title | xml_escape }}</title>
                     <description>{{ page.content | xml_escape }}</description>
