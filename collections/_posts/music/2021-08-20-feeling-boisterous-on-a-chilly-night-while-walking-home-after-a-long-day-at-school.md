@@ -7,8 +7,6 @@ keywords: music, composition, synth, electronic, drums, edm
 track_id: 1146309223
 ---
 
-{%- include track.html -%}
-
 This is that feeling when you boisterously walk (or bike, drive, swim, fly) home on a chilly night after a long day at school.
 
 This piece was composed as a final project for an introductory course to electronic music composition. Most parts were written as MIDI and fed into digital synths. The recurring bleeps were collected from an EuroRack analogue synth with the René sequencer.

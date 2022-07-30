@@ -7,8 +7,6 @@ keywords: music, composition, minimalism, fusion, string, ensemble, string ensem
 track_id: 1199277217
 ---
 
-{%- include track.html -%}
-
 This piece seeks to paint a diverse set of feelings. Listen for the string ensemble easing in and out of the void, the solemn moments of silence, the lightheartedness of the syncopated pizzicato, the relentless cycle of tension and relief.
 
 In some sections, I aimed for a more contemplative and reflective mood or atmosphere (which is partly why it goes over the 10-minute mark). One key inspirations was Steve Reich's [Music for 18 Musicians](https://en.wikipedia.org/wiki/Music_for_18_Musicians) (an hour long piece!) where Reich demonstrates the idea of "pulsing", which in this context is just taking a note and repeating it but with an increase then decrease in dynamics. The overall effect is quite serene, making the soundscape ebb in and out.

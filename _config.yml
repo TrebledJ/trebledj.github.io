@@ -327,6 +327,12 @@ defaults:
       include_thumbnail: false
   -
     scope:
+      path: "collections/_posts/music"
+      type: "posts"
+    values:
+      layout: "music_post"
+  -
+    scope:
       path: "tags"
     values:
       layout: "tag_page"

@@ -7,8 +7,6 @@ keywords: music, composition, band, guitars, drums, upbeat
 track_id: 1199278129
 ---
 
-{%- include track.html -%}
-
 Do you feel the exhilaration of the morning air? The excitement of stepping out of bed? Chomping down breakfast? 
 
 This upbeat track is an offshoot of [The Breath of Life](/posts/the-breath-of-life/), rendering its minimalistic elements with a modern instrumentation and at a faster pace. In particular, it combines the 1564 chord progression with the 332 rhythmic pattern in the rhythm guitar.
