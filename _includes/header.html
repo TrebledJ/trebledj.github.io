@@ -1,45 +1,39 @@
 <nav class="navbar navbar-expand-lg fixed-top navbar-dark" id="topNav">
-    <button aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler"
-        data-target="#navbarNav" data-toggle="collapse" type="button">
-        <span class="icono-hamburger" id="navbar-hamburger"></span>
-    </button>
-    <a class="navbar-brand" href="/">{{site.title}}</a>
-    <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
-            {% for i in site.urls %}
-            <li class="nav-item">
-                <a class="nav-link" href="{{site.url}}{{site.baseurl}}{{i.url}}">{{ i.text }}</a>
-            </li>
-            {% endfor %}
-        </ul>
+    <div class="container-fluid justify-content-between align-items-center">
+        <button aria-controls="navbar-container" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-bs-target="#navbar-container" data-bs-toggle="collapse" type="button">
+            <span class="icono-hamburger" id="navbar-hamburger"></span>
+        </button>
+        <a class="navbar-brand" href="/">{{site.title}}</a>
+        <div class="navbar-collapse collapse" id="navbar-container">
+            <ul class="navbar-nav me-auto">
+                {% for i in site.urls %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{site.url}}{{site.baseurl}}{{i.url}}">{{ i.text }}</a>
+                    </li>
+                {% endfor %}
+            </ul>
+            <ul class="navbar-nav">
+                <li>
+                    <a class="nav-link me-2" id="toggle-search-button">
+                        <i aria-hidden="true" class="fa fa-search search-icon"></i>
+                    </a>
+                </li>
+                <li>
+                    <input class="nav-link switch" id="theme-toggle" name="checkbox" onclick="modeSwitcher()" type="checkbox"/>
+                    <script>modeInit();</script>
+                </li>
+            </ul>
+        </div>
     </div>
-    <ul class="nav justify-content-end">
-        <!-- <li class="nav-item">
-              <a class="nav-link" href="{{site.url}}{{site.baseurl}}/styleguide">
-                 Styleguide
-              </a>
-            </li> -->
-        <li class="nav-item">
-            <a id="toggle-search-button" class="nav-link">
-                <i aria-hidden="true" class="fa fa-search search-icon"></i>
-            </a>
-        </li>
-        <li class="nav-item">
-            <input class="nav-link switch" id="theme-toggle" name="checkbox" onclick="modeSwitcher()" type="checkbox" />
-            <script>modeInit();</script>
-        </li>
-    </ul>
 </nav>
 <div id="top-progress-bar"></div>
 <!-- Search Form -->
 <div class="container-fluid">
     <div class="search-form-container p-4">
-        <input autofocus type="search" class="search-box w-100 ps-2 pb-1"
-            placeholder="Type to search..." />
+        <input autofocus class="search-box w-100 ps-2 pb-1" placeholder="Type to search..." type="search"/>
 
         <div class="row w-100">
-            <div id="results-list" class="col-12">
-            </div>
+            <div class="col-12" id="results-list"></div>
         </div>
     </div>
 </div>

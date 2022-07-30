@@ -167,7 +167,7 @@ ul {
     height: 5px;
     position: fixed;
     width: 100%;
-    overflow: hidden;
+    // overflow: hidden;
     z-index: 10;
     margin-top: 25px;
 }
@@ -177,7 +177,7 @@ body {
     color: var(--main-text-color) !important;
     // font-family: 'Quicksand', sans-serif !important;
     font-family: var(--font-family);
-    font-feature-settings: "kern"on;
+    font-feature-settings: "kern" on;
     font-size: 1.4rem;
     font-variant-numeric: oldstyle-nums;
     hanging-punctuation: first last;
@@ -345,13 +345,8 @@ header {
 }
 
 
-/* bootstrap override */
-.container-fluid {
+body > .container-fluid {
     padding: 0px !important;
-    width: fit-content !important;
-    margin-left: 0px !important;
-    margin-right: 0px !important;
-    margin-top: 10px !important;
 }
 
 .card {
@@ -1011,8 +1006,8 @@ footer {
     }
 
     #topNav {
-        padding-left: 0px;
-        padding-right: 0px;
+        padding-left: 4%;
+        padding-right: 4%;
     }
 
     .navbar-brand {
@@ -1092,8 +1087,8 @@ footer {
     }
 
     #topNav {
-        padding-left: 0px;
-        padding-right: 0px;
+        padding-left: 2%;
+        padding-right: 2%;
     }
 
     .navbar-brand {
@@ -1141,8 +1136,8 @@ footer {
     }
 
     #topNav {
-        padding-left: 0px;
-        padding-right: 0px;
+        padding-left: 4%;
+        padding-right: 4%;
     }
 
     #mc-embedded-subscribe-form {
