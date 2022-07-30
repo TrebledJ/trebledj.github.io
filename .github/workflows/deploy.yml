@@ -68,6 +68,7 @@ jobs:
 
     - name: build jekyll
       run: |
+        bundler update
         bundle install
         bundle exec jekyll build
 
