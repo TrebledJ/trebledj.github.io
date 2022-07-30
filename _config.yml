@@ -55,27 +55,35 @@ author_education_details:
       -
         name: Intro to Java
         desc: Introduction of programming concepts (types, arrays, control flow) using Java.
+        grade: A+
       -
         name: Programming with C++
         desc: Introduction to C++ programming (types, arrays, control flow, classes).
+        grade: A+
       -
         name: OOP and Data Structures
         desc: More basic C++ programming (inheritance, polymorphism, virtual functions, abstract classes, data structures (e.g. linked lists, AVL trees)).
+        grade: A+
       -
         name: Algorithm Design
         desc: Search/sorting algorithms, greedy algorithms, graph algorithms, dynamic programming, time/space complexity analysis.
+        grade: B
       -
         name: Competitive Programming in Cybersecurity I
         desc: Hands-on exercises in basic cybersecurity vulnerabilities through CTF training and solving CTF challenges. Topics include buffer overflow, ROP, static/dynamic binary analysis, symbolic execution, SQL injection, XSS.
+        grade: P
       -
         name: Competitive Programming in Cybersecurity II
         desc: Presentations on a cybersecurity vulnerability/technique. Solving CTF challenges.
+        grade: A+
       -
         name: Compiler Design
         desc: Formal languages, pumping lemma, compiler pipeline (lexing, parsing, name analysis, type checking, codegen), compiler project written in Scala.
+        grade: A
       -
         name: Discrete Mathematics
         desc: Set theory, logic, recursive sequences, euclidean algorithm, counting/permutations, graph theory.
+        grade: A+
 
     visibility: true
 
