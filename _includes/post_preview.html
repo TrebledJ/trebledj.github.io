@@ -6,7 +6,7 @@
                 <img class="post-img-contain" src="{{site.url}}{{site.baseurl}}{{post.thumbnail}}" alt="{{ post.title }}">
             </div>
         {% else %}
-            <img class="post-img-cover" src="{{site.url}}{{site.baseurl}}{{post.thumbnail | default: site.default_thumbnail}}" alt="{{ post.title }}">
+            <img class="post-img-cover" src="{{site.url}}{{site.baseurl}}{{site.default_thumbnail}}" alt="{{ post.title }}">
         {% endif %}
     </a>
 
