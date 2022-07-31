@@ -1,7 +1,7 @@
 let defaultTheme = "dark";
 
 function modeInit() {
-  let currentTheme = sessionStorage.getItem("theme");
+  let currentTheme = localStorage.getItem("theme");
   if (currentTheme === "dark") {
     setMode("dark");
   } else if (currentTheme === "light") {
@@ -15,7 +15,7 @@ function modeInit() {
 }
 
 function modeSwitcher() {
-  let currentTheme = sessionStorage.getItem("theme");
+  let currentTheme = localStorage.getItem("theme");
   if (currentTheme === "dark") {
     setMode("light");
   } else if (currentTheme === "light") {
@@ -28,9 +28,9 @@ function modeSwitcher() {
 function setMode(mode) {
   if (mode === "dark") {
     document.documentElement.setAttribute("data-theme", "dark");
-    sessionStorage.setItem("theme", "dark");
+    localStorage.setItem("theme", "dark");
   } else if (mode === "light") {
     document.documentElement.setAttribute("data-theme", "light");
-    sessionStorage.setItem("theme", "light");
+    localStorage.setItem("theme", "light");
   }
 }
