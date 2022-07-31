@@ -71,7 +71,7 @@ function fetchPostWithIndex(index) {
         <br/>
         <br/>
         <iframe allow="autoplay" frameborder="no" height="166" scrolling="no"
-          src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/${item.track_id}&color=%23${soundcloud_color}&auto_play=false&hide_related=true&show_comments=true&show_user=true&show_reposts=false&show_teaser=true"
+          src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/${item.track_id}&color=%23${soundcloud_color}&auto_play=false&hide_related=true&show_comments=true&show_user=true&show_reposts=false&show_teaser=false"
           width="100%"></iframe>
         <div>
           <span class="post-date">${item.date}</span>
