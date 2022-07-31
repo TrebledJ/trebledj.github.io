@@ -30,7 +30,7 @@ author_email: "trebledjjj@gmail.com"
 author_location:
 author_website_url: trebledj.github.io
 typewrite-text: I like pineapples on pizza.
-hero_cover_img: sample_cover.jpg # replace this for changing homepage cover (eg. try cover.jpeg). Image should be in /assets/img
+# hero_cover_img: sample_cover.jpg # replace this for changing homepage cover (eg. try cover.jpeg). Image should be in /assets/img
 
 # Experiences
 author_work_experiences:
@@ -281,7 +281,8 @@ formspree_email:
 # syntax highlighter
 markdown: kramdown
 highlighter: rouge
-permalink: pretty
+# permalink: pretty
+permalink: /:categories/:title/
 
 # pagination of posts
 paginate: 8
@@ -376,6 +377,15 @@ sass:
 exclude:
   - .sass-cache/
   - .jekyll-cache/
+  - README.md
+  - SECURITY.md
+  - LICENSE
+  - firebase.json
+  - Dockerfile
+  - DEPLOY_STRATEGY
+  - docker-compose-dev.yml
+  - docker-compose-prod.yml
+  - bower.json
   - gemfiles/
   - Gemfile
   - Gemfile.lock

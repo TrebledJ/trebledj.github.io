@@ -1,8 +1,0 @@
----
----
-{
-    "url": "{{site.url}}",
-    "baseurl": "{{site.baseurl}}",
-    "soundcloud_color": "{{site.soundcloud_color}}",
-    "fullurl": "{{site.url}}{{site.baseurl}}"
-}
