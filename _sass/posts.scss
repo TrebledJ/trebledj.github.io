@@ -1,3 +1,5 @@
+
+
 .post-preview {
     width: 100%;
     max-width: 100%;
@@ -91,4 +93,21 @@
 
 .post-title, .post-summary {
     color: var(--bold-color) !important;
+}
+
+$spacer: 1rem;
+@media (min-width: 768px) { 
+    .post-article {
+        padding: $spacer * 3;
+    }
+}
+@media (min-width: 481px) and (max-width: 767px) { 
+    .post-article {
+        padding: $spacer * 1.5;
+    }
+}
+@media (min-width: 200px) and (max-width: 480px) { 
+    .post-article {
+        padding: $spacer;
+    }
 }
