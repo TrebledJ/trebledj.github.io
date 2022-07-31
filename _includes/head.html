@@ -47,8 +47,7 @@
         <meta content="{{ site.url }}{{ page.thumbnail }}" property="og:image"/>
     {% endif %}
     {% if page.tags %}
-        {% for tag in page.tags
-  limit:1 %}
+        {% for tag in page.tags limit:1 %}
             <meta content="{{ tag }}" property="article:section"/>
         {% endfor %}
     {% endif %}
@@ -133,6 +132,10 @@
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <script crossorigin="anonymous" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
 
+    <!-- Google Analytics -->
+    {% if site.google_analytics and jekyll.environment == 'production' %}
+        {% include analytics.html %}
+    {% endif %}
 
     <!-- (you can remove the below scripts but do buy me a coffee to show some support :) -->
     <!-- Maker widget  -->
