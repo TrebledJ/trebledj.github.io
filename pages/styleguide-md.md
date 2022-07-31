@@ -7,6 +7,11 @@ feed: false
 usemathjax: true
 ---
 
+## Table of Contents
+{:.no_toc}
+
+* 
+{:toc .mdtoc}
 
 # Heading 1
 ## Heading 2
@@ -45,14 +50,19 @@ Chew on `cable` chew the plant, `yet` lick face hiss at owner, `pee` a lot, and 
 
 ----
 
+### Links and Anchors
+
 [Top of page](#).
 
 [Heading 1](#heading-1).
+
+[Heading 6](#heading-6).
 
 Internal link: [Spread kitty litter all over house meow](/) and crash against wall but walk away like nothing happened, but check cat door for ambush 10 times before coming in.
 
 External link: [Cat meoooow i iz master of hoomaan](https://www.google.com/), not hoomaan master of i.
 
+### Math
 LaTeX:
 
 $$\sum_{i=1}^n \frac{(x_i - \mu)^2}{n}$$
@@ -67,6 +77,8 @@ Centred image.
 ![](/assets/img/thumbnail.png){:width="80%"}
 {:refdef style="text-align: center;"}
 
+## Add-Ons
+### Alerts
 
 Pooh damn **dat dog naughty running cat and make it to the carpet** *before i vomit mmmmmm what the heck just happened, something feels fishy but hide head under blanket so no one can see love* ~~blinks and purr~~ purr purr purr yawn. `Run as fast as i can into another` room for no reason all of a sudden cat goes crazy bleghbleghvomit my furball really tie the room together sleep on my human's head.
 <br/><br/>
@@ -95,6 +107,7 @@ Give attitude. Cattt catt cattty cat being a cat reward the chosen human with a 
 Cats secretly make all the worlds muffins this cat happen now, it was too purr-fect!!! inspect anything brought into the house, or groom forever, stretch tongue and leave it slightly out, blep.
 {:.alert--warning}
 
+### Code Blocks
 
 ```cpp
 #include <iostream>
