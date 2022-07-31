@@ -1,13 +1,12 @@
 ---
 title: Styleguide (Markdown)
-layout: page
+layout: post
 permalink: /styleguide-md/
 visibility: false
 feed: false
+usemathjax: true
 ---
 
-
-# Styleguide (Markdown)
 
 # Heading 1
 ## Heading 2
@@ -43,6 +42,59 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit.
 <small>Rub butt on table hide head under blanket so no one can see destroy the blinds for meow.</small>
 
 Chew on `cable` chew the plant, `yet` lick face hiss at owner, `pee` a lot, and `meow` repeatedly scratch at fence purrrrrr eat muffins and poutine until owner comes back fight own tail roll on the floor purring your whiskers off so no, `you can't close the door`, i haven't decided whether or not i wanna go out so roll on the floor purring your whiskers off.
+
+----
+
+[Top of page](#).
+
+[Heading 1](#heading-1).
+
+Internal link: [Spread kitty litter all over house meow](/) and crash against wall but walk away like nothing happened, but check cat door for ambush 10 times before coming in.
+
+External link: [Cat meoooow i iz master of hoomaan](https://www.google.com/), not hoomaan master of i.
+
+LaTeX:
+
+$$\sum_{i=1}^n \frac{(x_i - \mu)^2}{n}$$
+
+Inline latex like $$\underbrace{1 + 1 = 2}_{\text{wow}}$$ should work.
+
+Full-width image.  
+![](/assets/img/thumbnail.png){:width="100%"}
+
+Centred image.  
+
+![](/assets/img/thumbnail.png){:width="80%"}
+{:refdef style="text-align: center;"}
+
+
+Pooh damn **dat dog naughty running cat and make it to the carpet** *before i vomit mmmmmm what the heck just happened, something feels fishy but hide head under blanket so no one can see love* ~~blinks and purr~~ purr purr purr yawn. `Run as fast as i can into another` room for no reason all of a sudden cat goes crazy bleghbleghvomit my furball really tie the room together sleep on my human's head.
+<br/><br/>
+Chase imaginary bugs sniff other cat's butt and hang jaw half open thereafter immediately regret falling into bathtub for scratch leg; meow for can opener to feed me yet licks your face. Jump around on couch, meow constantly until given food, pet right here, no not there, here, no fool, right here that other cat smells funny you should really give me all the treats because i smell the best and omg you finally got the right spot and i love you right now and scratch so owner bleeds. Hide when guests come over. 
+{:.alert--danger}
+
+Climb a tree, wait for a fireman jump to fireman then scratch his face need to chase tail spread kitty litter all over house purr as loud as possible, be the most annoying cat that you can, and, knock everything off the table yet try to hold own back foot to clean it but foot reflexively kicks you in face, go into a rage and bite own foot, hard.
+```cpp
+#include <vector>
+
+int main() {
+  auto v = std::vector{1, 2, 3, 4, 5};
+  std::foreach(v.begin(), v.end(), [](auto i) { std::cout << i << std::endl; });
+}
+```
+{:.alert--info}
+
+Meow. Toilet paper attack claws fluff everywhere meow miao french ciao litterbox scratch funny little cat chirrup noise shaking upright tail when standing next to you. Rub my belly hiss.
+{:.alert--primary}
+
+Test
+
+Give attitude. Cattt catt cattty cat being a cat reward the chosen human with a slow blink but chase ball of string yet always ensure to lay down in such a manner that tail can lightly brush human's nose so munch on tasty moths.
+{:.alert--success}
+
+Cats secretly make all the worlds muffins this cat happen now, it was too purr-fect!!! inspect anything brought into the house, or groom forever, stretch tongue and leave it slightly out, blep.
+{:.alert--warning}
+
 
 ```cpp
 #include <iostream>
