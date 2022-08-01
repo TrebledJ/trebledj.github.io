@@ -22,7 +22,7 @@ $focus-color: $primary-color !default;
  */
 
 @mixin alert($alert-color) {
-    margin: 2em 0 !important;
+    margin: 2em 0.5em !important;
     /* override*/
     padding: 1em;
     color: var(--medium-text-color);
@@ -51,6 +51,10 @@ $focus-color: $primary-color !default;
         /* using at-root to override .page-content h4 font size*/
         margin-bottom: 0;
         font-size: 1em;
+    }
+
+    @at-root ul#{&}, ol#{&} {
+        padding: 1em 2em;
     }
 
     p {
