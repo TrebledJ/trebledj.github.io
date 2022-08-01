@@ -3,10 +3,10 @@
     * tag_limit (default: 20): the number of tags to display
     * show_last_update (default: false): whether or not to show the date when the post was last updated
  -->
+{% unless post %}
+    {% assign post = page %}
+{% endunless %}
 <div class="d-flex flex-row align-items-center">
-    {% unless post %}
-        {% assign post = page %}
-    {% endunless %}
     <span>
         <i class="fas fa-calendar post-meta-icon me-1"></i>
     </span>
