@@ -1,7 +1,7 @@
 @import "devlopr";
 
 /* ==========================================================================
-   NOTICE TEXT BLOCKS
+   ALERT TEXT BLOCKS
    ========================================================================== */
 
 $gray: #7a8288 !default;
@@ -15,13 +15,13 @@ $focus-color: $primary-color !default;
 
 /**
  *  Default Kramdown usage (no indents!):
- *  <div class="notice" markdown="1">
- *  #### Headline for the Notice
- *  Text for the notice
+ *  <div class="alert" markdown="1">
+ *  #### Headline for the Alert
+ *  Text for the alert
  *  </div>
  */
 
-@mixin notice($notice-color) {
+@mixin alert($alert-color) {
     margin: 2em 0 !important;
     /* override*/
     padding: 1em;
@@ -30,15 +30,15 @@ $focus-color: $primary-color !default;
     text-indent: initial;
     /* override*/
     @at-root html[data-theme="dark"] #{&} {
-        background-color: mix(rgb(40, 40, 40), $notice-color, 80%);
+        background-color: mix(rgb(40, 40, 40), $alert-color, 80%);
     }
     @at-root html[data-theme="light"] #{&} {
-        background-color: mix(white, $notice-color, 80%);
+        background-color: mix(white, $alert-color, 80%);
     }
-    // background-color: color-mix(in srgb, $notice-color 80%, var(--main-background-color));
+    // background-color: color-mix(in srgb, $alert-color 80%, var(--main-background-color));
     // border-radius: $border-radius;
     border-radius: var(--border-radius);
-    box-shadow: 0 1px 1px rgba($notice-color, 0.25);
+    box-shadow: 0 1px 1px rgba($alert-color, 0.25);
 
     h4 {
         margin-top: 0 !important;
@@ -61,21 +61,21 @@ $focus-color: $primary-color !default;
     }
 
     h4+p {
-        /* remove space above paragraphs that appear directly after notice headline*/
+        /* remove space above paragraphs that appear directly after alert headline*/
         margin-top: 0;
         padding-top: 0;
     }
 
     a {
-        color: mix(#000, $notice-color, 10%);
+        color: mix(#000, $alert-color, 10%);
 
         &:hover {
-            color: mix(#000, $notice-color, 50%);
+            color: mix(#000, $alert-color, 50%);
         }
     }
 
     @at-root #{selector-unify(&, "blockquote")} {
-        border-left-color: mix(#000, $notice-color, 10%);
+        border-left-color: mix(#000, $alert-color, 10%);
     }
 
     pre code {
@@ -90,50 +90,50 @@ $focus-color: $primary-color !default;
     }
 }
 
-/* Default notice */
+/* Default alert */
 
 .alert {
-    @include notice($light-gray);
+    @include alert($light-gray);
 }
 
-/* Primary notice */
+/* Primary alert */
 
 .alert--primary {
-    @include notice($primary-color);
+    @include alert($primary-color);
 }
 
-/* Info notice */
+/* Info alert */
 
 .alert--info {
-    @include notice($info-color);
+    @include alert($info-color);
 }
 
-/* Warning notice */
+/* Warning alert */
 
 .alert--warning {
-    @include notice($warning-color);
+    @include alert($warning-color);
 }
 
-/* Success notice */
+/* Success alert */
 
 .alert--success {
-    @include notice($success-color);
+    @include alert($success-color);
 }
 
-/* Danger notice */
+/* Danger alert */
 
 .alert--danger {
-    @include notice($danger-color);
+    @include alert($danger-color);
 }
 
 // html[data-theme="dark"] {
 //     .alert, .alert--primary, .alert--info, .alert--warning, .alert-success, .alert--danger {
-//         background-color: mix(black, $notice-color, 80%);
+//         background-color: mix(black, $alert-color, 80%);
 //     }
 // }
 
 // html[data-theme="light"] {
 //     .alert, .alert--primary, .alert--info, .alert--warning, .alert-success, .alert--danger {
-//         background-color: mix(white, $notice-color, 80%);
+//         background-color: mix(white, $alert-color, 80%);
 //     }
 // }
