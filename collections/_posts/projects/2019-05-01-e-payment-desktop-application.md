@@ -1,21 +1,26 @@
 ---
 title:  E-Payment Desktop Application and System
 summary: "A reflection of my first large-scale project: an e-payment system plus cross-platform desktop application."
-updated: "2022-07-30"
+updated: "2022-08-01"
 tags: cpp qt sql project
 keywords: e-payment, desktop application, qt, gui, sql, c++
 pitch: Developed a desktop application for a new e-payment system in the school cafeteria. Collaborated with ICT staff in UI design and connecting the application with the school’s SQL Server database.
 ---
 
+{:center: style="text-align: center;"}
+
 This project involved creating a functioning e-payment system to be integrated at our high school's cafeteria.
 
-### Backstory
+### Context
 
-I was in my final year of high school. At the time, every single student had a student ID card. They were simple in design with the usual portrait, student name, and expiry date. A friend came to me and suggested "evolving" the student card to be able to use it for electronic transactions (e-payment). The idea is akin to using an [MTR Octopus][octopus] to pay for goodies instead of having to scramble for cash.
+I was in my penultimate year of high school and summer was approaching. At the time, every single student had a student ID card. They were simple in design with the usual portrait, student name, and expiry date. A friend came to me and suggested "evolving" the student card to be able to use it for electronic transactions (e-payment). The idea is akin to using an [MTR Octopus][octopus] to pay for goodies instead of having to scramble for cash and perform the entire process of calculating plus giving change.
 
 To give a bit more background, our school cafeteria has five to six different local vendors. The school would rent a stall out to tenants who would sell snacks and lunch during the appropriate hours. At the time, the only transaction method is cash.
 
 Also some background about the card: it's a [radio frequency ID (RFID)][rfid] card. I won't go into the technical details of it, but basically you scan the card on a dedicated reader, and it can read an unique ID.
+
+![](/assets/img/posts/studentcard/rfid.jpg){:width="60%"}
+{:center}
 
 ### Development
 #### A Painful Start
@@ -31,9 +36,10 @@ Initially I started developing the application using SFML, since it was the only
 * It was cross-platform, which was convenient in case the school's computer operating system is different.
 
 ![](https://i.imgflip.com/6obt0h.jpg){:width="60%"}
-{:refdef style="text-align: center;"}
+{:center}
 
 If there was one thing I learned, it was to understand the problem first, research the appropriate tools, and *then* start developing the solution. I wasted maybe two to four weeks coding a good GUI with SFML and scratching my head.
+{:.alert--success}
 
 #### Designing a Robust Solution
 Regardless, all the benefits brought by Qt allowed me to focus more on solving business logic issues. The logic issue? Well... there are several questions we should answer.
@@ -52,12 +58,26 @@ To solve (2), we *could* simply use a text file. Load data on startup, save data
 
 Now the problem with SQLite is that it's serverless. In plain English, it can't cope with multiple users well.
 
-A better alternative was to use MySQL or Microsoft SQL Server, which is designed to handle multiple users (clients, to be precise). Since our school's ICT team used SQL Server, so we eventually followed suit.
+A better alternative was to use MySQL or Microsoft SQL Server, which is designed to handle multiple users (clients, to be precise). Eventually I went with SQL Server, since that was what our school was using.
 
 How does MySQL and SQL Server connect with multiple clients across the network? This is something you'll have to ask the experts. :D
 
 ![](https://i.imgflip.com/6obsur.jpg){:width="60%"}
-{:refdef style="text-align: center;"}
+{:center}
+
+#### Sidenote on Version Control
+When undertaking *any* project, it is crucial to have flexibility. A version control system offers this.
+
+What is a version control system?
+
+A version control system (VCS) is a software tool which in a sense, takes snapshots (commits) of files and keeps track of them. Traditionally, to keep separate versions of a file, you might copy-paste a folder, name it "myfolder-v2", and so on. There are several reasons why you might want to do this, one example is that you want to keep a bunch of text from the old version and have it on hand if necessary.
+
+VCSs take this idea of versioning and put it on steroids. While developing, you can do a bunch of things. You can jump back to an earlier snapshot (checkout). You could work on a new feature or bugfix (branch) concurrently. Flexibility.
+
+Typically, VCSs are used by teams to effectively manage their code between team members. But they're also effective if you're coding alone! The (outdated) screenshots of the GUI in this post are here thanks to version control holding onto them. (I uploaded them but deleted them in one of my commits.)
+
+So if you're planning on doing a project (small, medium, or big) or even just cataloguing your learning process, consider using a VCS.
+{:.alert--success}
 
 #### Designing the GUI
 As mentioned before, there are three groups of users: vendors, students, and admins.
@@ -80,6 +100,8 @@ The [user flow][user-flow] for a transaction is:
 5. Program verifies if student has enough balance and transacts.
 6. Program records the transaction, updates the student's balance, and prints a receipt.
 
+Most of these steps weren't automated in the beginning. But to reduce the chance of making mistakes (which humans are really good at!), it's best to automate as much as possible.
+
 There are a couple other things vendors can do with the app:
 
 * Add menu items
@@ -87,17 +109,16 @@ There are a couple other things vendors can do with the app:
 
 But these are not very interesting.
 
-Admins, of course, have a more powerful role. These peeps can view *and* **update** student's balances (pretty boring TBH). (Unfortunately I did not save any screenshots of the GUI and I'm not bothered to redownload Qt and rebuild the app. >.>)
+Admins, of course, have a more powerful role. These peeps can view *and* **update** student's balances (but the actual flows are pretty boring TBH). (Unfortunately I did not save any screenshots of the GUI and I'm not bothered to redownload Qt and rebuild the app. >.>)
 
 ![](https://i.kym-cdn.com/entries/icons/original/000/032/676/Unlimited_Power_Banner.jpg){:width="80%"}
-{:refdef style="text-align: center;"}
+{:center}
 
 Students have the most ***exciting*** user flow of all.
 
-{:refdef: style="text-align: center;"}
 ![](/assets/img/posts/studentcard/standby.png){:width="45%"}
 ![](/assets/img/posts/studentcard/standby-scanned.png){:width="45%"}
-{:refdef}
+{:center}
 
 And since they have an exciting flow, I'll describe it for fun:
 
@@ -118,6 +139,15 @@ It's been several years since the e-payment system was launched in the summer of
 
 When I asked a student about it this year (2022), they said that the entire system was *still* up and running (a good sign!). Moreover, the school's ICT team has expanded it as a locking mechanism for student lockers. Hopefully it will become a reliable piece of technology and make the school environment safe, clean, and fast.
 
+### Takeways
+
+* Spend some time researching the problem you're trying to solve and the possible solutions. You'll accrue less [technical debt][techdebt] and thank yourself in the future.
+* Use a version control system for flexibility and to keep track of history.
+* Don't be afraid to try something new. The journey might just be worth it.
+{:.alert--success}
+
+
 [octopus]: https://en.wikipedia.org/wiki/Octopus_card
 [rfid]: https://en.wikipedia.org/wiki/Radio-frequency_identification
 [user-flow]: https://www.optimizely.com/optimization-glossary/user-flow
+[techdebt]: https://en.wikipedia.org/wiki/Technical_debt
