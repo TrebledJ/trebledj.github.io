@@ -1,19 +1,35 @@
+<!-- Parameters:
+    * post (default: page): a post/page object containing _.tags _.content _.title etc.
+    * tag_limit (default: 20): the number of tags to display
+    * show_last_update (default: false): whether or not to show the date when the post was last updated
+ -->
 <div>
     {% unless post %}
         {% assign post = page %}
     {% endunless %}
-    <span class="post-date"><i class="fas fa-calendar me-1" style="font-size: 14px;"></i>{{post.date | date: '%Y-%m-%d'}}</span>
+    <span class="post-date"><i class="fas fa-calendar post-meta-icon me-1"></i>{{post.date | date: '%Y-%m-%d'}}
+        {% if show_last_update and post.updated %}
+            (posted)
+        {% endif %}
+    </span>
+    {% if show_last_update and post.updated %}
+        &nbsp;•&nbsp;&nbsp;<span class="post-date"><i class="fas fa-calendar post-meta-icon me-1"></i>{{post.updated | date: '%Y-%m-%d'}} (updated)</span>
+    {% endif %}
+    &nbsp;•&nbsp;
+    <span class="post-words">
+        <i class="far fa-clock post-meta-icon me-1"></i>
+        {% assign words = post.content | number_of_words %}
+        {% unless words contains "-" %}
+            {{ words | plus: 250 | divided_by: 250 | append: "&nbsp;minute&nbsp;read" }}
+        {% endunless %}
+    </span>
+</div>
+<div class="mt-1">
+    <span><i class="fas fa-tag post-meta-icon me-1"></i></span>
     {% unless tag_limit %}
         {% assign tag_limit = 20 %}
     {% endunless %}
     {% for tag in post.tags limit:tag_limit %}
-        &nbsp;•&nbsp;&nbsp;{% include tag.html %}
+        {% include tag.html %}{% unless forloop.last %}&nbsp;{% endunless %}
     {% endfor %}
-    &nbsp;•&nbsp;
-    <span class="post-words">
-        {% assign words = post.content | number_of_words %}
-        {% unless words contains "-" %}
-            {{ words | plus: 250 | divided_by: 250 | append: " minute read" }}
-        {% endunless %}
-    </span>
 </div>

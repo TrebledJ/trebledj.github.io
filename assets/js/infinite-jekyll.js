@@ -65,7 +65,7 @@ function fetchPosts() {
 
 function fetchPostWithIndex(index) {
   let item = items[index];
-  let tags = item.tags.map(t => `&nbsp;•&nbsp;&nbsp;<a class="post-tags tag" href="${base_url}/tags/${t}">${t}</a>`).join("\n");
+  let tags = item.tags.map(t => `<a class="post-tags tag" href="${base_url}/tags/${t}">${t}</a>`).join("\n");
 
   $(` <li>
         <br/>
@@ -74,7 +74,9 @@ function fetchPostWithIndex(index) {
           src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/${item.track_id}&color=%23${soundcloud_color}&auto_play=false&hide_related=true&show_comments=true&show_user=true&show_reposts=false&show_teaser=false"
           width="100%"></iframe>
         <div>
-          <span class="post-date">${item.date}</span>
+          <span class="post-date"><i class="fas fa-calendar post-meta-icon me-1"></i>${item.date}</span>
+          &nbsp;•&nbsp;
+          <span><i class="fas fa-tag post-meta-icon me-1"></i></span>
           ${tags}
         </div>
         <div class="post-meta">
