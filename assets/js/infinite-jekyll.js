@@ -67,8 +67,7 @@ function fetchPostWithIndex(index) {
   let item = items[index];
   let tags = item.tags.map(t => `<a class="post-tags tag" href="${base_url}/tags/${t}">${t}</a>`).join("\n");
 
-  $(` <li>
-        <br/>
+  $(` <div>
         <br/>
         <iframe allow="autoplay" frameborder="no" height="166" scrolling="no"
           src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/${item.track_id}&color=%23${soundcloud_color}&auto_play=false&hide_related=true&show_comments=true&show_user=true&show_reposts=false&show_teaser=false"
@@ -86,7 +85,7 @@ function fetchPostWithIndex(index) {
           <span>${item.summary}</span> 
           <a href="${base_url}${item.url}">(continue reading)</a>
         </div>
-      </li>`
+      </div>`
   ).appendTo("#track-list")
   // &nbsp;•&nbsp; <a class="post-meta" href="${base_url}${item.url}">read the preface</a>
 }

@@ -1,14 +1,16 @@
 ---
 layout: default
 ---
-<div>
-    <ul id="track-list" style="list-style-type: none;">
+<div class="d-flex justify-content-center">
+<div class="col-lg-10">
+    <div id="track-list" class="container-fluid">
         <br/>
-    </ul>
+    </div>
 
     <div class="infinite-spinner"></div>
     <script src="{{site.url}}{{site.baseurl}}/assets/js/infinite-jekyll.js"></script>
     <script>
         loadInfinite(5);
     </script>
+</div>
 </div>
