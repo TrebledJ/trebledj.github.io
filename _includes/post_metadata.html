@@ -12,9 +12,6 @@
             (posted)
         {% endif %}
     </span>
-    {% if show_last_update and post.updated %}
-        &nbsp;•&nbsp;&nbsp;<span class="post-date"><i class="fas fa-calendar post-meta-icon me-1"></i>{{post.updated | date: '%Y-%m-%d'}} (updated)</span>
-    {% endif %}
     &nbsp;•&nbsp;
     <span class="post-words">
         <i class="far fa-clock post-meta-icon me-1"></i>
@@ -23,6 +20,11 @@
             {{ words | plus: 250 | divided_by: 250 | append: "&nbsp;minute&nbsp;read" }}
         {% endunless %}
     </span>
+</div>
+<div class="mt-1">
+    {% if show_last_update and post.updated %}
+        <span class="post-date"><i class="fas fa-calendar post-meta-icon me-1"></i>{{post.updated | date: '%Y-%m-%d'}} (updated)</span>
+    {% endif %}
 </div>
 <div class="mt-1">
     <span><i class="fas fa-tag post-meta-icon me-1"></i></span>
