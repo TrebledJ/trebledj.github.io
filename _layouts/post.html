@@ -3,4 +3,6 @@ layout: page_with_sidebar
 ---
 
 {%- include posts_article.html -%}
-{%- include posts_comments.html -%}
+{% if page.sharable %}
+    {%- include posts_comments.html -%}
+{% endif %}

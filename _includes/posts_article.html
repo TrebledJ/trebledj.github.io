@@ -6,21 +6,25 @@
         {% include post_metadata.html %}
     </div>
     <hr/>
-    <div class="card-body p-0" itemprop="articleBody">
+    <div class="card-body p-0 post-body" itemprop="articleBody">
         {% if page.include_thumbnail %}
             <img class="card-img-top" src="{{site.url}}{{site.baseurl}}{{ page.thumbnail | default: site.default_thumbnail }}" alt="{{ post.title }}"/>
             <br/>
             <br/>
         {% endif %}
         {{ content }}
-        <br/>
-        <br/>
-        {%- include share_page.html -%}
+        {% if page.sharable %}
+            <br/>
+            <br/>
+            {%- include share_page.html -%}
+        {% endif %}
     </div>
-    {%- if site.hyvor_talk_website_id -%}
-        <div class="comments">{%- include hyvor_comments.html -%}</div>
-    {%- endif -%}
-    {% if site.disqus_shortname %}
-        <div id="disqus_thread"></div>
+    {% if page.sharable %}
+        {%- if site.hyvor_talk_website_id -%}
+            <div class="comments">{%- include hyvor_comments.html -%}</div>
+        {%- endif -%}
+        {% if site.disqus_shortname %}
+            <div id="disqus_thread"></div>
+        {% endif %}
     {% endif %}
 </article>

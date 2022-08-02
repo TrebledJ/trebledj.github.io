@@ -325,6 +325,7 @@ defaults:
       author: "trebledj"
       # thumbnail: "/assets/img/thumbnail.png"
       include_thumbnail: false
+      sharable: true
   -
     scope:
       path: "collections/_posts/music"
