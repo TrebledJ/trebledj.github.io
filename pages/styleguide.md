@@ -2,6 +2,7 @@
 title: Styleguide
 layout: page
 permalink: /styleguide/
+published: false
 visibility: false
 feed: false
 ---

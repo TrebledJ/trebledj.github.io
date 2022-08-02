@@ -2,6 +2,7 @@
 title: Styleguide (Markdown)
 layout: post
 permalink: /styleguide-md/
+published: false
 visibility: false
 feed: false
 usemathjax: true

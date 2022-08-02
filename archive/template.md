@@ -2,7 +2,7 @@
 # layout to use from _layout folder
 layout: post 
 title:  "title of post"
-summary: "short summary of post"
+description: "short summary of post"
 author: trebledj
 date: '2021-02-28 1:35:23 +0530' # not really needed
 tags: list of tags

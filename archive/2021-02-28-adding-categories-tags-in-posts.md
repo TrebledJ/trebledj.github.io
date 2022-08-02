@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Adding Multiple Tags in Posts"
-summary: "Learn how to add tags in posts"
+description: "Learn how to add tags in posts"
 author: xplor4r
 date: '2021-02-28 1:35:23 +0530'
 tag: ['jekyll','guides', 'sample_category']

@@ -1,6 +1,6 @@
 ---
 title:  "The Breath of Life"
-summary: "Humans are complicated individuals even though we all start from two cells."
+description: "Humans are complicated individuals even though we all start from two cells."
 updated: "2022-07-28"
 tags: music minimalism fusion strings
 keywords: music, composition, minimalism, fusion, string, ensemble, string ensemble, emotional, peaceful, serene

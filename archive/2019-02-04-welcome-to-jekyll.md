@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Welcome to devlopr-jekyll !"
-summary: "Getting Started using devlopr-jekyll"
+description: "Getting Started using devlopr-jekyll"
 author: johndoe
 date: '2019-05-22 14:35:23 +0530'
 tag: music

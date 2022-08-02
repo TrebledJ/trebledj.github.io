@@ -82,7 +82,7 @@ function fetchPostWithIndex(index) {
         </div>
         <div class="post-meta">
           <a href="${base_url}${item.url}">Preface</a>:
-          <span>${item.summary}</span> 
+          <span>${item.description}</span> 
           <a href="${base_url}${item.url}">(continue reading)</a>
         </div>
       </div>`
