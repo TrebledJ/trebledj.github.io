@@ -12,6 +12,8 @@ usemathjax: false
 include_thumbnail: true # or false depending if you want the thumbnail to show on the post's page
 permalink: /posts/permalink/to/post/
 published: false
+pitch: A description displayed in the profile.
+related: list-of-permalink-slugs to-other-posts
 ---
 
 markdown/html/liquid content here

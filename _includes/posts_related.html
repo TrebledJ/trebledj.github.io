@@ -1,0 +1,33 @@
+<div class="card p-4">
+    <h4>Related</h4>
+    <div class="card-body p-0 mt-2">
+        {% assign show_last_update = false %}
+        {% if page.related %}
+            {% unless page.related == "none" %}
+                {% assign related = page.related | split: " " %}
+                {% for rel in related %}
+                    {% for post in site.posts %}
+                        {% if post.url contains rel %}
+                            {% include post_preview.html %}
+                        {% endif %}
+                    {% endfor %}
+                {% endfor %}
+            {% endunless %}
+        {% else %}
+            <!-- Default relations: any post with 2 tags in common. -->
+            {% for post in site.posts %}
+                {% if post.url != page.url %}
+                    {% assign counter = 0 %}
+                    {% for tag in post.tags %}
+                        {% if page.tags contains tag %}
+                            {% assign counter = counter | plus: 1 %}
+                        {% endif %}
+                    {% endfor %}
+                    {% if counter >= 2 %}
+                        {% include post_preview.html %}
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+    </div>
+</div>

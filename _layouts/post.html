@@ -2,7 +2,12 @@
 layout: page_with_sidebar
 ---
 
-{%- include posts_article.html -%}
-{% if page.sharable %}
-    {%- include posts_comments.html -%}
-{% endif %}
+<div class="w-100">
+    {%- include posts_article.html -%}
+</div>
+<div class="w-100 mt-4">
+    {% include posts_related.html %}
+    {% if page.sharable %}
+        {%- include posts_comments.html -%}
+    {% endif %}
+</div>
