@@ -36,7 +36,7 @@ This choice usually decides your pathway in the team, at least for the first yea
 I went with software. This is a personal choice, since I had experience with C++ and wanted to hone my programming skills. I had no experience with mech/hardware things besides playing with Lego, and my circuit/electronics physics is a bit rusty.
 
 ### Training
-![](/assets/img/posts/training.jpeg){:.w-75}
+![](/assets/img/memes/training.jpeg){:.w-75}
 {:.center}
 
 Shortly after the workshop, we were invited to attend training sessions. These are tutorial sessions held by Robotics Team seniors.
