@@ -7,9 +7,9 @@ keywords: e-payment, desktop application, gui, c++
 pitch: Developed a desktop application for a new e-payment system in the school cafeteria. Collaborated with ICT staff in UI design and connecting the application with the school’s SQL Server database.
 ---
 
-{:center: style="text-align: center;"}
-
 This project involved creating a functioning e-payment system to be integrated at our high school's cafeteria.
+
+{% include toc.md %}
 
 ### Context
 
@@ -20,7 +20,7 @@ To give a bit more background, our school cafeteria has five to six different lo
 Also some background about the card: it's a [radio frequency ID (RFID)][rfid] card. I won't go into the technical details of it, but basically you scan the card on a dedicated reader, and it can read an unique ID.
 
 ![](/assets/img/posts/studentcard/rfid.jpg){:width="60%"}
-{:center}
+{:.center}
 
 ### Development
 #### A Painful Start
@@ -36,7 +36,7 @@ Initially I started developing the application using SFML, since it was the only
 * It was cross-platform, which was convenient in case the school's computer operating system is different.
 
 ![](https://i.imgflip.com/6obt0h.jpg){:width="60%"}
-{:center}
+{:.center}
 
 If there was one thing I learned, it was to understand the problem first, research the appropriate tools, and *then* start developing the solution. I wasted maybe two to four weeks coding a good GUI with SFML and scratching my head.
 {:.alert--success}
@@ -63,7 +63,7 @@ A better alternative was to use MySQL or Microsoft SQL Server, which is designed
 How does MySQL and SQL Server connect with multiple clients across the network? This is something you'll have to ask the experts. :D
 
 ![](https://i.imgflip.com/6obsur.jpg){:width="60%"}
-{:center}
+{:.center}
 
 #### Sidenote on Version Control
 When undertaking *any* project, it is crucial to have flexibility. A version control system offers this.
@@ -112,13 +112,13 @@ But these are not very interesting.
 Admins, of course, have a more powerful role. These peeps can view *and* **update** student's balances (but the actual flows are pretty boring TBH). (Unfortunately I did not save any screenshots of the GUI and I'm not bothered to redownload Qt and rebuild the app. >.>)
 
 ![](https://i.kym-cdn.com/entries/icons/original/000/032/676/Unlimited_Power_Banner.jpg){:width="80%"}
-{:center}
+{:.center}
 
 Students have the most ***exciting*** user flow of all.
 
 ![](/assets/img/posts/studentcard/standby.png){:width="45%"}
 ![](/assets/img/posts/studentcard/standby-scanned.png){:width="45%"}
-{:center}
+{:.center}
 
 And since they have an exciting flow, I'll describe it for fun:
 
