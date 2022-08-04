@@ -1,8 +1,9 @@
 ---
 title: Robot Design Contest Simulator
 description: Here you can drive robots without having to worry about damaging physical property or being impaled.
-updated: "2022-08-03"
+updated: "2022-08-05"
 tags: cpp qt robotics project hkust
+thumbnail: /assets/img/posts/rdc-simulator/thumbnail.png
 pitch: Led and managed the development of a desktop simulator used in a recruitment competition for the HKUST Robotics Team.
 related: robocon-2021 robocon-2020 hkust-robotics-team
 ---
@@ -33,7 +34,7 @@ In the rest of this post, I'll use the terms "trainee" and "user" interchangably
 ### High-Level Overview
 To give an idea of what the simulator looks like, here's a little annotated screenshot of an early version:
 
-![](/assets/img/posts/rdc-simulator/setup.png){:.w-75}
+![](/assets/img/posts/rdc-simulator/setup.png){:.w-100}
 {:.center}
 
 Its core features?
@@ -73,7 +74,7 @@ I won't describe the communication model between the simulator and user program 
 
 This disadvantage seems to heavily outweigh the advantage; but in our defense, it simulates the real world of robotics perfectly. Even though the microcontroller processors are designed to be deterministic, sensor input and motor control are almost always non-deterministic (i.e. random) to a certain degree. :P
 
-Fun fact: the communication model was inspired by Codingame's turn-based games. However, Codingame's turn based system provides all available input every single turn. In the RDC emulator, we only provide input if the user program requests it. Why? Well... in retrospect, we *could* have sent all available input... but by the time we realised this, it was a bit too late to change, otherwise we would break a lot of the code trainees have already written. Codingame's turn-based model is certainly much cleaner though.
+**Fun fact**: the communication model was inspired by Codingame's turn-based games. However, Codingame's turn based system provides all available input every single turn. In the RDC emulator, we only provide input if the user program requests it. Why? Well... in retrospect, we *could* have sent all available input... but by the time we realised this, it was a bit too late to change, otherwise we would break a lot of the code trainees have already written. Codingame's turn-based model is certainly much cleaner though.
 {:.alert--success}
 
 ### Developing the Simulator
@@ -81,7 +82,7 @@ Fun fact: the communication model was inspired by Codingame's turn-based games. 
 #### Project Management
 We used our good friend GitHub projects and GitHub issues for project management and issue tracking.
 
-![](/assets/img/posts/rdc-simulator/issues.png){:.w-75}
+![](/assets/img/posts/rdc-simulator/issues.png){:.w-100}
 {:.center}
 
 Some general thoughts looking back:
@@ -123,11 +124,11 @@ Being a rather detail-oriented person, I have become quite fond of checking and 
 ### Conclusion
 At least two software trainee teams managed to complete the game and score full points.
 
-![](/assets/img/posts/rdc-simulator/winner.png){:.w-75}
+![](/assets/img/posts/rdc-simulator/winner.png){:.w-100}
 {:.center}
 
 * So was the RDC playable? Yes.
-  * ~~When developing the simulator, we didn't have a working program to test if the game can be completed. (Did I mention there was a time limit for the game?) So it was a relief when some teams managed to finish.~~
+  * ~~When developing the simulator, we didn't have a working program to test if the game can be completed. So it was a relief when some teams managed to finish.~~
 * Did it meet our objectives of testing trainees' technical and soft skills? Also yes... to some extent.
   * Some groups had free riders. There was a case where a group only had one teammate remaining...
 
