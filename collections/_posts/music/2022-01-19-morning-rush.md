@@ -5,6 +5,7 @@ updated: "2022-07-28"
 tags: music band
 keywords: composition guitars drums upbeat
 track_id: 1199278129
+related: joyride-in-d the-breath-of-life
 ---
 
 Do you feel the exhilaration of the morning air? The excitement of stepping out of bed? Chomping down breakfast? 
@@ -12,5 +13,3 @@ Do you feel the exhilaration of the morning air? The excitement of stepping out 
 This upbeat track is an offshoot of [The Breath of Life](/posts/the-breath-of-life/), rendering its minimalistic elements with a modern instrumentation and at a faster pace. In particular, it combines the 1564 chord progression with the 332 rhythmic pattern in the rhythm guitar.
 
 This is the second of my three 2021 compositions, uploaded to mark the start of 2022. Enjoy.
-
-Related: [The Breath of Life](/posts/the-breath-of-life/), [Joyride in D](/posts/joyride-in-d/)
