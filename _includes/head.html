@@ -112,6 +112,7 @@
     <script src="{{site.url}}{{site.baseurl}}/assets/js/mode-switcher.js"></script>
     <script src="{{site.url}}{{site.baseurl}}/assets/js/typewriter.js"></script>
     <script src="{{site.url}}{{site.baseurl}}/assets/js/search.js"></script>
+    <script src="{{site.url}}{{site.baseurl}}/assets/js/head.js"></script>
     
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/moment.min.js"></script> -->
     <!-- <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script> -->
@@ -149,14 +150,4 @@
       <!--[if gt IE 8]><!-->
     <html class="no-js"><!--<![endif]-->
     </html>
-
-    <script>
-        $(document).ready(function() {
-            if ("{{page.title}}" === "404") {
-                let img = Math.floor(Math.random() * 3) + 1;
-                $(`#img-404-${img}`).removeClass("d-none");
-                $(".post-posted-date").text(new Date().toISOString().split('T')[0]);
-            }
-        });
-    </script>
 </head>

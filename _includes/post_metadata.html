@@ -21,7 +21,7 @@
         <i class="far fa-clock post-meta-icon me-1"></i>
     </span>
     <span class="post-words">
-        {% assign words = post.content | number_of_words %}
+        {% assign words = post.content | strip_html | number_of_words %}
         {% unless words contains "-" %}
             {{ words | plus: 250 | divided_by: 250 | append: "&nbsp;minute&nbsp;read" }}
         {% endunless %}
