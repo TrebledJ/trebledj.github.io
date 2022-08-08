@@ -3,4 +3,4 @@ title: SQL
 permalink: /tags/sql/
 ---
 
-Stands for Structured Query Language. ~~Pronounced "squirrel".~~ This is commonly used for querying and manipulating data in databases, dataframes, etc.
+SQL (Structured Query Language, ~~pronounced "squirrel"~~) is a general language for querying and manipulating data in databases, dataframes, etc.

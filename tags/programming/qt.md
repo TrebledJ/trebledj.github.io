@@ -3,4 +3,4 @@ title: Qt
 permalink: /tags/qt/
 ---
 
-A robust C++ framework for developing cross-platform solutions.
+A robust [C++](/tags/cpp) framework for [developing](/tags/programming) cross-platform solutions.

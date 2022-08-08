@@ -3,6 +3,4 @@ title: Python
 permalink: /tags/python/
 ---
 
-A high-level general purpose programming language. Also a snake.
-
-<!-- TODO -->
+Python is a high-level, interpreted, general-purpose [programming](/tags/programming) language. Its design philosophy emphasizes code readability with the use of significant indentation. Python is dynamically-typed and garbage-collected.
