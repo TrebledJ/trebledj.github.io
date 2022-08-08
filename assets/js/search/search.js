@@ -35,7 +35,7 @@ $(document).ready(function() {
         })
       });
     resultdiv.empty();
-    resultdiv.prepend(`<p class="search-results-list__count">${result.length} result(s) found</p>`);
+    resultdiv.prepend(`<p class="search-results-list__count ps-1">${result.length} result(s) found</p>`);
     for (var item in result) {
       var ref = result[item].ref;
       if (store[ref].type === "tag") {
@@ -74,5 +74,9 @@ $(document).ready(function() {
       `);
       child.appendTo("#search-results-list");
     }
+  });
+
+  $('.modal').on('shown.bs.modal', function() {
+    $(this).find('[autofocus]').focus();
   });
 });

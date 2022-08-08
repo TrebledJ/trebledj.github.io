@@ -42,7 +42,7 @@ var store = [
           {
               "type": "tag",
               "title": {{xs[2] | jsonify}},
-              "content": {{page.content | strip_html | strip_newlines | jsonify}},
+              "content": {{page.content | markdownify | strip_html | strip_newlines | jsonify}},
               "url": {{page.url | jsonify}}
           }
           {% assign first = false %}
