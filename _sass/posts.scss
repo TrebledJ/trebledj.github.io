@@ -112,3 +112,9 @@ $spacer: 1rem;
         padding: $spacer;
     }
 }
+
+.post-article {
+    ul, ol {
+        margin-left: 0.5rem !important;
+    }
+}
