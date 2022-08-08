@@ -6,3 +6,20 @@ $(document).ready(function() {
         $(".post-posted-date").text(new Date().toISOString().split('T')[0]);
     }
 });
+
+
+// --- Scroll to Top --- //
+$(document).ready(function () {
+    $(window).scroll(function () {
+        if ($(this).scrollTop() > 40) {
+            $('#btn-back-to-top').fadeIn();
+        } else {
+            $('#btn-back-to-top').fadeOut();
+        }
+    });
+
+    $('#btn-back-to-top').click(function () {
+        document.body.scrollTop = 0;
+        document.documentElement.scrollTop = 0;
+    });
+});
