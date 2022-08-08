@@ -1,7 +1,7 @@
 $(document).ready(function() {
   'use strict';
-  var search_field = $('.search-box'),
-      results_list = $('#results-list'),
+  var search_field = $('#search-box'),
+      results_list = $('#search-results-list'),
       toggle_search = $('#toggle-search-button'),
       search_result_template = "\
         <div class='results-list__item'>\
@@ -9,20 +9,27 @@ $(document).ready(function() {
           <span class='post__date'>{{pubDate}}</span>\
         </div>";
 
-  toggle_search.click(function(event) {
-    event.preventDefault();
-    $('.search-form-container').toggleClass('is-active');
-    // TODO: change search icon to X.
-    setTimeout(function() {
-      $().focus();
-    }, 400);
-  })
+  // toggle_search.click(function(event) {
+  //   event.preventDefault();
+  //   $('.search-form-container').toggleClass('is-active');
+  //   // TODO: change search icon to X.
+  //   setTimeout(function() {
+  //     $().focus();
+  //   }, 400);
+  // })
 
-  $('.search-form-container').on('keyup', function(event) {
-    // Escape key.
-    if (event.keyCode == 27) {
-      $('.search-form-container').removeClass('is-active');
-    }
+  // $('.search-form-container')
+  // search_field
+  // .on('keyup', function(event) {
+  //   // Escape key.
+  //   if (event.keyCode == 27) {
+  //     console.log("Escape key pressed.");
+  //     $('.search-form-container').removeClass('is-active');
+  //   }
+  // });
+
+  toggle_search.click(function() {
+    search_field.focus();
   });
 
   search_field.ghostHunter({

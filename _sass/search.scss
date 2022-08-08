@@ -1,0 +1,62 @@
+#search-modal {
+    #search-box-container {
+        position: relative;
+    }
+
+    #search-box-container i {
+        position: absolute;
+        right: 20px;
+        top: 10px;
+        font-size: 20px;
+        color: #ced4da;
+    }
+
+    #search-box {
+        height: 40px;
+        border: 2px solid var(--light-border-color);
+        border-radius: var(--border-radius-small);
+        // background-color: #eeeeee69;
+        background-color: var(--card-background-color);
+    }
+
+    .border-bottom {
+        border-bottom: 2px solid var(--light-border-color);
+    }
+    
+    #search-results-list {
+        display: none;
+        height: 80vh;
+        overflow: auto;
+        white-space: normal;
+        text-align: center;
+        color: lightgrey;
+    
+        .heading {
+            margin-bottom: 16px !important;
+            margin-right: 16px !important;
+            font-size: 17px;
+            color: lightgrey !important;
+        }
+    
+        &__item {
+            padding-bottom: 16px;
+            border-bottom: 1px solid #3b4446;
+            margin-top: 50px;
+    
+            &__title {
+                display: block;
+                text-decoration: none;
+                font-size: 25px;
+                line-height: 25px;
+                color: orange !important;
+                text-decoration: none;
+            }
+    
+            &__date {
+                color: orange;
+                font-size: 15px;
+                line-height: 15px;
+            }
+        }
+    }
+}
