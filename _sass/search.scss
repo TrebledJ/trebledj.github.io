@@ -1,4 +1,10 @@
 #search-modal {
+    .modal-dialog {
+        max-width: 80%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
     #search-box-container {
         position: relative;
     }
