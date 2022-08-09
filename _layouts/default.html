@@ -22,18 +22,6 @@ layout: compress
             nanobar.go(100);
         </script>
 
-        <div data-api-key="Y2I1NTAyNWYtMTNkMy00ODg0LWE4NDItNTZhYzUxNzJkZTI5NjM3MDI4NTUzNzYyMjQ4NzU0" hidden id="snipcart"></div>
-        <script>
-          if (window.netlifyIdentity) {
-            window.netlifyIdentity.on("init", user => {
-              if (!user) {
-                window.netlifyIdentity.on("login", () => {
-                  document.location.href = "/admin/";
-                });
-              }
-            });
-          }
-        </script>
         <script>
           $(document).ready(_ => {
             $("body").tooltip({ selector: '[data-toggle=tooltip]' });
