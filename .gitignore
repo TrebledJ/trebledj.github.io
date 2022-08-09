@@ -14,3 +14,4 @@ _site/
 vendor/
 
 assets/json/debug.json
+.vscode/
