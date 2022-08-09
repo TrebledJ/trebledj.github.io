@@ -10,13 +10,19 @@ $(document).ready(function () {
 
 // --- Scroll to Top --- //
 $(document).ready(function () {
-    $(window).scroll(function () {
+    function check() {
         if ($(this).scrollTop() > 250) {
             $('#btn-back-to-top').fadeIn();
         } else {
             $('#btn-back-to-top').fadeOut();
         }
+    }
+
+    $(window).scroll(function () {
+        check();
     });
+
+    check(); // Check on doc ready, e.g. if page was reloaded, we could already be in the middle of the page.
 
     $('#btn-back-to-top').click(function () {
         document.body.scrollTop = 0;
