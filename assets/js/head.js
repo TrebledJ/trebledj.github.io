@@ -11,7 +11,7 @@ $(document).ready(function () {
 // --- Scroll to Top --- //
 $(document).ready(function () {
     $(window).scroll(function () {
-        if ($(this).scrollTop() > 40) {
+        if ($(this).scrollTop() > 250) {
             $('#btn-back-to-top').fadeIn();
         } else {
             $('#btn-back-to-top').fadeOut();
