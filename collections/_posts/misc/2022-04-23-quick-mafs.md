@@ -44,7 +44,10 @@ This means:
 * Our gadget payload shouldn't be more than 4000 chars long, to set some realistic limits.
 * We should add 8 bytes to call `print` after the gadget payload.
 
-#### Getting Our Gadgets
+#### Inspect-our Gadgets
+![](/assets/img/posts/ctf/inspector-gadget.jpeg){:.w-25}
+{:.center}
+
 Firstly, we'll load all the provided arithmetic gadgets into a list for convenience. Using [`ROPgadget`](https://github.com/JonathanSalwan/ROPgadget) and hacking a bit into the tool, we start with the following code:
 
 ```py
