@@ -18,7 +18,7 @@ usemathjax: true
 Another automatic binary challenge! This time there's more emphasis on `pwn`, specifically ROP. We need to solve the challenge 5 times in under 10 minutes, giving us about 2 minutes per solve.
 
 #### Preliminary Observations
-Decompiling with ghidra, we immediately notice a unsuspicious section of code labelled `gadgets`. This contains loads of arithmetic gadgets. Our objective is to set `rax` to a certain value, presumably, using the gadgets we're given here.
+Decompiling with ghidra, we immediately notice an unsuspicious section of code labelled `gadgets`. This contains loads of arithmetic gadgets. Our objective is to set `rax` to a certain value, presumably, using the gadgets we're given here.
 
 ![](/assets/img/posts/ctf/quick-mafs-1.png){:.w-100}
 {:.center}
