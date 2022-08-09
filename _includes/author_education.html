@@ -19,8 +19,13 @@
             </span>
             {% for course in detail.courses %}
                 <div class="d-flex flex-row justify-content-between align-items-center">
-                    <abbr data-placement="top" data-toggle="tooltip" title="{{course.desc}}">{{course.name}}</abbr>
-                    <abbr style="text-decoration: none;">{{course.grade}}</abbr>
+                    <div class="d-flex align-items-center">
+                        <span>{{course.name}}</span>
+                        <span class="ms-1" data-placement="top" data-toggle="tooltip" title="{{course.desc}}">
+                            <i class="fas fa-question-circle"></i>
+                        </span>
+                    </div>
+                    <div>{{course.grade}}</div>
                 </div>
             {% endfor %}
         </li>
