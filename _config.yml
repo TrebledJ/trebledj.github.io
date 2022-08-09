@@ -96,174 +96,233 @@ author_project_details:
               #   visibility: true
 
 author_skills:
-  - 
-    skill: C++
-    strength: 9.9
-    desc: Language features (templates, classes, C++11 lambdas, parameter packs, template metaprogramming, type traits, constexpr and its variants, C++20 Big4), patterns, idioms, nuances, debugging.
-    active: Using in robotics.
-    tag: cpp
-    icon: cplusplus/cplusplus-original
-    subskills:
-      -
-        skill: CMake
-        strength: 7
-        icon: cmake/cmake-original
-      -
-        skill: Qt
-        strength: 8.4
-        desc: Development cycle, library modules, MVC concept, nuances.
-        tag: qt
-        icon: qt/qt-original
+  -
+    category: Programming
+    skills:
+      - 
+        skill: C++
+        strength: 9.9
+        desc: Language features (templates, classes, C++11 lambdas, parameter packs, template metaprogramming, type traits, constexpr and its variants, C++20 Big4), patterns, idioms, nuances, debugging.
+        active: Using in robotics.
+        tag: cpp
+        icon: cplusplus/cplusplus-original
         subskills:
           -
-            skill: QML
-            strength: 8.8
-            desc: Development cycle, library modules, language features (transitions, behaviours, attached properties), Felgo.
-            tag: qml
-  -
-    skill: Python
-    strength: 9.8
-    desc: Language features (classes, f-strings, decorators, args/kwargs, pattern matching), patterns, standard libraries (math, regex, collections, itertools, functools).
-    tag: python
-    icon: python/python-original
-    subskills:
+            skill: CMake
+            strength: 7
+            icon: cmake/cmake-original
+          -
+            skill: Qt
+            strength: 8.4
+            desc: Development cycle, library modules, MVC concept, nuances.
+            tag: qt
+            icon: qt/qt-original
+            subskills:
+              -
+                skill: QML
+                strength: 8.1
+                desc: Development cycle, library modules, language features (transitions, behaviours, attached properties), Felgo.
+                tag: qml
+      -
+        skill: Python
+        strength: 9.8
+        desc: Language features (classes, f-strings, decorators, args/kwargs, pattern matching), patterns, standard libraries (math, regex, collections, itertools, functools).
+        tag: python
+        icon: python/python-original
+        subskills:
+          - 
+            skill: numpy
+            strength: 6
+          -
+            skill: matplotlib
+            strength: 6.5
+          -
+            skill: pwntools
+            strength: 7.5
+          -
+            skill: z3
+            strength: 7.9
+          -
+            skill: angr
+            strength: 7.4
+      -
+        skill: C
+        strength: 9.4
+        desc: Language nuances, common vulnerabilities, patterns, idioms, macros.
+        tag: c
+        icon: c/c-original
       - 
-        skill: numpy
-        strength: 6
+        skill: Haskell
+        strength: 8.8
+        active: Learning memoisation, lens.
+        desc: Language constructs (control flow, typeclasses and instances, modules), functional programming, standard library (list, unordered containers, IO, Control.Monad), parser combinators, monads (IO, ST), language extensions (implicit params), build systems (cabal, stack), testing (hspec), benchmarking (criterion).
+        tag: haskell
+        icon: haskell/haskell-original
       -
-        skill: matplotlib
-        strength: 6.5
-      -
-        skill: pwntools
+        skill: Rust
+        strength: 5.1
+        active: Learning standard library, concurrency.
+        desc: Language features (borrowing, iterators, pattern matching, structs and ADTs, traits), build system (cargo).
+        tag: rust
+        icon: rust/rust-plain
+      - 
+        skill: Scala
         strength: 7.5
-      -
-        skill: z3
-        strength: 7.9
-      -
-        skill: angr
-        strength: 7.4
-  -
-    skill: C
-    strength: 9.4
-    desc: Language nuances, common vulnerabilities, patterns, idioms, macros.
-    tag: c
-    icon: c/c-original
-  - 
-    skill: Haskell
-    strength: 8.8
-    active: Learning memoisation, lens.
-    desc: Language constructs (control flow, typeclasses and instances, modules), functional programming, standard library (list, unordered containers, IO, Control.Monad), parser combinators, monads (IO, ST), language extensions (implicit params), build systems (cabal, stack), testing (hspec), benchmarking (criterion).
-    tag: haskell
-    icon: haskell/haskell-original
-  -
-    skill: Rust
-    strength: 5.1
-    active: Learning standard library, concurrency.
-    desc: Language features (borrowing, iterators, pattern matching, structs and ADTs, traits), build system (cargo).
-    tag: rust
-    icon: rust/rust-plain
-  - 
-    skill: Scala
-    strength: 7.5
-    active: Using at work.
-    desc: Scala 2, Scala 3, language features (ADTs, type bounds, implicit params), standard library (containers, filesystem), build system (maven, sbt).
-    tag: scala
-    icon: scala/scala-original
-    subskills:
-      - 
-        skill: Spark
-        strength: 6.8
         active: Using at work.
-        desc: Jobs, SQL, dataframes.
-  - 
-    skill: HTML/CSS
-    strength: 6.5
-    active: Using to enhance this site.
-    desc: Tags, attributes, flex, scss.
-    icon: html5/html5-original
-    subskills:
+        desc: Scala 2, Scala 3, language features (ADTs, type bounds, implicit params), standard library (containers, filesystem), build system (maven, sbt).
+        tag: scala
+        icon: scala/scala-original
+        subskills:
+          - 
+            skill: Spark
+            strength: 6.8
+            active: Using at work.
+            desc: Jobs, SQL, dataframes.
       - 
-        skill: Bootstrap
-        strength: 6.8
+        skill: HTML/CSS
+        strength: 6.5
         active: Using to enhance this site.
-        icon: bootstrap/bootstrap-original
-  - 
-    skill: Javascript
-    strength: 6.1
-    active: Using to enhance this site.
-    desc: Basics, ES6 (classes syntax sugar, lambdas, rest parameters), DOM, JQuery.
-    icon: javascript/javascript-original
+        desc: Tags, attributes, flex, scss.
+        icon: html5/html5-original
+        subskills:
+          - 
+            skill: Bootstrap
+            strength: 6.8
+            active: Using to enhance this site.
+            icon: bootstrap/bootstrap-original
+      - 
+        skill: Javascript
+        strength: 6.1
+        active: Using to enhance this site.
+        desc: Basics, ES6 (classes syntax sugar, lambdas, rest parameters), DOM, JQuery.
+        icon: javascript/javascript-original
+      -
+        skill: Shell
+        strength: 8
+        desc: Shell scripting, unix commands (mv, ls, cp, scp, sudo), control flow, bash.
+        icon: bash/bash-original
+      - 
+        skill: SQL
+        strength: 8.2
+        active: Using at work.
+        desc: CRUD operations, CTEs, Spark SQL, prepared statements, SQL injection.
+        tag: sql
+      -
+        skill: OOP
+        long: Object-Oriented Programming
+        strength: 9.1
+        desc: Classes, inheritance, interfaces, ABCs, polymorphism, encapsulation, virtual functions, design patterns.
+      -
+        skill: FP
+        long: Functional Programming
+        strength: 8.9
+        active: Learning more about the ST monad, rank-N polymorphism, category theory.
+        desc: Recursion, higher order functions (map, filter, fold), ADTs (sum types), functors, applicatives, monads.
+      -
+        skill: PP
+        long: Parallel Programming/Processing
+        strength: 5.6
+        desc: CUDA, OpenMP, MPI, parallelisation, speedup.
+      -
+        skill: Algos & DS
+        long: Algorithms and Data Structures
+        strength: 7.8
+        active: Advent of Code
+        desc: Search/sorting algorithms, greedy algorithms, graph algorithms, dynamic programming, algo design, time/space complexity analysis.
+      -
+        skill: Git
+        strength: 8.8
+        desc: Git (Basics, Branches, Merging, Cherry Pick, Rebase, Submodules), GitHub (Issues, PR, Projects, Actions).
+      -
+        skill: Embedded
+        long: Embedded Programming and Systems
+        strength: 7.2
+        desc: Microcontrollers, core concepts (PWM, ADC), communication protocols (UART, CAN), FreeRTOS, STM32.
+        tag: embedded
+      -
+        skill: Binary Pwn
+        strength: 7.5
+        desc: Buffer overflow, ROP, ret2text, ret2libc, gdb.
+        tag: pwn
+      -
+        skill: Reverse
+        strength: 8.4
+        desc: x86 assembly, objdump, decompilers (ghidra), gdb, symbolic execution (z3, angr).
+        tag: reverse
   -
-    skill: Shell
-    strength: 8
-    desc: Shell scripting, unix commands (mv, ls, cp, scp, sudo), control flow, bash.
-    icon: bash/bash-original
-  - 
-    skill: SQL
-    strength: 8.2
-    active: Using at work.
-    desc: CRUD operations, CTEs, Spark SQL, prepared statements, SQL injection.
-    tag: sql
+    category: Areas
+    skills:
+      -
+        skill: PLs and CS
+        long: Programming languages and computer science.
+        strength: 8.9
+        active: In coding mode.
+        desc: Problem solving through programming and software engineering, programming paradigms, programming languages, algorithms and data structures.
+        tag: programming
+      -
+        skill: Robotics
+        strength: 6.8
+        desc: Sensors, actuators, basic theory.
+        tag: robotics
+      -
+        skill: Cybersecurity
+        strength: 6.4
+        active: COMP4633, CTFs.
+        desc: Basics, mindset, pwn, reverse, web.
+        tag: ctf
+      -
+        skill: Mathematics
+        strength: 0.5
+        active: The more I learn, the less I know.
+        desc: The more I learn, the less I know. High school math, basic calculus, basic stats and probability, linear algebra, matrices, discrete mathematics, group theory, graph theory.
+        tag: mathematics
+      -
+        skill: Composition
+        strength: 8.1
+        active: Harmony, orchestration.
+        desc: Organising sound coherently.
+        tag: music
   -
-    skill: OOP
-    long: Object-Oriented Programming
-    strength: 9.1
-    desc: Classes, inheritance, interfaces, ABCs, polymorphism, encapsulation, virtual functions, design patterns.
+    category: Others
+    skills:
+      -
+        skill: Harmony
+        strength: 8.3
+        active: Negative harmony, jazz harmony.
+        desc: The diatonic scale, chord progressions, tonic/dominant/subdominant chords, counterpoint, imitation.
+        tag: music
+      -
+        skill: Orchestration
+        strength: 7.1
+        active: Reading The Study of Orchestration and composing.
+        desc: Writing for strings/woodwind/brass/percussion, orchestrating homophonic textures, orchestra structure and form.
+      -
+        skill: Sleeping
+        strength: 8.9
+        active: Sometimes in bed.
+        desc: Internal death by boredom.
+      -
+        skill: Talking
+        strength: 3.1
+        active: Exercising my voice box by participating in the social construct of communication.
+        desc: Interactions through informative, ordered sound.
   -
-    skill: FP
-    long: Functional Programming
-    strength: 8.9
-    desc: Recursion, higher order functions (map, filter, fold), ADTs (sum types), functors, applicatives, monads.
-    active: Learning more about the ST monad, rank-N polymorphism, category theory.
-  -
-    skill: Algos & DS
-    long: Algorithms and Data Structures
-    strength: 7.8
-    desc: Search/sorting algorithms, greedy algorithms, graph algorithms, dynamic programming, algo design, time/space complexity analysis.
-    active: Advent of Code
-  -
-    skill: Embedded
-    long: Embedded Programming and Systems
-    strength: 7.2
-    desc: Microcontrollers, core concepts (PWM, ADC), communication protocols (UART, CAN), FreeRTOS, STM32.
-    tag: embedded
-  -
-    skill: Binary Pwn
-    strength: 7.5
-    desc: Buffer overflow, ROP, ret2text, ret2libc, gdb.
-    tag: pwn
-  -
-    skill: Reverse
-    strength: 8.4
-    desc: x86 assembly, objdump, decompilers (ghidra), gdb, symbolic execution (z3, angr).
-    tag: reverse
-  -
-    skill: Mathematics
-    strength: 0.5
-    active: The more I learn, the less I know.
-    desc: The more I learn, the less I know. High school math, basic calculus, basic stats and probability, linear algebra, matrices, discrete mathematics, group theory, graph theory.
-    tag: mathematics
-  -
-    skill: Harmony
-    strength: 8.3
-    active: Negative harmony, jazz harmony.
-    desc: The diatonic scale, chord progressions, tonic/dominant/subdominant chords, counterpoint, imitation.
-    tag: music
-  -
-    skill: Orchestration
-    strength: 7.1
-    active: Reading The Study of Orchestration and composing.
-    desc: Writing for strings/woodwind/brass/percussion, orchestrating homophonic textures, orchestra structure and form.
-  -
-    skill: Sleeping
-    strength: 8.9
-    active: Sometimes in bed.
-    desc: Internal death by boredom.
-  -
-    skill: Talking
-    strength: 3.1
-    active: Exercising my voice box by participating in the social construct of communication.
-    desc: Interactions through informative, ordered sound.
+    category: Languages
+    skills:
+      -
+        skill: English
+        strength: 9.3
+        active: Exercising my voice box.
+        desc: Fluent in reading, writing, listening. Less fluent in speaking.
+      -
+        skill: Cantonese
+        strength: 5.1
+        active: 哈咯.
+        desc: 悉聽、悉講、唔悉睇、唔悉寫... err... 悉睇和寫DD。
+      -
+        skill: Mandarin
+        strength: 4.2
+        desc: 能听、说、写和读非常简单的字。
 
 
 

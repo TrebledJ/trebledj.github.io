@@ -1,12 +1,18 @@
-{% for s in site.author_skills %}
-    {% assign pad = 0 %}
-    {% include skill_item.html %}
-    {% for s in s.subskills %}
-        {% assign pad = 4 %}
+{% for set in site.author_skills %}
+    <div class="d-flex justify-content-between align-items-center">
+        <small style="color: var(--medium-text-color);">{{set.category}}</small>
+        <div class="container-fluid mx-0"><hr/></div>
+    </div>
+    {% for s in set.skills %}
+        {% assign pad = 0 %}
         {% include skill_item.html %}
         {% for s in s.subskills %}
-            {% assign pad = 5 %}
+            {% assign pad = 4 %}
             {% include skill_item.html %}
+            {% for s in s.subskills %}
+                {% assign pad = 5 %}
+                {% include skill_item.html %}
+            {% endfor %}
         {% endfor %}
     {% endfor %}
 {% endfor %}
