@@ -177,7 +177,7 @@ author_skills:
         desc: Jobs, SQL, dataframes.
   - 
     skill: HTML/CSS
-    strength: 4.8
+    strength: 6.5
     active: Using to enhance this site.
     desc: Tags, attributes, flex, scss.
     icon: html5/html5-original
@@ -254,6 +254,16 @@ author_skills:
     strength: 7.1
     active: Reading The Study of Orchestration and composing.
     desc: Writing for strings/woodwind/brass/percussion, orchestrating homophonic textures, orchestra structure and form.
+  -
+    skill: Sleeping
+    strength: 8.9
+    active: Sometimes in bed.
+    desc: Internal death by boredom.
+  -
+    skill: Talking
+    strength: 3.1
+    active: Exercising my voice box by participating in the social construct of communication.
+    desc: Interactions through informative, ordered sound.
 
 
 
