@@ -297,6 +297,10 @@ author_skills:
         active: Reading The Study of Orchestration and composing.
         desc: Writing for strings/woodwind/brass/percussion, orchestrating homophonic textures, orchestra structure and form.
       -
+        skill: Google-fu
+        strength: 9.3
+        desc: Smashing problems through the power of kung-pow and wushiness! HAIYAH!
+      -
         skill: Sleeping
         strength: 8.9
         active: Sometimes in bed.
