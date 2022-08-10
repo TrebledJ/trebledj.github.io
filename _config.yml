@@ -85,8 +85,6 @@ author_education_details:
         desc: Set theory, logic, recursive sequences, euclidean algorithm, counting/permutations, graph theory.
         grade: A+
 
-    visibility: true
-
 # Projects
 author_project_details:
               # - project_thumbnail: gamershub.png
@@ -199,7 +197,7 @@ author_skills:
       -
         skill: Shell
         strength: 8
-        desc: Shell scripting, unix commands (mv, ls, cp, scp, sudo), control flow, bash.
+        desc: Shell scripting, unix commands (mv, ls, cp, scp, sudo, cut, awk, uniq, sort, sed, grep), control flow, bash.
         icon: bash/bash-original
       - 
         skill: SQL
