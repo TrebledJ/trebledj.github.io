@@ -1,7 +1,5 @@
 /* devlopr-jekyll styling */
 
-@import "jumbotron";
-
 /* variables */
 :root {
     --font-family-sans: 'Segoe UI', 'Roboto', Ubuntu, Cantarell, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji', system-ui, -apple-system;
@@ -437,15 +435,6 @@ body > .container-fluid {
     margin-left: 20px !important;
 }
 
-.jumbotron-heading {
-    font-size: 30px;
-}
-
-.lead {
-    font-size: 1.30rem !important;
-    font-weight: 600;
-}
-
 .fa {
     display: inline-block;
     font: normal normal normal 14px/1 FontAwesome;
@@ -826,11 +815,6 @@ footer {
         white-space: nowrap;
 
     }
-
-    .jumbotron {
-        padding: 10rem 1rem !important;
-    }
-
 }
 
 /* Smartphones */
@@ -908,11 +892,6 @@ footer {
         margin-left: -30px;
 
     }
-
-    .jumbotron {
-        padding: 10rem 1rem !important;
-    }
-
 }
 
 /*
