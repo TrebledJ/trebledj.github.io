@@ -467,7 +467,6 @@ exclude:
   - vendor/gems/
   - vendor/ruby/
   - assets/bower_components/isotope-layout/README.md
-  - assets/bower_components/icono/README.md
   - assets/bower_components/font-awesome/advanced-options/use-with-node-js/fontawesome-svg-core/README.md
   - assets/bower_components/nanobar/README.md
   - assets/bower_components/lightgallery/demo/README.md
