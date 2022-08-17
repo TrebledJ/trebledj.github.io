@@ -42,12 +42,22 @@
                     <i class="fas fa-rss"></i>
                 </a>
             </div>
+            <div class="col p-0">
+                <a class="social-link" href="mailto:{{site.author_email}}">
+                    <i class="fas fa-envelope"></i>
+                </a>
+            </div>
+            {% if page.url == '/profile/' %}
+            <div class="col p-0">
+                <a class="social-link" href="www.linkedin.com/in/trebledj">
+                    <i class="fab fa-linkedin"></i>
+                </a>
+            </div>
+            {% endif %}
         </div>
     </div>
-    <a class="social-link" data-placement="top" data-toggle="tooltip" style="cursor: default" title="Find me in International Baccalaureate, Programming Discussions, The Programmer's Hangout, and other Discord servers. (Mostly just lurking.)">
+    <!-- Wow so strong you hacked my html file. Now you know my Discord username. It was a bit awkward figuring out how to display it, so I just decided to leave it out... -->
+    <!-- <a class="social-link" data-placement="top" data-toggle="tooltip" style="cursor: default" title="Find me in International Baccalaureate, Programming Discussions, The Programmer's Hangout, and other Discord servers. (Mostly just lurking.)">
         <i class="fab fa-discord"></i>&nbsp;<span class="fs-6">TrebledJ#7595</span>
-    </a>
-    <a class="social-link" href="mailto:{{site.author_email}}">
-        <i class="fas fa-envelope"></i>&nbsp;<span class="fs-6">{{ site.author_email }}</span>
-    </a>
+    </a> -->
 </div>
