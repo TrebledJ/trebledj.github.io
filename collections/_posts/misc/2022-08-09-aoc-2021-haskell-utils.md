@@ -9,7 +9,7 @@ usemathjax: true
 
 Haskell, despite its relatively low popularity, is quite up to speed on language features and tooling (unlike–*cough cough*–some other languages). One of these features is being able to separate and organise files into modules, encouraging clean code practices and cleaner development.
 
-In AOC 2021, I found it useful to separate common functions into a [Utils.hs][aoc-utils] file. After all, to make our environments cleaner we should reduce, reuse, and recycle.
+In Advent of Code (AOC) 2021, I found it useful to separate common functions into a [Utils.hs][aoc-utils] file. After all, to make our environments cleaner we should reduce, reuse, and recycle.
 
 ![](/assets/img/posts/aoc/recycle-hs-utils.jpeg){:.w-75}
 {:.center}

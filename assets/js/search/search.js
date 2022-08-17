@@ -18,6 +18,15 @@ var idx = lunr(function () {
   }
 });
 
+
+function boost(term) {
+  let small_words = "a an the of by in with on to at since about through during over under".split(' ');
+  if (small_words.contains(term)) {
+    return 1;
+  }
+  return 100;
+}
+
 $(document).ready(function() {
   $('input#search-box').on('keyup', function () {
     var resultdiv = $('#search-results-list');
@@ -25,7 +34,7 @@ $(document).ready(function() {
     var result =
       idx.query(function (q) {
         query.split(lunr.tokenizer.separator).forEach(function (term) {
-          q.term(term, { boost: 100 })
+          q.term(term, { boost: boost(term) })
           if(query.lastIndexOf(" ") != query.length-1){
             q.term(term, {  usePipeline: false, wildcard: lunr.Query.wildcard.TRAILING, boost: 10 })
           }
