@@ -1,8 +1,8 @@
-<article class="post-preview d-flex flex-row">
+<article class="post-preview d-flex">
     <a class="post-thumbnail" href="{{site.baseurl}}{{post.url}}">
         {% if post.thumbnail %}
             <img class="post-img-blurred-bg" src="{{site.url}}{{site.baseurl}}{{post.thumbnail}}" alt="{{ post.title }}">
-            <div class="post-img-container d-flex align-items-center w-100 h-100">
+            <div class="post-img-container d-flex w-100 h-100">
                 <img class="post-img-contain" src="{{site.url}}{{site.baseurl}}{{post.thumbnail}}" alt="{{ post.title }}">
             </div>
         {% else %}
