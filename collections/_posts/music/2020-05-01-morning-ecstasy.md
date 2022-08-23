@@ -10,4 +10,4 @@ also_related: buoyant-ecstasy
 
 Composed in the student dorms during the Covid 2020 Spring.
 
-After Covid-19 hit, the student dorms were left vacant. The majority of students departed, either returning to their local residence or back where they came from. At the start of the Fall semester, the halls would be packed, bustling, and lively. By the spring semester, the hallways have become an empty husk. Hollow and empty, but also peaceful, quiet, and tranquil.
+After Covid-19 hit, the student dorms were left vacant. The majority of students departed, either returning to their local residence or back where they came from. At the start of the Fall semester, the halls would be packed, bustling, and lively. By the spring semester, the hallways have become an empty husk. Hollow and empty—but also peaceful, quiet, and tranquil.
