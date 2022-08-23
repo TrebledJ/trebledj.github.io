@@ -5,6 +5,7 @@ updated: "2022-07-28"
 tags: music band
 keywords: composition guitars drums upbeat
 track_id: 1199278825
+score_id: 8527562
 also_related: morning-rush the-breath-of-life
 ---
 

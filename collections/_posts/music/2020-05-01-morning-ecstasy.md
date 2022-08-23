@@ -5,6 +5,7 @@ updated: "2022-08-23"
 tags: music band
 keywords: composition guitars drums upbeat glockenspiel
 track_id: 1329504610
+score_id: 8527178
 also_related: buoyant-ecstasy
 ---
 

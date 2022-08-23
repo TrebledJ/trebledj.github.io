@@ -10,11 +10,14 @@ thumbnail: /assets/img/to/thumbnail.jpg
 keywords: key, words
 usemathjax: false
 include_thumbnail: true # or false depending if you want the thumbnail to show on the post's page
-permalink: /posts/permalink/to/post/
-published: false
 pitch: A description displayed in the profile.
+track_id: 00000011 # soundcloud track id
+score_id: 00000012 # musescore track id
 related: list-of-permalink-slugs to-other-posts
 also_related: list-of-permalink-slugs to-other-posts
+permalink: /posts/permalink/to/post/
+published: false # keep as draft
+feed: false # don't put into feed
 ---
 
 markdown/html/liquid content here

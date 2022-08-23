@@ -5,6 +5,7 @@ updated: "2022-07-28"
 tags: music band
 keywords: composition guitars drums upbeat
 track_id: 1199278129
+score_id: 8527520
 also_related: joyride-in-d the-breath-of-life
 ---
 
