@@ -404,12 +404,14 @@ defaults:
       # thumbnail: "/assets/img/thumbnail.png"
       include_thumbnail: false
       sharable: true
+      related_auto: false
   -
     scope:
       path: "collections/_posts/music"
       type: "posts"
     values:
       layout: "post-music"
+      related_auto: true
   -
     scope:
       path: "tags"

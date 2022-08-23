@@ -6,7 +6,7 @@ tags: music strings hkust
 keywords: composition oboe major minor
 track_id: 1329509965
 score_id: 8527388
-also_related: morning-ecstasy
+related: morning-ecstasy
 ---
 
 Alike [Morning Ecstasy](/posts/morning-ecstasy), this piece was also composed in 2020 Spring, during the first several months of the Covid-19 pandemic. In addition, this was composed as a project for an (introductory) course on music theory.

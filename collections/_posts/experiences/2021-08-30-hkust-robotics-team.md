@@ -6,7 +6,7 @@ tags: robotics experience embedded python c cpp hkust
 thumbnail: /assets/img/posts/robotics/wallpaper-2.png
 pitch: Joined the HKUST Robotics Team.
 published: false
-related: robocon-2021 robocon-2020 robot-design-contest-simulator
+related_tags: hkust robotics
 ---
 
 ### Joining the Team

@@ -5,6 +5,7 @@ updated: "2022-08-08"
 tags: ctf reverse writeup pwn python programming
 thumbnail: /assets/img/posts/ctf/inspector-gadget.jpeg
 usemathjax: true
+related_tags: ctf writeup
 ---
 
 {% include toc.md %}
