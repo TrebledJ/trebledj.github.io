@@ -1,3 +1,5 @@
+@import "devlopr";
+
 #search-modal {
     #search-box-container {
         position: relative;
@@ -16,12 +18,25 @@
         border: 2px solid var(--light-border-color);
         border-radius: var(--border-radius-small);
         // background-color: #eeeeee69;
+        color: var(--main-text-color);
         background-color: var(--card-background-color);
     }
 
-    .border-bottom {
-        border-bottom: 2px solid var(--light-border-color);
+    .modal-header {
+        border-bottom: 2px solid var(--light-border-color) !important;
     }
+
+    .border-bottom {
+        border-bottom: 2px solid var(--light-border-color) !important;
+    }
+
+    .modal-content {
+        background-color: var(--card-background-color);
+    }
+}
+
+html[data-theme="dark"] .btn-close {
+    filter: invert(1) grayscale(100%) brightness(200%);
 }
 
 @media (min-width: 768px) {
