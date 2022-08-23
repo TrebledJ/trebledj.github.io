@@ -14,9 +14,16 @@
                     {% endfor %}
                 {% endfor %}
             {% else %}
-                <!-- Default relations: any post with 2 tags in common. -->
+                <!-- Include any post with 2 tags in common plus any posts in page.also_related. -->
                 {% for post in site.posts %}
                     {% if post.url != page.url %}
+                        {% assign should_include = false %}
+                        {% if page.also_related %}
+                            {% assign slug = post.url | split: "/" | last %}
+                            {% if page.also_related contains slug %}
+                                {% assign should_include = true %}
+                            {% endif %}
+                        {% endif %}
                         {% assign counter = 0 %}
                         {% for tag in post.tags %}
                             {% if page.tags contains tag %}
@@ -24,6 +31,9 @@
                             {% endif %}
                         {% endfor %}
                         {% if counter >= 2 %}
+                            {% assign should_include = true %}
+                        {% endif %}
+                        {% if should_include == true %}
                             {% include post_preview.html %}
                         {% endif %}
                     {% endif %}

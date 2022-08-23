@@ -14,6 +14,7 @@ permalink: /posts/permalink/to/post/
 published: false
 pitch: A description displayed in the profile.
 related: list-of-permalink-slugs to-other-posts
+also_related: list-of-permalink-slugs to-other-posts
 ---
 
 markdown/html/liquid content here
