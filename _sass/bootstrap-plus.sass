@@ -1,0 +1,44 @@
+
+
+@for $i from 1 through 9
+    .w-#{$i}0
+        width: $i * 10% !important
+    .w-#{$i}5
+        width: $i * 10% + 5% !important
+
+
+$spacer: 1rem
+
+$value: null
+@for $i from 6 through 9
+    @if $i == 6
+        $value: $spacer * 4 !global
+    @else if $i == 7
+        $value: $spacer * 5 !global
+    @else if $i == 8
+        $value: $spacer * 6 !global
+    @else if $i == 9
+        $value: $spacer * 8 !global
+
+    .m-#{$i}
+        margin: $value !important
+    .mt-#{$i}
+        margin-top: $value !important
+    .mb-#{$i}
+        margin-bottom: $value !important
+    .ms-#{$i}
+        margin-left: $value !important
+    .me-#{$i}
+        margin-right: $value !important
+
+    .p-#{$i}
+        padding: $value !important
+    .pt-#{$i}
+        padding-top: $value !important
+    .pb-#{$i}
+        padding-bottom: $value !important
+    .ps-#{$i}
+        padding-left: $value !important
+    .pe-#{$i}
+        padding-right: $value !important
+    
