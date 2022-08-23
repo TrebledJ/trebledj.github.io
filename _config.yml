@@ -434,10 +434,14 @@ plugins:
   - jekyll-gist
   - jekyll-seo-tag
   - jekyll-sitemap
+  - jekyll-redirect-from
 
 # SASS
 sass:
   implementation: sass-embedded
+
+redirect_from:
+  json: false
 
 
 # Exclude from processing.
