@@ -21,7 +21,7 @@ var idx = lunr(function () {
 
 function boost(term) {
   let small_words = "a an the of by in with on to at since about through during over under".split(' ');
-  if (small_words.contains(term)) {
+  if (small_words.includes(term)) {
     return 1;
   }
   return 100;
