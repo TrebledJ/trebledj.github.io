@@ -5,7 +5,7 @@ updated: "2022-07-28"
 tags: music band
 keywords: composition guitars drums upbeat
 track_id: 1199278129
-related: joyride-in-d the-breath-of-life
+also_related: joyride-in-d the-breath-of-life
 ---
 
 Do you feel the exhilaration of the morning air? The excitement of stepping out of bed? Chomping down breakfast? 

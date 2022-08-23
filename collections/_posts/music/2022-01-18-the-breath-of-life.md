@@ -5,7 +5,7 @@ updated: "2022-07-28"
 tags: music minimalism fusion strings
 keywords: music, composition, minimalism, fusion, string, ensemble, string ensemble, emotional, peaceful, serene
 track_id: 1199277217
-related: joyride-in-d morning-rush reticence
+also_related: joyride-in-d morning-rush
 ---
 
 This piece seeks to paint a diverse set of feelings. Listen for the string ensemble easing in and out of the void, the solemn moments of silence, the lightheartedness of the syncopated pizzicato, the relentless cycle of tension and relief.
