@@ -3,7 +3,7 @@
         <h1 class="post-title" itemprop="name headline">{{ page.title }}</h1>
         <h6 class="">{{ page.description }}</h6>
         {% assign show_last_update = true %}
-        {% include post_metadata.html %}
+        {% include post-metadata.html %}
     </div>
     <hr/>
     <div class="card-body p-0 post-body" itemprop="articleBody">
@@ -16,15 +16,7 @@
         {% if page.sharable %}
             <br/>
             <br/>
-            {%- include share_page.html -%}
+            {%- include post-share.html -%}
         {% endif %}
     </div>
-    {% if page.sharable %}
-        {%- if site.hyvor_talk_website_id -%}
-            <div class="comments">{%- include hyvor_comments.html -%}</div>
-        {%- endif -%}
-        {% if site.disqus_shortname %}
-            <div id="disqus_thread"></div>
-        {% endif %}
-    {% endif %}
 </article>

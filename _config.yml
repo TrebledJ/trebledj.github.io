@@ -398,7 +398,7 @@ defaults:
       path: ""
       type: "posts"
     values:
-      layout: "post"
+      layout: "post-default"
       author: "trebledj"
       # thumbnail: "/assets/img/thumbnail.png"
       include_thumbnail: false
@@ -408,12 +408,12 @@ defaults:
       path: "collections/_posts/music"
       type: "posts"
     values:
-      layout: "music_post"
+      layout: "post-music"
   -
     scope:
       path: "tags"
     values:
-      layout: "tag_page"
+      layout: "page-tag"
   # -
   #   scope:
   #     path: ""
@@ -467,6 +467,7 @@ exclude:
   - gemfiles/
   - Gemfile
   - Gemfile.lock
+  - archive/
   - node_modules/
   - vendor/bundle/
   - vendor/cache/

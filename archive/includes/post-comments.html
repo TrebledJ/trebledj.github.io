@@ -1,0 +1,8 @@
+{% if page.sharable %}
+    {%- if site.hyvor_talk_website_id -%}
+        <div class="comments">{%- include hyvor-comments.html -%}</div>
+    {%- endif -%}
+    {% if site.disqus_shortname %}
+        <div id="disqus_thread"></div>
+    {% endif %}
+{% endif %}

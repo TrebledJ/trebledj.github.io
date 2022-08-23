@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: default-container
 permalink: /tags/
 feed: false
 visibility: false

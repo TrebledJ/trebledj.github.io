@@ -1,5 +1,5 @@
 ---
-layout: page_with_sidebar
+layout: page-with-sidebar
 ---
 <div class="card p-4">
     <h3>
@@ -17,7 +17,7 @@ layout: page_with_sidebar
     <div class="post-preview-list">
         {% assign slug = page.tag | default: page.title | slugify %}
         {% for post in site.tags[slug] %}
-            {% include post_preview.html %}
+            {% include post-preview.html %}
         {% endfor %}
     </div>
 </div>

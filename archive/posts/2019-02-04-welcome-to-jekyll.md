@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: post-default
 title:  "Welcome to devlopr-jekyll !"
 description: "Getting Started using devlopr-jekyll"
 author: johndoe

@@ -1,0 +1,13 @@
+---
+layout: page-with-sidebar
+---
+
+<div class="w-100">
+    {%- include post-article.html -%}
+</div>
+<div class="w-100 mt-4">
+    \{% include post-related.html %}
+    {% if page.sharable and false %}
+        {%- include post-comments.html -%}
+    {% endif %}
+</div>

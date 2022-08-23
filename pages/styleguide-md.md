@@ -1,6 +1,6 @@
 ---
 title: Styleguide (Markdown)
-layout: post
+layout: post-default
 permalink: /styleguide-md/
 published: false
 visibility: false

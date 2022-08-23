@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: post-default
 title:  "Added Latex Support"
 description: Writing Equations using Latex
 author: xplor4r

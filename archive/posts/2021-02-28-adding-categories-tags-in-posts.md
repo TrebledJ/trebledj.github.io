@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: post-default
 title:  "Adding Multiple Tags in Posts"
 description: "Learn how to add tags in posts"
 author: xplor4r

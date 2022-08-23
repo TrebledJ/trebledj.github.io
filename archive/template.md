@@ -1,6 +1,6 @@
 ---
 # layout to use from _layout folder
-layout: post 
+layout: post-default 
 title:  "title of post"
 description: "short summary of post"
 author: trebledj

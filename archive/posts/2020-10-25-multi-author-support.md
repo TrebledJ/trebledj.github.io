@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: post-default
 title:  "Added Multi Author Support"
 description: "Multi Author Support allows to create articles with different Authors"
 author: xplor4r

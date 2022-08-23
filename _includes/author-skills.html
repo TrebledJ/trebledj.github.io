@@ -5,13 +5,13 @@
     </div>
     {% for s in set.skills %}
         {% assign pad = 0 %}
-        {% include skill_item.html %}
+        {% include author-skill-item.html %}
         {% for s in s.subskills %}
             {% assign pad = 4 %}
-            {% include skill_item.html %}
+            {% include author-skill-item.html %}
             {% for s in s.subskills %}
                 {% assign pad = 5 %}
-                {% include skill_item.html %}
+                {% include author-skill-item.html %}
             {% endfor %}
         {% endfor %}
     {% endfor %}
