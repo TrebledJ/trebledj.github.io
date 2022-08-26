@@ -3,6 +3,8 @@ title:  "Space Penguin"
 description: "And yet another school year begins."
 tags: music electronic
 keywords: composition electronic side-chain-compression synth surge penguins-in-space learn-to-fly
+thumbnail: /assets/img/posts/music/space-penguin.jpg
+include_thumbnail: true
 track_id: 1331667688
 related_tags: music electronic
 ---
