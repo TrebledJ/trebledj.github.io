@@ -315,6 +315,10 @@ author_skills:
         strength: 3.1
         active: Exercising my voice box by participating in the social construct of communication.
         desc: Interactions through informative, ordered sound.
+      -
+        skill: Sleep-Talking
+        strength: 0.8
+        desc: How do they do it!?
   -
     category: Languages
     skills:
