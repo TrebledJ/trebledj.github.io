@@ -5,6 +5,7 @@ updated: "2022-08-01"
 tags: project qt cpp sql
 keywords: e-payment, desktop application, gui, c++
 pitch: Developed a Qt/C++ desktop application for a new e-payment system in the school cafeteria. Collaborated with ICT staff in UI design and connecting the application with the school’s SQL Server database.
+related_auto: true
 ---
 
 This project involved creating a functioning e-payment system to be integrated at our high school's cafeteria.
