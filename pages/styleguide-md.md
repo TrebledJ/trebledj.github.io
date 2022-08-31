@@ -71,11 +71,11 @@ $$\sum_{i=1}^n \frac{(x_i - \mu)^2}{n}$$
 Inline latex like $$\underbrace{1 + 1 = 2}_{\text{wow}}$$ should work.
 
 Full-width image.  
-![](/assets/img/thumbnail.png){:width="100%"}
+![](/assets/img/thumbnail.png){:.w-100}
 
 Centred image.  
 
-![](/assets/img/thumbnail.png){:width="80%"}
+![](/assets/img/thumbnail.png){:.w-80}
 {:refdef style="text-align: center;"}
 
 ## Add-Ons
