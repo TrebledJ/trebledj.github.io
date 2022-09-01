@@ -3,7 +3,7 @@ title: HKUST Robotics Team
 description: Experiences and reflections journeying with the HKUST Robotics Team.
 updated: "2022-08-03"
 tags: robotics experience embedded python c cpp hkust
-thumbnail: /assets/img/posts/robotics/wallpaper-2.png
+thumbnail: /assets/img/posts/robotics/wallpaper-2.jpg
 pitch: Joined the HKUST Robotics Team.
 published: false
 related_tags: hkust robotics
@@ -14,7 +14,7 @@ My first encounter with the Robotics team was in a recruitment email at the begi
 
 The exploration workshop was quite fun. We were provided a chassis with motors a bit like the one in the picture below. Our task was to use the robot to guide (dribble?) a ping-pong ball along a path within a fixed time (IIRC it was 60 seconds?).
 
-![](/assets/img/posts/robocon-2020/chassis-example.jpeg){:.w-75}
+![](/assets/img/posts/robocon-2020/chassis-example.jpg){:.w-75}
 {:.center}
 
 Software-wise we used Arduino to program the controller. I've never touched Arduino before, but the people behind it did a good job of abstracting a lot of low-level functionality. It was fun programming the robot to receive commands (e.g. turn left, turn right) and controlling the motors to respond. The programming wasn't too complicated. Something simple like this would've worked:
@@ -36,7 +36,7 @@ This choice usually decides your pathway in the team, at least for the first yea
 I went with software. This is a personal choice, since I had experience with C++ and wanted to hone my programming skills. I had no experience with mech/hardware things besides playing with Lego, and my circuit/electronics physics is a bit rusty.
 
 ### Training
-![](/assets/img/memes/training.jpeg){:.w-75}
+![](/assets/img/memes/training.jpg){:.w-75}
 {:.center}
 
 Shortly after the workshop, we were invited to attend training sessions. These are tutorial sessions held by Robotics Team seniors.

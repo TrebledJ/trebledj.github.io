@@ -4,7 +4,7 @@ description: "Pointillism is pretty interesting with a string ensemble!"
 updated: "2022-08-23"
 tags: music strings hkust
 keywords: composition oboe major minor
-thumbnail: /assets/img/posts/music/swirling-wisps-2.png
+thumbnail: /assets/img/posts/music/swirling-wisps-2.jpg
 include_thumbnail: true
 track_id: 1329509965
 score_id: 8527388

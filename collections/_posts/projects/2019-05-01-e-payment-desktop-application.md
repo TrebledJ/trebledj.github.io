@@ -87,7 +87,7 @@ As mentioned before, there are three groups of users: vendors, students, and adm
 
 This is what the design for the vendor interface looks like:
 
-![](/assets/img/posts/studentcard/vendor-order.png){:.w-100}
+![](/assets/img/posts/studentcard/vendor-order.jpg){:.w-100}
 
 Giant buttons on the left to select their customers' orders. A list of selected items on the right. And some buttons down below.
 
@@ -117,8 +117,8 @@ Admins, of course, have a more powerful role. These peeps can view *and* **updat
 
 Students have the most ***exciting*** user flow of all.
 
-![](/assets/img/posts/studentcard/standby.png){:.w-45}
-![](/assets/img/posts/studentcard/standby-scanned.png){:.w-45}
+![](/assets/img/posts/studentcard/standby.jpg){:.w-45}
+![](/assets/img/posts/studentcard/standby-scanned.jpg){:.w-45}
 {:.center}
 
 And since they have an exciting flow, I'll describe it for fun:
