@@ -1,5 +1,6 @@
 ---
 title: Applications
+tag: apps
 permalink: /tags/apps/
 ---
 
