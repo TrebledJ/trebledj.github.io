@@ -43,6 +43,13 @@ This plugin is inspired by the todo-tree plugin in VSCode, which searched files 
 
 When starting, I took reference of [jeetee’s annotation plugin](https://musescore.org/en/project/annotations). I noticed jeetee used Qt Quick Controls 1.0 instead of 2.0 used in some other plugins. Apparently, QML had made some drastic changes to the styling of controls (buttons, checkboxes, etc.). In 1.0, controls used the native style (e.g. Apple’s aqua style for macs). On the other hand, 2.0 controls require developers to customise styling; this may sound great for design flexibility, but in my experience it’s annoying to get it working with both light and dark theme.
 
+![](/assets/img/posts/music/plugin-qtquick1.jpg){:.w-45}
+![](/assets/img/posts/music/plugin-qtquick2.jpg){:.w-45}
+{:.center}
+
+<sup>Qt Quick Controls 1.0 vs 2.0. The latter comes with barely any default and takes more effort to properly set up.</sup>
+{:.center}
+
 Implementation-wise, the todo-list plugin aims to be self-contained and simple. Self-contained, meaning that everything is in a single .qml file, so that the user doesn’t need to bother with structure too much. Simple, meaning that it doesn’t store too much metadata. The plugin only stores the configuration options mentioned above. I avoid storing data such as measure and staff—which are alike the x and y position in a score—because things get messy when the stored todo is displaced, e.g. when a user inserts a bunch of measures or removes an instrument.
 
 Even though I’ve used Qt before, I was still surprised with how easy it was to set up a form dialog to configure user settings. Just slap together a `Dialog`, `GridLayout`, several `Label`s and `TextField`s, code the logic, and violà—we have our settings dialog.
