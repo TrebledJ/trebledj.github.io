@@ -2,8 +2,8 @@
 title:  "Feeling Boisterous On A Chilly Night While Walking Home After A Long Day At School"
 description: "...during winter ...in a silent neighbourhood ...with the entire road to yourself."
 updated: "2022-07-26"
-tags: music electronic hkust
-keywords: composition synth drums edm
+tags: composition electronic music hkust
+keywords: synth drums edm
 track_id: 1146309223
 ---
 

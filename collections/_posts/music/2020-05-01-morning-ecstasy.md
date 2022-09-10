@@ -2,8 +2,8 @@
 title:  "Morning Ecstasy"
 description: "When you get the entire floor of a student dorm to yourself."
 updated: "2022-08-23"
-tags: music band
-keywords: composition guitars drums upbeat glockenspiel
+tags: composition band music
+keywords: guitars drums upbeat glockenspiel
 track_id: 1329504610
 score_id: 8527178
 related: buoyant-ecstasy morning-rush

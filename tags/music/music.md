@@ -3,7 +3,7 @@ title: Music
 permalink: /tags/music/
 ---
 
-Music from and for the heart.
+A general tag for all music-related stuff.
 
 > Every morning will soon turn into evening,  
 > And springtime will soon turn into fall.  

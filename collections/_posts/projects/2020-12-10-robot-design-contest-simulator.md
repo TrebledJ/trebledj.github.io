@@ -2,7 +2,7 @@
 title: Robot Design Contest Simulator
 description: Here you can drive robots without having to worry about damaging physical property or being impaled.
 updated: "2022-08-05"
-tags: project qt cpp robotics hkust
+tags: project qt cpp robotics apps hkust
 thumbnail: /assets/img/posts/rdc-simulator/thumbnail.jpg
 pitch: Led and managed the development of a desktop simulator used in a recruitment competition for the HKUST Robotics Team.
 related: robocon-2021 robocon-2020 hkust-robotics-team

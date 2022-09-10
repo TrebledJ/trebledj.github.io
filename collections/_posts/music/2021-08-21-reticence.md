@@ -2,8 +2,8 @@
 title:  "Reticence"
 description: "Alternate title: sad.mp3."
 updated: "2022-07-26"
-tags: music piano strings hkust
-keywords: composition duet piano cello emotional
+tags: composition piano strings music hkust
+keywords: duet piano cello emotional
 thumbnail: /assets/img/posts/music/reticence.jpg
 include_thumbnail: true
 track_id: 1146309253

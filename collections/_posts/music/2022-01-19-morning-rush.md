@@ -2,8 +2,8 @@
 title:  "Morning Rush"
 description: "\"Quickly! School starts in 15 minutes and you still haven't changed out of your pajamas!\""
 updated: "2022-07-28"
-tags: music band
-keywords: composition guitars drums upbeat
+tags: composition band music
+keywords: guitars drums upbeat
 track_id: 1199278129
 score_id: 8527520
 related: morning-ecstasy joyride-in-d the-breath-of-life
