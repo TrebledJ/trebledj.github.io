@@ -7,10 +7,6 @@ pitch: Developed MuseScore quality-of-life plugins for navigation and score edit
 published: false
 ---
 
-{% include toc.md %}
-
-## Introduction
-
 MuseScore, a music notation desktop application, allows mini-extensions through its QML Plugins. MuseScore is built with the [Qt](https://en.wikipedia.org/wiki/Qt_(software)) framework and leverages the QML ecosystem for rapid prototyping and user-developed plugins.
 
 QML is a fun language to work with. Generally, the UI is coded in a declarative style and the logic is coded in JavaScript. This, of course, has the downside of losing the static type-checking of C++; so I would often be in the situation where I need to reload and fix things several times before getting it functioning properly.
@@ -18,6 +14,8 @@ QML is a fun language to work with. Generally, the UI is coded in a declarative 
 But the freedom and “I don’t care whether your types are correct” attitude of JS were quite nostalgic. Having played with QML/JS before, I decided I wanted to write some MuseScore plugins for fun ~~and also because I felt a need for them~~.
 
 In this post, I’ll introduce my first set of MuseScore plugins and give a brief developer’s account of them. These plugins aren’t really related to music. Rather, they’re inspired by VSCode plugins and features which I find useful. In a way, the plugins below make MuseScore more of a developer’s second home.
+
+{% include toc.md %}
 
 ## todo-list
 
