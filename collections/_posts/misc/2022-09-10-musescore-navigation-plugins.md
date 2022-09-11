@@ -36,7 +36,7 @@ Here are some examples of todos I might encounter while composing:
 
 ![](/assets/img/posts/music/plugin-todo-list.jpg){:.w-100}
 
-To allow for different todo styles and text, I provided several settings for the user to modify. These are listed in the link.
+To allow for different todo styles and text, I provided several settings for the user to modify. These are listed in on the [GitHub readme](https://github.com/TrebledJ/musescore-todo-list).
 
 ### Developer’s Note
 
