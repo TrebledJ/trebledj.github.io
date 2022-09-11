@@ -280,7 +280,7 @@ author_skills:
         strength: 8.1
         active: Harmony, orchestration.
         desc: Organising sound coherently.
-        tag: music
+        tag: composition
   -
     category: Others
     skills:
@@ -289,7 +289,7 @@ author_skills:
         strength: 8.3
         active: Negative harmony, jazz harmony.
         desc: The diatonic scale, chord progressions, tonic/dominant/subdominant chords, counterpoint, imitation.
-        tag: music
+        tag: composition
       -
         skill: Orchestration
         strength: 7.1

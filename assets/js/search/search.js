@@ -64,7 +64,7 @@ $(document).ready(function() {
           icon = "fas fa-cube";
         } else if (tags.includes("experience")) {
           icon = "fas fa-star";
-        } else if (tags.includes("music")) {
+        } else if (tags.includes("composition")) {
           icon = "fas fa-music";
         }
         var head = `<a href="${store[ref].url}">${store[ref].title}</a>
