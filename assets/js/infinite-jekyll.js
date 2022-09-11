@@ -1,19 +1,23 @@
-let items,
-    itemsToLoad,
+let itemsToLoad,
     isFetchingPosts = false,
     shouldFetchPosts = true,
     loadedItems = 0;
 
+let items = tracks;
+if (items.length <= itemsToLoad) {
+  disableFetching();
+}
+fetchPosts();
 // Load the JSON file containing all URLs
-$.getJSON('/assets/json/all-tracks.json', data => {
-  items = data["tracks"];
+// $.getJSON('/assets/json/all-tracks.json', data => {
+//   items = data["tracks"];
   
-  // If there aren't any more items available to load than already visible, disable fetching
-  if (items.length <= itemsToLoad)
-    disableFetching();
+//   // If there aren't any more items available to load than already visible, disable fetching
+//   if (items.length <= itemsToLoad)
+//     disableFetching();
   
-  fetchPosts();
-});
+//   fetchPosts();
+// });
 
 // If there's no spinner, it's not a page where items should be fetched
 if ($(".infinite-spinner").length < 1)
@@ -23,7 +27,9 @@ function loadInfinite(num) {
   itemsToLoad = num;
   fetchPosts();
   $(window).on('scroll', e => {
-    if (!shouldFetchPosts || isFetchingPosts || loadedItems >= items.length) return;
+    console.log("scroll");
+    if (!shouldFetchPosts || isFetchingPosts || !items || loadedItems >= items.length) return;
+    console.log("go go go");
     
     // Are we close to the end of the page? If we are, load more items
     let scrollPercentage = 100 * $(window).scrollTop() / ($(document).height() - $(window).height());
@@ -65,7 +71,7 @@ function fetchPosts() {
 
 function fetchPostWithIndex(index) {
   let item = items[index];
-  let tags = item.tags.map(t => `<a class="post-tags tag" href="${base_url}/tags/${t}">${t}</a>`).join("\n");
+  let tags = item.tags.filter(t => !["composition", "music"].includes(t)).map(t => `<a class="post-tags tag" href="${base_url}/tags/${t}">${t}</a>`).join("\n");
 
   $(` <div>
         <br/>
