@@ -8,16 +8,6 @@ if (items.length <= itemsToLoad) {
   disableFetching();
 }
 fetchPosts();
-// Load the JSON file containing all URLs
-// $.getJSON('/assets/json/all-tracks.json', data => {
-//   items = data["tracks"];
-  
-//   // If there aren't any more items available to load than already visible, disable fetching
-//   if (items.length <= itemsToLoad)
-//     disableFetching();
-  
-//   fetchPosts();
-// });
 
 // If there's no spinner, it's not a page where items should be fetched
 if ($(".infinite-spinner").length < 1)
