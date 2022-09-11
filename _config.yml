@@ -168,7 +168,6 @@ author_skills:
       - 
         skill: Scala
         strength: 7.5
-        active: Using at work.
         desc: Scala 2, Scala 3, language features (ADTs, type bounds, implicit params), standard library (containers, filesystem), build system (maven, sbt).
         tag: scala
         icon: scala/scala-original
@@ -176,7 +175,6 @@ author_skills:
           - 
             skill: Spark
             strength: 6.8
-            active: Using at work.
             desc: Jobs, SQL, dataframes.
       - 
         skill: HTML/CSS
@@ -231,12 +229,13 @@ author_skills:
         desc: Search/sorting algorithms, greedy algorithms, graph algorithms, dynamic programming, algo design, time/space complexity analysis.
       -
         skill: Git
-        strength: 8.8
+        strength: 8.9
         desc: Git (Basics, Branches, Merging, Cherry Pick, Rebase, Submodules), GitHub (Issues, PR, Projects, Actions).
       -
         skill: Embedded
         long: Embedded Programming and Systems
         strength: 7.2
+        active: Taking ELEC3300.
         desc: Microcontrollers, core concepts (PWM, ADC), communication protocols (UART, CAN), FreeRTOS, STM32.
         tag: embedded
       -
@@ -299,7 +298,7 @@ author_skills:
       -
         skill: Google-fu
         strength: 9.3
-        desc: Smashing problems through the power of kung-pow and wushiness! HAIYAH!
+        desc: Smashing problems through the power of Google's free search engine.
       -
         skill: Sleeping
         strength: 8.9
@@ -324,7 +323,7 @@ author_skills:
         desc: Fluent in reading, writing, listening. Less fluent in speaking.
       -
         skill: Cantonese
-        strength: 5.1
+        strength: 5.3
         active: 哈咯.
         desc: 悉聽、悉講、唔悉睇、唔悉寫... err... 悉睇和寫DD。
       -
