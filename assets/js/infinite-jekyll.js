@@ -17,9 +17,7 @@ function loadInfinite(num) {
   itemsToLoad = num;
   fetchPosts();
   $(window).on('scroll', e => {
-    console.log("scroll");
     if (!shouldFetchPosts || isFetchingPosts || !items || loadedItems >= items.length) return;
-    console.log("go go go");
     
     // Are we close to the end of the page? If we are, load more items
     let scrollPercentage = 100 * $(window).scrollTop() / ($(document).height() - $(window).height());
