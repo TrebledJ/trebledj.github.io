@@ -3,7 +3,7 @@ title: The HKUST Robotics Team
 description: Experiences and reflections journeying with the HKUST Robotics Team.
 tags: robotics experience hkust
 thumbnail: /assets/img/posts/robotics/wallpaper-2.jpg
-pitch: Joined the HKUST Robotics Team.
+pitch: Senior software engineer in the HKUST Robotics Team. Took part in training and mentoring new team members, remodularise project structure, and managing R&D projects.
 related_tags: hkust robotics
 ---
 
