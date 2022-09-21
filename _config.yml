@@ -235,17 +235,19 @@ author_skills:
         skill: Embedded
         long: Embedded Programming and Systems
         strength: 7.2
-        active: Taking ELEC3300.
+        active: Taking ELEC3300, a course on embedded systems.
         desc: Microcontrollers, core concepts (PWM, ADC), communication protocols (UART, CAN), FreeRTOS, STM32.
         tag: embedded
       -
         skill: Binary Pwn
         strength: 7.5
+        active: Practicing through CTFs.
         desc: Buffer overflow, ROP, ret2text, ret2libc, gdb.
         tag: pwn
       -
         skill: Reverse
         strength: 8.4
+        active: Practicing through CTFs.
         desc: x86 assembly, objdump, decompilers (ghidra), gdb, symbolic execution (z3, angr).
         tag: reverse
   -
