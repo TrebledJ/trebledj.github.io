@@ -5,9 +5,13 @@ layout: page-with-sidebar
 <div class="w-100">
     {%- include post-article.html -%}
 </div>
-<div class="w-100 mt-4">
-    {% include post-related.html %}
-    {% if page.sharable and false %}
-        {%- include post-comments.html -%}
-    {% endif %}
-</div>
+{% unless page.related == "none" %}
+    <div class="w-100 mt-4">
+        {% include post-related.html %}
+    </div>
+{% endunless %}
+{% if page.comments %}
+    <div class="card mt-4 p-4">
+        {% include post-comments.html %}
+    </div>
+{% endif %}

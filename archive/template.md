@@ -8,6 +8,7 @@ date: '2021-02-28 1:35:23 +0530' # not really needed
 tags: list of tags
 thumbnail: /assets/img/to/thumbnail.jpg
 keywords: key words  # Not really important.
+comments: true      # Enable comments
 usemathjax: false
 include_thumbnail: true # or false depending if you want the thumbnail to show on the post's page
 pitch: A description displayed in the profile.

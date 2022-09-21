@@ -18,8 +18,12 @@ function modeSwitcher() {
   let currentTheme = localStorage.getItem("theme");
   if (currentTheme === "dark") {
     setMode("light");
+    if (reloadDisqus)
+      reloadDisqus();
   } else if (currentTheme === "light") {
     setMode("dark");
+    if (reloadDisqus)
+      reloadDisqus();
   } else {
     setMode(defaultTheme);
   }
