@@ -408,7 +408,7 @@ defaults:
       type: "posts"
     values:
       layout: "post-music"
-      related_auto: true
+      # related_auto: true
   -
     scope:
       path: "tags"

@@ -13,6 +13,7 @@
                 {% endfor %}
             {% endfor %}
         {% else %}
+            {% assign count_included = 0 %}
             {% for post in site.posts %}
                 {% if post.url != page.url %}
                     {% assign should_include = false %}
@@ -51,6 +52,10 @@
                     {% endif %}
                     {% if should_include == true %}
                         {% include post-preview.html %}
+                        {% assign count_included = count_included | plus: 1 %}
+                        {% if count_included > 3 %}
+                            {% break %}
+                        {% endif %}
                     {% endif %}
                 {% endif %}
             {% endfor %}

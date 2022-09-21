@@ -6,7 +6,7 @@ tags: composition band music
 keywords: guitars drums upbeat
 track_id: 1199278129
 score_id: 8527520
-related: morning-ecstasy joyride-in-d the-breath-of-life
+related: joyride-in-d the-breath-of-life
 ---
 
 Do you feel the exhilaration of the morning air? The excitement of stepping out of bed? Chomping down breakfast? 

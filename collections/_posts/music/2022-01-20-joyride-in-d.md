@@ -6,7 +6,7 @@ tags: composition band music
 keywords: guitars drums upbeat
 track_id: 1199278825
 score_id: 8527562
-related: morning-ecstasy morning-rush the-breath-of-life
+related: morning-rush the-breath-of-life
 ---
 
 This upbeat track is an offshoot of [Morning Rush](/posts/morning-rush/), spawned from a melody in the latter's interlude. Couldn't resist going ham on the drums.

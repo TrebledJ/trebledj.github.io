@@ -8,6 +8,7 @@ thumbnail: /assets/img/posts/music/reticence.jpg
 include_thumbnail: true
 track_id: 1146309253
 score_id: 8527097
+related_auto: true
 ---
 
 Something about the past few years has been very poignant -- deep, memorable, touching yet almost hurting, somewhat close but also far, a bit cold but also evoking warm feelings.
