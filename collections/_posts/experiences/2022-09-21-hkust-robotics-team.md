@@ -1,6 +1,7 @@
 ---
 title: The HKUST Robotics Team
 description: Experiences and reflections journeying with the HKUST Robotics Team.
+updated: "2022-09-25"
 tags: robotics experience hkust
 thumbnail: /assets/img/posts/robotics/wallpaper-2.jpg
 pitch: Senior software engineer in the HKUST Robotics Team. Took part in training and mentoring new team members, remodularise project structure, and managing R&D projects.
@@ -101,7 +102,3 @@ Through the robotics team experience, one of my biggest areas of growth is in so
 In Robocon, it’s different. We’re stuck with our members for half a year. It takes skill to decide when and how to reprimand someone, and patience to mentor. Communication between divisions is also important. The best way to kill a team is to minimise communication. Of course, communication needs to be effective and should be followed up with action. In the end, it’s about becoming better humans in society.
 
 I’ve mentioned this in some other posts, but I am quite terrible when it comes to dealing with people. I’ve learned a great deal over the past couple years, and I’m still learning—it’s a process.
-
-My biggest tips would be to organise yourself, understand which parts you don’t understand so that you can formulate and ask questions.
-
-> He who asks a question remains a fool for five minutes. He who does not ask remains a fool forever. - Anon.
