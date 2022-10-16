@@ -276,14 +276,12 @@ pre {
 // }
 
 blockquote {
-    margin: var(--space-double) var(--space-base);
-    padding: calc(var(--space-base) * 1.2) var(--space-base) var(--space-base) var(--space-double);
+    padding: calc(var(--space-base) * 1) var(--space-base) 0 var(--space-double);
     overflow: auto;
-    opacity: var(--opacity-low);
+    opacity: var(--opacity-lower);
 
     background: var(--card-background-color);
-    border-radius: var(--border-radius);
-    border: var(--border-width) solid var(--box-background-color);
+    border: none;
     border-left: var(--border-width-alt) solid var(--light-border-color);
 }
 
