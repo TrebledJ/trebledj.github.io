@@ -1,0 +1,27 @@
+<ul class="timeline">
+    {% for award in site.author_awards %}
+    <li class="timeline-item rounded ms-3 p-4 pb-3 shadow">
+        <div class="timeline-arrow"></div>
+        <h2 class="h5 mb-1">
+            {% if award.url %}
+            <a href="{{award.url}}">{{award.name}}</a>
+            {% else %}
+            {{award.name}}
+            {% endif %}
+        </h2>
+        <h3 class="h6">
+            by
+            {% if award.org_url %}
+            <a href="{{award.org_url}}">{{award.org}}</a>
+            {% else %}
+            {{award.org}}
+            {% endif %}
+        </h3>
+        <span class="small text-gray">
+            <i class="fas fa-calendar"></i>
+            {{award.time}}
+        </span>
+        <p class="text-small mt-2 font-weight-light">{{award.description}}</p>
+    </li>
+    {% endfor %}
+</ul>
