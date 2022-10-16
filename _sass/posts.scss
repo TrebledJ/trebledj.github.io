@@ -146,6 +146,16 @@ $spacer: 1rem;
 
 .post-article {
     ul, ol {
-        margin-left: 0.5rem !important;
+        margin-left: 0.3rem !important;
+    }
+
+    li {
+        margin-bottom: 0.1rem !important;
+    }
+}
+
+.mdtoc {
+    li {
+        margin-bottom: 0.2rem !important;
     }
 }
