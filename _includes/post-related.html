@@ -60,7 +60,7 @@
                                     {% include post-preview-compressed.html %}
                                 </div>
                                 {% assign count_included = count_included | plus: 1 %}
-                                {% if count_included > 3 %}
+                                {% if count_included >= 3 %}
                                     {% break %}
                                 {% endif %}
                             {% endif %}
