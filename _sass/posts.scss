@@ -1,6 +1,6 @@
 
 
-.post-preview {
+.post-preview, .post-preview-compressed {
     width: 100%;
     max-width: 100%;
     margin-bottom: 1.5rem;
@@ -57,9 +57,24 @@
         }
     }
 
+}
+
+.post-preview {
     .post-title {
         margin: 0 0 10px;
         font-size: 24px;
+        font-weight: 400;
+    
+        a, a:hover {
+            color: var(--bold-color) !important;
+        }
+    }
+}
+
+.post-preview-compressed {
+    .post-title {
+        margin: 0 0 5px;
+        font-size: 18px;
         font-weight: 400;
     
         a, a:hover {
@@ -99,6 +114,19 @@
         .post-content {
             width: 100%;
         }
+    }
+}
+
+.post-preview-compressed {
+    flex-direction: column !important;
+    
+    .post-thumbnail {
+        width: 100%;
+        min-height: 200px;
+    }
+
+    .post-content {
+        width: 100%;
     }
 }
 
