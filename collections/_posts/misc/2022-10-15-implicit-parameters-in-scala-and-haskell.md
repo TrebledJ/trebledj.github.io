@@ -127,7 +127,8 @@ T sortBy(F cmp, T xs) {
 };
 
 // Sort with implicit comparator. We name it with an underscore to avoid confusion with std::sort.
-#define sort_(xs) sortBy(cmp, xs) // `cmp` is "implicit".
+// Note how `xs` is substituted with the parameter, but `cmp` is "implicitly" used.
+#define sort_(xs) sortBy(cmp, xs)
 
 // Helper function.
 void print(const vector<pair<int, int>>& xs) {
