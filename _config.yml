@@ -438,7 +438,7 @@ defaults:
     values:
       layout: "post-default"
       author: "trebledj"
-      # thumbnail: "/assets/img/thumbnail.png"
+      thumbnail: "/assets/img/thumbnail.png"
       include_thumbnail: false
       sharable: true
       comments: true

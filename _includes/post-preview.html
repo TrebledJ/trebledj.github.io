@@ -1,13 +1,9 @@
 <article class="post-preview d-flex">
     <a class="post-thumbnail" href="{{site.baseurl}}{{post.url}}">
-        {% if post.thumbnail %}
-            <img class="post-img-blurred-bg" src="{{site.url}}{{site.baseurl}}{{post.thumbnail}}" alt="{{ post.title }}">
-            <div class="post-img-container d-flex w-100 h-100">
-                <img class="post-img-contain" src="{{site.url}}{{site.baseurl}}{{post.thumbnail}}" alt="{{ post.title }}">
-            </div>
-        {% else %}
-            <img class="post-img-cover" src="{{site.url}}{{site.baseurl}}{{site.default_thumbnail}}" alt="{{ post.title }}">
-        {% endif %}
+        <img class="post-img-blurred-bg" src="{{site.url}}{{site.baseurl}}{{post.thumbnail}}" alt="{{ post.title }}">
+        <div class="post-img-container d-flex w-100 h-100">
+            <img class="post-img-contain" src="{{site.url}}{{site.baseurl}}{{post.thumbnail}}" alt="{{ post.title }}">
+        </div>
     </a>
 
     <div class="post-content d-flex flex-column justify-content-between">
