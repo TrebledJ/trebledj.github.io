@@ -25,5 +25,9 @@ layout: compress
             $("body").tooltip({ selector: '[data-toggle=tooltip]' });
           })
         </script>
+
+        {% if page.sharable %}
+        <script type="text/javascript" src="https://s7.addthis.com/js/300/addthis_widget.js#pubid=ra-634da597b9367ad3"></script>
+        {% endif %}
   </body>
 </html>

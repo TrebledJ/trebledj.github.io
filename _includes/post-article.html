@@ -4,6 +4,9 @@
         <h6 class="">{{ page.description }}</h6>
         {% assign show_last_update = true %}
         {% include post-metadata.html %}
+        {% if page.sharable %}
+        <div class="addthis_inline_share_toolbox"></div>
+        {% endif %}
     </div>
     <hr/>
     <div class="card-body p-0 post-body" itemprop="articleBody">
@@ -13,10 +16,5 @@
             <br/>
         {% endif %}
         {{ content }}
-        {% if page.sharable %}
-            <br/>
-            <br/>
-            {% include post-share.html %}
-        {% endif %}
     </div>
 </article>
