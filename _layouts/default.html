@@ -28,6 +28,27 @@ layout: compress
 
         {% if page.sharable %}
         <script type="text/javascript" src="https://s7.addthis.com/js/300/addthis_widget.js#pubid=ra-634da597b9367ad3"></script>
+        <script>
+          $(document).ready(_ => {
+            var removeCount = 0, tries = 0;
+            function noCampaign() {
+              var byebye = $('.addthis_bar a[href^="https://www.addthis.com/website-tools"]');
+              if (byebye.length) {
+                byebye[0].remove();
+                removeCount++;
+                if (removeCount < 2) {
+                  setTimeout(noCampaign, 200);
+                }
+              } else {
+                tries++;
+                if (tries < 100) {
+                  setTimeout(noCampaign, 200);
+                }
+              }
+            }
+            setTimeout(noCampaign, 400);
+          })
+        </script>
         {% endif %}
   </body>
 </html>
