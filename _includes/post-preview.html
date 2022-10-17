@@ -1,21 +1,25 @@
-<article class="post-preview d-flex">
-    <a class="post-thumbnail" href="{{site.baseurl}}{{post.url}}">
-        <img class="post-img-blurred-bg" src="{{site.url}}{{site.baseurl}}{{post.thumbnail}}" alt="{{ post.title }}">
-        <div class="post-img-container d-flex w-100 h-100">
-            <img class="post-img-contain" src="{{site.url}}{{site.baseurl}}{{post.thumbnail}}" alt="{{ post.title }}">
-        </div>
-    </a>
-
-    <div class="post-content d-flex flex-column justify-content-between">
-        <div>
-            <h2 class="post-title">
-                <a href="{{post.url | prepend: site.baseurl}}">{{post.title | smartify}}</a>
-            </h2>
-            <div class="post-summary">
-                <p>{{ post.description }}</p>
+<article class="post-preview">
+    <a href="{{site.baseurl}}{{post.url}}"></a>
+    <div class="d-flex">
+        <a class="post-thumbnail" href="{{site.baseurl}}{{post.url}}">
+            <img class="post-img-blurred-bg" src="{{site.url}}{{site.baseurl}}{{post.thumbnail}}" alt="{{ post.title }}">
+            <div class="post-img-container d-flex w-100 h-100">
+                <img class="post-img-contain" src="{{site.url}}{{site.baseurl}}{{post.thumbnail}}" alt="{{ post.title }}">
             </div>
+        </a>
+    
+        <div class="post-content d-flex flex-column justify-content-between">
+            <a href="{{site.baseurl}}{{post.url}}"></a>
+            <div>
+                <h2 class="post-title">
+                    {{post.title | smartify}}
+                </h2>
+                <div class="post-summary">
+                    <p>{{ post.description }}</p>
+                </div>
+            </div>
+            {% assign tag_limit = 2 %}
+            {% include post-metadata.html %}
         </div>
-        {% assign tag_limit = 2 %}
-        {% include post-metadata.html %}
     </div>
 </article>
