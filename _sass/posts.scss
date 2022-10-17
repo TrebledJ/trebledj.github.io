@@ -145,14 +145,6 @@
     }
 }
 
-.post-tag {
-    pointer-events: none;
-}
-.post-tag a {
-    pointer-events: all;
-    z-index: 1;
-}
-
 .post-preview-list {
     display: flex;
     flex-wrap: wrap;
