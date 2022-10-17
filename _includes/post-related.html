@@ -11,9 +11,7 @@
                     {% for rel in related %}
                         {% for post in site.posts %}
                             {% if post.url contains rel %}
-                                <div class="col-md-4">
-                                    {% include post-preview-compressed.html %}
-                                </div>
+                                {% include post-preview-compressed.html %}
                             {% endif %}
                         {% endfor %}
                     {% endfor %}
@@ -56,9 +54,7 @@
                                 {% endif %}
                             {% endif %}
                             {% if should_include == true %}
-                                <div class="col-md-4">
-                                    {% include post-preview-compressed.html %}
-                                </div>
+                                {% include post-preview-compressed.html %}
                                 {% assign count_included = count_included | plus: 1 %}
                                 {% if count_included >= 3 %}
                                     {% break %}
