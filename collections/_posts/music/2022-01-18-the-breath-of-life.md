@@ -4,7 +4,7 @@ description: "Humans are complicated individuals even though we all start from t
 updated: "2022-07-28"
 tags: composition minimalism fusion strings music
 keywords: ensemble, string ensemble, emotional, peaceful, serene
-thumbnail: /assets/img/posts/music/baby-fetus.jpg
+thumbnail: /assets/img/posts/music/spring-dawn.jpg
 track_id: 1199277217
 related: joyride-in-d morning-rush
 ---
