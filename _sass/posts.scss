@@ -113,7 +113,9 @@
 
 @media (min-width: 481px) {
     .post-preview {
-        flex-direction: row !important;
+        .post-preview-container {
+            flex-direction: row !important;
+        }
 
         .post-img-container {
             align-items: center;
@@ -132,7 +134,9 @@
 
 @media (max-width: 480px) {
     .post-preview {
-        flex-direction: column !important;
+        .post-preview-container {
+            flex-direction: column !important;
+        }
         
         .post-thumbnail {
             width: 100%;
