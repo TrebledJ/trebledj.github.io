@@ -54,7 +54,8 @@ As shown above, implicit params are coded by introducing a new set of parameters
 
 This is pretty useful for variables that have a single instance in any context and act like a global variable. In the Spark framework, a `SparkSession` is used to configure spark options, memory usage, and more. After configuration, we still want to hold onto the returned object in order to call functions such as `spark.sql`. Typically, we would only have one `SparkSession` in an application, so it makes sense to pass it to helper functions implicitly.
 
-One gotcha is that Scala searches the calling context for implicit parameters of a *matching type*. The variable name does not matter. Scala implicits are actually a tad more complicated (and much more powerful as a result), so my example here doesn’t do it justice.
+One gotcha is that Scala searches the calling context for implicit parameters of a *matching type*. The variable name does not matter. Scala implicits are actually [a tad more complicated][scala-implicits-where] (and much more powerful as a result), so my example here doesn’t do it justice.
+{:.alert--warning}
 
 ### ...in Haskell
 Haskell’s implicit parameters are different. Here’s an example:
@@ -109,6 +110,7 @@ sort :: (?cmp :: a -> a -> Ordering) => [a] -> [a]
 ```
 
 In a Haskell type signature, stuff on the left of `=>` are type constraints; here we have `?cmp :: a -> a -> Ordering`. Although somewhat unintuitive, this leverages Haskell’s existing type system so that implicit parameters are automatically propagated. So if another function calls `sort` without a `?cmp`, then that function will also have `?cmp :: a -> a -> Ordering` in its type constraint!
+{:.alert--info}
 
 On a different note, an important distinction is that instead of searching for variables with a matching type (as in Scala), Haskell searches for variables with the ***same name***. In a way, this behaves like C/C++ macros, but with type safety. Compare the Haskell example to this C++ example:
 
@@ -171,6 +173,8 @@ Coming back to software engineering, implicits are best reserved for extremely c
 Further Reading:
 
 - [Tour of Book: Implicit Parameters](https://docs.scala-lang.org/tour/implicit-parameters.html)
-- [Where does Scala look for implicits?](https://stackoverflow.com/questions/5598085/where-does-scala-look-for-implicits/5598107#5598107)
+- [Where does Scala look for implicits?][scala-implicits-where]
 - [GHC Language Extensions: Implicit Parameters](https://ghc.gitlab.haskell.org/ghc/doc/users_guide/exts/implicit_parameters.html)
 - [Implicit Parameters: Dynamic Scoping with Static Types](https://galois.com/wp-content/uploads/2014/08/pub_JL_ImplicitParameters.pdf): Basis for implicit params in Haskell. Good academic foundation and examples.
+
+[scala-implicits-where]: https://stackoverflow.com/questions/5598085/where-does-scala-look-for-implicits/5598107#5598107
