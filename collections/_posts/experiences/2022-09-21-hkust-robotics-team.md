@@ -31,7 +31,7 @@ I joined the HKUST Robotics Team in my first year of university. In the Fall sem
 
 I found out about the team from an email about a free robotics exploration workshop. (Keyword is *free*.) So of course I signed up. It was a fun little experience to kickstart my university life.
 
-![](/assets/img/posts/robotics/chassis-example.jpg){:.w-35}
+![Example of the chassis used.](/assets/img/posts/experiences/robotics/chassis-example.jpg){:.w-35}
 {:.center}
 
 In the workshop, we were given a chassis (like the one shown above) and were asked to build and program a bot to dribble a ping-pong ball across a maze. The workshop closed with an interview asking us about our interests.
@@ -40,7 +40,7 @@ We were asked to pick a division (or department, as some call it): mechanical, h
 
 ### The Training ✏️
 
-![](/assets/img/posts/memes/training.jpg){:.w-50}
+![Training is tuff!](/assets/img/posts/memes/training.jpg){:.w-50}
 {:.center}
 
 Next up were the tutorials. The first software tutorial was on basic programming using the C language. My prior experience with C++ helped a lot here.
@@ -100,5 +100,6 @@ But this post is supposed to be a reflection, so why am I blabbering about PID? 
 Through the robotics team experience, one of my biggest areas of growth is in soft skills, in particular communication and mentoring. Communicating in a group project for a course almost always seems superficial and is usually short-term.
 
 In Robocon, it’s different. We’re stuck with our members for half a year. It takes skill to decide when and how to reprimand someone, and patience to mentor. Communication between divisions is also important. The best way to kill a team is to minimise communication. Of course, communication needs to be effective and should be followed up with action. In the end, it’s about becoming better humans in society.
+{:.alert--success}
 
 I’ve mentioned this in some other posts, but I am quite terrible when it comes to dealing with people. I’ve learned a great deal over the past couple years, and I’m still learning—it’s a process.

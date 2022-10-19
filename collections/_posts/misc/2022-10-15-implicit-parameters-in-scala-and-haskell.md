@@ -169,6 +169,7 @@ Although implicit params remove the need to explicitly state params, there is al
 The similarity with natural languages is striking. Sometimes ambiguity may arise when people conversing don’t have sufficient context. Or misunderstanding may arise when people come from different cultures.
 
 Coming back to software engineering, implicits are best reserved for extremely common variables and unique types. Think twice before slapping `implicit` or a question mark in your code. You’ll thank yourself later.
+{:.alert--warning}
 
 Further Reading:
 
