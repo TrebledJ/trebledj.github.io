@@ -3,7 +3,7 @@ title: TAMUctf 2022 – Quick Mafs
 description: ROP chaining on steroids.
 updated: "2022-08-08"
 tags: ctf reverse writeup pwn python programming
-thumbnail: /assets/img/posts/misc/ctf/inspector-gadget.jpg
+thumbnail: /assets/img/posts/misc/ctf/inspector-gadget.png
 usemathjax: true
 related_tags: ctf writeup
 ---
@@ -46,7 +46,7 @@ This means:
 * We should add 8 bytes to call `print` after the gadget payload.
 
 #### Inspect-our Gadgets
-![](/assets/img/posts/misc/ctf/inspector-gadget.jpg){:.w-25}
+![](/assets/img/posts/misc/ctf/inspector-gadget.png){:.w-25}
 {:.center}
 
 Firstly, we'll load all the provided arithmetic gadgets into a list for convenience. Using [`ROPgadget`](https://github.com/JonathanSalwan/ROPgadget) and hacking a bit into the tool, we start with the following code:
