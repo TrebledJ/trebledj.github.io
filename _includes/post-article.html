@@ -10,8 +10,8 @@
     </div>
     <hr/>
     <div class="card-body p-0 post-body" itemprop="articleBody">
-        {% if page.include_thumbnail %}
-            <img class="card-img-top" src="{{site.url}}{{site.baseurl}}{{ page.thumbnail | default: site.default_thumbnail }}" alt="{{ post.title }}"/>
+        {% if page.include_thumbnail and page.thumbnail %}
+            <img class="card-img-top" src="{{site.url}}{{site.baseurl}}{{page.thumbnail}}" alt="{{ post.title }}"/>
             <br/>
             <br/>
         {% endif %}

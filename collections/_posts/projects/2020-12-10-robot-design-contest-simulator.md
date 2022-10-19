@@ -3,7 +3,7 @@ title: Robot Design Contest Simulator
 description: Here you can drive robots without having to worry about damaging physical property or being impaled.
 updated: "2022-08-05"
 tags: project qt cpp robotics apps hkust
-thumbnail: /assets/img/posts/rdc-simulator/thumbnail.jpg
+thumbnail: /assets/img/posts/projects/rdc-simulator/thumbnail.jpg
 pitch: Led and managed the development of a desktop simulator used in a recruitment competition for the HKUST Robotics Team.
 related: robocon-2021 robocon-2020 hkust-robotics-team
 ---
@@ -34,7 +34,7 @@ In the rest of this post, I'll use the terms "trainee" and "user" interchangably
 ### High-Level Overview
 To give an idea of what the simulator looks like, here's a little annotated screenshot of an early version:
 
-![](/assets/img/posts/rdc-simulator/setup.jpg){:.w-100}
+![Annotation of the UI](/assets/img/posts/projects/rdc-simulator/setup.jpg){:.w-100}
 {:.center}
 
 Its core features?
@@ -82,7 +82,7 @@ This disadvantage seems to heavily outweigh the advantage; but in our defense, i
 #### Project Management
 We used our good friend GitHub projects and GitHub issues for project management and issue tracking.
 
-![](/assets/img/posts/rdc-simulator/issues.png){:.w-100}
+![List of GitHub issues (most of them resolved).](/assets/img/posts/projects/rdc-simulator/issues.png){:.w-100}
 {:.center}
 
 Some general thoughts looking back:
@@ -113,7 +113,7 @@ For physics, we ended up choosing Box2D. We decided to go with this library sinc
 
 One pain point I encountered was that the `b2vec2` constructor does not have default values! This caused me grief, since objects were beginning to fly ***everywhere***. And it took a LONG TIME TO DEBUGGGGG!!! I had assumed that since it was a C++-based library, it would have reasonable defaults. Well apparently not.
 
-![](/assets/img/posts/rdc-simulator/b2vec2.jpg){:.w-75}
+![box2d y u no embrace c++](/assets/img/posts/projects/rdc-simulator/b2vec2.jpg){:.w-75}
 {:.center}
 
 #### Documentation
@@ -124,7 +124,7 @@ Being a rather detail-oriented person, I have become quite fond of checking and 
 ### Conclusion
 At least two software trainee teams managed to complete the game and score full points.
 
-![](/assets/img/posts/rdc-simulator/winner.jpg){:.w-100}
+![The winning team!](/assets/img/posts/projects/rdc-simulator/winner.jpg){:.w-100}
 {:.center}
 
 * So was the RDC playable? Yes.

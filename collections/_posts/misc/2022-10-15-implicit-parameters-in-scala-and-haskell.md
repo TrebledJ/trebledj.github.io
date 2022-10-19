@@ -2,7 +2,7 @@
 title: Implicit Parameters in Scala and Haskell
 description: ...and also C++ (kinda).
 tags: tutorial scala haskell cpp programming
-thumbnail: /assets/img/posts/tutorial/implicits-thumbnail.jpg
+thumbnail: /assets/img/posts/tutorials/implicits/implicits-thumbnail.jpg
 related_tags: programming
 ---
 
@@ -161,7 +161,7 @@ This example irks me since it uses macros, so it's a bit hacky... too hacky for 
 
 Although implicit params remove the need to explicitly state params, there is also the danger of hiding too much. This may lead to code being harder to trace and debug, and hence may cause confusion among team members.
 
-![Elmo abusing implicits. Don't be Elmo!](/assets/img/posts/tutorial/implicits.jpg){:.w-50}
+![Elmo abusing implicits. Don't be Elmo!](/assets/img/posts/tutorials/implicits/implicits.jpg){:.w-50}
 {:.center}
 
 The similarity with natural languages is striking. Sometimes ambiguity may arise when people conversing don’t have sufficient context. Or misunderstanding may arise when people come from different cultures.

@@ -3,12 +3,12 @@ title: The HKUST Robotics Team
 description: Experiences and reflections journeying with the HKUST Robotics Team.
 updated: "2022-09-25"
 tags: robotics experience hkust
-thumbnail: /assets/img/posts/robotics/wallpaper-2.jpg
+thumbnail: /assets/img/posts/experiences/robotics/wallpaper-2.jpg
 pitch: Senior software engineer in the HKUST Robotics Team. Took part in training and mentoring new team members, remodularise project structure, and managing R&D projects.
 related_tags: hkust robotics
 ---
 
-![](/assets/img/posts/robotics/off-ramp.jpg){:.w-60}
+![Bye bye CGA.](/assets/img/posts/memes/off-ramp-robotics.jpg){:.w-60}
 {:.center}
 
 The Fall term. It’s that time of year again when the team goes out in full to attract fresh talent.
@@ -40,7 +40,7 @@ We were asked to pick a division (or department, as some call it): mechanical, h
 
 ### The Training ✏️
 
-![](/assets/img/memes/training.jpg){:.w-50}
+![](/assets/img/posts/memes/training.jpg){:.w-50}
 {:.center}
 
 Next up were the tutorials. The first software tutorial was on basic programming using the C language. My prior experience with C++ helped a lot here.

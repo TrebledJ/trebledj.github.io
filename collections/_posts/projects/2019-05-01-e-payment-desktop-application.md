@@ -20,7 +20,7 @@ To give a bit more background, our school cafeteria has five to six different lo
 
 Also some background about the card: it's a [radio frequency ID (RFID)][rfid] card. I won't go into the technical details of it, but basically you scan the card on a dedicated reader, and it can read an unique ID.
 
-![](/assets/img/posts/studentcard/rfid.jpg){:.w-60}
+![Exhibit A: an RFID](/assets/img/posts/projects/studentcard/rfid.jpg){:.w-60}
 {:.center}
 
 ### Development
@@ -36,7 +36,7 @@ Initially I started developing the application using SFML, since it was the only
 * There are UI classes for widgets (e.g. pushbuttons, checkboxes, listviews), so I didn't have to reinvent the wheel.
 * It was cross-platform, which was convenient in case the school's computer operating system is different.
 
-![](https://i.imgflip.com/6obt0h.jpg){:.w-60}
+![SFML is not cute.](/assets/img/posts/memes/sfml-is-not-cute.jpg){:.w-60}
 {:.center}
 
 If there was one thing I learned, it was to understand the problem first, research the appropriate tools, and *then* start developing the solution. I wasted maybe two to four weeks coding a good GUI with SFML and scratching my head.
@@ -63,7 +63,7 @@ A better alternative was to use MySQL or Microsoft SQL Server, which is designed
 
 How does MySQL and SQL Server connect with multiple clients across the network? This is something you'll have to ask the experts. :D
 
-![](https://i.imgflip.com/6obsur.jpg){:.w-60}
+![Net-what?](/assets/img/posts/memes/netwhat.jpg){:.w-60}
 {:.center}
 
 #### Sidenote on Version Control
@@ -87,7 +87,7 @@ As mentioned before, there are three groups of users: vendors, students, and adm
 
 This is what the design for the vendor interface looks like:
 
-![](/assets/img/posts/studentcard/vendor-order.jpg){:.w-100}
+![Vendor ordering UI.](/assets/img/posts/projects/studentcard/vendor-order.jpg){:.w-100}
 
 Giant buttons on the left to select their customers' orders. A list of selected items on the right. And some buttons down below.
 
@@ -112,13 +112,13 @@ But these are not very interesting.
 
 Admins, of course, have a more powerful role. These peeps can view *and* **update** student's balances (but the actual flows are pretty boring TBH). (Unfortunately I did not save any screenshots of the GUI and I'm not bothered to redownload Qt and rebuild the app. >.>)
 
-![](https://i.kym-cdn.com/entries/icons/original/000/032/676/Unlimited_Power_Banner.jpg){:.w-80}
+![Unnnnnlliiiimmiiitted pooower!.](/assets/img/posts/memes/unlimited-power.jpg){:.w-80}
 {:.center}
 
 Students have the most ***exciting*** user flow of all.
 
-![](/assets/img/posts/studentcard/standby.jpg){:.w-45}
-![](/assets/img/posts/studentcard/standby-scanned.jpg){:.w-45}
+![Standby UI, before scanning.](/assets/img/posts/projects/studentcard/standby.jpg){:.w-45}
+![Standby UI, after scanning.](/assets/img/posts/projects/studentcard/standby-scanned.jpg){:.w-45}
 {:.center}
 
 And since they have an exciting flow, I'll describe it for fun:

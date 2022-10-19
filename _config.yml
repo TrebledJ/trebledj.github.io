@@ -428,8 +428,6 @@ collections:
     output: true
     permalink: /posts/:title/
 
-default_thumbnail: "/assets/img/thumbnail.png"
-
 defaults:
   -
     scope:
@@ -438,7 +436,7 @@ defaults:
     values:
       layout: "post-default"
       author: "trebledj"
-      thumbnail: "/assets/img/thumbnail.png"
+      thumbnail: "/assets/img/posts/thumbnail/default.png"
       include_thumbnail: false
       sharable: true
       comments: true
