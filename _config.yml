@@ -447,6 +447,7 @@ defaults:
       type: "posts"
     values:
       layout: "post-music"
+      include_thumbnail: true
       # related_auto: true
   -
     scope:

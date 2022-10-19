@@ -5,7 +5,6 @@ updated: "2022-07-26"
 tags: composition piano strings counterpoint music hkust
 keywords: duet piano cello emotional
 thumbnail: /assets/img/posts/music/reticence.jpg
-include_thumbnail: true
 track_id: 1146309253
 score_id: 8527097
 related_auto: true
