@@ -142,8 +142,8 @@ author_skills:
       - 
         skill: C++
         strength: 9.9
-        desc: Language features (templates, classes, C++11 lambdas, parameter packs, template metaprogramming, type traits, constexpr and its variants, C++20 Big4), patterns, idioms, nuances, debugging.
         active: Using in robotics.
+        desc: Language features (templates, classes, C++11 lambdas, parameter packs, template metaprogramming, type traits, constexpr and its variants, C++20 Big4), patterns, idioms, nuances, debugging.
         tag: cpp
         icon: cplusplus/cplusplus-original
         subskills:
@@ -167,13 +167,15 @@ author_skills:
       -
         skill: Python
         strength: 9.8
+        active: Learning machine learning with Python.
         desc: Language features (classes, f-strings, decorators, args/kwargs, pattern matching), patterns, standard libraries (math, regex, collections, itertools, functools).
         tag: python
         icon: python/python-original
         subskills:
           - 
             skill: numpy
-            strength: 6
+            strength: 8
+            active: Machine learning.
           -
             skill: matplotlib
             strength: 6.5
@@ -266,7 +268,6 @@ author_skills:
         skill: Algos & DS
         long: Algorithms and Data Structures
         strength: 7.8
-        active: Advent of Code
         desc: Search/sorting algorithms, greedy algorithms, graph algorithms, dynamic programming, algo design, time/space complexity analysis.
       -
         skill: Git
