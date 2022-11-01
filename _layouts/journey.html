@@ -32,16 +32,22 @@ layout: default-full
 <div class="jumbotron">
     <p class="jumbotron-heading">My Journey in Embedded Systems</p>
     <div class="jumbotron-btns">
-        <a href="#timeline" class="me-2">
+        <a class="me-2" href="#timeline">
             <button class="btn btn-md btn-warning">
                 <i class="fas fa-clock me-1"></i>
                 <strong>Timeline</strong>
             </button>
         </a>
-        <a href="#posts">
+        <a class="me-2" href="#skillz">
             <button class="btn btn-md btn-primary">
                 <i class="fas fa-tag me-1"></i>
-                <strong>Recent Posts</strong>
+                <strong>Skills</strong>
+            </button>
+        </a>
+        <a href="#posts">
+            <button class="btn btn-md btn-success">
+                <i class="fas fa-tag me-1"></i>
+                <strong>Related Posts</strong>
             </button>
         </a>
     </div>
@@ -77,6 +83,24 @@ layout: default-full
     </div>
 </div>
 
+<!-- Skillz. -->
+<a name="skillz"></a>
+<div class="d-flex justify-content-center mt-5">
+    <div class="col-lg-9 p-3">
+        <h2 class="card-title">Skills</h2>
+        <div class="container p-3 gx-2">
+            <div class="row row-cols-2">
+                {% for s in site.data.journey['embedded'].skills %}
+                    {% assign pad = 0 %}
+                    <div class="col">
+                        {% include author-skill-item.html %}
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+
 <!-- Poosts. -->
 <a name="posts"></a>
 {% assign related_tags = site.data.journey['embedded'].related_tags %}
@@ -85,9 +109,6 @@ layout: default-full
         <section id="recent-posts">
             <div class="d-flex flex-row justify-content-between align-items-center">
                 <h2 class="card-title">Recent Posts</h2>
-                <!-- <a class="btn btn-lg btn-dark" href="/posts">
-                View All
-            </a> -->
                 <div class="d-flex flex-row">
                     {% for tag in related_tags %}
                         <a href="{{site.url}}{{site.baseurl}}/tags/{{tag | slugify}}">

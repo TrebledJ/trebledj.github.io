@@ -12,8 +12,8 @@
     float: right;
 }
 .main-timeline2 .timeline2-content{
-    color: #555;
-    background: #fff;
+    color: var(--main-text-color);
+    background: var(--card-background-color);
     padding: 15px 15px 15px 290px;
     border-radius: 20px;
     box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
@@ -41,7 +41,7 @@
     top: 50%;
 }
 .main-timeline2 .timeline2-icon{
-    color: #fff !important;
+    color: var(--card-background-color) !important;
     font-size: 50px;
     font-weight: 600;
     text-align: center;
@@ -81,10 +81,10 @@
     left: auto;
     right: 139px;
 }
-.main-timeline2 .timeline2:nth-child(4n+2) .timeline2-content:before{ background-color: #FF3E7D; }
-.main-timeline2 .timeline2:nth-child(4n+2) .timeline2-year{ color: #FF3E7D; }
-.main-timeline2 .timeline2:nth-child(4n+3) .timeline2-content:before{ background-color: #7338BA; }
-.main-timeline2 .timeline2:nth-child(4n+3) .timeline2-year{ color: #7338BA; }
+.main-timeline2 .timeline2:nth-child(4n+2) .timeline2-content:before{ background-color: #f3457f; }
+.main-timeline2 .timeline2:nth-child(4n+2) .timeline2-year{ color: #f3457f; }
+.main-timeline2 .timeline2:nth-child(4n+3) .timeline2-content:before{ background-color: #804ebd; }
+.main-timeline2 .timeline2:nth-child(4n+3) .timeline2-year{ color: #804ebd; }
 .main-timeline2 .timeline2:nth-child(4n+4) .timeline2-content:before{ background-color: #FF9800; }
 .main-timeline2 .timeline2:nth-child(4n+4) .timeline2-year{ color: #FF9800; }
 @media screen and (max-width:767px){
