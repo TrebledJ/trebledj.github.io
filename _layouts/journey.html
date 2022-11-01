@@ -57,7 +57,7 @@ layout: default-full
 <a name="timeline"></a>
 <div class="d-flex justify-content-center mt-5">
     <div class="col-lg-9 p-3">
-        <h2>My Journey</h2>
+        <h2 class="mb-0">My Journey</h2>
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
@@ -87,7 +87,7 @@ layout: default-full
 <a name="skillz"></a>
 <div class="d-flex justify-content-center mt-5">
     <div class="col-lg-9 p-3">
-        <h2>Skills</h2>
+        <h2 class="mb-0">Skills</h2>
         <div class="container p-3 gx-2">
             <div class="row row-cols-2">
                 {% for s in site.data.journey['embedded'].skills %}
@@ -108,7 +108,7 @@ layout: default-full
     <div class="col-lg-9 p-3">
         <section id="recent-posts">
             <div class="d-flex flex-row justify-content-between align-items-center">
-                <h2>Recent Posts</h2>
+                <h2 class="mb-0">Recent Posts</h2>
                 <div class="d-flex flex-row">
                     {% for tag in related_tags %}
                         <a href="{{site.url}}{{site.baseurl}}/tags/{{tag | slugify}}">
