@@ -5,13 +5,13 @@ layout: default-container
     <div class="row">
         <div class="col-lg-4">
             <!-- SOCIAL LINKS -->
-            {% assign displayname = site.author_name %}
+            {% assign displayname = site.data.profile.author_name %}
             {% include author-social.html %}
 
             <!-- ABOUT -->
             <div class="card p-4 pb-3 mb-3">
                 <h2 class="card-title">About</h2>
-                {{ site.author_bio | markdownify }}
+                {{ site.data.profile.author_bio | markdownify }}
             </div>
 
             <!-- SKILLZ -->

@@ -1,10 +1,10 @@
 <div class="card p-4 mb-3" id="profile-card">
     <div class="d-flex flex-column align-items-center">
         <!-- <a href="/profile"> -->
-        <img src="{{site.url}}{{site.baseurl}}/assets/img/{{ site.author_logo }}" class="profile-img"/>
+        <img src="{{site.url}}{{site.baseurl}}/assets/img/{{ site.data.profile.author_logo }}" class="profile-img"/>
         <!-- </a> -->
         {% unless displayname %}
-            {% assign displayname = site.author %}
+            {% assign displayname = site.data.profile.author %}
         {% endunless %}
         <h2 class="profile-name">{{displayname}}</h2>
         <!-- <p class="profile-bio">{{ site.subtitle }}</p> -->
@@ -48,7 +48,7 @@
                 </a>
             </div>
             <div class="col p-2">
-                <a class="social-link" href="mailto:{{site.author_email}}">
+                <a class="social-link" href="mailto:{{site.data.profile.author_email}}">
                     <i class="fas fa-envelope"></i>
                 </a>
             </div>
