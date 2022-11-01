@@ -1,0 +1,26 @@
+embedded:
+  timeline:
+    - title: Joined HKUST Robotics Team (Robocon)
+      icon: fa fa-rocket
+      year: 2019
+      description: |
+        - Learned embedded systems basics (GPIO/PWM) and communication protocols (UART, CAN).
+        - Joined the software department.
+
+    - title: Robotics Team Member
+      icon: fa fa-robot
+      year: 2021
+      description: |
+        - Competed in ABU Robocon in 2020, 2021.
+        - Achieved 1st place in the regional competition.
+        - Mentored software juniors and promote good software engineering practices.
+        - Participated in outreach programs for primary/secondary students.
+    
+    - title: Midi Keyboard (ELEC3300 Project)
+      icon: fa fa-music
+      year: 2022
+      description: Building + programming a midi keyboard using STM32.
+
+  related_tags:
+    - Embedded
+    - Robotics

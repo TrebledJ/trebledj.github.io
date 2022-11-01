@@ -1,0 +1,126 @@
+---
+layout: default-full
+---
+<style>
+    .jumbotron {
+        background: linear-gradient(to bottom right, rgb(207, 159, 0), rgb(72, 149, 242)) !important;
+        text-align: center;
+        background-size: cover;
+        background-position: center;
+        height: 60vh;
+        padding: 10rem 1rem !important;
+    }
+
+    .jumbotron-btns {
+        display: block;
+        margin-top: 50px;
+    }
+
+    .jumbotron-heading {
+        font-size: 36px;
+        font-weight: 600;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .jumbotron-heading,
+    .lead {
+        color: #000;
+    }
+</style>
+
+<!-- Jumbo the dumbo. -->
+<div class="jumbotron">
+    <p class="jumbotron-heading">My Journey in Embedded Systems</p>
+    <div class="jumbotron-btns">
+        <a href="#timeline" class="me-2">
+            <button class="btn btn-md btn-warning">
+                <i class="fas fa-clock me-1"></i>
+                <strong>Timeline</strong>
+            </button>
+        </a>
+        <a href="#posts">
+            <button class="btn btn-md btn-primary">
+                <i class="fas fa-tag me-1"></i>
+                <strong>Recent Posts</strong>
+            </button>
+        </a>
+    </div>
+</div>
+
+<!-- Timeline -->
+<a name="timeline"></a>
+<div class="d-flex justify-content-center mt-5">
+    <div class="col-lg-9 p-3">
+        <h2 class="card-title">My Journey</h2>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="main-timeline2">
+                        {% for milestone in site.data.journey['embedded'].timeline %}
+                            <div class="timeline2">
+                                <div class="timeline2-content">
+                                    <div class="timeline2-year">{{milestone.year}}</div>
+                                    <div class="timeline2-icon">
+                                        <i class="{{milestone.icon}}"></i>
+                                    </div>
+                                    <h3 class="title">{{milestone.title}}</h3>
+                                    <p class="description">
+                                        {{milestone.description | markdownify}}
+                                    </p>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Poosts. -->
+<a name="posts"></a>
+{% assign related_tags = site.data.journey['embedded'].related_tags %}
+<div class="d-flex justify-content-center mt-5">
+    <div class="col-lg-9 p-3">
+        <section id="recent-posts">
+            <div class="d-flex flex-row justify-content-between align-items-center">
+                <h2 class="card-title">Recent Posts</h2>
+                <!-- <a class="btn btn-lg btn-dark" href="/posts">
+                View All
+            </a> -->
+                <div class="d-flex flex-row">
+                    {% for tag in related_tags %}
+                        <a href="{{site.url}}{{site.baseurl}}/tags/{{tag | slugify}}">
+                            <button class="btn btn-md btn-primary ms-2">
+                                <i class="fas fa-tag me-1"></i>
+                                <strong>{{tag}}</strong>
+                            </button>
+                        </a>
+                    {% endfor %}
+                </div>
+            </div>
+            <br/>
+
+            {% assign related_limit = page.related_limit | default: 5 %}
+            {% assign related_count = 0 %}
+            {% for post in site.posts %}
+                {% assign is_related = false %}
+                {% for tag in related_tags %}
+                    {% assign tag2 = tag | slugify %}
+                    {% if post.tags contains tag2 %}
+                        {% assign is_related = true %}
+                        {% break %}
+                    {% endif %}
+                {% endfor %}
+                {% if is_related %}
+                    {% assign tag_limit = 5 %}
+                    {% include post-preview.html %}
+                    {% assign related_count = related_count | plus: 1 %}
+                {% endif %}
+                {% if related_count >= related_limit %}
+                    {% break %}
+                {% endif %}
+            {% endfor %}
+        </section>
+    </div>
+</div>
