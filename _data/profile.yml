@@ -98,9 +98,17 @@ education_details:
         desc: Presentations on a cybersecurity vulnerability/technique. Solving CTF challenges.
         grade: A+
       -
+        name: Competitive Programming in Cybersecurity III
+        desc: Teaching cybersecurity knowledge. Solving CTF challenges.
+        grade: in progress
+      -
         name: Compiler Design
         desc: Formal languages, pumping lemma, compiler pipeline (lexing, parsing, name analysis, type checking, codegen), compiler project written in Scala.
         grade: A
+      -
+        name: Embedded Systems
+        desc: Timers, interrupts, communication protocols, DMA, ADC/DAC, etc.
+        grade: in progress
       -
         name: Discrete Mathematics
         desc: Set theory, logic, recursive sequences, euclidean algorithm, counting/permutations, graph theory.
@@ -345,10 +353,6 @@ skills:
         skill: Sleep-Walking
         strength: 0.4
         desc: So hard to get it right...
-      -
-        skill: Sleep-Walking-Talking
-        strength: 0.1
-        desc: Level 100 mafia boss incoming!
   -
     category: Languages
     skills:
