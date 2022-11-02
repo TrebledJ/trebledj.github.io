@@ -1,9 +1,5 @@
 ---
 ---
-var disqus_config = function () {
-    this.page.url = '{{site.url}}';
-    this.page.identifier = '{{page.url}}';
-};
 function loadDisqus() {
     var d = document, s = d.createElement('script');
     s.src = 'https://{{site.disqus_shortname}}.disqus.com/embed.js';
