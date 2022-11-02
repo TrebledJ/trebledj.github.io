@@ -86,7 +86,15 @@ embedded:
       desc: Microcontrollers, core concepts (PWM, ADC), communication protocols (UART, CAN), FreeRTOS, STM32.
       tag: embedded
     -
-      skill: Algos & DS
-      long: Algorithms and Data Structures
-      strength: 7.8
-      desc: Search/sorting algorithms, greedy algorithms, graph algorithms, dynamic programming, algo design, time/space complexity analysis.
+      skill: STM32
+      strength: 8.2
+      active: Using in Robotics Team and ELEC3300.
+      desc: HAL Library, protocols, peripherals.
+    -
+      skill: FreeRTOS
+      strength: 7.1
+      desc: Task notifications, thread contexts.
+    -
+      skill: Arduino
+      strength: 5.4
+      desc: Libraries, structure.
