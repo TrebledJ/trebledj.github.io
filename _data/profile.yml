@@ -109,6 +109,11 @@ education_details:
 # Projects
 project_details:
 
+skills_desc: |
+  Skills displayed here are my subjective interpretations.
+  You may interpret them relative to each other.
+  E.g. my skills in C++ and Python are comparable, but vastly overshadow my Rust skills.
+
 skills:
   -
     category: Programming
@@ -250,7 +255,7 @@ skills:
       -
         skill: Embedded
         long: Embedded Programming and Systems
-        strength: 7.2
+        strength: 7.5
         active: Taking ELEC3300, a course on embedded systems.
         desc: Microcontrollers, core concepts (PWM, ADC), communication protocols (UART, CAN), FreeRTOS, STM32.
         tag: embedded
@@ -262,7 +267,7 @@ skills:
         tag: pwn
       -
         skill: Reverse
-        strength: 8.4
+        strength: 8.5
         active: Practicing through CTFs.
         desc: x86 assembly, objdump, decompilers (ghidra), gdb, symbolic execution (z3, angr).
         tag: reverse
@@ -278,12 +283,12 @@ skills:
         tag: programming
       -
         skill: Robotics
-        strength: 6.8
+        strength: 6.9
         desc: Sensors, actuators, basic theory.
         tag: robotics
       -
         skill: Cybersecurity
-        strength: 6.4
+        strength: 6.5
         active: COMP4633, CTFs.
         desc: Basics, mindset, pwn, reverse, web.
         tag: ctf
@@ -324,24 +329,37 @@ skills:
         desc: Internal death by boredom.
       -
         skill: Talking
-        strength: 3.1
+        strength: 4.8
         active: Exercising my voice box by participating in the social construct of communication.
         desc: Interactions through informative, ordered sound.
       -
         skill: Sleep-Talking
         strength: 0.8
         desc: How do they do it!?
+      -
+        skill: Walking
+        strength: 8.4
+        active: Can't stop, won't stop.
+        desc: The act of putting one foot in front of the other in a steady fashion.
+      -
+        skill: Sleep-Walking
+        strength: 0.4
+        desc: So hard to get it right...
+      -
+        skill: Sleep-Walking-Talking
+        strength: 0.1
+        desc: Level 100 mafia boss incoming!
   -
     category: Languages
     skills:
       -
         skill: English
-        strength: 9.3
+        strength: 9.2
         active: Exercising my voice box.
         desc: Fluent in reading, writing, listening. Less fluent in speaking.
       -
         skill: Cantonese
-        strength: 5.3
+        strength: 5.4
         active: 哈咯.
         desc: 悉聽、悉講、唔悉睇、唔悉寫... err... 悉睇和寫DD。
       -

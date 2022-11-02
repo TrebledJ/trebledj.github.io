@@ -16,7 +16,12 @@ layout: default-container
 
             <!-- SKILLZ -->
             <div class="card author-skills p-4 mb-3">
-                <h2 class="card-title">Skilltree</h2>
+                <div class="d-flex flex-row align-items-center">
+                    <h2 class="card-title mb-0">Skilltree</h2>
+                    <span class="fs-5 ms-2" data-placement="top" data-toggle="tooltip" title="{{site.data.profile.skills_desc}}">
+                        <i class="fas fa-question-circle"></i>
+                    </span>
+                </div>
                 {%- include author-skills.html -%}
             </div>
         </div>
