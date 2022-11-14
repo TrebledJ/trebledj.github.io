@@ -43,18 +43,18 @@ We’re provided with an encryption script `chall.py` (written in Python), along
 - The script uses `random.shuffle` without seeding. This means we can’t easily reproduce the character mapping (`charmap`). We’ll need to try harder.
 - Although the script reads the plaintext in binary format (`open('message.txt', 'rb')`), I’m banking on the clue that the plaintext is an English article—so hopefully there aren’t any weird characters.
 
-So how do we go about cracking this? Brute-force will be undoubtedly inefficient as we have $64! \approx 1.27 \times 10^{89}$ mapping combinations to try. It would take *years* before we have any progress! Also we’d need to look at results to determine if the English looks right (or automate it by checking a word list)—this would take even more time! Regardless, we’d need to find some other way.
+So how do we go about cracking this? Brute-force will be undoubtedly inefficient as we have $64! \approx 1.27 \times 10^{89}$ mapping combinations to try. It would take *years* before we have any progress! Also we’d need to look at results to determine if the English looks right (or automate it by checking a word list)—this would take even more time! Regardless, we need to find some other way.
 
 ## Let’s Get Cracking
 
 Here’s one idea: since the plaintext is an English article, this means that most (if not all) characters are in the printable ASCII range (32-127). This means that the most significant bit (MSB) of each byte *cannot* be 1. We can use this to create a **blacklist** of mappings. For example, originally we have 64 mappings for the letter `A`. After blacklisting, we may be left with, say, 16 mappings. This drastically reduces the search space.[^extended-ascii]
 
-Since Base64 simply maps 8-bits to 6-bits, so 3 bytes of ASCII would be translated to 4 bytes of Base64.
+Since Base64 simply maps 8-bits to 6-bits, so 3 characters of ASCII would be translated to 4 characters of Base64.
 
-![Base64 maps three bytes to four.](/assets/img/posts/misc/ctf/base64-encryption/base64-is-so-cool.png){:.w-100}
+![Base64 maps three characters to four.](/assets/img/posts/misc/ctf/base64-encryption/base64-is-so-cool.png){:.w-100}
 {:.center}
 
-<sup>Base64 maps three bytes to four. ([Source](https://www.tenminutetutor.com/img/data-formats/binary-encoding/base64.png))</sup>
+<sup>Base64 maps three characters to four. ([Source](https://www.tenminutetutor.com/img/data-formats/binary-encoding/base64.png))</sup>
 {:.center}
 
 
@@ -94,7 +94,7 @@ print(''.join(sorted(whitelist['J']))
 
 Neat! This will help us later on (when we resort to ~~blatant~~ educated guessing).
 
-We can do a similar thing on the low end. Again, since the smallest printable ASCII character is 32 (which, btw, is space), this means either the second or third MSBs would be set.[^newline]
+We can do a similar thing on the low end. Again, since the smallest printable ASCII character is 32, this means either the second or third MSBs would be set.[^newline]
 
 ```python
 def get_inverted_chars_with_mask(m):
@@ -113,7 +113,7 @@ Another idea comes to mind. Remember the plaintext is in English? Well, with Eng
 
 In the same vein, some letters and sequences in the *Base64 encoding* will also appear more frequently than others.
 
-With this in mind, we can compare the ciphertext with the Base64 encoding of some random article (also in English, of course). For this, I copied some articles from [CNN Lite](https://lite.cnn.com/en) (text-only, so it's easier to copy), encoded it, then analysed letter frequencies using [dcode.fr](https://www.dcode.fr/frequency-analysis). You could use this excellent article as well:
+With this in mind, we can compare the ciphertext to the Base64 encoding of some random article (also in English, of course). For this, I copied some articles from [CNN Lite](https://lite.cnn.com/en) (text-only, so it's easier to copy), encoded it, then analysed letter frequencies using [dcode.fr](https://www.dcode.fr/frequency-analysis). You could use this excellent article as well:
 
 ```
 V2UncmUgbm8gc3RyYW5nZXJzIHRvIGxvdmUKWW91IGtub3cgdGhlIHJ1bGVzIGFuZCBzbyBkbyBJIChkbyBJKQpBIGZ1bGwgY29tbWl0bWVudCdzIHdoYXQgSSdtIHRoaW5raW5nIG9mCllvdSB3b3VsZG4ndCBnZXQgdGhpcyBmcm9tIGFueSBvdGhlciBndXkKSSBqdXN0IHdhbm5hIHRlbGwgeW91IGhvdyBJJ20gZmVlbGluZwpHb3R0YSBtYWtlIHlvdSB1bmRlcnN0YW5kCk5ldmVyIGdvbm5hIGdpdmUgeW91IHVwCk5ldmVyIGdvbm5hIGxldCB5b3UgZG93bgpOZXZlciBnb25uYSBydW4gYXJvdW5kIGFuZCBkZXNlcnQgeW91Ck5ldmVyIGdvbm5hIG1ha2UgeW91IGNyeQpOZXZlciBnb25uYSBzYXkgZ29vZGJ5ZQpOZXZlciBnb25uYSB0ZWxsIGEgbGllIGFuZCBodXJ0IHlvdQo=
@@ -126,9 +126,9 @@ V2UncmUgbm8gc3RyYW5nZXJzIHRvIGxvdmUKWW91IGtub3cgdGhlIHJ1bGVzIGFuZCBzbyBkbyBJIChk
 <sup>Frequency analysis of plain vs. encrypted Base64.</sup>
 {:.center}
 
-From this, we can deduce that 'Y' was mapped from 'I' in original encoding due to the gap in frequency.
+From this, we can deduce that 'w' was mapped from 'G' in the original encoding (due to the gap in frequency).
 
-One useful option is the **bigrams/n-grams** option. We can tell dcode to analyse frequencies of *groups of characters* with a sliding window. This is useful to identify words. Again, keep in mind that four Base64 chars equals three ASCII chars.
+One useful option is the **bigrams/n-grams** option. We can tell dcode to analyse frequencies of *groups of characters* with a sliding window. This is useful to identify words and sequences.
 
 ![dcode.fr 4-gram for normal Base64.](/assets/img/posts/misc/ctf/base64-encryption/b64-plain-4gram.jpg){:.w-40}
 ![dcode.fr 4-gram for encrypted Base64.](/assets/img/posts/misc/ctf/base64-encryption/b64-crypt-4gram.jpg){:.w-40}
@@ -137,12 +137,12 @@ One useful option is the **bigrams/n-grams** option. We can tell dcode to analys
 <sup>Frequency analysis of 4-grams in plain vs. encrypted Base64.</sup>
 {:.center}
 
-Observe how "YoJP0H" occurs frequently. This corresponds to "IHRoZS", which happens to be the Base64 encoding for " the".
+Observe how "YoJP0H" occurs (relatively) frequently. This corresponds to "IHRoZS", which happens to be the Base64 encoding for " the".
 
 Frequency analysis is useful to group letters into buckets. But using frequency analysis alone is painful. Some guesswork is needed. Here's the complete process I went through:
 
 - Frequency Analysis: use dcode.fr to associate frequent characters.
-    - We can make use of our earlier constraints to eliminate wrong guesses.[^remove-constraints]
+    - We can make use of our earlier constraints to eliminate wrong guesses.[^byebye-constraints]
         
         ```python
         guesses = { # Dictionary of guessed mappings.
@@ -171,7 +171,6 @@ Frequency analysis is useful to group letters into buckets. But using frequency 
 - Guesswork: guess English from the ~~nonsense~~ existing characters.
     - e.g. "Eog:ish" → "English", "qepqesents" → "represents", "pqese&ved" → "preserved"
     - Once we patched a word, other words became easier to patch.
-    - Find out what mapping was being used and substitute it with the *expected* mapping.
 
     <br/>
     ![Moar results!!!](/assets/img/posts/misc/ctf/base64-encryption/progress-2.jpg){:.w-100}
@@ -187,6 +186,7 @@ Frequency analysis is useful to group letters into buckets. But using frequency 
     <br/>
     ![Rrrreeeeeeeeeeeee.](/assets/img/posts/misc/ctf/base64-encryption/wikipedia-frequency-analysis.jpg){:.w-100}
     
+Finding the rest of the mappings was quite easy. After a bit more tuning, we get the flag.
 
 ## Final Remarks
 
@@ -206,4 +206,4 @@ hkcert22{b4s3_s1x7y_f0ur_1s_4n_3nc0d1n9_n07_4n_encryp710n}
 
 [^newline]: But what about newline (`\n`, ASCII 10) and carriage return (`\r`, ASCII 13)? These are also possible to have in plaintext messages. We shouldn’t entirely discount these, but as they’re relatively rare, we won’t consider them for now.
 
-[^remove-constraints]: Later on, we removed the second/third-MSB constraint since it got in the way of decoding `\n`.
+[^byebye-constraints]: Later on, we removed the second/third-MSB constraint since it got in the way of decoding `\n`.
