@@ -1,14 +1,14 @@
 ---
 title: HKCERT 2022 – Base64 Encryption
 description: Frequency analysis with a touch of heuristics.
-updated: "2022-08-10"
+# updated: "2022-08-10"
 tags: ctf cryptography writeup python programming
 thumbnail: /assets/img/posts/misc/ctf/hkcert22-thumbnail.jpg
 related_tags: ctf writeup
 usemathjax: true
 ---
 
-The challenge looks deceptively simple. After all, it’s in Base64, so it shouldn’t be too hard, right?
+The challenge looks deceptively simple. Chinese has over 50,000 characters. Base64 just has 64. So it should be easy right?
 
 Haha nope. It's not as trivial as I thought.
 
@@ -40,7 +40,6 @@ We’re provided with an encryption script `chall.py` (written in Python), along
     encrypted = ''.join([charmap[c] for c in encoded])
     ```
     
-    - Note that padding (`=`) is stripped, so we’ll need to manually pad later on.
 - The script uses `random.shuffle` without seeding. This means we can’t easily reproduce the character mapping (`charmap`). We’ll need to try harder.
 - Although the script reads the plaintext in binary format (`open('message.txt', 'rb')`), I’m banking on the clue that the plaintext is an English article—so hopefully there aren’t any weird characters.
 
@@ -52,8 +51,12 @@ Here’s one idea: since the plaintext is an English article, this means that mo
 
 Since Base64 simply maps 8-bits to 6-bits, so 3 bytes of ASCII would be translated to 4 bytes of Base64.
 
-![Base64 maps three bytes to four.](/assets/img/posts/misc/ctf/base64-encryption/base64-is-so-cool.png)
-{:.w-100}
+![Base64 maps three bytes to four.](/assets/img/posts/misc/ctf/base64-encryption/base64-is-so-cool.png){:.w-100}
+{:.center}
+
+<sup>Base64 maps three bytes to four. ([Source](https://www.tenminutetutor.com/img/data-formats/binary-encoding/base64.png))</sup>
+{:.center}
+
 
 ```python
 charset = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/'
@@ -110,7 +113,11 @@ Another idea comes to mind. Remember the plaintext is in English? Well, with Eng
 
 In the same vein, some letters and sequences in the *Base64 encoding* will also appear more frequently than others.
 
-With this in mind, we can compare the ciphertext with the Base64 encoding of some random article (also in English, of course). For this, I copied some articles from [CNN Lite](https://lite.cnn.com/en) (text-only, so easier to copy), encoded it, then analysed letter frequency using [dcode.fr](https://www.dcode.fr/frequency-analysis).
+With this in mind, we can compare the ciphertext with the Base64 encoding of some random article (also in English, of course). For this, I copied some articles from [CNN Lite](https://lite.cnn.com/en) (text-only, so it's easier to copy), encoded it, then analysed letter frequencies using [dcode.fr](https://www.dcode.fr/frequency-analysis). You could use this excellent article as well:
+
+```
+V2UncmUgbm8gc3RyYW5nZXJzIHRvIGxvdmUKWW91IGtub3cgdGhlIHJ1bGVzIGFuZCBzbyBkbyBJIChkbyBJKQpBIGZ1bGwgY29tbWl0bWVudCdzIHdoYXQgSSdtIHRoaW5raW5nIG9mCllvdSB3b3VsZG4ndCBnZXQgdGhpcyBmcm9tIGFueSBvdGhlciBndXkKSSBqdXN0IHdhbm5hIHRlbGwgeW91IGhvdyBJJ20gZmVlbGluZwpHb3R0YSBtYWtlIHlvdSB1bmRlcnN0YW5kCk5ldmVyIGdvbm5hIGdpdmUgeW91IHVwCk5ldmVyIGdvbm5hIGxldCB5b3UgZG93bgpOZXZlciBnb25uYSBydW4gYXJvdW5kIGFuZCBkZXNlcnQgeW91Ck5ldmVyIGdvbm5hIG1ha2UgeW91IGNyeQpOZXZlciBnb25uYSBzYXkgZ29vZGJ5ZQpOZXZlciBnb25uYSB0ZWxsIGEgbGllIGFuZCBodXJ0IHlvdQo=
+```
 
 ![dcode.fr frequency analysis for normal Base64.](/assets/img/posts/misc/ctf/base64-encryption/b64-plain-1gram.jpg){:.w-40}
 ![dcode.fr frequency analysis for encrypted Base64.](/assets/img/posts/misc/ctf/base64-encryption/b64-crypt-1gram.jpg){:.w-40}
