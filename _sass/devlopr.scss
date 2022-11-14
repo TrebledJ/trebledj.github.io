@@ -10,8 +10,11 @@
     /* an ideal reading width - 48rem - 768px based off 16px:1rem */
     /* remember to set this to media-queries too if you are not handling it separately */
     --body-width: 48rem;
-    --header-height: 40px;
+    --header-height: 60px;
     --footer-height: 60px;
+
+    // For anchors and jumpy jumping.
+    --jump-buffer: calc(var(--header-height) + 10px);
 
     /* default: minor third scale progression */
     --typescale-body: 1.2;
@@ -175,7 +178,7 @@ body {
     color: var(--main-text-color) !important;
     // font-family: 'Quicksand', sans-serif !important;
     font-family: var(--font-family);
-    font-feature-settings: "kern" on;
+    font-feature-settings: "kern"on;
     font-size: 1.4rem;
     font-variant-numeric: oldstyle-nums;
     hanging-punctuation: first last;
@@ -330,18 +333,7 @@ hr {
     background-color: var(--medium-text-color);
 }
 
-/* Navigation Header */
-header {
-    background-color: var(--main-background-color);
-    box-shadow: 0px;
-    // height: auto;
-    height: var(--header-height);
-    width: 100%;
-    padding: 11px;
-}
-
-
-body > .container-fluid {
+body>.container-fluid {
     padding: 0px !important;
 }
 
@@ -1468,3 +1460,19 @@ footer {
 }
 
 /* Generic.Inserted & Diff Inserted */
+
+// Anchors/Jumps workaround with fixed header.
+// Footnote tags in content.
+.post-article sup[role="doc-noteref"] {
+    margin-top: -var(--jump-buffer);
+    padding-top: var(--jump-buffer);
+}
+
+// Footnotes at end.
+.post-article .footnotes li::before {
+    display: block; 
+    content: " "; 
+    margin-top: -60px; 
+    height: 60px; 
+    visibility: hidden; 
+}
