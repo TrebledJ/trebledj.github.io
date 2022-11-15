@@ -1,0 +1,145 @@
+---
+title: HKCERT 2022 – C++harming Website
+description: A harming website? I hope I don’t get hacked from this. >.<
+# updated: "2022-08-10"
+tags: ctf reverse writeup cpp python programming
+thumbnail: /assets/img/posts/misc/ctf/hkcert22-thumbnail.jpg
+related_tags: ctf writeup
+usemathjax: true
+---
+
+{% include toc.md %}
+
+## Description
+
+350 points. 4/5 ⭐️. 4/311 solves.
+
+> Seems someone encrypt their flag with [some weird online website](http://chal.hkcert22.pwnable.hk:28248/). And seems the website is written in C++...
+> 
+> Does anyone even use C++ to write their web server? I guess C++ is still charm but it must be easy to reverse.... right?
+
+## Analysis
+
+We’re provided with the server binary written in C++. No source code. 😟 We’re also provided with a link to a website (presumably hosted by the server).
+
+Hmm, I wonder what the website has in store for us. Let’s check it out!
+
+![Website seems to work!](/assets/img/posts/misc/ctf/charming-website/website-seems-to-work.jpg){:.w-80}
+{:.center}
+
+How disappointing. Oh well, perhaps the binary is more helpful. Maybe we can find out how to work the website. Might be important. Might not be important. Who knows?[^might-be-important]
+
+What does Ghidra tell us?
+
+![You can run but you can't hide!](/assets/img/posts/misc/ctf/charming-website/decompile-run.jpg){:.w-80}
+{:.center}
+
+It’s easy to be intimidated by such a large application. And it’s in C++, so there’s a ton of garbage (`std`, templates, constructors, destructors, etc.).[^cpp]
+
+Some notes:
+
+- The server uses a library called **[oatpp](https://oatpp.io/)**.
+    - It’s useful to look at some oatpp examples, as this gives us a general idea of the application flow and structure.
+    - For example, an endpoint could be defined by using `oatpp::web::server::HttpRouter::route` ([example](https://oatpp.io/docs/start/step-by-step/#add-request-handler)) or with the `ENDPOINT` macro ([example](https://oatpp.io/docs/start/step-by-step/#use-api-controller)).
+    - Now that we know what library is used, can we find out what the endpoint is?
+    - Yes. Chances are, there is only one endpoint, and this would be hardcoded and stored in static memory.
+- Let’s look at some strings!
+    - Ghidra has a “Defined Strings” tool for browsing strings…
+    - But I prefer using the simple `strings` command along with `grep`:
+        
+        ```bash
+        strings cryptor-exe | grep -Ev '^_Z.*' # Filter out most C++ symbols. (Manually leaf through the rest.)
+        strings cryptor-exe | grep '/'         # Search for endpoint or MIME type.
+        ```
+        
+    - With this, we find out that the endpoint is **`/encrypt`**, and the MIME type is **`application/json`**. No other MIME type appears, so it's probably using JSON for both request and response.
+      - We can try to use Postman or whatever to test the endpoint.
+
+        ![Postman Pat](/assets/img/posts/misc/ctf/charming-website/postman-pat-postman-pat-postman-pat-and-his-black-and-white-cat.jpg){:.w-90}
+        {:.center}
+
+    - There’s also some interesting things such as “*charm.c*”. But I thought this was a C++ application? Perhaps a third-party library? Maybe we can use this later on.
+- The gold can be found in **`MyController::Encrypt::encrypt`**. This is where all the juicy stuff takes place. You can arrive here through a number of ways (e.g. following XREFs of `uc_encrypt`).
+    - The function begins by generating a random Initialisation Vector (IV).
+    - It then initialises some state using `uc_state_init` with a key.
+        
+        ![Juicy init.](/assets/img/posts/misc/ctf/charming-website/decompile-encrypt-1.jpg){:.w-70}
+        {:.center}
+
+        Fortunately, the key is stored in static memory. In plain sight. This is a true blurse.
+
+        ![YAS!](/assets/img/posts/misc/ctf/charming-website/encryption-rev-chal-with-hardcoded-key.jpg){:.w-50}
+        {:.center}
+
+    - The message is then encrypted using `uc_encrypt`.
+
+        ![Juicy encrypt.](/assets/img/posts/misc/ctf/charming-website/decompile-encrypt-2.jpg){:.w-80}
+        {:.center}
+
+        I have no idea what `puVar[-0x227] = X` does, and apparently it's not important.
+
+    - Finally, `encrypt` encodes the message, tag, and IV in Base64; then sends out a JSON response.
+
+- Google suggests some form of [AES-GCM](https://en.wikipedia.org/wiki/Galois/Counter_Mode) is being used. But is it really?
+- Hmm… there’s a `uc_decrypt`…
+
+## Pikachu used charm! It’s not very effective.
+
+The pipeline is apparent: receive POST request → generate IV → init state → encrypt → Base64 → send JSON → bye bye. Can we flip this around to get back the original message?
+
+To make our life easier (and also because curiousity), let’s see if the encryption library is open-source. OSINT time! Googling “*charm.c uc_encrypt site:github.com*” leads us to [dsvpn](https://github.com/jedisct1/dsvpn), which links us to [charm](https://github.com/jedisct1/charm). Both are GitHub repositories using the same charm.c used in the challenge.
+
+Also, the source gives us clues we might’ve missed in our initial analysis. For example, the key should be 32 bytes long. This was quite helpful, as Ghidra for some reason grouped the 32nd byte apart from the first 31 bytes.
+
+Now that we have the source, we can use it directly for our solve script! Sweet!
+
+```c
+int main() {
+    uint32_t st[12] = {};
+
+    // Obtained from binary (static_key symbol).
+    unsigned char key[] = "\xf2\x9c\x0b\xf1\xc5\x1a\x7e\x65\x75\x80\x23\x6e\x8b\x74\x38\xbf\x59\x39\x8a\x1a\x05\xc6\x43\xfa\x1d\x57\x82\x0a\xb9\xc6\xdc\x50";
+    
+    // Obtained by decoding Base64.
+    unsigned char iv[] = "\xe2\x4f\x76\x18\xd8\xa3\xa\xaf\xa8\xbf\xee\xe6\x5c\xe9\x4\x1e";
+    unsigned char tag[] = "\xd0\x5b\x4c\x60\x6d\x88\x3f\x18\xff\xa8\x58\x43\xfc\xd2\xc6\xac";
+    unsigned char c[] = "\xe4\xa\xf2\xb3\x96\x3c\x7a\x9a\x86\xe1\xa4\x9e\x45\xc5\xef\x7f\xe4\x8a\x96\x13\x4a\x95\x8\xc8\xdb\x6c\x7c\xa2\x34\x6f\xf4\x37\xae\xd0\x46\x1\xb2\xd0\xc\x32\xbb\x3e\xb6\xf9\xe6\x51\x5e\x6e\x14\xb\x97\x5b\x99\xd\xda\x3a\xf3\xe0\xd2\x66\xed\xe8\x7a\xbc\x6e\xc\xab\xec";
+    
+    uc_state_init(st, key, iv);
+    
+    size_t len = strlen((char*)c);
+    int res = uc_decrypt(st, c, len, tag, 16);
+    printf("result: %d\n", res);
+    printf("%s\n", c);
+}
+```
+
+Since the state is initialised inside the endpoint, it is refreshed every time. As long as we have the key and IV, we can recover the state. Finally, we decrypt the message and get the flag. That's all there is to it!
+
+## Final Remarks
+
+This was a rather nice, relaxing C++ challenge. And yes, C++ is still charm.
+
+With C++ reverse challenges (and looking at large applications in general), it’s difficult to know what’s important because there are so many things to look at. But! It’s really helpful to know what’s *not* important, because then you can filter those out and pay attention to things that matter.
+{:.alert--success}
+
+For example, if you see angle brackets `<` `>`, you can usually ignore everything in between. Normally they're the default anyways.
+
+Also if there’s something to learn from this challenge, it’s that application developers should secure their secrets (e.g. with environment variables or config loaders). 😛
+
+## Solve Scripts
+
+<script src="https://gist.github.com/TrebledJ/ba53a8c720de910e0bdc55892171f76e.js?file=convert.py"></script>
+<script src="https://gist.github.com/TrebledJ/ba53a8c720de910e0bdc55892171f76e.js?file=main.c"></script>
+
+## Flag
+
+```c
+hkcert22{n3v3r_s4w_4n_c++_ap1_s3Rv3R?m3_n31th3r_bb4t_17_d0e5_eX15ts}
+```
+
+---
+
+[^might-be-important]: It wasn’t.
+
+[^cpp]: To be fair, one of the reasons C++ is powerful is because it’s both *performant* and *expressive*. And it’s expressive, because there can be a lot of hidden control flow. You can write one line of code which could be syntax sugar for twenty lines of code, and even more assembly. With C, it’s more straightforward (and simple).
