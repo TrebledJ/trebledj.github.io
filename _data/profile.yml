@@ -7,8 +7,6 @@ author_bio: |
   I'm also interested in a wide range of fields: [robotics](/tags/robotics), [cybersecurity](/tags/ctf),
   [application development](/tags/apps), and software engineering in general.
   I'm excited about developing applications to solve problems and provide an educational interface for learners.
-  Mostly I've been working on desktop apps, but I've been looking into web as well.
-  Also, I'm not afraid of pineapple on pizza ~~unlike some people *cough cough* :P~~.
 
 author_email: "trebledjjj@gmail.com"
 # author_location: # This information is private buddy.
@@ -26,6 +24,13 @@ work_experiences:
     visibility: true
 
 awards:
+  - name: HKCERT CTF 2022 – 4th Place (Tertiary Category)
+    description: Competed and achieved 4/73 in the tertiary category, 9/311 overall.
+    time: 2022
+    url: /posts/hkcert-2022-cpp-harming-website
+    org: HKCERT, HKPC.
+    org_url: https://ctf.hkcert.org/
+
   - name: DownUnderCTF 2022 – Most Entertaining Writeup
     description: Compose a CTF writeup on solving a reverse puzzle, making the judges flip over their chairs in laughter.
     time: 2022
