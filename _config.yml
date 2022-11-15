@@ -111,7 +111,7 @@ defaults:
 
 # Hangry for updates? Lemme feed you.
 feed:
-  posts_limit: 15
+  posts_limit: 10
   tags:
     path: "feeds/"
     only:
@@ -120,7 +120,7 @@ feed:
       - project
       - aoc
       - ctf
-  # disable_in_development: true
+  disable_in_development: true
 
 # Build settings
 plugins:

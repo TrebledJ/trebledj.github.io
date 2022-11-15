@@ -1,23 +1,16 @@
 ---
-layout: page-with-sidebar
+layout: page-simple
+logo: tag
 ---
-<div class="card p-4">
-    <h3>
-        <i class="fas fa-tag me-1"></i>
-        Tag:
-        {{page.title}}
-    </h3>
 
-    <br/>
-    <div>
-        {{content}}
-    </div>
+<div>
+    {{content}}
+</div>
 
-    <br/>
-    <div class="post-preview-list">
-        {% assign slug = page.tag | default: page.title | slugify %}
-        {% for post in site.tags[slug] %}
-            {% include post-preview.html %}
-        {% endfor %}
-    </div>
+<br/>
+<div class="post-preview-list">
+    {% assign slug = page.tag | default: page.title | slugify %}
+    {% for post in site.tags[slug] %}
+        {% include post-preview.html %}
+    {% endfor %}
 </div>
