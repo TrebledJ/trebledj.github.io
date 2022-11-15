@@ -105,7 +105,7 @@ subchars_not_in_ascii = [get_inverted_chars_with_mask(m) for m in in_ascii] # ch
 
 Another idea comes to mind. Remember the plaintext is in English? Well, with English text, some letters appear more frequently than others. The same applies to words and sequences. 
 
-![Frequency of English letters. But we need to careful with letter cases.](/assets/img/posts/misc/ctf/base64-encryption/letter-frequencies.jpg){:.w-90}
+![Frequency of English letters. But we need to careful with letter cases.](/assets/img/posts/misc/ctf/base64-encryption/letter-frequencies.jpg){:.w-80}
 {:.center}
 
 <sup>(Frequency of the English alphabet. Source: Wikimedia commons.)</sup>
