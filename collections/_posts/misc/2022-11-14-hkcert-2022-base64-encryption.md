@@ -108,7 +108,7 @@ Another idea comes to mind. Remember the plaintext is in English? Well, with Eng
 ![Frequency of English letters. But we need to careful with letter cases.](/assets/img/posts/misc/ctf/base64-encryption/letter-frequencies.jpg){:.w-80}
 {:.center}
 
-<sup>(Frequency of the English alphabet. Source: Wikipedia.)</sup>
+<sup>Frequency of the English alphabet. (Source: Wikipedia.)</sup>
 {:.center}
 
 In the same vein, some letters and sequences in the *Base64 encoding* will also appear more frequently than others.
