@@ -1456,18 +1456,7 @@ footer {
 
 /* Generic.Inserted & Diff Inserted */
 
-// Anchors/Jumps workaround with fixed header.
-// Footnote tags in content.
-.post-article sup[role="doc-noteref"] {
-    margin-top: -var(--jump-buffer);
-    padding-top: var(--jump-buffer);
-}
-
-// Footnotes at end.
-.post-article .footnotes li::before {
-    display: block; 
-    content: " "; 
-    margin-top: -60px; 
-    height: 60px; 
-    visibility: hidden; 
+// Anchors/Jumps with fixed header.
+html {
+    scroll-padding-top: var(--jump-buffer);
 }
