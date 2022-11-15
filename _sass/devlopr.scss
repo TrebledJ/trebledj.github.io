@@ -160,12 +160,12 @@ html[data-theme="light"] {
 /* On scroll progress bar */
 #top-progress-bar {
     background: linear-gradient(to right, var(--nav-link-color-sp) var(--progress), transparent 0);
-    height: 5px;
+    height: 4px;
     position: fixed;
     width: 100%;
     // overflow: hidden;
     z-index: 10;
-    margin-top: 23px;
+    top: var(--header-height);
 }
 
 body {
@@ -338,6 +338,7 @@ body>.container-fluid {
 }
 
 #topNav {
+    height: var(--header-height);
     padding-left: 9%;
     padding-right: 9%;
     background-color: var(--main-background-color) !important;
