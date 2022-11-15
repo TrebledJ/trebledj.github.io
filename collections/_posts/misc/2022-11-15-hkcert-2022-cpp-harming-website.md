@@ -2,7 +2,7 @@
 title: HKCERT CTF 2022 – C++harming Website
 description: A harming website? Hope I don’t get hacked from this. >.<
 # updated: "2022-08-10"
-tags: ctf reverse writeup cpp python programming
+tags: ctf reverse writeup cpp programming
 thumbnail: /assets/img/posts/misc/ctf/hkcert22-thumbnail.jpg
 related_tags: ctf writeup
 usemathjax: true
