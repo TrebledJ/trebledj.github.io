@@ -89,8 +89,8 @@ html[data-theme="light"] .hero-section {
 // --- Scroll to Top --- //
 #btn-back-to-top {
     position: fixed;
-    bottom: 20px;
-    right: 20px;
+    bottom: 10px;
+    right: 10px;
     display: none;
     z-index: 90;
     background-color: var(--button-background-color);
@@ -99,12 +99,5 @@ html[data-theme="light"] .hero-section {
     border-radius: var(--border-radius);
     i {
         color: var(--link-color);
-    }
-}
-
-@media (max-width: 768px) {
-    #btn-back-to-top {
-        bottom: 10px;
-        right: 10px;
     }
 }
