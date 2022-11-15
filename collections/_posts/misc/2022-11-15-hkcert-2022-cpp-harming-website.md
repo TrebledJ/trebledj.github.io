@@ -123,7 +123,7 @@ This was a rather nice, relaxing C++ challenge. And yes, C++ is still charm.
 With C++ reverse challenges (and looking at large applications in general), it’s difficult to know what’s important because there are so many things to look at. But! It’s really helpful to know what’s *not* important, because then you can filter those out and pay attention to things that matter.
 {:.alert--success}
 
-For example, if you see angle brackets `<` `>`, you can usually ignore everything in between. Normally they're the default anyways.
+For example, if you see templates (the ever so familiar, pointy friends of ours), you can usually ignore everything in between. Normally they're the default anyways.
 
 Also if there’s something to learn from this challenge, it’s that application developers should secure their secrets (e.g. with environment variables or config loaders). 😛
 
