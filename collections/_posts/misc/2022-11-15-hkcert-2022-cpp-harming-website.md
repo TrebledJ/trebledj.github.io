@@ -1,6 +1,6 @@
 ---
 title: HKCERT 2022 – C++harming Website
-description: A harming website? I hope I don’t get hacked from this. >.<
+description: A harming website? Hope I don’t get hacked from this. >.<
 # updated: "2022-08-10"
 tags: ctf reverse writeup cpp python programming
 thumbnail: /assets/img/posts/misc/ctf/hkcert22-thumbnail.jpg
