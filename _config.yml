@@ -109,12 +109,26 @@ defaults:
     values:
       sitemap: false
 
+# Hangry for updates? Lemme feed you.
+feed:
+  posts_limit: 15
+  tags:
+    path: "feeds/"
+    only:
+      - programming
+      - music
+      - project
+      - aoc
+      - ctf
+  # disable_in_development: true
+
 # Build settings
 plugins:
   - jekyll-paginate
   - jekyll-gist
   - jekyll-seo-tag
   - jekyll-sitemap
+  - jekyll-feed
   - jekyll-redirect-from
 
 # SASS
