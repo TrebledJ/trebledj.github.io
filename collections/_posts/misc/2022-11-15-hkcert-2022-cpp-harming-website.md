@@ -40,7 +40,7 @@ Some notes:
 
 - The server uses a library called **[oatpp](https://oatpp.io/)**.
     - It’s useful to look at some oatpp examples, as this gives us a general idea of the application flow and structure.
-    - For example, an endpoint could be defined by using `oatpp::web::server::HttpRouter::route` ([example](https://oatpp.io/docs/start/step-by-step/#add-request-handler)) or with the `ENDPOINT` macro ([example](https://oatpp.io/docs/start/step-by-step/#use-api-controller)).
+    - For example, an endpoint could be defined by using `oatpp::web::server::HttpRouter::route` ([example](https://oatpp.io/docs/start/step-by-step/#add-request-handler)) or with the `ENDPOINT` macro ([example](https://oatpp.io/docs/start/step-by-step/#use-api-controller)). It appears our charming website was using the latter.
     - Now that we know what library is used, can we find out what the endpoint is?
     - Yes. Chances are, there is only one endpoint, and this would be hardcoded and stored in static memory.
 - Let’s look at some strings!
