@@ -85,13 +85,11 @@ Some notes:
 
 ## Pikachu used charm! It’s not very effective.
 
-The pipeline is apparent: receive POST request → generate IV → init state → encrypt → Base64 → send JSON → bye bye. Can we flip this around to get back the original message?
+To make our life easier (and also because of curiousity), let’s see if the encryption library is open-source. OSINT time! Googling “*charm.c uc_encrypt site:github.com*” leads us to [dsvpn](https://github.com/jedisct1/dsvpn), which links us to [charm](https://github.com/jedisct1/charm). Both are GitHub repositories using the same charm.c as the challenge.
 
-To make our life easier (and also because curiousity), let’s see if the encryption library is open-source. OSINT time! Googling “*charm.c uc_encrypt site:github.com*” leads us to [dsvpn](https://github.com/jedisct1/dsvpn), which links us to [charm](https://github.com/jedisct1/charm). Both are GitHub repositories using the same charm.c used in the challenge.
+The source gives us obvious clues we might’ve missed in our initial analysis. For example, the key should be 32 bytes long. This was quite helpful, as Ghidra for some reason grouped the 32nd byte apart from the first 31 bytes; and I spent half an hour figuring out what went wrong.
 
-Also, the source gives us clues we might’ve missed in our initial analysis. For example, the key should be 32 bytes long. This was quite helpful, as Ghidra for some reason grouped the 32nd byte apart from the first 31 bytes.
-
-Now that we have the source, we can use it directly for our solve script! Sweet!
+Now that we have the source, we can use it directly for our solve script!
 
 ```c
 int main() {
