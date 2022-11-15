@@ -20,7 +20,7 @@ related_tags: tag1 tag2 tag3  # Any post containing all these tags is marked as 
 related_auto: true # Use an auto algorithm to determine whether a post is related.
 permalink: /posts/permalink/to/post/
 published: false # keep as draft
-feed: false # don't put into feed
+sitemap: false # don't put in sitemap
 ---
 
 markdown/html/liquid content here
