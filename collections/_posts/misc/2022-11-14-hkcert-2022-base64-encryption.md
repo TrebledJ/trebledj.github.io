@@ -1,7 +1,7 @@
 ---
 title: HKCERT 2022 – Base64 Encryption
 description: Frequency analysis with a touch of heuristics.
-# updated: "2022-08-10"
+updated: "2022-11-15"
 tags: ctf cryptography writeup python programming
 thumbnail: /assets/img/posts/misc/ctf/hkcert22-thumbnail.jpg
 related_tags: ctf writeup
@@ -16,11 +16,11 @@ Haha nope. It's not as trivial as I thought.
 
 ## Description
 
+200 points. 3/5 ⭐️. 6/311 solves.
+
 > People said that base64 is an encoding, not an encryption. Did they have a misconception about that?
 > 
-> 
 > If you believe that base64 is just an encoding, then convince me that you are able to "decode" the article (which is in English).
-> 
 
 Regardless, the challenge author is kind enough to provide a clue in the description: the plaintext is an **article** in **English**. We’ll see how this helps us later on.
 
