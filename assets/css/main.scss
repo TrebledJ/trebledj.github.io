@@ -101,3 +101,10 @@ html[data-theme="light"] .hero-section {
         color: var(--link-color);
     }
 }
+
+@media (max-width: 768px) {
+    #btn-back-to-top {
+        bottom: 10px;
+        right: 10px;
+    }
+}
