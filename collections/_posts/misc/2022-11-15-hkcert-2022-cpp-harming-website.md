@@ -1,7 +1,7 @@
 ---
 title: HKCERT CTF 2022 – C++harming Website
 description: A harming website? Hope I don’t get hacked from this. >.<
-# updated: "2022-08-10"
+updated: "2022-11-16"
 tags: ctf reverse writeup cpp
 thumbnail: /assets/img/posts/misc/ctf/hkcert22-thumbnail.jpg
 related_tags: ctf writeup
@@ -36,13 +36,13 @@ Firing up Ghidra and loading the binary, we start by going to `main` (okay so fa
 
 It’s easy to be intimidated by such a large application. And it’s in C++, so there’s a ton of garbage (`std`, templates, constructors, destructors, etc.).[^cpp]
 
-After a while of noodling, let's see what we've found.
+After a bit of digging, we uncover quite a bit of info:
 
 - The server uses a library called **[oatpp](https://oatpp.io/)**.
     - It’s useful to look at some oatpp examples, as this gives us a general idea of the application flow and structure.
     - For example, an endpoint could be defined by using `oatpp::web::server::HttpRouter::route` ([example](https://oatpp.io/docs/start/step-by-step/#add-request-handler)) or with the `ENDPOINT` macro ([example](https://oatpp.io/docs/start/step-by-step/#use-api-controller)). It appears our charming website was using the latter.
     - Now that we know what library is used, can we find out what the endpoint is?
-    - Yes. Chances are, there is only one endpoint, and this would be hardcoded and stored in static memory.
+    - Yes. In the examples, we see that the endpoints are hardcoded. Chances are, the endpoints in the charming website are also hardcoded, and thus stored in static memory.
 - Let’s look at some strings!
     - Ghidra has a “Defined Strings” tool for browsing strings...
     - But I ended up using the `strings` command along with `grep`:
