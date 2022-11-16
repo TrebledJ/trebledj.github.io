@@ -29,14 +29,14 @@ Hmm, I wonder what the website has in store for us. Let’s check it out!
 
 How disappointing. Oh well, perhaps the binary is more helpful. Maybe we can find out how to work the website. Might be important. Might not be important. Who knows?[^might-be-important]
 
-What does Ghidra tell us?
+Firing up Ghidra and loading the binary, we start by going to `main` (okay so far!). `main` doesn't seem to do much, besides calling `init`, `run`, and `std::cout`. Things get a lot more interesting when we look at `run`:
 
 ![You can run but you can't hide!](/assets/img/posts/misc/ctf/charming-website/decompile-run.jpg){:.w-80}
 {:.center}
 
 It’s easy to be intimidated by such a large application. And it’s in C++, so there’s a ton of garbage (`std`, templates, constructors, destructors, etc.).[^cpp]
 
-Some notes:
+After a while of noodling, let's see what we've found.
 
 - The server uses a library called **[oatpp](https://oatpp.io/)**.
     - It’s useful to look at some oatpp examples, as this gives us a general idea of the application flow and structure.
@@ -44,8 +44,8 @@ Some notes:
     - Now that we know what library is used, can we find out what the endpoint is?
     - Yes. Chances are, there is only one endpoint, and this would be hardcoded and stored in static memory.
 - Let’s look at some strings!
-    - Ghidra has a “Defined Strings” tool for browsing strings…
-    - But I prefer using the simple `strings` command along with `grep`:
+    - Ghidra has a “Defined Strings” tool for browsing strings...
+    - But I ended up using the `strings` command along with `grep`:
         
         ```bash
         strings cryptor-exe | grep -Ev '^_Z.*' # Filter out most C++ symbols. (Manually leaf through the rest.)
@@ -53,12 +53,13 @@ Some notes:
         ```
         
     - With this, we find out that the endpoint is **`/encrypt`**, and the MIME type is **`application/json`**. No other MIME type appears, so it's probably using JSON for both request and response.
-      - We can try to use Postman or whatever to test the endpoint.
+      - We can guess which JSON keys are parsed by looking at other strings. It appears the only key used is `message`.
+      - We can try to use Postman or whatever to test the endpoint. Let's have a spin:
 
         ![Postman Pat](/assets/img/posts/misc/ctf/charming-website/postman-pat-postman-pat-postman-pat-and-his-black-and-white-cat.jpg){:.w-90}
         {:.center}
 
-    - There’s also some interesting things such as “*charm.c*”. But I thought this was a C++ application? Perhaps a third-party library? Maybe we can use this later on.
+    - There’s also some interesting strings such as “*charm.c*”. But I thought this was a C++ application? Perhaps a third-party library? Maybe we can use this later on.
 - The gold can be found in **`MyController::Encrypt::encrypt`**. This is where all the juicy stuff takes place. You can arrive here through a number of ways (e.g. following XREFs of `uc_encrypt`).
     - The function begins by generating a random Initialisation Vector (IV).
     - It then initialises some state using `uc_state_init` with a key.
@@ -66,7 +67,7 @@ Some notes:
         ![Juicy init.](/assets/img/posts/misc/ctf/charming-website/decompile-encrypt-1.jpg){:.w-70}
         {:.center}
 
-        Fortunately, the key is stored in static memory. In plain sight. This is a true blurse.
+        Fortunately, the key is stored in static memory. In plain sight. This is very blursed: blessed, because (from a CTF POV) we don't need much work; and cursed, because (from a dev vs. exploiter POV) we don't need much work.
 
         ![YAS!](/assets/img/posts/misc/ctf/charming-website/encryption-rev-chal-with-hardcoded-key.jpg){:.w-50}
         {:.center}
@@ -80,14 +81,16 @@ Some notes:
 
     - Finally, `encrypt` encodes the message, tag, and IV in Base64; then sends out a JSON response.
 
-- Google suggests some form of [AES-GCM](https://en.wikipedia.org/wiki/Galois/Counter_Mode) is being used. But is it really?
-- Hmm… there’s a `uc_decrypt`…
+- Now how do we go about reversing this encryption?
+  - It's probably not trivial—most encryptions aren't.
+  - What cryptographic algorithms use a tag and IV? Google suggested AES-GCM.
+  - Oh, but wait—there’s a `uc_decrypt` function...
 
 ## Pikachu used charm! It’s not very effective.
 
 To make our life easier (and also because of curiousity), let’s see if the encryption library is open-source. OSINT time! Googling “*charm.c uc_encrypt site:github.com*” leads us to [dsvpn](https://github.com/jedisct1/dsvpn), which links us to [charm](https://github.com/jedisct1/charm). Both are GitHub repositories using the same charm.c as the challenge.
 
-The source gives us obvious clues we might’ve missed in our initial analysis. For example, the key should be 32 bytes long. This was quite helpful, as Ghidra for some reason grouped the 32nd byte apart from the first 31 bytes; and I spent half an hour figuring out what went wrong.
+The source gives us obvious clues we might’ve missed in our initial analysis. For example, the key should be 32 bytes long. This was quite helpful, as Ghidra for some reason grouped the 32nd byte apart from the first 31 bytes (took me a while to figure out what went wrong).
 
 Now that we have the source, we can use it directly for our solve script!
 
@@ -112,7 +115,7 @@ int main() {
 }
 ```
 
-Since the state is initialised inside the endpoint, it is refreshed every time. As long as we have the key and IV, we can recover the state. Finally, we decrypt the message and get the flag. That's all there is to it!
+Since the state is initialised inside the endpoint, it is refreshed for each encryption. As long as we have the key and IV, we can recover the state. Finally, we decrypt the message and get the flag. That's all there is to it!
 
 ## Final Remarks
 
