@@ -14,6 +14,19 @@ author_website_url: trebledj.github.io
 
 # Experiences
 work_experiences:
+  - company_name: HKUST Robotics Team
+    # company_logo: logos/oocl.png
+    company_url: https://robotics.ust.hk/
+    designation: Senior Software Engineer
+    description: |
+      - Trained new members on robotics, programming, and tooling.
+      - Coordinated junior members to develop three generations of robots.
+      - Modernised the team's STM32 development kit with C++20.
+      - Orchestrated R&D projects among software members.
+    date_start: 2021-09
+    date_end: current
+    visibility: true
+
   - company_name: OOCL
     company_logo: logos/oocl.png
     company_url: https://www.oocl.com
@@ -24,21 +37,27 @@ work_experiences:
     visibility: true
 
 awards:
-  - name: HKCERT CTF 2022 – 4th Place (Tertiary Category)
-    description: Competed and achieved 4/73 in the tertiary category, 9/311 overall.
+  - name: PwC Hackaday CTF 2022 -- 1st Runner Up (Hong Kong Regional)
+    description: Competed and achieved 2/12 in the Hong Kong Regional category, 5/27 overall.
+    time: 2022
+    org: pwc
+    org_url: https://www.pwchk.com/en/events/hackaday-2022-competitions.html#capture-flag
+
+  - name: HKCERT CTF 2022 -- 3rd Place (Tertiary Category)
+    description: Competed and achieved 3/72 in the tertiary category, 9/311 overall.
     time: 2022
     url: /posts/hkcert-2022-cpp-harming-website
     org: HKCERT, HKPC.
     org_url: https://ctf.hkcert.org/
 
-  - name: DownUnderCTF 2022 – Most Entertaining Writeup
+  - name: DownUnderCTF 2022 -- Most Entertaining Writeup
     description: Compose a CTF writeup on solving a reverse puzzle, making the judges flip over their chairs in laughter.
     time: 2022
     url: /posts/ductf-2022-ezpz-rev
     org: DownUnderCTF Inc.
     org_url: https://downunderctf.com/inc/
 
-  - name: TAMUctf 2022 – 4th Place
+  - name: TAMUctf 2022 -- 4th Place
     description: Competed and achieved 4th place out of 477 teams with the HKUST Firebird CTF team.
     time: 2022
     url: https://ctftime.org/event/1557
@@ -50,19 +69,19 @@ awards:
     time: 2020 - 2021
     org: HKSAR Government Scholarship Fund
 
-  - name: ABU Robocon 2021 HK Regional – 1st Place
+  - name: ABU Robocon 2021 HK Regional -- 1st Place
     description: Competed and achieved 1st place out of 13 teams with the HKUST Robotics team.
     time: 2021
     org: ABU Robocon HK
     org_url: http://www.roboconhk.com/2021/index.html
 
-  - name: ABU Robocon 2020 HK Regional – 4th Place
+  - name: ABU Robocon 2020 HK Regional -- 4th Place
     description: Competed and achieved 4th place out of 9 teams with the HKUST Robotics team.
     time: 2020
     org: ABU Robocon HK
     org_url: http://www.roboconhk.com/2020/index.html
 
-  - name: Codingame Code of Kutulu Challenge – 51st Place
+  - name: Codingame Code of Kutulu Challenge -- 51st Place
     description: Competed and achieved 51st place out of 2092 players in an online AI bot coding challenge.
     time: 2018
     org: Codingame
