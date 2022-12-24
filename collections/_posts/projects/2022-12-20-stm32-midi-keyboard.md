@@ -36,13 +36,13 @@ The STM32 MIDI Keyboard was a project aimed to practice [embedded systems](/tags
 
 ## Development
 
-I was lucky to work with another member of the [Robotics Team](/tags/robotics) at HKUST ([GitHub](https://github.com/TangYanYee)). She did the electrical work of designing and soldering the <abbr data-toggle="tooltip" title="The printed circuit board. It's the underlying hardware that makes everything work!">PCB</abbr>. Both of us weren't familiar with mechanical design, so we ended up sticking things onto plywood and screwing things together. But hey, at least it's a minimum viable product.
+I was lucky to work with [another member](https://github.com/TangYanYee) of the [Robotics Team](/tags/robotics) at HKUST. She did the electrical work of designing and soldering the <abbr data-toggle="tooltip" title="The printed circuit board. It's the underlying hardware that makes everything work!">PCB</abbr>. Both of us weren't familiar with mechanical design, so we ended up sticking things onto plywood and screwing things together. But hey, at least it's a minimum viable product.
 
 Although the course provided us with a multi-functional board (STM32F103VET6), we ended up using with a different board (STM32F405). The F4 series comes with more processing power, flash memory, and RAM. These are important considerations when it comes to a real-time music system. Audio buffering needs to be fast and steady, and sufficient memory is required for storage and buffering.
 
 We used C++20 for the project[^1]. Although most objects and peripherals were singletons, classes (and templates!) proved useful, especially for containers (such as a [fixed-size vector][fsvector]). C++ also allowed us to have static reflection for enums, thanks to [magic_enum][menum]. The alternative would've been X-macros or hard-coding, both less maintainable options. 
 
-[^1]: I was excited to try C++20 modules—which gcc-arm v11 supports!—but CMake doesn't support modules yet. I guess nobody likes dealing with compilation order? C'mon CMake! It's been three years already!
+[^1]: I was excited to try C++20 modules—which gcc-arm v11 supports!—but CMake doesn't support modules yet. The [issue][cmake-modules] is still ongoing as I write. I think they're trying, but I guess nobody likes dealing with compilation order? C'mon CMake! It's been three years already!
 
 Most MIDI keyboards out there don't produce sound by themselves, and I sometimes I'd rather just noodle around without having to set up any computer software. So one of our goals was to have the keyboard produce sound. This was pretty straightforward. Slap a timer, <abbr data-toggle="tooltip" title="Direct Memory Access. Allows data to be transferred without using CPU processing resources. Great for performance!">DMA</abbr>, and <abbr data-toggle="tooltip" title="Digital-to-audio converter. Converts 1s and 0s to bzzzt-pzzt-mzzt-woink (analog signals).">DAC</abbr> together, and <abbr data-toggle="tooltip" title="This isn't an abbreviation. :P">BAM</abbr>—non-blocking audio output!
 
@@ -70,3 +70,4 @@ If you're interested in trying something similar, here are some things we planne
 [fsvector]: https://github.com/TrebledJ/stm32-midi-keyboard/blob/main/Core/Inc/utils/tinyvector.hpp
 [menum]: https://github.com/Neargye/magic_enum
 [dsp-se-question]: https://dsp.stackexchange.com/questions/85140/adding-two-sine-waves-results-in-a-low-buzz
+[cmake-modules]: https://gitlab.kitware.com/cmake/cmake/-/issues/18355
