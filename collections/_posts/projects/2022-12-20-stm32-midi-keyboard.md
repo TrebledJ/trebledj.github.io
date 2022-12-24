@@ -1,7 +1,7 @@
 ---
 title: STM32 MIDI Keyboard
 description: Boing boing plunk plunk.
-# updated: "2022-08-02"
+updated: "2022-12-25"
 tags: project cpp embedded programming music hkust
 thumbnail: /assets/img/posts/projects/midi-keyboard.jpg
 include_thumbnail: true
