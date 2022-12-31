@@ -33,5 +33,5 @@ end
 # Performance-booster for watching directories on Windows
 gem "wdm", "~> 0.1.1", :install_if => Gem.win_platform?
 gem "webrick", "~> 1.7"
-gem 'sass-embedded', '~> 1.55'
+gem 'sass-embedded', '~> 1.57'
 gem 'jekyll-redirect-from'
