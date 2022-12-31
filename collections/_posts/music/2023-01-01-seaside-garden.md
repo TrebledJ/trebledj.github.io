@@ -4,7 +4,7 @@ description: A first attempt at songwriting.
 tags: composition song piano music hkust
 # keywords: hkust anthem
 thumbnail: /assets/img/posts/music/seaside-garden.jpg
-track_id: 1413798349
+track_id: 1413849847
 score_id: 9351160
 related_tags: composition
 ---
