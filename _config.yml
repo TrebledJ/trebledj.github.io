@@ -89,7 +89,7 @@ defaults:
       type: "posts"
     values:
       layout: "post-music"
-      include_thumbnail: true
+      include_thumbnail: false
       # related_auto: true
   -
     scope:
