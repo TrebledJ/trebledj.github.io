@@ -13,8 +13,12 @@
     </title>
     <meta content="IE=edge" http-equip="X-UA-Compatible"/>
     <meta content="width=device-width, initial-scale=1" name="viewport"/>
-    <meta name="description" content="{{ page.description | strip_html | default: site.description }} - {% if page.description %}{{ page.content | markdownify | strip_html | truncatewords: 30 }}{% endif %}">
-    <meta name="keywords" content="{% if page.title %}{{ page.title }}, {{ site.title }}, {% for tag in page.tags %}{{ tag }}{% if forloop.last == false %}, {% endif %}{% endfor %}{% else %}{{ site.title }}, {% for tag in site.tags %}{% capture tags_slug %}{{ tag | first }}{% endcapture %}{% for tag in tags_slug %}{{ tag }}{% endfor %}{% if forloop.last == false %}, {% endif %}{% endfor %}{% endif %},{{ page.keywords | escape }}"/>
+    {# <meta name="description" content="{{ page.description | strip_html | default: site.description }} - {% if page.description %}{{ page.content | markdownify | strip_html | truncatewords: 30 }}{% endif %}"> #}
+    {# TODO: add description #}
+    <meta name="description" content="Sample description">
+    {# <meta name="keywords" content="{% if page.title %}{{ page.title }}, {{ site.title }}, {% for tag in page.tags %}{{ tag }}{% if forloop.last == false %}, {% endif %}{% endfor %}{% else %}{{ site.title }}, {% for tag in site.tags %}{% capture tags_slug %}{{ tag | first }}{% endcapture %}{% for tag in tags_slug %}{{ tag }}{% endfor %}{% if forloop.last == false %}, {% endif %}{% endfor %}{% endif %},{{ page.keywords | escape }}"/> #}
+    {# TODO: add keywords #}
+    <meta name="keywords" content="Sample keywords"/> 
 
     <link href="/feed.xml" rel="alternate" title="RSS" type="application/rss+xml"/>
     <meta content="{{ site.share.fb_appid }}" property="fb:app_id"/>
@@ -38,15 +42,18 @@
         <meta content="{{ site.url }}{{ page.url }}" property="og:url"/>
     {% endif %}
     {% if page.date %}
-        <meta content="{{ page.date | date_to_xmlschema }}" property="article:published_time"/>
+        {# <meta content="{{ page.date | date_to_xmlschema }}" property="article:published_time"/> #}
+        <meta content="{{ page.date }}" property="article:published_time"/>
         <meta content="{{ site.url }}/about/" property="article:author"/>
     {% endif %}
     {% if page.thumbnail %}
         <meta content="{{ site.url }}{{ page.thumbnail }}" property="og:image"/>
     {% endif %}
     {% if page.tags %}
-        {% for tag in page.tags limit:1 %}
-            <meta content="{{ tag }}" property="article:section"/>
+        {% for tag in page.tags %}
+            {% if loop.first %}
+                <meta content="{{ tag }}" property="article:section"/>
+            {% endif %}
         {% endfor %}
     {% endif %}
     {% if page.tags %}
@@ -79,17 +86,17 @@
   />
   {% endif %} -->
 
-    <link rel="stylesheet" href="{{site.url}}{{site.baseurl}}/assets/css/main.css"/>
-    <!-- <link rel="stylesheet" href="{{site.url}}{{site.baseurl}}/assets/css/custom-style.css" /> -->
-    <link rel="stylesheet" href="{{site.url}}{{site.baseurl}}/assets/bower_components/lightgallery/dist/css/lightgallery.min.css"/>
-    <link rel="stylesheet" href="{{site.url}}{{site.baseurl}}/assets/bower_components/bootstrap/dist/css/bootstrap.min.css"/>
-    <link rel="stylesheet" href="{{site.url}}{{site.baseurl}}/assets/bower_components/font-awesome/web-fonts-with-css/css/fontawesome-all.min.css"/>
+    <link rel="stylesheet" href="/css/main.css"/>
+    <!-- <link rel="stylesheet" href="assets/css/custom-style.css" /> -->
+    <link rel="stylesheet" href="/css/lightgallery.min.css"/>
+    <link rel="stylesheet" href="/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="/css/font-awesome.min.css"/>
     <!-- Dev Icons -->
     <link href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.15.1/devicon.min.css" rel="stylesheet">
     <!-- Fonts-->
     <link href="https://fonts.googleapis.com/css?family=Quicksand&display=swap" rel="stylesheet"/>
     <!-- Favicon -->
-    <link rel="icon" href="{{site.url}}{{site.baseurl}}/assets/img/favicon.ico" type="image/gif" sizes="16x16"/>
+    <link rel="icon" href="/img/favicon.ico" type="image/gif" sizes="16x16"/>
     <script>
       var base_url = '{{site.url}}{{site.baseurl}}';
       var soundcloud_color = '{{site.soundcloud_color}}';
@@ -97,21 +104,21 @@
 
     <!-- Jquery -->
     <script crossorigin="anonymous" integrity="sha384-vk5WoKIaW/vJyUAd9n/wmopsmNhiy+L2Z+SBxGYnUkunIxVxAv/UtMOhba/xskxh" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="{{site.url}}{{site.baseurl}}/assets/bower_components/jquery/dist/jquery.min.js"></script>
-    <script src="{{site.url}}{{site.baseurl}}/assets/bower_components/jquery.easing/jquery.easing.min.js"></script>
-    <script src="{{site.url}}{{site.baseurl}}/assets/bower_components/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="{{site.url}}{{site.baseurl}}/assets/bower_components/jquery-mousewheel/jquery.mousewheel.min.js"></script>
-    <script src="{{site.url}}{{site.baseurl}}/assets/bower_components/lightgallery/dist/js/lightgallery-all.min.js"></script>
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/jquery.easing.min.js"></script>
+    <script src="/js/bootstrap.bundle.min.js"></script>
+    <script src="/js/jquery.mousewheel.min.js"></script>
+    <script src="/js/lightgallery-all.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/picturefill/3.0.2/picturefill.min.js"></script>
     <!-- <script src="{{site.url}}{{site.baseurl}}/assets/bower_components/imagesloaded/imagesloaded.pkgd.min.js"></script> -->
-    <script src="{{site.url}}{{site.baseurl}}/assets/bower_components/nanobar/nanobar.min.js"></script>
-    <script src="{{site.url}}{{site.baseurl}}/assets/js/search/lunr.min.js"></script>
-    <script src="{{site.url}}{{site.baseurl}}/assets/js/search/search-store.js"></script>
-    <script src="{{site.url}}{{site.baseurl}}/assets/js/search/search.js"></script>
-    <script src="{{site.url}}{{site.baseurl}}/assets/js/on-scroll-progress.js"></script>
-    <script src="{{site.url}}{{site.baseurl}}/assets/js/mode-switcher.js"></script>
-    <script src="{{site.url}}{{site.baseurl}}/assets/js/typewriter.js"></script>
-    <script src="{{site.url}}{{site.baseurl}}/assets/js/head.js"></script>
+    <script src="/js/nanobar.min.js"></script>
+    <script src="/js/search/lunr.min.js"></script>
+    <script src="/js/search/search-store.js"></script>
+    <script src="/js/search/search.js"></script>
+    <script src="/js/on-scroll-progress.js"></script>
+    <script src="/js/mode-switcher.js"></script>
+    <script src="/js/typewriter.js"></script>
+    <script src="/js/head.js"></script>
     
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/moment.min.js"></script> -->
 

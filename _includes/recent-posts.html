@@ -7,7 +7,9 @@
     </div>
     <br/>
 
-    {% for post in site.posts limit:5 %}
-        {% include post-preview.html %}
+    {% for post in site.posts %}
+        {% if loop.index0 < 5 %}
+            {% include "post-preview.html" %}
+        {% endif %}
     {% endfor %}
 </section>
