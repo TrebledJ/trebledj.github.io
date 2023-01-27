@@ -3,11 +3,9 @@ title:  "The Breath of Life"
 description: "Humans are complicated individuals even though we all start from two cells."
 updated: "2022-07-28"
 tags:
- - composition
  - minimalism
  - fusion
  - strings
- - music
 keywords: ensemble, string ensemble, emotional, peaceful, serene
 thumbnail: /img/posts/music/spring-dawn.jpg
 track_id: 1199277217

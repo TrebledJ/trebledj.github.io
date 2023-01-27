@@ -2,7 +2,11 @@
 title: TAMUctf 2022 – CTF Sim
 description: Oops, your vpointer was redirected.
 updated: "2022-08-10"
-tags: ctf pwn writeup python cpp programming
+tags: 
+ - pwn
+ - python
+ - cpp
+ - programming
 thumbnail: /img/posts/misc/ctf/ctf-sim/ctf-sim-thumbnail.jpg
 keywords: vpointer vptr ctf virtual function virtual-function vtable gdb
 related_tags: ctf writeup

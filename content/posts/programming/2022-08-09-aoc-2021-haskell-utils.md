@@ -2,7 +2,9 @@
 title: AOC 2021 Haskell Utils
 description: An introduction and walkthrough of my haskell utilities.
 updated: "2022-08-09"
-tags: aoc haskell programming
+tags:
+ - aoc
+ - haskell
 thumbnail: /img/posts/misc/aoc/recycle-hs-utils.jpg
 usemathjax: true
 related_tags: aoc haskell

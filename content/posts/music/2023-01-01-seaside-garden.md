@@ -2,10 +2,8 @@
 title: Seaside Garden
 description: A first attempt at songwriting.
 tags:
- - composition
  - song
  - piano
- - music
  - hkust
 # keywords: hkust anthem
 thumbnail: /img/posts/music/seaside-garden.jpg

@@ -48,7 +48,7 @@ $(document).ready(function() {
     for (var item in result) {
       var ref = result[item].ref;
       if (store[ref].type === "tag") {
-        var icon = "fas fa-tag";
+        var icon = "fa fa-tag";
         var head = `<a class="post-tags tag" href="${store[ref].url}">${store[ref].title}</a>`;
         var desc = store[ref].content;
         var words = desc.split(" ");
@@ -58,14 +58,14 @@ $(document).ready(function() {
           desc = words.join(" ") + end;
         }
       } else {
-        var icon = "fas fa-book-open";
+        var icon = "fa fa-book-open";
         var tags = store[ref].tags;
         if (tags.includes("project")) {
-          icon = "fas fa-cube";
+          icon = "fa fa-cube";
         } else if (tags.includes("experience")) {
-          icon = "fas fa-star";
+          icon = "fa fa-star";
         } else if (tags.includes("composition")) {
-          icon = "fas fa-music";
+          icon = "fa fa-music";
         }
         var head = `<a href="${store[ref].url}">${store[ref].title}</a>
                     <a class="post-tags tag ms-2" href="${base_url}/tags/${tags[0]}">${tags[0]}</a>`;

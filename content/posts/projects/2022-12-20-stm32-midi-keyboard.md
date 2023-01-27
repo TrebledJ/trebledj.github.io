@@ -2,7 +2,12 @@
 title: STM32 MIDI Keyboard
 description: Boing boing plunk plunk.
 updated: "2022-12-25"
-tags: project cpp embedded programming music hkust
+tags:
+ - cpp
+ - embedded
+ - programming
+ - music
+ - hkust
 thumbnail: /img/posts/projects/midi-keyboard.jpg
 include_thumbnail: true
 pitch: Developed a MIDI keyboard using an STM32F4 microcontroller.

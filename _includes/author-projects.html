@@ -4,7 +4,7 @@
             <div class="timeline-arrow"></div>
             <h2 class="h5 mb-1"><a href="{{site.baseurl}}{{post.url}}">{{post.title}}</a></h2>
             <span class="small text-gray">
-                <i class="fas fa-calendar"></i>
+                <i class="fa fa-calendar"></i>
                 {{post.date | date }}
                 {% set nonproj_tags = post.tags | where_exp: "tag", "tag != 'project'" %}
                 {% for tag in nonproj_tags | head(3) %}
