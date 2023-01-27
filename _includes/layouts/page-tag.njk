@@ -1,5 +1,5 @@
 ---
-layout: page-simple
+layout: layouts/page-simple
 logo: tag
 ---
 
@@ -9,8 +9,8 @@ logo: tag
 
 <br/>
 <div class="post-preview-list">
-    {% assign slug = page.tag | default: page.title | slugify %}
+    {% set slug = page.tag | default: page.title | slugify %}
     {% for post in site.tags[slug] %}
-        {% include post-preview.html %}
+        {% include "post-preview.html" %}
     {% endfor %}
 </div>

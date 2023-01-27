@@ -2,11 +2,11 @@
 ---
 <!DOCTYPE html>
 <html lang="{{ page.lang or "en" }}">
-    {%- include "head.html" -%}
+    {% include "head.html" %}
     <body>
-        {%- include "header.html" -%}
+        {% include "header.html" %}
         {{ content | safe }}
-        {%- include "footer.html" -%}
+        {% include "footer.html" %}
         <script>
             var options = {
                 classname: 'progressline',

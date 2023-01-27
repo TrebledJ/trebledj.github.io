@@ -8,7 +8,7 @@ usemathjax: true
 related_tags: ctf writeup
 ---
 
-{% include toc.md %}
+{% include "toc.md" %}
 
 ### Challenge Description
 > Oops! I dropped all of these arithmetic gadgets. Fortunately there are enough of them that you won't be able to pick out the right ones.... right?

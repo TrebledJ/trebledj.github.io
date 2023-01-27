@@ -1,5 +1,5 @@
 ---
-layout: default-full
+layout: layouts/default-full
 ---
 <style>
     .jumbotron {
@@ -91,9 +91,9 @@ layout: default-full
         <div class="container p-3">
             <div class="row row-cols-2 gx-6">
                 {% for s in site.data.journey['embedded'].skills %}
-                    {% assign pad = 0 %}
+                    {% set pad = 0 %}
                     <div class="col">
-                        {% include author-skill-item.html %}
+                        {% include "author-skill-item.html" %}
                     </div>
                 {% endfor %}
             </div>
@@ -103,7 +103,7 @@ layout: default-full
 
 <!-- Poosts. -->
 <a name="posts"></a>
-{% assign related_tags = site.data.journey['embedded'].related_tags %}
+{% set related_tags = site.data.journey['embedded'].related_tags %}
 <div class="d-flex justify-content-center mt-5">
     <div class="col-lg-9 p-3">
         <section id="recent-posts">
@@ -122,21 +122,21 @@ layout: default-full
             </div>
             <br/>
 
-            {% assign related_limit = page.related_limit | default: 5 %}
-            {% assign related_count = 0 %}
+            {% set related_limit = page.related_limit | default: 5 %}
+            {% set related_count = 0 %}
             {% for post in site.posts %}
-                {% assign is_related = false %}
+                {% set is_related = false %}
                 {% for tag in related_tags %}
-                    {% assign tag2 = tag | slugify %}
+                    {% set tag2 = tag | slugify %}
                     {% if post.tags contains tag2 %}
-                        {% assign is_related = true %}
+                        {% set is_related = true %}
                         {% break %}
                     {% endif %}
                 {% endfor %}
                 {% if is_related %}
-                    {% assign tag_limit = 5 %}
-                    {% include post-preview.html %}
-                    {% assign related_count = related_count | plus: 1 %}
+                    {% set tag_limit = 5 %}
+                    {% include "post-preview.html" %}
+                    {% set related_count = related_count | plus: 1 %}
                 {% endif %}
                 {% if related_count >= related_limit %}
                     {% break %}

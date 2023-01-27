@@ -1,17 +1,17 @@
 ---
-layout: default-container
+layout: layouts/default-container
 ---
 <div class="col-lg-12 g-4">
     <div class="row">
         <div class="col-lg-4">
             <!-- SOCIAL LINKS -->
-            {% assign displayname = site.data.profile.author_name %}
-            {% include author-social.html %}
+            {% set displayname = site.data.profile.author_name %}
+            {% include "author-social.html" %}
 
             <!-- ABOUT -->
             <div class="card p-4 pb-3 mb-3">
                 <h2 class="card-title"><i class="fas fa-pen fs-3"></i> About</h2>
-                {{ site.data.profile.author_bio | markdownify }}
+                {{ site.author.bio | markdownify }}
             </div>
 
             <!-- SKILLZ -->
@@ -22,7 +22,7 @@ layout: default-container
                         <i class="fas fa-question-circle"></i>
                     </span>
                 </div>
-                {%- include author-skills.html -%}
+                {% include "author-skills.html" %}
             </div>
         </div>
         <div class="col-lg-8">
@@ -30,35 +30,35 @@ layout: default-container
             <div class="card p-4 mb-3" id="author_projects" style="height: 75vh">
                 <h2 class="card-title"><i class="fas fa-book-open fs-3"></i> Projects</h2>
                 <div class="m-0 overflow-auto">
-                    {% include author-projects.html %}
+                    {% include "author-projects.html" %}
                 </div>
             </div>
             <!-- EXPERIENCES -->
             <div class="card p-4 mb-3" id="author_experiences" style="height: 75vh">
                 <h2 class="card-title"><i class="fas fa-star fs-3"></i> Experiences</h2>
                 <div class="m-0 overflow-auto">
-                    {% include author-experiences.html %}
+                    {% include "author-experiences.html" %}
                 </div>
             </div>
             <!-- WORK EXPERIENCES -->
             <div class="card p-4 mb-3">
                 <h2 class="card-title"><i class="fas fa-briefcase fs-3"></i> Work Experience</h2>
                 <div class="m-0 overflow-auto">
-                    {% include author-work-experiences.html %}
+                    {% include "author-work-experiences.html" %}
                 </div>
             </div>
             <!-- AWARDS -->
             <div class="card p-4 mb-3" style="height: 75vh">
                 <h2 class="card-title"><i class="fas fa-trophy fs-3"></i> Awards</h2>
                 <div class="m-0 overflow-auto">
-                    {% include author-awards.html %}
+                    {% include "author-awards.html" %}
                 </div>
             </div>
             <!-- EDUCATION -->
             <div class="card p-4">
                 <h2 class="card-title"><i class="fas fa-graduation-cap fs-3"></i> Education</h2>
                 <div class="m-0 overflow-auto">
-                    {% include author-education.html %}
+                    {% include "author-education.html" %}
                 </div>
             </div>
         </div>

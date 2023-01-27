@@ -18,8 +18,8 @@
                     <p>{{ post.description }}</p>
                 </div>
             </div>
-            {% assign tag_limit = tag_limit | default: 2 %}
-            {% include post-metadata.html %}
+            {% set tag_limit = tag_limit | default: 2 %}
+            {% include "post-metadata.html" %}
         </div>
     </div>
 </article>

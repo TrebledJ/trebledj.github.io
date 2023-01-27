@@ -4,14 +4,14 @@
         <div class="container-fluid mx-0"><hr/></div>
     </div>
     {% for s in set.skills %}
-        {% assign pad = 0 %}
-        {% include author-skill-item.html %}
+        {% set pad = 0 %}
+        {% include "author-skill-item.html" %}
         {% for s in s.subskills %}
-            {% assign pad = 4 %}
-            {% include author-skill-item.html %}
+            {% set pad = 4 %}
+            {% include "author-skill-item.html" %}
             {% for s in s.subskills %}
-                {% assign pad = 5 %}
-                {% include author-skill-item.html %}
+                {% set pad = 5 %}
+                {% include "author-skill-item.html" %}
             {% endfor %}
         {% endfor %}
     {% endfor %}

@@ -1,12 +1,9 @@
 <div class="card p-4 mb-3" id="profile-card">
     <div class="d-flex flex-column align-items-center">
         <!-- <a href="/profile"> -->
-        <img src="{{site.url}}{{site.baseurl}}/assets/img/{{ site.data.profile.author_logo }}" class="profile-img"/>
+        <img src="/img/{{ site.author.logo }}" class="profile-img"/>
         <!-- </a> -->
-        {% unless displayname %}
-            {% assign displayname = site.data.profile.author %}
-        {% endunless %}
-        <h2 class="profile-name">{{displayname}}</h2>
+        <h2 class="profile-name">{{displayname | default(site.author.name) }}</h2>
         <!-- <p class="profile-bio">{{ site.subtitle }}</p> -->
     </div>
 
@@ -24,7 +21,7 @@
             </div>
             <div class="col p-2">
                 <a class="social-link" href="https://www.codingame.com/profile/8444100ecb9723c1ec542346b0630aaa2821532">
-                    <img height="24" src="{{'assets/img/logos/codingame.png' | absolute_url}}"/>
+                    <img height="24" src="/img/logos/codingame.png"/>
                 </a>
             </div>
             <div class="col p-2 px-0">
@@ -39,16 +36,16 @@
             </div>
             <div class="col p-2">
                 <a class="social-link" href="https://musescore.com/user/20636901">
-                    <img height="24" src="{{'assets/img/logos/musescore.png' | absolute_url}}"/>
+                    <img height="24" src="/img/logos/musescore.png"/>
                 </a>
             </div>
             <div class="col p-2">
-                <a class="social-link" href="{{'feeds' | absolute_url}}">
+                <a class="social-link" href="/feeds">
                     <i class="fas fa-rss"></i>
                 </a>
             </div>
             <div class="col p-2">
-                <a class="social-link" href="mailto:{{site.data.profile.author_email}}">
+                <a class="social-link" href="mailto:{{site.author.email}}">
                     <i class="fas fa-envelope"></i>
                 </a>
             </div>

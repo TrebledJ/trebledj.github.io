@@ -8,7 +8,7 @@ related_tags: ctf writeup
 usemathjax: true
 ---
 
-{% include toc.md %}
+{% include "toc.md" %}
 
 ## Description
 

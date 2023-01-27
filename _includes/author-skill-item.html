@@ -23,7 +23,7 @@
         {% endif %}
     </div>
     <div style="width: 45%">
-        {% assign prog = s.strength | times: 10 %}
+        {% set prog = s.strength | times: 10 %}
         <div class="mt-0">
             {% if s.active %}
                 <div class="progress" data-placement="top" data-toggle="tooltip" title="{{s.active}}">

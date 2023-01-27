@@ -11,7 +11,7 @@ related_auto: true
 
 This project involved creating a functioning e-payment system to be integrated at our high school's cafeteria.
 
-{% include toc.md %}
+{% include "toc.md" %}
 
 ### Context
 

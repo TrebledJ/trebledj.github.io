@@ -13,12 +13,10 @@
     </title>
     <meta content="IE=edge" http-equip="X-UA-Compatible"/>
     <meta content="width=device-width, initial-scale=1" name="viewport"/>
-    {# <meta name="description" content="{{ page.description | strip_html | default: site.description }} - {% if page.description %}{{ page.content | markdownify | strip_html | truncatewords: 30 }}{% endif %}"> #}
-    {# TODO: add description #}
-    <meta name="description" content="Sample description">
+    <meta name="description" content="{{ page.description or site.description }}">
     {# <meta name="keywords" content="{% if page.title %}{{ page.title }}, {{ site.title }}, {% for tag in page.tags %}{{ tag }}{% if forloop.last == false %}, {% endif %}{% endfor %}{% else %}{{ site.title }}, {% for tag in site.tags %}{% capture tags_slug %}{{ tag | first }}{% endcapture %}{% for tag in tags_slug %}{{ tag }}{% endfor %}{% if forloop.last == false %}, {% endif %}{% endfor %}{% endif %},{{ page.keywords | escape }}"/> #}
     {# TODO: add keywords #}
-    <meta name="keywords" content="Sample keywords"/> 
+    <meta name="keywords" content="{{site.description}}"/> 
 
     <link href="/feed.xml" rel="alternate" title="RSS" type="application/rss+xml"/>
     <meta content="{{ site.share.fb_appid }}" property="fb:app_id"/>
@@ -143,7 +141,7 @@
 
     <!-- Google Analytics -->
     {% if site.google_analytics and jekyll.environment == 'production' %}
-        {% include analytics.html %}
+        {% include "analytics.html" %}
     {% endif %}
 
     <!-- (you can remove the below scripts but do buy me a coffee to show some support :) -->

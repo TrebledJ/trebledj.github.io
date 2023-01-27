@@ -9,7 +9,7 @@ related_tags: programming
 > *Do not say a little in many words, but a great deal in a few.*  
 >  – Pythagoras
 
-{% include toc.md %}
+{% include "toc.md" %}
 
 ## What the heck are implicits?
 

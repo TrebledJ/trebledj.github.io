@@ -94,9 +94,13 @@ module.exports = function (eleventyConfig) {
 	})
 
 	// Filters
-	eleventyConfig.addFilter("readableDate", (dateObj, format, zone) => {
+	eleventyConfig.addFilter("date", (dateObj, format, zone) => {
 		// Formatting tokens for Luxon: https://moment.github.io/luxon/#/formatting?id=table-of-tokens
 		return DateTime.fromJSDate(dateObj, { zone: zone || "utc" }).toFormat(format || "dd LLLL yyyy");
+	});
+
+	eleventyConfig.addFilter("contains", (haystack, needle) => {
+		return haystack ? haystack.includes(needle) : false;
 	});
 
 	eleventyConfig.addFilter('htmlDateString', (dateObj) => {
@@ -133,6 +137,10 @@ module.exports = function (eleventyConfig) {
 	eleventyConfig.addFilter("filterTagList", function filterTagList(tags) {
 		return (tags || []).filter(tag => ["all", "nav", "post", "posts"].indexOf(tag) === -1);
 	});
+
+	eleventyConfig.addNunjucksFilter("markdownify", (markdownString) =>
+		md.render(markdownString)
+	);
 
 	// Customize Markdown library settings:
 	eleventyConfig.amendLibrary("md", mdLib => {
