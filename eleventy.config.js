@@ -3,6 +3,8 @@ const { DateTime } = require("luxon");
 const markdownItAnchor = require("markdown-it-anchor");
 const markdownItAttrs = require('markdown-it-attrs');
 
+const htmlmin = require("html-minifier");
+
 const pluginRss = require("@11ty/eleventy-plugin-rss");
 const pluginSyntaxHighlight = require("@11ty/eleventy-plugin-syntaxhighlight");
 const pluginNavigation = require("@11ty/eleventy-navigation");
@@ -141,6 +143,23 @@ module.exports = function (eleventyConfig) {
 	eleventyConfig.addNunjucksFilter("markdownify", (markdownString) =>
 		md.render(markdownString)
 	);
+
+	// Transforms
+	eleventyConfig.addTransform("htmlmin", function (content) {
+		// Prior to Eleventy 2.0: use this.outputPath instead
+		if (this.page.outputPath && this.page.outputPath.endsWith(".html")) {
+			let minified = htmlmin.minify(content, {
+				useShortDoctype: true,
+				removeComments: true,
+				minifyJS: true,
+				collapseWhitespace: true
+			});
+			return minified;
+		}
+
+		return content;
+	});
+
 
 	// Customize Markdown library settings:
 	eleventyConfig.amendLibrary("md", mdLib => {

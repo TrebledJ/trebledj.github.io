@@ -51,6 +51,7 @@
 		"bootstrap": "^5.2.3",
 		"eleventy-sass": "^2.1.7",
 		"font-awesome": "^4.7.0",
+		"html-minifier": "^4.0.0",
 		"jquery": "^3.6.3",
 		"lunr": "^2.3.9",
 		"markdown-it-attrs": "^4.1.6",
