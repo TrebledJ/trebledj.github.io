@@ -9,7 +9,7 @@
                 {% if page.related %}
                     {% set related = page.related | split: " " %}
                     {% for rel in related %}
-                        {% for post in site.posts %}
+                        {% for post in collections.posts %}
                             {% if post.url contains rel %}
                                 {% include "post-preview-compressed.html" %}
                             {% endif %}
@@ -17,7 +17,7 @@
                     {% endfor %}
                 {% else %}
                     {% set count_included = 0 %}
-                    {% for post in site.posts %}
+                    {% for post in collections.posts %}
                         {% if post.url != page.url %}
                             {% set should_include = false %}
                             {% if should_include == false and page.related_more %}

@@ -1,3 +1,5 @@
+{% from "post-preview.html" import render_preview %}
+
 <section id="recent-posts">
     <div class="d-flex flex-row justify-content-between align-items-center">
         <h2 class="mb-0">Recent Posts</h2>
@@ -7,9 +9,7 @@
     </div>
     <br/>
 
-    {% for post in site.posts %}
-        {% if loop.index0 < 5 %}
-            {% include "post-preview.html" %}
-        {% endif %}
+    {% for post in collections.posts | reverse | head(5) %}
+        {{ render_preview(post) }}
     {% endfor %}
 </section>

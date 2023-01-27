@@ -1,25 +1,28 @@
+{% from "post-metadata.html" import render_metadata %}
+
+{% macro render_preview(post, taglimit=2) %}
 <article class="post-preview">
-    <a href="{{site.baseurl}}{{post.url}}"></a>
+    <a href="{{post.data.url}}"></a>
     <div class="post-preview-container d-flex">
-        <a class="post-thumbnail" href="{{site.baseurl}}{{post.url}}">
-            <img class="post-img-blurred-bg" src="{{site.url}}{{site.baseurl}}{{post.thumbnail}}" alt="{{ post.title }}">
+        <a class="post-thumbnail" href="{{post.data.url}}">
+            <img class="post-img-blurred-bg" src="{{post.data.thumbnail}}" alt="{{ post.data.title }}">
             <div class="post-img-container d-flex w-100 h-100">
-                <img class="post-img-contain" src="{{site.url}}{{site.baseurl}}{{post.thumbnail}}" alt="{{ post.title }}">
+                <img class="post-img-contain" src="{{post.data.thumbnail}}" alt="{{ post.data.title }}">
             </div>
         </a>
     
         <div class="post-content d-flex flex-column justify-content-between">
-            <a href="{{site.baseurl}}{{post.url}}"></a>
+            <a href="{{post.data.url}}"></a>
             <div>
                 <h2 class="post-title">
-                    {{post.title | smartify}}
+                    {{post.data.title}}
                 </h2>
                 <div class="post-summary">
-                    <p>{{ post.description }}</p>
+                    <p>{{ post.data.description }}</p>
                 </div>
             </div>
-            {% set tag_limit = tag_limit | default: 2 %}
-            {% include "post-metadata.html" %}
+            {{ render_metadata(post, taglimit) }}
         </div>
     </div>
 </article>
+{% endmacro %}

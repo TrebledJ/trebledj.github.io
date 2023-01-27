@@ -2,9 +2,9 @@
 layout: layouts/page-with-sidebar
 ---
 <div class="post-preview-list">
-    {% for post in paginator.posts %}
+    {% for post in collections.posts %}
         {% include "post-preview.html" %}
     {% endfor %}
 </div>
 
-{% include "pagination-links.html" %}
+{# {% include "pagination-links.html" %} #}

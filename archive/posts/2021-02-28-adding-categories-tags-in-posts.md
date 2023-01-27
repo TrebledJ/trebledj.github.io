@@ -6,7 +6,7 @@ author: xplor4r
 date: '2021-02-28 1:35:23 +0530'
 tag: ['jekyll','guides', 'sample_category']
 tags: jekyll
-thumbnail: /assets/img/posts/code.jpg
+thumbnail: /img/posts/code.jpg
 keywords: devlopr jekyll, how to use devlopr, devlopr, how to use devlopr-jekyll, devlopr-jekyll tutorial,best jekyll themes, multi tags and tags
 usemathjax: false
 permalink: /posts/adding-tags-tags-in-posts/

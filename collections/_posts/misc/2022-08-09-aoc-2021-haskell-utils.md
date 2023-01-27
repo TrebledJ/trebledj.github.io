@@ -3,7 +3,7 @@ title: AOC 2021 Haskell Utils
 description: An introduction and walkthrough of my haskell utilities.
 updated: "2022-08-09"
 tags: aoc haskell programming
-thumbnail: /assets/img/posts/misc/aoc/recycle-hs-utils.jpg
+thumbnail: /img/posts/misc/aoc/recycle-hs-utils.jpg
 usemathjax: true
 related_tags: aoc haskell
 ---
@@ -12,7 +12,7 @@ Haskell, despite its relatively low popularity, is quite up to speed on language
 
 In Advent of Code (AOC) 2021, I found it useful to separate common functions into a [Utils.hs][aoc-utils] file. After all, to make our environments cleaner we should reduce, reuse, and recycle.
 
-![](/assets/img/posts/misc/aoc/recycle-hs-utils.jpg){:.w-75}
+![](/img/posts/misc/aoc/recycle-hs-utils.jpg){:.w-75}
 {:.center}
 
 I'll introduce some basic utilities first before moving on to advanced ones. However, I won't make too many attempts to teach the basics. For that you may refer yourself to [Learn You a Haskell][lyah] (LYAH), which provides a very nice tutorial into Haskell.
@@ -184,7 +184,7 @@ counter = foldr (\x -> M.insertWith (+) x 1) M.empty
 
 This helper function takes a list and counts the number of occurrences, packing it into a hashmap for efficient lookup.
 
-![](/assets/img/posts/misc/aoc/hashmapuh.jpg){:.w-75}
+![](/img/posts/misc/aoc/hashmapuh.jpg){:.w-75}
 {:.center}
 
 After all, if Python has such a convenience (`collections.Counter`), why shouldn't Haskell have something similar?
@@ -275,7 +275,7 @@ instance ParseLike Parser where
     Left  err -> T.trace (errorBundlePretty err) undefined
 ```
 
-![](/assets/img/posts/misc/aoc/parselike.jpg){:.w-50}
+![](/img/posts/misc/aoc/parselike.jpg){:.w-50}
 {:.center}
 
 Here's an example usage from [Day 1](https://github.com/TrebledJ/aoc/blob/master/2021/haskell/app/D01.hs):

@@ -98,11 +98,15 @@ module.exports = function (eleventyConfig) {
 	// Filters
 	eleventyConfig.addFilter("date", (dateObj, format, zone) => {
 		// Formatting tokens for Luxon: https://moment.github.io/luxon/#/formatting?id=table-of-tokens
-		return DateTime.fromJSDate(dateObj, { zone: zone || "utc" }).toFormat(format || "dd LLLL yyyy");
+		return DateTime.fromJSDate(dateObj, { zone: zone || "utc" }).toFormat(format || "yyyy-LL-dd");
 	});
 
-	eleventyConfig.addFilter("contains", (haystack, needle) => {
-		return haystack ? haystack.includes(needle) : false;
+	eleventyConfig.addFilter("exclude", (array, items) => {
+		return array.filter(e => typeof(items) == 'string' ? e != items : !items.includes(e));
+	});
+
+	eleventyConfig.addFilter("split", (str, delimiter) => {
+		return str ? str.split(delimiter || ' ') : [];
 	});
 
 	eleventyConfig.addFilter('htmlDateString', (dateObj) => {

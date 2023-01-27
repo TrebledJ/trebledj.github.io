@@ -9,7 +9,7 @@ layout: default-container
         <p>{{ page.bio }}</p>
 
         <h2>Post by this author</h2>
-        {%- assign author_posts = site.posts
+        {%- assign author_posts = collections.posts
                   | where: "author", page.username
                 -%}
         {%- for post in author_posts -%}

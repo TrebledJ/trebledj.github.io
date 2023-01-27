@@ -12,7 +12,7 @@ permalink: /feeds/posts.xml
         <lastBuildDate>{{ site.time | date_to_rfc822 }}</lastBuildDate>
         <generator>Jekyll v{{ jekyll.version }}</generator>
 
-        {% for post in site.posts limit:20 %}
+        {% for post in collections.posts limit:20 %}
             {% if post.feed != false %}
                 <item>
                     <title>{{ post.title | xml_escape }}</title>

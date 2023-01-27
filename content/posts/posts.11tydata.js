@@ -2,5 +2,8 @@ module.exports = {
 	tags: [
 		"posts"
 	],
-	"layout": "layouts/post.njk",
+	layout: "layouts/post",
+	eleventyComputed: {
+		permalink: data => '/posts/' + data.page.fileSlug
+	}
 };

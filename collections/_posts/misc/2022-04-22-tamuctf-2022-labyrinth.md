@@ -3,7 +3,7 @@ title: TAMUctf 2022 – Labyrinth
 description: Using CFGs to solve a control-flow maze.
 updated: "2022-08-07"
 tags: ctf reverse writeup python programming
-thumbnail: /assets/img/posts/misc/ctf/labyrinth/labyrinth-thumbnail.jpg
+thumbnail: /img/posts/misc/ctf/labyrinth/labyrinth-thumbnail.jpg
 related_tags: ctf writeup
 ---
 
@@ -53,10 +53,10 @@ It appears that PIE is enabled. We'll make a mental note of this, since this may
 
 Next, we decompile our elves using ghidra and make some observations.
 
-![Labyrinth decompiled 1.](/assets/img/posts/misc/ctf/labyrinth/labyrinth-1.jpg){:.w-100}
+![Labyrinth decompiled 1.](/img/posts/misc/ctf/labyrinth/labyrinth-1.jpg){:.w-100}
 {:.center}
 
-![Labyrinth decompiled 2.](/assets/img/posts/misc/ctf/labyrinth/labyrinth-2.jpg){:.w-100}
+![Labyrinth decompiled 2.](/img/posts/misc/ctf/labyrinth/labyrinth-2.jpg){:.w-100}
 {:.center}
 
 * Each binary contains a thousand (1000) functions (excluding `main`). The symbols are `function_0`, `function_1`, `function_2`, and so on.
@@ -109,14 +109,14 @@ Now we'll try some good ol' angr `explore()` and see what turns up.
 #### Path Explosion
 Unfortunately, this takes forever to run due to *path explosion*. Notice how the control flow makes the paths diverge in one of the binaries:
 
-![Paths go boom.](/assets/img/posts/misc/ctf/labyrinth/labyrinth-path-explosion-graph.jpg){:.w-75}
+![Paths go boom.](/img/posts/misc/ctf/labyrinth/labyrinth-path-explosion-graph.jpg){:.w-75}
 {:.center}
 
 Now angr is pretty smart, but not too smart. Angr will simulate all paths and if it encounters a branch, it will simulate both branches together. However, it will treat the `function_133` branches as separate states...
 
 To get a more concrete view of paths exploding, Gru tried calling `simgr.run(n=50)`—which simulates 50 steps...
 
-![Good going, Gru!](/assets/img/posts/misc/ctf/labyrinth/labyrinth-path-explosion-gru.jpg){:.w-75}
+![Good going, Gru!](/img/posts/misc/ctf/labyrinth/labyrinth-path-explosion-gru.jpg){:.w-75}
 {:.center}
 
 90 active states is quite a lot! Usually we'd want to limit ourselves to around 10 active states to ensure good simulation speed.
@@ -126,9 +126,9 @@ With 50 steps and already 90 active states, the situation is pretty dismal. We'l
 #### CFGs to the Rescue
 Control flow graphs (CFGs) are directed graphs where nodes are blocks of code and edges indicate the direction the code can take. By translating the program into a graph, we can utilise the many graph algorithms at our disposal. In particular, we're interested in the shortest path between a start node and target node.
 
-![Path explosion 1.](/assets/img/posts/misc/ctf/labyrinth/labyrinth-path-explosion-1.jpg){:.w-30}
-![Path explosion 2.](/assets/img/posts/misc/ctf/labyrinth/labyrinth-path-explosion-2.jpg){:.w-30}
-![Path explosion 3.](/assets/img/posts/misc/ctf/labyrinth/labyrinth-path-explosion-3.jpg){:.w-30}
+![Path explosion 1.](/img/posts/misc/ctf/labyrinth/labyrinth-path-explosion-1.jpg){:.w-30}
+![Path explosion 2.](/img/posts/misc/ctf/labyrinth/labyrinth-path-explosion-2.jpg){:.w-30}
+![Path explosion 3.](/img/posts/misc/ctf/labyrinth/labyrinth-path-explosion-3.jpg){:.w-30}
 {:.center}
 
 Angr comes with a bundle of analysis modules; these include two CFG analysis strategies: `CFGFast` and `CFGEmulated`. The former analyses the program statically (without actually simulating the code!), whereas the latter analyses the program dynamically (i.e. by simulating the code).

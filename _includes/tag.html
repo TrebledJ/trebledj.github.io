@@ -1,1 +1,3 @@
-<a class="post-tags tag" href="{{site.baseurl}}/tags/{{tag}}">{{tag}}</a>
+{% macro render_tag(name) %}
+<a class="post-tags tag" href="/tags/{{name}}">{{name}}</a>
+{% endmacro %}

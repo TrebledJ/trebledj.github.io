@@ -124,7 +124,7 @@ layout: layouts/default-full
 
             {% set related_limit = page.related_limit | default: 5 %}
             {% set related_count = 0 %}
-            {% for post in site.posts %}
+            {% for post in collections.posts %}
                 {% set is_related = false %}
                 {% for tag in related_tags %}
                     {% set tag2 = tag | slugify %}

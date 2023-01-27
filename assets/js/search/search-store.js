@@ -2,7 +2,7 @@
 ---
 
 var store = [
-  {% for post in site.posts %}
+  {% for post in collections.posts %}
       {
           "type": "post",
           "title": {{post.title | jsonify}},
