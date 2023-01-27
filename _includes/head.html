@@ -60,33 +60,7 @@
         {% endfor %}
     {% endif %}
 
-    <!-- Twitter Cards -->
-      <!-- <meta name="twitter:card" content="summary" />
-  <meta name="twitter:site" content="@{{ site.share.twitter_username }}" />
-  <meta name="twitter:creator" content="@{{ site.share.twitter_username }}" />
-
-  {% if page.title %}
-  <meta name="twitter:title" content="{{ page.title }}" />
-  {% else %}
-  <meta name="twitter:title" content="{{ site.title }}" />
-  {% endif %}
-
-  {% if page.url %}
-  <meta name="twitter:url" content="{{ site.url }}{{ page.url }}" />
-  {% endif %} {% if page.description %}
-  <meta name="twitter:description" content="{{ page.description }}" />
-  {% else %}
-  <meta name="twitter:description" content="{{ site.description }}" />
-  {% endif %} {% if page.header-img %}
-  <meta
-    name="twitter:image:src"
-    content="{{ site.url }}{{ page.thumbnail }}"
-  />
-  {% endif %} -->
-
     <link rel="stylesheet" href="/css/main.css"/>
-    <!-- <link rel="stylesheet" href="assets/css/custom-style.css" /> -->
-    {# <link rel="stylesheet" href="/css/lightgallery.min.css"/> #}
     <link rel="stylesheet" href="/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="/css/font-awesome.min.css"/>
     <!-- Dev Icons -->
@@ -95,8 +69,7 @@
     <link href="https://fonts.googleapis.com/css?family=Quicksand&display=swap" rel="stylesheet"/>
     <!-- Favicon -->
     <link rel="icon" href="/img/favicon.ico" type="image/gif" sizes="16x16"/>
-    {# <link rel="stylesheet" href="/css/index.css"> #}
-    <link rel="stylesheet" href="/css/prism-okaidia.css">{# addPassthroughCopy file #}
+    <link rel="stylesheet" href="/css/prism-okaidia.css">
     <link rel="stylesheet" href="/css/prism-diff.css">
     <script>
       var base_url = '{{site.url}}{{site.baseurl}}';
@@ -109,20 +82,15 @@
     <script src="/js/jquery.easing.min.js"></script>
     <script src="/js/bootstrap.bundle.min.js"></script>
     <script src="/js/jquery.mousewheel.min.js"></script>
-    {# <script src="/js/lightgallery-all.min.js"></script> #}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/picturefill/3.0.2/picturefill.min.js"></script>
-    <!-- <script src="{{site.url}}{{site.baseurl}}/assets/bower_components/imagesloaded/imagesloaded.pkgd.min.js"></script> -->
     <script src="/js/nanobar.min.js"></script>
     <script src="/js/search/lunr.min.js"></script>
-    {# <script src="/js/search/search-store.js"></script> #}
     <script src="/js/search/search.js"></script>
     <script src="/js/on-scroll-progress.js"></script>
     <script src="/js/mode-switcher.js"></script>
     <script src="/js/typewriter.js"></script>
     <script src="/js/head.js"></script>
     
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/moment.min.js"></script> -->
-
     <!-- for Mathjax support -->
     {% if usemathjax %}
         <script>
@@ -147,12 +115,6 @@
         {% include "analytics.html" %}
     {% endif %}
 
-    <!-- (you can remove the below scripts but do buy me a coffee to show some support :) -->
-    <!-- Maker widget  -->
-      <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-      <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-      <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-      <!--[if gt IE 8]><!-->
     <html class="no-js"><!--<![endif]-->
     </html>
 </head>
