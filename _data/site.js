@@ -14,6 +14,11 @@ module.exports = function() {
 			I'm also interested in a wide range of fields: [robotics](/tags/robotics), [cybersecurity](/tags/ctf),
 			[application development](/tags/apps), and software engineering in general.
 			I'm excited about developing applications to solve problems and provide an educational interface for learners.`
-		}
+		},
+		"github_username": "TrebledJ",
+		"musescore_id": "20636901",
+		"google_analytics": "G-7TQ4WV0LMK",
+		"disqus_shortname": "trebledj",
+		"soundcloud_color": "2631c8",
 	};
 };

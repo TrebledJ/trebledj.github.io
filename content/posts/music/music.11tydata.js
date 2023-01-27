@@ -4,4 +4,5 @@ module.exports = {
         "music",
     ],
     layout: "layouts/post-music",
+    include_thumbnail: false,
 }
