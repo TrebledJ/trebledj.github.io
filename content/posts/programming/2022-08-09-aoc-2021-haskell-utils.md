@@ -14,8 +14,8 @@ Haskell, despite its relatively low popularity, is quite up to speed on language
 
 In Advent of Code (AOC) 2021, I found it useful to separate common functions into a [Utils.hs][aoc-utils] file. After all, to make our environments cleaner we should reduce, reuse, and recycle.
 
-![](/img/posts/misc/aoc/recycle-hs-utils.jpg){:.w-75}
-{:.center}
+![](/img/posts/misc/aoc/recycle-hs-utils.jpg){.w-75}
+{.center}
 
 I'll introduce some basic utilities first before moving on to advanced ones. However, I won't make too many attempts to teach the basics. For that you may refer yourself to [Learn You a Haskell][lyah] (LYAH), which provides a very nice tutorial into Haskell.
 
@@ -63,7 +63,7 @@ count p = length . filter p
 ```
 
 `.` stands for function composition, similar to those you see in math ($f \circ g$). On the practical side, it applies the right-hand-side function first, followed by the left-hand-side function. Programs are all about combining small operations to form bigger ones, so you'll see `.` being used a lot in purely functional code.
-{:.alert--info}
+{.alert--info}
 
 In the code above, you can think of `count` as taking one parameter `p :: a -> Bool` and returning a function `[a] -> Int` which is the composition of `length` and `filter p`. It may help if I refine the type signature, so that it's clear that it returns `[a] -> Int`:
 
@@ -94,7 +94,7 @@ ghci> lastBy (< 4) [1..5]
 ```
 
 `even` checks if a number is even. `< 4` checks if a number is less than 4. We *could* be more explicit: `lessThan4 x = x < 4`; but `< 4` is just more concise.
-{:.alert--info}
+{.alert--info}
 
 These functions are useful when we've generated a list of possible solutions, but only want the first or last element which meets some criteria.
 
@@ -124,7 +124,7 @@ fromBinary "1011"
 ```
 
 `digitToInt` is a function defined in `Data.Char` which converts a char digit (`'0'..'9'`) to the corresponding integer `0..9`.
-{:.alert--info}
+{.alert--info}
 
 ### Debug Utilities
 Debugging in the functional world is slightly more nuanced than debugging in the imperative world. Haskell's `Debug.Trace` library—with its signature function `trace`—allows us to print messages to standard output, bypassing the restrictions of pure functions. Some examples of `trace` in action:
@@ -186,8 +186,8 @@ counter = foldr (\x -> M.insertWith (+) x 1) M.empty
 
 This helper function takes a list and counts the number of occurrences, packing it into a hashmap for efficient lookup.
 
-![](/img/posts/misc/aoc/hashmapuh.jpg){:.w-75}
-{:.center}
+![](/img/posts/misc/aoc/hashmapuh.jpg){.w-75}
+{.center}
 
 After all, if Python has such a convenience (`collections.Counter`), why shouldn't Haskell have something similar?
 
@@ -217,7 +217,7 @@ counter :: (Foldable t, Eq k, Hashable k, Num v) =>
 I used the [strict hashmap][data-hashmap-strict] provided in the `unordered-collections` package, but it should work with lazy hashmaps as well.
 
 If you want to use the `Hashable` typeclass in code, you'll need to ["expose" the hidden `hashable` package and import `Data.Hashable`](https://stackoverflow.com/a/68761231/10239789).
-{:.alert--warning}
+{.alert--warning}
 
 ### Parser Utilities
 I used MegaParsec this year, but the idea of the following utilities can also be applied for other parser combinator libraries.
@@ -277,8 +277,8 @@ instance ParseLike Parser where
     Left  err -> T.trace (errorBundlePretty err) undefined
 ```
 
-![](/img/posts/misc/aoc/parselike.jpg){:.w-50}
-{:.center}
+![](/img/posts/misc/aoc/parselike.jpg){.w-50}
+{.center}
 
 Here's an example usage from [Day 1](https://github.com/TrebledJ/aoc/blob/master/2021/haskell/app/D01.hs):
 

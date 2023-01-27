@@ -25,8 +25,8 @@ To give a bit more background, our school cafeteria has five to six different lo
 
 Also some background about the card: it's a [radio frequency ID (RFID)][rfid] card. I won't go into the technical details of it, but basically you scan the card on a dedicated reader, and it can read an unique ID.
 
-![Exhibit A: an RFID](/img/posts/projects/studentcard/rfid.jpg){:.w-60}
-{:.center}
+![Exhibit A: an RFID](/img/posts/projects/studentcard/rfid.jpg){.w-60}
+{.center}
 
 ### Development
 #### A Painful Start
@@ -41,11 +41,11 @@ Initially I started developing the application using SFML, since it was the only
 * There are UI classes for widgets (e.g. pushbuttons, checkboxes, listviews), so I didn't have to reinvent the wheel.
 * It was cross-platform, which was convenient in case the school's computer operating system is different.
 
-![SFML is not cute.](/img/posts/memes/sfml-is-not-cute.jpg){:.w-60}
-{:.center}
+![SFML is not cute.](/img/posts/memes/sfml-is-not-cute.jpg){.w-60}
+{.center}
 
 If there was one thing I learned, it was to understand the problem first, research the appropriate tools, and *then* start developing the solution. I wasted maybe two to four weeks coding a good GUI with SFML and scratching my head.
-{:.alert--success}
+{.alert--success}
 
 #### Designing a Robust Solution
 Regardless, all the benefits brought by Qt allowed me to focus more on solving business logic issues. The logic issue? Well... there are several questions we should answer.
@@ -68,8 +68,8 @@ A better alternative was to use MySQL or Microsoft SQL Server, which is designed
 
 How does MySQL and SQL Server connect with multiple clients across the network? This is something you'll have to ask the experts. :D
 
-![Net-what?](/img/posts/memes/netwhat.jpg){:.w-60}
-{:.center}
+![Net-what?](/img/posts/memes/netwhat.jpg){.w-60}
+{.center}
 
 #### Sidenote on Version Control
 When undertaking *any* project, it is crucial to have flexibility. A version control system offers this.
@@ -83,7 +83,7 @@ VCSs take this idea of versioning and put it on steroids. While developing, you 
 Typically, VCSs are used by teams to effectively manage their code between team members. But they're also effective if you're coding alone! The (outdated) screenshots of the GUI in this post are here thanks to version control holding onto them. (I uploaded them but deleted them in one of my commits.)
 
 So if you're planning on doing a project (small, medium, or big) or even just cataloguing your learning process, consider using a VCS.
-{:.alert--success}
+{.alert--success}
 
 #### Designing the GUI
 As mentioned before, there are three groups of users: vendors, students, and admins.
@@ -92,7 +92,7 @@ As mentioned before, there are three groups of users: vendors, students, and adm
 
 This is what the design for the vendor interface looks like:
 
-![Vendor ordering UI.](/img/posts/projects/studentcard/vendor-order.jpg){:.w-100}
+![Vendor ordering UI.](/img/posts/projects/studentcard/vendor-order.jpg){.w-100}
 
 Giant buttons on the left to select their customers' orders. A list of selected items on the right. And some buttons down below.
 
@@ -117,14 +117,14 @@ But these are not very interesting.
 
 Admins, of course, have a more powerful role. These peeps can view *and* **update** student's balances (but the actual flows are pretty boring TBH). (Unfortunately I did not save any screenshots of the GUI and I'm not bothered to redownload Qt and rebuild the app. >.>)
 
-![Unnnnnlliiiimmiiitted pooower!.](/img/posts/memes/unlimited-power.jpg){:.w-80}
-{:.center}
+![Unnnnnlliiiimmiiitted pooower!.](/img/posts/memes/unlimited-power.jpg){.w-80}
+{.center}
 
 Students have the most ***exciting*** user flow of all.
 
-![Standby UI, before scanning.](/img/posts/projects/studentcard/standby.jpg){:.w-45}
-![Standby UI, after scanning.](/img/posts/projects/studentcard/standby-scanned.jpg){:.w-45}
-{:.center}
+![Standby UI, before scanning.](/img/posts/projects/studentcard/standby.jpg){.w-45}
+![Standby UI, after scanning.](/img/posts/projects/studentcard/standby-scanned.jpg){.w-45}
+{.center}
 
 And since they have an exciting flow, I'll describe it for fun:
 
@@ -150,7 +150,7 @@ When I asked a student about it this year (2022), they said that the entire syst
 * Spend some time researching the problem you're trying to solve and the possible solutions. You'll accrue less [technical debt][techdebt] and thank yourself in the future.
 * Use a version control system for flexibility and to keep track of history.
 * Don't be afraid to try something new. The journey might just be worth it.
-{:.alert--success}
+{.alert--success}
 
 
 [octopus]: https://en.wikipedia.org/wiki/Octopus_card

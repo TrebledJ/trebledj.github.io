@@ -52,15 +52,15 @@ As a first step, we'll run `checksec` to see what securities are in place.
 It appears that PIE is enabled. We'll make a mental note of this, since this may mess with function addresses.
 
 **What is PIE?** Position-independent executable is a security mechanism whereby on starting an application, the OS will offset the assembly sections (`.data`, `.text`, etc.).
-{:.alert--success}
+{.alert--success}
 
 Next, we decompile our elves using ghidra and make some observations.
 
-![Labyrinth decompiled 1.](/img/posts/misc/ctf/labyrinth/labyrinth-1.jpg){:.w-100}
-{:.center}
+![Labyrinth decompiled 1.](/img/posts/misc/ctf/labyrinth/labyrinth-1.jpg){.w-100}
+{.center}
 
-![Labyrinth decompiled 2.](/img/posts/misc/ctf/labyrinth/labyrinth-2.jpg){:.w-100}
-{:.center}
+![Labyrinth decompiled 2.](/img/posts/misc/ctf/labyrinth/labyrinth-2.jpg){.w-100}
+{.center}
 
 * Each binary contains a thousand (1000) functions (excluding `main`). The symbols are `function_0`, `function_1`, `function_2`, and so on.
 * Each of these functions will:
@@ -79,7 +79,7 @@ To "solve" an elf, we need to give an appropriate input at each step of the func
 
 **What is angr?**  
 angr is a python library which simulates machine code while keeping track of program state. It's exploration features are useful to find the input corresponding to a given output.
-{:.alert--success}
+{.alert--success}
 
 #### Coding
 As a preliminary step, we'll import angr, load the project, and set some constants.
@@ -97,7 +97,7 @@ def solve(file='elf'):
 ```
 
 Note: ghidra will load PIE assembly at offset `0x100000`, but angr loads it at `0x400000` by default. So all addresses in the previous section were offset by an additional `0x300000` to account for this difference. There's a way to make angr load at a custom offset, but I forgot what the option was called. (But the option exists!)
-{:.alert--warning}
+{.alert--warning}
 
 Now we'll try some good ol' angr `explore()` and see what turns up.
 
@@ -112,15 +112,15 @@ Now we'll try some good ol' angr `explore()` and see what turns up.
 #### Path Explosion
 Unfortunately, this takes forever to run due to *path explosion*. Notice how the control flow makes the paths diverge in one of the binaries:
 
-![Paths go boom.](/img/posts/misc/ctf/labyrinth/labyrinth-path-explosion-graph.jpg){:.w-75}
-{:.center}
+![Paths go boom.](/img/posts/misc/ctf/labyrinth/labyrinth-path-explosion-graph.jpg){.w-75}
+{.center}
 
 Now angr is pretty smart, but not too smart. Angr will simulate all paths and if it encounters a branch, it will simulate both branches together. However, it will treat the `function_133` branches as separate states...
 
 To get a more concrete view of paths exploding, Gru tried calling `simgr.run(n=50)`—which simulates 50 steps...
 
-![Good going, Gru!](/img/posts/misc/ctf/labyrinth/labyrinth-path-explosion-gru.jpg){:.w-75}
-{:.center}
+![Good going, Gru!](/img/posts/misc/ctf/labyrinth/labyrinth-path-explosion-gru.jpg){.w-75}
+{.center}
 
 90 active states is quite a lot! Usually we'd want to limit ourselves to around 10 active states to ensure good simulation speed.
 
@@ -129,10 +129,10 @@ With 50 steps and already 90 active states, the situation is pretty dismal. We'l
 #### CFGs to the Rescue
 Control flow graphs (CFGs) are directed graphs where nodes are blocks of code and edges indicate the direction the code can take. By translating the program into a graph, we can utilise the many graph algorithms at our disposal. In particular, we're interested in the shortest path between a start node and target node.
 
-![Path explosion 1.](/img/posts/misc/ctf/labyrinth/labyrinth-path-explosion-1.jpg){:.w-30}
-![Path explosion 2.](/img/posts/misc/ctf/labyrinth/labyrinth-path-explosion-2.jpg){:.w-30}
-![Path explosion 3.](/img/posts/misc/ctf/labyrinth/labyrinth-path-explosion-3.jpg){:.w-30}
-{:.center}
+![Path explosion 1.](/img/posts/misc/ctf/labyrinth/labyrinth-path-explosion-1.jpg){.w-30}
+![Path explosion 2.](/img/posts/misc/ctf/labyrinth/labyrinth-path-explosion-2.jpg){.w-30}
+![Path explosion 3.](/img/posts/misc/ctf/labyrinth/labyrinth-path-explosion-3.jpg){.w-30}
+{.center}
 
 Angr comes with a bundle of analysis modules; these include two CFG analysis strategies: `CFGFast` and `CFGEmulated`. The former analyses the program statically (without actually simulating the code!), whereas the latter analyses the program dynamically (i.e. by simulating the code).
 

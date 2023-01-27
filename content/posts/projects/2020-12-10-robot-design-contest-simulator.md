@@ -39,8 +39,8 @@ In the rest of this post, I'll use the terms "trainee" and "user" interchangably
 ### High-Level Overview
 To give an idea of what the simulator looks like, here's a little annotated screenshot of an early version:
 
-![Annotation of the UI](/img/posts/projects/rdc-simulator/setup.jpg){:.w-100}
-{:.center}
+![Annotation of the UI](/img/posts/projects/rdc-simulator/setup.jpg){.w-100}
+{.center}
 
 Its core features?
 
@@ -73,22 +73,22 @@ In robotics, a program is usually compiled then transferred over to a microcontr
 Instead of writing a program that can touch the peripherals and actuators, trainees write a program which communicates with the simulator via standard I/O. In a microcontroller, GPIO pins can be accessed and read directly; but in the RDC simulator, GPIO data is provided from standard input. If an object is detected, the GPIO pin outputs a 1. Otherwise it outputs a 0.
 
 **What is GPIO?** General purpose input/output. In layman's terms: communicating with 1s and 0s. An example of a sensor which uses GPIO is an infrared (IR) sensor, which detects if an object is present within a certain distance in a fixed direction.
-{:.alert--info}
+{.alert--info}
 
 I won't describe the communication model between the simulator and user program in detail, since it's a bit convoluted and messy. (Although you can still [check it out][emulator-flow].) But suffice to say, there are advantages and disadvantages. An advantage is that the simulator and user program are decoupled, so the simulation would look nice and appear smooth. A disadvantage of our implementation is that the two programs (simulator and user) run asynchronously; and due to timing issues, this means that the simulation runs differently each time we hit "Run" (even without setting any randomness to our input).
 
 This disadvantage seems to heavily outweigh the advantage; but in our defense, it simulates the real world of robotics perfectly. Even though the microcontroller processors are designed to be deterministic, sensor input and motor control are almost always non-deterministic (i.e. random) to a certain degree. :P
 
 **Fun fact**: the communication model was inspired by Codingame's turn-based games. However, Codingame's turn based system provides all available input every single turn. In the RDC emulator, we only provide input if the user program requests it. Why? Well... in retrospect, we *could* have sent all available input... but by the time we realised this, it was a bit too late to change, otherwise we would break a lot of the code trainees have already written. Codingame's turn-based model is certainly much cleaner though.
-{:.alert--success}
+{.alert--success}
 
 ### Developing the Simulator
 
 #### Project Management
 We used our good friend GitHub projects and GitHub issues for project management and issue tracking.
 
-![List of GitHub issues (most of them resolved).](/img/posts/projects/rdc-simulator/issues.png){:.w-100}
-{:.center}
+![List of GitHub issues (most of them resolved).](/img/posts/projects/rdc-simulator/issues.png){.w-100}
+{.center}
 
 Some general thoughts looking back:
 
@@ -118,8 +118,8 @@ For physics, we ended up choosing Box2D. We decided to go with this library sinc
 
 One pain point I encountered was that the `b2vec2` constructor does not have default values! This caused me grief, since objects were beginning to fly ***everywhere***. And it took a LONG TIME TO DEBUGGGGG!!! I had assumed that since it was a C++-based library, it would have reasonable defaults. Well apparently not.
 
-![box2d y u no embrace c++](/img/posts/projects/rdc-simulator/b2vec2.jpg){:.w-75}
-{:.center}
+![box2d y u no embrace c++](/img/posts/projects/rdc-simulator/b2vec2.jpg){.w-75}
+{.center}
 
 #### Documentation
 There are various sources for documentation on the RDC simulator. We have [documentation related to setup, installation, and administrative procedures][emulator-start] and another set of [documentation for coding a user program][emulator-docs].
@@ -129,8 +129,8 @@ Being a rather detail-oriented person, I have become quite fond of checking and 
 ### Conclusion
 At least two software trainee teams managed to complete the game and score full points.
 
-![The winning team!](/img/posts/projects/rdc-simulator/winner.jpg){:.w-100}
-{:.center}
+![The winning team!](/img/posts/projects/rdc-simulator/winner.jpg){.w-100}
+{.center}
 
 * So was the RDC playable? Yes.
   * ~~When developing the simulator, we didn't have a working program to test if the game can be completed. So it was a relief when some teams managed to finish.~~
@@ -142,14 +142,14 @@ Some wisdom to takeaway:
 * Plan things ahead. It's better to resolve problems earlier on than later down the road. If your product is used by a lot users, changing something drastic later on may affect your users negatively.
 * Be organised. Know what TODOs exist, which ones are more important, and when they should be done.
 * Remember to initialise your Box2D `b2vec2`s unless you want your physics intentionally broken.
-{:.alert--success}
+{.alert--success}
 
 Also, some final reflections:
 
 * We had planned a roadmap but started lagging behind. Perhaps the goals were slightly unrealistic, or we didn't consider the stress of the exam period. In my eyes, we could have pushed things a bit earlier so that the trainees had more time to plan. The final features (Demo Mode) were slightly rushed at the end.
 * Coding-wise, I think we did ok. The only thing to improve was our intellectual capacity so that we could write more sophisticated simulations. Some sensors were hacked together rather awkwardly. But learning takes time.
 * Probably one thing we could've done better was provide more tips for the trainees. I heard from other seniors that some trainees had difficulty merging their code (which was one way we tested collaborative skills).
-{:.alert--warning}
+{.alert--warning}
 
 
 [ustrobotics]: https://robotics.ust.hk/

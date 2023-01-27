@@ -25,8 +25,8 @@ Another automatic binary challenge! This time there's more emphasis on `pwn`, sp
 #### Preliminary Observations
 Decompiling with ghidra, we immediately notice an unsuspicious section of code labelled `gadgets`. This contains loads of arithmetic gadgets. Our objective is to set `rax` to a certain value, presumably, using the gadgets we're given here.
 
-![](/img/posts/misc/ctf/quick-mafs-1.jpg){:.w-100}
-{:.center}
+![](/img/posts/misc/ctf/quick-mafs-1.jpg){.w-100}
+{.center}
 
 The first gadget we see is a simple MOV instruction. This allows us to set the initial value of `rax`.
 
@@ -50,8 +50,8 @@ This means:
 * We should add 8 bytes to call `print` after the gadget payload.
 
 #### Inspect-our Gadgets
-![](/img/posts/misc/ctf/inspector-gadget.png){:.w-25}
-{:.center}
+![](/img/posts/misc/ctf/inspector-gadget.png){.w-25}
+{.center}
 
 Firstly, we'll load all the provided arithmetic gadgets into a list for convenience. Using [`ROPgadget`](https://github.com/JonathanSalwan/ROPgadget) and hacking a bit into the tool, we start with the following code:
 
@@ -104,7 +104,7 @@ Further, let $m_i$, $n_i$, and $p_i$ be the number of the $i$-th add, subtract, 
 \begin{align}
 c + \sum a_im_i - \sum s_in_i = \left(\bigwedge x_ip_i\right) \wedge r
 \end{align}
-{:.alert--info}
+{.alert--info}
 
 Our strategy now is to build up this equation using Z3 symbols, then throw the equation at the Z3 solver and get back solution sets for all $m_i, n_i, p_i$.
 

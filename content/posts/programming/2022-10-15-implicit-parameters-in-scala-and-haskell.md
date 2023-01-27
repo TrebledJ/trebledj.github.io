@@ -59,7 +59,7 @@ As shown above, implicit params are coded by introducing a new set of parameters
 This is pretty useful for variables that have a single instance in any context and act like a global variable. In the Spark framework, a `SparkSession` is used to configure spark options, memory usage, and more. After configuration, we still want to hold onto the returned object in order to call functions such as `spark.sql`. Typically, we would only have one `SparkSession` in an application, so it makes sense to pass it to helper functions implicitly.
 
 One gotcha is that Scala searches the calling context for implicit parameters of a *matching type*. The variable name does not matter. Scala implicits are actually [a tad more complicated][scala-implicits-where] (and much more powerful as a result), so my example here doesn’t do it justice.
-{:.alert--warning}
+{.alert--warning}
 
 ### ...in Haskell
 Haskell’s implicit parameters are different. Here’s an example:
@@ -114,7 +114,7 @@ sort :: (?cmp :: a -> a -> Ordering) => [a] -> [a]
 ```
 
 In a Haskell type signature, stuff on the left of `=>` are type constraints; here we have `?cmp :: a -> a -> Ordering`. Although somewhat unintuitive, this leverages Haskell’s existing type system so that implicit parameters are automatically propagated. So if another function calls `sort` without a `?cmp`, then that function will also have `?cmp :: a -> a -> Ordering` in its type constraint!
-{:.alert--info}
+{.alert--info}
 
 On a different note, an important distinction is that instead of searching for variables with a matching type (as in Scala), Haskell searches for variables with the ***same name***. In a way, this behaves like C/C++ macros, but with type safety. Compare the Haskell example to this C++ example:
 
@@ -167,13 +167,13 @@ This example irks me since it uses macros, so it's a bit hacky... too hacky for 
 
 Although implicit params remove the need to explicitly state params, there is also the danger of hiding too much. This may lead to code being harder to trace and debug, and hence may cause confusion among team members.
 
-![Elmo abusing implicits. Don't be Elmo!](/img/posts/tutorials/implicits/implicits.jpg){:.w-50}
-{:.center}
+![Elmo abusing implicits. Don't be Elmo!](/img/posts/tutorials/implicits/implicits.jpg){.w-50}
+{.center}
 
 The similarity with natural languages is striking. Sometimes ambiguity may arise when people conversing don’t have sufficient context. Or misunderstanding may arise when people come from different cultures.
 
 Coming back to software engineering, implicits are best reserved for extremely common variables and unique types. Think twice before slapping `implicit` or a question mark in your code. You’ll thank yourself later.
-{:.alert--warning}
+{.alert--warning}
 
 Further Reading:
 

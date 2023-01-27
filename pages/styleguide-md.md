@@ -9,10 +9,10 @@ usemathjax: true
 ---
 
 ## Table of Contents
-{:.no_toc}
+{.no_toc}
 
 * 
-{:toc .mdtoc}
+{.oc .mdtoc}
 
 # Heading 1
 ## Heading 2
@@ -71,12 +71,12 @@ $$\sum_{i=1}^n \frac{(x_i - \mu)^2}{n}$$
 Inline latex like $$\underbrace{1 + 1 = 2}_{\text{wow}}$$ should work.
 
 Full-width image.  
-![](/img/thumbnail.png){:.w-100}
+![](/img/thumbnail.png){.w-100}
 
 Centred image.  
 
-![](/img/thumbnail.png){:.w-80}
-{:refdef style="text-align: center;"}
+![](/img/thumbnail.png){.w-80}
+{.efdef style="text-align: center;"}
 
 ## Add-Ons
 ### Alerts
@@ -84,7 +84,7 @@ Centred image.
 Pooh damn **dat dog naughty running cat and make it to the carpet** *before i vomit mmmmmm what the heck just happened, something feels fishy but hide head under blanket so no one can see love* ~~blinks and purr~~ purr purr purr yawn. `Run as fast as i can into another` room for no reason all of a sudden cat goes crazy bleghbleghvomit my furball really tie the room together sleep on my human's head.
 <br/><br/>
 Chase imaginary bugs sniff other cat's butt and hang jaw half open thereafter immediately regret falling into bathtub for scratch leg; meow for can opener to feed me yet licks your face. Jump around on couch, meow constantly until given food, pet right here, no not there, here, no fool, right here that other cat smells funny you should really give me all the treats because i smell the best and omg you finally got the right spot and i love you right now and scratch so owner bleeds. Hide when guests come over. 
-{:.alert--danger}
+{.alert--danger}
 
 Climb a tree, wait for a fireman jump to fireman then scratch his face need to chase tail spread kitty litter all over house purr as loud as possible, be the most annoying cat that you can, and, knock everything off the table yet try to hold own back foot to clean it but foot reflexively kicks you in face, go into a rage and bite own foot, hard.
 ```cpp
@@ -95,18 +95,18 @@ int main() {
   std::foreach(v.begin(), v.end(), [](auto i) { std::cout << i << std::endl; });
 }
 ```
-{:.alert--info}
+{.alert--info}
 
 Meow. Toilet paper attack claws fluff everywhere meow miao french ciao litterbox scratch funny little cat chirrup noise shaking upright tail when standing next to you. Rub my belly hiss.
-{:.alert--primary}
+{.alert--primary}
 
 Test
 
 Give attitude. Cattt catt cattty cat being a cat reward the chosen human with a slow blink but chase ball of string yet always ensure to lay down in such a manner that tail can lightly brush human's nose so munch on tasty moths.
-{:.alert--success}
+{.alert--success}
 
 Cats secretly make all the worlds muffins this cat happen now, it was too purr-fect!!! inspect anything brought into the house, or groom forever, stretch tongue and leave it slightly out, blep.
-{:.alert--warning}
+{.alert--warning}
 
 ### Code Blocks
 
@@ -135,7 +135,7 @@ fib n | n < 2 = 1
 ```rust
 fn main() {
   let x: Vec<i32> = vec![1, 3, 5, 7, 9];
-  println!("{:?}", x);
+  println!("{.}", x);
 }
 ```
 
