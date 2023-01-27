@@ -1,17 +1,17 @@
+
 <article class="card post-article" itemscope itemtype="http://schema.org/BlogPosting">
     <div class="article-header">
-        <h1 class="post-title" itemprop="name headline">{{ page.title }}</h1>
-        <h6 class="">{{ page.description }}</h6>
-        {% set show_last_update = true %}
+        <h1 class="post-title" itemprop="name headline">{{ title }}</h1>
+        <h6 class="">{{ description }}</h6>
         {% include "post-metadata.html" %}
-        {% if page.sharable %}
+        {% if sharable %}
         <div class="addthis_inline_share_toolbox"></div>
         {% endif %}
     </div>
     <hr/>
     <div class="card-body p-0 post-body" itemprop="articleBody">
-        {% if page.include_thumbnail and page.thumbnail %}
-            <img class="card-img-top" src="{{site.url}}{{site.baseurl}}{{page.thumbnail}}" alt="{{ post.title }}"/>
+        {% if include_thumbnail and thumbnail %}
+            <img class="card-img-top" src="{{thumbnail}}" alt="{{ title }}"/>
             <br/>
             <br/>
         {% endif %}

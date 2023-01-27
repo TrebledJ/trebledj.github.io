@@ -1,19 +1,17 @@
-{% from "tag.html" import render_tag %}
+{% from "tag.html" import render_tag, render_tag_list %}
 
 {# Parameters:
 * post (default: page): a post/page object containing _.tags _.content _.title etc.
 * tag_limit (default: 20): the number of tags to display
 * show_last_update (default: false): whether or not to show the date when the post was last updated #}
-{% macro render_metadata(post, taglimit=2) %}
 <div class="d-flex flex-row align-items-center">
     <span>
         <i class="fa fa-calendar post-meta-icon me-1"></i>
     </span>
     &nbsp;<span class="post-date post-posted-date">
-        {{ post.page.date | date }}
-        {% if show_last_update and post.updated %}
-        (posted)
-        {% endif %}
+        {% block post_metadata_date %}
+        {{ page.date | date }} (posted)
+        {% endblock %}
     </span>
     <span class="fs-5">&nbsp;|</span>
     <span>
@@ -21,28 +19,25 @@
     </span>
     <span class="post-words">
         {% set words = post.content | striptags | wordcount %}
-        {% if words > 0 %}
         {% set minutes = ((words + 250) / 250) | int %}
         {{ minutes + " minute read" }}
-        {% endif %}
     </span>
 </div>
-{% if show_last_update and post.updated %}
+{% block post_metadata_updated %}
+{% if updated %}
 <div class="d-flex flex-row align-items-center mt-1">
     <i class="fa fa-calendar post-meta-icon me-1"></i>
     <span class="post-date post-updated-date">
-        {{ post.updated | date }}
-        (updated)
+        {{ updated | date }} (updated)
     </span>
 </div>
 {% endif %}
+{% endblock %}
 <div class="tag-list d-flex flex-row align-items-center mt-1">
     <span>
         <i class="fa fa-tag post-meta-icon me-2"></i>
     </span>
-    {% for name in post.data.tags | exclude('posts') | head(taglimit) %}
-        <span>{{render_tag(name)}}</span>
-    {% if not loop.last %}&nbsp;{% endif %}
-    {% endfor %}
+    {% block post_metadata_tags %}
+    {{ render_tag_list(tags) }}
+    {% endblock %}
 </div>
-{% endmacro %}

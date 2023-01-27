@@ -28,8 +28,19 @@ module.exports = function (eleventyConfig) {
 	// Process content images to the image pipeline.
 	eleventyConfig.addWatchTarget("content/**/*.{png,jpeg}");
 
-	eleventyConfig.setBrowserSyncConfig({
-		files: './_site/css/**/*.css'
+	eleventyConfig.setBrowserSyncConfig(
+		require('./browsersync')('dist')
+	);
+	// eleventyConfig.setBrowserSyncConfig({
+	// 	files: './_site/css/**/*.css'
+	// });
+	eleventyConfig.setServerOptions({
+		liveReload: true,
+		// files: './_site/css/**/*.css'
+		watch: [
+			'./_site/css/**/*.css',
+			'./_site/posts/**/*.html'
+		]
 	});
 
 

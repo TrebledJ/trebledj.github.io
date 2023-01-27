@@ -1,3 +1,10 @@
 {% macro render_tag(name) %}
 <a class="post-tags tag" href="/tags/{{name}}">{{name}}</a>
 {% endmacro %}
+
+{% macro render_tag_list(tags, limit=3, blacklist=['posts']) %}
+{% for name in tags | exclude(blacklist) | head(limit) %}
+<span>{{render_tag(name)}}</span>
+{% if not loop.last %}&nbsp;{% endif %}
+{% endfor %}
+{% endmacro %}
