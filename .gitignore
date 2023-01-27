@@ -15,3 +15,5 @@ vendor/
 
 assets/json/debug.json
 .vscode/
+
+node_modules/
