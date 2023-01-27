@@ -9,3 +9,23 @@
         &-100 { width: 100%; }
     }
 }
+
+
+/* Direct Links / Markdown Headers */
+.direct-link {
+	font-family: sans-serif;
+	text-decoration: none;
+	font-style: normal;
+    font-size: 20px;
+	margin-left: .1em;
+}
+a[href].direct-link,
+a[href].direct-link:visited {
+	color: transparent !important;
+}
+a[href].direct-link:focus,
+a[href].direct-link:focus:visited,
+:hover > a[href].direct-link,
+:hover > a[href].direct-link:visited {
+	color: #aaa !important;
+}

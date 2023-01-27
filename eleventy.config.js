@@ -2,6 +2,7 @@ const path = require("path");
 const { DateTime } = require("luxon");
 const markdownItAnchor = require("markdown-it-anchor");
 const markdownItAttrs = require('markdown-it-attrs');
+const markdownItTOC = require("markdown-it-toc-done-right");
 
 const htmlmin = require("html-minifier");
 
@@ -35,7 +36,7 @@ module.exports = function (eleventyConfig) {
 	eleventyConfig.addWatchTarget("content/**/*.{png,jpeg}");
 
 	eleventyConfig.setBrowserSyncConfig(
-		require('./browsersync')('dist')
+		require('./browsersync')('_site')
 	);
 	// eleventyConfig.setBrowserSyncConfig({
 	// 	files: './_site/css/**/*.css'
@@ -45,7 +46,8 @@ module.exports = function (eleventyConfig) {
 		// files: './_site/css/**/*.css'
 		watch: [
 			'./_site/css/**/*.css',
-			'./_site/posts/**/*.html'
+			'./_site/posts/**/*',
+			'./_site/*',
 		]
 	});
 
@@ -192,10 +194,14 @@ module.exports = function (eleventyConfig) {
 			permalink: markdownItAnchor.permalink.ariaHidden({
 				placement: "after",
 				class: "direct-link",
-				symbol: "#",
+				symbol: "§",
 			}),
-			level: [1, 2, 3, 4],
+			level: [2, 3, 4],
 			slugify: eleventyConfig.getFilter("slugify")
+		});
+		mdLib.use(markdownItTOC, {
+			placeholder: '{toc}',
+			// listType: 'ul',
 		});
 		mdLib.use(markdownItAttrs, {
 			leftDelimiter: '{',

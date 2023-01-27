@@ -1,4 +1,4 @@
-module.exports = function() {
+module.exports = function () {
 	return {
 		"title": "TrebledJ's Pages",
 		"url": "https://trebledj.github.io.com",
@@ -15,6 +15,12 @@ module.exports = function() {
 			[application development](/tags/apps), and software engineering in general.
 			I'm excited about developing applications to solve problems and provide an educational interface for learners.`
 		},
+		"navpages": [
+			{ text: 'Home', url: '/' },
+			{ text: 'Posts', url: '/posts' },
+			{ text: 'Projects', url: '/tags/projects' },
+			{ text: 'Music', url: '/music' },
+		],
 		"github_username": "TrebledJ",
 		"musescore_id": "20636901",
 		"google_analytics": "G-7TQ4WV0LMK",
