@@ -1,33 +1,36 @@
-var idx = lunr(function () {
-  this.field('title');
-  this.field('description');
-  this.field('content');
-  this.field('tags', { boost: 5 });
-  this.ref('id');
+$(async function () {
+  let p = await fetch('/search.json');
+  let store = await p.json();
 
-  this.pipeline.remove(lunr.trimmer);
+  var idx = lunr(function () {
+    this.field('title');
+    this.field('description');
+    this.field('content');
+    this.field('tags', { boost: 5 });
+    this.ref('id');
 
-  for (var item in store) {
-    this.add({
-      title: store[item].title,
-      description: store[item].description,
-      content: store[item].content,
-      tags: store[item].tags,
-      id: item,
-    });
+    this.pipeline.remove(lunr.trimmer);
+
+    for (var item in store) {
+      console.log("item: ", JSON.stringify(item));
+      this.add({
+        title: store[item].title,
+        description: store[item].description,
+        content: store[item].content,
+        tags: store[item].tags,
+        id: item,
+      });
+    }
+  });
+
+  function boost(term) {
+    let small_words = "a an the of by in with on to at since about through during over under".split(' ');
+    if (small_words.includes(term)) {
+      return 1;
+    }
+    return 100;
   }
-});
 
-
-function boost(term) {
-  let small_words = "a an the of by in with on to at since about through during over under".split(' ');
-  if (small_words.includes(term)) {
-    return 1;
-  }
-  return 100;
-}
-
-$(document).ready(function() {
   $('input#search-box').on('keyup', function () {
     var resultdiv = $('#search-results-list');
     var query = $(this).val().toLowerCase();
@@ -35,11 +38,11 @@ $(document).ready(function() {
       idx.query(function (q) {
         query.split(lunr.tokenizer.separator).forEach(function (term) {
           q.term(term, { boost: boost(term) })
-          if(query.lastIndexOf(" ") != query.length-1){
-            q.term(term, {  usePipeline: false, wildcard: lunr.Query.wildcard.TRAILING, boost: 10 })
+          if (query.lastIndexOf(" ") != query.length - 1) {
+            q.term(term, { usePipeline: false, wildcard: lunr.Query.wildcard.TRAILING, boost: 10 })
           }
-          if (term != ""){
-            q.term(term, {  usePipeline: false, editDistance: 1, boost: 1 })
+          if (term != "") {
+            q.term(term, { usePipeline: false, editDistance: 1, boost: 1 })
           }
         })
       });
@@ -58,20 +61,24 @@ $(document).ready(function() {
           desc = words.join(" ") + end;
         }
       } else {
-        var icon = "fa fa-book-open";
-        var tags = store[ref].tags;
+        var icon = "fa fa-book";
+        var tags = store[ref].tags.split(",");
         if (tags.includes("project")) {
           icon = "fa fa-cube";
         } else if (tags.includes("experience")) {
           icon = "fa fa-star";
+        } else if (tags.includes("ctf")) {
+          icon = "fa fa-flag";
         } else if (tags.includes("composition")) {
           icon = "fa fa-music";
+        } else if (tags.includes("programming")) {
+          icon = "fa fa-laptop";
         }
         var head = `<a href="${store[ref].url}">${store[ref].title}</a>
                     <a class="post-tags tag ms-2" href="${base_url}/tags/${tags[0]}">${tags[0]}</a>`;
         var desc = store[ref].description;
       }
-      
+
       var child = $(`
       <div class="d-flex flex-row align-items-center p-2 border-bottom search-results-list__item">
           <i class="${icon} fs-5"></i>
@@ -85,7 +92,7 @@ $(document).ready(function() {
     }
   });
 
-  $('.modal').on('shown.bs.modal', function() {
+  $('.modal').on('shown.bs.modal', function () {
     $(this).find('[autofocus]').focus();
   });
 });

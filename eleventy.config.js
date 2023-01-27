@@ -13,6 +13,12 @@ const { EleventyHtmlBasePlugin } = require("@11ty/eleventy");
 const eleventySass = require("eleventy-sass");
 
 module.exports = function (eleventyConfig) {
+	const md = require("markdown-it")({
+		html: false,
+		breaks: true,
+		linkify: true,
+	});
+
 	// Copy the contents of the `public` folder to the output folder
 	// For example, `./public/css/` ends up in `_site/css/`
 	eleventyConfig.addPassthroughCopy({
@@ -113,7 +119,7 @@ module.exports = function (eleventyConfig) {
 	});
 
 	eleventyConfig.addFilter("exclude", (array, items) => {
-		return array.filter(e => typeof(items) == 'string' ? e != items : !items.includes(e));
+		return array.filter(e => typeof (items) == 'string' ? e != items : !items.includes(e));
 	});
 
 	eleventyConfig.addFilter("split", (str, delimiter) => {
@@ -157,6 +163,10 @@ module.exports = function (eleventyConfig) {
 
 	eleventyConfig.addNunjucksFilter("markdownify", (markdownString) =>
 		md.render(markdownString)
+	);
+
+	eleventyConfig.addNunjucksFilter("jsonify", (object) =>
+		JSON.stringify(object)
 	);
 
 	// Transforms

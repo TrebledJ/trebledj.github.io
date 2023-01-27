@@ -1,0 +1,32 @@
+---
+permalink: /search.json
+---
+
+[
+  {% for post in collections.posts %}
+      {
+          "type": "post",
+          "title": "{{post.data.title}}",
+          "tags": "{{post.data.tags | exclude("posts")}}",
+          "description": "{{post.data.description}}",
+          "content": {{post.content | striptags | jsonify | safe}},
+          "url": "{{site.url}}{{post.url}}"
+      }
+      {% if not loop.last %},{%endif%}
+  {% endfor %}
+  {# {% set first = true %}
+  {% for page in site.pages %}
+      {% set xs = page.permalink | split('/') %}
+      {% set xs_size = xs | size %}
+      {% if xs[1] == 'tags' and page.feed != false %}
+          {% if not first %},{% endif %}
+          {
+              "type": "tag",
+              "title": {{xs[2] | jsonify}},
+              "content": {{page.content | striptags | jsonify | safe}},
+              "url": {{page.url | jsonify}}
+          }
+          {% set first = false %}
+      {% endif %}
+  {% endfor %} #}
+]

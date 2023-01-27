@@ -61,7 +61,6 @@ $(async function () {
 
   function fetchPostWithIndex(index) {
     let item = items[index];
-    console.log("item: " + JSON.stringify(item));
     let tags = item.tags.filter(t => !["composition", "music"].includes(t)).map(t => `<a class="post-tags tag" href="${base_url}/tags/${t}">${t}</a>`).join("\n");
 
     $(` <div>

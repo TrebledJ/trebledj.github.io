@@ -1,7 +1,7 @@
 module.exports = function() {
 	return {
 		"title": "TrebledJ's Pages",
-		"url": "https://trebledj.github.io.com/",
+		"url": "https://trebledj.github.io.com",
 		"language": "en",
 		"description": "TrebledJ's personal blog on programming, music, and memes.",
 		"author": {
