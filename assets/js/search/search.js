@@ -12,7 +12,6 @@ $(async function () {
     this.pipeline.remove(lunr.trimmer);
 
     for (var item in store) {
-      console.log("item: ", JSON.stringify(item));
       this.add({
         title: store[item].title,
         description: store[item].description,
@@ -62,7 +61,7 @@ $(async function () {
         }
       } else {
         var icon = "fa fa-book";
-        var tags = store[ref].tags.split(",");
+        var tags = store[ref].tags;
         if (tags.includes("project")) {
           icon = "fa fa-cube";
         } else if (tags.includes("experience")) {

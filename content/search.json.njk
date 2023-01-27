@@ -7,7 +7,7 @@ permalink: /search.json
       {
           "type": "post",
           "title": "{{post.data.title}}",
-          "tags": "{{post.data.tags | exclude("posts")}}",
+          "tags": {{post.data.tags | exclude("posts") | jsonify | safe}},
           "description": "{{post.data.description}}",
           "content": {{post.content | striptags | jsonify | safe}},
           "url": "{{site.url}}{{post.url}}"
