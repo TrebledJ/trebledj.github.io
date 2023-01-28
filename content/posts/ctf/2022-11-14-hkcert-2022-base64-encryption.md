@@ -117,7 +117,7 @@ In the same vein, some letters and sequences in the *Base64 encoding* will also 
 
 With this in mind, we can compare the ciphertext to the Base64 encoding of some random article (also in English, of course). For this, I copied some articles from [CNN Lite](https://lite.cnn.com/en) (text-only, so it's easier to copy), encoded it, then analysed letter frequencies using [dcode.fr](https://www.dcode.fr/frequency-analysis). You could use this excellent article as well:
 
-```
+```text
 V2UncmUgbm8gc3RyYW5nZXJzIHRvIGxvdmUKWW91IGtub3cgdGhlIHJ1bGVzIGFuZCBzbyBkbyBJIChkbyBJKQpBIGZ1bGwgY29tbWl0bWVudCdzIHdoYXQgSSdtIHRoaW5raW5nIG9mCllvdSB3b3VsZG4ndCBnZXQgdGhpcyBmcm9tIGFueSBvdGhlciBndXkKSSBqdXN0IHdhbm5hIHRlbGwgeW91IGhvdyBJJ20gZmVlbGluZwpHb3R0YSBtYWtlIHlvdSB1bmRlcnN0YW5kCk5ldmVyIGdvbm5hIGdpdmUgeW91IHVwCk5ldmVyIGdvbm5hIGxldCB5b3UgZG93bgpOZXZlciBnb25uYSBydW4gYXJvdW5kIGFuZCBkZXNlcnQgeW91Ck5ldmVyIGdvbm5hIG1ha2UgeW91IGNyeQpOZXZlciBnb25uYSBzYXkgZ29vZGJ5ZQpOZXZlciBnb25uYSB0ZWxsIGEgbGllIGFuZCBodXJ0IHlvdQo=
 ```
 
@@ -163,30 +163,37 @@ Frequency analysis is useful to group letters into buckets. But using frequency 
             assert set(g).issubset(whitelist[c]) for gc in g), f'mismatch for {c} -> {g}, whitelist: {whitelist[c]}'
             whitelist[c] = g # Throw away all other values.
         ```
-        
+
     <br/>
+
     ![Results!](/img/posts/misc/ctf/base64-encryption/progress-1.jpg){.w-100}
 
     <sup>Random decoding after frequency analysis.</sup>
     {.center}
+
+    {.no-center}
 
 - Guesswork: guess English from the ~~nonsense~~ existing characters.
     - e.g. "Eog:ish" → "English", "qepqesents" → "represents", "pqese&ved" → "preserved"
     - Once we patched a word, other words became easier to patch.
 
     <br/>
+
     ![Moar results!!!](/img/posts/misc/ctf/base64-encryption/progress-2.jpg){.w-100}
 
     <sup>Random decoding after guessing.</sup>
     {.center}
 
+    {.no-center}
+
     - At this point, we can continue patching "ciphertext", "letters", "potential", etc. Or we could just use...
+  
+    <br/>
 
 - Google: after decoding a sizeable portion, let's pray and hope the plaintext is open-source. Then use the plaintext to derive the rest of the mapping.
     - It turns out the plaintext is—quite aptly—the [Wikipedia summary of frequency analysis](https://en.wikipedia.org/wiki/Frequency_analysis).
     
-    <br/>
-    ![Rrrreeeeeeeeeeeee.](/img/posts/misc/ctf/base64-encryption/wikipedia-frequency-analysis.jpg){.w-100}
+        ![Rrrreeeeeeeeeeeee.](/img/posts/misc/ctf/base64-encryption/wikipedia-frequency-analysis.jpg){.w-100}
     
 Finding the rest of the mappings was quite easy. After a bit more tuning, we get the flag.
 
@@ -198,7 +205,7 @@ There are probably better ways to automatically perform frequency analysis and s
 
 ## Flag
 
-```
+```text
 hkcert22{b4s3_s1x7y_f0ur_1s_4n_3nc0d1n9_n07_4n_encryp710n}
 ```
 

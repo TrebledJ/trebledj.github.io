@@ -61,6 +61,8 @@ After a bit of digging, we uncover quite a bit of info:
         ![Postman Pat](/img/posts/misc/ctf/charming-website/postman-pat-postman-pat-postman-pat-and-his-black-and-white-cat.jpg){.w-90}
         {.center}
 
+        {.no-center}
+
     - There’s also some interesting strings such as “*charm.c*”. But I thought this was a C++ application? Perhaps a third-party library? Maybe we can use this later on.
 - The gold can be found in **`MyController::Encrypt::encrypt`**. This is where all the juicy stuff takes place. You can arrive here through a number of ways (e.g. following XREFs of `uc_encrypt`).
     - The function begins by generating a random Initialisation Vector (IV).
@@ -73,6 +75,9 @@ After a bit of digging, we uncover quite a bit of info:
 
         ![YAS!](/img/posts/misc/ctf/charming-website/encryption-rev-chal-with-hardcoded-key.jpg){.w-50}
         {.center}
+
+        {.no-center}
+
 
     - The message is then encrypted using `uc_encrypt`.
 
@@ -137,7 +142,7 @@ Also if there’s something to learn from this challenge, it’s that applicatio
 
 ## Flag
 
-```c
+```text
 hkcert22{n3v3r_s4w_4n_c++_ap1_s3Rv3R?m3_n31th3r_bb4t_17_d0e5_eX15ts}
 ```
 
