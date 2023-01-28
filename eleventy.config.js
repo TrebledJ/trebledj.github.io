@@ -208,7 +208,6 @@ module.exports = function (eleventyConfig) {
 		let autoCommonTagsThreshold = related.autoCommonTagsThreshold || 0.4;
 
 		let final_related = []; // Final array of related posts.
-		// posts.reverse(); // Reverse posts, start from latest.
 
 		// Force related posts into the array.
 		if (related.posts) {
@@ -230,7 +229,6 @@ module.exports = function (eleventyConfig) {
 				}
 
 				if (related.tags.every(t => post.data.tags.includes(t))) {
-					console.log("related tags:", post.data.title, "is related to", thisPost.data.title);
 					final_related.push(post);
 				}
 			}
@@ -257,7 +255,6 @@ module.exports = function (eleventyConfig) {
 				}
 
 				if (countCommon(thisTags, post.data.tags) - 1 >= Math.ceil(thisTags.length * autoCommonTagsThreshold)) {
-					console.log("related auto:", post.data.title, "is related to", thisPost.data.title);
 					final_related.push(post);
 				}
 			}
