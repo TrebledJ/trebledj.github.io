@@ -3,14 +3,16 @@ layout: layouts/page-simple
 logo: tag
 ---
 
+{% from "post-preview.html" import render_preview %}
+
 <div>
     {{ content | safe }}
 </div>
 
 <br/>
 <div class="post-preview-list">
-    {% set slug = page.tag | default: page.title | slugify %}
-    {% for post in site.tags[slug] %}
-        {% include "post-preview.html" %}
+    {% set slug = tag | default(title) | slugify %}
+    {% for post in collections[slug] | reverse %}
+        {{ render_preview(post, 3) }}
     {% endfor %}
 </div>

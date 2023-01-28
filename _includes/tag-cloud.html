@@ -1,10 +1,9 @@
-{% set tags = site.tags | sort %}
-{% for tag in tags %}
+{% set tags = collections.tags | dictsort %}
+{% for tag, count in tags %}
     <div style="display: inline-block;">
-        {% set tagsz = tag | last | size %}
-        {% set perc = tagsz * 4 + 80 %}
-        <a class="tag" href="/tags/{{ tag | first | slugify }}/" style="font-size: {{perc}}%;">
-            {{ tag[0] }}
+        {% set perc = count * 4 + 80 %}
+        <a class="tag" href="/tags/{{ tag | slugify }}/" style="font-size: {{perc}}%;">
+            {{ tag }}
         </a>
     </div>
 {% endfor %}
