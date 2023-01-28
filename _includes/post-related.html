@@ -6,7 +6,7 @@
         <div class="container">
             <div class="row">
                 {% set this = collections.posts | getCollectionItem %}
-                {% for post in collections.posts | relatedTo(this, related) %}
+                {% for post in collections.posts | reverse | relatedTo(this, related) %}
                     {% include "post-preview-compressed.html" %}
                 {% endfor %}
             </div>

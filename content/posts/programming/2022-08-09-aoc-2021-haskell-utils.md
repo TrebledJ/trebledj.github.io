@@ -7,7 +7,8 @@ tags:
  - haskell
 thumbnail: /img/posts/misc/aoc/recycle-hs-utils.jpg
 usemathjax: true
-related_tags: aoc haskell
+related:
+  tags: [aoc, haskell]
 ---
 
 Haskell, despite its relatively low popularity, is quite up to speed on language features and tooling (unlike–*cough cough*–some other languages). One of these features is being able to separate and organise files into modules, encouraging clean code practices and cleaner development.

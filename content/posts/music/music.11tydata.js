@@ -8,6 +8,5 @@ module.exports = {
     related: {
         tags: ['composition'],
         sort: 'relevant',
-        auto: true,
     }
 }

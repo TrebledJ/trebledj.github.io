@@ -11,7 +11,6 @@ tags:
 thumbnail: /img/posts/projects/midi-keyboard.jpg
 include_thumbnail: true
 pitch: Developed a MIDI keyboard using an STM32F4 microcontroller.
-related_auto: true
 ---
 
 This project was made for a course on embedded systems and is published [online](https://github.com/TrebledJ/stm32-midi-keyboard).

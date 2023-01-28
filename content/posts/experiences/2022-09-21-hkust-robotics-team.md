@@ -7,7 +7,8 @@ tags:
  - hkust
 thumbnail: /img/posts/experiences/robotics/wallpaper-2.jpg
 pitch: Senior software engineer in the HKUST Robotics Team. Took part in training and mentoring new team members, remodularise project structure, and managing R&D projects.
-related_tags: hkust robotics
+related:
+    tags: [hkust, robotics]
 ---
 
 ![Bye bye CGA.](/img/posts/memes/off-ramp-robotics.jpg){.w-60}

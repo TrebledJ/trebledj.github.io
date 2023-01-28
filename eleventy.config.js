@@ -204,10 +204,11 @@ module.exports = function (eleventyConfig) {
 	eleventyConfig.addFilter("relatedTo", (posts, thisPost, related) => {
 		let n = related.num || 3; // Number of related elements to find.
 
-		let autoCommonTagsThreshold = 0.4; // In auto checking, if a post has at least this many percentage of common tags, then it is considered related.
+		// In auto checking, if a post has at least this many percentage of common tags, then it is considered related.
+		let autoCommonTagsThreshold = related.autoCommonTagsThreshold || 0.4;
 
 		let final_related = []; // Final array of related posts.
-		posts.reverse(); // Reverse posts, start from latest.
+		// posts.reverse(); // Reverse posts, start from latest.
 
 		// Force related posts into the array.
 		if (related.posts) {
@@ -229,6 +230,7 @@ module.exports = function (eleventyConfig) {
 				}
 
 				if (related.tags.every(t => post.data.tags.includes(t))) {
+					console.log("related tags:", post.data.title, "is related to", thisPost.data.title);
 					final_related.push(post);
 				}
 			}
@@ -255,6 +257,7 @@ module.exports = function (eleventyConfig) {
 				}
 
 				if (countCommon(thisTags, post.data.tags) - 1 >= Math.ceil(thisTags.length * autoCommonTagsThreshold)) {
+					console.log("related auto:", post.data.title, "is related to", thisPost.data.title);
 					final_related.push(post);
 				}
 			}

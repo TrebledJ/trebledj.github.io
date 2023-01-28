@@ -11,7 +11,7 @@ tags:
  - music
 thumbnail: /img/posts/music/piano-keys.jpg
 pitch: Developed MuseScore quality-of-life plugins for navigation and score editing using QML/JS.
-related: none
+related: false
 ---
 
 MuseScore, a music notation desktop application, allows mini-extensions through its QML Plugins. MuseScore is built with the [Qt](https://en.wikipedia.org/wiki/Qt_(software)) framework and leverages the QML ecosystem for rapid prototyping and user-developed plugins.

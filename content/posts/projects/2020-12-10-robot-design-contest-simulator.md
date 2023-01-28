@@ -10,7 +10,8 @@ tags:
  - hkust
 thumbnail: /img/posts/projects/rdc-simulator/thumbnail.jpg
 pitch: Led and managed the development of a desktop simulator used in a recruitment competition for the HKUST Robotics Team.
-related: robocon-2021 robocon-2020 hkust-robotics-team
+related:
+  posts: [robocon-2021, robocon-2020, hkust-robotics-team]
 ---
 
 This project was part of a recruitment phase for the HKUST Robotics Team. We used Qt for the GUI and Box2D for physics. The public-facing side of the project is uploaded [online](https://github.com/HKUST-Robocon/RDC-Emulator-2020) and the desktop applications are [available for download](https://github.com/HKUST-Robocon/RDC-Emulator-2020/releases), but the source code is kept hidden. This post will provide some context and thought processes behind the design.

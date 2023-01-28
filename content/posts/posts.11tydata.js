@@ -11,5 +11,7 @@ module.exports = {
 	include_thumbnail: false,
 	sharable: true,
 	comments: true,
-	related_auto: false,
+	related: {
+		auto: true,
+	}
 };

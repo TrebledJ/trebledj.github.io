@@ -7,7 +7,8 @@ tags:
  - haskell
  - cpp
 thumbnail: /img/posts/tutorials/implicits/implicits-thumbnail.jpg
-related_tags: programming
+related:
+  tags: [programming]
 ---
 
 > *Do not say a little in many words, but a great deal in a few.*  
