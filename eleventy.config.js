@@ -238,6 +238,14 @@ module.exports = function (eleventyConfig) {
 			// listType: 'ul',
 		});
 		mdLib.use(markdownItFootnote);
+		mdLib.renderer.rules.footnote_caption = (tokens, idx/*, options, env, slf*/) => {
+			var n = Number(tokens[idx].meta.id + 1).toString();
+			if (tokens[idx].meta.subId > 0) {
+				n += ':' + tokens[idx].meta.subId;
+			}
+			return n;
+		};
+
 		mdLib.use(markdownItAttrs, {
 			leftDelimiter: '{',
 			rightDelimiter: '}',
