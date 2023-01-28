@@ -1,9 +1,22 @@
 ---
 layout: layouts/page-default
 ---
-<div class="col-lg-9">
+<div class="col-lg-3 left-sidebar">
+    <div class="container">
+        <p>Test</p>
+    </div>
+</div>
+
+{# <div class="col-lg-8"> #}
     {{content | safe}}
-</div>
-<div class="col-lg-3">
+{# </div> #}
+{# <div class="col-lg-3">
     {% include "sidebar.html" %}
-</div>
+</div> #}
+{# 
+<div class="col-lg-2 right-sidebar">
+    <div class="container">
+        {% set this = collections.posts | getCollectionItem %}
+        {{this.content | toc}}
+    </div>
+</div> #}

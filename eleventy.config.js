@@ -4,7 +4,9 @@ const { DateTime } = require("luxon");
 const markdownItAnchor = require("markdown-it-anchor");
 const markdownItAttrs = require('markdown-it-attrs');
 const markdownItFootnote = require('markdown-it-footnote');
-const markdownItTOC = require("markdown-it-toc-done-right");
+// const markdownItTOC = require("markdown-it-toc-done-right");
+const pluginTOC = require('eleventy-plugin-toc')
+
 
 const htmlmin = require("html-minifier");
 
@@ -291,19 +293,19 @@ module.exports = function (eleventyConfig) {
 	// Customize Markdown library settings:
 	eleventyConfig.amendLibrary("md", mdLib => {
 		mdLib.use(markdownItAnchor, {
-			permalink: markdownItAnchor.permalink.ariaHidden({
-				placement: "after",
-				class: "direct-link",
-				symbol: "§",
-			}),
+			// permalink: markdownItAnchor.permalink.ariaHidden({
+			// 	placement: "after",
+			// 	class: "direct-link",
+			// 	symbol: "§",
+			// }),
 			level: [2, 3, 4],
 			slugify: eleventyConfig.getFilter("slugify"),
 		});
-		mdLib.use(markdownItTOC, {
-			placeholder: '{toc}',
-			slugify: eleventyConfig.getFilter("slugify"),
-			// listType: 'ul',
-		});
+		// mdLib.use(markdownItTOC, {
+		// 	placeholder: '{toc}',
+		// 	slugify: eleventyConfig.getFilter("slugify"),
+		// 	// listType: 'ul',
+		// });
 		mdLib.use(markdownItFootnote);
 		mdLib.renderer.rules.footnote_caption = (tokens, idx/*, options, env, slf*/) => {
 			var n = Number(tokens[idx].meta.id + 1).toString();
@@ -318,6 +320,12 @@ module.exports = function (eleventyConfig) {
 			rightDelimiter: '}',
 			allowedAttributes: []  // empty array = all attributes are allowed
 		});
+	});
+
+	eleventyConfig.addPlugin(pluginTOC, {
+		tags: ['h2', 'h3'],
+		ul: false,
+		// wrapper: 'div'
 	});
 
 	// Features to make your build faster (when you need them)

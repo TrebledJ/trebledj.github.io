@@ -2,18 +2,27 @@
 layout: layouts/page-with-sidebar
 ---
 
-<div class="w-100">
-    {% include "post-article.html" %}
+<div class="col-lg-6">
+    <div class="w-100">
+        {% include "post-article.html" %}
+    </div>
+    {% if related %}
+        <hr/>
+        <div class="w-100 mt-4">
+            {% include "post-related.html" %}
+        </div>
+    {% endif %}
+    {% if comments %}
+        <hr/>
+        <div class="container mt-4 p-4">
+            {% include "post-comments.html" %}
+        </div>
+    {% endif %}
 </div>
-{% if related %}
-    <hr/>
-    <div class="w-100 mt-4">
-        {% include "post-related.html" %}
+
+<div class="col-lg-3 right-sidebar">
+    <div class="container ps-0">
+        <span>Content</span>
+        {{content | toc | safe}}
     </div>
-{% endif %}
-{% if comments %}
-    <hr/>
-    <div class="container mt-4 p-4">
-        {% include "post-comments.html" %}
-    </div>
-{% endif %}
+</div>
