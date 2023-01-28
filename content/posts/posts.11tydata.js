@@ -4,7 +4,7 @@ module.exports = {
 	],
 	layout: "layouts/post-default",
 	eleventyComputed: {
-		permalink: data => '/posts/' + data.page.fileSlug
+		permalink: data => '/posts/' + data.page.fileSlug + '/index.html'
 	},
 	author: "trebledj",
 	thumbnail: "/img/posts/thumbnail/default.png",

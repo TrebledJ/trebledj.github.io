@@ -1,9 +1,10 @@
 ---
 layout: layouts/page-with-sidebar
 ---
+{% from "post-preview.html" import render_preview %}
 <div class="post-preview-list">
-    {% for post in collections.posts %}
-        {% include "post-preview.html" %}
+    {% for post in collections.posts | reverse %}
+        {{ render_preview(post) }}
     {% endfor %}
 </div>
 
