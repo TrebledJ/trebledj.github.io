@@ -8,7 +8,8 @@ keywords: guitars drums upbeat
 thumbnail: /img/posts/music/neo-bus.jpg
 track_id: 1199278129
 score_id: 8527520
-related: joyride-in-d the-breath-of-life
+related:
+    posts: [joyride-in-d, the-breath-of-life]
 ---
 
 Do you feel the exhilaration of the morning air? The excitement of stepping out of bed? Chomping down breakfast? 

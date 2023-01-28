@@ -9,7 +9,8 @@ keywords: oboe major minor
 thumbnail: /img/posts/music/swirling-wisps-2.jpg
 track_id: 1329509965
 score_id: 8527388
-related: morning-ecstasy
+related:
+    posts: [morning-ecstasy]
 ---
 
 Alike [Morning Ecstasy](/posts/morning-ecstasy), this piece was also composed in 2020 Spring, during the first several months of the Covid-19 pandemic. In addition, this was composed as a project for an (introductory) course on music theory.

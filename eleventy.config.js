@@ -154,6 +154,10 @@ module.exports = function (eleventyConfig) {
 		return DateTime.fromJSDate(dateObj, { zone: zone || "utc" }).toFormat(format || "yyyy-LL-dd");
 	});
 
+	eleventyConfig.addFilter("contains", (array, e) => {
+		return array.includes(e);
+	});
+
 	eleventyConfig.addFilter("exclude", (array, items) => {
 		return array.filter(e => typeof (items) == 'string' ? e != items : !items.includes(e));
 	});
@@ -197,11 +201,73 @@ module.exports = function (eleventyConfig) {
 		return (tags || []).filter(tag => ["all", "nav", "post", "posts"].indexOf(tag) === -1);
 	});
 
-	eleventyConfig.addNunjucksFilter("markdownify", (markdownString) =>
+	eleventyConfig.addFilter("relatedTo", (posts, thisPost, related) => {
+		let n = related.num || 3; // Number of related elements to find.
+
+		let autoCommonTagsThreshold = 0.4; // In auto checking, if a post has at least this many percentage of common tags, then it is considered related.
+
+		let final_related = []; // Final array of related posts.
+		posts.reverse(); // Reverse posts, start from latest.
+
+		// Force related posts into the array.
+		if (related.posts) {
+			for (let slug of related.posts) {
+				// Find post...
+				let post = posts.find(e => e.page.fileSlug === slug);
+				final_related.push(post);
+			}
+		}
+
+		// Find relevant posts with same tags as `related.tags`.
+		if (related.tags) {
+			for (let post of posts) {
+				if (final_related.length >= n) {
+					break;
+				}
+				if (post == thisPost || final_related.includes(post)) {
+					continue; // Already marked as related. Skip.
+				}
+
+				if (related.tags.every(t => post.data.tags.includes(t))) {
+					final_related.push(post);
+				}
+			}
+		}
+
+		function countCommon(a, b) {
+			let count = 0;
+			for (const e of a) {
+				if (b.includes(e))
+					count++;
+			}
+			return count;
+		}
+
+		if (related.auto) {
+			// Find posts that have common tags with this post.
+			let thisTags = thisPost.data.tags;
+			for (let post of posts) {
+				if (final_related.length >= n) {
+					break;
+				}
+				if (post == thisPost || final_related.includes(post)) {
+					continue; // Already marked as related. Skip.
+				}
+
+				if (countCommon(thisTags, post.data.tags) - 1 >= Math.ceil(thisTags.length * autoCommonTagsThreshold)) {
+					final_related.push(post);
+				}
+			}
+		}
+
+		return final_related;
+	});
+
+	eleventyConfig.addFilter("markdownify", (markdownString) =>
 		md.render(markdownString)
 	);
 
-	eleventyConfig.addNunjucksFilter("jsonify", (object) =>
+	eleventyConfig.addFilter("jsonify", (object) =>
 		JSON.stringify(object)
 	);
 

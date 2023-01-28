@@ -6,7 +6,8 @@ tags:
 keywords: side-chain-compression synth surge penguins-in-space learn-to-fly
 thumbnail: /img/posts/music/space-penguin.jpg
 track_id: 1331667688
-related_tags: composition electronic
+related:
+    tags: [electronic]
 ---
 
 Dedicated to everyone feeling stressed, down, lost, or under the weather.

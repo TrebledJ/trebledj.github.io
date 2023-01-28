@@ -8,7 +8,8 @@ tags:
 keywords: synth drums edm
 thumbnail: /img/posts/music/winter-road.jpg
 track_id: 1146309223
-related_tags: composition electronic
+related:
+    tags: [electronic]
 ---
 
 That feeling when you boisterously walk (or bike, drive, swim, fly) home on a chilly night after a long day at school.

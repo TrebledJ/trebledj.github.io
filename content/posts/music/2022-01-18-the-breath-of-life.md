@@ -9,7 +9,8 @@ tags:
 keywords: ensemble, string ensemble, emotional, peaceful, serene
 thumbnail: /img/posts/music/spring-dawn.jpg
 track_id: 1199277217
-related: joyride-in-d morning-rush
+related:
+    posts: [joyride-in-d, morning-rush]
 ---
 
 This piece seeks to paint a diverse set of feelings. Listen for the string ensemble easing in and out of the void, the solemn moments of silence, the lightheartedness of the syncopated pizzicato, the relentless cycle of tension and relief.

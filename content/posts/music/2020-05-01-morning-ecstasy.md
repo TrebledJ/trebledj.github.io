@@ -8,7 +8,8 @@ keywords: guitars drums upbeat glockenspiel
 thumbnail: /img/posts/music/candy-swirls.jpg
 track_id: 1329504610
 score_id: 8527178
-related: buoyant-ecstasy morning-rush
+related:
+    posts: [buoyant-ecstasy, morning-rush]
 ---
 
 Composed in the student dorms during the Covid 2020 Spring.
