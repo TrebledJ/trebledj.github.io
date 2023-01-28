@@ -18,7 +18,7 @@ module.exports = function () {
 		"navpages": [
 			{ text: 'Home', url: '/' },
 			{ text: 'Posts', url: '/posts' },
-			{ text: 'Projects', url: '/tags/projects' },
+			{ text: 'Projects', url: '/tags/project' },
 			{ text: 'Music', url: '/music' },
 		],
 		"github_username": "TrebledJ",
