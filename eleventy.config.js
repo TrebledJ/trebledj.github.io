@@ -231,10 +231,11 @@ module.exports = function (eleventyConfig) {
 				symbol: "§",
 			}),
 			level: [2, 3, 4],
-			slugify: eleventyConfig.getFilter("slugify")
+			slugify: eleventyConfig.getFilter("slugify"),
 		});
 		mdLib.use(markdownItTOC, {
 			placeholder: '{toc}',
+			slugify: eleventyConfig.getFilter("slugify"),
 			// listType: 'ul',
 		});
 		mdLib.use(markdownItFootnote);
