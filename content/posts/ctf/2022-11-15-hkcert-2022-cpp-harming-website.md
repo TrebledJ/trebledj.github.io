@@ -141,8 +141,6 @@ Also if there’s something to learn from this challenge, it’s that applicatio
 hkcert22{n3v3r_s4w_4n_c++_ap1_s3Rv3R?m3_n31th3r_bb4t_17_d0e5_eX15ts}
 ```
 
----
-
 [^might-be-important]: It wasn’t.
 
 [^cpp]: To be fair, one of the reasons C++ is powerful is because it’s both *performant* and *expressive*. And it’s expressive, because there can be a lot of hidden control flow. You can write one line of code which could be syntax sugar for twenty lines of code, and even more assembly. With C, it’s more straightforward (and simple).

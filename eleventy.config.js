@@ -1,7 +1,9 @@
 const path = require("path");
 const { DateTime } = require("luxon");
+
 const markdownItAnchor = require("markdown-it-anchor");
 const markdownItAttrs = require('markdown-it-attrs');
+const markdownItFootnote = require('markdown-it-footnote');
 const markdownItTOC = require("markdown-it-toc-done-right");
 
 const htmlmin = require("html-minifier");
@@ -35,9 +37,27 @@ module.exports = function (eleventyConfig) {
 	// Process content images to the image pipeline.
 	eleventyConfig.addWatchTarget("content/**/*.{png,jpeg}");
 
-	eleventyConfig.setBrowserSyncConfig(
-		require('./browsersync')('_site')
-	);
+	// eleventyConfig.setBrowserSyncConfig(
+	// 	require('./browsersync')('_site')
+	// );
+	eleventyConfig.setBrowserSyncConfig({
+		callbacks: {
+			ready: function (err, bs) {
+				bs.addMiddleware("*", (req, res) => {
+					if (!fs.existsSync(NOT_FOUND_PATH)) {
+						throw new Error(`Expected a \`${NOT_FOUND_PATH}\` file but could not find one. Did you create a 404.html template?`);
+					}
+
+					const content_404 = fs.readFileSync(NOT_FOUND_PATH);
+					// Add 404 http status code in request header.
+					res.writeHead(404, { "Content-Type": "text/html; charset=UTF-8" });
+					// Provides the 404 content without redirect.
+					res.write(content_404);
+					res.end();
+				});
+			}
+		}
+	});
 	// eleventyConfig.setBrowserSyncConfig({
 	// 	files: './_site/css/**/*.css'
 	// });
@@ -46,8 +66,9 @@ module.exports = function (eleventyConfig) {
 		// files: './_site/css/**/*.css'
 		watch: [
 			'./_site/css/**/*.css',
-			'./_site/posts/**/*',
-			'./_site/*',
+			'./_site/posts/*',
+			'./_site/tags/*',
+			'./_site/music',
 		]
 	});
 
@@ -113,6 +134,19 @@ module.exports = function (eleventyConfig) {
 			}
 		});
 	})
+
+	// Collections
+	eleventyConfig.addCollection("tags", function (collectionApi) {
+		// get unsorted items
+		let counter = {};
+		for (let tag of collectionApi.getFilteredByTag('posts').flatMap(post => post.data.tags)) {
+			if (!tag || tag === "posts")
+				continue;
+			// console.log('counting:', tag);
+			counter[tag] = (counter[tag] ? counter[tag] + 1 : 1);
+		}
+		return counter;
+	});
 
 	// Filters
 	eleventyConfig.addFilter("date", (dateObj, format, zone) => {
@@ -203,6 +237,7 @@ module.exports = function (eleventyConfig) {
 			placeholder: '{toc}',
 			// listType: 'ul',
 		});
+		mdLib.use(markdownItFootnote);
 		mdLib.use(markdownItAttrs, {
 			leftDelimiter: '{',
 			rightDelimiter: '}',

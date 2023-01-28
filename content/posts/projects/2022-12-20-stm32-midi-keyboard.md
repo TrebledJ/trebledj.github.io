@@ -70,8 +70,6 @@ If you're interested in trying something similar, here are some things we planne
 * Explore and use [FluidSynth](https://github.com/FluidSynth/fluidsynth)
 * More instrument options
 
----
-
 [fsvector]: https://github.com/TrebledJ/stm32-midi-keyboard/blob/main/Core/Inc/utils/tinyvector.hpp
 [menum]: https://github.com/Neargye/magic_enum
 [dsp-se-question]: https://dsp.stackexchange.com/questions/85140/adding-two-sine-waves-results-in-a-low-buzz
