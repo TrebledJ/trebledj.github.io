@@ -31,8 +31,6 @@ module.exports = function (eleventyConfig) {
 		"./assets/": "/",
 		"./node_modules/@popperjs/core/dist/umd/popper.min.js": "/js/popper.min.js",
 		"./node_modules/prismjs/themes/prism-okaidia.css": "/css/prism-okaidia.css",
-		"./node_modules/font-awesome/css/font-awesome.css": "/css/font-awesome.min.css",
-		"./node_modules/font-awesome/fonts/": "/fonts/",
 	});
 
 	// Run Eleventy when these files change:
