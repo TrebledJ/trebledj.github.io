@@ -4,6 +4,7 @@ const { DateTime } = require("luxon");
 const markdownItAnchor = require("markdown-it-anchor");
 const markdownItAttrs = require('markdown-it-attrs');
 const markdownItFootnote = require('markdown-it-footnote');
+
 // const markdownItTOC = require("markdown-it-toc-done-right");
 const pluginTOC = require('eleventy-plugin-toc')
 
@@ -16,6 +17,7 @@ const pluginNavigation = require("@11ty/eleventy-navigation");
 const eleventyImage = require("@11ty/eleventy-img");
 const { EleventyHtmlBasePlugin } = require("@11ty/eleventy");
 const eleventySass = require("eleventy-sass");
+const mathjaxPlugin = require("eleventy-plugin-mathjax");
 
 module.exports = function (eleventyConfig) {
 	const md = require("markdown-it")({
@@ -80,6 +82,13 @@ module.exports = function (eleventyConfig) {
 	eleventyConfig.addPlugin(pluginSyntaxHighlight);
 	eleventyConfig.addPlugin(pluginNavigation);
 	eleventyConfig.addPlugin(EleventyHtmlBasePlugin);
+	eleventyConfig.addPlugin(mathjaxPlugin, {
+		output: "chtml",
+		chtml: {
+			fontURL:
+				"https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2",
+		},
+	});
 
 	eleventyConfig.addPlugin(eleventySass/* , {
 		compileOptions: {
