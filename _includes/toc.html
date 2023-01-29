@@ -1,6 +1,6 @@
 {% set toc = content | toc %}
 {% if toc %}
-    <div class="container ps-0 toc-container">
+    <div class="container toc-container">
         <span><a onclick="$('#btn-back-to-top').trigger('click')">Content</a></span>
         {{toc | safe}}
     </div>
