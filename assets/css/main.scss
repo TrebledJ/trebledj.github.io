@@ -16,20 +16,30 @@
 $enable-negative-margins: true;
 
 /* custom css goes below */
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
     // scroll-margin-top: 60px;
 }
 
-a, a:visited {
+a,
+a:visited {
     text-decoration: none !important;
 }
 
 // Color-shift links on hover.
-a:hover, a:active {
+a:hover,
+a:active {
     color: var(--link-hover-color) !important;
 }
 
-abbr, abbr:visited, abbr:hover, abbr:active {
+abbr,
+abbr:visited,
+abbr:hover,
+abbr:active {
     text-decoration: underline dotted;
 }
 
@@ -97,6 +107,7 @@ html[data-theme="light"] .hero-section {
     box-shadow: 0 0 10px rgba(0, 0, 0, .05);
     border: 1px solid var(--light-border-color);
     border-radius: var(--border-radius);
+
     i {
         color: var(--link-color);
     }
@@ -111,16 +122,24 @@ html[data-theme="light"] .hero-section {
         z-index: 2;
         height: calc(100vh - 7rem);
         overflow-y: auto;
-    
+
         .toc {
             font-size: 12px !important;
+
         }
-    
+
+        .toc-container {
+            a {
+                color: var(--main-text-color) !important;
+                cursor: pointer;
+            }
+        }
+
         ol {
             list-style-type: none;
             margin-left: 0 !important;
             padding-left: 1rem !important;
-    
+
             li {
                 margin-top: 0.4rem !important;
             }
