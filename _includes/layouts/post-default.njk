@@ -21,8 +21,11 @@ layout: layouts/page-with-sidebar
 </div>
 
 <div class="col-lg-3 right-sidebar">
+    {% set toc = content | toc %}
+    {% if toc %}
     <div class="container ps-0">
         <span>Content</span>
-        {{content | toc | safe}}
+        {{toc | safe}}
     </div>
+    {% endif %}
 </div>
