@@ -345,8 +345,8 @@ body>.container-fluid {
 
 #topNav {
     // height: var(--header-height);
-    padding-left: 9%;
-    padding-right: 9%;
+    padding-left: 2vw;
+    padding-right: 2vw;
     background-color: var(--main-background-color) !important;
     border-bottom: 1px solid var(--light-border-color);
     width: 100vw;
@@ -888,6 +888,13 @@ footer {
     }
 }
 
+@include media-breakpoint-down(md) {
+    #topNav {
+        padding-left: 0;
+        padding-right: 0;
+    }
+}
+
 /*
     ##Device = Low Resolution Tablets, Mobiles (Landscape)
     ##Screen = B/w 481px to 767px
@@ -912,11 +919,6 @@ footer {
         #author_details {
             text-align: center;
         }
-    }
-
-    #topNav {
-        padding-left: 4%;
-        padding-right: 4%;
     }
 
     #mc-embedded-subscribe-form {
