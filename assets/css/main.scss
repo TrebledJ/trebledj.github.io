@@ -123,6 +123,10 @@ html[data-theme="light"] .hero-section {
     position: sticky;
 }
 
+.author-social-items-wrapper {
+    position: relative;
+}
+
 .author-social-item-list {
     display: block;
     position: absolute;
@@ -148,6 +152,7 @@ html[data-theme="light"] .hero-section {
         margin-top: 20px;
         font-size: 24px;
     }
+
     .profile-bio {
         font-size: 16px;
     }
@@ -219,30 +224,33 @@ html[data-theme="light"] .hero-section {
     }
 }
 
-@include media-breakpoint-down(md) {
+@include media-breakpoint-down(lg) {
     .profile-name {
         font-size: 18px;
     }
+
     .profile-bio {
         font-size: 14px;
     }
 
     .left-sidebar {
+        // width: 100%;
+
         button {
             position: relative;
             margin-bottom: 0;
 
-            &:before {
-                @supports (pointer-events: none) {
-                    content: '';
-                    position: fixed;
-                    top: 0;
-                    left: 0;
-                    width: 100%;
-                    height: 100%;
-                    pointer-events: none;
-                }
-            }
+            // &:before {
+            //     @supports (pointer-events: none) {
+            //         content: '';
+            //         position: fixed;
+            //         top: 0;
+            //         left: 0;
+            //         width: 100%;
+            //         height: 100%;
+            //         pointer-events: none;
+            //     }
+            // }
 
             &.open {
                 &:before {
@@ -257,13 +265,42 @@ html[data-theme="light"] .hero-section {
         align-items: start;
 
         .profile-img {
-            width: 8vw;
+            width: 32px;
+            height: 32px;
             // align-self: flex-start;
         }
 
         .author-info {
             padding-left: 15px;
             padding-right: 15px;
+        }
+
+        .author-social-item-list {
+            &:before {
+                display: block;
+                content: "";
+                position: absolute;
+                top: -11px;
+                left: calc(50% - 10px);
+                width: 0;
+                border-style: solid;
+                border-width: 0 10px 10px;
+                border-color: var(--light-border-color) transparent;
+                z-index: 0;
+            }
+
+            &:after {
+                display: block;
+                content: "";
+                position: absolute;
+                top: -10px;
+                left: calc(50% - 10px);
+                width: 0;
+                border-style: solid;
+                border-width: 0 10px 10px;
+                border-color: var(--main-background-color) transparent;
+                z-index: 1;
+            }
         }
     }
 

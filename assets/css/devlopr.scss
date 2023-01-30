@@ -202,64 +202,64 @@ body {
     padding-right: 0px !important;
 }
 
-.col-auto,
-.col-lg,
-.col-lg-1,
-.col-lg-10,
-.col-lg-11,
-.col-lg-2,
-.col-lg-3,
-.col-lg-4,
-.col-lg-5,
-.col-lg-6,
-.col-lg-7,
-.col-lg-8,
-.col-lg-9,
-.col-lg-auto,
-.col-md,
-.col-md-1,
-.col-md-10,
-.col-md-11,
-.col-md-12,
-.col-md-2,
-.col-md-3,
-.col-md-4,
-.col-md-5,
-.col-md-6,
-.col-md-7,
-.col-md-8,
-.col-md-9,
-.col-md-auto,
-.col-sm,
-.col-sm-1,
-.col-sm-10,
-.col-sm-11,
-.col-sm-12,
-.col-sm-2,
-.col-sm-3,
-.col-sm-4,
-.col-sm-5,
-.col-sm-6,
-.col-sm-7,
-.col-sm-8,
-.col-sm-9,
-.col-sm-auto,
-.col-xl,
-.col-xl-1,
-.col-xl-10,
-.col-xl-11,
-.col-xl-12,
-.col-xl-2,
-.col-xl-3,
-.col-xl-4,
-.col-xl-5,
-.col-xl-6,
-.col-xl-7,
-.col-xl-8,
-.col-xl-9,
-.col-xl-auto {
-    padding-left: 5px !important;
-}
+// .col-auto,
+// .col-lg,
+// .col-lg-1,
+// .col-lg-10,
+// .col-lg-11,
+// .col-lg-2,
+// .col-lg-3,
+// .col-lg-4,
+// .col-lg-5,
+// .col-lg-6,
+// .col-lg-7,
+// .col-lg-8,
+// .col-lg-9,
+// .col-lg-auto,
+// .col-md,
+// .col-md-1,
+// .col-md-10,
+// .col-md-11,
+// .col-md-12,
+// .col-md-2,
+// .col-md-3,
+// .col-md-4,
+// .col-md-5,
+// .col-md-6,
+// .col-md-7,
+// .col-md-8,
+// .col-md-9,
+// .col-md-auto,
+// .col-sm,
+// .col-sm-1,
+// .col-sm-10,
+// .col-sm-11,
+// .col-sm-12,
+// .col-sm-2,
+// .col-sm-3,
+// .col-sm-4,
+// .col-sm-5,
+// .col-sm-6,
+// .col-sm-7,
+// .col-sm-8,
+// .col-sm-9,
+// .col-sm-auto,
+// .col-xl,
+// .col-xl-1,
+// .col-xl-10,
+// .col-xl-11,
+// .col-xl-12,
+// .col-xl-2,
+// .col-xl-3,
+// .col-xl-4,
+// .col-xl-5,
+// .col-xl-6,
+// .col-xl-7,
+// .col-xl-8,
+// .col-xl-9,
+// .col-xl-auto {
+//     padding-left: 5px !important;
+// }
 
 pre {
     display: block;
@@ -349,6 +349,7 @@ body>.container-fluid {
     padding-right: 9%;
     background-color: var(--main-background-color) !important;
     border-bottom: 1px solid var(--light-border-color);
+    width: 100vw;
     // box-shadow: #000 0px 0px 8px;
 }
 
@@ -716,7 +717,8 @@ footer {
 /* Responsive Media Queries */
 
 .main-container {
-    margin: 20px;
+    width: 100%;
+    padding: 20px;
     min-height: calc(100vh - var(--footer-height) - var(--header-height));
 }
 
@@ -793,8 +795,8 @@ footer {
     }
 
     #topNav {
-        padding-left: 4%;
-        padding-right: 4%;
+        padding-left: 0%;
+        padding-right: 0%;
     }
 
     .navbar-brand {
