@@ -2,10 +2,15 @@
 layout: layouts/page-default
 ---
 {% from "post/preview.html" import render_preview %}
-<div class="post-preview-list">
-    {% for post in collections.posts | reverse %}
-        {{ render_preview(post) }}
-    {% endfor %}
+
+<div class="col-lg-6">
+    <div class="post-preview-list">
+        {% for post in collections.postsr %}
+            {{ render_preview(post) }}
+        {% endfor %}
+    </div>
 </div>
+
+<div class="col-lg-3"></div>
 
 {# {% include "pagination-links.html" %} #}
