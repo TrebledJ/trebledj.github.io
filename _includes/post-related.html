@@ -1,15 +1,18 @@
-<div class="container p-4">
-    <h4>
-        <i class="fa fa-link me-2"></i>Related
-    </h4>
-    <div class="card-body p-0 mt-2">
-        <div class="container">
+{% set this = collections.posts | getCollectionItem %}
+{% set relatedPosts = collections.posts | reverse | relatedTo(this, related) %}
+
+{% if relatedPosts | length > 0 %}
+    <hr/>
+    <div class="w-100 p-4">
+        <h4>
+            <i class="fa fa-link me-2"></i>Related
+            </h4>
+        <div class="mt-4">
             <div class="row">
-                {% set this = collections.posts | getCollectionItem %}
-                {% for post in collections.posts | reverse | relatedTo(this, related) %}
+                {% for post in relatedPosts %}
                     {% include "post-preview-compressed.html" %}
                 {% endfor %}
             </div>
         </div>
     </div>
-</div>
+{% endif %}

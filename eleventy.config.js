@@ -204,7 +204,7 @@ module.exports = function (eleventyConfig) {
 	});
 
 	eleventyConfig.addFilter("relatedTo", (posts, thisPost, related) => {
-		let n = related.num || 3; // Number of related elements to find.
+		let n = related.num || 0; // Number of related elements to find.
 
 		// In auto checking, if a post has at least this many percentage of common tags, then it is considered related.
 		let autoCommonTagsThreshold = related.autoCommonTagsThreshold || 0.4;
@@ -214,6 +214,10 @@ module.exports = function (eleventyConfig) {
 		// Force related posts into the array.
 		if (related.posts) {
 			for (let slug of related.posts) {
+				if (final_related.length >= n) {
+					break;
+				}
+				
 				// Find post...
 				let post = posts.find(e => e.page.fileSlug === slug);
 				final_related.push(post);

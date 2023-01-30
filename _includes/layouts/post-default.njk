@@ -5,10 +5,7 @@ layout: layouts/page-with-sidebar
 <div class="col-lg-6">
     {% include "post-article.html" %}
     {% if related %}
-        <hr/>
-        <div class="w-100 mt-4">
-            {% include "post-related.html" %}
-        </div>
+        {% include "post-related.html" %}
     {% endif %}
     {% if comments %}
         <hr/>

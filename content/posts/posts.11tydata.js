@@ -13,5 +13,6 @@ module.exports = {
 	comments: true,
 	related: {
 		auto: true,
+		num: 4,
 	}
 };
