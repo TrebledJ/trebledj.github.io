@@ -10,8 +10,6 @@ thumbnail: /img/posts/misc/ctf/labyrinth/labyrinth-thumbnail.jpg
 related_tags: ctf writeup
 ---
 
-{% include "toc.md" %}
-
 ### Challenge Description
 > To get the flag you'll need to get to the end of a maz- five randomly generated mazes within five minutes.
 > 

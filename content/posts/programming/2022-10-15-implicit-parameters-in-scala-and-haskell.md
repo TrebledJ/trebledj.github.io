@@ -14,8 +14,6 @@ related:
 > *Do not say a little in many words, but a great deal in a few.*  
 >  – Pythagoras
 
-{% include "toc.md" %}
-
 ## What the heck are implicits?
 
 In software engineering, the [Don’t Repeat Yourself](https://en.m.wikipedia.org/wiki/Don't_repeat_yourself) principle is one of the foundations of writing modular programs. **Implicit parameters** are one of those language features which hide repetitive code so that developers can focus on the more important aspects of logic. Not all programming languages have implicit parameters; but those that do provide an extra mechanism to deal with repetitive code.

@@ -20,8 +20,6 @@ In Advent of Code (AOC) 2021, I found it useful to separate common functions int
 
 I'll introduce some basic utilities first before moving on to advanced ones. However, I won't make too many attempts to teach the basics. For that you may refer yourself to [Learn You a Haskell][lyah] (LYAH), which provides a very nice tutorial into Haskell.
 
-{% include "toc.md" %}
-
 ### List Utilities
 #### `count :: (a -> Bool) -> [a] -> Int`
 

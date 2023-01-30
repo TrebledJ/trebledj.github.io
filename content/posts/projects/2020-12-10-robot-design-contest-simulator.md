@@ -16,8 +16,6 @@ related:
 
 This project was part of a recruitment phase for the HKUST Robotics Team. We used Qt for the GUI and Box2D for physics. The public-facing side of the project is uploaded [online](https://github.com/HKUST-Robocon/RDC-Emulator-2020) and the desktop applications are [available for download](https://github.com/HKUST-Robocon/RDC-Emulator-2020/releases), but the source code is kept hidden. This post will provide some context and thought processes behind the design.
 
-{% include "toc.md" %}
-
 ### Context
 Every year, the [HKUST Robotics Team][ustrobotics] will host a set of training sessions followed by an internal competition (aka a Robot Design Contest or RDC) for trainees to test their mettle and skills. Trainees are segregated into mechanical, hardware, and software divisions, each division training a different skillset. In the RDC, trainees are grouped such that there is a fair distribution of trainees from each division.
 

@@ -14,8 +14,6 @@ The challenge looks deceptively simple. Chinese has over 50,000 characters. Base
 
 Haha nope. It's not as trivial as I thought.
 
-{% include "toc.md" %}
-
 ## Description
 
 200 points. 3/5 ⭐️. 6/311 solves.

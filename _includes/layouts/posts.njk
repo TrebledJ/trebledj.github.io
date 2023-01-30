@@ -1,7 +1,7 @@
 ---
-layout: layouts/page-with-sidebar
+layout: layouts/page-default
 ---
-{% from "post-preview.html" import render_preview %}
+{% from "post/preview.html" import render_preview %}
 <div class="post-preview-list">
     {% for post in collections.posts | reverse %}
         {{ render_preview(post) }}

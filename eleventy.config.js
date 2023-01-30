@@ -4,8 +4,6 @@ const { DateTime } = require("luxon");
 const markdownItAnchor = require("markdown-it-anchor");
 const markdownItAttrs = require('markdown-it-attrs');
 const markdownItFootnote = require('markdown-it-footnote');
-
-// const markdownItTOC = require("markdown-it-toc-done-right");
 const pluginTOC = require('eleventy-plugin-toc')
 
 
@@ -148,6 +146,10 @@ module.exports = function (eleventyConfig) {
 			counter[tag] = (counter[tag] ? counter[tag] + 1 : 1);
 		}
 		return counter;
+	});
+	eleventyConfig.addCollection("postsr", function (collectionApi) {
+		// Reversed collection.
+		return collectionApi.getFilteredByTag('posts').slice().reverse();
 	});
 
 	// Filters
@@ -306,11 +308,6 @@ module.exports = function (eleventyConfig) {
 			level: [2, 3, 4],
 			slugify: eleventyConfig.getFilter("slugify"),
 		});
-		// mdLib.use(markdownItTOC, {
-		// 	placeholder: '{toc}',
-		// 	slugify: eleventyConfig.getFilter("slugify"),
-		// 	// listType: 'ul',
-		// });
 		mdLib.use(markdownItFootnote);
 		mdLib.renderer.rules.footnote_caption = (tokens, idx/*, options, env, slf*/) => {
 			var n = Number(tokens[idx].meta.id + 1).toString();

@@ -12,8 +12,6 @@ keywords: vpointer vptr ctf virtual function virtual-function vtable gdb
 related_tags: ctf writeup
 ---
 
-{% include "toc.md" %}
-
 ### Challenge Description
 > Wanna take a break from the ctf to do another ctf?
 

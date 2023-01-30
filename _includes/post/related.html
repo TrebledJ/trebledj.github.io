@@ -1,0 +1,18 @@
+{% set this = collections.posts | getCollectionItem %}
+{% set relatedPosts = collections.postsr | relatedTo(this, related) %}
+
+{% if relatedPosts | length > 0 %}
+    <hr/>
+    <div class="w-100 p-4">
+        <h4>
+            <i class="fa fa-link me-2"></i>Related
+        </h4>
+        <div class="row mt-4">
+            {% for post in relatedPosts %}
+                <div class="col-md-6">
+                    {% include "post/preview-compressed.html" %}
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endif %}

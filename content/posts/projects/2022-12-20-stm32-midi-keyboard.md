@@ -16,8 +16,6 @@ pitch: Developed a MIDI keyboard using an STM32F4 microcontroller.
 This project was made for a course on embedded systems and is published [online](https://github.com/TrebledJ/stm32-midi-keyboard).
 
 
-{% include "toc.md" %}
-
 <!-- ## Posts in This Project -->
 
 

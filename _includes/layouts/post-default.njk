@@ -1,20 +1,18 @@
 ---
-layout: layouts/page-with-sidebar
+layout: layouts/page-default
 ---
 
 <div class="col-lg-6">
-    {% include "post-article.html" %}
+    {% include "post/article.html" %}
     {% if related %}
-        {% include "post-related.html" %}
+        {% include "post/related.html" %}
     {% endif %}
     {% if comments %}
         <hr/>
         <div class="container mt-4 p-4">
-            {% include "post-comments.html" %}
+            {% include "post/comments.html" %}
         </div>
     {% endif %}
 </div>
 
-<div class="col-lg-3 right-sidebar sticky">
-    {% include "toc.html" %}
-</div>
+{% include "sidebar-right.html" %}

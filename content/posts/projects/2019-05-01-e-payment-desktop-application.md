@@ -14,8 +14,6 @@ pitch: Developed a Qt/C++ desktop application for a new e-payment system in the 
 
 This project involved creating a functioning e-payment system to be integrated at our high school's cafeteria.
 
-{% include "toc.md" %}
-
 ### Context
 
 I was in my penultimate year of high school and summer was approaching. At the time, every single student had a student ID card. They were simple in design with the usual portrait, student name, and expiry date. A friend came to me and suggested "evolving" the student card to be able to use it for electronic transactions (e-payment). The idea is akin to using an [MTR Octopus][octopus] to pay for goodies instead of having to scramble for cash and perform the entire process of calculating plus giving change.

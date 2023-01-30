@@ -10,8 +10,6 @@ related_tags: ctf writeup
 usemathjax: true
 ---
 
-{% include "toc.md" %}
-
 ## Description
 
 350 points. 4/5 ⭐️. 4/311 solves.

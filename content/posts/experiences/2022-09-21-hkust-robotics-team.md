@@ -20,8 +20,6 @@ The purpose of this post is to reflect on and share about this experience. The f
 
 Please understand that the team has a culture of keeping things secret. 🤫 So I won’t delve precisely into what I worked on. Also understand that each person experiences things differently, so don’t take my writing below as representative of the entire team and experience. Things may change in the next few years, or may have already changed.
 
-{% include "toc.md" %}
-
 ## Joining the Team 🚪
 
 I joined the HKUST Robotics Team in my first year of university. In the Fall semester, the team would have a semester-long recruitment process, designed to filter candidates. Recruitment was separated into multiple stages:

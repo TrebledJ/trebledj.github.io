@@ -22,8 +22,6 @@ But the freedom and “I don’t care whether your types are correct” attitude
 
 In this post, I’ll introduce my first set of MuseScore plugins and give a brief developer’s account of them. These plugins aren’t really related to music. Rather, they’re inspired by VSCode plugins and features which I find useful. In a way, the plugins below make MuseScore more of a developer’s second home.
 
-{% include "toc.md" %}
-
 ## todo-list
 
 View the project on: [MuseScore](https://musescore.org/en/project/musescore-do-list) / [GitHub](https://github.com/TrebledJ/musescore-todo-list).
