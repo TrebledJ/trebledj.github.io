@@ -67,9 +67,7 @@
 
 // Nested anchors: https://stackoverflow.com/a/52076345/10239789.
 .tag-list {
-    position: relative;
     pointer-events: none;
-    z-index: 10;
 
     .post-tags {
         pointer-events: all;

@@ -1,65 +1,28 @@
-<div class="card p-4 mb-3" id="profile-card">
-    <div class="d-flex flex-column align-items-center">
-        <!-- <a href="/profile"> -->
-        <img src="/img/{{ site.author.logo }}" class="profile-img"/>
-        <!-- </a> -->
-        <h2 class="profile-name">{{displayname | default(site.author.name) }}</h2>
-        <!-- <p class="profile-bio">{{ site.subtitle }}</p> -->
+<div class="left-sidebar-container d-flex" id="profile-card">
+    <img src="/img/{{ site.author.logo }}" class="profile-img"/>
+    <div class="author-info d-flex flex-column align-items-start">
+        <h4 class="profile-name">{{ site.author.alias | default(site.author.name) }}</h4>
+        <p class="profile-bio">{{ site.subtitle }}</p>
     </div>
-
-    <div class="container w-85">
-        <div class="row row-cols-3 align-items-center">
-            <div class="col p-2">
-                <a class="social-link" href="http://github.com/TrebledJ">
-                    <i class="fab fa-github"></i>
-                </a>
-            </div>
-            <div class="col p-2">
-                <a class="social-link" href="https://stackoverflow.com/users/10239789/trebledj">
-                    <i class="fab fa-stack-overflow"></i>
-                </a>
-            </div>
-            <div class="col p-2">
-                <a class="social-link" href="https://www.codingame.com/profile/8444100ecb9723c1ec542346b0630aaa2821532">
-                    <img height="24" src="/img/logos/codingame.png"/>
-                </a>
-            </div>
-            <div class="col p-2 px-0">
-                <a class="social-link" href="https://soundcloud.com/trebledj">
-                    <i class="fab fa-soundcloud"></i>
-                </a>
-            </div>
-            <div class="col p-2">
-                <a class="social-link" href="https://open.spotify.com/user/24i9exez29k1jr85olljuy94g?si=4213a229649f4ceb">
-                    <i class="fab fa-spotify"></i>
-                </a>
-            </div>
-            <div class="col p-2">
-                <a class="social-link" href="https://musescore.com/user/20636901">
-                    <img height="24" src="/img/logos/musescore.png"/>
-                </a>
-            </div>
-            <div class="col p-2">
-                <a class="social-link" href="/feeds">
-                    <i class="fa fa-rss"></i>
-                </a>
-            </div>
-            <div class="col p-2">
-                <a class="social-link" href="mailto:{{site.author.email}}">
-                    <i class="fa fa-envelope"></i>
-                </a>
-            </div>
-            {% if page.url == '/profile/' %}
-            <div class="col p-2">
-                <a class="social-link" href="https://www.linkedin.com/in/trebledj">
-                    <i class="fab fa-linkedin"></i>
-                </a>
-            </div>
-            {% endif %}
-        </div>
+    <div class="author-social-items-wrapper">
+        <button class="btn btn-primary py-1">Follow</button>
+        <ul class="author-social-item-list hidden">
+            {% for item in site.social %}
+                <li class="author-social-item">
+                    <a href="{{item.link}}">
+                        <div class="d-flex flex-row justify-content-start align-items-center">
+                            <div class="d-flex align-items-center justify-content-center" style="width:30px">
+                                {% if item.icon %}
+                                    <i class="social-icon {{item.icon}}" {% if item.color %}style="color:{{item.color}} !important;"{% endif %}></i>
+                                {% else %}
+                                    <i class="social-icon-img"><img src="{{item.img}}"/></i>
+                                {% endif %}
+                            </div>
+                            <span class="social-link ms-1">{{item.name}}</span>
+                        </div>
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
     </div>
-    <!-- Wow so strong you hacked my html file. Now you know my Discord username. It was a bit awkward figuring out how to display it, so I just decided to leave it out... -->
-    <!-- <a class="social-link" data-placement="top" data-toggle="tooltip" style="cursor: default" title="Find me in International Baccalaureate, Programming Discussions, The Programmer's Hangout, and other Discord servers. (Mostly just lurking.)">
-        <i class="fab fa-discord"></i>&nbsp;<span class="fs-6">TrebledJ#7595</span>
-    </a> -->
 </div>
