@@ -3,7 +3,7 @@ layout: layouts/page-default
 ---
 {% from "post/preview.html" import render_preview %}
 
-<div class="col-lg-6">
+<div class="col-lg-9">
     <div class="post-preview-list">
         {% for post in collections.postsr %}
             {{ render_preview(post) }}
@@ -11,6 +11,6 @@ layout: layouts/page-default
     </div>
 </div>
 
-<div class="col-lg-3"></div>
+{# <div class="col-lg-3"></div> #}
 
 {# {% include "pagination-links.html" %} #}
