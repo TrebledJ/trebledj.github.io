@@ -7,7 +7,7 @@ document.addEventListener('scroll', _ => {
   progress = scrollTop / height * 100;
 
   if ( progress > 0) {
-    progressBar = document.querySelector('#top-progress-bar');
+    progressBar = document.querySelector('#scroll-progress-bar');
     progressBar.style.setProperty('--progress', progress + '%');
   } else {
     progressBar.style.setProperty('--progress', '0%');

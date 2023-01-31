@@ -61,12 +61,13 @@
     color: coral;
 }
 
-/* Progress Bar */
-.progressline .bar {
+/* On-Load Progress Bar */
+.load-progress-bar .bar {
     background: var(--nav-link-color-sp);
 }
 
-#top-progress-bar {
+/* On-Scroll Progress Bar */
+#scroll-progress-bar {
     background: linear-gradient(to right, var(--nav-link-color-sp) var(--progress), transparent 0);
     height: 4px;
     position: fixed;
@@ -76,7 +77,7 @@
 }
 
 @include media-breakpoint-down(lg) {
-    #top-progress-bar {
+    #scroll-progress-bar {
         top: 57px;
     }
 }
