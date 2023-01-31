@@ -25,7 +25,7 @@ $(async function () {
       let scrollPercentage = 100 * $(window).scrollTop() / ($(document).height() - $(window).height());
 
       // If we've scrolled past the loadNewPostsThreshold, fetch items
-      if (scrollPercentage > 90) {
+      if (scrollPercentage > 85) {
         fetchPosts();
       }
     });
