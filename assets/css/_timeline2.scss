@@ -13,7 +13,7 @@
 }
 .main-timeline2 .timeline2-content{
     color: var(--main-text-color);
-    background: var(--card-background-color);
+    background: var(--main-background-color);
     padding: 15px 15px 15px 290px;
     border-radius: 20px;
     box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
@@ -41,7 +41,7 @@
     top: 50%;
 }
 .main-timeline2 .timeline2-icon{
-    color: var(--card-background-color) !important;
+    color: var(--main-background-color) !important;
     font-size: 50px;
     font-weight: 600;
     text-align: center;

@@ -54,9 +54,9 @@ blockquote {
     overflow: auto;
     opacity: var(--opacity-lower);
 
-    background: var(--card-background-color);
+    background: var(--main-background-color);
     border: none;
-    border-left: var(--border-width-thick) solid var(--light-border-color);
+    border-left: var(--border-width-thick) solid var(--accent-color);
 }
 
 blockquote p {

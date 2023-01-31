@@ -15,9 +15,8 @@
         height: 40px;
         border: var(--border-width-thick) solid var(--light-border-color);
         border-radius: var(--border-radius-small);
-        // background-color: #eeeeee69;
+        background-color: var(--main-background-color);
         color: var(--main-text-color);
-        background-color: var(--card-background-color);
     }
 
     .modal-header {
@@ -27,9 +26,9 @@
     .border-bottom {
         border-bottom: 2px solid var(--light-border-color) !important;
     }
-
+    
     .modal-content {
-        background-color: var(--card-background-color);
+        background-color: var(--main-background-color);
     }
 }
 
