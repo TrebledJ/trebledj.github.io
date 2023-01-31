@@ -5,11 +5,8 @@ logo: tag
 
 {% from "post/preview.html" import render_preview %}
 
-<div>
-    {{ content | safe }}
-</div>
+{{ content | safe }}
 
-<br/>
 <div class="post-preview-list">
     {% set slug = tag | default(title) | slugify %}
     {% for post in collections[slug] | reverse %}

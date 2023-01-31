@@ -1,15 +1,13 @@
 ---
 layout: layouts/page-default
 ---
-<div class="container p-4">
+<div class="col-lg-9 pt-2">
     <h3>
         {% if logo %}
             <i class="fa fa-{{logo}} me-1"></i>
         {% endif %}
         {{title}}
     </h3>
-
-    <br/>
     <div>
         {{ content | safe }}
     </div>
