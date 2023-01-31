@@ -20,11 +20,11 @@
     }
 
     .modal-header {
-        border-bottom: 2px solid var(--light-border-color) !important;
+        border-bottom: 2px solid var(--light-border-color);
     }
 
     .border-bottom {
-        border-bottom: 2px solid var(--light-border-color) !important;
+        border-bottom: var(--border-width) solid var(--light-border-color) !important;
     }
     
     .modal-content {
@@ -36,7 +36,7 @@ html[data-theme="dark"] .btn-close {
     filter: invert(1) grayscale(100%) brightness(200%);
 }
 
-@media (min-width: 768px) {
+@include media-breakpoint-up(md) {
     // Larger modal for large screens.
     #search-modal .modal-dialog {
         max-width: 80%;

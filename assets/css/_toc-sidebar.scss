@@ -8,7 +8,7 @@
     overflow-y: auto;
 
     .toc {
-        font-size: 12px !important;
+        font-size: 12px;
     }
 
     .toc-container {
@@ -20,11 +20,11 @@
 
     ol {
         list-style-type: none;
-        margin-left: 0 !important;
-        padding-left: 1rem !important;
+        margin-left: 0;
+        padding-left: 1rem;
 
         li {
-            margin-top: 0.4rem !important;
+            margin-top: 0.4rem;
         }
     }
 }

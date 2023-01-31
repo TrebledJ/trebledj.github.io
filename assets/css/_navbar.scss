@@ -2,18 +2,18 @@
 #topNav {
     padding-left: 2vw;
     padding-right: 2vw;
-    background-color: var(--main-background-color) !important;
+    background-color: var(--main-background-color);
     border-bottom: 1px solid var(--light-border-color);
     width: 100vw;
 }
 
 #navbar-hamburger,
 #navbar-search {
-    color: var(--bold-color) !important;
+    color: var(--bold-color);
 }
 
 .navbar-dark .navbar-brand {
-    color: #ff7601 !important;
+    color: var(--link-color);
 }
 
 .navbar-dark .navbar-nav .nav-link {
@@ -21,8 +21,8 @@
 }
 
 .navbar-dark .navbar-toggler {
-    border-color: transparent !important;
-    box-shadow: none !important;
+    border-color: transparent;
+    box-shadow: none;
 }
 
 .navbar-brand-img {

@@ -87,7 +87,7 @@
 .main-timeline2 .timeline2:nth-child(4n+3) .timeline2-year{ color: #804ebd; }
 .main-timeline2 .timeline2:nth-child(4n+4) .timeline2-content:before{ background-color: #FF9800; }
 .main-timeline2 .timeline2:nth-child(4n+4) .timeline2-year{ color: #FF9800; }
-@media screen and (max-width:767px){
+@include media-breakpoint-down(lg) {
     .main-timeline2 .timeline2,
     .main-timeline2 .timeline2:nth-child(even){
         width: 100%;

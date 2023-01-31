@@ -79,8 +79,7 @@ h3,
 h4,
 h5,
 h6 {
-    color: var(--bold-color) !important;
-    line-height: 1.1;
+    color: var(--bold-color);
 }
 
 hr {
@@ -90,5 +89,5 @@ hr {
 pre {
     display: block;
     font-size: 87.5%;
-    color: #d4d4d4 !important;
+    color: #d4d4d4;
 }
