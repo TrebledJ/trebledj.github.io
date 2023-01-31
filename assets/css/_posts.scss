@@ -1,6 +1,5 @@
-
-
-.post-preview, .post-preview-compressed {
+.post-preview,
+.post-preview-compressed {
     width: 100%;
     max-width: 100%;
     margin-bottom: 1.5rem;
@@ -33,6 +32,7 @@
             object-fit: contain;
             z-index: 2;
         }
+
         .post-img-blurred-bg {
             position: absolute;
             width: 100%;
@@ -53,15 +53,29 @@
 }
 
 // Nested anchors: https://stackoverflow.com/a/52076345/10239789.
-.post-preview, .post-preview-compressed {
+.post-preview,
+.post-preview-compressed {
     position: relative;
 
-    & > a {
+    &>a {
         position: absolute;
         top: 0;
         left: 0;
         bottom: 0;
         right: 0;
+    }
+}
+
+.post-preview {
+    .post-title {
+        margin: 0 0 10px;
+        font-size: 24px;
+        font-weight: 400;
+        
+        a,
+        a:hover {
+            color: var(--bold-color) !important;
+        }
     }
 }
 
@@ -74,26 +88,15 @@
     }
 }
 
-.post-preview {
-    .post-title {
-        margin: 0 0 10px;
-        font-size: 24px;
-        font-weight: 400;
-    
-        a, a:hover {
-            color: var(--bold-color) !important;
-        }
-    }
-}
-
 .post-preview-compressed {
     // Smaller title.
     .post-title {
         margin: 0 0 5px;
         font-size: 18px;
         font-weight: 400;
-    
-        a, a:hover {
+
+        a,
+        a:hover {
             color: var(--bold-color) !important;
         }
     }
@@ -135,7 +138,7 @@
         .post-preview-container {
             flex-direction: column !important;
         }
-        
+
         .post-thumbnail {
             width: 100%;
             min-height: 200px;
@@ -168,39 +171,18 @@
     font-size: 40px;
 }
 
-.post-title, .post-summary {
+.post-title,
+.post-summary {
     color: var(--bold-color) !important;
 }
 
-$spacer: 1rem;
-// @media (min-width: 768px) { 
-//     .post-article {
-//         padding: $spacer * 3;
-//     }
-// }
-// @media (min-width: 481px) and (max-width: 767px) { 
-//     .post-article {
-//         padding: $spacer * 1.5;
-//     }
-// }
-// @media (min-width: 200px) and (max-width: 480px) { 
-    // .post-article {
-    //     padding: $spacer;
-    // }
-// }
-
 .post-article {
-    ul, ol {
+    ul,
+    ol {
         margin-left: 0rem !important;
     }
 
     li {
         margin-bottom: 0.1rem !important;
-    }
-}
-
-.mdtoc {
-    li {
-        margin-top: 0.2rem !important;
     }
 }

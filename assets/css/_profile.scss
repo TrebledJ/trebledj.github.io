@@ -1,0 +1,15 @@
+
+
+.skill-item .progress-bar {
+    // background-color: var(--link-color);
+    -webkit-animation-direction: reverse;
+    -moz-animation-direction: reverse;
+    -ms-animation-direction: reverse;
+    -o-animation-direction: reverse;
+    animation-direction: reverse;
+}
+
+.skill-item .progress {
+    height: 12px;
+}
+

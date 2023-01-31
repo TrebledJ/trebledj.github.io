@@ -1,0 +1,86 @@
+
+#topNav {
+    // height: var(--header-height);
+    padding-left: 2vw;
+    padding-right: 2vw;
+    background-color: var(--main-background-color) !important;
+    border-bottom: 1px solid var(--light-border-color);
+    width: 100vw;
+    // box-shadow: #000 0px 0px 8px;
+}
+
+#navbar-hamburger,
+#navbar-search {
+    color: var(--bold-color) !important;
+}
+
+.navbar-dark .navbar-brand {
+    color: #ff7601 !important;
+}
+
+.navbar-dark .navbar-nav .nav-link {
+    color: var(--nav-link-color) !important;
+}
+
+.navbar-dark .navbar-toggler {
+    border-color: transparent !important;
+    box-shadow: none !important;
+}
+
+.navbar-brand-img {
+    width: 50px;
+    height: 50px;
+}
+
+@include media-breakpoint-down(lg) {
+    #topNav {
+        padding-left: 0;
+        padding-right: 0;
+    }
+}
+
+@include media-breakpoint-down(md) {
+    .navbar-brand {
+        display: inline-block;
+        padding-top: .3125rem;
+        padding-bottom: .3125rem;
+        margin-right: 1rem;
+        font-size: 1.25rem;
+        line-height: inherit;
+        white-space: nowrap;
+    }
+}
+
+@include media-breakpoint-down(sm) {
+    .navbar-brand {
+        margin-left: -30px;
+    }
+}
+
+/* Search Icon */
+.search-icon {
+    font-size: 25px !important;
+    color: coral;
+}
+
+/* Progress bar */
+.progressline .bar {
+    background: var(--nav-link-color-sp);
+}
+
+/* On scroll progress bar */
+#top-progress-bar {
+    background: linear-gradient(to right, var(--nav-link-color-sp) var(--progress), transparent 0);
+    height: 4px;
+    position: fixed;
+    width: 100%;
+    // overflow: hidden;
+    z-index: 1000;
+    top: var(--header-height);
+}
+
+@media (max-width: 992px) {
+    #top-progress-bar {
+        top: 57px;
+    }
+}

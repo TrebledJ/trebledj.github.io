@@ -1,0 +1,173 @@
+
+// Blatantly stolen from Minimal Mistakes and Chirpy.
+
+.author-social-items-wrapper {
+    position: relative;
+}
+
+.author-social-item-list {
+    display: block;
+    position: absolute;
+    right: 0;
+    margin-top: 15px;
+    z-index: 5;
+    padding: 10px;
+    list-style-type: none;
+    border: 1px solid var(--light-border-color);
+    border-radius: var(--border-radius);
+    background: var(--main-background-color);
+    box-shadow: 0 2px 4px 0 rgba(#000, 0.16), 0 2px 10px 0 rgba(#000, 0.12);
+    cursor: default;
+
+    &.hidden {
+        display: none;
+    }
+}
+
+// Big screen.
+@include media-breakpoint-up(lg) {
+    .profile-name {
+        margin-top: 20px;
+        font-size: 24px;
+    }
+
+    .profile-bio {
+        font-size: 16px;
+    }
+
+    .left-sidebar {
+        top: 5rem;
+        left: 0;
+        z-index: 2;
+        height: calc(100vh - 11rem);
+        overflow-y: auto;
+        opacity: 0.8;
+
+        button {
+            display: none;
+        }
+    }
+
+    .left-sidebar-container {
+        flex-direction: column;
+        align-items: start;
+
+        .profile-img {
+            width: 100px;
+            height: 100px;
+        }
+    }
+
+    .author-social-item-list {
+        display: block;
+        position: relative;
+        margin: 0;
+        padding: 0;
+        border: 0;
+        background: transparent;
+        box-shadow: none;
+
+        &.hidden {
+            display: block;
+        }
+    }
+
+    .right-sidebar {
+        top: 5rem;
+        right: 0;
+        z-index: 2;
+        height: calc(100vh - 11rem);
+        overflow-y: auto;
+
+        .toc {
+            font-size: 12px !important;
+        }
+
+        .toc-container {
+            a {
+                color: var(--main-text-color) !important;
+                cursor: pointer;
+            }
+        }
+
+        ol {
+            list-style-type: none;
+            margin-left: 0 !important;
+            padding-left: 1rem !important;
+
+            li {
+                margin-top: 0.4rem !important;
+            }
+        }
+    }
+}
+
+@include media-breakpoint-down(lg) {
+    .profile-name {
+        font-size: 18px;
+    }
+
+    .profile-bio {
+        font-size: 14px;
+    }
+
+    .left-sidebar {
+        button {
+            position: relative;
+            margin-bottom: 0;
+
+            &.open {
+                &:before {
+                    pointer-events: auto;
+                }
+            }
+        }
+    }
+
+    .left-sidebar-container {
+        flex-direction: row;
+        align-items: start;
+
+        .profile-img {
+            width: 32px;
+            height: 32px;
+        }
+
+        .author-info {
+            padding-left: 15px;
+            padding-right: 15px;
+        }
+
+        .author-social-item-list {
+            &:before {
+                display: block;
+                content: "";
+                position: absolute;
+                top: -11px;
+                left: calc(50% - 10px);
+                width: 0;
+                border-style: solid;
+                border-width: 0 10px 10px;
+                border-color: var(--light-border-color) transparent;
+                z-index: 0;
+            }
+
+            &:after {
+                display: block;
+                content: "";
+                position: absolute;
+                top: -10px;
+                left: calc(50% - 10px);
+                width: 0;
+                border-style: solid;
+                border-width: 0 10px 10px;
+                border-color: var(--main-background-color) transparent;
+                z-index: 1;
+            }
+        }
+    }
+
+    .right-sidebar {
+        display: none;
+    }
+}
