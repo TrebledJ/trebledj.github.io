@@ -65,6 +65,8 @@ $enable-negative-margins: true;
     color: var(--main-text-color) !important;
     border: var(--border-width) solid var(--main-text-color);
     border-radius: var(--border-radius-small);
+    position: relative;
+    z-index: 1;
 }
 
 
