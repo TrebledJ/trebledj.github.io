@@ -4,18 +4,13 @@ layout: layouts/page-default
 
 <div class="col-lg-9">
     <div class="d-flex justify-content-center">
-        <div id="track-list" class="container-fluid">
-            <br/>
-        </div>
+        <div id="track-list" class="container-fluid"></div>
 
         <div class="infinite-spinner"></div>
         <script src="/tracks.json"></script>
         <script src="/js/infinite-jekyll.js"></script>
         <script>
-            {
-                # loadInfinite(5);
-                #
-            }
+            loadInfinite(5);
         </script>
     </div>
 </div>

@@ -62,9 +62,10 @@ $(async function () {
   function fetchPostWithIndex(index) {
     let item = items[index];
     let tags = item.tags.filter(t => !["composition", "music"].includes(t)).map(t => `<a class="post-tags tag" href="${base_url}/tags/${t}">${t}</a>`).join("\n");
+    let brk = (index ? '<br/>' : ''); // No break on the first item.
 
     $(` <div>
-        <br/>
+        ${brk}
         <iframe allow="autoplay" frameborder="no" height="166" scrolling="no"
           src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/${item.track_id}&color=%23${soundcloud_color}&auto_play=false&hide_related=true&show_comments=true&show_user=true&show_reposts=false&show_teaser=false"
           width="100%"></iframe>
