@@ -67,6 +67,11 @@ i.social-icon-img {
 .social-link {
     color: var(--main-text-color) !important;
     font-size: 12px;
+
+    &:hover,
+    &:active {
+        color: var(--link-hover-color) !important;
+    }
 }
 
 // Large screens.
