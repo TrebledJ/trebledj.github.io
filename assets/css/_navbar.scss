@@ -1,12 +1,10 @@
-
+/* Navigation Bar */
 #topNav {
-    // height: var(--header-height);
     padding-left: 2vw;
     padding-right: 2vw;
     background-color: var(--main-background-color) !important;
     border-bottom: 1px solid var(--light-border-color);
     width: 100vw;
-    // box-shadow: #000 0px 0px 8px;
 }
 
 #navbar-hamburger,
@@ -63,23 +61,21 @@
     color: coral;
 }
 
-/* Progress bar */
+/* Progress Bar */
 .progressline .bar {
     background: var(--nav-link-color-sp);
 }
 
-/* On scroll progress bar */
 #top-progress-bar {
     background: linear-gradient(to right, var(--nav-link-color-sp) var(--progress), transparent 0);
     height: 4px;
     position: fixed;
     width: 100%;
-    // overflow: hidden;
     z-index: 1000;
     top: var(--header-height);
 }
 
-@media (max-width: 992px) {
+@include media-breakpoint-down(lg) {
     #top-progress-bar {
         top: 57px;
     }

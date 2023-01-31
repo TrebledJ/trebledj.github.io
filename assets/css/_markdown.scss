@@ -12,27 +12,31 @@
 
 
 /* Direct Links / Markdown Headers */
-.direct-link {
-	font-family: sans-serif;
-	text-decoration: none;
-	font-style: normal;
-    font-size: 20px;
-	margin-left: .1em;
-}
-a[href].direct-link,
-a[href].direct-link:visited {
-	color: transparent !important;
-}
-a[href].direct-link:focus,
-a[href].direct-link:focus:visited,
-:hover > a[href].direct-link,
-:hover > a[href].direct-link:visited {
-	color: #aaa !important;
-}
+// .md-anchor {
+// 	font-family: sans-serif;
+// 	text-decoration: none;
+// 	font-style: normal;
+//     font-size: 20px;
+// 	margin-left: .1em;
+// }
+// a[href].md-anchor,
+// a[href].md-anchor:visited {
+// 	color: transparent !important;
+// }
+// a[href].md-anchor:focus,
+// a[href].md-anchor:focus:visited,
+// :hover > a[href].md-anchor,
+// :hover > a[href].md-anchor:visited {
+// 	color: #aaa !important;
+// }
+
+
+// Handle svg images in both light/dark mode.
 
 html[data-theme="light"] .svg-img {
     filter: invert(0%);
 }
+
 html[data-theme="dark"] .svg-img {
     filter: invert(100%);
 }
