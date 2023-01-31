@@ -1,5 +1,5 @@
 * {
-    transition: background-color 0.3s ease-in, border-color 0.3s ease-in;
+    transition: background-color var(--transition-duration) ease-in, border-color var(--transition-duration) ease-in;
 }
 
 html {
@@ -56,7 +56,7 @@ blockquote {
 
     background: var(--card-background-color);
     border: none;
-    border-left: var(--border-width-alt) solid var(--light-border-color);
+    border-left: var(--border-width-thick) solid var(--light-border-color);
 }
 
 blockquote p {

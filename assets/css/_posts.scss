@@ -5,11 +5,11 @@
     margin-bottom: 1.5rem;
     -webkit-border-radius: var(--border-radius);
     border-radius: var(--border-radius);
-    border: 1px solid var(--light-border-color);
+    border: var(--border-width) solid var(--light-border-color);
     overflow: hidden;
-    -webkit-transition: all .3s ease;
-    -o-transition: all .3s ease;
-    transition: all .3s ease;
+    -webkit-transition: all var(--transition-duration) ease;
+    -o-transition: all var(--transition-duration) ease;
+    transition: all var(--transition-duration) ease;
     -webkit-box-shadow: 0 1px 1px 0 rgba(31, 35, 46, 0.15);
     box-shadow: 0 1px 1px 0 rgba(31, 35, 46, 0.15);
 

@@ -43,7 +43,7 @@ li.timeline-item::before {
     display: inline-block;
     position: absolute;
     border-radius: 50%;
-    border: 3px solid var(--medium-text-color);
+    border: var(--border-width-thick) solid var(--medium-text-color);
     left: 11px;
     width: 14px;
     height: 14px;

@@ -1,5 +1,8 @@
-.profile-name, .profile-bio, .profile-img, .author-social-items-wrapper button, .author-social-item-list {
-    opacity: 0.7;
+.author-social-items-wrapper button {
+    opacity: var(--opacity-low);
+}
+.profile-name, .profile-bio, .profile-img, .author-social-item-list {
+    opacity: var(--opacity-lower);
 }
 
 .left-sidebar-container {
@@ -35,7 +38,7 @@
     position: relative;
     margin: 0;
     padding: 0;
-    border: 0;
+    border: none;
     background: transparent;
     box-shadow: none;
     list-style-type: none;
@@ -127,11 +130,11 @@ i.social-icon-img {
         margin-top: 15px;
         z-index: 5;
         padding: 10px;
-        border: 1px solid var(--light-border-color);
+        border: var(--border-width) solid var(--light-border-color);
         border-radius: var(--border-radius);
         background: var(--main-background-color);
         box-shadow: 0 2px 4px 0 rgba(#000, 0.16), 0 2px 10px 0 rgba(#000, 0.12);
-        opacity: 1.0;
+        opacity: var(--opacity-full);
         cursor: default;
 
         // Hide social items by default (for small screens).
