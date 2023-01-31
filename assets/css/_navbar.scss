@@ -17,7 +17,7 @@
 }
 
 .navbar-dark .navbar-nav .nav-link {
-    color: var(--nav-link-color) !important;
+    color: var(--main-text-color) !important;
 }
 
 .navbar-dark .navbar-toggler {
@@ -63,12 +63,12 @@
 
 /* On-Load Progress Bar */
 .load-progress-bar .bar {
-    background: var(--nav-link-color-sp);
+    background: var(--link-color);
 }
 
 /* On-Scroll Progress Bar */
 #scroll-progress-bar {
-    background: linear-gradient(to right, var(--nav-link-color-sp) var(--progress), transparent 0);
+    background: linear-gradient(to right, var(--link-color) var(--progress), transparent 0);
     height: 4px;
     position: fixed;
     width: 100%;

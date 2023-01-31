@@ -23,13 +23,13 @@ ul.timeline:before {
 
 li.timeline-item {
     margin: 20px 0 0 0;
-    background: var(--box-background-color);
+    background: var(--main-background-color);
 }
 
 /* Timeline item arrow */
 .timeline-arrow {
     border-top: 0.5rem solid transparent;
-    border-right: 0.5rem solid var(--box-background-color);
+    border-right: 0.5rem solid var(--main-background-color);
     border-bottom: 0.5rem solid transparent;
     display: block;
     position: absolute;
