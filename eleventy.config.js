@@ -138,16 +138,15 @@ module.exports = function (eleventyConfig) {
 
 	// Collections
 	eleventyConfig.addCollection("tags", function (collectionApi) {
-		// get unsorted items
 		let counter = {};
 		for (let tag of collectionApi.getFilteredByTag('posts').flatMap(post => post.data.tags)) {
 			if (!tag || tag === "posts")
 				continue;
-			// console.log('counting:', tag);
 			counter[tag] = (counter[tag] ? counter[tag] + 1 : 1);
 		}
 		return counter;
 	});
+
 	eleventyConfig.addCollection("postsr", function (collectionApi) {
 		// Reversed collection.
 		return collectionApi.getFilteredByTag('posts').slice().reverse();
