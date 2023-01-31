@@ -1,14 +1,14 @@
-<div class="left-sidebar-container d-flex" id="profile-card">
+<div class="left-sidebar-container d-flex">
     <img src="/img/{{ site.author.logo }}" class="profile-img"/>
     <div class="author-info d-flex flex-column align-items-start">
         <h4 class="profile-name">{{ site.author.alias | default(site.author.name) }}</h4>
         <p class="profile-bio">{{ site.subtitle }}</p>
     </div>
-    <div class="author-social-items-wrapper">
+    <div class="author-social-items-wrapper mt-1">
         <button class="btn btn-primary py-1">Follow</button>
         <ul class="author-social-item-list hidden">
             {% for item in site.social %}
-                <li class="author-social-item">
+                <li>
                     <a href="{{item.link}}">
                         <div class="d-flex flex-row justify-content-start align-items-center">
                             <div class="d-flex align-items-center justify-content-center" style="width:30px">

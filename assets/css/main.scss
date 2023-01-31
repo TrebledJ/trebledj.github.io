@@ -10,7 +10,7 @@
 @import "bootstrap-plus";
 
 @import "common";
-@import "devlopr";
+// @import "devlopr";
 @import "layouts";
 
 @import "timeline";
@@ -25,7 +25,8 @@
 @import "markdown";
 @import "search";
 @import "profile";
-@import "sidebar";
+@import "social-sidebar";
+@import "toc-sidebar";
 @import "theme-switch";
 
 $enable-negative-margins: true;
@@ -66,3 +67,9 @@ $enable-negative-margins: true;
     border-radius: var(--border-radius-small);
 }
 
+
+.author-profile-img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+}

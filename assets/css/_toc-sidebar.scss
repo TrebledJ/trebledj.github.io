@@ -1,0 +1,37 @@
+
+
+.right-sidebar {
+    top: 5rem;
+    right: 0;
+    z-index: 2;
+    height: calc(100vh - 11rem);
+    overflow-y: auto;
+
+    .toc {
+        font-size: 12px !important;
+    }
+
+    .toc-container {
+        a {
+            color: var(--main-text-color) !important;
+            cursor: pointer;
+        }
+    }
+
+    ol {
+        list-style-type: none;
+        margin-left: 0 !important;
+        padding-left: 1rem !important;
+
+        li {
+            margin-top: 0.4rem !important;
+        }
+    }
+}
+
+// Small screen: bye bye sidebar.
+@include media-breakpoint-down(lg) {
+    .right-sidebar {
+        display: none;
+    }
+}
