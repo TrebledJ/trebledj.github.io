@@ -13,7 +13,8 @@
 }
 
 .navbar-dark .navbar-brand {
-    color: var(--link-color);
+    color: var(--navbar-accent-color) !important;
+    font-weight: 600;
 }
 
 .navbar-dark .navbar-nav .nav-link {
@@ -58,7 +59,7 @@
 /* Search Icon */
 .search-icon {
     font-size: 25px !important;
-    color: coral;
+    color: var(--navbar-accent-color);
 }
 
 /* On-Load Progress Bar */

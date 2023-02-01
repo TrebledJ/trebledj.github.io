@@ -75,3 +75,10 @@ $enable-negative-margins: true;
     height: 150px;
     border-radius: 50%;
 }
+
+
+#recent-posts .btn {
+    border: var(--border-width) solid var(--light-border-color);
+    background-color: var(--background-color);
+    color: var(--bold-color) !important;
+}

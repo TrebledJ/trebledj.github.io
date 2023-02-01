@@ -61,6 +61,10 @@
     --transition-duration: 0.3s;
 }
 
+html {
+    --navbar-accent-color: var(--link-color);
+}
+
 html[data-theme="dark"] {
     --bold-color: rgb(188, 188, 188);
     --highlight-color: rgb(153, 153, 153);
@@ -75,7 +79,6 @@ html[data-theme="dark"] {
     --newsletter-background-color: rgb(34, 35, 36);
 }
 
-html,
 html[data-theme="light"] {
     --bold-color: rgb(0, 0, 0);
     --highlight-color: rgb(204, 204, 204);
