@@ -1,4 +1,5 @@
 module.exports = {
+    category: "music",
     tags: [
         "composition",
         "music",

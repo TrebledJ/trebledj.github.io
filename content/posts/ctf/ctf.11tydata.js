@@ -1,4 +1,5 @@
 module.exports = {
+	category: "ctfs",
 	tags: [
 		"ctf",
 		"writeup",

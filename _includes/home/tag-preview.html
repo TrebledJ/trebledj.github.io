@@ -1,0 +1,17 @@
+{% from "post/preview.html" import render_preview %}
+
+{% macro render_tag_preview(posts, heading, nposts = 3) %}
+
+    <div class="recent-posts d-flex flex-row justify-content-between align-items-center">
+        <h2 class="mb-0">{{heading}}</h2>
+        <a class="btn btn-lg" href="/posts">
+                View All
+            </a>
+    </div>
+    <br/>
+
+    {% for post in posts | reverse | head(nposts) %}
+        {{ render_preview(post) }}
+    {% endfor %}
+
+{% endmacro %}

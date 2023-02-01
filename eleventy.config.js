@@ -147,6 +147,13 @@ module.exports = function (eleventyConfig) {
 		return counter;
 	});
 
+	const categories = ["ctfs", "experience", "music", "programming", "projects"]
+	for (const cat of categories) {
+		eleventyConfig.addCollection(`cat-${cat}`, function (collectionApi) {
+			return collectionApi.getFilteredByTag('posts').filter(post => post.data.category === cat);
+		});
+	}
+
 	eleventyConfig.addCollection("postsr", function (collectionApi) {
 		// Reversed collection.
 		return collectionApi.getFilteredByTag('posts').slice().reverse();
