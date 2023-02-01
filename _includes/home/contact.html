@@ -1,0 +1,39 @@
+<div class="contact container mt-4 p-3">
+    <h2 id="contact">Contact</h2>
+    <div class="col">
+        <div class="row">
+            <div class="col-md-6 d-flex justify-content-center align-items-center">
+                <form id="contact-form" class="w-100" action="https://getform.io/f/{{site.getform_endpoint}}" method="POST">
+                    <div class="row mb-3">
+                        <div class="col">
+                            <label for="name" class="form-label">Name</label>
+                            <input type="text" class="form-control" id="name" name="name" placeholder="Jon Dough">
+                        </div>
+                        <div class="col">
+                            <label for="email" class="form-label">Email Address</label>
+                            <input type="email" class="form-control" id="email" name="email" placeholder="jondough@example.com">
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="subject" class="form-label">Subject</label>
+                        <input type="text" class="form-control" id="subject" name="subject" placeholder="I like apples.">
+                    </div>
+                    <div class="mb-3">
+                        <label for="message" class="form-label">Message</label>
+                        <textarea class="form-control" id="message" name="message" rows="3" placeholder="Apples are round and red. But did you know an apple a day keeps the doctor away?" required="required"></textarea>
+                    </div>
+
+                    <input type="hidden" name="_gotcha" style="display:none !important">
+
+                    <script src="https://js.hcaptcha.com/1/api.js" async defer></script>
+                    <div class="h-captcha" data-sitekey="{{site.getform_sitekey}}"></div>
+
+                    <button type="submit" class="btn btn-primary btn-block mb-4">Send</button>
+                </form>
+            </div>
+            <div class="col-md-6 px-4">
+                {% include "author/social-links.html" %}
+            </div>
+        </div>
+    </div>
+</div>
