@@ -6,23 +6,6 @@
     </div>
     <div class="author-social-items-wrapper mt-1">
         <button class="btn btn-primary py-1">Stalk Me</button>
-        <ul class="author-social-item-list hidden">
-            {% for item in site.social %}
-                <li>
-                    <a href="{{item.link}}">
-                        <div class="d-flex flex-row justify-content-start align-items-center">
-                            <div class="d-flex align-items-center justify-content-center" style="width:30px">
-                                {% if item.icon %}
-                                    <i class="social-icon {{item.icon}}" {% if item.color %}style="color:{{item.color}} !important;"{% endif %}></i>
-                                {% else %}
-                                    <i class="social-icon-img"><img src="{{item.img}}"/></i>
-                                {% endif %}
-                            </div>
-                            <span class="social-link ms-1">{{item.name}}</span>
-                        </div>
-                    </a>
-                </li>
-            {% endfor %}
-        </ul>
+        {% include "author/social-links.html" %}
     </div>
 </div>

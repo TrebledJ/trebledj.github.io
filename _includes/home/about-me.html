@@ -1,0 +1,16 @@
+<div class="about-me container mt-5">
+    <div class="col">
+        <div class="row">
+            <div class="col-md-4 p-3 d-flex justify-content-center align-items-center">
+                <img src="/img/{{ site.author.logo }}" class="profile-img"/>
+            </div>
+            <div class="col-md-8">
+                <div class="author-info d-flex flex-column align-items-start">
+                    <h4 class="profile-name">{{ site.author.alias | default(site.author.name) }}</h4>
+                    {# <p class="profile-bio"></p> #}
+                    {{site.author.bio | markdownify | safe}}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

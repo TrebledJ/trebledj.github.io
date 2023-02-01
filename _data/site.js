@@ -1,5 +1,15 @@
 module.exports = function () {
 	const email = "trebledjjj@gmail.com"
+	const bio = `
+Hi! I'm a final year undergrad studying mathematics at the Hong Kong University of Science and Technology. \
+I love to [code](/tags/programming) and [compose music](/tags/composition). \
+I'm also interested in a wide range of fields: [robotics](/tags/robotics), [cybersecurity](/tags/ctf), \
+[application development](/tags/apps), and software engineering in general. \
+I like [math](/tags/mathematics) as well, although I'm terrible at it. \
+I'm excited to develop applications to solve problems, share ideas through writing, and learn more about the small world we're stuck on.
+
+Feel free to [reach out](#contact) for whatever reason. ヽ(・∀・)ﾉ
+`.trim();
 
 	return {
 		title: "TrebledJ's Pages",
@@ -12,11 +22,7 @@ module.exports = function () {
 			name: "Johnathan",
 			email: email,
 			logo: "profile.png",
-			bio: `Hi! I'm a final year HKUST mathematics undergrad.
-			I'm passionate about [programming](/tags/programming) and [composing music](/tags/composition).
-			I'm also interested in a wide range of fields: [robotics](/tags/robotics), [cybersecurity](/tags/ctf),
-			[application development](/tags/apps), and software engineering in general.
-			I'm excited about developing applications to solve problems and provide an educational interface for learners.`
+			bio: bio,
 		},
 		navpages: [
 			{ text: 'Home', url: '/' },
