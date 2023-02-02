@@ -30,6 +30,7 @@ module.exports = function (eleventyConfig) {
 		"./assets/css/third-party": "/css/",
 		"./node_modules/@popperjs/core/dist/umd/popper.min.js": "/js/popper.min.js",
 		"./node_modules/prismjs/themes/prism-okaidia.css": "/css/prism-okaidia.css",
+		"./node_modules/bootstrap/dist/": "/",
 	});
 
 	// Run Eleventy when these files change:
