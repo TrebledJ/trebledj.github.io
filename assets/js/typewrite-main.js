@@ -5,6 +5,7 @@ $(function () {
 
     let strings = [
         'Playing with code 💻',
+        'Playing with embedded systems ⚡️',
         'Composing with style (￣▽￣)/♫•*¨*•.¸¸♪',
         'Studying 📖',
         'Playing CTFs 🚩',
