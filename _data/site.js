@@ -51,12 +51,11 @@ Feel free to [reach out](#contact) for whatever reason. ヽ(・∀・)ﾉ
 		environment: process.env.ENVIRONMENT || 'development',
 		content_security_policy: `
 		default-src 'self' ;
-		script-src 'self' 'unsafe-inline' *.disqus.com a.disquscdn.com requirejs.org code.jquery.com gist.github.com cdn.jsdelivr.net www.google-analytics.com www.googletagmanager.com;
+		script-src 'self' 'unsafe-inline' *.disqus.com a.disquscdn.com code.jquery.com gist.github.com cdn.jsdelivr.net;
 		style-src 'self' 'unsafe-inline' a.disquscdn.com cdn.jsdelivr.net github.githubassets.com;
 		font-src 'self' cdn.jsdelivr.net;
 		img-src 'self' data: *;
 		frame-src disqus.com *.soundcloud.com;
-		connect-src 'self' www.google-analytics.com;
 		prefetch-src *.disquscdn.com disqus.com;
 		`,
 	};
