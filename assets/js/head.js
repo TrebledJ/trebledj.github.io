@@ -1,13 +1,12 @@
 // --- 404 random meme --- //
 $(function () {
-    console.log("checking for 404...");
-    /* var numMemes = 4;
+    var numMemes = 4;
     if ($(".post-title").innerHTML.includes("404")) {
         console.log("choosing meme...");
         let img = Math.floor(Math.random() * numMemes) + 1;
         $(`#img-404-${img}`).removeClass("d-none");
         $(".post-posted-date").text(new Date().toISOString().split('T')[0]);
-    } */
+    }
 });
 
 
