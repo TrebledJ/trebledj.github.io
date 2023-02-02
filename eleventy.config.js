@@ -26,11 +26,14 @@ module.exports = function (eleventyConfig) {
 	// Copy the contents of the `public` folder to the output folder
 	// For example, `./public/css/` ends up in `_site/css/`
 	eleventyConfig.addPassthroughCopy({
-		"./assets/": "/",
-		"./assets/css/third-party": "/css/",
-		"./node_modules/@popperjs/core/dist/umd/popper.min.js": "/js/popper.min.js",
+		"./assets/img": "/img",
+		"./assets/webfonts": "/webfonts",
+		"./assets/css/**/*.{css,map}": "/css/",
+		"./assets/js/**/*.js": "/js/",
+		"./node_modules/@popperjs/core/dist/umd/popper.min.{js,js.map}": "/js/",
 		"./node_modules/prismjs/themes/prism-okaidia.css": "/css/prism-okaidia.css",
 		"./node_modules/bootstrap/dist/": "/",
+		"./node_modules/lunr/*.js": "/js/",
 	});
 
 	// Run Eleventy when these files change:
