@@ -50,13 +50,12 @@ Feel free to [reach out](#contact) for whatever reason. ヽ(・∀・)ﾉ
 		],
 		environment: process.env.ENVIRONMENT || 'development',
 		content_security_policy: `
-		default-src 'self' ;
-		script-src 'self' 'unsafe-inline' *.disqus.com a.disquscdn.com code.jquery.com gist.github.com cdn.jsdelivr.net;
-		style-src 'self' 'unsafe-inline' a.disquscdn.com cdn.jsdelivr.net github.githubassets.com;
+		default-src 'self' *.disqus.com *.disquscdn.com;
+		script-src 'self' 'unsafe-inline' code.jquery.com gist.github.com cdn.jsdelivr.net;
+		style-src 'self' 'unsafe-inline' cdn.jsdelivr.net github.githubassets.com;
 		font-src 'self' cdn.jsdelivr.net;
 		img-src 'self' data: *;
 		frame-src disqus.com *.soundcloud.com;
-		prefetch-src *.disquscdn.com disqus.com;
 		`,
 	};
 };
