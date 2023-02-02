@@ -32,7 +32,7 @@ Feel free to [reach out](#contact) for whatever reason. ヽ(・∀・)ﾉ
 		],
 		github_username: "TrebledJ",
 		musescore_id: "20636901",
-		google_analytics: "G-7TQ4WV0LMK",
+		// google_analytics: "G-7TQ4WV0LMK",
 		disqus_shortname: "trebledj",
 		soundcloud_color: "2631c8",
 		getform_endpoint: "3b2a26ea-31c4-49ef-a496-d4d765773e59",
@@ -49,5 +49,15 @@ Feel free to [reach out](#contact) for whatever reason. ヽ(・∀・)ﾉ
 			{ name: "Feeds", icon: "fas fa-rss", link: "/feeds" },
 		],
 		environment: process.env.ENVIRONMENT || 'development',
+		content_security_policy: `
+		default-src 'self' ;
+		script-src 'self' 'unsafe-inline' *.disqus.com a.disquscdn.com requirejs.org code.jquery.com gist.github.com cdn.jsdelivr.net www.google-analytics.com www.googletagmanager.com;
+		style-src 'self' 'unsafe-inline' a.disquscdn.com cdn.jsdelivr.net github.githubassets.com;
+		font-src 'self' cdn.jsdelivr.net;
+		img-src 'self' data: *;
+		frame-src disqus.com *.soundcloud.com;
+		connect-src 'self' www.google-analytics.com;
+		prefetch-src *.disquscdn.com disqus.com;
+		`,
 	};
 };
