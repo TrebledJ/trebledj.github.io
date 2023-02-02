@@ -1,50 +1,49 @@
-
-<div class="row center">
+<div class="row">
     <!-- Pagination links -->
-    {% if paginator.total_pages > 1 %}
-        <ul class="pagination pagination-sm">
-            {% if paginator.previous_page %}
-                <li class="pagination-link">
-                    <a href="{{ paginator.previous_page_path | prepend: site.baseurl | replace: '//', '/' }}">&laquo;</a>
+    {% set npages = pagination.pages.length %}
+    {% if npages > 1 %}
+        <ul class="pagination pagination-sm justify-content-center">
+            {% if pagination.pageNumber > 0 %}
+                <li class="page-item">
+                    <a class="page-link" href="{{pagination.href.first}}">&laquo;</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="{{pagination.href.previous}}">Prev</a>
                 </li>
             {% else %}
-                <li class="pagination-link disabled">
-                    <span aria-hidden="true">&laquo;</span>
+                <li class="page-item faded">
+                    <span class="page-link">&laquo;</a>
+                </li>
+                <li class="page-item faded">
+                    <span class="page-link">Prev</a>
                 </li>
             {% endif %}
 
-            <li class="pagination-link">
-                <a href="/posts">First</a>
-            </li>
-
-            {% for page in (1..paginator.total_pages) %}
-                {% if page == paginator.page %}
-                    <li class="active pagination-link">
-                        <a>{{ page }}<span class="sr-only">(current)</span>
-                        </a>
-                    </li>
-                {% elsif page == 1 %}
-                    <li class="pagination-link">
-                        <a href="/posts">{{ page }}</a>
+            {% for idx in range(0, npages) %}
+                {% if idx == pagination.pageNumber %}
+                    <li class="page-item active" aria-current="page">
+                        <span class="page-link">{{ idx }}</a>
                     </li>
                 {% else %}
-                    <li class="pagination-link">
-                        <a href="{{ site.paginate_path | prepend: site.baseurl | replace: '//', '/' | replace: ':num', page }}">{{ page }}</a>
+                    <li class="page-item">
+                        <a class="page-link" href="{{pagination.hrefs[idx]}}">{{ idx }}</a>
                     </li>
                 {% endif %}
             {% endfor %}
 
-            <li class="pagination-link">
-                <a href="/posts/page/{{ paginator.total_pages }}/#/">Last</a>
-            </li>
-
-            {% if paginator.next_page %}
-                <li class="pagination-link">
-                    <a href="{{ paginator.next_page_path | prepend: site.baseurl | replace: '//', '/' }}">&raquo;</a>
+            {% if pagination.pageNumber + 1 < npages %}
+                <li class="page-item">
+                    <a class="page-link" href="{{pagination.href.next}}">Next</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="{{ pagination.href.last }}">&raquo;</a>
                 </li>
             {% else %}
-                <li class="disabled pagination-link">
-                    <span>&raquo;</span>
+                <li class="page-item faded">
+                    <span class="page-link">Next</a>
+                </li>
+                <li class="page-item faded">
+                    <span class="page-link">&raquo;</a>
                 </li>
             {% endif %}
         </ul>

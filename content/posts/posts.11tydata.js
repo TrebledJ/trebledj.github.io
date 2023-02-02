@@ -14,5 +14,6 @@ module.exports = {
 	related: {
 		auto: true,
 		num: 4,
-	}
+	},
+	eleventyExcludeFromCollections: false,
 };

@@ -83,3 +83,20 @@ $enable-negative-margins: true;
     background-color: var(--background-color);
     color: var(--bold-color) !important;
 }
+
+
+.pagination {
+    .page-link {
+        background-color: var(--main-background-color) !important;
+        color: var(--medium-text-color) !important;
+        border: var(--border-width) solid var(--light-border-color);
+    }
+
+    .active .page-link {
+        border: var(--border-width) solid var(--highlight-color);
+    }
+}
+
+.faded {
+    opacity: var(--opacity-lowest);
+}

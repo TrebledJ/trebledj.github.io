@@ -4,7 +4,7 @@ module.exports = {
 		permalink: data => {
 			if (data.draft) {
 				// BUILD_DRAFTS is set in eleventy.config.js
-				if(process.env.BUILD_DRAFTS) {
+				if (process.env.BUILD_DRAFTS) {
 					return data.permalink;
 				}
 
@@ -14,18 +14,6 @@ module.exports = {
 
 			return data.permalink;
 		},
-		eleventyExcludeFromCollections: data => {
-			if(data.draft) {
-				// BUILD_DRAFTS is set in eleventy.config.js
-				if(process.env.BUILD_DRAFTS) {
-					return data.eleventyExcludeFromCollections;
-				}
-
-				// Always exclude from non-watch/serve builds
-				return true;
-			}
-
-			return data.eleventyExcludeFromCollections;
-		}
 	},
+	eleventyExcludeFromCollections: true,
 };
