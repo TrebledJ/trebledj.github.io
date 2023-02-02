@@ -1,12 +1,12 @@
-{% if process.env.environment == 'production' %}
+{% if site.environment == 'production' %}
     <div id="disqus_thread"></div>
     <script>
-    var disqus_config = function () {
-        this.page.url = 'page.url';
-        this.page.identifier = '{{page.url}}';
-        this.page.title = '{{page.title}}';
-    };
-</script>
+        var disqus_config = function () {
+            this.page.url = 'page.url';
+            this.page.identifier = '{{page.url}}';
+            this.page.title = '{{page.title}}';
+        };
+    </script>
     <script defer src="/js/disqus.js"></script>
     <noscript>Please enable JavaScript to view the
         <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>

@@ -47,6 +47,7 @@ Feel free to [reach out](#contact) for whatever reason. ヽ(・∀・)ﾉ
 			{ name: "Discord (TrebledJ#7595)", icon: "fab fa-discord", color: 'rgb(84, 100, 235)', link: `https://discordapp.com/users/220427982798454794` },
 			{ name: "Mail", icon: "fas fa-envelope", link: `mailto:${email}` },
 			{ name: "Feeds", icon: "fas fa-rss", link: "/feeds" },
-		]
+		],
+		environment: process.env.ENVIRONMENT || 'development',
 	};
 };
