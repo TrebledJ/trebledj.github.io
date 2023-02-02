@@ -107,7 +107,8 @@
     {# <script crossorigin="anonymous" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script> #}
 
     <!-- Google Analytics -->
-    {% if site.google_analytics and jekyll.environment == 'production' %}
+    <script>console.log("environment:", {{process.env.environment}});</script>
+    {% if site.google_analytics and process.env.environment == 'production' %}
         {% include "analytics.html" %}
     {% endif %}
 
