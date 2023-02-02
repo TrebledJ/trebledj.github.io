@@ -1,7 +1,8 @@
 // --- 404 random meme --- //
 $(function () {
-    var numMemes = 4;
-    if ($(".post-title").innerHTML.includes("404")) {
+    const title = $(".post-title").innerHTML || $(".post-title")[0].innerHTML;
+    if (title.includes("404")) {
+        const numMemes = $(".post-article img").length;
         console.log("choosing meme...");
         let img = Math.floor(Math.random() * numMemes) + 1;
         $(`#img-404-${img}`).removeClass("d-none");
