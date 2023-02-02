@@ -128,53 +128,55 @@ i.social-icon-img {
         align-items: start;
     }
 
-    .author-info {
-        padding-left: 15px;
-        padding-right: 15px;
-    }
-
-    .author-social-item-list {
-        position: absolute;
-        right: 0;
-        margin-top: 15px;
-        z-index: 5;
-        padding: 10px;
-        border: var(--border-width) solid var(--light-border-color);
-        border-radius: var(--border-radius);
-        background: var(--main-background-color);
-        box-shadow: 0 2px 4px 0 rgba(#000, 0.16), 0 2px 10px 0 rgba(#000, 0.12);
-        opacity: var(--opacity-full);
-        cursor: default;
-
-        // Hide social items by default (for small screens).
-        &.hidden {
-            display: none;
+    .left-sidebar {
+        .author-info {
+            padding-left: 15px;
+            padding-right: 15px;
         }
-
-        &:before {
-            display: block;
-            content: "";
+    
+        .author-social-item-list {
             position: absolute;
-            top: -11px;
-            left: calc(50% - 10px);
-            width: 0;
-            border-style: solid;
-            border-width: 0 10px 10px;
-            border-color: var(--light-border-color) transparent;
-            z-index: 0;
-        }
-
-        &:after {
-            display: block;
-            content: "";
-            position: absolute;
-            top: -10px;
-            left: calc(50% - 10px);
-            width: 0;
-            border-style: solid;
-            border-width: 0 10px 10px;
-            border-color: var(--main-background-color) transparent;
-            z-index: 1;
+            right: 0;
+            margin-top: 15px;
+            z-index: 5;
+            padding: 10px;
+            border: var(--border-width) solid var(--light-border-color);
+            border-radius: var(--border-radius);
+            background: var(--main-background-color);
+            box-shadow: 0 2px 4px 0 rgba(#000, 0.16), 0 2px 10px 0 rgba(#000, 0.12);
+            opacity: var(--opacity-full);
+            cursor: default;
+    
+            // Hide social items by default (for small screens).
+            &.hidden {
+                display: none;
+            }
+    
+            &:before {
+                display: block;
+                content: "";
+                position: absolute;
+                top: -11px;
+                left: calc(50% - 10px);
+                width: 0;
+                border-style: solid;
+                border-width: 0 10px 10px;
+                border-color: var(--light-border-color) transparent;
+                z-index: 0;
+            }
+    
+            &:after {
+                display: block;
+                content: "";
+                position: absolute;
+                top: -10px;
+                left: calc(50% - 10px);
+                width: 0;
+                border-style: solid;
+                border-width: 0 10px 10px;
+                border-color: var(--main-background-color) transparent;
+                z-index: 1;
+            }
         }
     }
 }

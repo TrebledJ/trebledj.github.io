@@ -1,9 +1,9 @@
 <div class="contact container mt-4 p-3">
-    <h2 id="contact">Contact</h2>
     <div class="col">
-        <div class="row">
+        <div class="row gx-4">
             <div class="col-md-6 d-flex justify-content-center align-items-center">
                 <form id="contact-form" class="w-100" action="https://getform.io/f/{{site.getform_endpoint}}" method="POST">
+                    <h2 id="contact">Contact</h2>
                     <div class="row mb-3">
                         <div class="col">
                             <label for="name" class="form-label">Name</label>
@@ -31,8 +31,9 @@
                     <button type="submit" class="btn btn-primary btn-block mb-4">Send</button>
                 </form>
             </div>
-            <div class="col-md-6 px-4">
-                <h4>Other ways to find me:</h4>
+            <div class="col-md-6 px">
+                <h2>Social</h2>
+                <p>Find me in these communities:</p>
                 {% include "author/social-links.html" %}
             </div>
         </div>
