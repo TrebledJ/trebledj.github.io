@@ -14,7 +14,7 @@ updates:
       interval: "daily"
 
   # Maintain dependencies for gemfile/gemspec
-  - package-ecosystem: "bundler"
+  - package-ecosystem: "npm"
     directory: "/" # Location of package manifests
     schedule:
       interval: "daily"
