@@ -1,5 +1,3 @@
----
----
 function loadDisqus() {
     var d = document, s = d.createElement('script');
     s.src = 'https://{{site.disqus_shortname}}.disqus.com/embed.js';
