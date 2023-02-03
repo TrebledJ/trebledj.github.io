@@ -23,7 +23,7 @@ Jekyll and Eleventy (aka 11ty) are static site generators (SSGs)—programs that
 Some key things I really like about 11ty so far... (keep in mind I’m coming from Jekyll)...
 
 - Loads of plugins
-    - The JS and npm ecosystem is pretty diverse. Much more so than Jekyll’s. I’m guessing it’s because most plugins were built for Next.js (another popular, mature SSG) and were modular enough to work with 11ty.
+    - The JS and npm ecosystem is pretty diverse. For context, Jekyll is a ruby library, and its plugins are lacking (in number and maintenance). I’m guessing it’s because most plugins were built for Next.js (another popular, mature SSG) and were modular enough to work with 11ty.
     - Some plugins don’t work straight out of the box. They may need some careful tuning… or there may be an eleventy plugin alternative.
 - Flexibility
     - Very easy and flexible to manage [data](https://www.11ty.dev/docs/data-cascade/), including front matter data and site metadata.
