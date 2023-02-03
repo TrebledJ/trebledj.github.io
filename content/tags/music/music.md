@@ -2,7 +2,7 @@
 title: Music
 ---
 
-A general tag for all music-related stuff.
+A general tag for all music-related stuff. For a tag of my compositions, see [*compositions*](/tags/composition).
 
 > Every morning will soon turn into evening,  
 > And springtime will soon turn into fall.  
