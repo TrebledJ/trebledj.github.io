@@ -1,6 +1,5 @@
 ---
 title: Music
-permalink: /tags/music/
 ---
 
 A general tag for all music-related stuff.

@@ -1,6 +1,5 @@
 ---
 title: AOC
-permalink: /tags/aoc/
 ---
 
 Advent of Code (AOC) is a series of fun [programming](/tags/programming) challenges released annually from December 1 to 25.

@@ -1,6 +1,5 @@
 ---
 title: Mathematics
-permalink: /tags/mathematics/
 ---
 
 The purest of subjects. Well, maybe besides philosophy.
