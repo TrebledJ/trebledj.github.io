@@ -58,5 +58,11 @@ Feel free to [reach out](#contact) for whatever reason. ヽ(・∀・)ﾉ
 		frame-src disqus.com *.soundcloud.com;
 		prefetch-src *.disquscdn.com disqus.com;
 		`,
+		contact_placeholder: {
+			name: 'Jon Dough',
+			email: 'jondough@example.com',
+			subject: "Doh'nuts.",
+			message: `Got blog content suggestions, feedback, or comments? Lemme know!`,
+		},
 	};
 };

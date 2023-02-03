@@ -7,20 +7,20 @@
                     <div class="row mb-3">
                         <div class="col">
                             <label for="name" class="form-label">Name</label>
-                            <input type="text" class="form-control" id="name" name="name" placeholder="Jon Dough">
+                            <input type="text" class="form-control" id="name" name="name" placeholder="{{site.contact_placeholder.name}}">
                         </div>
                         <div class="col">
                             <label for="email" class="form-label">Email Address</label>
-                            <input type="email" class="form-control" id="email" name="email" placeholder="jondough@example.com">
+                            <input type="email" class="form-control" id="email" name="email" placeholder="{{site.contact_placeholder.email}}">
                         </div>
                     </div>
                     <div class="mb-3">
                         <label for="subject" class="form-label">Subject</label>
-                        <input type="text" class="form-control" id="subject" name="subject" placeholder="I like apples.">
+                        <input type="text" class="form-control" id="subject" name="subject" placeholder="{{site.contact_placeholder.subject}}">
                     </div>
                     <div class="mb-3">
                         <label for="message" class="form-label">Message</label>
-                        <textarea class="form-control" id="message" name="message" rows="3" placeholder="Apples are round and red. But did you know an apple a day keeps the doctor away?" required="required"></textarea>
+                        <textarea class="form-control" id="message" name="message" rows="4" placeholder="{{site.contact_placeholder.message}}" required="required"></textarea>
                     </div>
 
                     <input type="hidden" name="_gotcha" style="display:none !important">
