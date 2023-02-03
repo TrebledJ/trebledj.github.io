@@ -4,20 +4,23 @@ description: The devil's in the details.
 tags:
  - meta
  - js
-thumbnail: /img/posts/thumbnail/eleventy.png
+thumbnail: /img/posts/misc/eleventy.png
 related:
     disable: true
 ---
 
 This post contains a brief explanation of this site’s migration and improvement over the last week.
 
-Jekyll and Eleventy (aka 11ty) are static site generators (SSGs)—programs that take us from templated code + blog posts written in Markdown to full-fledged static websites. 11ty is one of the newer, growing SSGs out there.
+Jekyll and Eleventy (aka 11ty) are static site generators (SSGs)—programs that take us from templated code + blog posts written in Markdown to full-fledged static websites. 11ty is one of the newer, growing SSGs out there. Of course, we can't have a migration post without the appropriate meme. So let's start with that:
+
+![Weow eleventy looks pretty!](/img/posts/misc/ogle-ogle-eleventy.jpg){.w-80}
+{.center}
 
 ## Rambling About Eleventy
 
 ### The Good
 
-Some key things I really like about 11ty so far… (keep in mind I’m coming from Jekyll)…
+Some key things I really like about 11ty so far... (keep in mind I’m coming from Jekyll)...
 
 - Loads of plugins
     - The JS and npm ecosystem is pretty diverse. Much more so than Jekyll’s. I’m guessing it’s because most plugins were built for Next.js (another popular, mature SSG) and were modular enough to work with 11ty.
@@ -29,7 +32,7 @@ Some key things I really like about 11ty so far… (keep in mind I’m coming fr
     - You can use a web framework such as React or Vue if you want. But it’s not needed. “*Frameworks come and go*”, as they say.
 - [Nunjucks](https://mozilla.github.io/nunjucks/) > Liquid
     - Ah yesss, ternary expressions! Inline math! Comments look nicer as well.
-    - Thought that was all? Get **MINDBLOWN** by **********importable********** macros and template inheritance.
+    - Thought that was all? Get **MINDBLOWN** by *importable* macros and template inheritance.
 - [Build speed](https://www.zachleat.com/web/build-benchmark/)
     - It’s pretty fast. Comparable to Hugo.
     - Great if you have a thousand posts, though I probably won’t write beyond a couple hundred in my lifetime.
@@ -38,7 +41,7 @@ Some key things I really like about 11ty so far… (keep in mind I’m coming fr
 
 ### The Meh
 
-Of course not everything is rainbows and sunshine. Time to be salty now. Some things I feel iffy with…
+Not everything is rainbows and sunshine. Time to be salty now. Some things I feel iffy with...
 
 - 404 doesn’t work in localhost. It forces(?) me to use a Content Security Policy, which makes the site more secure in hindsight, but it’s annoying to deal with. One reason I decided to remove Google Analytics[^a] was to escape from such trouble.
 - Still haven’t figured out how to minify CSS and JS. The architecturing involved seems a bit weird… I may check it out again some time.
@@ -47,7 +50,7 @@ Of course not everything is rainbows and sunshine. Time to be salty now. Some th
 
 Also, while we’re on the meta topic of this site. You may notice some improvements, such as…
 
-- Better UI components on these posts. These were achieved using `position: sticky;` in CSS, along with other magic. Social links are also reorganised.
+- Better UI components on these posts. The sidebars were made using `position: sticky;` in CSS, along with other magic. Social links are also reorganised and collapse nicely under a button for smol screens.
 - The site should feel more minimalist, as I’ve ditched a bunch of cards and borders.
 - Figured out how to add a Discord link. :D
 - Revised the Home Page. There’s more stuff there now. Go check it out!
