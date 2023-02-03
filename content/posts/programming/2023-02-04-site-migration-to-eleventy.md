@@ -4,7 +4,7 @@ description: The devil's in the details.
 tags:
  - meta
  - js
-thumbnail: /img/posts/misc/eleventy.png
+thumbnail: /img/posts/misc/ogle-ogle-eleventy.jpg
 related:
     disable: true
 ---
