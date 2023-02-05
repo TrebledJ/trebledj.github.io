@@ -21,6 +21,9 @@ eleventyExcludeFromCollections: true
       <updated>{{ post.date | dateToRfc3339 }}</updated>
       <id>{{ absolutePostUrl }}</id>
       <content xml:lang="{{ site.language }}" type="html">{{ post.templateContent | htmlToAbsoluteUrls(absolutePostUrl) }}</content>
+      {% for tag in post.data.tags | exclude("posts") %}
+        <category>{{tag}}</category>
+      {% endfor %}
     </entry>
   {%- endfor %}
 </feed>
