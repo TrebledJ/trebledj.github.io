@@ -1,0 +1,22 @@
+---
+eleventyExcludeFromCollections: true
+permalink: feeds/recent.xml
+---
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        {% for post in collections.postsr | head(10) %}
+            {% if post.feed != false %}
+                <item>
+                    <title>{{ post.data.title }}</title>
+                    <description>{{ post.data.description }}</description>
+                    <pubDate>{{ post.date | dateToRfc3339 }}</pubDate>
+                    <link>{{ post.url | absoluteUrl(site.url) }}</link>
+                    {% for tag in post.data.tags | exclude("posts") %}
+                        <category>{{tag}}</category>
+                    {% endfor %}
+                </item>
+            {% endif %}
+        {% endfor %}
+    </channel>
+</rss>
