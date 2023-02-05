@@ -51,13 +51,13 @@ Feel free to [reach out](#contact) for whatever reason. ヽ(・∀・)ﾉ
 		environment: process.env.ENVIRONMENT || 'development',
 		content_security_policy: `
 		default-src 'self';
-		script-src 'self' 'unsafe-inline' *.disqus.com a.disquscdn.com code.jquery.com gist.github.com cdn.jsdelivr.net hcaptcha.com launchpad-wrapper.privacymanager.io;
-		style-src 'self' 'unsafe-inline' a.disquscdn.com cdn.jsdelivr.net github.githubassets.com hcaptcha.com;
+		script-src 'self' 'unsafe-inline' *.disqus.com a.disquscdn.com code.jquery.com gist.github.com cdn.jsdelivr.net https://hcaptcha.com https://*.hcaptcha.com launchpad-wrapper.privacymanager.io;
+		style-src 'self' 'unsafe-inline' a.disquscdn.com cdn.jsdelivr.net github.githubassets.com https://hcaptcha.com https://*.hcaptcha.com;
 		font-src 'self' cdn.jsdelivr.net;
 		img-src 'self' data: *;
-		frame-src disqus.com *.soundcloud.com hcaptcha.com;
-		prefetch-src *.disquscdn.com disqus.com;
-		connect-src hcaptcha.com;
+		frame-src disqus.com *.soundcloud.com https://hcaptcha.com https://*.hcaptcha.com;
+		prefetch-src 'self' *.disquscdn.com disqus.com;
+		connect-src 'self' https://hcaptcha.com https://*.hcaptcha.com;
 		`,
 		contact_placeholder: {
 			name: 'Jon Dough',
