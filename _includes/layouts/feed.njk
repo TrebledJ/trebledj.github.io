@@ -15,7 +15,7 @@ eleventyExcludeFromCollections: true
   </author>
   {%- for post in collections[target] | reverse %}
     {%- set absolutePostUrl = post.url | absoluteUrl(site.url) %}
-    <entry>
+    <item>
       <title>{{ post.data.title }}</title>
       <link href="{{ absolutePostUrl }}"/>
       <updated>{{ post.date | dateToRfc3339 }}</updated>
@@ -24,6 +24,6 @@ eleventyExcludeFromCollections: true
       {% for tag in post.data.tags | exclude("posts") %}
         <category>{{tag}}</category>
       {% endfor %}
-    </entry>
+    </item>
   {%- endfor %}
 </feed>
