@@ -5,9 +5,6 @@
         <h6 class="">{{ description }}</h6>
         {% set post = collections.posts | getCollectionItem %}
         {% include "post/metadata.html" %}
-        {% if sharable %}
-        <div class="addthis_inline_share_toolbox"></div>
-        {% endif %}
     </div>
     <hr/>
     <div class="card-body p-0 post-body" itemprop="articleBody">
