@@ -1,18 +1,3 @@
-// --- 404 random meme --- //
-$(function () {
-    const title = $(".post-title").innerHTML || $(".post-title")[0].innerHTML;
-    if (title.includes("404")) {
-        const numMemes = 4;
-        // const numMemes = $(".post-article img").length;
-        // console.log("choosing meme...");
-        let img = Math.floor(Math.random() * numMemes) + 1;
-        $(".404-meme").html(`<img src="/img/posts/memes/404-${img}.jpg" class="w-75">`);
-        // $(`#img-404-${img}`).removeClass("d-none");
-        $(".post-posted-date").text(new Date().toISOString().split('T')[0]);
-    }
-});
-
-
 // --- Scroll to Top --- //
 $(function () {
     function check() {

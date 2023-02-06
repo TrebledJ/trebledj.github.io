@@ -1,3 +1,4 @@
+// --- Copy URL --- //
 const copyUrlToClipboard = async () => {
     try {
         await navigator.clipboard.writeText(location.href);
@@ -7,6 +8,7 @@ const copyUrlToClipboard = async () => {
 };
 
 
+// --- TOC Current Section Highlight --- //
 $(function () {
     const headerOffset = 75;
     const sections = document.querySelectorAll(".post-article h2,.post-article h3");
