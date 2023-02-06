@@ -186,3 +186,8 @@
         margin-bottom: 0.1rem;
     }
 }
+
+.share a {
+    color: var(--main-text-color) !important;
+    cursor: pointer;
+}

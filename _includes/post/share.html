@@ -1,20 +1,25 @@
-<!-- Load Facebook SDK for JavaScript -->
-<div id="fb-root"></div>
-<script>
-  (function(d, s, id) {
-    var js,
-      fjs = d.getElementsByTagName(s)[0];
-    if (d.getElementById(id)) return;
-    js = d.createElement(s);
-    js.id = id;
-    js.src = "https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.0";
-    fjs.parentNode.insertBefore(js, fjs);
-  })(document, "script", "facebook-jssdk");
-</script>
-<script async charset="utf-8" src="https://platform.twitter.com/widgets.js"></script>
+{% macro icon(faicon) %}
+<span class="fs-4 ms-3">
+    <i class="{{faicon}}"></i>
+</span>
+{% endmacro %}
+{% macro sharer(brand) %}
+<a data-sharer="{{brand}}" data-title="{{title}}" data-url="{{page.url | absoluteUrl}}">
+    {{icon('fab fa-' + brand)}}
+</a>
+{% endmacro %}
 
-<div class="share-page">
-    <p class="share-text">Share this on &rarr;</p>
-    <a class="twitter-share-button" data-show-count="false" data-size="large" href="https://twitter.com/share?ref_src=twsrc%5Etfw" style="margin-top:5px;">Tweet</a>
-    <a class="fb-share-button" data-href="{{site.url}}{{page.url}}" data-size="large" data-layout="button">Share</a>
+<script src="/js/sharer.min.js"></script>
+<div class="share d-flex flex-row-reverse mt-4 mb-3 align-items-center">
+    <a onclick="copyUrlToClipboard()">
+        {{icon('fas fa-link')}}
+    </a>
+    {{sharer('twitter')}}
+    {{sharer('facebook')}}
+    {# {{sharer('linkedin')}} #}
+    {# {{sharer('line')}} #}
+    {{sharer('whatsapp')}}
+    {{sharer('telegram')}}
+    {{sharer('reddit')}}
+    <span class="text-sm mr-1">Share: </span>
 </div>

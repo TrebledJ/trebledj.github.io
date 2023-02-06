@@ -34,6 +34,7 @@ module.exports = function (eleventyConfig) {
 		"./node_modules/prismjs/themes/prism-okaidia.css": "/css/prism-okaidia.css",
 		"./node_modules/bootstrap/dist/": "/",
 		"./node_modules/lunr/*.js": "/js/",
+		"./node_modules/sharer.js/*.js": "/js/",
 	});
 
 	// Run Eleventy when these files change:
