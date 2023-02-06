@@ -16,6 +16,11 @@
             color: var(--main-text-color) !important;
             cursor: pointer;
         }
+
+        a.active {
+            color: var(--bold-color) !important;
+            font-weight: 600;
+        }
     }
 
     ol {
