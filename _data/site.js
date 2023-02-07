@@ -15,6 +15,7 @@ Feel free to [reach out](#contact) for whatever reason. ヽ(・∀・)ﾉ
 		title: "TrebledJ's Pages",
 		subtitle: "Dabbling in code, music, math, and memes since conception.",
 		url: "https://trebledj.github.io",
+		baseurl: "",
 		language: "en",
 		description: "TrebledJ's personal blog on programming, music, and memes.",
 		author: {
