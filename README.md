@@ -2,11 +2,15 @@
 
 My personal website. Visit it here: [trebledj.github.io](https://trebledj.github.io).
 
+### Note on Content
+
+Feel free to refer to my code—sewn together from various sources—for your inspiration.
+
+Aside from that, please don't plagiarise any of my blog content.
+You may be a stackoverflow-code-copypasta guru, but don't be so low as to copypasta my writing.
+
 <!--
-To test:
-
 ```
-bundle exec jekyll serve --livereload 
+npm run start
 ```
-
 -->
