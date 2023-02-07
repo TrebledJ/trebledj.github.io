@@ -1,10 +1,10 @@
 async function InfiniteLoader(params) {
-  const dataFile = params.data;
-  const initialLoad = params.items.num || 10;
-  const subsequentLoad = params.items.after || initialLoad;
-  const html = params.html || (item => item);
-  const htmlElement = params.element || '.post-list';
-  const scrollPercentageTrigger = 90;
+  const dataFile = params.data;                             // The JSON data file to load data from.
+  const initialLoad = params.items.num || 10;               // Number of items to load initially.
+  const subsequentLoad = params.items.after || initialLoad; // Number of items to load subsequently on scroll.
+  const html = params.html || (item => item);               // The HTML data to load.
+  const htmlElement = params.element || '.post-list';       // Where to insert the items.
+  const scrollPercentageTrigger = 90;                       // Scroll percentage when we should trigger a subsequent load (0-100).
 
   if (!dataFile)
     return console.error('no data file specified');
@@ -17,7 +17,7 @@ async function InfiniteLoader(params) {
 
   let isFetchingPosts = false;
   let shouldFetchPosts = true;
-  let loadedItems = 0; /* Number of already loaded items. */
+  let loadedItems = 0; // Number of already loaded items.
 
   const p = await fetch(dataFile);
   const items = await p.json();
@@ -30,12 +30,12 @@ async function InfiniteLoader(params) {
     shouldFetchPosts = false;
 
   $(window).on('scroll', e => {
-    if (!shouldFetchPosts || isFetchingPosts || !items || loadedItems >= items.length) return;
+    if (!shouldFetchPosts || isFetchingPosts || !items || loadedItems >= items.length)
+      return;
 
-    // Are we close to the end of the page? If we are, load more items
+    // Are we close to the end of the page? If we are, load more items.
     const scrollPercentage = 100 * $(window).scrollTop() / ($(document).height() - $(window).height());
 
-    // If we've scrolled past the loadNewPostsThreshold, fetch items
     if (scrollPercentage > scrollPercentageTrigger) {
       fetchPosts(subsequentLoad);
     }
@@ -48,18 +48,14 @@ async function InfiniteLoader(params) {
 
     isFetchingPosts = true;
 
-    // Load as many items as there were present on the page when it loaded.
-    // After successfully loading a post, load the next one.
-    for (let i = 0; i < num; i++) {
-      const index = loadedItems;
-      if (index >= items.length)
-        break;
-      
-      fetchPostWithIndex(index);
+    const n = Math.min(num, maxItemsToLoad - loadedItems);
+    for (let i = 0; i < n; i++) {
+      fetchPostWithIndex(loadedItems);
       loadedItems++;
     }
 
     if (loadedItems >= maxItemsToLoad) {
+      // Disable fetching once we've finished loaded the max number of items.
       disableFetching();
       return;
     }
@@ -67,16 +63,21 @@ async function InfiniteLoader(params) {
     isFetchingPosts = false;
   }
 
+
+  // Fetches a post associated with the given index.
   function fetchPostWithIndex(index) {
     const item = items[index];
     if (typeof html === 'function') {
+      // Call the user-provided function, passing in the item and index.
       $(html(item, index)).appendTo(htmlElement);
     } else if (typeof html === 'string') {
+      // Use the string directly.
       $(html).appendTo(htmlElement);
     }
   }
 
   function disableFetching() {
+    // No more posts should be fetched after calling this function...
     shouldFetchPosts = false;
     isFetchingPosts = false;
     $(".infinite-spinner").fadeOut();
