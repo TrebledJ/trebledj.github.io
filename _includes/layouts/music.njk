@@ -13,7 +13,11 @@ layout: layouts/page-default
             $(async function () {
                 InfiniteLoader({
                     data: '/tracks.json',
-                    num: 5,
+                    items: {
+                        num: 5,
+                        after: 2,
+                        max: 8,
+                    },
                     element: '#track-list',
                     html: (item, index) => {
                         const toHTMLTag = t => `<a class="post-tags tag" href="{{ site.baseurl }}/tags/${t}">${t}</a>`;

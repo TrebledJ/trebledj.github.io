@@ -1,31 +1,35 @@
 async function InfiniteLoader(params) {
   const dataFile = params.data;
-  const itemsToLoad = params.num || 5;
-  const loadHTML = params.html;
+  const initialLoad = params.items.num || 10;
+  const subsequentLoad = params.items.after || initialLoad;
+  const html = params.html;
   const htmlElement = params.element;
+  const scrollPercentageTrigger = 85;
 
   if (!dataFile)
     return console.error('no data file specified');
 
-  if (!loadHTML)
+  if (!html)
     return console.error('no HTML to load');
 
-  if (!(['string', 'function'].includes(typeof loadHTML)))
+  if (!(['string', 'function'].includes(typeof html)))
     return console.error('params.html should be string or function');
 
   if (!htmlElement)
     return console.error('no HTML element to insert to');
 
-  let isFetchingPosts = false,
-    shouldFetchPosts = true,
-    loadedItems = 0;
+  let isFetchingPosts = false;
+  let shouldFetchPosts = true;
+  let loadedItems = 0; /* Number of already loaded items. */
 
-  let p = await fetch(dataFile);
-  let items = await p.json();
-  if (items.length <= itemsToLoad) {
-    disableFetching();
-  }
-  fetchPosts();
+  const p = await fetch(dataFile);
+  const items = await p.json();
+  const maxItemsToLoad = Math.min(params.items.max || Number.MAX_SAFE_INTEGER, items.length);
+
+  // if (items.length <= itemsToLoad) {
+  //   disableFetching();
+  // }
+  fetchPosts(initialLoad);
 
   // If there's no spinner, it's not a page where items should be fetched
   if ($(".infinite-spinner").length < 1)
@@ -33,38 +37,45 @@ async function InfiniteLoader(params) {
 
   // function loadInfinite(num) {
   //   itemsToLoad = num;
-    // fetchPosts();
+  // fetchPosts();
   $(window).on('scroll', e => {
     if (!shouldFetchPosts || isFetchingPosts || !items || loadedItems >= items.length) return;
 
     // Are we close to the end of the page? If we are, load more items
-    let scrollPercentage = 100 * $(window).scrollTop() / ($(document).height() - $(window).height());
+    const scrollPercentage = 100 * $(window).scrollTop() / ($(document).height() - $(window).height());
 
     // If we've scrolled past the loadNewPostsThreshold, fetch items
-    if (scrollPercentage > 85) {
-      fetchPosts();
+    if (scrollPercentage > scrollPercentageTrigger) {
+      fetchPosts(subsequentLoad);
     }
   });
   // }
 
   // Fetch a chunk of items
-  function fetchPosts() {
-    // Exit if items haven't been loaded
-    if (!items) {
-      return;
-    }
+  function fetchPosts(num) {
+    // // Exit if items haven't been loaded.
+    // if (!items) {
+    //   return;
+    // }
 
-    // Wait for loadInfinite to be called
-    if (!itemsToLoad) {
+    // // Wait for loadInfinite to be called.
+    // if (!itemsToLoad) {
+    //   return;
+    // }
+
+    if (!shouldFetchPosts)
       return;
-    }
+
+    if (loadedItems >= maxItemsToLoad)
+      return;
 
     isFetchingPosts = true;
 
     // Load as many items as there were present on the page when it loaded
-    // After successfully loading a post, load the next one
-    for (let i = 0; i < itemsToLoad; i++) {
-      let index = loadedItems;
+    // After successfully loading a post, load the next one.
+    const n = Math.min(num, maxItemsToLoad - loadedItems);
+    for (let i = 0; i < n; i++) {
+      const index = loadedItems;
       if (index >= items.length) {
         break;
       }
@@ -76,11 +87,11 @@ async function InfiniteLoader(params) {
   }
 
   function fetchPostWithIndex(index) {
-    let item = items[index];
-    if (typeof loadHTML === 'function') {
-      $(loadHTML(item, index)).appendTo(htmlElement);
-    } else if (typeof loadHTML === 'string') {
-      $(loadHTML).appendTo(htmlElement);
+    const item = items[index];
+    if (typeof html === 'function') {
+      $(html(item, index)).appendTo(htmlElement);
+    } else if (typeof html === 'string') {
+      $(html).appendTo(htmlElement);
     }
     // let tags = item.tags.filter(t => !["composition", "music"].includes(t)).map(t => `<a class="post-tags tag" href="${base_url}/tags/${t}">${t}</a>`).join("\n");
     // let brk = (index ? '<br/>' : ''); // No break on the first item.
