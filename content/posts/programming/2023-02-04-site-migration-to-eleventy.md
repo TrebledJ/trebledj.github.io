@@ -1,6 +1,7 @@
 ---
 title: Site Migration to Eleventy
 description: The devil's in the details.
+updated: '2023-02-09'
 tags:
  - meta
  - js
@@ -33,6 +34,7 @@ Some key things I really like about 11ty so far... (keep in mind I’m coming fr
 - [Nunjucks](https://mozilla.github.io/nunjucks/) > Liquid
     - Ah yesss, ternary expressions! Inline math! Comments look nicer as well.
     - Thought that was all? Get **MINDBLOWN** by *importable* macros and template inheritance.
+    - Liquid and Nunjucks are templating languages, promoting code and layout reuse. They can also be used to generate post lists, feeds, and data files. With Jekyll, you're stuck with Liquid; but with Eleventy, you're free to choose from a variety. Usually people recommend Nunjucks--with good reason too!
 - [Build speed](https://www.zachleat.com/web/build-benchmark/)
     - It’s pretty fast. Comparable to Hugo.
     - Great if you have a thousand posts, though I probably won’t write beyond a couple hundred in my lifetime.
