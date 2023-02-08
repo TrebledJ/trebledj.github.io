@@ -1,0 +1,26 @@
+---
+title: Posts
+layout: layouts/page-default
+permalink: /posts/infinite/index.html
+---
+
+<div class="col-lg-9">
+    <div class="d-flex justify-content-center">
+        <div class="post-list container-fluid"></div>
+
+        <script src="/js/infinite-loader.js"></script>
+        <script>
+            $(async function () {
+                InfiniteLoader({
+                    data: '/posts/demo.json',
+                    items: {
+                        num: 10,
+                        after: 2,
+                    },
+                    html: item => `<p>${item}</p><br/>`,
+                });
+            });
+        </script>
+    </div>
+    <div class="infinite-spinner"></div>
+</div>

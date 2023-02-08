@@ -1,0 +1,18 @@
+---
+permalink: /posts/demo.json
+---
+
+[
+  {% for post in collections.postsr %}
+    {# {
+      "title": {{post.data.title | jsonify | safe}},
+      "description": {{post.data.description | jsonify | safe}},
+      "excerpt": {{post.content | striptags | truncate(120, false, "...") | jsonify | safe}},
+      "tags": {{post.data.tags | exclude("posts") | jsonify | safe}},
+      "date": {{post.page.date | date | jsonify | safe}},
+      "url": {{post.url | jsonify | safe}}
+    } #}
+    {{post.data.title | jsonify | safe}}
+    {% if not loop.last %},{% endif %}
+  {% endfor %}
+]

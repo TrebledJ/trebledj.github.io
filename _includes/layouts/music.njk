@@ -15,7 +15,7 @@ layout: layouts/page-default
                         num: 4,
                         after: 2,
                     },
-                    element: '#track-list',
+                    append: '#track-list',
                     html: (item, index) => {
                         const toHTMLTag = t => `<a class="post-tags tag" href="{{ site.baseurl }}/tags/${t}">${t}</a>`;
 

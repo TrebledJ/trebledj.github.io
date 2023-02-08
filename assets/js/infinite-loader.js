@@ -3,7 +3,7 @@ async function InfiniteLoader(params) {
   const initialLoad = params.items.num || 10;               // Number of items to load initially.
   const subsequentLoad = params.items.after || initialLoad; // Number of items to load subsequently on scroll.
   const html = params.html || (item => item);               // The HTML data to load.
-  const htmlElement = params.element || '.post-list';       // Where to insert the items.
+  const appendElement = params.append || '.post-list';      // Where to insert the items.
   const scrollPercentageTrigger = 90;                       // Scroll percentage when we should trigger a subsequent load (0-100).
 
   if (!dataFile)
@@ -12,7 +12,7 @@ async function InfiniteLoader(params) {
   if (!(['string', 'function'].includes(typeof html)))
     return console.error('params.html should be string or function');
 
-  if (!htmlElement)
+  if (!appendElement)
     return console.error('no HTML element to insert to');
 
   let isFetchingPosts = false;
@@ -25,7 +25,7 @@ async function InfiniteLoader(params) {
 
   fetchPosts(initialLoad);
 
-  // If there's no spinner, it's not a page where items should be fetched
+  // If there's no spinner, it's not a page where items should be fetched.
   if ($(".infinite-spinner").length < 1)
     shouldFetchPosts = false;
 
@@ -67,13 +67,17 @@ async function InfiniteLoader(params) {
   // Fetches a post associated with the given index.
   function fetchPostWithIndex(index) {
     const item = items[index];
+    let x = html;
     if (typeof html === 'function') {
       // Call the user-provided function, passing in the item and index.
-      $(html(item, index)).appendTo(htmlElement);
+      x = html(item, index);
     } else if (typeof html === 'string') {
       // Use the string directly.
-      $(html).appendTo(htmlElement);
+      // x = html;
+    } else {
+      console.error("unrecognised html generator type:", typeof html);
     }
+    $(x).appendTo(appendElement);
   }
 
   function disableFetching() {
