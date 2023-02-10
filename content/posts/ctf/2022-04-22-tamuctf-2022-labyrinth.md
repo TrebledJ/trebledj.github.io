@@ -246,6 +246,6 @@ p.interactive()
 ```
 
 ### Flag
-```
+```text
 gigem{w0w_y0ur3_r34lly_600d_w17h_m4z35}
 ```
