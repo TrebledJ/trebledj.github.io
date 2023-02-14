@@ -167,7 +167,7 @@ module.exports = function (eleventyConfig) {
 	// Filters
 	eleventyConfig.addFilter("date", (dateObj, format, zone) => {
 		// Formatting tokens for Luxon: https://moment.github.io/luxon/#/formatting?id=table-of-tokens
-		return DateTime.fromJSDate(dateObj, { zone: zone || "utc" }).toFormat(format || "yyyy-LL-dd");
+		return DateTime.fromJSDate(dateObj, { zone: zone || "utc" }).toFormat(format || "yyyy-LL-dd").replace(/-/g, '&#8209;');
 	});
 
 	eleventyConfig.addFilter("contains", (array, e) => {

@@ -5,7 +5,7 @@
             <h2 class="h5 mb-1"><a href="{{site.baseurl}}{{post.url}}">{{post.title}}</a></h2>
             <span class="small text-gray">
                 <i class="fa fa-calendar"></i>
-                {{post.date | date }}
+                {{post.date | date | safe }}
                 {% set nonproj_tags = post.tags | where_exp: "tag", "tag != 'experience'" %}
                 {% for tag in nonproj_tags | head(3) %}
                     &nbsp;•&nbsp;

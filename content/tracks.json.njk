@@ -9,7 +9,7 @@ permalink: /tracks.json
       "track_id": {{post.data.track_id}},
       "score_id": {{post.data.score_id | default(0)}},
       "tags": ["{{post.data.tags | exclude(["posts", "composition", "music"]) | join('", "') | safe}}"],
-      "date": "{{post.page.date | date}}",
+      "date": "{{post.page.date | date | safe}}",
       "description": "{{post.content | striptags | truncate(120, false, "...") | safe}}",
       "url": "{{post.url}}"
     }

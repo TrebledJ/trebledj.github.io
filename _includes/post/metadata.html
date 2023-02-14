@@ -11,7 +11,7 @@ render_tag_list %}
     </span>
     &nbsp;<span class="post-date post-posted-date">
         {% block post_metadata_date %}
-        Posted on {{ page.date | date }}
+        Posted on {{ page.date | date | safe }}
         {% endblock %}
     </span>
     {% block post_metadata_updated %}
