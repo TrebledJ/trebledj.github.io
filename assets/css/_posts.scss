@@ -71,7 +71,7 @@
         margin: 0 0 10px;
         font-size: 24px;
         font-weight: 400;
-        
+
         a,
         a:hover {
             color: var(--bold-color) !important;
@@ -89,6 +89,7 @@
 }
 
 .post-preview-compressed {
+
     // Smaller title.
     .post-title {
         margin: 0 0 5px;
@@ -177,6 +178,7 @@
 }
 
 .post-article {
+
     ul,
     ol {
         margin-left: 0rem;
@@ -190,4 +192,8 @@
 .share a {
     color: var(--main-text-color) !important;
     cursor: pointer;
+}
+
+.copied {
+    opacity: 0;
 }

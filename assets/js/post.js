@@ -4,7 +4,11 @@ const copyUrlToClipboard = async () => {
         await navigator.clipboard.writeText(location.href);
     } catch (err) {
         console.error("Failed to copy: ", err);
+        return;
     }
+
+    $(".copied").css({ top: 0, opacity: 1 });
+    $(".copied").animate({ top: -25, opacity: 0 }, 1000);
 };
 
 

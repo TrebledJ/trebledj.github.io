@@ -10,16 +10,17 @@
 {% endmacro %}
 
 <script src="/js/sharer.min.js"></script>
-<div class="share d-flex flex-row-reverse mt-4 mb-3 align-items-center">
+<div class="share d-flex flex-row mt-4 mb-3 align-items-center">
+    <span class="text-sm mr-1">Share on </span>
+    {{sharer('reddit')}}
+    {{sharer('telegram')}}
+    {{sharer('whatsapp')}}
+    {# {{sharer('line')}} #}
+    {# {{sharer('linkedin')}} #}
+    {{sharer('facebook')}}
+    {{sharer('twitter')}}
     <a onclick="copyUrlToClipboard()">
         {{icon('fas fa-link')}}
     </a>
-    {{sharer('twitter')}}
-    {{sharer('facebook')}}
-    {# {{sharer('linkedin')}} #}
-    {# {{sharer('line')}} #}
-    {{sharer('whatsapp')}}
-    {{sharer('telegram')}}
-    {{sharer('reddit')}}
-    <span class="text-sm mr-1">Share: </span>
+    <span class="copied ms-2">Copied!</span>
 </div>
