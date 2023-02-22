@@ -36,10 +36,11 @@ layout: layouts/page-default
                             ${brk}
                             <iframe allow="autoplay" frameborder="no" height="166" scrolling="no"
                                 src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/${item.track_id}&color=%23{{ site.soundcloud_color }}&auto_play=false&hide_related=true&show_comments=true&show_user=true&show_reposts=false&show_teaser=false&visual=${visual}"
-                                width="100%"></iframe>
+                                width="100%">
+                            </iframe>
                             <div class="d-flex flex-row align-items-center">
-                                <span class="post-date"><i class="fa fa-calendar post-meta-icon me-1"></i>${item.date}</span>
-                                <span class="fs-6">&nbsp;•&nbsp;</span>
+                                {# <span class="post-date"><i class="fa fa-calendar post-meta-icon me-1"></i>${item.date}</span>
+                                <span class="fs-6">&nbsp;•&nbsp;</span> #}
                                 <span><i class="fa fa-tag post-meta-icon me-1"></i></span>
                                 <div>
                                 ${tags}
