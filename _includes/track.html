@@ -4,3 +4,9 @@
         <span class="fs-6"><sup>The score for this piece has been made available <a href="https://musescore.com/user/{{site.musescore_id}}/scores/{{score_id}}">online</a>.</sup></span>
     {% endif %}
 </div>
+{# Compress SoundCloud embed for small screens. #}
+<script>
+    if ($(window).width() < 600) {
+        $(".sharedContent > iframe")[0].src += '&visual=true';
+    }
+</script>
