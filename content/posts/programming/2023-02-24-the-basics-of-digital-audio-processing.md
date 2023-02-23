@@ -101,7 +101,7 @@ Clicks (aka pops) occur when a signal behaves discontinuously with large differe
 <sup>Signal jumps from -1.0 to 1.0, causing my speaker to pop and my ear drums to bleed from utter despair.</sup>
 {.center}
 
-Clicks may arise from trimming or combining an audio recordings without applying fades. In audio synthesis, they may also arise out of mishandling buffers and samples.
+Clicks may arise from trimming or combining an audio recordings without applying fades. In audio synthesis, they may also arise out of mishandling buffers and samples. ([Read more about clicks](https://mynewmicrophone.com/what-causes-speakers-to-pop-and-crackle-and-how-to-fix-it/).)
 
 ## Recap
 
@@ -114,8 +114,3 @@ So to conclude…
 - Some common issues to audio processing are clipping and clicks. They usually indicate
     - [Clipping](#clipping) occurs when samples don’t fit into the given dynamic range and are cut.
     - [Clicks](#clicks) occur when a large difference occurs in samples, causing the speaker to act wonkily.
-
-Further reading:
-
-- [Embedded Audio Processing](https://www.analog.com/media/en/dsp-documentation/embedded-media-processing/embedded-media-processing-chapter5.pdf)
-- [What Causes Speakers To Pop And Crackle, And How To Fix It](https://mynewmicrophone.com/what-causes-speakers-to-pop-and-crackle-and-how-to-fix-it/)
