@@ -16,7 +16,7 @@ A while back I worked on a lil’ [MIDI keyboard](/posts/stm32-midi-keyboard) pr
 
 ## Dealing with Data
 
-![Get ready for some Data!](/img/posts/misc/dsp/data.jpg){.w-85}
+![Get ready for some Data!](/img/posts/misc/dsp/data.jpg){.w-75}
 {.center}
 
 When processing data of any form, we are concerned with the data’s quality. Higher quality data corresponds to a better user experience but also higher memory and computing requirements.
