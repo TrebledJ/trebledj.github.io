@@ -5,7 +5,9 @@ updated: "2022-12-25"
 tags:
  - cpp
  - embedded
+ - dsp
  - programming
+ - c
  - music
  - hkust
 thumbnail: /img/posts/projects/midi-keyboard.jpg
