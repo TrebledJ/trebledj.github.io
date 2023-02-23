@@ -20,7 +20,7 @@ $focus-color: $primary-color !default;
  */
 
 @mixin alert($alert-color) {
-    margin: 2em 0.5em !important;
+    margin: 2em 0em;
     /* override*/
     padding: 1em;
     color: var(--medium-text-color);
