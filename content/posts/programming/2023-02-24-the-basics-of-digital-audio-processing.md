@@ -1,6 +1,6 @@
 ---
-title: "Part 1: The Basics of Digital Audio Processing"
-description: An introductory discourse on processing audio. What makes audio tick?
+title: "Part 1: Digital Audio Processing for Dummies"
+description: An introductory discourse on processing and generating audio. What makes audio tick?
 # updated: '2023-02-22'
 tags:
  - tutorial
@@ -14,7 +14,7 @@ related:
 
 A while back I worked on a lil’ [MIDI keyboard](/posts/stm32-midi-keyboard) project and learnt a lot regarding digital audio signal processing. This post is the first in a series of posts related to that project and aims to provide a springboard for those who wish to get their feet wet with audio processing.
 
-## Dealing with Data
+## Dealing with Data 📈
 
 ![Get ready for some Data!](/img/posts/misc/dsp/data.jpg){.w-75}
 {.center}
@@ -103,7 +103,133 @@ Clicks (aka pops) occur when a signal behaves discontinuously with large differe
 
 Clicks may arise from trimming or combining an audio recordings without applying fades. In audio synthesis, they may also arise out of mishandling buffers and samples. ([Read more about clicks](https://mynewmicrophone.com/what-causes-speakers-to-pop-and-crackle-and-how-to-fix-it/).)
 
-## Recap
+## Audio Synthesis 🎶
+
+Now that we’ve covered the basics regarding data representation, we’re ready to get our hands dirty with audio generation. But E here does our audio signal come from? Our signal might be…
+
+- recorded. Sound waves are picked up by special hardware (e.g. a microphone) and translated to a digital signal through an ADC.
+- loaded from a file. There are many audio formats out there, the common ones being .wav and .mp3. The .wav format is the simplest: it just stores samples uncompressed (as-is). Other formats will compress the audio to achieve smaller file sizes (which in turn, means faster upload/download speeds).
+- synthesised. We generate audio out of thin air (or rather, code and electronics).
+
+I’ll mainly focus on **synthesis**. We’ll start by finding out how to generate a single tone, then learn how to generate multiple tones (that sound at the same time!—pretty important for musical applications). We’ll end by looking at a nifty, efficient method for synthesis.
+
+## Buffering 📦
+
+A naive approach to generate audio might be:
+
+1. Generate/process one sample
+2. Feed it to the DAC/speaker
+
+But there are several issues with this: function call overhead may impact performance and we have little room left for doing other things. For the sound to play smoothly at a sampling rate of 44100Hz, each sample needs to be delivered within 1/44100 s = 22.6us.
+
+A better approach is to use a *buffer* and modify our approach:
+
+1. Generate/process N samples
+2. Feed all N samples to the audio buffer
+
+ buffer will hold onto our samples before we feed it to a speaker or whatnot.
+
+In C/C++, we can generate a 440Hz sine tone lasting 1 second like so:
+
+```cpp
+#define SAMPLE_RATE 44100  // Number of samples per second.
+
+float buffer[SAMPLE_RATE]; // Buffer of samples to populate, each ranging from -1 to 1.
+float freq = 440;          // Frequency, in Hz.
+
+// Populate the buffer with 1 second of 440Hz sine.
+for (int i = 0; i < SAMPLE_RATE; i++) {
+	buffer[i] = sin(2 * PI * freq * i / SAMPLE_RATE);
+}
+```
+
+And that’s it—we’ve just whooshed 1 full second of pure sine tone goodness from nothing! Granted, there are some flaws with this method (it’s inefficient, and the signal clicks when repeated); but hey, it demonstrates synthesis.
+
+A more efficient approach is to interpolate over pre-generated values (known as *wavetable* or *table-lookup synthesis*), sacrificing a bit of memory for faster runtime performance. The open-source [LEAF](https://github.com/spiricom/LEAF/blob/a0b0b7915cce3792ea00f06d0a6861be1a73d609/leaf/Src/leaf-oscillators.c#L67) library demonstrates this:
+
+```cpp
+// Get the pre-generated sample to the LEFT of the current sample.
+samp0 = __leaf_table_sinewave[idx];
+
+// Get the pre-generated sample to the RIGHT of the current sample.
+idx = (idx + 1) & c->mask;
+samp1 = __leaf_table_sinewave[idx];
+
+// Interpolate between the left and right samples to get the current sample.
+return (samp0 + (samp1 - samp0) * ((float)tempFrac * 0.000000476837386f)); // 1/2097151
+```
+
+We can also leverage hardware to speed up processing, but we’ll leave that for the next post.
+
+## The Fourier Theorem 📊
+
+One fundamental theorem in signal processing relates to the composition of signals. The **Fourier Theorem** can be summarised into:
+
+> Any *periodic* signal can be broken down into a sum of sine waves.
+
+We can express this mathematically as
+
+$$
+f(x) = a_0\sin(f_0x + b_0) + a_1\sin(f_1x + b_1) + \cdots + a_n\sin(f_nx + b_n)
+$$
+
+where $a_i$, $f_i$, and $b_i$ are the amplitude, frequency, and phase of each constituent sine wave.
+
+![Skipper's partial to Fourier. They're the best of chums.](/img/posts/misc/dsp/fourier-analysis.jpg){.w-80}
+{.center}
+
+The Fourier Theorem and Fourier Transform are ubiquitious in modern day technology. It is the basis for many audio processing techniques such as filtering, equalisation, and noise cancellation. By manipulating the individual sine waves that make up a sound, we can alter its characteristics and create new sounds. The Fourier Transform is also a key component in compressing JPG images.
+{.alert--info}
+
+What’s cool about this theorem is that we can apply it the other way: any periodic signal can be *generated* by adding sine waves. This lays the groundwork for additive synthesis and generating audio with multiple pitches (e.g. a chord).
+
+
+## Additive Synthesis ➕
+
+The principle of **additive synthesis** is pretty straightforward: signals can be combined by adding samples along time.
+
+![Example of additive synthesis, localised on this very webpage.](/img/posts/misc/dsp/additive-synthesis.jpg){.w-100}
+{.center}
+
+<sup>Example of additive synthesis. The first and second signal show pure sine tones at 440Hz ($s1$) and 660Hz ($s2$). The third signal adds the two signals ($s1 + s2$). The fourth signal scales the summed signal down to fit within $[-1, 1]$ ($(s1 + s2) / 2$). Source code can be found on [GitHub][addsynthgist].</sup>
+{.center}
+
+[addsynthgist]: https://gist.github.com/TrebledJ/14b8842ef3696b09e299c34ba0da9e6c
+
+To sound another pitch, we simply add a second sine wave to the buffer.
+
+```cpp
+#define SAMPLE_RATE 44100  // Number of samples per second.
+
+float buffer[SAMPLE_RATE]; // Buffer of samples to populate, each ranging from -1 to 1.
+float freq = 440;          // Frequency, in Hz.
+float freq2 = 880;         // Another frequency, in Hz. // New!
+
+// Populate the buffer with 1 second of 440Hz sine.
+for (int i = 0; i < SAMPLE_RATE; i++) {
+    buffer[i] = 0.5f * sin(2 * PI * freq * i / SAMPLE_RATE); // New: multiply by 0.5.
+	buffer[i] += 0.5f * sin(2 * PI * freq2 * i / SAMPLE_RATE); // New!
+}
+```
+
+How easy was that? We just define a new frequency (880) and add another sine sample directly onto our buffer!
+
+Let’s try it out! Don’t have the luxury of an embedded system with DAC and speaker? No worries! Additive synthesis can be demonstrated with tools localised on your computer. We can do it with some help from [Audacity](https://www.audacityteam.org/):
+
+- Let’s start off with one tone.
+    - Generate a 440Hz tone (Generate > Tone… > Sine).
+    - Play it. You’ll hear a pure tone.
+- Now let’s add another tone.
+    - Make a new track (Tracks > Add New > Mono Track).
+    - Generate an 880Hz tone in the new track. Same method as above.
+    - Play it to hear a beautiful sounding octave.
+
+![Get ready for some Data!](/img/posts/misc/dsp/audacity.jpg){.w-100}
+{.center}
+
+You can try layering other frequencies (554Hz, 659Hz) to play a nifty A Major chord.
+
+## Recap 🔁
 
 So to conclude…
 
@@ -114,3 +240,10 @@ So to conclude…
 - Some common issues to audio processing are clipping and clicks. They usually indicate
     - [Clipping](#clipping) occurs when samples don’t fit into the given dynamic range and are cut.
     - [Clicks](#clicks) occur when a large difference occurs in samples, causing the speaker to act wonkily.
+- Audio samples may come from several sources. It may be recorded, loaded from a file, or [synthesised](#audio-synthesis).
+- We can synthesise musical pitches by buffering samples and feeding them to hardware.
+    - We can use wavetable synthesis for faster sample generation.
+- According to the [Fourier Theorem](#the-fourier-theorem), all signals can be broken into a summation of sine waves.
+- To play multiple pitches simultaneously (chords), we can apply [additive synthesis](#additive-synthesis) to combine signals together.
+
+In the next post, we'll dive deeper into audio synthesis in embedded systems and engineer a simple tone generator.
