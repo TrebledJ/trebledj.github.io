@@ -1,7 +1,7 @@
 ---
 title: Site Migration to Eleventy
 description: JavaScript go brrrrrrrrr.
-updated: '2023-02-22'
+updated: '2023-03-04'
 tags:
  - meta
  - js
@@ -34,8 +34,8 @@ Some key things I really like about 11ty so far... (keep in mind I’m coming fr
 - [Nunjucks](https://mozilla.github.io/nunjucks/) > Liquid
     - Ah yesss, ternary expressions! Inline math! Comments look nicer as well.
     - Thought that was all? Get **MINDBLOWN** by *importable* macros and template inheritance.
-    - Liquid and Nunjucks are templating languages, promoting code and layout reuse. They can also be used to generate post lists, feeds, and data files. With Jekyll, you're stuck with Liquid; but with 11ty, you're free to choose from a variety. Usually people recommend Nunjucks--with good reason too!
-    - Nunjucks builds [twice as slow compared to Liquid](https://docs.google.com/spreadsheets/d/1-H3wmT7q7m7G7d5M_dCLxQOiAAX3TP0byQdf0pP1fAQ/edit#gid=604275556), but this is a fine tradeoff considering the sweeter programming experience.
+    - Liquid and Nunjucks are templating languages, promoting code and layout reuse. They can also be used to generate post lists, feeds, and data files. With Jekyll, you're stuck with Liquid; but with 11ty, you're free to choose from a variety. Usually people recommend Nunjucks—with good reason too!
+    - Although Nunjucks builds [twice as slow compared to Liquid](https://docs.google.com/spreadsheets/d/1-H3wmT7q7m7G7d5M_dCLxQOiAAX3TP0byQdf0pP1fAQ/edit#gid=604275556),  this is a fine tradeoff considering the sweeter programming experience.
 - [Build speed](https://www.zachleat.com/web/build-benchmark/)
     - It’s pretty fast. Comparable to Hugo (which is the fastest SSG out there).
     - Great if you have a thousand posts, though I probably won’t write beyond a couple hundred in my entire lifetime.
