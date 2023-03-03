@@ -1,7 +1,7 @@
 ---
 title: "Part 1: Digital Audio Processing for Dummies"
 description: An introductory discourse on processing and generating audio. What makes audio tick?
-# updated: '2023-02-22'
+updated: '2023-03-03'
 tags:
  - tutorial
  - dsp
