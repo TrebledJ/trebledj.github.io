@@ -120,14 +120,12 @@ A naive approach to generate audio might be:
 1. Generate/process one sample
 2. Feed it to the DAC/speaker
 
-But there are several issues with this: function call overhead may impact performance and we have little room left for doing other things. For the sound to play smoothly at a sampling rate of 44100Hz, each sample needs to be delivered within 1/44100 s = 22.6us.
+But there are several issues with this: function call overhead may impact performance and we have little room left to do other things. For the sound to play smoothly while sampling at 44100Hz, each sample needs to be delivered within $\frac{1}{44100}$ s = $22.6$ µs.
 
-A better approach is to use a *buffer* and modify our approach:
+A better approach is to use a *buffer* and work in batches. The buffer will hold onto our samples before feeding it to the speaker.
 
-1. Generate/process N samples
-2. Feed all N samples to the audio buffer
-
- buffer will hold onto our samples before we feed it to a speaker or whatnot.
+1. Generate/process $N$ samples
+2. Feed all $N$ samples to the DAC/speaker
 
 In C/C++, we can generate a 440Hz sine tone lasting 1 second like so:
 
