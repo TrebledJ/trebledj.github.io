@@ -105,7 +105,7 @@ Clicks may arise from trimming or combining an audio recordings without applying
 
 ## Audio Synthesis 🎶
 
-Now that we’ve covered the basics regarding data representation, we’re ready to get our hands dirty with audio generation. But E here does our audio signal come from? Our signal might be…
+Now that we’ve covered the basics regarding data representation, we’re ready to get our hands dirty with audio generation. But where does our audio signal come from? Our signal might be…
 
 - recorded. Sound waves are picked up by special hardware (e.g. a microphone) and translated to a digital signal through an ADC.
 - loaded from a file. There are many audio formats out there, the common ones being .wav and .mp3. The .wav format is the simplest: it just stores samples uncompressed (as-is). Other formats will compress the audio to achieve smaller file sizes (which in turn, means faster upload/download speeds).
