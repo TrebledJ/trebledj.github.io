@@ -73,7 +73,7 @@ Sometimes when experimenting with audio, something goes amiss. Among the most co
 💡 **Pro Tip**: Oscilloscopes are your friend! If you encounter weird sounds, you can feed your processed signal into an oscilloscope (analog or digital) to check for clipping or clicks.
 {.alert--success}
 
-### Clipping
+### Clipping ✂️
 
 Clipping occurs when our samples go out-of-bounds, past the maximum/minimum quantisation value. Clipping may cause our signal to wraparound or flatten at the peaks and troughs.
 
@@ -108,12 +108,12 @@ Clicks may arise from trimming or combining an audio recordings without applying
 Now that we’ve covered the basics regarding data representation, we’re ready to get our hands dirty with audio generation. But where does our audio signal come from? Our signal might be…
 
 - recorded. Sound waves are picked up by special hardware (e.g. a microphone) and translated to a digital signal through an ADC.
-- loaded from a file. There are many audio formats out there, the common ones being .wav and .mp3. The .wav format is the simplest: it just stores samples uncompressed (as-is). Other formats will compress the audio to achieve smaller file sizes (which in turn, means faster upload/download speeds).
+- loaded from a file. These are many audio formats out there, but the most common ones are .wav and .mp3. The .wav format is the simplest: it just stores samples as-is. Other formats compress audio to achieve smaller file sizes (which in turn, means faster upload/download speeds).
 - synthesised. We generate audio out of thin air (or rather, code and electronics).
 
-I’ll mainly focus on **synthesis**. We’ll start by finding out how to generate a single tone, then learn how to generate multiple tones (that sound at the same time!—pretty important for musical applications). We’ll end by looking at a nifty, efficient method for synthesis.
+I’ll mainly focus on **synthesis**. We’ll start by finding out how to generate a single tone, then learn how to generate multiple tones simultaneously.
 
-## Buffering 📦
+### Buffering 📦
 
 A naive approach to generate audio might be:
 
@@ -161,7 +161,7 @@ return (samp0 + (samp1 - samp0) * ((float)tempFrac * 0.000000476837386f)); // 1/
 
 We can also leverage hardware to speed up processing, but we’ll leave that for the next post.
 
-## The Fourier Theorem 📊
+### The Fourier Theorem 📊
 
 One fundamental theorem in signal processing relates to the composition of signals. The **Fourier Theorem** can be summarised into:
 
@@ -184,7 +184,7 @@ The Fourier Theorem and Fourier Transform are ubiquitious in modern day technolo
 What’s cool about this theorem is that we can apply it the other way: any periodic signal can be *generated* by adding sine waves. This lays the groundwork for additive synthesis and generating audio with multiple pitches (e.g. a chord).
 
 
-## Additive Synthesis ➕
+### Additive Synthesis ➕
 
 The principle of **additive synthesis** is pretty straightforward: signals can be combined by adding samples along time.
 
@@ -241,9 +241,9 @@ So to conclude…
     - [Clipping](#clipping) occurs when samples don’t fit into the given dynamic range and are cut.
     - [Clicks](#clicks) occur when a large difference occurs in samples, causing the speaker to act wonkily.
 - Audio samples may come from several sources. It may be recorded, loaded from a file, or [synthesised](#audio-synthesis).
-- We can synthesise musical pitches by buffering samples and feeding them to hardware.
-    - We can use wavetable synthesis for faster sample generation.
-- According to the [Fourier Theorem](#the-fourier-theorem), all signals can be broken into a summation of sine waves.
-- To play multiple pitches simultaneously (chords), we can apply [additive synthesis](#additive-synthesis) to combine signals together.
+  - We can synthesise musical pitches by buffering samples and feeding them to hardware.
+      - We can use wavetable synthesis for faster sample generation.
+  - According to the [Fourier Theorem](#the-fourier-theorem), all signals can be broken into a summation of sine waves.
+  - To play multiple pitches simultaneously (chords), we can apply [additive synthesis](#additive-synthesis) to combine signals together.
 
 In the next post, we'll dive deeper into audio synthesis in embedded systems and engineer a simple tone generator.
