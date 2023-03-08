@@ -1,7 +1,7 @@
 ---
 title: "Part 1: Digital Audio Processing for Dummies"
 description: An introductory discourse on processing and generating audio. What makes audio tick?
-updated: '2023-03-08'
+updated: '2023-03-09'
 tags:
  - tutorial
  - dsp
@@ -68,7 +68,7 @@ Here, we’re mostly concerned with data storage (whether in files or in RAM). I
 
 When it comes to storing samples in files, most applications use 16-bit integers, which allow for a sufficient resolution (-32,768 to +32,767) at two bytes per sample. 32-bit floats are another common representation, bringing substantially greater detail at the expense of twice the space. For a comparison of magnitudes, 32-bit floats range from about -10<sup>38</sup> to +10<sup>38</sup> whereas 32-bit integers range from about -10<sup>9</sup> to +10<sup>9</sup>. Sadly, the increased range of floats comes with a downside—reduced precision—floats are only precise up to 7 decimal points[^floats].
 
-[^floats]: See more: [Single-precision floating-point format](https://en.wikipedia.org/wiki/Single-precision_floating-point_format).
+[^floats]: For more info on floating points, see [Single-precision floating-point format](https://en.wikipedia.org/wiki/Single-precision_floating-point_format).
 
 Now when it comes to audio *processing*, it's easier to work with floats in the range of -1 to 1. Why the smaller range? Well, if we work directly with the maximum bounds, we may easily (and accidentally) overflow.
 
@@ -223,9 +223,9 @@ void generate_samples_w(float freq) {
     }
 }
 ```
-For a sine wave, we don't gain much in terms of performance. But for a more complex waveform, wavetable synthesis is more performant. In fact, we can optimise `get_next_sample` even more![^leaf]
+For a sine wave, we don't gain much in terms of performance. But when it comes to generating complex waveforms, wavetable synthesis rocks![^leaf]
 
-[^leaf]: See the open source [LEAF](https://github.com/spiricom/LEAF/blob/a0b0b7915cce3792ea00f06d0a6861be1a73d609/leaf/Src/leaf-oscillators.c#L67) library for an example of heavily optimised wavetable synthesis.
+[^leaf]: Guess what? We can optimise wavetable synthesis even more—so it'll rock even more! See the open source [LEAF](https://github.com/spiricom/LEAF/blob/a0b0b7915cce3792ea00f06d0a6861be1a73d609/leaf/Src/leaf-oscillators.c#L67) library for an example of heavily optimised wavetable synthesis.
 
 Besides this software approach, we can also leverage hardware to speed up processing. But this is a matter for the next post.
 
