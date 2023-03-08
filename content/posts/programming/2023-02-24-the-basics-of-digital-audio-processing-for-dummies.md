@@ -56,8 +56,10 @@ The diagram below demonstrates aliasing, which happens when our sample rate is t
 
 [^emp]: Katz, D; Gentile, R. 2005. *Embedded Media Processing*. They’ve provided [Chapter 5: Embedded Audio Processing](https://www.analog.com/media/en/dsp-documentation/embedded-media-processing/embedded-media-processing-chapter5.pdf) as a preview.
 
-The Nyquist Theorem explains why we usually sample above 40kHz, but why those rates specifically? Well, there are historical reasons (pioneering decisions), but the two numbers also contain many factors (e.g. $44100 = 2^2 \times 3^2 \times 5^2 \times 7^2$) which may be convenient for downsampling and other endeavours. Moreover, since anti-aliasing and low-pass filters may disrupt samples, being lenient with our sampling frequency becomes a boon. ([See more](https://dsp.stackexchange.com/q/17685/65058).)
+The Nyquist Theorem explains why we usually sample above 40kHz, but why those rates specifically? Well, there are historical reasons (pioneering decisions), but the two numbers also contain many factors (e.g. $44100 = 2^2 \times 3^2 \times 5^2 \times 7^2$) which may be convenient for downsampling and other endeavours. Moreover, since anti-aliasing and low-pass filters may disrupt samples, being lenient with our sampling frequency becomes a boon.[^why-44100]
 {.alert--info}
+
+[^why-44100]: See also: [Why do we choose 44.1 kHz as recording sampling rate?](https://dsp.stackexchange.com/q/17685/65058)
 
 ### Quantisation
 
@@ -115,7 +117,9 @@ Clicks (aka pops) occur when a signal behaves discontinuously with large differe
 <sup>Signal jumps from -1.0 to 1.0, causing my speaker to pop and my ear drums to bleed from utter despair.</sup>
 {.center}
 
-Clicks may arise from trimming or combining an audio recordings without applying fades. In audio synthesis, they may also arise out of mishandling buffers and samples. ([Read more about clicks](https://mynewmicrophone.com/what-causes-speakers-to-pop-and-crackle-and-how-to-fix-it/).)
+Clicks may arise from trimming or combining an audio recordings without applying fades. In audio synthesis, they may also arise out of mishandling buffers and samples.[^clicks]
+
+[^clicks]: Fox, Arthur. [*What Causes Speakers To Pop And Crackle, And How To Fix It*](https://mynewmicrophone.com/what-causes-speakers-to-pop-and-crackle-and-how-to-fix-it/)
 
 
 ## Recap 🔁

@@ -140,7 +140,7 @@ void generate_samples_w(float freq) {
 ```
 For a sine wave, we don't gain much in terms of performance. But when it comes to generating complex waveforms, wavetable synthesis rocks![^leaf]
 
-[^leaf]: Guess what? We can optimise wavetable synthesis even more—so it'll rock even more! See the open source [LEAF](https://github.com/spiricom/LEAF/blob/a0b0b7915cce3792ea00f06d0a6861be1a73d609/leaf/Src/leaf-oscillators.c#L67) library for an example of heavily optimised wavetable synthesis.
+[^leaf]: Guess what? There are more ways to optimise wavetable synthesis—so it'll rock even more! See the open source [LEAF](https://github.com/spiricom/LEAF/blob/a0b0b7915cce3792ea00f06d0a6861be1a73d609/leaf/Src/leaf-oscillators.c#L67) library for an example of heavily optimised wavetable synthesis.
 
 Besides this software approach, we can also leverage hardware to speed up processing. But this is a matter for the next post.
 
