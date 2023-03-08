@@ -28,7 +28,7 @@ Now that we’ve covered the basics regarding data representation, we’re ready
 
 I’ll mainly focus on **synthesis**. We’ll start by finding out how to generate a single tone, then learn how to generate multiple tones simultaneously.
 
-### Buffering 📦
+## Buffering 📦
 
 A naive approach to generate audio might be:
 
@@ -39,25 +39,27 @@ But there are several issues with this: function call overhead may impact perfor
 
 A better approach is to use a *buffer* and work in batches. The buffer will hold onto our samples before feeding it to the speaker.
 
-1. Process $N$ samples
+1. Process $N$ samples and store them in a buffer
 2. Feed all $N$ samples to the DAC/speaker
 
-We'll focus more on step 1 (processing) for now. We'll cover step 2 in the next post.
+We'll focus more on step 1 (processing) for now. We'll cover step 2 (output) in the next post.
 
-In C/C++, we can generate a 440Hz sine tone lasting 1 second like so:
+In C/C++, we can generate a sine tone like so:
 
 ```cpp
 #define SAMPLE_RATE 44100  // Number of samples per second.
+#define BUFFER_SIZE 1024   // Length of the buffer. Typically a power of 2.
 
-float buffer[SAMPLE_RATE]; // Buffer of samples to populate, each ranging from -1 to 1.
+// Define an array for storing samples.
+float buffer[BUFFER_SIZE]; // Buffer of samples to populate, each ranging from -1 to 1.
 
 /**
  * Generate samples of a sine wave and store them in a buffer.
  * @param freq  Frequency of the sine wave, in Hz.
  */
 void generate_samples(float freq) {
-    // Populate the buffer with 1 second of 440Hz sine.
-    for (int i = 0; i < SAMPLE_RATE; i++) {
+    // Populate the buffer with a sine tone with frequency `freq`.
+    for (int i = 0; i < BUFFER_SIZE; i++) {
         buffer[i] = sin(2 * PI * freq * i / SAMPLE_RATE);
     }
 }
@@ -66,10 +68,10 @@ void generate_samples(float freq) {
 Remember how we mentioned different types and representations in the [Quantisation](#quantisation) section? Since we're concerned with audio processing, we'll be using floats and quantising from -1 to 1.
 {.alert--info}
 
-And that’s it—we’ve just whooshed 1 full second of pure sine tone goodness from nothing! Granted, there are some flaws with this method (it’s inefficient, and the signal clicks when repeated); but hey, it demonstrates synthesis.
+And that’s it—we’ve just whooshed pure sine tone goodness from nothing! Granted, there are some flaws with this method (it’s inefficient, and the signal clicks when repeated); but hey, it demonstrates synthesis.
 
-### Wavetable Synthesis 🌊
-A more efficient approach is to interpolate over pre-generated values (known as **wavetable synthesis** or **table-lookup synthesis**), sacrificing a bit of memory for faster runtime performance. The idea is to pre-generate one cycle of the wave (e.g. a sine) and store it in a lookup table. Then when generating samples for our audio, we would lookup the pre-generated samples and use intermediate values if necessary (via interpolation).
+## Wavetable Synthesis 🌊
+A more efficient approach to synthesis is to interpolate over pre-generated values, sacrificing a bit of memory for faster runtime performance. This is known as **wavetable synthesis** or **table-lookup synthesis**. The idea is to pre-generate one cycle of the wave (e.g. a sine) and store it in a lookup table. Then when generating samples for our audio, we would lookup the pre-generated samples and derive intermediate values if necessary (via interpolation).
 
 This is akin to preparing a cheat sheet for an exam, but you're only allowed to bring one sheet of paper—space is precious. You decide to only include the most crucial equations, key points, and references. Then when taking the exam you refer to the cheat sheet for ideas and combine them with your thoughts, ultimately forming your answer.
 
@@ -85,7 +87,8 @@ Wavetable synthesis can be implemented in C++ like so:
 
 ```cpp
 #define SINE_WAVETABLE_SIZE 256
-#define SAMPLE_RATE 44100   // Number of samples per second (of the target waveform).
+#define SAMPLE_RATE 44100       // Number of samples per second (of the target waveform).
+#define BUFFER_SIZE 1024
 
 // The pre-generated wavetable. It should capture one cycle of the desired waveform (in this case, a sine).
 float sine_wavetable[SINE_WAVETABLE_SIZE] = { /* pre-generated values ... */ };
@@ -95,6 +98,8 @@ float sine_wavetable[SINE_WAVETABLE_SIZE] = { /* pre-generated values ... */ };
 // The integer part indicates the index of left sample along the wavetable, modulus the size.
 // The decimal part indicates the fraction between the left and right samples.
 float phase = 0;
+
+float buffer[BUFFER_SIZE];
 
 /**
  * Generate samples of a sine wave by interpolating a wavetable.
@@ -121,7 +126,7 @@ float get_next_sample(float freq) {
 }
 
 void generate_samples_w(float freq) {
-    for (int i = 0; i < SAMPLE_RATE; i++) {
+    for (int i = 0; i < BUFFER_SIZE; i++) {
         buffer[i] = get_next_sample(freq); // We've offloaded the calculations to `get_next_sample`.
     }
 }
@@ -132,7 +137,7 @@ For a sine wave, we don't gain much in terms of performance. But when it comes t
 
 Besides this software approach, we can also leverage hardware to speed up processing. But this is a matter for the next post.
 
-### The Fourier Theorem 📊
+## The Fourier Theorem 📊
 
 One fundamental theorem in signal processing relates to the composition of signals. The **Fourier Theorem** can be summarised into:
 
@@ -155,7 +160,7 @@ where $a_i$, $f_i$, and $b_i$ are the amplitude, frequency, and phase of each co
 What’s cool about this theorem is that we can apply it the other way: any periodic signal can be *generated* by adding sine waves. This lays the groundwork for additive synthesis and generating audio with multiple pitches (e.g. a chord).
 
 
-### Additive Synthesis ➕
+## Additive Synthesis ➕
 
 The principle of **additive synthesis** is pretty straightforward: signals can be combined by adding samples along time.
 
@@ -171,8 +176,9 @@ To sound another pitch, we simply add a second sine wave to the buffer.
 
 ```cpp
 #define SAMPLE_RATE 44100
+#define BUFFER_SIZE 1024
 
-float buffer[SAMPLE_RATE];
+float buffer[BUFFER_SIZE];
 
 /**
  * Generate samples of two sine waves played together and store them in a buffer.
@@ -180,7 +186,7 @@ float buffer[SAMPLE_RATE];
  * @param freq2 Frequency of the second sine wave, in Hz.
  */
 void generate_samples2(float freq, float freq2) {
-    for (int i = 0; i < SAMPLE_RATE; i++) {
+    for (int i = 0; i < BUFFER_SIZE; i++) {
         buffer[i] = 0.5f * sin(2 * PI * freq * i / SAMPLE_RATE);
         buffer[i] += 0.5f * sin(2 * PI * freq2 * i / SAMPLE_RATE);
     }
