@@ -122,7 +122,7 @@ Clicks may arise from trimming or combining an audio recordings without applying
 
 Audio processing and sounds are ubiquitous in daily life. In this post, we explored how digital audio works under the hood. Hopefully we communicated on the same wavelength and no aliasing occured on your end. 😏
 
-In the next post, we'll look at audio synthesis: the making of audio from nothing.
+In the [next post](/posts/digital-audio-synthesis-for-dummies), we'll look at audio synthesis: the making of audio from nothing.
 
 To recap…
 

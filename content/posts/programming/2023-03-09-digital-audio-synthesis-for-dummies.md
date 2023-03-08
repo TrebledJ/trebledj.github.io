@@ -44,11 +44,14 @@ A better approach is to use a *buffer* and work in batches. The buffer will hold
 
 We'll focus more on step 1 (processing) for now. We'll cover step 2 (output) in the next post.
 
+Remember how we mentioned different [quantisation](/posts/the-basics-of-digital-audio-processing-for-dummies#quantisation) representations in the previous post? Since we're concerned with audio processing, we'll be using floats and quantising from -1 to 1.
+{.alert--info}
+
 In C/C++, we can generate a sine tone like so:
 
 ```cpp
 #define SAMPLE_RATE 44100  // Number of samples per second.
-#define BUFFER_SIZE 1024   // Length of the buffer. Typically a power of 2.
+#define BUFFER_SIZE 1024   // Length of the buffer.
 
 // Define an array for storing samples.
 float buffer[BUFFER_SIZE]; // Buffer of samples to populate, each ranging from -1 to 1.
@@ -65,10 +68,14 @@ void generate_samples(float freq) {
 }
 ```
 
-Remember how we mentioned different types and representations in the [Quantisation](#quantisation) section? Since we're concerned with audio processing, we'll be using floats and quantising from -1 to 1.
+And that’s it—we’ve just whooshed pure sine tone goodness from nothing! Granted, there are some flaws with this method (it’s inefficient, and the signal clicks when repeated); but hey, it demonstrates synthesis.
+
+
+**Note** on Buffers: It's common to use a buffer size which is medium-sized power of 2 (e.g. 512, 1024, 2048, 4096...) as this enhances cache loads and processing speed (dividing by a power of 2 is super easy for processors!).[^buffers]
 {.alert--info}
 
-And that’s it—we’ve just whooshed pure sine tone goodness from nothing! Granted, there are some flaws with this method (it’s inefficient, and the signal clicks when repeated); but hey, it demonstrates synthesis.
+[^buffers]: Boy, do I have a lot to say about buffers. Why is the buffer size important? Small buffers may reduce the efficacy of batching operations (which is the primary purpose of buffers). Large buffers may block the processor too much, making it sluggish to respond to new input. Choosing an appropriate buffer size also depends on your sampling rate. With a buffer size of 1024 sampling at 44100Hz, we would need generate our samples every $\frac{1024}{44.1\text{kHz}} \approx 23.2$ ms. On a single processor, this means we have *less than* 23.2 ms to perform other tasks (e.g. handle UI, events, etc.).
+
 
 ## Wavetable Synthesis 🌊
 A more efficient approach to synthesis is to interpolate over pre-generated values, sacrificing a bit of memory for faster runtime performance. This is known as **wavetable synthesis** or **table-lookup synthesis**. The idea is to pre-generate one cycle of the wave (e.g. a sine) and store it in a lookup table. Then when generating samples for our audio, we would lookup the pre-generated samples and derive intermediate values if necessary (via interpolation).
@@ -193,8 +200,7 @@ void generate_samples2(float freq, float freq2) {
 }
 ```
 
-How easy was that? Again, the code above populates the buffer with 1 second of audio. But this time, we add a second sample.
-We also make sure to scale the sample back down to the $[-1, 1]$ range by multiplying each sample by 0.5.
+How easy was that? Again, the code above populates the buffer 1024 samples of audio. But this time, we added a second sample. We also made sure to scale the sample back down to the $[-1, 1]$ range by multiplying each sample by 0.5.
 
 Let’s try it out! Don’t worry if you lack the luxury of an embedded system with DACs and speakers. Additive synthesis can be demonstrated with tools localised on your computer. We can do it with some help from [Audacity](https://www.audacityteam.org/):
 
