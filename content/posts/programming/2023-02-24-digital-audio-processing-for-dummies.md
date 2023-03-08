@@ -238,9 +238,7 @@ One fundamental theorem in signal processing relates to the composition of signa
 We can express this mathematically as
 
 $$
-\begin{align*}
 f(x) = a_0\sin(f_0x + b_0) + a_1\sin(f_1x + b_1) + \cdots + a_n\sin(f_nx + b_n)
-\end{align*}
 $$
 
 where $a_i$, $f_i$, and $b_i$ are the amplitude, frequency, and phase of each constituent sine wave.
