@@ -64,7 +64,7 @@ The Nyquist Theorem explains why we usually sample above 40kHz, but why those ra
 
 While sampling deals with resolution in time, **quantisation** deals with resolution in *dynamics* (or *loudness)*.
 
-Here, we’re mostly concerned with data storage (whether in files or in RAM). If we store our samples using 1 bit, then each sample has two possible loudness values (0 or 1). But 1 bit is no good, as this means our dynamic range is limited to silence (0) or an ear-breaking loudness (1). If we use 2 bits, we get twice as many volume settings (00, 01, 10, and 11). Now we have a couple intermediate options and don’t have to break our ears! The more bits each sample has, the greater the dynamic resolution.
+Here, we’re mostly concerned with data storage (whether in files or in RAM). If we store our samples using 1 bit, then each sample has only two possible loudness values (0 or 1). But this means our dynamic range is limited to silence (0) or an ear-breaking loudness (1)... so 1 bit is no good. If we use 2 bits, we get twice as many volume settings (00, 01, 10, and 11). Now we have a couple intermediate options and don’t have to break our ears! The more bits each sample has, the greater the dynamic resolution.
 
 When it comes to storing samples in files, most applications use 16-bit integers, which allow for a sufficient resolution (-32,768 to +32,767) at two bytes per sample. 32-bit floats are another common representation, bringing substantially greater detail at the expense of twice the space. For a comparison of magnitudes, 32-bit floats range from about -10<sup>38</sup> to +10<sup>38</sup> whereas 32-bit integers range from about -10<sup>9</sup> to +10<sup>9</sup>. Sadly, the increased range of floats comes with a downside—reduced precision—floats are only precise up to 7 decimal points[^floats].
 
@@ -72,16 +72,21 @@ When it comes to storing samples in files, most applications use 16-bit integers
 
 Now when it comes to audio *processing*, it's easier to work with floats in the range of -1 to 1. Why the smaller range? Well, if we work directly with the maximum bounds, we may easily (and accidentally) overflow.
 
-For example, suppose I'm using 16-bit integers when processing and I have a bunch of samples at +32,767. Now let's say I want to add another signal on top. The result will be greater than +32,767. And due to the nature of integers in computers, the result will *wraparound* to a negative value. To give a concrete example: $32,767 + 1 = -32,768$ (for *16-bit integers*!).
+For example, suppose I'm using 16-bit integers when processing and I have a bunch of samples at +32,767. Now let's say I want to add another signal on top. The result will be greater than +32,767. And due to the nature of integers in computers, the result will *wraparound* to a negative value (e.g. $32,767 + 1 = -32,768$, for 16-bit integers).
 
 ## Audio Mishaps and Bugs 🐞
 
 > *If you know the enemy and know yourself, you need not fear the result of a hundred battles.* – Sun Tzu, The Art of War
 
-Sometimes when experimenting with audio, something goes amiss. Among the most common issues are clipping and clicks. You'll thank yourself later when debugging these pesky lil' issues.
+Sometimes when experimenting with audio, something goes amiss. Among the most common issues are aliasing, clipping, and clicks. You'll thank yourself later when debugging these pesky lil' issues.
 
-💡 **Pro Tip**: Oscilloscopes are your friend! If you encounter weird sounds, you can feed your processed signal into an oscilloscope (analog or digital) to check for clipping or clicks.
+💡 **Pro Tip**: Oscilloscopes are your friend! If you encounter weird sounds, you can feed your processed signal into an oscilloscope (analog or digital) to check for any issues.
 {.alert--success}
+
+### Aliasing
+We mentioned aliasing [earlier](#nyquist-shannon-sampling-theorem). Aliasing occurs when a signal is sampled insufficiently, causing it to appear at a lower frequency.
+
+Generally, increasing the sampling rate helps (or lowering your expectations for the maximum frequency). In any case, it's wise to be vigilant with your sampling rate and frequency range.
 
 ### Clipping ✂️
 
@@ -112,6 +117,7 @@ Clicks (aka pops) occur when a signal behaves discontinuously with large differe
 {.center}
 
 Clicks may arise from trimming or combining an audio recordings without applying fades. In audio synthesis, they may also arise out of mishandling buffers and samples. ([Read more about clicks](https://mynewmicrophone.com/what-causes-speakers-to-pop-and-crackle-and-how-to-fix-it/).)
+
 
 ## Audio Synthesis 🎶
 
@@ -166,19 +172,17 @@ And that’s it—we’ve just whooshed 1 full second of pure sine tone goodness
 ### Wavetable Synthesis 🌊
 A more efficient approach is to interpolate over pre-generated values (known as **wavetable synthesis** or **table-lookup synthesis**), sacrificing a bit of memory for faster runtime performance. The idea is to pre-generate one cycle of the wave (e.g. a sine) and store it in a lookup table. Then when generating samples for our audio, we would lookup the pre-generated samples and use intermediate values if necessary (via interpolation).
 
-This is akin to preparing a cheat sheet for the exam. Then when taking the exam, you refer to the cheat sheet for equations, key points, and references; and finally connect them with the rest of your ideas.
-
-I bet all this text is boring you, so here are some helpful visuals to ease the mood:
+This is akin to preparing a cheat sheet for an exam, but you're only allowed to bring one sheet of paper—space is precious. You decide to only include the most crucial equations, key points, and references. Then when taking the exam you refer to the cheat sheet for ideas and combine them with your thoughts, ultimately forming your answer.
 
 ![Wavetable synthesis, localised in a nifty lil giffy.](/img/posts/misc/dsp/wavetable-synthesis.gif){.w-100}
 {.center}
 
-<sup>Example of wavetable synthesis. The blue dots above represent the pre-generated wavetable of length 32. The red dots are samples of a 8Hz sine wave sampled at 100Hz, generated by interpolating between values in the wavetable. The red connections indicate the source of the sample. Source code can be found on [GitHub][wavesynthgist].</sup>
+<sup>Example of wavetable synthesis. The blue dots (above) indicate a pre-generated wavetable of length 32. The red dots (below) are samples of a 8Hz sine wave sampled at 100Hz, generated by interpolating on the wavetable. ([Source Code][wavesynthgist])</sup>
 {.center}
 
 [wavesynthgist]: https://gist.github.com/TrebledJ/f42f9030d1bee0ece8af7fc0db5d0151
 
-Wavetable synthesis can be implemented like so in C++:
+Wavetable synthesis can be implemented in C++ like so:
 
 ```cpp
 #define SINE_WAVETABLE_SIZE 256
@@ -259,7 +263,7 @@ The principle of **additive synthesis** is pretty straightforward: signals can b
 ![Example of additive synthesis, localised on this very webpage.](/img/posts/misc/dsp/additive-synthesis.jpg){.w-100}
 {.center}
 
-<sup>Example of additive synthesis. The first and second signal show pure sine tones at 440Hz ($s1$) and 660Hz ($s2$). The third signal adds the two signals ($s1 + s2$). The fourth signal scales the summed signal down to fit within $[-1, 1]$ ($(s1 + s2) / 2$). Source code can be found on [GitHub][addsynthgist].</sup>
+<sup>Example of additive synthesis. The first and second signal show pure sine tones at 440Hz ($s1$) and 660Hz ($s2$). The third signal adds the two signals ($s1 + s2$). The fourth signal scales the third signal down to fit within $[-1, 1]$ ($(s1 + s2) / 2$). ([Source Code][addsynthgist])</sup>
 {.center}
 
 [addsynthgist]: https://gist.github.com/TrebledJ/14b8842ef3696b09e299c34ba0da9e6c
@@ -315,11 +319,12 @@ In the next post, we'll dive deeper into audio synthesis in embedded systems and
 
 To recap…
 
-- A fundamental aspect to audio processing is understanding the *quality* of data. This comes in two forms: sampling and quantisation.
+- Fundamental to audio processing is the *quality* of audio data. This comes in two forms: sampling and quantisation.
     - [Sampling](#sampling) refers to the discretisation and resolution of a signal in *time*. Larger sample rate = more information per second = higher quality.
     - [Quantisation](#quantisation) refers to the bitdepth, the resolution in loudness. Higher bitdepth = more degrees of loudness = higher quality.
     - To accurately reconstruct a signal, the **Nyquist Theorem** states the sample rate should be at least *twice the maximum frequency of the signal*.
 - Some common issues to audio processing are clipping and clicks. They usually indicate
+    - [Aliasing](#aliasing) occurs when a signal is misinterpreted to be of lower frequency.
     - [Clipping](#clipping) occurs when samples don’t fit into the given dynamic range and are cut.
     - [Clicks](#clicks) occur when a large difference occurs in samples, causing the speaker to act wonkily.
 - Audio samples may come from several sources. It may be recorded, loaded from a file, or [synthesised](#audio-synthesis).
