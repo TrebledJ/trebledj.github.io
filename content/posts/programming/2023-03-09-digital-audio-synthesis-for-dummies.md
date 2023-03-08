@@ -216,6 +216,7 @@ Wavetable synthesis aims to *optimise* generation of a *specific* waveform.
 Additive synthesis aims to *combine multiple waveforms*, of *any* shape and size (think chords).
 {.alert--success}
 
+<!-- ### Fundamental Frequency -->
 <!-- TODO: fundamentals? -->
 
 ## Recap 🔁
