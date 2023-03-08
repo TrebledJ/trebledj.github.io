@@ -1,10 +1,12 @@
 ---
 title: "Part 1: Digital Audio Processing for Dummies"
 description: An introductory discourse on processing and generating audio. What makes audio tick?
-updated: '2023-03-03'
+updated: '2023-03-08'
 tags:
  - tutorial
  - dsp
+ - c
+ - cpp
  - music
 thumbnail: /img/posts/misc/dsp/sine-oscilloscope.jpg
 usemathjax: true
@@ -62,13 +64,21 @@ The Nyquist Theorem explains why we usually sample above 40kHz, but why those ra
 
 While sampling deals with resolution in time, **quantisation** deals with resolution in *dynamics* (or *loudness)*.
 
-Here, we’re mostly concerned with data storage. If we store our samples using 1 bit, then each sample has two possible loudness values (0 or 1). But 1 bit is no good, since we’ll be listening to silence or *breaking* our ears otherwise. If we use 2 bits, we get twice as many volume settings (00, 01, 10, and 11). Now we have a couple intermediate options and don’t have to break our ears! The more bits each sample has, the greater the dynamic resolution.
+Here, we’re mostly concerned with data storage (whether in files or in RAM). If we store our samples using 1 bit, then each sample has two possible loudness values (0 or 1). But 1 bit is no good, as this means our dynamic range is limited to silence (0) or an ear-breaking loudness (1). If we use 2 bits, we get twice as many volume settings (00, 01, 10, and 11). Now we have a couple intermediate options and don’t have to break our ears! The more bits each sample has, the greater the dynamic resolution.
 
-Most applications use 16-bit integers, which allow for a sufficient resolution (-32,768 to +32,767) and take up a fair amount of space (two bytes). 32-bit floats are another common representation, with more detail at the expense of space.
+When it comes to storing samples in files, most applications use 16-bit integers, which allow for a sufficient resolution (-32,768 to +32,767) at two bytes per sample. 32-bit floats are another common representation, bringing substantially greater detail at the expense of twice the space. For a comparison of magnitudes, 32-bit floats range from about -10<sup>38</sup> to +10<sup>38</sup> whereas 32-bit integers range from about -10<sup>9</sup> to +10<sup>9</sup>. Sadly, the increased range of floats comes with a downside—reduced precision—floats are only precise up to 7 decimal points[^floats].
+
+[^floats]: See more: [Single-precision floating-point format](https://en.wikipedia.org/wiki/Single-precision_floating-point_format).
+
+Now when it comes to audio *processing*, it's easier to work with floats in the range of -1 to 1. Why the smaller range? Well, if we work directly with the maximum bounds, we may easily (and accidentally) overflow.
+
+For example, suppose I'm using 16-bit integers when processing and I have a bunch of samples at +32,767. Now let's say I want to add another signal on top. The result will be greater than +32,767. And due to the nature of integers in computers, the result will *wraparound* to a negative value. To give a concrete example: $32,767 + 1 = -32,768$ (for *16-bit integers*!).
 
 ## Audio Mishaps and Bugs 🐞
 
-Sometimes when experimenting with audio, something goes amiss. Among the most common issues are clipping and clicks. It’s handy to know these issues to speed up debugging.
+> *If you know the enemy and know yourself, you need not fear the result of a hundred battles.* – Sun Tzu, The Art of War
+
+Sometimes when experimenting with audio, something goes amiss. Among the most common issues are clipping and clicks. You'll thank yourself later when debugging these pesky lil' issues.
 
 💡 **Pro Tip**: Oscilloscopes are your friend! If you encounter weird sounds, you can feed your processed signal into an oscilloscope (analog or digital) to check for clipping or clicks.
 {.alert--success}
@@ -143,7 +153,7 @@ for (int i = 0; i < SAMPLE_RATE; i++) {
 
 And that’s it—we’ve just whooshed 1 full second of pure sine tone goodness from nothing! Granted, there are some flaws with this method (it’s inefficient, and the signal clicks when repeated); but hey, it demonstrates synthesis.
 
-A more efficient approach is to interpolate over pre-generated values (known as *wavetable* or *table-lookup synthesis*), sacrificing a bit of memory for faster runtime performance. The open-source [LEAF](https://github.com/spiricom/LEAF/blob/a0b0b7915cce3792ea00f06d0a6861be1a73d609/leaf/Src/leaf-oscillators.c#L67) library demonstrates this:
+A more efficient approach is to interpolate over pre-generated values (known as **wavetable synthesis** or **table-lookup synthesis**), sacrificing a bit of memory for faster runtime performance. The open-source [LEAF](https://github.com/spiricom/LEAF/blob/a0b0b7915cce3792ea00f06d0a6861be1a73d609/leaf/Src/leaf-oscillators.c#L67) library demonstrates this:
 
 ```cpp
 // Get the pre-generated sample to the LEFT of the current sample.
@@ -222,14 +232,18 @@ Let’s try it out! Don’t have the luxury of an embedded system with DAC and s
     - Generate an 880Hz tone in the new track. Same method as above.
     - Play it to hear a beautiful sounding octave.
 
-![Get ready for some Data!](/img/posts/misc/dsp/audacity.jpg){.w-100}
+![The audacity of it all!](/img/posts/misc/dsp/audacity.jpg){.w-100}
 {.center}
 
 You can try layering other frequencies (554Hz, 659Hz) to play a nifty A Major chord.
 
 ## Recap 🔁
 
-So to conclude…
+Audio processing and sounds are ubiquitous in daily life. In this post, we explored how digital audio works under the hood. Hopefully we communicated on the same wavelength and no aliasing occured on your end. 😏
+
+In the next post, we'll dive deeper into audio synthesis in embedded systems and engineer a simple tone generator.
+
+To recap…
 
 - A fundamental aspect to audio processing is understanding the *quality* of data. This comes in two forms: sampling and quantisation.
     - [Sampling](#sampling) refers to the discretisation and resolution of a signal in *time*. Larger sample rate = more information per second = higher quality.
@@ -243,5 +257,3 @@ So to conclude…
       - We can use wavetable synthesis for faster sample generation.
   - According to the [Fourier Theorem](#the-fourier-theorem), all signals can be broken into a summation of sine waves.
   - To play multiple pitches simultaneously (chords), we can apply [additive synthesis](#additive-synthesis) to combine signals together.
-
-In the next post, we'll dive deeper into audio synthesis in embedded systems and engineer a simple tone generator.
