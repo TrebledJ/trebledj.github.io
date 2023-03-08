@@ -50,7 +50,7 @@ body {
 }
 
 blockquote {
-    padding: calc(var(--space-base) * 1) var(--space-base) 0 var(--space-double);
+    padding: calc(var(--space-base) * 1) var(--space-base) 0 calc(var(--space-base) * 1.5);
     overflow: auto;
     opacity: var(--opacity-lower);
 
