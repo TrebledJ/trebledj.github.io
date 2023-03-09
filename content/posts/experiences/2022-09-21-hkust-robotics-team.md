@@ -56,11 +56,11 @@ Lastly, to top off the recruitment process, trainees would form groups to compet
 
 The primary objective of the internal contest is to observe how well candidates work with others and at the same time, being able to apply the technical skills gained in the tutorial. Whether you win 1st place or not—that is secondary. Winning doesn’t guarantee you a spot in the team. Similarly, losing doesn’t guarantee you get kicked out immediately. Let this be a life lesson. :P
 
-Unfortunately, due to the protests and temporary closure of the university, the contest was cancelled T_T and we jumped straight to peer evaluation and the next phase: entering sub-teams.
+Unfortunately, due to the protests and temporary closure of the university, the contest was cancelled T_T and we jumped straight to peer evaluation followed by the next phase: entering subteams.
 
 ## Team Freshman 🍎
 
-Each year, the HKUST Robotics Team participates in several competitions, with a dedicated sub-team for each. At the time of joining, I had to choose between the ABU Robocon, MATE ROV, and NXP Smart Car sub-teams. I was persuaded to join Robocon, and well—here I am now. 😐
+Each year, the HKUST Robotics Team participates in several competitions, with a dedicated subteam for each. At the time of joining, I had to choose between the ABU Robocon, MATE ROV, and NXP Smart Car subteams. I was persuaded to join Robocon, and well—here I am now. 😐
 
 You would’ve thought that, after the internal contest and trainee selection, the hardest part of training would be over and we could relax after. Haha, nope! We had to prepare for the upcoming [Robocon 2020](/posts/robocon-2020) competition!
 
@@ -88,11 +88,11 @@ Mentoring is tough, but rewarding. There is the urge to stay ahead of the junior
 
 More reflections can be found in my [Robocon 2021 post](/posts/robocon-2021).
 
-Nowadays my role is more passive, I monitor the team, provide training, and offer guidance.
+Nowadays, my role is more passive—I monitor the team, provide training, and offer guidance.
 
 ## Personal Improvement/Development 🚀
 
-In robotics and control theory, PID is one of the core elements contributing to stable motors, mechanisms, and machinery. How does a heater know when to start/stop heating? PID. How does a drone know how fast to spin its motors so that it hovers mid-air? PID.
+In robotics and control theory, PID is one of the core elements contributing to stable motors, mechanisms, and machinery. How does a heater know when to start/stop heating? PID. How does a drone know how fast to spin its motors to hover midair? PID.
 
 PID stands for proportional, integral, and derivative—rather mathy terms, and quite so, because that’s how PID controls are computed.
 

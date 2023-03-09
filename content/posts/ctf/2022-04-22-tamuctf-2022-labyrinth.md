@@ -52,7 +52,7 @@ It appears that PIE is enabled. We'll make a mental note of this, since this may
 **What is PIE?** Position-independent executable is a security mechanism whereby on starting an application, the OS will offset the assembly sections (`.data`, `.text`, etc.).
 {.alert--success}
 
-Next, we decompile our elves using ghidra and make some observations.
+Next, we decompile our elves using Ghidra and make some observations.
 
 ![Labyrinth decompiled 1.](/img/posts/misc/ctf/labyrinth/labyrinth-1.jpg){.w-100}
 {.center}
@@ -76,7 +76,7 @@ Next, we decompile our elves using ghidra and make some observations.
 To "solve" an elf, we need to give an appropriate input at each step of the function such that the correct branch and path are taken. In other words, we need to trace the right path out of the maze. We need to solve 5 elves to get the flag. We only have five minutes for five elves. Solving this without any automation seems next to impossible. Thankfully, we have angr.
 
 **What is angr?**  
-angr is a python library which simulates machine code while keeping track of program state. It's exploration features are useful to find the input corresponding to a given output.
+angr is a python library which simulates machine code while keeping track of program state. Its exploration features are useful to find the input corresponding to a given output.
 {.alert--success}
 
 #### Coding
@@ -94,7 +94,7 @@ def solve(file='elf'):
     tar_addr = 0x4011c8
 ```
 
-Note: ghidra will load PIE assembly at offset `0x100000`, but angr loads it at `0x400000` by default. So all addresses in the previous section were offset by an additional `0x300000` to account for this difference. There's a way to make angr load at a custom offset, but I forgot what the option was called. (But the option exists!)
+Note: Ghidra will load PIE assembly at offset `0x100000`, but angr loads it at `0x400000` by default. So all addresses in the previous section were offset by an additional `0x300000` to account for this difference. There's a way to make angr load at a custom offset, but I forgot what the option was called. (But the option exists!)
 {.alert--warning}
 
 Now we'll try some good ol' angr `explore()` and see what turns up.
@@ -113,7 +113,7 @@ Unfortunately, this takes forever to run due to *path explosion*. Notice how the
 ![Paths go boom.](/img/posts/misc/ctf/labyrinth/labyrinth-path-explosion-graph.jpg){.w-75}
 {.center}
 
-Now angr is pretty smart, but not too smart. Angr will simulate all paths and if it encounters a branch, it will simulate both branches together. However, it will treat the `function_133` branches as separate states...
+Now angr is pretty smart, but not too smart. angr will simulate all paths and if it encounters a branch, it will simulate both branches together. However, it will treat the `function_133` branches as separate states...
 
 To get a more concrete view of paths exploding, Gru tried calling `simgr.run(n=50)`—which simulates 50 steps...
 
@@ -125,18 +125,18 @@ To get a more concrete view of paths exploding, Gru tried calling `simgr.run(n=5
 With 50 steps and already 90 active states, the situation is pretty dismal. We'll need to find a better way of getting to the target address.
 
 #### CFGs to the Rescue
-Control flow graphs (CFGs) are directed graphs where nodes are blocks of code and edges indicate the direction the code can take. By translating the program into a graph, we can utilise the many graph algorithms at our disposal. In particular, we're interested in the shortest path between a start node and target node.
+**Control flow graphs** (CFGs) are directed graphs where nodes are blocks of code and edges indicate the direction the code can take. By translating the program into a graph, we can utilise the many graph algorithms at our disposal. In particular, we're interested in the *shortest path between a start node and target node*.
 
 ![Path explosion 1.](/img/posts/misc/ctf/labyrinth/labyrinth-path-explosion-1.jpg){.w-30}
 ![Path explosion 2.](/img/posts/misc/ctf/labyrinth/labyrinth-path-explosion-2.jpg){.w-30}
 ![Path explosion 3.](/img/posts/misc/ctf/labyrinth/labyrinth-path-explosion-3.jpg){.w-30}
 {.center}
 
-Angr comes with a bundle of analysis modules; these include two CFG analysis strategies: `CFGFast` and `CFGEmulated`. The former analyses the program statically (without actually simulating the code!), whereas the latter analyses the program dynamically (i.e. by simulating the code).
+angr comes with a bundle of analysis modules; these include two CFG analysis strategies: `CFGFast` and `CFGEmulated`. The former analyses the program statically (without actually simulating the code!), whereas the latter analyses the program dynamically (i.e. by simulating the code).
 
 Since the labyrinth elf only contains simple if-statements and function calls, and no obfuscation or complicated redirection whatsoever, we can construct a CFG statically!
 
-Working with graphs and nodes in angr is fairly straightforward. Angr CFGs are just instances of **networkx** graphs (a python graph library), so we'll need to import it to use its handy `shortest_path` function.
+Working with graphs and nodes in angr is fairly straightforward. angr CFGs are just instances of `networkx` graphs (a python graph library), so we'll need to import it to use its handy `shortest_path` function.
 
 ```py
     # Construct a CFG from the 1000 functions. 
@@ -173,7 +173,7 @@ Now that we have a direct sequence of nodes from `main` to our `exit(0)` functio
         state = simgr.found[0]
 ```
 
-Our last step is to get the input used. Angr's constraint solver should have it figured out.
+Our last step is to get the input used. angr's constraint solver should have it figured out.
 
 ```py
     # Get input which will get us from main to exit(0).

@@ -61,7 +61,7 @@ It was quite relaxing and nice to have a (semi-?)personal project developing and
 If you're interested in trying something similar, here are some things we planned but didn't incorporate into our project:
 
 * On/off switch
-* Rechargable battery
+* Rechargeable battery
 * MIDI-USB output + Real-time MIDI input into software
 * LED backlight under the keyboard?
 * Stereo audio (L/R)

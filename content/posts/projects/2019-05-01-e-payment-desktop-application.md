@@ -20,7 +20,7 @@ I was in my penultimate year of high school and summer was approaching. At the t
 
 To give a bit more background, our school cafeteria has five to six different local vendors. The school would rent a stall out to tenants who would sell snacks and lunch during the appropriate hours. At the time, the only transaction method is cash.
 
-Also some background about the card: it's a [radio frequency ID (RFID)][rfid] card. I won't go into the technical details of it, but basically you scan the card on a dedicated reader, and it can read an unique ID.
+Also, some background about the card: it's a [radio frequency ID (RFID)][rfid] card. I won't go into the technical details of it, but basically you scan the card on a dedicated reader, and it can read a unique ID.
 
 ![Exhibit A: an RFID](/img/posts/projects/studentcard/rfid.jpg){.w-60}
 {.center}
@@ -57,7 +57,7 @@ All three groups should have different access rights. For example, vendors and s
 
 Moreover, since their roles are different, the interfaces they see should also be different. A vendor shouldn't need to see an admin-level page, since it's unrelated to their function.
 
-To solve (2), we *could* simply use a text file. Load data on startup, save data every time something changes. But this only works for a single user on a single device. Well... that's what I actually did at the beginning, except I used a SQLite database (which is basically a glorified text file made convenient for sql).
+To solve (2), we *could* simply use a text file. Load data on startup, save data every time something changes. But this only works for a single user on a single device. Well... that's what I actually did at the beginning, except I used a SQLite database (which is basically a glorified text file made convenient for SQL).
 
 Now the problem with SQLite is that it's serverless. In plain English, it can't cope with multiple users well.
 
@@ -112,7 +112,7 @@ There are a couple other things vendors can do with the app:
 
 But these are not very interesting.
 
-Admins, of course, have a more powerful role. These peeps can view *and* **update** student's balances (but the actual flows are pretty boring TBH). (Unfortunately I did not save any screenshots of the GUI and I'm not bothered to redownload Qt and rebuild the app. >.>)
+Admins, of course, have a more powerful role. These peeps can view *and* **update** student's balances (but the actual flows are pretty boring TBH). (Unfortunately I did not save any screenshots of the GUI, and I'm not bothered to redownload Qt just to build the app once. >.>)
 
 ![Unnnnnlliiiimmiiitted pooower!.](/img/posts/memes/unlimited-power.jpg){.w-80}
 {.center}
@@ -132,7 +132,7 @@ And since they have an exciting flow, I'll describe it for fun:
 5. Otherwise, they haven't lost it. So they place the card on top of the RFID reader.
 6. Wait one second for the reader to scan the card.
 7. Watch their card ID appear on the screen.
-8. Absorb the details shown on a second page (card number, student ID, balance, whether or not the card is active).
+8. Absorb the details shown on a second page (card number, student ID, balance, whether the card is active).
 9. Leave the site.
 
 Exciting, right?
@@ -142,7 +142,7 @@ It's been several years since the e-payment system was launched in the summer of
 
 When I asked a student about it this year (2022), they said that the entire system was *still* up and running (a good sign!). Moreover, the school's ICT team has expanded it as a locking mechanism for student lockers. Hopefully it will become a reliable piece of technology and make the school environment safe, clean, and fast.
 
-### Takeways
+### Takeaways
 
 * Spend some time researching the problem you're trying to solve and the possible solutions. You'll accrue less [technical debt][techdebt] and thank yourself in the future.
 * Use a version control system for flexibility and to keep track of history.

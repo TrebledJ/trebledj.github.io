@@ -21,7 +21,7 @@ related_tags: ctf writeup
 Another automatic binary challenge! This time there's more emphasis on `pwn`, specifically ROP. We need to solve the challenge 5 times in under 10 minutes, giving us about 2 minutes per solve.
 
 #### Preliminary Observations
-Decompiling with ghidra, we immediately notice an unsuspicious section of code labelled `gadgets`. This contains loads of arithmetic gadgets. Our objective is to set `rax` to a certain value, presumably, using the gadgets we're given here.
+Decompiling with Ghidra, we immediately notice an unsuspicious section of code labelled `gadgets`. This contains loads of arithmetic gadgets. Our objective is to set `rax` to a certain value, presumably, using the gadgets we're given here.
 
 ![](/img/posts/misc/ctf/quick-mafs-1.jpg){.w-100}
 {.center}
@@ -99,9 +99,9 @@ Let $c$ be the init constant, moved to `rax` in the first gadget. Let $r$ be the
 <br/>  
 Further, let $m_i$, $n_i$, and $p_i$ be the number of the $i$-th add, subtract, and xor gadget to apply; and constrain $m_i, n_i, p_i \in \mathbb{Z}^+ \cup \{0\}$. These are unknown variables. We want to solve for these sets of variables such that
 <br/>
-\begin{align}
-c + \sum a_im_i - \sum s_in_i = \left(\bigwedge x_ip_i\right) \wedge r
-\end{align}
+$$
+c + \sum a_im_i - \sum s_in_i = \left(\bigwedge x_ip_i\right) \wedge r.
+$$
 {.alert--info}
 
 Our strategy now is to build up this equation using Z3 symbols, then throw the equation at the Z3 solver and get back solution sets for all $m_i, n_i, p_i$.
@@ -152,7 +152,7 @@ We can begin constructing constraints and feeding things to a Z3 solver!
     s.add(BitVecVal(rax_init_value, 16) + Sum(add_terms) - Sum(sub_terms) == BitVecVal(target, 16) ^ xor_all)
 ```
 
-But this constraint isn't enough. Without other contraints, Z3 would return ginormous values which technically satisfy the equation. But there's no way we can call a gadget 1851138 times or -29301 times. We'll need some constraints to limit the values the symbols can take on.
+But this constraint isn't enough. Without other constraints, Z3 would return ginormous values which technically satisfy the equation. But there's no way we can call a gadget 1851138 times or -29301 times. We'll need some constraints to limit the values the symbols can take on.
 
 ```py
     # Bounds constraints.

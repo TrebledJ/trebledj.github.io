@@ -31,7 +31,7 @@ How disappointing. Oh well, perhaps the binary is more helpful. Maybe we can fin
 
 Firing up Ghidra and loading the binary, we start by going to `main` (okay so far!). `main` doesn't seem to do much, besides calling `init`, `run`, and `std::cout`. Things get a lot more interesting when we look at `run`:
 
-![You can run but you can't hide!](/img/posts/misc/ctf/charming-website/decompile-run.jpg){.w-80}
+![You can run, but you can't hide!](/img/posts/misc/ctf/charming-website/decompile-run.jpg){.w-80}
 {.center}
 
 It’s easy to be intimidated by such a large application. And it’s in C++, so there’s a ton of garbage (`std`, templates, constructors, destructors, etc.).[^cpp]
@@ -93,7 +93,7 @@ After a bit of digging, we uncover quite a bit of info:
 
 ## Pikachu used charm! It’s not very effective.
 
-To make our life easier (and also because of curiousity), let’s see if the encryption library is open-source. OSINT time! Googling “*charm.c uc_encrypt site:github.com*” leads us to [dsvpn](https://github.com/jedisct1/dsvpn), which links us to [charm](https://github.com/jedisct1/charm). Both are GitHub repositories using the same charm.c as the challenge.
+To make our life easier (and also because of curiosity), let’s see if the encryption library is open-source. OSINT time! Googling “*charm.c uc_encrypt site:github.com*” leads us to [dsvpn](https://github.com/jedisct1/dsvpn), which links us to [charm](https://github.com/jedisct1/charm). Both are GitHub repositories using the same charm.c as the challenge.
 
 The source gives us obvious clues we might’ve missed in our initial analysis. For example, the key should be 32 bytes long. This was quite helpful, as Ghidra for some reason grouped the 32nd byte apart from the first 31 bytes (took me a while to figure out what went wrong).
 
@@ -129,9 +129,9 @@ This was a rather nice, relaxing C++ challenge. And yes, C++ is still charm.
 With C++ reverse challenges (and looking at large applications in general), it’s difficult to know what’s important because there are so many things to look at. But! It’s really helpful to know what’s *not* important, because then you can filter those out and pay attention to things that matter.
 {.alert--success}
 
-For example, if you see templates (the ever so familiar, pointy friends of ours), you can usually ignore everything in between. Normally they're the default anyways.
+For example, if you see templates (the ever so familiar, pointy friends of ours), you can usually ignore everything in between. Normally they're the default anyway.
 
-Also if there’s something to learn from this challenge, it’s that application developers should secure their secrets (e.g. with environment variables or config loaders). 😛
+Also, if there’s something to learn from this challenge, it’s that application developers should secure their secrets (e.g. with environment variables or config loaders). 😛
 
 ## Solve Scripts
 

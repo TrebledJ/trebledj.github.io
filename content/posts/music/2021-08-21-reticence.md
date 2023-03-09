@@ -15,6 +15,6 @@ related:
     auto: true
 ---
 
-Something about the past few years has been very poignant -- deep, memorable, touching yet almost hurting, somewhat close but also far, a bit cold but also evoking warm feelings.
+Something about the past few years has been very poignant—deep, memorable, touching yet almost hurting; somewhat close yet also far; cold and distant yet warm inside.
 
 This is a piece composed as a final project for an introductory course to music composition. Originally, I wanted the piece to be faster and more brisk (akin to a stressed state of mind). But after some reflection (and on further advice by instructors), I settled with a slower tempo. Following further modifications, the final result attempts to capture a held back, cold yet comforting, and ultimately poignant mood.

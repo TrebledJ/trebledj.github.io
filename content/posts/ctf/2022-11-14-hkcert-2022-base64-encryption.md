@@ -105,7 +105,7 @@ subchars_not_in_ascii = [get_inverted_chars_with_mask(m) for m in in_ascii] # ch
 
 Another idea comes to mind. Remember the plaintext is in English? Well, with English text, some letters appear more frequently than others. The same applies to words and sequences. 
 
-![Frequency of English letters. But we need to careful with letter cases.](/img/posts/misc/ctf/base64-encryption/letter-frequencies.jpg){.w-80}
+![Frequency of English letters. But we need to be careful with letter cases.](/img/posts/misc/ctf/base64-encryption/letter-frequencies.jpg){.w-80}
 {.center}
 
 <sup>Frequency of the English alphabet. (Source: Wikipedia.)</sup>
@@ -181,8 +181,6 @@ Frequency analysis is useful to group letters into buckets. But using frequency 
 
     <sup>Random decoding after guessing.</sup>
     {.center}
-
-    {.no-center}
 
     - At this point, we can continue patching "ciphertext", "letters", "potential", etc. Or we could just use...
   

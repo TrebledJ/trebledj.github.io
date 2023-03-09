@@ -31,7 +31,7 @@ void* win_addr = (void*)&win;
 
 A `win` function is already provided, along with a global variable `win_addr` storing the address of `win`.
 
-Now on to the fun stuff. We're given six classes with the `solve` virtual function: one base class and the other five inheritting and overriding `solve`.
+Now on to the fun stuff. We're given six classes with the `solve` virtual function: one base class and the other five inheriting and overriding `solve`.
 
 ```cpp
 struct challenges { virtual void solve() { /* ... */ } };
@@ -124,7 +124,7 @@ I'll try my best to summarise the wisdom found there:
     * In memory, the vptr is placed at the *very beginning* of the object.
     * The vptr points to the vtable of the class.
 * The vtable is a list of pointers to the concrete implementations of the virtual functions.
-* When a virtual function is called, the vtable is accessed through the vptr. The vtable is then used to **lookup** the appropriate virtual function and pass it the appropriate parameters.
+* When a virtual function is called, the vtable is accessed through the vptr. The vtable is then used to **look up** the appropriate virtual function and pass it the appropriate parameters.
 
 To better understand vtables and vpointers, here's a virtual function example in C++ along with a desugared version written in C.
 
@@ -219,8 +219,8 @@ int main(void) {
 So to reiterate and relate how this works with ctf_sim.cpp:
 
 * By observation, each class (`challenge`, `forensic`, `reversing`, etc.) has a virtual function.
-* Therefore each class has a vtable.
-* Also an object of any class (`challenge`, `forensic`, etc.) has a vptr.
+* Therefore, each class has a vtable.
+* Also, an object of any class (`challenge`, `forensic`, etc.) has a vptr.
 * This vptr points to the corresponding vtable of the class.
   * e.g. a `forensic` object will have a vptr pointing to the `forensic` vtable.
   * a `pwn` object will have a vptr pointing to the `pwn` vtable.
