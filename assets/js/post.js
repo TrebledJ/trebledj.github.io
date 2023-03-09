@@ -14,7 +14,7 @@ const copyUrlToClipboard = async () => {
 
 // --- TOC Current Section Highlight --- //
 $(function () {
-    const headerOffset = 75;
+    const headerOffset = 150;
     const sections = document.querySelectorAll(".post-article h2,.post-article h3");
     const menu = document.querySelectorAll("nav.toc a");
 
