@@ -15,15 +15,17 @@ related:
     auto: false
 ---
 
-This is the second post in a series of posts on Digital Audio Processing. Similar to the [previous post](/posts/the-basics-of-digital-audio-processing-for-dummies), this post stems from a lil’ [MIDI keyboard](/posts/stm32-midi-keyboard) project I worked on last semester and is an attempt to share the knowledge I've gained with others. This post will dive into wonderful world of audio generation and introduce some basic concepts.
+This is the second post in a series of posts on Digital Audio Processing. Similar to the [previous post](/posts/the-basics-of-digital-audio-processing-for-dummies), this post stems from a lil’ [MIDI keyboard](/posts/stm32-midi-keyboard) project I worked on last semester and is an attempt to share the knowledge I've gained with others. This post will dive into the wonderful world of audio generation and introduce some basic concepts.
 
 
 ## Audio Synthesis 🎶
 
-Now that we’ve covered the basics regarding data representation, we’re ready to get our hands dirty with audio generation. But where does our audio signal come from? Our signal might be…
+<!-- TODO: abbreviations -->
+
+Where do audio signals come from? Our signal might be…
 
 - recorded. Sound waves are picked up by special hardware (e.g. a microphone) and translated to a digital signal through an ADC.
-- loaded from a file. These are many audio formats out there, but the most common ones are .wav and .mp3. The .wav format is the simplest: it just stores samples as-is. Other formats compress audio to achieve smaller file sizes (which in turn, means faster upload/download speeds).
+- loaded from a file. There are many audio formats out there, but the most common ones are .wav and .mp3. The .wav format is the simplest: it just stores samples as-is. Other formats compress audio to achieve smaller file sizes (which in turn, means faster upload/download speeds).
 - synthesised. We generate audio out of thin air (or rather, code and electronics).
 
 I’ll mainly focus on **synthesis**. We’ll start by finding out how to generate a single tone, then learn how to generate multiple tones simultaneously.
@@ -68,7 +70,7 @@ void generate_samples(float freq) {
 }
 ```
 
-And that’s it—we’ve just whooshed pure sine tone goodness from nothing! Granted, there are some flaws with this method (it’s inefficient, and the signal clicks when repeated); but hey, it demonstrates synthesis.
+And that’s it—we’ve just whooshed pure sine tone goodness from nothing! Granted, there are some flaws with this method (it could be more efficient, and the signal clicks when repeated); but hey, it demonstrates synthesis.
 
 
 **Note** on Buffers: It's common to use a buffer size which is medium-sized power of 2 (e.g. 512, 1024, 2048, 4096...) as this enhances cache loads and processing speed (dividing by a power of 2 is super easy for processors!).[^buffers]
@@ -80,7 +82,7 @@ And that’s it—we’ve just whooshed pure sine tone goodness from nothing! Gr
 ## Wavetable Synthesis 🌊
 A more efficient approach to synthesis is to interpolate over pre-generated values, sacrificing a bit of memory for faster runtime performance. This is known as **wavetable synthesis** or **table-lookup synthesis**. The idea is to pre-generate one cycle of the wave (e.g. a sine) and store it in a lookup table. Then when generating samples for our audio, we would lookup the pre-generated samples and derive intermediate values if necessary (via interpolation).
 
-This is akin to preparing a cheat sheet for an exam, but you're only allowed to bring one sheet of paper—space is precious. You decide to only include the most crucial equations, key points, and references. Then when taking the exam you refer to the cheat sheet for ideas and combine them with your thoughts, ultimately forming your answer.
+This is akin to preparing a cheat sheet for an exam, but you're only allowed to bring one sheet of paper—space is precious. You decide to only include the most crucial equations, key points, and references. Then when taking the exam you refer to the cheat sheet for ideas, connect the dots, and combine them with your thoughts to form an answer.
 
 ![Wavetable synthesis, localised in a nifty lil giffy.](/img/posts/misc/dsp/wavetable-synthesis.gif){.w-100}
 {.center}
@@ -146,9 +148,9 @@ Besides this software approach, we can also leverage hardware to speed up proces
 
 ## The Fourier Theorem 📊
 
-One fundamental theorem in signal processing relates to the composition of signals. The **Fourier Theorem** can be summarised into:
+One fundamental theorem in signal processing is the **Fourier Theorem**, which relates to the composition of signals. It can be summarised into:
 
-> Any *periodic* signal can be broken down into a sum of sine waves.
+> Any *periodic* signal can be *broken down* into a *sum* of sine waves.
 
 We can express this mathematically as
 
@@ -161,7 +163,7 @@ where $a_i$, $f_i$, and $b_i$ are the amplitude, frequency, and phase of each co
 ![Skipper's partial to Fourier. They're the best of chums.](/img/posts/misc/dsp/fourier-analysis.jpg){.w-80}
 {.center}
 
-**Did you know?** The Fourier Theorem and Fourier Transform are ubiquitious in modern day technology. It is the basis for many audio processing techniques such as filtering, equalisation, and noise cancellation. By manipulating the individual sine waves that make up a sound, we can alter its characteristics and create new sounds. The Fourier Transform is also a key component in compressing JPG images.
+**Did you know?** The Fourier Theorem and Fourier Transform are ubiquitious in modern day technology. It is the basis for many audio processing techniques such as filtering, equalisation, and noise cancellation. By manipulating the individual sine waves that make up a sound, we can alter its characteristics and create new sounds. The Fourier Transform is also a key component in compression, such as the JPG image format.
 {.alert--info}
 
 What’s cool about this theorem is that we can apply it the other way: any periodic signal can be *generated* by adding sine waves. This lays the groundwork for additive synthesis and generating audio with multiple pitches (e.g. a chord).
@@ -200,9 +202,9 @@ void generate_samples2(float freq, float freq2) {
 }
 ```
 
-How easy was that? Again, the code above populates the buffer 1024 samples of audio. But this time, we added a second sample. We also made sure to scale the sample back down to the $[-1, 1]$ range by multiplying each sample by 0.5.
+Again, the code above populates the buffer with 1024 samples of audio. But this time, we introduced a second frequency `freq2` and added a second sample to the buffer. We also made sure to scale the resulting sample back down to the $[-1, 1]$ range by multiplying each sample by 0.5.
 
-Let’s try it out! Don’t worry if you lack the luxury of an embedded system with DACs and speakers. Additive synthesis can be demonstrated with tools localised on your computer. We can do it with some help from [Audacity](https://www.audacityteam.org/):
+We can see additive synthesis in action with some help from [Audacity](https://www.audacityteam.org/).
 
 - Let’s start off with one tone.
     - Generate a 440Hz tone (Generate > Tone… > Sine).
@@ -214,6 +216,8 @@ Let’s try it out! Don’t worry if you lack the luxury of an embedded system w
 
 ![The audacity of it all!](/img/posts/misc/dsp/audacity.jpg){.w-100}
 {.center}
+
+During playback, Audacity will combine the samples from both tracks by summing them and play the summed signal.
 
 You can try layering other frequencies (554Hz, 659Hz) to play a nifty A Major chord.
 
@@ -227,9 +231,9 @@ Additive synthesis aims to *combine multiple waveforms*, of *any* shape and size
 
 ## Recap 🔁
 
-Audio generation can be pretty fun once we dive deep. As before, I hope we communicated on the same wavelength and no aliasing occured on your end. 😏
+Audio generation can be pretty fun once we dive deep. The applications can also be pretty fun: toys, electronic instruments, virtual instruments, digital synths, speakers, hearing aids, and whatnot.  As before, I hope we communicated on the same wavelength and the information on this post did not experience aliasing. 😏
 
-In the next post, we'll dive deeper into audio synthesis in embedded systems and engineer a simple tone generator.
+In the next post, we'll dive even deeper into audio synthesis (particularly in embedded systems) and engineer a simple tone generator.
 
 To recap…
 
