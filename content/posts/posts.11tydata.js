@@ -6,8 +6,12 @@ module.exports = {
 	],
 	layout: "layouts/post-default",
 	eleventyComputed: {
-		// updated: data => getGitCommitDateFromPath(data.page.inputPath),
-		updated: data => process.env.ENVIRONMENT === 'development' ? new Date() : getGitCommitDateFromPath(data.page.inputPath),
+		updated: data => {
+			let d = getGitCommitDateFromPath(data.page.inputPath);
+			console.log(`date of ${data.page.inputPath}: ${d}`);
+			return d;
+		},
+		// updated: data => process.env.ENVIRONMENT === 'development' ? new Date() : getGitCommitDateFromPath(data.page.inputPath),
 		permalink: data => '/posts/' + data.page.fileSlug + '/index.html',
 	},
 	author: "trebledj",
