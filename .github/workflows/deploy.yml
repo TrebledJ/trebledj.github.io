@@ -28,7 +28,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
         with:
-          fetch-depth: 4000
+          fetch-depth: 10000
       - name: Detect package manager
         id: detect-package-manager
         run: |
