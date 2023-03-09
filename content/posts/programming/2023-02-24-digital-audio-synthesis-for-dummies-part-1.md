@@ -1,6 +1,6 @@
 ---
-title: "Part 1: The Basics of Digital Audio Processing for Dummies"
-description: An introductory discourse on processing. What makes audio tick?
+title: "Digital Audio Synthesis for Dummies: Part 1"
+description: An introductory discourse on audio processing. What makes audio tick?
 updated: '2023-03-09'
 tags:
  - tutorial
@@ -8,7 +8,7 @@ tags:
 thumbnail: /img/posts/misc/dsp/sine-oscilloscope.jpg
 usemathjax: true
 related:
-    posts: [stm32-midi-keyboard, digital-audio-synthesis-for-dummies]
+    posts: [stm32-midi-keyboard, digital-audio-synthesis-for-dummies-part-2]
     auto: false
 ---
 

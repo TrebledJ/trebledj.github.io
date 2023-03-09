@@ -14,7 +14,7 @@ thumbnail: /img/posts/projects/midi-keyboard.jpg
 include_thumbnail: true
 pitch: Developed a MIDI keyboard using an STM32F4 microcontroller.
 related:
-  posts: [the-basics-of-digital-audio-processing-for-dummies, digital-audio-synthesis-for-dummies]
+  posts: [digital-audio-synthesis-for-dummies-part-1, digital-audio-synthesis-for-dummies-part-2]
 ---
 
 This project was made for a course on embedded systems and is published [online](https://github.com/TrebledJ/stm32-midi-keyboard).

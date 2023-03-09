@@ -1,6 +1,6 @@
 ---
-title: "Part 2: Digital Audio Synthesis for Dummies"
-description: A yabbering on generating audio for great good.
+title: "Digital Audio Synthesis for Dummies: Part 2"
+description: Generating audio signals for great good.
 updated: '2023-03-09'
 tags:
  - tutorial
@@ -11,7 +11,7 @@ tags:
 thumbnail: /img/posts/misc/dsp/sine-oscilloscope.jpg
 usemathjax: true
 related:
-    posts: [stm32-midi-keyboard, the-basics-of-digital-audio-processing-for-dummies]
+    posts: [stm32-midi-keyboard, digital-audio-synthesis-for-dummies-part-1]
     auto: false
 ---
 
