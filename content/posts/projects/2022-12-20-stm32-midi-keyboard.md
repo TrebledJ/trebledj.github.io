@@ -3,11 +3,11 @@ title: STM32 MIDI Keyboard
 description: Boing boing plunk plunk.
 updated: "2022-12-25"
 tags:
- - cpp
  - embedded
- - dsp
- - programming
+ - cpp
  - c
+ - programming
+ - dsp
  - music
  - hkust
 thumbnail: /img/posts/projects/midi-keyboard.jpg
