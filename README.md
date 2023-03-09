@@ -32,7 +32,6 @@ npm run start
     * Minimalistic design
     * Clean, organised codebase (easy to hack)
     * Alerts (coloured boxes)
-    * Post preview
     * Sticky profile sidebar on left
   * Things I hate
     * Hand-spun CSS/JS? Nyeh.
