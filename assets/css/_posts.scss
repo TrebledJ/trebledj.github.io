@@ -199,6 +199,7 @@
             flex-direction: row;
             align-items: center;
         }
+
         .post-updated-date-icon {
             display: none;
         }
@@ -216,6 +217,13 @@
     }
 }
 
+.metadata-container,
+.metadata-tag-container,
+.post-share,
+.right-sidebar {
+    opacity: var(--opacity-lower);
+}
+
 @include media-breakpoint-down(md) {
     .post-article {
         .metadata-container {
@@ -224,7 +232,7 @@
     }
 }
 
-.share a {
+.post-share a {
     color: var(--main-text-color) !important;
     cursor: pointer;
 }
