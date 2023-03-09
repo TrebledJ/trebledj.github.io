@@ -15,7 +15,7 @@ related:
     auto: false
 ---
 
-This is the second post in a series of posts on Digital Audio Processing. Similar to the [previous post](/posts/the-basics-of-digital-audio-processing-for-dummies), this post stems from a lil’ [MIDI keyboard](/posts/stm32-midi-keyboard) project I worked on last semester and is an attempt to share the knowledge I've gained with others. This post will dive into the wonderful world of audio generation and introduce some basic concepts.
+This is the second post in a series of posts on Digital Audio Processing. Similar to the [previous post][prev-post], this post stems from a lil’ [MIDI keyboard](/posts/stm32-midi-keyboard) project I worked on last semester and is an attempt to share the knowledge I've gained with others. This post will dive into the wonderful world of audio generation and introduce some basic concepts.
 
 
 ## Audio Synthesis 🎶
@@ -47,7 +47,7 @@ A better approach is to use a *buffer* and work in batches. The buffer will hold
 
 We'll focus more on step 1 (processing) for now. We'll cover step 2 (output) in the next post.
 
-Remember how we mentioned different [quantisation](/posts/the-basics-of-digital-audio-processing-for-dummies#quantisation) representations in the previous post? Since we're concerned with audio processing, we'll be using floats and quantising from -1 to 1.
+Remember how we mentioned different [quantisation][prev-post-quantisation] representations in the previous post? Since we're concerned with audio processing, we'll be using floats and quantising from -1 to 1.
 {.alert--info}
 
 In C/C++, we can generate a sine tone like so:
@@ -244,3 +244,7 @@ To recap…
 - We can optimise waveform generation by using [wavetable synthesis](#wavetable-synthesis), which trades memory for speed.
 - According to the [Fourier Theorem](#the-fourier-theorem), all signals can be broken into a summation of sine waves.
 - To play multiple pitches simultaneously (chords), we can apply [additive synthesis](#additive-synthesis) to combine signals together.
+
+
+[prev-post]: /posts/digital-audio-synthesis-for-dummies-part-1
+[prev-post-quantisation]: /posts/digital-audio-synthesis-for-dummies-part-1#quantisation

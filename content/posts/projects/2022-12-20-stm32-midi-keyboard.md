@@ -20,9 +20,6 @@ related:
 This project was made for a course on embedded systems and is published [online](https://github.com/TrebledJ/stm32-midi-keyboard).
 
 
-<!-- ## Posts in This Project -->
-
-
 ## Synopsis
 The STM32 MIDI Keyboard was a project aimed to practice [embedded systems](/tags/embedded) design while also have fun developing a tactile music application. Here are some features found on the keyboard:
 
@@ -70,6 +67,11 @@ If you're interested in trying something similar, here are some things we planne
 * Better storage (currently we only load/store MIDI for one piece)
 * Explore and use [FluidSynth](https://github.com/FluidSynth/fluidsynth)
 * More instrument options
+
+I've also published some follow-up tutorials on digital audio synthesis:
+
+* [Part 1: Audio Basics](/posts/digital-audio-synthesis-for-dummies-part-1)
+* [Part 2: Audio Synthesis](/posts/digital-audio-synthesis-for-dummies-part-2)
 
 [fsvector]: https://github.com/TrebledJ/stm32-midi-keyboard/blob/main/Core/Inc/utils/tinyvector.hpp
 [menum]: https://github.com/Neargye/magic_enum
