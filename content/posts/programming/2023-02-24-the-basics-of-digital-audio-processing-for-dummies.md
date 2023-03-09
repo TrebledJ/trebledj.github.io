@@ -20,7 +20,7 @@ A while back I worked on a lil’ [MIDI keyboard](/posts/stm32-midi-keyboard) pr
 ![Get ready for some Data!](/img/posts/misc/dsp/data.jpg){.w-75}
 {.center}
 
-When processing data of any form, we are concerned with the data’s quality. Higher quality data corresponds to a better user experience but also higher memory and computing requirements.
+When processing data of any form, we are concerned with the data’s quality. Higher quality data may lead to a more thorough analysis and better user experience, but also demand higher memory and computing requirements.
 
 With audio, we are concerned with two dimensions of quality: sampling (time) and quantisation (bitdepth).
 
@@ -31,12 +31,12 @@ With audio, we are concerned with two dimensions of quality: sampling (time) and
 ![Want some free samples?](/img/posts/misc/dsp/sampling.png){.w-90}
 {.center}
 
-<sup>Green line: continuous, original signal. Black dots: discrete, sampled signal.</sup>
+<sup>Green line: original, continuous signal. Black dots: sampled, discrete signal.</sup>
 {.center}
 
 Digital audio signals are represented discretely by storing samples at regular intervals instead of having a single continuous line.
 
-The **sample rate** refers to how fast we chop, how fast we sample our audio. Choosing an appropriate sample rate for your application is pretty crucial. Audio is usually sampled at 44.1kHz or 48kHz. But why are these rates so common? To answer this, we first need to learn about the…
+The **sample rate** refers to how fast we chop, how fast we sample our audio. Choosing an appropriate sample rate for your application is an important consideration. Audio is usually sampled at 44.1kHz or 48kHz. But why are these rates so common? To answer this, we first need to learn about the…
 
 ### Nyquist-Shannon Sampling Theorem
 
@@ -56,38 +56,45 @@ The diagram below demonstrates aliasing, which happens when our sample rate is t
 
 [^emp]: Katz, D; Gentile, R. 2005. *Embedded Media Processing*. They’ve provided [Chapter 5: Embedded Audio Processing](https://www.analog.com/media/en/dsp-documentation/embedded-media-processing/embedded-media-processing-chapter5.pdf) as a preview.
 
-The Nyquist Theorem explains why we usually sample above 40kHz, but why those rates specifically? Well, there are historical reasons (pioneering decisions), but the two numbers also contain many factors (e.g. $44100 = 2^2 \times 3^2 \times 5^2 \times 7^2$) which may be convenient for downsampling and other endeavours. Moreover, since anti-aliasing and low-pass filters may disrupt samples, being lenient with our sampling frequency becomes a boon.[^why-44100]
+The Nyquist Theorem explains why we usually sample above 40kHz, but why 44.1kHz specifically? Well, there are historical reasons (pioneering decisions) and mathematical reasons (factoring and downsampling[^factoring]). Also, being lenient with our sampling frequency gives filters more flexibility.[^why-44100]
 {.alert--info}
 
+[^factoring]: 44100 can be factored into $44100 = 2^2 \times 3^2 \times 5^2 \times 7^2$, which is useful for downsampling to various applications.
 [^why-44100]: See also: [Why do we choose 44.1 kHz as recording sampling rate?](https://dsp.stackexchange.com/q/17685/65058)
 
 ### Quantisation
 
 While sampling deals with resolution in time, **quantisation** deals with resolution in *dynamics* (or *loudness)*.
 
-Here, we’re mostly concerned with data storage (whether in files or in RAM). If we store our samples using 1 bit, then each sample has only two possible loudness values (0 or 1). But this means our dynamic range is limited to silence (0) or an ear-breaking loudness (1)... so 1 bit is no good. If we use 2 bits, we get twice as many volume settings (00, 01, 10, and 11). Now we have a couple intermediate options and don’t have to break our ears! The more bits each sample has, the greater the dynamic resolution.
+Here, we’re mostly concerned with data storage (both files and RAM). If we store our samples using 1 bit, then each sample has only two possible loudness values (0 or 1). But this means our dynamic range is limited to silence (0) or an ear-shattering loudness (1)... so 1 bit is no good. If we use 2 bits, we get twice as many volume settings (00, 01, 10, and 11). Now we have a couple intermediate options and don’t have to break our ears! The more bits each sample has, the greater the dynamic resolution.
 
-When it comes to storing samples in files, most applications use 16-bit integers, which allow for a sufficient resolution (-32,768 to +32,767) at two bytes per sample. 32-bit floats are another common representation, bringing substantially greater detail at the expense of twice the space. For a comparison of magnitudes, 32-bit floats range from about -10<sup>38</sup> to +10<sup>38</sup> whereas 32-bit integers range from about -10<sup>9</sup> to +10<sup>9</sup>. Sadly, the increased range of floats comes with a downside—reduced precision—floats are only precise up to 7 decimal points[^floats].
+When it comes to storing samples in files, most applications use 16-bit integers, which allow for a decent resolution (-32,768 to +32,767) at two bytes per sample. 32-bit floats are another common representation, bringing substantially greater detail at the expense of twice the space. How much more detail are we talking about? 32-bit floats range from about -10<sup>38</sup> to +10<sup>38</sup> whereas 32-bit integers range from about -10<sup>9</sup> to +10<sup>9</sup>. Sadly, the increased range of floats comes with a downside: reduced precision. Floats are only precise up to 7 significant figures[^floats].
 
 [^floats]: For more info on floating points, see [Single-precision floating-point format](https://en.wikipedia.org/wiki/Single-precision_floating-point_format).
 
-Now when it comes to audio *processing*, it's easier to work with floats in the range of -1 to 1. Why the smaller range? Well, if we work directly with the maximum bounds, we may easily (and accidentally) overflow.
+Now when it comes to audio *processing*, it's easier to work with floats in the range of -1.0 to 1.0. Why the smaller range? Well, if we work directly with the maximum bounds, we may easily encounter errors.
+With integers, we would experience [integer overflow](https://en.wikipedia.org/wiki/Integer_overflow), which would wrap positive values to negative values.
+With floats, we would venture into the territory of infinity, which may disrupt subsequent computations.
 
-For example, suppose I'm using 16-bit integers when processing and I have a bunch of samples at +32,767. Now let's say I want to add another signal on top. The result will be greater than +32,767. And due to the nature of integers in computers, the result will *wraparound* to a negative value (e.g. $32,767 + 1 = -32,768$, for 16-bit integers).
+Thus we use a smaller range to allow room for processing.
+
 
 ## Audio Mishaps and Bugs 🐞
 
 > *If you know the enemy and know yourself, you need not fear the result of a hundred battles.* – Sun Tzu, The Art of War
 
-Sometimes when experimenting with audio, something goes amiss. Among the most common issues are aliasing, clipping, and clicks. You'll thank yourself later when debugging these pesky lil' issues.
+Sometimes when experimenting with audio, something goes amiss. The most common issues are aliasing, clipping, and clicks. These pesky lil' issues may crop up when processing audio... all the more important to understand how to mitigate them.
 
-💡 **Pro Tip**: Oscilloscopes are your friend! If you encounter weird sounds, you can feed your processed signal into an oscilloscope (analog or digital) to check for any issues.
+💡 **Pro Tip**: Oscilloscopes are your friend! If you encounter weird sounds, you can feed your processed signal into an oscilloscope (analogue or digital) to check for issues.
 {.alert--success}
 
+
 ### Aliasing
+
 We mentioned aliasing [earlier](#nyquist-shannon-sampling-theorem). Aliasing occurs when a signal is sampled insufficiently, causing it to appear at a lower frequency.
 
-Generally, increasing the sampling rate helps (or lowering your expectations for the maximum frequency). In any case, it's wise to be vigilant with your sampling rate and frequency range.
+Generally, increasing the sample rate helps (or lowering your expectations for the maximum frequency). In any case, it's wise to be vigilant with your sample rate and frequency range.
+
 
 ### Clipping ✂️
 
@@ -105,11 +112,12 @@ Clipping occurs when our samples go out-of-bounds, past the maximum/minimum quan
 <sup>Example of a signal flattened at the peaks and troughs due to clamping.</sup>
 {.center}
 
-Clipping usually happens out of negligence for the dynamic range. It can be addressed by scaling down the signal (achieved by multiplying samples by a factor < 1) or by using [dynamic range compression](https://en.wikipedia.org/wiki/Dynamic_range_compression) (loud noises are dampened, soft noises are left unchanged).
+Clipping usually happens due to neglecting the dynamic range. It can be addressed by scaling down the signal (achieved by multiplying samples by a factor < 1) or by using [dynamic range compression](https://en.wikipedia.org/wiki/Dynamic_range_compression) (loud noises are dampened, soft noises are left unchanged).
+
 
 ### Clicks
 
-Clicks (aka pops) occur when a signal behaves discontinuously with large differences between samples. This difference forces the hardware speaker to vibrate quickly… too quickly.
+Clicks (aka pops) occur when a signal behaves discontinuously with large differences between samples. This difference forces the speaker hardware to vibrate quickly… too quickly.
 
 ![Jumpy jumpy signal is bad bad.](/img/posts/misc/dsp/click.jpg){.w-90}
 {.center}
@@ -117,14 +125,14 @@ Clicks (aka pops) occur when a signal behaves discontinuously with large differe
 <sup>Signal jumps from -1.0 to 1.0, causing my speaker to pop and my ear drums to bleed from utter despair.</sup>
 {.center}
 
-Clicks may arise from trimming or combining an audio recordings without applying fades. In audio synthesis, they may also arise out of mishandling buffers and samples.[^clicks]
+Clicks may arise from trimming or combining audio recordings without applying fades. In audio synthesis, they may also arise out of mishandling buffers and samples.[^clicks]
 
 [^clicks]: Fox, Arthur. [*What Causes Speakers To Pop And Crackle, And How To Fix It*](https://mynewmicrophone.com/what-causes-speakers-to-pop-and-crackle-and-how-to-fix-it/)
 
 
 ## Recap 🔁
 
-Audio processing and sounds are ubiquitous in daily life. In this post, we explored how digital audio works under the hood. Hopefully we communicated on the same wavelength and no aliasing occured on your end. 😏
+Audio processing is ubiquitous in daily life. In this post, we explored how digital audio works under the hood. Hopefully we communicated on the same wavelength and no aliasing occured on your end. 😏
 
 In the [next post](/posts/digital-audio-synthesis-for-dummies), we'll look at audio synthesis: the making of audio from nothing.
 
@@ -134,7 +142,7 @@ To recap…
     - [Sampling](#sampling) refers to the discretisation and resolution of a signal in *time*. Larger sample rate = more information per second = higher quality.
     - [Quantisation](#quantisation) refers to the bitdepth, the resolution in loudness. Higher bitdepth = more degrees of loudness = higher quality.
     - To accurately reconstruct a signal, the **Nyquist Theorem** states the sample rate should be at least *twice the maximum frequency of the signal*.
-- Some common issues to audio processing are clipping and clicks. They usually indicate
+- Some common issues to audio processing are aliasing, clipping, and clicks.
     - [Aliasing](#aliasing) occurs when a signal is misinterpreted to be of lower frequency.
     - [Clipping](#clipping) occurs when samples don’t fit into the given dynamic range and are cut.
     - [Clicks](#clicks) occur when a large difference occurs in samples, causing the speaker to act wonkily.

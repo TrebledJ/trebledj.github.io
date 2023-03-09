@@ -30,6 +30,7 @@ Where do audio signals come from? Our signal might be…
 
 I’ll mainly focus on **synthesis**. We’ll start by finding out how to generate a single tone, then learn how to generate multiple tones simultaneously.
 
+
 ## Buffering 📦
 
 A naive approach to generate audio might be:
@@ -80,6 +81,7 @@ And that’s it—we’ve just whooshed pure sine tone goodness from nothing! Gr
 
 
 ## Wavetable Synthesis 🌊
+
 A more efficient approach to synthesis is to interpolate over pre-generated values, sacrificing a bit of memory for faster runtime performance. This is known as **wavetable synthesis** or **table-lookup synthesis**. The idea is to pre-generate one cycle of the wave (e.g. a sine) and store it in a lookup table. Then when generating samples for our audio, we would lookup the pre-generated samples and derive intermediate values if necessary (via interpolation).
 
 This is akin to preparing a cheat sheet for an exam, but you're only allowed to bring one sheet of paper—space is precious. You decide to only include the most crucial equations, key points, and references. Then when taking the exam you refer to the cheat sheet for ideas, connect the dots, and combine them with your thoughts to form an answer.
@@ -145,6 +147,7 @@ For a sine wave, we don't gain much in terms of performance. But when it comes t
 [^leaf]: Guess what? There are more ways to optimise wavetable synthesis—so it'll rock even more! See the open source [LEAF](https://github.com/spiricom/LEAF/blob/a0b0b7915cce3792ea00f06d0a6861be1a73d609/leaf/Src/leaf-oscillators.c#L67) library for an example of heavily optimised wavetable synthesis.
 
 Besides this software approach, we can also leverage hardware to speed up processing. But this is a matter for the next post.
+
 
 ## The Fourier Theorem 📊
 
@@ -228,6 +231,7 @@ Additive synthesis aims to *combine multiple waveforms*, of *any* shape and size
 
 <!-- ### Fundamental Frequency -->
 <!-- TODO: fundamentals? -->
+
 
 ## Recap 🔁
 
