@@ -231,7 +231,7 @@ Additive synthesis aims to *combine multiple waveforms*, of *any* shape and size
 
 ## Recap 🔁
 
-Audio generation can be pretty fun once we dive deep. The applications can also be pretty fun: toys, electronic instruments, virtual instruments, digital synths, speakers, hearing aids, and whatnot.  As before, I hope we communicated on the same wavelength and the information on this post did not experience aliasing. 😏
+Audio generation is pretty fun once we dive deep, as are its applications: toys, electronic instruments, virtual instruments, digital synths, speakers, hearing aids, and whatnot.  As before, I hope we communicated on the same wavelength and the information on this post did not experience aliasing. 😏
 
 In the next post, we'll dive even deeper into audio synthesis (particularly in embedded systems) and engineer a simple tone generator.
 
