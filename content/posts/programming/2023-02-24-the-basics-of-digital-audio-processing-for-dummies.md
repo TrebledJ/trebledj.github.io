@@ -22,7 +22,7 @@ A while back I worked on a lil’ [MIDI keyboard](/posts/stm32-midi-keyboard) pr
 
 When processing data of any form, we are concerned with the data’s quality. Higher quality data may lead to a more thorough analysis and better user experience, but also demand higher memory and computing requirements.
 
-With audio, we are concerned with two dimensions of quality: sampling (time) and quantisation (bitdepth).
+With audio, we are concerned with two dimensions of quality: sampling (time) and quantisation (bit depth).
 
 ### Sampling
 
@@ -76,7 +76,7 @@ Now when it comes to audio *processing*, it's easier to work with floats in the 
 With integers, we would experience [integer overflow](https://en.wikipedia.org/wiki/Integer_overflow), which would wrap positive values to negative values.
 With floats, we would venture into the territory of infinity, which may disrupt subsequent computations.
 
-Thus we use a smaller range to allow room for processing.
+Thus, we use a smaller range to allow room for processing.
 
 
 ## Audio Mishaps and Bugs 🐞
@@ -132,7 +132,7 @@ Clicks may arise from trimming or combining audio recordings without applying fa
 
 ## Recap 🔁
 
-Audio processing is ubiquitous in daily life. In this post, we explored how digital audio works under the hood. Hopefully we communicated on the same wavelength and no aliasing occured on your end. 😏
+Audio processing is ubiquitous in daily life. In this post, we explored how digital audio works under the hood. Hopefully we communicated on the same wavelength and no aliasing occurred on your end. 😏
 
 In the [next post](/posts/digital-audio-synthesis-for-dummies), we'll look at audio synthesis: the making of audio from nothing.
 
@@ -140,9 +140,9 @@ To recap…
 
 - Fundamental to audio processing is the *quality* of audio data. This comes in two forms: sampling and quantisation.
     - [Sampling](#sampling) refers to the discretisation and resolution of a signal in *time*. Larger sample rate = more information per second = higher quality.
-    - [Quantisation](#quantisation) refers to the bitdepth, the resolution in loudness. Higher bitdepth = more degrees of loudness = higher quality.
+    - [Quantisation](#quantisation) refers to the bit depth, the resolution in loudness. Higher bit depth = more degrees of loudness = higher quality.
     - To accurately reconstruct a signal, the **Nyquist Theorem** states the sample rate should be at least *twice the maximum frequency of the signal*.
 - Some common issues to audio processing are aliasing, clipping, and clicks.
     - [Aliasing](#aliasing) occurs when a signal is misinterpreted to be of lower frequency.
     - [Clipping](#clipping) occurs when samples don’t fit into the given dynamic range and are cut.
-    - [Clicks](#clicks) occur when a large difference occurs in samples, causing the speaker to act wonkily.
+    - [Clicks](#clicks) occur when a large difference occurs in samples, causing the speaker to act wonky.
