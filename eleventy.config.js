@@ -1,47 +1,30 @@
-const path = require("path");
-const { DateTime } = require("luxon");
-
-const markdownItAnchor = require("markdown-it-anchor");
-const markdownItAttrs = require('markdown-it-attrs');
-const markdownItFootnote = require('markdown-it-footnote');
-const pluginTOC = require('eleventy-plugin-toc')
-
-
 const htmlmin = require("html-minifier");
 
-const pluginRss = require("@11ty/eleventy-plugin-rss");
-const pluginSyntaxHighlight = require("@11ty/eleventy-plugin-syntaxhighlight");
-const pluginNavigation = require("@11ty/eleventy-navigation");
-const eleventyImage = require("@11ty/eleventy-img");
-const { EleventyHtmlBasePlugin } = require("@11ty/eleventy");
-const eleventySass = require("eleventy-sass");
+const plugins = require('./eleventy/plugins');
+const filters = require('./eleventy/filters');
+const markdown = require('./eleventy/markdown');
+const collections = require('./eleventy/collections');
 
 module.exports = function (eleventyConfig) {
-	const md = require("markdown-it")({
-		html: false,
-		breaks: true,
-		linkify: true,
-	});
-
 	// Copy the contents of the `public` folder to the output folder
 	// For example, `./public/css/` ends up in `_site/css/`
 	eleventyConfig.addPassthroughCopy({
 		"./assets/img": "/img",
 		"./assets/webfonts": "/webfonts",
-		"./assets/css/**/*.{css,map}": "/css/",
+		"./node_modules/bootstrap/dist/": "/",
 		"./assets/js/**/*.js": "/js/",
 		"./node_modules/@popperjs/core/dist/umd/popper.min.{js,js.map}": "/js/",
-		"./node_modules/prismjs/themes/prism-okaidia.css": "/css/prism-okaidia.css",
-		"./node_modules/bootstrap/dist/": "/",
 		"./node_modules/lunr/*.js": "/js/",
 		"./node_modules/sharer.js/*.js": "/js/",
+		"./assets/css/**/*.{css,map}": "/css/",
+		"./node_modules/prismjs/themes/prism-okaidia.css": "/css/prism-okaidia.css",
 	});
 
 	// Run Eleventy when these files change:
 	// https://www.11ty.dev/docs/watch-serve/#add-your-own-watch-targets
 
 	// Process content images to the image pipeline.
-	eleventyConfig.addWatchTarget("content/**/*.{png,jpeg}");
+	eleventyConfig.addWatchTarget("assets/**/*.{png,jpeg}");
 
 	// eleventyConfig.setBrowserSyncConfig(
 	// 	require('./browsersync')('_site')
@@ -64,12 +47,9 @@ module.exports = function (eleventyConfig) {
 			}
 		}
 	});
-	// eleventyConfig.setBrowserSyncConfig({
-	// 	files: './_site/css/**/*.css'
-	// });
+
 	eleventyConfig.setServerOptions({
 		liveReload: true,
-		// files: './_site/css/**/*.css'
 		watch: [
 			'./_site/css/**/*.css',
 			'./_site/posts/*',
@@ -80,217 +60,13 @@ module.exports = function (eleventyConfig) {
 
 
 	// Plugins
-	eleventyConfig.addPlugin(pluginRss);
-	eleventyConfig.addPlugin(pluginSyntaxHighlight);
-	eleventyConfig.addPlugin(pluginNavigation);
-	eleventyConfig.addPlugin(EleventyHtmlBasePlugin);
-
-	eleventyConfig.addPlugin(eleventySass/* , {
-		compileOptions: {
-			permalink: function (contents, inputPath) {
-				return (data) => data.page.filePathStem.replace(/^\/scss\//, "/css/") + ".css";
-			}
-		}
-	} */);
-
-	// Eleventy Image shortcode
-	// https://www.11ty.dev/docs/plugins/image/
-	eleventyConfig.addPlugin(eleventyConfig => {
-		function relativeToInputPath(inputPath, relativeFilePath) {
-			let split = inputPath.split("/");
-			split.pop();
-
-			return path.resolve(split.join(path.sep), relativeFilePath);
-		}
-
-		eleventyConfig.addAsyncShortcode("image", async function imageShortcode(src, alt, sizes) {
-			let file = relativeToInputPath(this.page.inputPath, src);
-			let metadata = await eleventyImage(file, {
-				widths: ["auto"],
-				// You can add "avif" or "jpeg" here if you’d like!
-				formats: ["webp", "png"],
-				outputDir: path.join(eleventyConfig.dir.output, "img"), // Advanced usage note: `eleventyConfig.dir` works here because we’re using addPlugin.
-			});
-			let imageAttributes = {
-				alt,
-				sizes,
-				loading: "lazy",
-				decoding: "async",
-			};
-			return eleventyImage.generateHTML(metadata, imageAttributes);
-		});
-	});
-
-	// Drafts implementation, see `content/content.11tydata.js` for additional code.
-	// This section *could* be simplified to an environment variable in an npm script,
-	// but this way an ENV is not required and this code works cross-platform.
-	eleventyConfig.addPlugin(function enableDrafts(eleventyConfig) {
-		let logged = false;
-		eleventyConfig.on("eleventy.before", ({ runMode }) => {
-			// Only show drafts in serve/watch modes
-			if (runMode === "serve" || runMode === "watch") {
-				process.env.BUILD_DRAFTS = true;
-				process.env.ENVIRONMENT = 'development';
-
-				// Only log once.
-				if (!logged) {
-					console.log("[11ty/eleventy-base-blog] including `draft: true` posts");
-				}
-
-				logged = true;
-			}
-		});
-	})
+	plugins(eleventyConfig);
 
 	// Collections
-	eleventyConfig.addCollection("tags", function (collectionApi) {
-		let counter = {};
-		for (let tag of collectionApi.getFilteredByTag('posts').flatMap(post => post.data.tags)) {
-			if (!tag || tag === "posts")
-				continue;
-			counter[tag] = (counter[tag] ? counter[tag] + 1 : 1);
-		}
-		return counter;
-	});
-
-	const categories = ["ctfs", "experience", "music", "programming", "projects"]
-	for (const cat of categories) {
-		eleventyConfig.addCollection(`cat-${cat}`, function (collectionApi) {
-			return collectionApi.getFilteredByTag('posts').filter(post => post.data.category === cat);
-		});
-	}
-
-	eleventyConfig.addCollection("postsr", function (collectionApi) {
-		// Reversed collection.
-		return collectionApi.getFilteredByTag('posts').slice().reverse();
-	});
+	collections(eleventyConfig);
 
 	// Filters
-	eleventyConfig.addFilter("date", (dateObj, format, zone) => {
-		// Formatting tokens for Luxon: https://moment.github.io/luxon/#/formatting?id=table-of-tokens
-		return DateTime.fromJSDate(dateObj, { zone: zone || "utc" }).toFormat(format || "yyyy-LL-dd").replace(/-/g, '&#8209;');
-	});
-
-	eleventyConfig.addFilter("contains", (array, e) => {
-		return array.includes(e);
-	});
-
-	eleventyConfig.addFilter("exclude", (array, items) => {
-		return array.filter(e => typeof (items) == 'string' ? e != items : !items.includes(e));
-	});
-
-	eleventyConfig.addFilter("split", (str, delimiter) => {
-		return str ? str.split(delimiter || ' ') : [];
-	});
-
-	eleventyConfig.addFilter('htmlDateString', (dateObj) => {
-		// dateObj input: https://html.spec.whatwg.org/multipage/common-microsyntaxes.html#valid-date-string
-		return DateTime.fromJSDate(dateObj, { zone: 'utc' }).toFormat('yyyy-LL-dd');
-	});
-
-	// Get the first `n` elements of a collection.
-	eleventyConfig.addFilter("head", (array, n) => {
-		if (!Array.isArray(array) || array.length === 0) {
-			return [];
-		}
-		if (n < 0) {
-			return array.slice(n);
-		}
-
-		return array.slice(0, n);
-	});
-
-	// Return the smallest number argument
-	eleventyConfig.addFilter("min", (...numbers) => {
-		return Math.min.apply(null, numbers);
-	});
-
-	// Return all the tags used in a collection
-	eleventyConfig.addFilter("getAllTags", collection => {
-		let tagSet = new Set();
-		for (let item of collection) {
-			(item.data.tags || []).forEach(tag => tagSet.add(tag));
-		}
-		return Array.from(tagSet);
-	});
-
-	eleventyConfig.addFilter("filterTagList", function filterTagList(tags) {
-		return (tags || []).filter(tag => ["all", "nav", "post", "posts"].indexOf(tag) === -1);
-	});
-
-	eleventyConfig.addFilter("relatedTo", (posts, thisPost, related) => {
-		let n = related.num || 0; // Number of related elements to find.
-
-		// In auto checking, if a post has at least this many percentage of common tags, then it is considered related.
-		let autoCommonTagsThreshold = related.autoCommonTagsThreshold || 0.4;
-
-		let final_related = new Set(); // Final array of related posts.
-
-		// Force related posts into the array.
-		if (related.posts) {
-			for (let slug of related.posts) {
-				if (final_related.length >= n) {
-					break;
-				}
-				
-				// Find post...
-				let post = posts.find(e => e.page.fileSlug === slug);
-				final_related.add(post);
-			}
-		}
-
-		// Find relevant posts with same tags as `related.tags`.
-		if (related.tags) {
-			for (let post of posts) {
-				if (final_related.length >= n) {
-					break;
-				}
-				if (post == thisPost || final_related.has(post)) {
-					continue; // Already marked as related. Skip.
-				}
-
-				if (related.tags.every(t => post.data.tags.includes(t))) {
-					final_related.add(post);
-				}
-			}
-		}
-
-		function countCommon(a, b) {
-			let count = 0;
-			for (const e of a) {
-				if (b.includes(e))
-					count++;
-			}
-			return count;
-		}
-
-		if (related.auto) {
-			// Find posts that have common tags with this post.
-			let thisTags = thisPost.data.tags;
-			for (let post of posts) {
-				if (final_related.length >= n) {
-					break;
-				}
-				if (post == thisPost || final_related.has(post)) {
-					continue; // Already marked as related. Skip.
-				}
-
-				if (countCommon(thisTags, post.data.tags) - 1 >= Math.ceil(thisTags.length * autoCommonTagsThreshold)) {
-					final_related.add(post);
-				}
-			}
-		}
-
-		return Array.from(final_related);
-	});
-
-	eleventyConfig.addFilter("markdownify", (markdownString) =>
-		md.render(markdownString)
-	);
-
-	eleventyConfig.addFilter("jsonify", (object) =>
-		JSON.stringify(object)
-	);
+	filters(eleventyConfig);
 
 	// Transforms
 	eleventyConfig.addTransform("htmlmin", function (content) {
@@ -311,37 +87,8 @@ module.exports = function (eleventyConfig) {
 
 
 	// Customize Markdown library settings:
-	eleventyConfig.amendLibrary("md", mdLib => {
-		mdLib.use(markdownItAnchor, {
-			// permalink: markdownItAnchor.permalink.ariaHidden({
-			// 	placement: "after",
-			// 	class: "md-anchor",
-			// 	symbol: "§",
-			// }),
-			level: [2, 3, 4],
-			slugify: eleventyConfig.getFilter("slugify"),
-		});
-		mdLib.use(markdownItFootnote);
-		mdLib.renderer.rules.footnote_caption = (tokens, idx/*, options, env, slf*/) => {
-			var n = Number(tokens[idx].meta.id + 1).toString();
-			if (tokens[idx].meta.subId > 0) {
-				n += ':' + tokens[idx].meta.subId;
-			}
-			return n;
-		};
-
-		mdLib.use(markdownItAttrs, {
-			leftDelimiter: '{',
-			rightDelimiter: '}',
-			allowedAttributes: []  // empty array = all attributes are allowed
-		});
-	});
-
-	eleventyConfig.addPlugin(pluginTOC, {
-		tags: ['h2', 'h3'],
-		ul: false,
-		// wrapper: 'div'
-	});
+	markdown(eleventyConfig);
+	
 
 	// Features to make your build faster (when you need them)
 
