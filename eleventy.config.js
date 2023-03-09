@@ -224,7 +224,7 @@ module.exports = function (eleventyConfig) {
 		// In auto checking, if a post has at least this many percentage of common tags, then it is considered related.
 		let autoCommonTagsThreshold = related.autoCommonTagsThreshold || 0.4;
 
-		let final_related = []; // Final array of related posts.
+		let final_related = new Set(); // Final array of related posts.
 
 		// Force related posts into the array.
 		if (related.posts) {
@@ -235,7 +235,7 @@ module.exports = function (eleventyConfig) {
 				
 				// Find post...
 				let post = posts.find(e => e.page.fileSlug === slug);
-				final_related.push(post);
+				final_related.add(post);
 			}
 		}
 
@@ -245,12 +245,12 @@ module.exports = function (eleventyConfig) {
 				if (final_related.length >= n) {
 					break;
 				}
-				if (post == thisPost || final_related.includes(post)) {
+				if (post == thisPost || final_related.has(post)) {
 					continue; // Already marked as related. Skip.
 				}
 
 				if (related.tags.every(t => post.data.tags.includes(t))) {
-					final_related.push(post);
+					final_related.add(post);
 				}
 			}
 		}
@@ -271,17 +271,17 @@ module.exports = function (eleventyConfig) {
 				if (final_related.length >= n) {
 					break;
 				}
-				if (post == thisPost || final_related.includes(post)) {
+				if (post == thisPost || final_related.has(post)) {
 					continue; // Already marked as related. Skip.
 				}
 
 				if (countCommon(thisTags, post.data.tags) - 1 >= Math.ceil(thisTags.length * autoCommonTagsThreshold)) {
-					final_related.push(post);
+					final_related.add(post);
 				}
 			}
 		}
 
-		return final_related;
+		return Array.from(final_related);
 	});
 
 	eleventyConfig.addFilter("markdownify", (markdownString) =>
