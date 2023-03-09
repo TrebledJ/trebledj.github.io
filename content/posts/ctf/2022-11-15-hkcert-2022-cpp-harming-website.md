@@ -1,7 +1,6 @@
 ---
 title: HKCERT CTF 2022 – C++harming Website
 description: A harming website? Hope I don’t get hacked from this. >.<
-updated: "2022-11-16"
 tags:
  - reverse
  - cpp
