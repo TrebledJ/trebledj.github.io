@@ -6,6 +6,7 @@ render_tag_list %}
 * tag_limit (default: 20): the number of tags to display
 * show_last_update (default: false): whether or not to show the date when the post was last updated #}
 <div class="metadata-container d-flex">
+    {# Posted Date #}
     <div class="d-flex flex-row align-items-center">
         <span>
             <i class="fa fa-calendar post-meta-icon me-1"></i>
@@ -16,6 +17,8 @@ render_tag_list %}
             {% endblock %}
         </span>
     </div>
+
+    {# Updated Date #}
     <div class="d-flex flex-row align-items-center">
         {% block post_metadata_updated %}
             {% if updated %}
@@ -28,6 +31,8 @@ render_tag_list %}
             {% endif %}
         {% endblock %}
     </div>
+
+    {# Reading Time #}
     <div class="d-flex flex-row align-items-center">
         <span>
             <i class="far fa-clock post-meta-icon me-1"></i>
@@ -39,11 +44,15 @@ render_tag_list %}
         </span>
     </div>
 </div>
-<div class="tag-list d-flex flex-row align-items-center mt-1">
+
+{# Tags #}
+<div class="d-flex flex-row align-items-center mt-1">
     <span>
         <i class="fa fa-tag post-meta-icon me-2"></i>
     </span>
+    <div class="tag-list d-flex flex-row flex-wrap align-items-center">
     {% block post_metadata_tags %}
         {{ render_tag_list(tags, 20) }}
     {% endblock %}
+</div>
 </div>
