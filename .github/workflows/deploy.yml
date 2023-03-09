@@ -61,6 +61,14 @@ jobs:
             ${{ runner.os }}-eleventy-${{ hashFiles('**/package-lock.json', '**/yarn.lock') }}-
       - name: Install dependencies
         run: ${{ steps.detect-package-manager.outputs.manager }} ${{ steps.detect-package-manager.outputs.command }}
+      - name: Debug
+        run: |
+          pwd
+          echo '\n\nGit Status'
+          git status
+          echo '\n\nGit Log'
+          git log -1 --format=%at eleventy.config.js
+
       - name: Build
         run: ${{ steps.detect-package-manager.outputs.manager }} run build-ghpages 
       - name: Upload artifact
