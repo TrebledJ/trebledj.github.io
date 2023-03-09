@@ -130,6 +130,7 @@ module.exports = function (eleventyConfig) {
 			// Only show drafts in serve/watch modes
 			if (runMode === "serve" || runMode === "watch") {
 				process.env.BUILD_DRAFTS = true;
+				process.env.ENVIRONMENT = 'development';
 
 				// Only log once.
 				if (!logged) {
