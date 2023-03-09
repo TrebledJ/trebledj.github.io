@@ -26,11 +26,11 @@ In this post, I’ll introduce my first set of MuseScore plugins and give a brie
 
 View the project on: [MuseScore](https://musescore.org/en/project/musescore-do-list) / [GitHub](https://github.com/TrebledJ/musescore-todo-list).
 
-In software development, todos are commonly added into source code as reminders to the poor developers toiling away writing code. Todos come in many forms: bugs to be fixed, issues to be resolved, feature requests, etc.
+In software development, to-dos are commonly added into source code as reminders to the poor developers toiling away writing code. To-dos come in many forms: bugs to be fixed, issues to be resolved, feature requests, etc.
 
-Sometimes when composing, I find myself lost in a sea of todos. During a composing session, I might drop a todo note to follow-up on it next time.
+Sometimes when composing, I find myself lost in a sea of to-dos. During a composing session, I might drop a to-do note to follow-up on it next time.
 
-Here are some examples of todos I might encounter while composing:
+Here are some examples of to-dos I might encounter while composing:
 
 - TODO: Explore different chord progressions for this transition.
 - TODO: More brass to this section.
@@ -40,11 +40,11 @@ Here are some examples of todos I might encounter while composing:
 
 ![](/img/posts/music/musescore/plugin-todo-list.jpg){.w-100}
 
-To allow for different todo styles and text, I provided several settings for the user to modify. These are listed in on the [GitHub readme](https://github.com/TrebledJ/musescore-todo-list).
+To allow for different to-do styles and text, I provided several settings for the user to modify. These are listed in on the [GitHub readme](https://github.com/TrebledJ/musescore-todo-list).
 
 ### Developer’s Note
 
-This plugin is inspired by the todo-tree plugin in VSCode, which searches files in the current workspace for `TODO`s/`FIXME`s and lists them in a tree view. I toyed with idea of replicating this on MuseScore—listing todos on all open scores—but eventually decided to embrace the [KISS principle](https://en.wikipedia.org/wiki/KISS_principle) and just list todos for the current score.
+This plugin is inspired by the todo-tree plugin in VSCode, which searches files in the current workspace for `TODO`s/`FIXME`s and lists them in a tree view. I toyed with idea of replicating this on MuseScore—listing to-dos on all open scores—but eventually decided to embrace the [KISS principle](https://en.wikipedia.org/wiki/KISS_principle) and just list to-dos for the current score.
 
 When starting, I took reference of [jeetee’s annotation plugin](https://musescore.org/en/project/annotations). I noticed jeetee used Qt Quick Controls 1.0 instead of 2.0 used in some other plugins. Apparently, QML had made some drastic changes to the styling of controls (buttons, checkboxes, etc.). In 1.0, controls used the native style (e.g. Apple’s aqua style for macs). On the other hand, 2.0 controls require developers to customise styling; this may sound great for design flexibility, but in my experience it’s annoying to get it working with both light and dark themes.
 
@@ -55,7 +55,7 @@ When starting, I took reference of [jeetee’s annotation plugin](https://musesc
 <sup>Qt Quick Controls 1.0 vs 2.0. The latter comes with barely any default and takes more effort to properly set up.</sup>
 {.center}
 
-Implementation-wise, the todo-list plugin aims to be self-contained and simple. Self-contained, meaning that everything is in a single .qml file, so that the user doesn’t need to bother with structure too much. Simple, meaning that it doesn’t store too much metadata. The plugin only stores the configuration options mentioned above. I avoid storing data such as measure and staff—which are alike the x and y position in a score—because things get messy when the stored todo is displaced, e.g. when a user inserts a bunch of measures or removes an instrument.
+Implementation-wise, the todo-list plugin aims to be self-contained and simple. Self-contained, meaning that everything is in a single .qml file, so that the user doesn’t need to bother with structure too much. Simple, meaning that it doesn’t store too much metadata. The plugin only stores the configuration options mentioned above. I avoid storing data such as measure and staff—which are alike the x and y position in a score—because things get messy when the stored to-do is displaced, e.g. when a user inserts a bunch of measures or removes an instrument.
 
 Even though I’ve used Qt before, I was still surprised with how easy it was to set up a form dialog to configure user settings. Just slap together a `Dialog`, `GridLayout`, several `Label`s and `TextField`s, code the logic, and violà—we have our settings dialog.
 
@@ -67,9 +67,9 @@ This plugin keeps track of where your cursor has been so that you can easily jum
 
 When programming in an IDE, it is sometimes necessary to jump to a different part of code, then jump back to where you were before. For example, you might want to check the implementation of a certain function.
 
-Similarly when editing a score, one might wish to visit a section, perhaps copy something, then return to their previous position.
+Similarly, when editing a score one might wish to visit a section, perhaps copy something, then return to their previous position.
 
-The History module is comprised of three separate plugins:
+The History module comprises three separate plugins:
 
 - Go Back,
 - Go Forward, and
@@ -93,7 +93,7 @@ Marks down a section, saving it so that you can easily return to it later withou
 
 This is really useful for large scores, where scrolling from front to middle to end can be pain. An existing built-in way to jump around sections is to use rehearsal marks plus MuseScore's timeline. However, I find this insufficient since a rehearsal mark only carries horizontal positioning info (measures), but not vertical positioning info (staffs).
 
-The Bookmarks module is comprised of four plugins:
+The Bookmarks module comprises four plugins:
 
 - Go to Previous Bookmark,
 - Go to Next Bookmark,
@@ -115,13 +115,13 @@ cmd("note-input")
 
 We call the command twice to toggle between the two different modes (default and note-input).
 
-However, when jumping to a specific measure + staff, MuseScore will scroll to the correct measure, but not the staff. Logic-wise, nothing is affected since the correct measure + staff are selected. The problem is just an UI issue which the MuseScore Plugins API doesn’t have a solution for. 😢
+However, when jumping to a specific measure + staff, MuseScore will scroll to the correct measure, but not the staff. Logic-wise, nothing is affected since the correct measure + staff are selected. The problem is just a UI issue which the MuseScore Plugins API doesn’t have a solution for. 😢
 
-For History and Bookmark, I decided to use separate JS files to hold all the logic. This is useful since the logic will be used in several different plugins. For example, both *History: Go Back* and *History: Go Forward* use the same underlying function to iterate across the score.
+For History and Bookmark, I decided to use separate JS files to hold all the logic. This promotes code reuse. For example, both *History: Go Back* and *History: Go Forward* use the same underlying function to iterate across the score.
 
 I tried commenting my code cleanly, in case I need to come back to it later; I’m quite forgetful.
 
-JavaScript’s non-existent type checking really irks me. I’m toying with the idea of using TypeScript and compiling the file to JavaScript for testing. I’ve already set up a MakeFile for packaging (zipping) the files anyways, so might as well add a rule that compiles .ts into .js and gain type safety.
+JavaScript’s lack of type checking really irks me. I’m toying with the idea of using TypeScript and compiling the file to JavaScript for testing. I’ve already set up a MakeFile for packaging (zipping) the files anyway, so might as well add a rule that compiles .ts into .js and gain type safety.
 
 ## Epilogue
 

@@ -27,7 +27,7 @@ I'll introduce some basic utilities first before moving on to advanced ones. How
 count p xs = length (filter p xs)
 ```
 
-Typically the situation arises when we need to count the number of elements in a list. For example, "count the number of occurrences of `3` in `[1, 2, 3, 4, 3, 3, 5]`". To do this, we'll `filter` the matching elements, then take the `length` of the filtered list to count the number of matches.
+Typically, the situation arises when we need to count the number of elements in a list. For example, "count the number of occurrences of `3` in `[1, 2, 3, 4, 3, 3, 5]`". To do this, we'll `filter` the matching elements, then take the `length` of the filtered list to count the number of matches.
 
 If you're new to Haskell, you're probably wondering "what the heck are the jumble of symbols on the first line?" It's the type signature! We can roughly translate it as follows:
 
@@ -41,7 +41,7 @@ If you're new to Haskell, you're probably wondering "what the heck are the jumbl
 
 Well, this isn't entirely accurate due to currying, but it's a decent mental model.
 
-In the type signature, `a` is a generic type, similar to template parameters in C++ and generics in Java/Scala although the convention in those languages is to use `T` and `A`.
+In the type signature, `a` is a generic type, similar to template parameters in C++ and generics in Java/Scala (although the convention in those languages is to use `T` and `A`).
 
 ```cpp
 // C++
@@ -73,7 +73,7 @@ count :: (a -> Bool) -> ([a] -> Int)
 So we can actually think of `count` as having several types:
 
 1. it takes a `(a -> Bool)`, a `[a]`, and returns an `Int`; or
-2. it takes a `(a -> Bool)` and returns an `([a] -> Int)`.
+2. it takes a `(a -> Bool)` and returns a `([a] -> Int)`.
 
 Either way the function does the same thing. Under the hood, however, the Haskell compiler thinks using the latter version. This phenomenon is known as currying and its flexibility is quite useful for creating partial functions.
 
@@ -236,7 +236,7 @@ integer = (negate <$> try (char '-' *> digits)) <|> digits
 Convenience function for parsing a (possibly negative) integer.
 
 ### AOC-specific Utilities
-Some more utilties which I wrote solely for AOC.
+Some more utilities which I wrote solely for AOC.
 
 #### `defaultMain`
 ```haskell

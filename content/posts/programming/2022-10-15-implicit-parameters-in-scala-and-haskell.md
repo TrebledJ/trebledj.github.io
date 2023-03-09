@@ -14,9 +14,9 @@ related:
 > *Do not say a little in many words, but a great deal in a few.*  
 >  – Pythagoras
 
-## What the heck are implicits?
+## What the heck are implicit parameters?
 
-In software engineering, the [Don’t Repeat Yourself](https://en.m.wikipedia.org/wiki/Don't_repeat_yourself) principle is one of the foundations of writing modular programs. **Implicit parameters** are one of those language features which hide repetitive code so that developers can focus on the more important aspects of logic. Not all programming languages have implicit parameters; but those that do provide an extra mechanism to deal with repetitive code.
+In software engineering, the [Don’t Repeat Yourself](https://en.m.wikipedia.org/wiki/Don't_repeat_yourself) principle is one of the foundations of writing modular programs. **Implicit parameters** (implicits, for short) are one of those language features which hide repetitive code so that developers can focus on the more important aspects of logic. Not all programming languages have implicit parameters; but those that do provide an extra mechanism to deal with repetitive code.
 
 Both Scala and Haskell have the notion of implicit parameters. In Scala, it’s a built-in feature; whereas in Haskell, it’s a language extension. An even more important distinction is that in Scala, implicit variables bind by *type*, whereas in Haskell, they bind by *name*. We'll take a look at these in more detail.
 
