@@ -62,7 +62,7 @@ module.exports = function (eleventyConfig) {
 
 				// Only log once.
 				if (!logged) {
-					console.log("[11ty/eleventy-base-blog] including `draft: true` posts");
+					console.log("[11ty] including `draft: true` posts");
 				}
 
 				logged = true;
