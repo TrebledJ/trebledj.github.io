@@ -6,6 +6,7 @@ const markdown = require('./eleventy/markdown');
 const collections = require('./eleventy/collections');
 
 module.exports = function (eleventyConfig) {
+	process.env.ENVIRONMENT = process.env.ENVIRONMENT || 'development';
 	console.log(`environment: ${process.env.ENVIRONMENT}`);
 
 	// Copy the contents of the `public` folder to the output folder
