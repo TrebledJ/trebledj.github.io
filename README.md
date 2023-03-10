@@ -24,6 +24,8 @@ npm run start
   * Things I like
     * Bootstrap/jQuery: Good for starters and prototyping
     * SASS: Enables rapid CSS development
+    * Scroll progress
+    * Navbar
   * Things I hate
     * Terrible coding standards and codebase
     * Some nonsensical CSS rules
