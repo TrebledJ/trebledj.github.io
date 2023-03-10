@@ -1,6 +1,6 @@
 _site/
 
 assets/json/debug.json
-.vscode/
+.vscode/*.json
 
 node_modules/

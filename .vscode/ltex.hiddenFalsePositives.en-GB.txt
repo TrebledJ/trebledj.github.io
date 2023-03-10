@@ -1,0 +1,35 @@
+{"rule":"ALONG_TIME","sentence":"^\\QThe principle of additive synthesis is pretty straightforward: signals can be combined by adding samples along time.\\E$"}
+{"rule":"MORFOLOGIK_RULE_EN_GB","sentence":"\\Q{.center}\\E"}
+{"rule":"DO_VBZ","sentence":"^\\QWhere do audio signals come from?\\E$"}
+{"rule":"EN_A_VS_AN","sentence":"^\\QThey may need some careful tuning… or there may be an 11ty plugin alternative.\\E$"}
+{"rule":"MORFOLOGIK_RULE_EN_GB","sentence":"^\\QNunjucks > Liquid\nAh yesss, ternary expressions!\\E$"}
+{"rule":"IF_OF","sentence":"^\\QGreat if you have a thousand posts, though I probably won't write beyond a couple hundred in my entire lifetime.\\E$"}
+{"rule":"MORFOLOGIK_RULE_EN_GB","sentence":"^\\QFor completeness, here's the full d22.rs script.\\E$"}
+{"rule":"RB_RB_COMMA","sentence":"^\\QThis post is a (very very late) writeup on solving the Advent of Code 2021 Day 22 challenge.\\E$"}
+{"rule":"MORFOLOGIK_RULE_EN_GB","sentence":"^\\QScala implicits are actually a tad more complicated (and much more powerful as a result), so my example here doesn't do it justice.\\E$"}
+{"rule":"MORFOLOGIK_RULE_EN_GB","sentence":"^\\QSokath, his eyes uncovered!\\E$"}
+{"rule":"EN_A_VS_AN","sentence":"^\\QSince all the numbers are at the end of the line, it's sufficient to split each line by whitespace, index the last token, and convert it to an \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q.\\E$"}
+{"rule":"EN_A_VS_AN","sentence":"^\\Q\\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q returns an \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q type.\\E$"}
+{"rule":"MORFOLOGIK_RULE_EN_GB","sentence":"^\\QWe assumed there won't be out-of-bound issues since AOC usually constrains numbers to 32/64-bit ints.\\E$"}
+{"rule":"MORFOLOGIK_RULE_EN_GB","sentence":"^\\QFor completeness, here's the full D16.hs script.\\E$"}
+{"rule":"EN_A_VS_AN","sentence":"^\\QIn Advent of Code (AOC) 2021, I found it useful to separate common functions into a Utils.hs file.\\E$"}
+{"rule":"ENGLISH_WORD_REPEAT_RULE","sentence":"^\\QHaskell, despite its relatively low popularity, is quite up to speed on language features and tooling (unlike–cough cough–some other languages).\\E$"}
+{"rule":"MORFOLOGIK_RULE_EN_GB","sentence":"^\\QParser Utilities\nI used MegaParsec this year, but the idea of the following utilities can also be applied for other parser combinator libraries.\\E$"}
+{"rule":"COMMA_COMPOUND_SENTENCE","sentence":"^\\QUnfortunately, due to the protests and temporary closure of the university, the contest was cancelled T_T and we jumped straight to peer evaluation and the next phase: entering sub-teams.\\E$"}
+{"rule":"COMMA_COMPOUND_SENTENCE","sentence":"^\\QYou would've thought that, after the internal contest and trainee selection, the hardest part of training would be over and we could relax after.\\E$"}
+{"rule":"COMMA_PARENTHESIS_WHITESPACE","sentence":"^\\Q:(\\E$"}
+{"rule":"COMMA_COMPOUND_SENTENCE","sentence":"^\\QUnfortunately, due to the protests and temporary closure of the university, the contest was cancelled T_T and we jumped straight to peer evaluation and the next phase: entering subteams.\\E$"}
+{"rule":"COMMA_COMPOUND_SENTENCE","sentence":"^\\QUnfortunately, due to the protests and temporary closure of the university, the contest was cancelled T_T and we jumped straight to peer evaluation followed by the next phase: entering subteams.\\E$"}
+{"rule":"MORFOLOGIK_RULE_EN_GB","sentence":"^\\QIn last year's AOC, I tried solving everything with Haskell, but was suuuper annoyed with simulation challenges.\\E$"}
+{"rule":"CD_NN","sentence":"^\\QThese were challenges asking us to do stuff like: \"oh, please simulate this 1,000x1,000 grid for 1,000,000 steps with Conway's game of life\".\\E$"}
+{"rule":"EN_A_VS_AN","sentence":"^\\Q😱 On a couple of occasions, the error messages don't help at all (e.g. adding \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q to an \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q trait in a function type?); but usually there is some blog post explaining and providing a proper solution to the problem.\\E$"}
+{"rule":"EN_GB_SIMPLE_REPLACE","sentence":"^\\QThere were also times when the robot would randomly and rapidly spin like the spinner on a cotton candy machine.\\E$"}
+{"rule":"MORFOLOGIK_RULE_EN_GB","sentence":"^\\QYou should analyze it, construct an input to make it terminate with \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q, and then respond with your input in the same format.\\E$"}
+{"rule":"PLURAL_VERB_AFTER_THIS","sentence":"^\\QOn my computer, this solve process takes roughly 30-40 seconds... which is good enough, since it falls within the allotted time of one minute per solve.\\E$"}
+{"rule":"MORFOLOGIK_RULE_EN_GB","sentence":"^\\QYou should analyze the binary, construct a payload to accomplish that, and then send it back to the server as a newline terminated hex string.\\E$"}
+{"rule":"MORFOLOGIK_RULE_EN_GB","sentence":"^\\QSo we have everything setup for unlimited ROPping.\\E$"}
+{"rule":"BY_BUY","sentence":"^\\Q...then \"encrypts\" it by mapping each Base64 character to another one:\\E$"}
+{"rule":"COMMA_PARENTHESIS_WHITESPACE","sentence":"^\\QThis corresponds to \"IHRoZS\", which happens to be the Base64 encoding for \" the\".\\E$"}
+{"rule":"MASS_AGREEMENT","sentence":"^\\QNo source code.\\E$"}
+{"rule":"MORFOLOGIK_RULE_EN_GB","sentence":"^\\Q{.no-center}\\E$"}
+{"rule":"SETUP_VERB","sentence":"^\\QWe have documentation related to setup, installation, and administrative procedures and another set of documentation for coding a user program.\\E$"}
