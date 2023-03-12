@@ -249,8 +249,9 @@ To recap…
 - Audio samples may come from several sources. It may be recorded, loaded from a file, or [synthesised](#audio-synthesis).
 - We can synthesise musical pitches by [buffering](#buffering) samples and feeding them to hardware.
 - According to the [Fourier Theorem](#the-fourier-theorem), all signals can be broken into a summation of sine waves.
-- To play multiple pitches simultaneously (chords) or to combine signals, we can apply [additive synthesis](#additive-synthesis).
-- We can generate complex waveforms by using [wavetable synthesis](#wavetable-synthesis), which trades memory for speed by storing signals and sampling from the existing signal.
+- To combine audio signals, we can apply [additive synthesis](#additive-synthesis).
+  - This also allows us to play multiple pitches simultaneously (chords).
+- We can generate complex waveforms by using [wavetable synthesis](#wavetable-synthesis), which trades memory for speed by sampling pre-generated signals.
 
 
 [prev-post]: /posts/digital-audio-synthesis-for-dummies-part-1
