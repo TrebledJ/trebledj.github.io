@@ -158,9 +158,9 @@ You can try layering other frequencies (554Hz, 659Hz) to play a nifty A Major ch
 
 ## Wavetable Synthesis 🌊
 
-In previous code blocks, we computed samples using `sin(...)`. But what if we wanted to compute something more complex? Do we really just reverse the Fourier theorem and sum a bunch of sine signals?
+In previous code blocks, we computed samples using `sin()`. But what if we wanted to compute something more complex? Do we really just reverse the Fourier theorem and apply additive synthesis on a bunch of sine signals? It turns out there's a better way.
 
-A more efficient approach to synthesis is to interpolate over pre-generated values, sacrificing a bit of memory for faster runtime performance. This is known as **wavetable synthesis** or **table-lookup synthesis**. The idea is to pre-generate one cycle of the wave (e.g. a sine) and store it in a lookup table. Then when generating samples for our audio, we would look up the pre-generated samples and derive intermediate values if necessary (via interpolation).
+A more efficient approach is to interpolate over *pre-generated values*, sacrificing a bit of memory for faster runtime performance. This is known as **wavetable synthesis** or **table-lookup synthesis**. The idea is to pre-generate one cycle of the wave (e.g. a sine) and store it in a lookup table. Then when generating samples for our audio, we would look up the pre-generated samples and derive intermediate values if necessary (via interpolation).
 
 This is akin to preparing a cheat sheet for an exam, but you're only allowed to bring one sheet of paper—space is precious. You decide to only include the most crucial equations, key points, and references. Then when taking the exam you refer to the cheat sheet for ideas, connect the dots, and combine them with your thoughts to form an answer.
 
@@ -224,16 +224,17 @@ For a sine wave, we don't gain much in terms of performance. But when it comes t
 
 [^leaf]: Guess what? There are more ways to optimise wavetable synthesis—so it'll rock even more! See the open source [LEAF](https://github.com/spiricom/LEAF/blob/a0b0b7915cce3792ea00f06d0a6861be1a73d609/leaf/Src/leaf-oscillators.c#L67) library for an example of heavily optimised wavetable synthesis.
 
-Besides this software approach, we can also leverage hardware to speed up processing. But this is a matter for the next post.
-
-Wavetable synthesis is commonly used by MIDI. Each instrument has its own *soundfont*, which is a collection of wavetables of different pitches. This unifies the synthesis approach for all instruments, as some may be simple to generate (e.g. clarinet) while others are more complex.
+Wavetable synthesis is commonly used by MIDI to generate sounds. Each instrument has its own *soundfont*, which is a collection of wavetables of different pitches. This unifies the synthesis approach for all instruments, as some may be simple to generate (e.g. clarinet) while others are more complex.
 {.alert--info}
 
-
-**Note**: Additive synthesis and wavetable synthesis serve two very different purposes!
+💡 Additive synthesis and wavetable synthesis serve two very different purposes!
+<br/>
 Additive synthesis aims to *combine multiple waveforms*, of *any* shape and size (e.g. playing chords, or combining guitar and voice tracks).
+<br/>
 Wavetable synthesis aims to generate a *specific* waveform (in a fast manner).
 {.alert--success}
+
+Besides this software approach, we can also leverage hardware to speed up processing. But this is a matter for the next post.
 
 
 
