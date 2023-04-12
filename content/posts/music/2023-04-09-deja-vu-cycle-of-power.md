@@ -17,7 +17,6 @@ related:
 
 > *And in the days of those kings the God of heaven will set up a kingdom that shall never be destroyed, nor shall the kingdom be left to another people. It shall break in pieces all these kingdoms and bring them to an end, and it shall stand forever…*
 > 
-> 
 > — Daniel 2:44 (NIV)
 > 
 
@@ -26,7 +25,6 @@ Organisations, institutions, nations, governments, civilisations. Whether big or
 Does this mean we should dissolve into anarchy? Well, no. Organisation, with enough trust, is better than disorganisation. Proper care should be taken to manage resources, especially on a nation-wide level.
 
 > *What has been is what will be, and what has been done is what will be done, and there is nothing new under the sun.*
-> 
 > 
 > — Ecclesiastes 1:9 (NIV)
 > 
@@ -47,6 +45,6 @@ Although the world we live in may seem like an inescapable matrix[^matrix], each
 
 On this Easter Sunday (and well… all Easter Sundays), we commemorate the resurrection of Jesus Christ, remembering the glorious occasion of His power—and victory—over death, sin, and evil.
 
-[^dimred]: How do you apply dimension reduction  on the infinite without discarding an *ounce* of its beauty? Good luck trying to use PCA or whatever dimensionality reduction algorithm is popular at the time of reading. I mean, I suppose it's still possible to focus on some aspects and reduce accordingly. Maybe for a later time.
+[^dimred]: How do you apply dimension reduction on the infinite without discarding an *ounce* of its beauty? Good luck trying to use PCA or whatever dimensionality reduction algorithm is popular at the time of reading. I mean, I suppose it's still possible to focus on some aspects and reduce accordingly. Maybe for a later time.
 
 [^matrix]: Alluding to the [movie](https://en.wikipedia.org/wiki/The_Matrix). Go watch it if you haven’t already. <sub>*cough* - You know who you are.</sub>
