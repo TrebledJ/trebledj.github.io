@@ -17,7 +17,9 @@ _Midnight Enigma_ is composed for a [musical challenge][chal] constraining pitch
 
 [^phrygian]: The Phrygian mode is characterised by the flat-2nd. As _Midnight Enigma_ is primarily in C minor, the flat-2nd would be the D-flat.
 
-I decided to go with a minimalist/band/electronic fusion with a mix of drums, Reichian phasing, and electronic-inspired delay. I enjoy the concept of open world games such as Minecraft—a huge number of possibilities lie at your fingertips, and consequences aren't as drastic as in real life. A majority of the piece was composed during midnight hours in the days before the competition deadline, hence the title. (Yes, I messed up my sleep schedule then.)
+I decided to go with a minimalist/band/electronic fusion with a mix of drums, Reichian phasing, and electronic-inspired delay. I enjoy the concept of open world games such as Minecraft—a huge number of possibilities lie at your fingertips, and consequences aren't as drastic as in real life.
+
+A majority of the piece was composed during midnight hours in the days before the competition deadline, hence the title. (Yes, I messed up my sleep schedule then.)
 
 This was my first time using MIDI vocals. They sound better than I expected; might reuse it in future pieces. :)
 
