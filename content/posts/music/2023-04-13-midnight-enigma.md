@@ -10,7 +10,7 @@ thumbnail: /img/posts/music/midnight-enigma.jpg
 track_id: 1490881297
 score_id: 10353301
 related:
-    tags: [composition]
+    tags: [minimalism]
 ---
 
 _Midnight Enigma_ is composed for a [musical challenge][chal] constraining pitches within two octaves (here, G2-G3 + G4-G5), with the bonus theme of game music. I had to cut some corners melodically, but having this constraint also meant I can focus on and explore other aspects of music: the rhythm, extended chords, microtones, and whatnot. I also decided to play around with the Phrygian mode[^phrygian] a bit more, so that was fun.
