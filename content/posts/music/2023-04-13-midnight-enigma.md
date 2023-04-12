@@ -1,6 +1,6 @@
 ---
 title: Midnight Enigma
-description: A phrygian minimalist mystery.
+description: A mysterious mix of minimalism and modal musings.
 tags:
  - minimalism
  - electronic
