@@ -24,6 +24,10 @@ categories:
 redirect_from: [/profile]
 ---
 
+{% block head_assets_ext %}
+<link rel="stylesheet" href="/css/shooting-stars.css"/>
+{% endblock %}
+
 {% include "home/hero.html" %}
 {% include "home/about-me.html" %}
 {% include "home/recents.html" %}

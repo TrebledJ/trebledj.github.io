@@ -29,6 +29,8 @@
     <script src="/js/search.js"></script>
     <script src="/js/theme-switcher.js"></script>
     <script src="/js/sidebar.js"></script>
+    {% block head_assets_ext %}
+    {% endblock %}
 
     {% if usemathjax %}
         {% include "utilities/mathjax.html" %}
