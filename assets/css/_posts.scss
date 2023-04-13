@@ -101,6 +101,10 @@
     }
 }
 
+a.tag:hover {
+    color: var(--link-color) !important;
+}
+
 .post-preview-compressed {
 
     // Smaller title.
