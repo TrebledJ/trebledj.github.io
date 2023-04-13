@@ -64,7 +64,7 @@ Feel free to [reach out](#contact) for whatever reason. ヽ(・∀・)ﾉ
 			name: 'Optimus Prime',
 			email: 'optimus@autobots.woot',
 			subject: "Autobots—roll out!",
-			message: `Got blog content suggestions, feedback, or comments? Lemme know!`,
+			message: `Got suggestions, feedback, or comments? Lemme know!`,
 		},
 	};
 };
