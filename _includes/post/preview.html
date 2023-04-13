@@ -1,4 +1,4 @@
-{% macro render_preview(post, taglimit=3) %}
+{% macro render_preview(post, taglimit=3, excludeTags=[]) %}
 <article class="post-preview">
     <a href="{{post.url}}"></a>
     <div class="post-preview-container d-flex">

@@ -5,7 +5,7 @@
         <div class="row gx-5">
             {% for cat in categories %}
                 <div class="col-lg-6">
-                    {{render_tag_preview(collections, cat.name, cat.tag, cat.about)}}
+                    {{render_tag_preview(collections, cat.name, cat.tag, cat.about, cat.exclude)}}
                 </div>
             {% endfor %}
         </div>

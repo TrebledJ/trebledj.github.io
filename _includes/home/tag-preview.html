@@ -1,6 +1,6 @@
 {% from "post/preview.html" import render_preview %}
 
-{% macro render_tag_preview(collections, name, tag, about, nposts = 3) %}
+{% macro render_tag_preview(collections, name, tag, about, excludeTags, nposts = 3) %}
 
     <div class="recent-posts d-flex flex-row justify-content-between align-items-center">
         <h2 class="mb-0">{{name}}
@@ -15,7 +15,7 @@
     <br/>
 
     {% for post in collections['cat-' + name | slugify] | reverse | head(nposts) %}
-        {{ render_preview(post) }}
+        {{ render_preview(post, excludeTags=excludeTags) }}
     {% endfor %}
 
 {% endmacro %}
