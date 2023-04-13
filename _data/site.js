@@ -61,9 +61,9 @@ Feel free to [reach out](#contact) for whatever reason. ヽ(・∀・)ﾉ
 		connect-src 'self' https://hcaptcha.com https://*.hcaptcha.com;
 		`,
 		contact_placeholder: {
-			name: 'Jon Dough',
-			email: 'jondough@example.com',
-			subject: "Doh'nuts.",
+			name: 'Optimus Prime',
+			email: 'optimus@autobots.woot',
+			subject: "Autobots—roll out!",
 			message: `Got blog content suggestions, feedback, or comments? Lemme know!`,
 		},
 	};
