@@ -11,7 +11,7 @@ function modeInit() {
   }
 
   // Set switch to correct setting on load.
-  $("#theme-toggle")[0].checked = (currentTheme === "light");
+  document.getElementById('theme-toggle').checked = (currentTheme === "light");
 }
 
 function modeSwitcher() {
