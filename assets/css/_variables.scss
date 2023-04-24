@@ -1,9 +1,4 @@
 :root {
-    --font-family-sans: 'Segoe UI', 'Roboto', Ubuntu, Cantarell, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji', system-ui, -apple-system;
-    --font-family-serif: 'Iowan Old Style', 'Apple Garamond', Baskerville, 'Times New Roman', 'Droid Serif', Times, 'Source Serif Pro', serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
-    --font-family-monospace: Menlo, Consolas, Monaco, 'Liberation Mono', 'Courier New', monospace;
-    --font-family-cursive: cursive;
-
     /* an ideal reading width - 48rem - 768px based off 16px:1rem */
     /* remember to set this to media-queries too if you are not handling it separately */
     --body-width: 48rem;
@@ -42,10 +37,6 @@
     --space-quarter: calc(var(--space-base-rem) / 4);
     --space-double: calc(var(--space-base-rem) * 2);
 
-
-    /* typography */
-    --font-family: var(--font-family-sans);
-    --font-family-headings: var(--font-family-sans);
 
     --border-width: 1px;
     --border-width-thick: 3px;

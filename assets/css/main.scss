@@ -1,6 +1,4 @@
-// --- 
-// --- 
-// @charset "utf-8";
+$enable-negative-margins: true;
 
 @import '../../node_modules/bootstrap/scss/mixins';
 @import '../../node_modules/bootstrap/scss/functions';
@@ -26,8 +24,6 @@
 @import "social-sidebar";
 @import "toc-sidebar";
 @import "theme-switch";
-
-$enable-negative-margins: true;
 
 
 // --- Scroll to Top --- //
@@ -61,6 +57,7 @@ $enable-negative-margins: true;
     padding: 2px 4px;
     background-color: transparent !important;
     color: var(--main-text-color) !important;
+    line-height: 1.5;
     border: var(--border-width) solid var(--main-text-color);
     border-radius: var(--border-radius-small);
     position: relative;
