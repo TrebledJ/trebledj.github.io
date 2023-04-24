@@ -16,7 +16,7 @@
                     {{post.data.title}}
                 </h2>
                 <div class="post-summary">
-                    <p>{{ post.data.description }}</p>
+                    <p>{{ post.data.description | markdownify | safe }}</p>
                 </div>
             </div>
             {% include "post/metadata-preview.html" %}

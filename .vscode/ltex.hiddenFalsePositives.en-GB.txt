@@ -33,3 +33,4 @@
 {"rule":"MASS_AGREEMENT","sentence":"^\\QNo source code.\\E$"}
 {"rule":"MORFOLOGIK_RULE_EN_GB","sentence":"^\\Q{.no-center}\\E$"}
 {"rule":"SETUP_VERB","sentence":"^\\QWe have documentation related to setup, installation, and administrative procedures and another set of documentation for coding a user program.\\E$"}
+{"rule":"ENGLISH_WORD_REPEAT_BEGINNING_RULE","sentence":"^\\QIn C++, it's \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q and \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q^expected.\\E$"}
