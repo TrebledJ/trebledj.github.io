@@ -57,7 +57,6 @@ Feel free to [reach out](#contact) for whatever reason. ヽ(・∀・)ﾉ
 		font-src 'self' data: cdn.jsdelivr.net;
 		img-src 'self' data: *;
 		frame-src disqus.com *.soundcloud.com https://hcaptcha.com https://*.hcaptcha.com;
-		prefetch-src 'self' *.disquscdn.com disqus.com;
 		connect-src 'self' https://hcaptcha.com https://*.hcaptcha.com;
 		`,
 		contact_placeholder: {
