@@ -28,7 +28,7 @@ ADTs offers us two ways to combine types: **product types** and **sum types**.
 
 ## Product Types
 
-If you’ve used structs, tuples, or record types, then you already have a sense of what product types are. Generally speaking, product types combine types with **all *coexisting together*.
+If you’ve used structs, tuples, or record types, then you already have a sense of what product types are. Generally speaking, product types combine types with all *coexisting together*.
 
 Here are some product types in Haskell:
 
