@@ -2,22 +2,31 @@
 layout: layouts/page-default
 ---
 
-<div class="col-lg-6">
-    {% include "post/article.html" %}
-    {% if sharable %}
-        {% include "post/share.html" %}
-    {% endif %}
-    {% if related %}
-        {% include "post/related.html" %}
-    {% endif %}
-    {% if comments %}
-        <hr/>
-        <div class="container mt-4 p-4">
-            {% include "post/comments.html" %}
+{# This is a hack to get the right sidebar to be parsed and loaded first. We
+could put the left sidebar, content, and right sidebar in the same div; but this
+would lead to the right sidebar being loaded after a noticeable delay. #}
+<div class="col-lg-9">
+    <div class="row d-flex flex-row-reverse">
+        <div class="col-lg-4">
+            {% include "sidebar-right.html" %}
         </div>
-    {% endif %}
-</div>
 
-{% include "sidebar-right.html" %}
+        <div class="col-lg-8">
+            {% include "post/article.html" %}
+            {% if sharable %}
+                {% include "post/share.html" %}
+            {% endif %}
+            {% if related %}
+                {% include "post/related.html" %}
+            {% endif %}
+            {% if comments %}
+                <hr/>
+                <div class="container mt-4 p-4">
+                    {% include "post/comments.html" %}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
 
 <script defer src="/js/post.js"></script>
