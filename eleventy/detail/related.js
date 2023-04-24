@@ -33,7 +33,7 @@ module.exports = function (posts, thisPost, related) {
     // Force related posts into the array.
     if (related.posts) {
         for (let slug of related.posts) {
-            if (final_related.length >= n) {
+            if (final_related.size >= n) {
                 break;
             }
 
@@ -51,7 +51,7 @@ module.exports = function (posts, thisPost, related) {
     // Find relevant posts with same tags as `related.tags`.
     if (related.tags) {
         for (let post of posts) {
-            if (final_related.length >= n) {
+            if (final_related.size >= n) {
                 break;
             }
             if (post == thisPost || final_related.has(post)) {
@@ -77,7 +77,7 @@ module.exports = function (posts, thisPost, related) {
         // Find posts that have common tags with this post.
         let thisTags = thisPost.data.tags;
         for (let post of posts) {
-            if (final_related.length >= n) {
+            if (final_related.size >= n) {
                 break;
             }
             if (post == thisPost || final_related.has(post)) {
