@@ -19,13 +19,14 @@ This post is for the curious programmer. Today, we’ll be looking at the mathem
 
 We are interested in combining types, but that alone isn’t saying much. First, we want to combine types **meaningfully** in order to communicate ideas through those types.
 This notion lies with expressibility and the art of programming. Code is, after all, a medium between programmers.
+
 Second, we want to combine types **concisely**; our types shouldn’t contain redundant, ambiguous information. Removing redundancy implies removing duplicate or invalid states, leading to better maintainability and fewer bugs.
 
 ADTs offers us two ways to combine types: **product types** and **sum types**.
 
 ## Product Types
 
-If you’ve used structs, tuples, or record types, then you already have a sense of what product types are. Generally speaking, product types combine types with all *coexisting together*.
+If you’ve used structs, tuples, or record types, then you already have a sense of what product types are. Product types combine types together as one. A pizza is like a product type, combining crust, cheese, and toppings. When you bite into a pizza, you enjoy the sensation of all three together.
 
 Here are some product types in Haskell:
 
@@ -76,11 +77,10 @@ In the final example above, we wrote a product type representing a `Person`. All
 
 ### Sum Types
 
-Sum types are another way to combine types. In contrast to product types, sum types combine types in an *exclusive* fashion: *only one type can exist at any given moment*.
+Sum types are another way to combine types. In contrast to product types, sum types combine types *exclusively*. The choice of crust is like a sum type. Should the crust be thin, thick, or stuffed with cheese? We can only choose one option.
 
 ![Sum types stand out from the historic dominance of product types.](/img/posts/programming/sheesh-sum-types.jpg){.w-80}
 {.center}
-
 
 Sum types in their *simplest* form are just enums.[^but-enum-values-arent-types] In C/C++, we might define them like so:
 
