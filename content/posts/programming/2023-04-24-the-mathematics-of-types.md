@@ -1,6 +1,6 @@
 ---
 title: "The Mathematics of Types"
-description: "*Any fool can write code that a computer can understand. Good programmers write code that humans can understand.* – Martin Fowler"
+description: "Programming isn't about mindlessly typing away on a keyboard. There is an aesthetic quality that comes with approaching a problem."
 tags:
  - mathematics
  - haskell
@@ -356,8 +356,8 @@ Algebraic data types may be sufficient for most use cases, but we’ve only scra
 
 But to recap:
 
-- **Algebraic data types (ADTs)** consist of *product types* and *sum types*. These are used to model real world data.
-- By leveraging ADTs, we can write code that is meaningful and concise.
+- **Algebraic data types (ADTs)** consist of *product types* and *sum types*.
+- By leveraging ADTs, we can write code that is meaningful and concise, modelling the real world more closely.
 - There are two main forms of ADTs. Both enable us to combine smaller types into larger types.
     - **Product types** can be thought of as a *multiplication on types*.
     - Similarly, **sum types** are like a *summation on types*.
