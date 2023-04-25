@@ -103,7 +103,7 @@ Sum types also allow us to represent more complex data structures. Suppose we wa
 
 ```cpp
 // C++ Object-Oriented Approach
-using Course = std::string; // Type alias.
+using Course = std::string; // For simplicity, a course is simply a string.
 
 class Member {};
 
@@ -123,10 +123,10 @@ public:
 In functional programming, we could express a `Member` as a sum type of `Student` or `Teacher`.
 
 ```haskell
-type Course = String -- Type alias.
+type Course = String
 
 data Member = Student { year :: Int, courses :: [Course] }
-						| Teacher { teaches :: [Course] }
+			| Teacher { teaches :: [Course] }
 ```
 
 Here, `Student` and `Teacher` are two branches of the `Member` type, and a `Member` can only be either a `Student` or a `Teacher`. We can also add more branches to the sum type, such as `Administrator`, `Visitor`, and so on.[^c-sum-types]
@@ -141,15 +141,12 @@ Sum types also enable us to express errors in a type-safe way. We can create a `
 data Maybe a = Nothing | Just a
 ```
 
-This type allows us to handle errors in a more structured way and avoid a lot of `if-else` statements.[^howithelp]
-
-[^howithelp]: Through the help of monads!
+This type allows us to handle errors in a more structured way and avoid a lot of `if-else` statements (with the help of monads!).
 
 To sum up, sum types enable us to express complex data structures, while avoiding redundancy and making our code more maintainable and type-safe.
 
-By the way, we would call `Just` a *data constructor*. This means we can construct concrete data by applying values to `Just`. For example, `Just 1`, `Just "in"`, and `Just (Just 42)` are all data. The same applies to `False`, `True`, and `Nothing`, but those don’t take arguments. More on this later…
-
-{.alert-info}
+We call `Just` a *data constructor*. This means we can construct concrete data by applying values to `Just`, as if it were a function. For example, `Just 1`, `Just "in"`, and `Just (Just 42)` are all concrete data. The same applies to `False`, `True`, and `Nothing`, but those don’t take arguments.
+{.alert--info}
 
 ## Types in the Wild
 
@@ -170,10 +167,8 @@ ghci> divMod 42 2
 (21,0)
 ```
 
-In the Haskell REPL, lines starting with `ghci>` indicate code entered by the programmer. Other lines contain REPL output.
-Also, some notes Haskell notation: parameters in Haskell are delimited by *spaces* rather than *commas*, a bit like shell scripting.
-
-{.alert-success}
+In the Haskell REPL, lines starting with `ghci>` indicate REPL input. Other lines are REPL output.
+{.alert--success}
 
 ### Sum Types in the Wild
 
@@ -187,9 +182,9 @@ Again, `Maybe` is defined as a sum type like so:
 data Maybe a = Nothing | Just a
 ```
 
-Here, `a` is a type parameter, much like the type parameters in C++ templates and other generic programming languages. We can substitute types to get a **concrete type**. For example, we can have a `Maybe Int`, `Maybe Bool`, `Maybe String`, or even a `Maybe (Maybe (Maybe Int))`!
+Here, `a` is a type parameter, much like the type parameters in C++ templates and other generic programming languages. We can substitute types to get a **concrete type**. For example, we can have `Maybe Int`, `Maybe Bool`, `Maybe String`, or—for the absolute masochists—`Maybe (Maybe (Maybe Int))`!
 
-We can write a safe integer divide function by returning `Nothing` when the divisor is `0` (indicating an error) and returning the wrapped quotient otherwise.
+`Maybe` is commonly used to denote a computation that might fail. For instance, we can write a safe integer divide function which returns `Nothing` when the divisor is `0` (indicating an error, since we can't divide) and returning the wrapped quotient otherwise.
 
 ```haskell
 ghci> safeDiv x y = if x == 0 then Nothing else Just (x `div` y)
@@ -201,7 +196,7 @@ ghci> safeDiv 7 0
 Nothing
 ```
 
-`Maybe` is commonly used in places where the error is obvious, such as in map lookup (where `Nothing` implies non-existence).
+`Maybe` is used in other places where the error is obvious, such as in map lookup (where `Nothing` implies non-existence).
 
 `Either` is similar, but is defined over two type parameters.
 
@@ -209,36 +204,39 @@ Nothing
 data Either a b = Left a | Right b
 ```
 
-The type parameters `a` and `b` can be anything; but commonly, `a` is an error (such as a `String`) while `b` is some useful data.
+The type parameters `a` and `b` can be anything; but commonly, `a` is used to describe an error (such as a `String` or an enum) while `b` is some successful computation.
 
 In the wild, `Either` is used in Haskell parsing libraries to return parse results. Sometimes, the parse is successful and returns the generated tree or data (`Right`). Other times, the parse fails and the library returns information of where it failed (`Left`). For example, maybe it failed to parse an unexpected `:` at line 5, column 42 of something.json.
 
 ## The Algebra of Types
 
-The astute may notice that product types combine types in an “***and***” fashion, whereas sum types do so in an “***or***” fashion. One of the alluring aspects of types is that we can construct an algebra over them. This also highlights the characteristics of product types and sum types more clearly.
+The astute may notice that product types combine types in an “***and***” fashion, whereas sum types do so in an “***or***” fashion. One of the alluring aspects of ADTs is that we can construct an algebra over them, allowing us to rigorously work with types.
+
+In the following parts, we'll explore how types relate to math and apply algebraic principles similar to those from elementary!
+
+A word on notation. Monospaced letters ($\texttt{a}$) denote types/code. $|\texttt{a}|$ denotes the size of set `a`. $\equiv$ denotes an isomorphism between types (as in $\texttt{Int} \equiv \texttt{Int}$), and $=$ is reserved for good ol' algebraic equivalence.
+{.alert--info}
 
 ### Types as Sets
 
-Let’s start by treating types as *sets of values*.[^notset] A `Bool` can be thought of as a set of two values: $\{\texttt{True}, \texttt{False}\}$, so $|\texttt{Bool}| = 2$.[^cardinals]
+Let’s start by treating types as *sets of values*.[^notset] For instance, a `Bool` can be thought of as a set of two values: $\{\texttt{True}, \texttt{False}\}$, so $|\texttt{Bool}| = 2$.
 
 [^notset]: I should mention—there are significant differences between types and sets. But please bear with me, for the sake of this post. ._.
 
-[^cardinals]: We use $|A|$ to denote the size of set `A`.
-
-What about a $(\texttt{Bool}, \texttt{Bool})$?  Each `Bool` can be either True or False; thus their combination yields $|(\texttt{Bool}, \texttt{Bool})| = 2 \times 2 = 4$ values. Generalising this,
+What about a $(\texttt{Bool}, \texttt{Bool})$?  Each `Bool` can be either `True` or `False`; thus their combination yields $|(\texttt{Bool}, \texttt{Bool})| = 2 \times 2 = 4$ values. Generalising this,
 
 $$
-|(a, b)| = a \times b
+|\texttt{(a, b)}| = |\texttt{a}| \times |\texttt{b}|
 $$
 
-See how it got the name “product type“?
+See how it got the name “product type”?
 
 What about sum types? How many values can `Maybe Bool` take? In the `Nothing` branch, we have one value: `Nothing`. In the `Just` branch, we have two: `Just True` and `Just False`. Altogether, $|\texttt{Maybe Bool}| = 3$. In general,
 
 $$
 \begin{align*}
-|\texttt{Maybe }a| &= |a| + 1 \\
-|\texttt{Either }a\ \ b| &= |a| + |b|
+|\texttt{Maybe a}| &= |\texttt{a}| + 1 \\\\
+|\texttt{Either a b}| &= |\texttt{a}| + |\texttt{b}|
 \end{align*}
 $$
 
@@ -256,13 +254,10 @@ Is there another way to represent the problem? Yes: `(Bool, a)`. We can use the 
 
 In fact, we’ve just constructed an **isomorphism** between types!
 
-The beauty is in the algebra. The equivalence above can be succinctly (and abstractly!) written as $\texttt{Either a a} \equiv \texttt{(Bool, a)}$—or more algebraically, $a + a = 2a$.[^notation]
-
-[^notation]: For notation’s sake, I’ll use $\equiv$ to denote an isomorphism between types (e.g. $\texttt{Int} \equiv \texttt{Int}$).
+The beauty is in the algebra. The equivalence above can be succinctly (and abstractly!) written as $\texttt{Either a a} \equiv \texttt{(Bool, a)}$—or more algebraically, $a + a = 2a$.
 
 More formally, an isomorphism exists between types `a` and `b` if we can *convert between the two types without loss of information*. The most straightforward approach is to define two functions: `toRHS :: a -> b` and `toLHS :: b -> a`. Alternatively with the algebra presented above, we can easily prove isomorphisms by checking the algebraic equivalence of two types!
-
-{.alert-success}
+{.alert--success}
 
 With the toy example presented above, our converters would be
 
@@ -276,7 +271,7 @@ toLHS (True, x) = Left x
 toLHS (False, x) = Right x
 ```
 
-Notice how information is preserved: $\texttt{toLHS }(\texttt{toRHS } x) = x,\ \forall x \in \texttt{Either a a}$ and $\texttt{toRHS } (\texttt{toLHS }y) = y, \ \forall y \in \texttt{(Bool, a)}$.
+Notice how information is preserved, i.e. $\texttt{toLHS }(\texttt{toRHS } x) = x,\ \forall x \in \texttt{Either a a}$ and $\texttt{toRHS } (\texttt{toLHS }y) = y, \ \forall y \in \texttt{(Bool, a)}$.
 
 In the same vein, the following types are also equivalent:
 
@@ -287,13 +282,12 @@ In the same vein, the following types are also equivalent:
 
 But wait, there’s more! There are also *null* and *unit* types which behave just like 0 and 1 in the integers, with the usual axioms.
 
-Meet `Void` and `()`, two very special types. `Void` resembles the null set: it has *no concrete values*. So how is this type used? Well, without any concrete values, its primary utility is in the type level. For example, with the [Megaparsec](https://hackage.haskell.org/package/megaparsec) parsing library, we could use `Parsec Void u a` to use the default error component.
+Meet `Void` and `()`, two very special types. `Void` resembles the null set: it has *no concrete values*. So how is this type used? Well, without any concrete values, its primary utility is in the type level. For example, in the [Megaparsec](https://hackage.haskell.org/package/megaparsec) parsing library, `Void` is used in `Parsec Void u a` to indicate a default option.
 
 `()` is the 0-tuple, the singleton set containing `()` itself. (To clarify, “`()`” is both a type and a value, depending on the context.)
 
 Note: C’s `void` should **not** be confused with Haskell’s `Void`. The former is more like `()`, containing only one possible result.
-
-{.alert-warning}
+{.alert--warning}
 
 With these funky creatures, we can write isomorphisms such as:
 
@@ -301,26 +295,26 @@ With these funky creatures, we can write isomorphisms such as:
     - Corresponds to $0 + a = a$.
     - Bijection:
     
-    ```haskell
-    toRHS :: Either Void a -> a
-    toRHS (Right x) = x
-    -- toRHS (Left x) = undefined -- Implicit.
-    
-    toLHS :: a -> Either Void a
-    toLHS x = Right x
-    ```
+        ```haskell
+        toRHS :: Either Void a -> a
+        toRHS (Right x) = x
+        -- toRHS (Left x) = undefined -- Implicit.
+        
+        toLHS :: a -> Either Void a
+        toLHS x = Right x
+        ```
     
 - $\texttt{((), a)} \equiv \texttt{a}$
     - Corresponds to $1 \times a = a$.
     - Bijection:
     
-    ```haskell
-    toRHS :: ((), a) -> a
-    toRHS ((), x) = x
-    
-    toLHS :: a -> ((), a)
-    toLHS x = ((), x)
-    ```
+        ```haskell
+        toRHS :: ((), a) -> a
+        toRHS ((), x) = x
+        
+        toLHS :: a -> ((), a)
+        toLHS x = ((), x)
+        ```
     
 
 You may verify that the bijections[^bijection] hold, i.e. show that $\texttt{toLHS }(\texttt{toRHS } x) = x$ and $\texttt{toRHS }(\texttt{toLHS } y) = y$ for any $x$ and $y$.

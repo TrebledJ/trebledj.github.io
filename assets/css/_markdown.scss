@@ -25,7 +25,14 @@
 
     p {
         line-height: 1.65em;
-        margin-bottom: 1.25rem;
+        margin-bottom: 1.2rem;
+    }
+
+    ul {
+        margin-top: 0.2rem;
+        p {
+            margin-bottom: 0rem;
+        }
     }
 }
 
