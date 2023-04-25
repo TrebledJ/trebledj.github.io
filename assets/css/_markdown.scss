@@ -1,3 +1,11 @@
+// TODO: combine with post.scss
+
+.post-article {
+    h6, p {
+        line-height: 1.65em;
+    }
+}
+
 .post-body {
     .center {
         text-align: center;
@@ -21,11 +29,6 @@
 
     .no-center {
         /* This class serves no purpose other than making markdown assign attribute lists correctly. (Needs some whitespace tuning.) */
-    }
-
-    p {
-        line-height: 1.65em;
-        margin-bottom: 1.2rem;
     }
 
     ul {
