@@ -17,12 +17,9 @@ This post is for the curious programmer. Today, we’ll be looking at the mathem
 
 ## Motivation for ADTs
 
-We are interested in combining types, but that alone isn’t saying much. We want to combine types:
-
-- **meaningfully**, i.e. communicate ideas through those types, and
-- **concisely**, i.e. such types shouldn’t contain redundant information.
-
-The first point lies with the notion of expressibility and the art of programming. Code is, after all, a medium between programmers. The second point is even more important, as removing redundancy implies removing duplicate and invalid states, leading to better maintainability and fewer bugs.
+We are interested in combining types, but that alone isn’t saying much. First, we want to combine types **meaningfully** in order to communicate ideas through those types.
+This notion lies with expressibility and the art of programming. Code is, after all, a medium between programmers.
+Second, we want to combine types **concisely**; our types shouldn’t contain redundant, ambiguous information. Removing redundancy implies removing duplicate or invalid states, leading to better maintainability and fewer bugs.
 
 ADTs offers us two ways to combine types: **product types** and **sum types**.
 
