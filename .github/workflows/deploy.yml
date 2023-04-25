@@ -7,9 +7,12 @@ on:
     branches: master
     paths:
       - '**'
+      - '!.gitignore'
       - '!*.md'
       - '!LICENSE'
       - '!.github/**'
+      - '!.vscode/**'
+      - '!archive/**'
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
