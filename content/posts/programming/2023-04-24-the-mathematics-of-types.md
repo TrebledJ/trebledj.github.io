@@ -82,7 +82,7 @@ Sum types are another way to combine types. In contrast to product types, sum ty
 ![Sum types stand out from the historic dominance of product types.](/img/posts/programming/sheesh-sum-types.jpg){.w-80}
 {.center}
 
-Sum types in their *simplest* form are just enums.[^but-enum-values-arent-types] In C/C++, we might define them like so:
+Sum types in their *simplest* form are just enums. In C/C++, we might define them like so:
 
 ```cpp
 enum Bool {
@@ -98,8 +98,6 @@ data Bool = False | True
 ```
 
 Notice the vertical bar `|`. This means a value with type `Bool` can either be `False` or `True`. It can’t be both at the same time.
-
-[^but-enum-values-arent-types]: We talked about combining *types*. Enums, on the other hand, combine *values*… We explore this in a section near the end: [enums as sum types](#enums-as-sum-types).
 
 Sum types also allow us to represent more complex data structures. Suppose we want to model students and teachers in a school. The traditional object-oriented method would be to declare a base `Member` class, then derive `Student` and `Teacher` classes.
 
@@ -352,7 +350,7 @@ data Bool = False () | True ()
 
 Here, `False` is a *data constructor* while `()` is a *type*. In this version of `Bool`, we’re basically combining a bunch of unit types `()` using different tags.
 
-In this regard, enums can be thought of as sugar-coated sum types; and conversely, sum types can be thought of as glorified enums. We’ve seen how enums and sum types can be defined similarly in Haskell. The same goes for Rust and Scala 3, where we would use the `enum` keyword for both enums and sum types.
+In this regard, we can think of enums as sugar-coated sum types; and conversely, sum types can be thought of as glorified enums. We’ve seen how enums and sum types can be defined similarly in Haskell. The same goes for Rust and Scala 3, where the `enum` keyword is not only used to define enums, but also sum types (and in general, ADTs).
 
 ## Conclusion and Recap
 
