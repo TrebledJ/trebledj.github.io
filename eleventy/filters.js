@@ -9,12 +9,35 @@ module.exports = function (eleventyConfig) {
 		return DateTime.fromJSDate(dateObj, { zone: zone || "utc" }).toFormat(format || "yyyy-LL-dd").replace(/-/g, '&#8209;');
 	});
 
+    eleventyConfig.addFilter("dateISO", (dateObj, zone) => {
+		return DateTime.fromJSDate(dateObj, { zone: zone || "utc" }).toISO();
+	});
+
 	eleventyConfig.addFilter("contains", (array, e) => {
 		return array.includes(e);
 	});
 
 	eleventyConfig.addFilter("exclude", (array, items) => {
 		return array.filter(e => typeof (items) == 'string' ? e != items : !items.includes(e));
+	});
+
+	eleventyConfig.addFilter("push", (array, thisPost, item) => {
+		console.log("array push:", thisPost.fileSlug, JSON.stringify(array));
+		if (array === undefined) {
+			throw new Error('push: array is undefined');
+		}
+		let array2 = array.slice(); // Soft-copy.
+		array2.push(item);
+		return array2;
+	});
+
+	eleventyConfig.addFilter("extend", (array, items) => {
+		if (array === undefined) {
+			throw new Error('extend: array is undefined');
+		}
+		let array2 = array.slice(); // Soft-copy.
+		array2.push(...items);
+		return array2;
 	});
 
 	eleventyConfig.addFilter("split", (str, delimiter) => {

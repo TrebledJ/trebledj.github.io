@@ -17,17 +17,27 @@
 {% else %}
     <meta name="description" content="{{ site.description }}">
 {% endif %}
-{# <meta name="keywords" content="{% if page.title %}{{ page.title }}, {{ site.title }}, {% for tag in page.tags %}{{ tag }}{% if forloop.last == false %}, {% endif %}{% endfor %}{% else %}{{ site.title }}, {% for tag in site.tags %}{% capture tags_slug %}{{ tag | first }}{% endcapture %}{% for tag in tags_slug %}{{ tag }}{% endfor %}{% if forloop.last == false %}, {% endif %}{% endfor %}{% endif %},{{ page.keywords | escape }}"/> #}
-{# TODO: add keywords #}
-<meta name="keywords" content="{{site.description}}"/>
+
+{% set page_keywords = [] %}
+{% if tags %}
+    {% set page_keywords = page_keywords | extend(tags | exclude('posts')) %}
+{% endif %}
+{% if keywords %}
+    {% set page_keywords = page_keywords | extend(keywords) %}
+{% endif %}
+<meta name="keywords" content="{{page_keywords | join(',') | safe}}" />
+
+{% if noindex %}
+    {% set index = "noindex" %}
+{% else %}
+    {% set index = "index" %}
+{% endif %}
+<meta name="robots" content="{{index}},follow"/>
 
 <meta http-equiv='Content-Security-Policy' content="{{site.content_security_policy}}"/>
 
-<link href="/feed.xml" rel="alternate" title="RSS" type="application/rss+xml"/>
+<link href="/feeds/posts.xml" rel="alternate" title="RSS" type="application/rss+xml"/>
 <meta content="{{ site.title }}" property="og:site_name"/>
-{% if page.noindex %}
-    <meta content="noindex" name="robots"/>
-{% endif %}
 {% if title %}
     <meta content="{{ title }}" property="og:title"/>
     <meta content="article" property="og:type"/>
@@ -43,23 +53,19 @@
 {% if page.url %}
     <meta content="{{ site.url }}{{ page.url }}" property="og:url"/>
 {% endif %}
+{% if thumbnail %}
+    <meta content="{{ site.url }}{{ thumbnail }}" property="og:image"/>
+{% endif %}
 {% if page.date %}
-    {# <meta content="{{ page.date | date_to_xmlschema }}" property="article:published_time"/> #}
-    <meta content="{{ page.date }}" property="article:published_time"/>
-    <meta content="{{ site.url }}/about/" property="article:author"/>
+    <meta content="{{ page.date | dateISO }}" property="article:published_time"/>
 {% endif %}
-{% if page.thumbnail %}
-    <meta content="{{ site.url }}{{ page.thumbnail }}" property="og:image"/>
+{% if updated %}
+    <meta content="{{ updated | dateISO }}" property="article:modified_time"/>
 {% endif %}
-{% if page.tags %}
-    {% for tag in page.tags %}
-        {% if loop.first %}
-            <meta content="{{ tag }}" property="article:section"/>
-        {% endif %}
-    {% endfor %}
+<meta content="{{ site.author.alias }}" property="article:author"/>
+{% if category %}
+    <meta content="{{ category }}" property="article:section"/>
 {% endif %}
-{% if page.tags %}
-    {% for tag in page.tags %}
-        <meta content="{{ tag }}" property="article:tag"/>
-    {% endfor %}
+{% if tags %}
+    <meta content="{{ tags | exclude('posts') | join(',') | safe }}" property="article:tag"/>
 {% endif %}

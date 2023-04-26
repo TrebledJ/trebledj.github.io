@@ -18,6 +18,7 @@ related: /posts/post1 /posts/post2 # Related will only contain these posts. "non
 related_more: /posts/post1 /posts/post2 # In addition to other selections, mark these posts as related.
 related_tags: tag1 tag2 tag3  # Any post containing all these tags is marked as related.
 related_auto: true # Use an auto algorithm to determine whether a post is related.
+noindex: true # Set true to add a noindex metadata, to indicate SE robots to not index this page.
 permalink: /posts/permalink/to/post/
 published: false # keep as draft
 sitemap: false # don't put in sitemap
