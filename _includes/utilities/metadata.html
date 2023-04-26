@@ -1,4 +1,6 @@
 <meta charset="utf-8"/>
+
+{# Title / Description #}
 <title>
     {% if title %}
         {{ title }}
@@ -10,15 +12,21 @@
             {{ site.description }}
     {% endif %}
 </title>
-<meta content="IE=edge" http-equip="X-UA-Compatible"/>
-<meta content="width=device-width, initial-scale=1" name="viewport"/>
+
 {% if description %}
     <meta name="description" content="{{ description | markdownify | safe | striptags }}">
 {% else %}
     <meta name="description" content="{{ site.description }}">
 {% endif %}
 
+{# Compatibility #}
+<meta content="IE=edge" http-equip="X-UA-Compatible"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+
+{# Meta: Keywords #}
+{# List a bunch of keywords which make sense for this page. #}
 {% set page_keywords = [] %}
+{% set page_keywords = page_keywords | push(site.author.alias | lower) %}
 {% if tags %}
     {% set page_keywords = page_keywords | extend(tags | exclude('posts')) %}
 {% endif %}
@@ -27,6 +35,8 @@
 {% endif %}
 <meta name="keywords" content="{{page_keywords | join(',') | safe}}" />
 
+{# Meta: Robots #}
+{# Configure how the page is indexed and crawled. #}
 {% if noindex %}
     {% set index = "noindex" %}
 {% else %}
@@ -34,9 +44,18 @@
 {% endif %}
 <meta name="robots" content="{{index}},follow"/>
 
+{# Meta: CSP #}
 <meta http-equiv='Content-Security-Policy' content="{{site.content_security_policy}}"/>
 
-<link href="/feeds/posts.xml" rel="alternate" title="RSS" type="application/rss+xml"/>
+{# Meta: RSS Auto-Discovery #}
+<link href="/feeds/posts.xml" rel="alternate" title="RSS Feed for {{site.title}}" type="application/rss+xml"/>
+{% if feedtags | contains(page.fileSlug) %}
+    {# Additional tag for tag pages. #}
+    <link href="/feeds/{{page.fileSlug}}.xml" rel="alternate" title="RSS Feed for {{site.title}} ({{page.fileSlug}})" type="application/rss+xml"/>
+{% endif %}
+
+{# OpenGraph Metadata #}
+{# See https://ogp.me/. #}
 <meta content="{{ site.title }}" property="og:site_name"/>
 {% if title %}
     <meta content="{{ title }}" property="og:title"/>
