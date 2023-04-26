@@ -5,21 +5,5 @@
         {% include "header.html" %}
         {{ content | safe }}
         {% include "footer.html" %}
-        <script>
-            var options = {
-                classname: 'load-progress-bar',
-                id: 'my-id'
-            };
-            var nanobar = new Nanobar( options );
-            nanobar.go( 30 );
-            nanobar.go( 76 );
-            nanobar.go(100);
-        </script>
-
-        <script>
-          $(document).ready(_ => {
-            $("body").tooltip({ selector: '[data-toggle=tooltip]' });
-          })
-        </script>
   </body>
 </html>

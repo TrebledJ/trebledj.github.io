@@ -9,29 +9,30 @@ layout: layouts/page-default
         <script src="/js/infinite-loader.js"></script>
         <script>
             document.addEventListener("DOMContentLoaded", () => {
-                const visual = ($(window).width() < 600 ? true : false);
-                InfiniteLoader({
-                    data: '/tracks.json',
-                    items: {
-                        num: 4,
-                        after: 2,
-                    },
-                    append: '#track-list',
-                    html: (item, index) => {
-                        const toHTMLTag = t => `<a class="post-tags tag" href="{{ site.baseurl }}/tags/${t}">${t}</a>`;
+                (function ($) {
+                    const visual = ($(window).width() < 600);
+                    const l = InfiniteLoader({
+                        data: '/tracks.json',
+                        items: {
+                            num: 4,
+                            after: 2
+                        },
+                        append: '#track-list',
+                        html: (item, index) => {
+                            const toHTMLTag = t => `<a class="post-tags tag" href="{{ site.baseurl }}/tags/${t}">${t}</a>`;
 
-                        /* Exclude common tags and convert into html code. */
-                        const tags = item
-                            .tags
-                            .map(toHTMLTag)
-                            .join("\n");
+                            /* Exclude common tags and convert into html code. */
+                            const tags = item
+                                .tags
+                                .map(toHTMLTag)
+                                .join("\n");
 
-                        /* No break on the first item. */
-                        const brk = index
-                            ? '<br/>'
-                            : '';
+                            /* No break on the first item. */
+                            const brk = index
+                                ? '<br/>'
+                                : '';
 
-                        return `
+                            return `
                         <div>
                             ${brk}
                             <iframe allow="autoplay" frameborder="no" height="166" scrolling="no"
@@ -51,8 +52,9 @@ layout: layouts/page-default
                                 <a href="{{ site.baseurl }}${item.url}">(continue reading)</a>
                             </div>
                         </div>`;
-                    }
-                });
+                        }
+                    });
+                })(jQuery);
             });
         </script>
     </div>
