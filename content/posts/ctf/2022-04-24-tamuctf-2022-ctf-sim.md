@@ -7,7 +7,7 @@ tags:
  - cpp
  - programming
 thumbnail: /img/posts/misc/ctf/ctf-sim/ctf-sim-thumbnail.jpg
-keywords: vpointer vptr ctf virtual function virtual-function vtable gdb
+keywords: [vpointer, vptr, ctf, virtual function, vtable, gdb]
 related_tags: ctf writeup
 ---
 

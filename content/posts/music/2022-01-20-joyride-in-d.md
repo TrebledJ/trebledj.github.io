@@ -4,7 +4,7 @@ description: "Jetpack Joyride but without a jetpack, and in D."
 updated: "2022-07-28"
 tags:
  - band
-keywords: guitars drums upbeat
+keywords: [guitars, drums, upbeat]
 thumbnail: /img/posts/music/joyride.jpg
 track_id: 1199278825
 score_id: 8527562

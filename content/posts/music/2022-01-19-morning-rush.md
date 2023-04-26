@@ -4,7 +4,7 @@ description: "\"Quickly! School starts in 15 minutes and you still haven't chang
 updated: "2022-07-28"
 tags:
  - band
-keywords: guitars drums upbeat
+keywords: [guitars, drums, upbeat]
 thumbnail: /img/posts/music/neo-bus.jpg
 track_id: 1199278129
 score_id: 8527520

@@ -5,7 +5,7 @@ tags:
  - song
  - piano
  - hkust
-# keywords: hkust anthem
+keywords: [hkust, anthem]
 thumbnail: /img/posts/music/seaside-garden.jpg
 track_id: 1413849847
 score_id: 9351160

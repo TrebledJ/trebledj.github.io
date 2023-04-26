@@ -6,7 +6,7 @@ tags:
  - minimalism
  - fusion
  - strings
-keywords: ensemble, string ensemble, emotional, peaceful, serene
+keywords: [ensemble, string ensemble, emotional, peaceful, serene]
 thumbnail: /img/posts/music/spring-dawn.jpg
 track_id: 1199277217
 related:

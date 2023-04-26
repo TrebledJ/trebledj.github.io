@@ -5,7 +5,7 @@ updated: "2022-07-26"
 tags:
  - electronic
  - hkust
-keywords: synth drums edm
+keywords: [synth, drums, edm]
 thumbnail: /img/posts/music/winter-road.jpg
 track_id: 1146309223
 related:
