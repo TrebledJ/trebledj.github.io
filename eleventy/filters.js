@@ -21,8 +21,7 @@ module.exports = function (eleventyConfig) {
 		return array.filter(e => typeof (items) == 'string' ? e != items : !items.includes(e));
 	});
 
-	eleventyConfig.addFilter("push", (array, thisPost, item) => {
-		console.log("array push:", thisPost.fileSlug, JSON.stringify(array));
+	eleventyConfig.addFilter("push", (array, item) => {
 		if (array === undefined) {
 			throw new Error('push: array is undefined');
 		}
