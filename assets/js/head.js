@@ -1,13 +1,5 @@
-// --- Scroll to Top --- //
 $(function () {
-    function check() {
-        if ($(this).scrollTop() > 250) {
-            $('#btn-back-to-top').fadeIn();
-        } else {
-            $('#btn-back-to-top').fadeOut();
-        }
-    }
-
+    /* Scroll Progress */
     $(document).on('scroll', () => {
         var docElem = document.documentElement;
         var docBody = document.body;
@@ -24,7 +16,14 @@ $(function () {
         }
     });
 
-
+    /* Scroll to Top */
+    function check() {
+        if ($(this).scrollTop() > 250) {
+            $('#btn-back-to-top').fadeIn();
+        } else {
+            $('#btn-back-to-top').fadeOut();
+        }
+    }
 
     $(window).on("scroll", function () {
         check();
@@ -37,10 +36,12 @@ $(function () {
         document.documentElement.scrollTop = 0;
     });
 
+    /* Vars */
     var base_url = '{{site.baseurl}}';
     var soundcloud_color = '{{site.soundcloud_color}}';
+    var defaultTheme = "dark";
 
-    // Nanobar.
+    /* Nanobar */
     var options = {
         classname: 'load-progress-bar',
         id: 'my-id'
@@ -50,27 +51,48 @@ $(function () {
     nanobar.go(76);
     nanobar.go(100);
 
-    // Load tooltips.
+    /* Load Tooltips */
     $("body").tooltip({ selector: '[data-toggle=tooltip]' });
 
-    // /**
-    //  * @param {String} HTML representing a single element
-    //  * @return {Element}
-    //  */
-    // function htmlToElement(html) {
-    //     var template = document.createElement('template');
-    //     html = html.trim(); // Never return a text node of whitespace as the result
-    //     template.innerHTML = html;
-    //     return template.content.firstChild;
-    // }
+    /* Theme */
+    function modeInit() {
+        let currentTheme = localStorage.getItem("theme");
+        if (currentTheme === "dark") {
+            setMode("dark");
+        } else if (currentTheme === "light") {
+            setMode("light");
+        } else {
+            setMode(defaultTheme);
+        }
 
-    // /**
-    //  * @param {String} HTML representing any number of sibling elements
-    //  * @return {NodeList} 
-    //  */
-    // function htmlToElements(html) {
-    //     var template = document.createElement('template');
-    //     template.innerHTML = html;
-    //     return template.content.childNodes;
-    // }
+        // Set switch to correct setting on load.
+        document.getElementById('theme-toggle').checked = (currentTheme === "light");
+    }
+
+    function modeSwitcher() {
+        let currentTheme = localStorage.getItem("theme");
+        if (currentTheme === "dark") {
+            setMode("light");
+            if (reloadDisqus)
+                reloadDisqus();
+        } else if (currentTheme === "light") {
+            setMode("dark");
+            if (reloadDisqus)
+                reloadDisqus();
+        } else {
+            setMode(defaultTheme);
+        }
+    }
+
+    function setMode(mode) {
+        if (mode === "dark") {
+            document.documentElement.setAttribute("data-theme", "dark");
+            localStorage.setItem("theme", "dark");
+        } else if (mode === "light") {
+            document.documentElement.setAttribute("data-theme", "light");
+            localStorage.setItem("theme", "light");
+        }
+    }
+
+    modeInit();
 });
