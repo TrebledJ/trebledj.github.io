@@ -8,13 +8,31 @@ $(function () {
         }
     }
 
+    $(document).on('scroll', () => {
+        var docElem = document.documentElement;
+        var docBody = document.body;
+        var scrollTop = (docBody.scrollTop || docElem.scrollTop);
+        var height = docElem.scrollHeight - docElem.clientHeight;
+
+        progress = scrollTop / height * 100;
+
+        if (progress > 0) {
+            progressBar = document.querySelector('#scroll-progress-bar');
+            progressBar.style.setProperty('--progress', progress + '%');
+        } else {
+            progressBar.style.setProperty('--progress', '0%');
+        }
+    });
+
+
+
     $(window).on("scroll", function () {
         check();
     });
 
     check(); // Check on doc ready, e.g. if page was reloaded, we could already be in the middle of the page.
 
-    $('#btn-back-to-top').on("click", function () {
+    $('#btn-back-to-top').on("click", () => {
         document.body.scrollTop = 0;
         document.documentElement.scrollTop = 0;
     });
