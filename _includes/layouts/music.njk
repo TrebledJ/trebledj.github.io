@@ -8,7 +8,7 @@ layout: layouts/page-default
 
         <script src="/js/infinite-loader.js"></script>
         <script>
-            $(async function () {
+            document.addEventListener("DOMContentLoaded", () => {
                 const visual = ($(window).width() < 600 ? true : false);
                 InfiniteLoader({
                     data: '/tracks.json',
