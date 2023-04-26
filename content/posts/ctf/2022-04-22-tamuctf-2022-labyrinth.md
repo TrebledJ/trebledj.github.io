@@ -6,7 +6,6 @@ tags:
  - python
  - programming
 thumbnail: /img/posts/misc/ctf/labyrinth/labyrinth-thumbnail.jpg
-related_tags: ctf writeup
 ---
 
 ### Challenge Description

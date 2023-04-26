@@ -8,7 +8,6 @@ tags:
  - programming
 thumbnail: /img/posts/misc/ctf/inspector-gadget.png
 usemathjax: true
-related_tags: ctf writeup
 ---
 
 ### Challenge Description

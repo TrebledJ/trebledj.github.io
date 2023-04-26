@@ -8,7 +8,6 @@ tags:
  - programming
 thumbnail: /img/posts/misc/ctf/ctf-sim/ctf-sim-thumbnail.jpg
 keywords: [vpointer, vptr, ctf, virtual function, vtable, gdb]
-related_tags: ctf writeup
 ---
 
 ### Challenge Description

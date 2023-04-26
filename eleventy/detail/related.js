@@ -14,6 +14,7 @@ const chalk = require('chalk');
  *      - Only the first `related.num` items will be added.
  *  - tags: Array[string]
  *      - Find posts with the same tags contained in this array.
+ *      - Only posts which contain all of the listed tags are considered.
  *  - auto: bool
  *      - Whether to automagically look for relevant posts using an internal algorithm.
  *  - autoCommonTagsThreshold: float

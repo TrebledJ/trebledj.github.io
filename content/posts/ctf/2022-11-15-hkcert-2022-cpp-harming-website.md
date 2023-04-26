@@ -5,7 +5,6 @@ tags:
  - reverse
  - cpp
 thumbnail: /img/posts/misc/ctf/hkcert22-thumbnail.jpg
-related_tags: ctf writeup
 usemathjax: true
 ---
 
