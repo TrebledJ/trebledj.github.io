@@ -172,9 +172,12 @@ In the Haskell REPL, lines starting with `ghci>` indicate REPL input. Other line
 
 ### Sum Types in the Wild
 
-There are two common sum types in the wild: `Maybe` (introduced previously) and `Either`. These are typically used to express errors: either an error occurred or a valid result is returned. `Maybe` and `Either` have other names as well. In Rust, they’re called [`Option`](https://doc.rust-lang.org/std/option/enum.Option.html) and [`Result`](https://doc.rust-lang.org/std/result/enum.Result.html). In Scala, it’s [`Option`](https://www.scala-lang.org/api/2.13.3/scala/Option.html) (not the same one as Rust!) and [`Either`](https://www.scala-lang.org/api/2.13.6/scala/util/Either.html). In C++, it’s [`optional`](https://en.cppreference.com/w/cpp/utility/optional) and [`expected`](https://github.com/TartanLlama/expected)[^expected].
+There are two common sum types in the wild: `Maybe` (introduced previously) and `Either`. These are typically used to express errors: either an error occurred or a valid result is returned.
 
-[^expected]: `std::expected` is expected (haha) to arrive in the C++23 standard.
+`Maybe` and `Either` have other names as well. In Rust, they’re called [`Option`](https://doc.rust-lang.org/std/option/enum.Option.html) and [`Result`](https://doc.rust-lang.org/std/result/enum.Result.html). In Scala, it’s [`Option`](https://www.scala-lang.org/api/2.13.3/scala/Option.html) (not the same one as Rust!) and [`Either`](https://www.scala-lang.org/api/2.13.6/scala/util/Either.html). In C++, it’s [`optional`](https://en.cppreference.com/w/cpp/utility/optional) and [`expected`](https://github.com/TartanLlama/expected)[^expected].
+This list isn't exhaustive, but it goes to show how ubiquitous sum types are—though not as widespread as product types, for historic reasons.
+
+[^expected]: `std::optional` was introduced in C++17, and `std::expected` is expected (haha) to arrive with C++23.
 
 Again, `Maybe` is defined as a sum type like so:
 
