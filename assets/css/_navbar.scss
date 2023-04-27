@@ -36,6 +36,10 @@
         padding-left: 0;
         padding-right: 0;
     }
+
+    #navbar-container {
+        padding-left: 10px;
+    }
 }
 
 @include media-breakpoint-down(md) {
