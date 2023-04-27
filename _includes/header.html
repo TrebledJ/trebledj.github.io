@@ -23,7 +23,7 @@
                 <li>
                     <input class="nav-link switch" id="theme-toggle" name="checkbox" onclick="modeSwitcher()"
                         type="checkbox" />
-                    <script>modeInit();</script>
+                    <script>document.getElementById('theme-toggle').checked = isLightTheme();</script>
                 </li>
             </ul>
         </div>

@@ -10,9 +10,10 @@ function modeInit() {
     } else {
         setMode(defaultTheme);
     }
+}
 
-    // Set switch to correct setting on load.
-    document.getElementById('theme-toggle').checked = (currentTheme === "light");
+function isLightTheme() {
+    return (localStorage.getItem("theme") === "light");
 }
 
 function modeSwitcher() {
@@ -38,5 +39,7 @@ function setMode(mode) {
         document.documentElement.setAttribute("data-theme", "light");
         localStorage.setItem("theme", "light");
     }
-
 }
+
+
+modeInit();
