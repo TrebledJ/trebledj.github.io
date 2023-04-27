@@ -22,7 +22,7 @@ Feel free to [reach out](#contact) for whatever reason. ヽ(・∀・)ﾉ
 			alias: "TrebledJ",
 			name: "Johnathan",
 			email: email,
-			logo: "profile.png",
+			logo: "profile-icon.jpg",
 			bio: bio,
 		},
 		navpages: [
