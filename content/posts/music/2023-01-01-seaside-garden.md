@@ -15,7 +15,7 @@ _Seaside Garden_ is composed for HKUST's Call for Scores for the School Anthem. 
 
 ## Rationale
 
-My journey with HKUST started three and a half years ago. This was a period of becoming, exploration, and development. To me, the university is like a garden: cultivating and nurturing flora and fauna, a peaceful sanctuary, a place of life and beauty. Being situated near the sea, HKUST stands firm as waves ceaselessly crash against its foundation.
+My journey with HKUST started three and a half years ago. This was a period of becoming, exploration, and development. To me, the university is like a garden: cultivating and nurturing flora and fauna, a peaceful sanctuary, a place of life and beauty. Situated near the sea, HKUST stands firm as waves ceaselessly crash against its foundation.
 
 But what's a garden without birds? A garden is a place where birds can flourish and grow before departing and exploring the outside world. There are countless kinds of birds: wisened owls, agile peregrines, shrewd crows, and hardworking weavers among others. The garden and birds live in symbiosis. The garden provides nutrition and shelter; in exchange, birds spread seeds and pollinate flowers. It is well-known that birds digest fruit from one end and discharge (plus fertilise!) seeds from the other end, planting these gifts to who-knows-where. Without birds, the world becomes a very dark and dismal place.
 
