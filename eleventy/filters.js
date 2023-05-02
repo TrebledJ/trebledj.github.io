@@ -4,12 +4,12 @@ const findPostsRelatedTo = require('./detail/related')
 
 
 module.exports = function (eleventyConfig) {
-    eleventyConfig.addFilter("date", (dateObj, format, zone) => {
+	eleventyConfig.addFilter("date", (dateObj, format, zone) => {
 		// Formatting tokens for Luxon: https://moment.github.io/luxon/#/formatting?id=table-of-tokens
 		return DateTime.fromJSDate(dateObj, { zone: zone || "utc" }).toFormat(format || "yyyy-LL-dd").replace(/-/g, '&#8209;');
 	});
 
-    eleventyConfig.addFilter("dateISO", (dateObj, zone) => {
+	eleventyConfig.addFilter("dateISO", (dateObj, zone) => {
 		return DateTime.fromJSDate(dateObj, { zone: zone || "utc" }).toISO();
 	});
 
@@ -90,7 +90,7 @@ module.exports = function (eleventyConfig) {
 	eleventyConfig.addFilter("relatedTo", findPostsRelatedTo);
 
 
-    const md = require("markdown-it")({
+	const md = require("markdown-it")({
 		html: false,
 		breaks: true,
 		linkify: true,
