@@ -31,7 +31,7 @@ Composed in the final week of the year 2022 and released on New Year's Day 2023,
 
 ## Lyrics
 
-I am no lyricist, but for completeness and posterity here are my jank lyrics.
+I'm no lyricist, but for completeness and posterity here are my jank lyrics.
 
 **Verse 1**  
 Seedlings sprout forth  
