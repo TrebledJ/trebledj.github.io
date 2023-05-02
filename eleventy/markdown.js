@@ -18,9 +18,11 @@ module.exports = function(eleventyConfig) {
 		mdLib.use(markdownItFootnote);
 		mdLib.renderer.rules.footnote_caption = (tokens, idx/*, options, env, slf*/) => {
 			var n = Number(tokens[idx].meta.id + 1).toString();
-			if (tokens[idx].meta.subId > 0) {
-				n += ':' + tokens[idx].meta.subId;
-			}
+			// This following `if` will enable the sub-id being shown on the footnote marking.
+			// Sub-ids > 0 occur when there are multiple footnotes with the same reference.
+			// if (tokens[idx].meta.subId > 0) {
+			// 	n += ':' + tokens[idx].meta.subId;
+			// }
 			return n;
 		};
 
