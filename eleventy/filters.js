@@ -48,6 +48,15 @@ module.exports = function (eleventyConfig) {
 		return DateTime.fromJSDate(dateObj, { zone: 'utc' }).toFormat('yyyy-LL-dd');
 	});
 
+	// A filter to murder tags and their children brutally with regex. Please don't take this comment seriously.
+	eleventyConfig.addFilter('annihilateTags', (html, tags) => {
+		let dumbHTMLRegex = tag => new RegExp(`<${tag}(\\s+\\w+\\s*=\\s*("[^"]*"|'[^']*'))*>.*?</${tag}>`, "ig");
+		if (typeof tags === 'string')
+			return html.replace(dumbHTMLRegex(tags), '');
+		else /* Otherwise, assume tags is an Array. */
+			return tags.reduce((acc, x) => acc.replace(dumbHTMLRegex(x), ''), html);
+	});
+
 	// Get the first `n` elements of a collection.
 	eleventyConfig.addFilter("head", (array, n) => {
 		if (!Array.isArray(array) || array.length === 0) {

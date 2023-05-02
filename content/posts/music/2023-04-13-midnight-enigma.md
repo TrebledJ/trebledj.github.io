@@ -13,7 +13,9 @@ related:
     tags: [minimalism]
 ---
 
-_Midnight Enigma_ is composed for a [musical challenge][chal] constraining pitches within two octaves (here, G2-G3 + G4-G5), with the bonus theme of game music. I had to cut some corners melodically, but having this constraint also meant I can focus on and explore other aspects of music: the rhythm, extended chords, microtones, and whatnot. I also decided to play around with the Phrygian mode[^phrygian] a bit more, so that was fun.
+_Midnight Enigma_ is composed for a [musical challenge][chal] constraining pitches within two octaves[^octaves], with the bonus theme of game music. I had to cut some corners melodically, but having this constraint also meant I can focus on and explore other aspects of music: the rhythm, extended chords, microtones, and whatnot. I also decided to play around with the Phrygian mode[^phrygian] a bit more, so that was fun.
+
+[^octaves]: The octaves I chose were G2-G3 + G4-G5. Pitches can be anywhere inside these ranges, but not between (G3-G4) or outside.
 
 [^phrygian]: The Phrygian mode is characterised by the flat-2nd. As _Midnight Enigma_ is primarily in C minor, the flat-2nd would be the D-flat.
 
