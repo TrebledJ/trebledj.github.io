@@ -177,7 +177,7 @@ There are two common sum types in the wild: `Maybe` (introduced previously) and 
 `Maybe` and `Either` have other names as well. In Rust, they’re called [`Option`](https://doc.rust-lang.org/std/option/enum.Option.html) and [`Result`](https://doc.rust-lang.org/std/result/enum.Result.html). In Scala, it’s [`Option`](https://www.scala-lang.org/api/2.13.3/scala/Option.html) (not the same one as Rust!) and [`Either`](https://www.scala-lang.org/api/2.13.6/scala/util/Either.html). In C++, it’s [`optional`](https://en.cppreference.com/w/cpp/utility/optional) and [`expected`](https://github.com/TartanLlama/expected)[^expected].
 This list isn't exhaustive, but it goes to show how ubiquitous sum types are—though not as widespread as product types, for historic reasons.
 
-[^expected]: `std::optional` was introduced in C++17, and `std::expected` is expected (haha) to arrive with C++23.
+[^expected]: `std::optional` was introduced in C++17, and `std::expected` is expected (haha) to arrive with C++23. You can still pull these types from various libraries though.
 
 Again, `Maybe` is defined as a sum type like so:
 
@@ -322,9 +322,9 @@ With these funky creatures, we can write isomorphisms such as:
 
 You may verify that the bijections[^bijection] hold, i.e. show that $\texttt{toLHS }(\texttt{toRHS } x) = x$ and $\texttt{toRHS }(\texttt{toLHS } y) = y$ for any $x$ and $y$.
 
-[^bijection]: A bijection is also known as a **one-to-one mapping**. Each input must map to one and only one output.
+[^bijection]: A [bijection](https://en.wikipedia.org/wiki/Bijection) is also known as a *one-to-one correspondence* or *invertible* function. Each input must map to one (and only one) unique output. Functions such as $x \mapsto \sqrt{x}$ and $x \mapsto \lfloor x \rfloor$ are not bijections as multiple inputs map to the same output—we can't recover our input given the output (which is the whole idea of being *invertible*).
 
-I’ll leave other algebraic constructions as an exercise for the reader. 🙃 Try coming up with examples of types and bijections for the following.
+As for other algebraic constructions, I shall kindly leave them as an exercise for the reader. 🙃 Try coming up with examples of types and bijections for the following:
 
 - Associativity: $(a + b) + c = a + (b + c)$, $(ab)c = a(bc)$
 - Commutativity: $a + b = b + a$, $ab = ba$
@@ -372,5 +372,6 @@ But to recap:
 
 ### References/Further Reading
 
-- [The Algebra of Algebraic Data Types](https://gist.github.com/gregberns/5e9da0c95a9a8d2b6338afe69310b945) by Chris Taylor
+- [The Algebra of Algebraic Data Types: Part 1](https://gist.github.com/gregberns/5e9da0c95a9a8d2b6338afe69310b945) by Chris Taylor
 - [Type Isomorphism](https://kseo.github.io/posts/2016-12-25-type-isomorphism.html) by Kwang Yul Seo
+- [The Algebra of Algebraic Data Types: Part 2](https://web.archive.org/web/20140122164049/http://chris-taylor.github.io/blog/2013/02/11/the-algebra-of-algebraic-data-types-part-ii/) by Chris Taylor (dives into recursive ADTs!)
