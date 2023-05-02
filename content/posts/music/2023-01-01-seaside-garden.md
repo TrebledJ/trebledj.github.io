@@ -11,7 +11,9 @@ track_id: 1413849847
 score_id: 9351160
 ---
 
-_Seaside Garden_ is composed for HKUST's Call for Scores for the School Anthem. I present my rationale below, at the expense of being cheesy.
+_Seaside Garden_ is composed for HKUST's Call for Scores for the School Anthem.[^acceptance] I present my rationale below, at the expense of being cheesy.
+
+[^acceptance]: It didn't get accepted, sadly. But that's okay.
 
 ## Rationale
 
