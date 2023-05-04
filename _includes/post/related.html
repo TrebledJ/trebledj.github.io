@@ -2,7 +2,7 @@
 {% set relatedPosts = collections.postsr | relatedTo(this, related) %}
 
 {% if (not related.disable) and relatedPosts | length > 0 %}
-    <hr/>
+    <hr class="section-sep" />
     <div class="w-100 p-4">
         <h4>
             <i class="fa fa-link me-2"></i>Related

@@ -223,6 +223,7 @@ a.tag:hover {
     }
 
     .post-article {
+
         .post-posted-date::after,
         .post-updated-date::after {
             content: "|";
@@ -258,4 +259,9 @@ a.tag:hover {
 
 .footnote-backref {
     font-family: "Open Sans", arial, sans-serif;
+}
+
+.footnotes-sep,
+.section-sep {
+    margin: 2rem 0;
 }
