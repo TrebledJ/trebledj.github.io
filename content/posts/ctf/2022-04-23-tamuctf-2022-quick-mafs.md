@@ -100,7 +100,7 @@ Further, let $m_i$, $n_i$, and $p_i$ be the number of the $i$-th add, subtract, 
 $$
 c + \sum a_im_i - \sum s_in_i = \left(\bigwedge x_ip_i\right) \wedge r.
 $$
-{.alert--info}
+{.alert .alert-info}
 
 Our strategy now is to build up this equation using Z3 symbols, then throw the equation at the Z3 solver and get back solution sets for all $m_i, n_i, p_i$.
 

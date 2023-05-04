@@ -100,8 +100,38 @@ module.exports = function (eleventyConfig) {
 		md.render(markdownString)
 	);
 
-
 	eleventyConfig.addFilter("jsonify", (object) =>
 		JSON.stringify(object)
 	);
+
+	eleventyConfig.addPairedShortcode("alert", async function (content, role, emoji) {
+		const alert = {
+			primary: ['info', ''],
+			note: ['primary', 'pencil'],
+			info: ['primary', ''],
+			warning: ['warning', 'triangle-exclamation'],
+			success: ['success', 'lightbulb'],
+			danger: ['danger', 'radiation'],
+			simple: ['secondary', '']
+		};
+		const accepted = Object.keys(alert);
+		if (!accepted.includes(role)) {
+			throw new Error(`Expected a valid alert role (${accepted.join(', ')}), but got ${role}.`);
+		}
+
+		const [state, defaultEmoji] = alert[role];
+		if (!emoji) {
+			emoji = defaultEmoji;
+		}
+		let emoji_line = '';
+		if (emoji) {
+			emoji_line = `<i class="fas fa-${emoji} ms-1 me-3 mt-1 fs-4" role="img"></i>`;
+		}
+
+
+		return `<div class="alert alert-${state} d-flex align-items-start">${emoji_line}
+		<div class="alert-content">
+		${content.trimEnd()}
+		</div></div>`;
+	});
 };

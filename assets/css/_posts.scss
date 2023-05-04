@@ -304,6 +304,10 @@ a.tag:hover {
     margin: 2rem 0;
 }
 
+.alert-content > p:last-child {
+    margin-bottom: 0;
+}
+
 /* Direct Links / Markdown Headers */
 // .md-anchor {
 // 	font-family: sans-serif;

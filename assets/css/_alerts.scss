@@ -1,141 +1,18 @@
-/* ==========================================================================
-   ALERT TEXT BLOCKS
-   ========================================================================== */
+// Bootstrap alerts.
+html[data-theme="dark"] {
+    // Generate contextual modifier classes for colorizing the alert.
+    @each $state,
+    $value in $theme-colors {
+        $alert-background: shift-color($value, -$alert-bg-scale);
+        $alert-border: shift-color($value, -$alert-border-scale);
+        $alert-color: shift-color($value, -10% - $alert-color-scale);
 
-$gray: #7a8288 !default;
-$light-gray: mix(#fff, $gray, 50%) !default;
-$primary-color: #6f777d !default;
-$success-color: #3fa63f !default;
-$warning-color: #d67f05 !default;
-$danger-color: #ee5f5b !default;
-$info-color: #34a5c8 !default;
-$focus-color: $primary-color !default;
-
-/**
- *  Default Kramdown usage (no indents!):
- *  <div class="alert" markdown="1">
- *  #### Headline for the Alert
- *  Text for the alert
- *  </div>
- */
-
-@mixin alert($alert-color) {
-    margin: 1em 0em;
-    /* override*/
-    padding: 1em;
-    color: var(--medium-text-color);
-    // font-size: $type-size-6 !important;
-    text-indent: initial;
-    /* override*/
-    @at-root html[data-theme="dark"] #{&} {
-        background-color: mix(rgb(40, 40, 40), $alert-color, 80%);
-    }
-    @at-root html[data-theme="light"] #{&} {
-        background-color: mix(white, $alert-color, 80%);
-    }
-    // background-color: color-mix(in srgb, $alert-color 80%, var(--main-background-color));
-    // border-radius: $border-radius;
-    border-radius: var(--border-radius);
-    box-shadow: 0 1px 1px rgba($alert-color, 0.25);
-
-    h4 {
-        margin-top: 0 !important;
-        /* override*/
-        margin-bottom: 0.75em;
-        line-height: inherit;
-    }
-
-    @at-root .page__content #{&} h4 {
-        /* using at-root to override .page-content h4 font size*/
-        margin-bottom: 0;
-        font-size: 1em;
-    }
-
-    @at-root ul#{&}, ol#{&} {
-        padding: 1em 2em;
-    }
-
-    p {
-        &:last-child {
-            margin-bottom: 0 !important;
-            /* override*/
+        @if (contrast-ratio($alert-background, $alert-color) < $min-contrast-ratio) {
+            $alert-color: mix($value, color-contrast($alert-background), abs($alert-color-scale));
         }
-    }
 
-    h4+p {
-        /* remove space above paragraphs that appear directly after alert headline*/
-        margin-top: 0;
-        padding-top: 0;
-    }
-
-    a {
-        color: mix(#000, $alert-color, 10%);
-
-        &:hover {
-            color: mix(#000, $alert-color, 50%);
-        }
-    }
-
-    @at-root #{selector-unify(&, "blockquote")} {
-        border-left-color: mix(#000, $alert-color, 10%);
-    }
-
-    pre code {
-        background-color: inherit;
-    }
-
-    ul {
-        &:last-child {
-            margin-bottom: 0;
-            /* override*/
+        .alert-#{$state} {
+            @include alert-variant($alert-background, $alert-border, $alert-color);
         }
     }
 }
-
-/* Default alert */
-
-.alert {
-    @include alert($light-gray);
-}
-
-/* Primary alert */
-
-.alert--primary {
-    @include alert($primary-color);
-}
-
-/* Info alert */
-
-.alert--info {
-    @include alert($info-color);
-}
-
-/* Warning alert */
-
-.alert--warning {
-    @include alert($warning-color);
-}
-
-/* Success alert */
-
-.alert--success {
-    @include alert($success-color);
-}
-
-/* Danger alert */
-
-.alert--danger {
-    @include alert($danger-color);
-}
-
-// html[data-theme="dark"] {
-//     .alert, .alert--primary, .alert--info, .alert--warning, .alert-success, .alert--danger {
-//         background-color: mix(black, $alert-color, 80%);
-//     }
-// }
-
-// html[data-theme="light"] {
-//     .alert, .alert--primary, .alert--info, .alert--warning, .alert-success, .alert--danger {
-//         background-color: mix(white, $alert-color, 80%);
-//     }
-// }

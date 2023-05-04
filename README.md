@@ -33,7 +33,7 @@ npm run start
   * Things I like
     * Minimalistic design
     * Clean, organised codebase (easy to hack)
-    * Alerts (coloured boxes)
+    * Alerts (coloured boxes), but I eventually changed to Bootstrap alerts.
     * Sticky profile sidebar on left
   * Things I hate
     * Hand-spun CSS/JS? Nyeh.

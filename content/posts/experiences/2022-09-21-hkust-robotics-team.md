@@ -101,6 +101,6 @@ But this post is supposed to be a reflection, so why am I blabbering about PID? 
 Through the robotics team experience, one of my biggest areas of growth is in soft skills, in particular communication and mentoring. Communicating in a group project for a course almost always seems superficial and is usually short-term.
 
 In Robocon, it’s different. We’re stuck with our members for half a year. It takes skill to decide when and how to reprimand someone, and patience to mentor. Communication between divisions is also important. The best way to kill a team is to minimise communication. Of course, communication needs to be effective and should be followed up with action. In the end, it’s about becoming better humans in society.
-{.alert--success}
+{.alert .alert-success}
 
 I’ve mentioned this in some other posts, but I am quite terrible when it comes to dealing with people. I’ve learned a great deal over the past couple years, and I’m still learning—it’s a process.

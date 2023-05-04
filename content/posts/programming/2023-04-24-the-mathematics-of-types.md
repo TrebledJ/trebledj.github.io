@@ -145,8 +145,9 @@ This type allows us to handle errors in a more structured way and avoid a lot of
 
 To sum up, sum types enable us to express complex data structures, while avoiding redundancy and making our code more maintainable and type-safe.
 
+{% alert "success" %}
 We call `Just` a *data constructor*. This means we can construct concrete data by applying values to `Just`, as if it were a function. For example, `Just 1`, `Just "in"`, and `Just (Just 42)` are all concrete data. The same applies to `False`, `True`, and `Nothing`, but those don’t take arguments.
-{.alert--info}
+{% endalert %}
 
 ## Types in the Wild
 
@@ -167,8 +168,10 @@ ghci> divMod 42 2
 (21,0)
 ```
 
+{% alert "simple" %}
 In the Haskell REPL, lines starting with `ghci>` indicate REPL input. Other lines are REPL output.
-{.alert--success}
+{% endalert %}
+
 
 ### Sum Types in the Wild
 
@@ -217,8 +220,14 @@ The astute may notice that product types combine types in an “***and***” fas
 
 In the following parts, we'll explore how types relate to math and apply algebraic principles similar to those from elementary!
 
-A word on notation. Monospaced letters ($\texttt{a}$) denote types/code. $|\texttt{a}|$ denotes the size of set `a`. $\equiv$ denotes an isomorphism between types (as in $\texttt{Int} \equiv \texttt{Int}$), and $=$ is reserved for good ol' algebraic equivalence.
-{.alert--info}
+{% alert "note" %}
+A word on notation.
+
+* Monospaced letters ($\texttt{a}$) denote types/code,
+* $|\texttt{a}|$ denotes the size of set `a`,
+* $\equiv$ denotes an isomorphism between types (as in $\texttt{Int} \equiv \texttt{Int}$), and
+* $=$ is reserved for good ol' algebraic equivalence.
+{% endalert %}
 
 ### Types as Sets
 
@@ -259,8 +268,9 @@ In fact, we’ve just constructed an **isomorphism** between types!
 
 The beauty is in the algebra. The equivalence above can be succinctly (and abstractly!) written as $\texttt{Either a a} \equiv \texttt{(Bool, a)}$—or more algebraically, $a + a = 2a$.
 
+{% alert "success" %}
 More formally, an isomorphism exists between types `a` and `b` if we can *convert between the two types without loss of information*. The most straightforward approach is to define two functions: `toRHS :: a -> b` and `toLHS :: b -> a`. Alternatively with the algebra presented above, we can easily prove isomorphisms by checking the algebraic equivalence of two types!
-{.alert--success}
+{% endalert %}
 
 With the toy example presented above, our converters would be
 
@@ -289,8 +299,9 @@ Meet `Void` and `()`, two very special types. `Void` resembles the null set: it 
 
 `()` is the 0-tuple, the singleton set containing `()` itself. (To clarify, “`()`” is both a type and a value, depending on the context.)
 
-Note: C’s `void` should **not** be confused with Haskell’s `Void`. The former is more like `()`, containing only one possible result.
-{.alert--warning}
+{% alert "warning" %}
+C’s `void` should **not** be confused with Haskell’s `Void`. The former is more like `()`, containing only one possible result.
+{% endalert %}
 
 With these funky creatures, we can write isomorphisms such as:
 
@@ -322,7 +333,9 @@ With these funky creatures, we can write isomorphisms such as:
 
 You may verify that the bijections[^bijection] hold, i.e. show that $\texttt{toLHS }(\texttt{toRHS } x) = x$ and $\texttt{toRHS }(\texttt{toLHS } y) = y$ for any $x$ and $y$.
 
-[^bijection]: A [bijection](https://en.wikipedia.org/wiki/Bijection) is also known as a *one-to-one correspondence* or *invertible* function. Each input must map to one (and only one) unique output. Functions such as $x \mapsto \sqrt{x}$ and $x \mapsto \lfloor x \rfloor$ are not bijections as multiple inputs map to the same output—we can't recover our input given the output (which is the whole idea of being *invertible*).
+[^bijection]: A [bijection](https://en.wikipedia.org/wiki/Bijection) is also known as a *one-to-one correspondence* or *invertible* function. Each input must map to one (and only one) unique output.
+<br/>
+Functions such as $x \mapsto \sqrt{x}$ and $x \mapsto \lfloor x \rfloor$ are not bijections since multiple inputs may map to the same output—we can't recover a unique input given an output. This is the whole idea of being *invertible*.
 
 As for other algebraic constructions, I shall kindly leave them as an exercise for the reader. 🙃 Try coming up with examples of types and bijections for the following:
 

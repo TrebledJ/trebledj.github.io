@@ -48,7 +48,7 @@ A better approach is to use a *buffer* and work in batches. The buffer will hold
 We'll focus more on step 1 (processing) for now. We'll cover step 2 (output) in the next post.
 
 Remember how we mentioned different [quantisation][prev-post-quantisation] representations in the previous post? Since we're concerned with audio processing, we'll be using floats and quantising from -1 to 1.
-{.alert--info}
+{.alert .alert-info}
 
 In C/C++, we can generate a sine tone like so:
 
@@ -74,7 +74,7 @@ void generate_samples(float freq) {
 And that’s it—we’ve just whooshed pure sine tone goodness from nothing! Granted, there are some flaws with this method (it could be more efficient, and the signal clicks when repeated); but hey, it demonstrates synthesis.
 
 **Note** on Buffers: It's common to use a buffer size which is medium-sized power of 2 (e.g. 512, 1024, 2048, 4096...) as this enhances cache loads and processing speed (dividing by a power of 2 is super easy for processors!).[^buffers]
-{.alert--info}
+{.alert .alert-info}
 
 [^buffers]: Boy, do I have a lot to say about buffers. Why is the buffer size important? Small buffers may reduce the efficacy of batching operations (which is the primary purpose of buffers). Large buffers may block the processor too much, making it sluggish to respond to new input. Choosing an appropriate buffer size also depends on your sampling rate. With a buffer size of 1024 sampling at 44100Hz, we would need to generate our samples every $\frac{1024}{44.1\text{kHz}} \approx 23.2$ ms. On a single processor, this means we have *less than* 23.2 ms to perform other tasks (e.g. handle UI, events, etc.).
 
@@ -95,7 +95,7 @@ where $a_i$, $f_i$, and $b_i$ are the amplitude, frequency, and phase of each co
 {.center}
 
 **Did you know?** The Fourier Theorem and Fourier Transform are ubiquitous in modern day technology. It is the basis for many audio processing techniques such as filtering, equalisation, and noise cancellation. By manipulating the individual sine waves that make up a sound, we can alter its characteristics and create new sounds. The Fourier Transform is also a key component in compression, such as the JPG image format.
-{.alert--info}
+{.alert .alert-info}
 
 What’s cool about this theorem is that we can apply it the other way: any periodic signal can be *generated* by adding sine waves. This lays the groundwork for additive synthesis and generating audio with multiple pitches (e.g. a chord).
 
@@ -225,14 +225,14 @@ For a sine wave, we don't gain much in terms of performance. But when it comes t
 [^leaf]: Guess what? There are more ways to optimise wavetable synthesis—so it'll rock even more! See the open source [LEAF](https://github.com/spiricom/LEAF/blob/a0b0b7915cce3792ea00f06d0a6861be1a73d609/leaf/Src/leaf-oscillators.c#L67) library for an example of heavily optimised wavetable synthesis.
 
 Wavetable synthesis is commonly used by MIDI to generate sounds. Each instrument has its own *soundfont*, which is a collection of wavetables of different pitches. This unifies the synthesis approach for all instruments, as some may be simple to generate (e.g. clarinet) while others are more complex.
-{.alert--info}
+{.alert .alert-info}
 
 💡 Additive synthesis and wavetable synthesis serve two very different purposes!
 <br/>
 Additive synthesis aims to *combine multiple waveforms*, of *any* shape and size (e.g. playing chords, or combining guitar and voice tracks).
 <br/>
 Wavetable synthesis aims to generate a *specific* waveform (in a fast manner).
-{.alert--success}
+{.alert .alert-success}
 
 Besides this software approach, we can also leverage hardware to speed up processing. But this is a matter for the next post.
 

@@ -24,6 +24,8 @@ $enable-negative-margins: true;
 @import "toc-sidebar";
 @import "theme-switch";
 
+@import '../../node_modules/bootstrap/scss/alert';
+
 
 // --- Scroll to Top --- //
 #btn-back-to-top {

@@ -4,8 +4,9 @@ const markdownItFootnote = require('markdown-it-footnote');
 const pluginTOC = require('eleventy-plugin-toc')
 
 
-module.exports = function(eleventyConfig) {
-    eleventyConfig.amendLibrary("md", mdLib => {
+
+module.exports = function (eleventyConfig) {
+	eleventyConfig.amendLibrary("md", mdLib => {
 		mdLib.use(markdownItAnchor, {
 			// permalink: markdownItAnchor.permalink.ariaHidden({
 			// 	placement: "after",

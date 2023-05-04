@@ -48,7 +48,7 @@ As a first step, we'll run `checksec` to see what securities are in place.
 It appears that PIE is enabled. We'll make a mental note of this, since this may mess with function addresses.
 
 **What is PIE?** Position-independent executable is a security mechanism whereby on starting an application, the OS will offset the assembly sections (`.data`, `.text`, etc.).
-{.alert--success}
+{.alert .alert-success}
 
 Next, we decompile our elves using Ghidra and make some observations.
 
@@ -75,7 +75,7 @@ To "solve" an elf, we need to give an appropriate input at each step of the func
 
 **What is angr?**  
 angr is a python library which simulates machine code while keeping track of program state. Its exploration features are useful to find the input corresponding to a given output.
-{.alert--success}
+{.alert .alert-success}
 
 #### Coding
 As a preliminary step, we'll import angr, load the project, and set some constants.
@@ -93,7 +93,7 @@ def solve(file='elf'):
 ```
 
 Note: Ghidra will load PIE assembly at offset `0x100000`, but angr loads it at `0x400000` by default. So all addresses in the previous section were offset by an additional `0x300000` to account for this difference. There's a way to make angr load at a custom offset, but I forgot what the option was called. (But the option exists!)
-{.alert--warning}
+{.alert .alert-warning}
 
 Now we'll try some good ol' angr `explore()` and see what turns up.
 
