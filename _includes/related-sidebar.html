@@ -1,0 +1,11 @@
+{% set this = collections.posts | getCollectionItem %}
+{% set relatedPosts = collections.postsr | relatedTo(this, related) %}
+
+{% if related and (not related.disable) 
+    and relatedPosts | length > 0 %}
+    <div class="related-sidebar-container mb-2">
+        <span>
+            <a href="#related">Related</a>
+        </span>
+    </div>
+{% endif %}
