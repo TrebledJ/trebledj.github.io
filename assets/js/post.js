@@ -19,6 +19,7 @@ $(function () {
     const menu = document.querySelectorAll("nav.toc a");
 
     const hash = window.location.hash;
+    const articleEnd = document.querySelector("#end-of-article").offsetTop;
 
     if (hash) {
         for (const item of menu) {
@@ -47,12 +48,19 @@ $(function () {
             var docBody = document.body;
             var scrollTop = (docBody.scrollTop || docElem.scrollTop);
 
+            if (scrollTop > articleEnd + 30) {
+                if (currentActive !== -1) {
+                    removeAllActive();
+                    currentActive = -1;
+                }
+                return;
+            }
+
             const currentHeading =
                 sections.length -
                 [...sections].reverse().findIndex((section) => {
                     return section.offsetTop - headerOffset <= scrollTop;
-                }) -
-                1;
+                }) - 1;
 
             if (currentHeading !== currentActive) {
                 removeAllActive();
