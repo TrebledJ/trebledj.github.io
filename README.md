@@ -27,7 +27,7 @@ npm run start
     * Scroll progress
     * Navbar
   * Things I hate
-    * Terrible coding standards and codebase
+    * Bizarre coding standards and codebase
     * Some nonsensical CSS rules
 * [Minimal Mistakes](https://mmistakes.github.io/minimal-mistakes/)
   * Things I like
