@@ -36,10 +36,6 @@ $(function () {
         document.documentElement.scrollTop = 0;
     });
 
-    /* Vars */
-    var base_url = '{{site.baseurl}}';
-    var soundcloud_color = '{{site.soundcloud_color}}';
-
     /* Nanobar */
     var options = {
         classname: 'load-progress-bar',
