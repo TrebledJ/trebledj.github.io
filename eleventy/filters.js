@@ -109,10 +109,11 @@ module.exports = function (eleventyConfig) {
 			primary: ['info', ''],
 			note: ['primary', 'pencil'],
 			info: ['primary', ''],
+			fact: ['primary', 'lightbulb'],
 			warning: ['warning', 'triangle-exclamation'],
-			success: ['success', 'lightbulb'],
+			success: ['success', 'rocket'],
 			danger: ['danger', 'radiation'],
-			simple: ['secondary', '']
+			simple: ['secondary', ''],
 		};
 		const accepted = Object.keys(alert);
 		if (!accepted.includes(role)) {
@@ -125,9 +126,8 @@ module.exports = function (eleventyConfig) {
 		}
 		let emoji_line = '';
 		if (emoji) {
-			emoji_line = `<i class="fas fa-${emoji} ms-1 me-3 mt-1 fs-4" role="img"></i>`;
+			emoji_line = `<i class="fa fa-${emoji} ms-1 me-3 mt-1 fs-4" role="img"></i>`;
 		}
-
 
 		return `<div class="alert alert-${state} d-flex align-items-start">${emoji_line}
 		<div class="alert-content">

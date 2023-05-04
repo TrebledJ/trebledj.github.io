@@ -145,7 +145,7 @@ This type allows us to handle errors in a more structured way and avoid a lot of
 
 To sum up, sum types enable us to express complex data structures, while avoiding redundancy and making our code more maintainable and type-safe.
 
-{% alert "success" %}
+{% alert "fact" %}
 We call `Just` a *data constructor*. This means we can construct concrete data by applying values to `Just`, as if it were a function. For example, `Just 1`, `Just "in"`, and `Just (Just 42)` are all concrete data. The same applies to `False`, `True`, and `Nothing`, but those don’t take arguments.
 {% endalert %}
 
@@ -268,7 +268,7 @@ In fact, we’ve just constructed an **isomorphism** between types!
 
 The beauty is in the algebra. The equivalence above can be succinctly (and abstractly!) written as $\texttt{Either a a} \equiv \texttt{(Bool, a)}$—or more algebraically, $a + a = 2a$.
 
-{% alert "success" %}
+{% alert "fact" %}
 More formally, an isomorphism exists between types `a` and `b` if we can *convert between the two types without loss of information*. The most straightforward approach is to define two functions: `toRHS :: a -> b` and `toLHS :: b -> a`. Alternatively with the algebra presented above, we can easily prove isomorphisms by checking the algebraic equivalence of two types!
 {% endalert %}
 

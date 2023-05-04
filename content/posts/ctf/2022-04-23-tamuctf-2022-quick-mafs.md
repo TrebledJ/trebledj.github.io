@@ -92,15 +92,16 @@ Now comes the fun part... solving our way to `rax` using a constraint solver...
 #### ZZZ
 We'll use Z3 as our constraint solver. Our approach to solving this is...
 
+{% alert "info" %}
 Let $c$ be the init constant, moved to `rax` in the first gadget. Let $r$ be the target `rax`. Let $a_i$, $s_i$, and $x_i$ be the constants of the $i$-th add, subtract, and xor gadget respectively. These variables are all known constants.
 <a id="equation"></a>
-<br/>  
+
 Further, let $m_i$, $n_i$, and $p_i$ be the number of the $i$-th add, subtract, and xor gadget to apply; and constrain $m_i, n_i, p_i \in \mathbb{Z}^+ \cup \{0\}$. These are unknown variables. We want to solve for these sets of variables such that
-<br/>
+
 $$
 c + \sum a_im_i - \sum s_in_i = \left(\bigwedge x_ip_i\right) \wedge r.
 $$
-{.alert .alert-info}
+{% endalert %}
 
 Our strategy now is to build up this equation using Z3 symbols, then throw the equation at the Z3 solver and get back solution sets for all $m_i, n_i, p_i$.
 

@@ -55,8 +55,9 @@ The diagram below demonstrates aliasing, which happens when our sample rate is t
 
 [^emp]: Katz, D; Gentile, R. 2005. *Embedded Media Processing*. They’ve provided [Chapter 5: Embedded Audio Processing](https://www.analog.com/media/en/dsp-documentation/embedded-media-processing/embedded-media-processing-chapter5.pdf) as a preview.
 
+{% alert "note" %}
 The Nyquist Theorem explains why we usually sample above 40kHz, but why 44.1kHz specifically? Well, there are historical reasons (pioneering decisions) and mathematical reasons (factoring and downsampling[^factoring]). Also, being lenient with our sampling frequency gives filters more flexibility.[^why-44100]
-{.alert .alert-info}
+{% endalert %}
 
 [^factoring]: 44100 can be factored into $44100 = 2^2 \times 3^2 \times 5^2 \times 7^2$, which is useful for downsampling to various applications.
 [^why-44100]: See also: [Why do we choose 44.1 kHz as recording sampling rate?](https://dsp.stackexchange.com/q/17685/65058)
@@ -84,8 +85,9 @@ Thus, we use a smaller range to allow room for processing.
 
 Sometimes when experimenting with audio, something goes amiss. The most common issues are aliasing, clipping, and clicks. These pesky lil' issues may crop up when processing audio... all the more important to understand how to mitigate them.
 
-💡 **Pro Tip**: Oscilloscopes are your friend! If you encounter weird sounds, you can feed your processed signal into an oscilloscope (analogue or digital) to check for issues.
-{.alert .alert-success}
+{% alert "success" %}
+**Pro Tip**: Oscilloscopes are your friend! If you encounter weird sounds, you can feed your processed signal into an oscilloscope (analogue or digital) to check for issues.
+{% endalert %}
 
 
 ### Aliasing

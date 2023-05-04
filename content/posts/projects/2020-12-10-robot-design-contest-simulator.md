@@ -71,15 +71,18 @@ In robotics, a program is usually compiled then transferred over to a microcontr
 
 Instead of writing a program that can touch the peripherals and actuators, trainees write a program which communicates with the simulator via standard I/O. In a microcontroller, GPIO pins can be accessed and read directly; but in the RDC simulator, GPIO data is provided from standard input. If an object is detected, the GPIO pin outputs a 1. Otherwise, it outputs a 0.
 
-**What is GPIO?** General purpose input/output. In layman's terms: communicating with 1s and 0s. An example of a sensor which uses GPIO is an infrared (IR) sensor, which detects if an object is present within a certain distance in a fixed direction.
-{.alert .alert-info}
+{% alert "fact" %}
+**What is GPIO?** 
+General purpose input/output. In layman's terms: communicating with 1s and 0s. An example of a sensor which uses GPIO is an infrared (IR) sensor, which detects if an object is present within a certain distance in a fixed direction.
+{% endalert %}
 
 I won't describe the communication model between the simulator and user program in detail, since it's a bit convoluted and messy. (Although you can still [check it out][emulator-flow].) But suffice to say, there are advantages and disadvantages. An advantage is that the simulator and user program are decoupled, so the simulation would look nice and appear smooth. A disadvantage of our implementation is that the two programs (simulator and user) run asynchronously; and due to timing issues, this means that the simulation runs differently each time we hit "Run" (even without setting any randomness to our input).
 
 This disadvantage seems to heavily outweigh the advantage; but in our defence, it simulates the real world of robotics perfectly. Even though the microcontroller processors are designed to be deterministic, sensor input and motor control are almost always non-deterministic (i.e. random) to a certain degree. :P
 
-**Fun fact**: the communication model was inspired by Codingame's turn-based games. However, Codingame's turn based system provides all available input every single turn. In the RDC emulator, we only provide input if the user program requests it. Why? Well... in retrospect, we *could* have sent all available input... but by the time we realised this, it was a bit too late to change, otherwise we would break a lot of the code trainees have already written. Codingame's turn-based model is certainly much cleaner though.
-{.alert .alert-success}
+{% alert "fact" %}
+The communication model was inspired by Codingame's turn-based games. However, Codingame's turn based system provides all available input every single turn. In the RDC emulator, we only provide input if the user program requests it. Why? Well... in retrospect, we *could* have sent all available input... but by the time we realised this, it was a bit too late to change, otherwise we would break a lot of the code trainees have already written. Codingame's turn-based model is certainly much cleaner though.
+{% endalert %}
 
 ### Developing the Simulator
 
@@ -138,17 +141,19 @@ At least two software trainee teams managed to complete the game and score full 
 
 Some wisdom to takeaway:
 
+{% alert "success" %}
 * Plan things ahead. It's better to resolve problems earlier on than later down the road. If your product is used by a lot of users, changing something drastic later on may affect your users negatively.
 * Be organised. Know what to-dos exist, which ones are more important, and when they should be done.
 * Remember to initialise your Box2D `b2vec2`s unless you want your physics intentionally broken.
-{.alert .alert-success}
+{% endalert %}
 
 Also, some final reflections:
 
+{% alert "warning" %}
 * We had planned a roadmap but started lagging behind. Perhaps the goals were slightly unrealistic, or we didn't consider the stress of the exam period. In my eyes, we could have pushed things a bit earlier so that the trainees had more time to plan. The final features (Demo Mode) were slightly rushed at the end.
 * Coding-wise, I think we did okay. The only thing to improve was our intellectual capacity so that we could write more sophisticated simulations. Some sensors were hacked together rather awkwardly. But learning takes time.
 * Probably one thing we could've done better was provide more tips for the trainees. I heard from other seniors that some trainees had difficulty merging their code (which was one way we tested collaborative skills).
-{.alert .alert-warning}
+{% endalert %}
 
 
 [ustrobotics]: https://robotics.ust.hk/

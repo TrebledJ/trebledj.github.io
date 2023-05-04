@@ -47,8 +47,10 @@ As a first step, we'll run `checksec` to see what securities are in place.
 
 It appears that PIE is enabled. We'll make a mental note of this, since this may mess with function addresses.
 
-**What is PIE?** Position-independent executable is a security mechanism whereby on starting an application, the OS will offset the assembly sections (`.data`, `.text`, etc.).
-{.alert .alert-success}
+{% alert "fact" %}
+**What is PIE?**
+Sadly, not the scrumptious dessert. Position-independent executable is a security mechanism whereby on starting an application, the OS will offset the assembly sections (`.data`, `.text`, etc.).
+{% endalert %}
 
 Next, we decompile our elves using Ghidra and make some observations.
 
@@ -73,9 +75,10 @@ Next, we decompile our elves using Ghidra and make some observations.
 
 To "solve" an elf, we need to give an appropriate input at each step of the function such that the correct branch and path are taken. In other words, we need to trace the right path out of the maze. We need to solve 5 elves to get the flag. We only have five minutes for five elves. Solving this without any automation seems next to impossible. Thankfully, we have angr.
 
+{% alert "fact" %}
 **What is angr?**  
 angr is a python library which simulates machine code while keeping track of program state. Its exploration features are useful to find the input corresponding to a given output.
-{.alert .alert-success}
+{% endalert %}
 
 #### Coding
 As a preliminary step, we'll import angr, load the project, and set some constants.
@@ -92,8 +95,9 @@ def solve(file='elf'):
     tar_addr = 0x4011c8
 ```
 
-Note: Ghidra will load PIE assembly at offset `0x100000`, but angr loads it at `0x400000` by default. So all addresses in the previous section were offset by an additional `0x300000` to account for this difference. There's a way to make angr load at a custom offset, but I forgot what the option was called. (But the option exists!)
-{.alert .alert-warning}
+{% alert "note" %}
+Ghidra will load PIE assembly at offset `0x100000`, but angr loads it at `0x400000` by default. So all addresses in the previous section were offset by an additional `0x300000` to account for this difference. There's a way to make angr load at a custom offset, but I forgot what the option was called. (But the option exists!)
+{% endalert %}
 
 Now we'll try some good ol' angr `explore()` and see what turns up.
 

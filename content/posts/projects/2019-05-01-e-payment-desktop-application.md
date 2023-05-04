@@ -41,8 +41,9 @@ Initially I started developing the application using SFML, since it was the only
 ![SFML is not cute.](/img/posts/memes/sfml-is-not-cute.jpg){.w-60}
 {.center}
 
+{% alert "success" %}
 If there was one thing I learned, it was to understand the problem first, research the appropriate tools, and *then* start developing the solution. I wasted maybe two to four weeks coding a good GUI with SFML and scratching my head.
-{.alert .alert-success}
+{% endalert %}
 
 #### Designing a Robust Solution
 Regardless, all the benefits brought by Qt allowed me to focus more on solving business logic issues. The logic issue? Well... there are several questions we should answer.
@@ -79,8 +80,9 @@ VCSs take this idea of versioning and put it on steroids. While developing, you 
 
 Typically, VCSs are used by teams to effectively manage their code between team members. But they're also effective if you're coding alone! The (outdated) screenshots of the GUI in this post are here thanks to version control holding onto them. (I uploaded them but deleted them in one of my commits.)
 
-So if you're planning on doing a project (small, medium, or big) or even just cataloguing your learning process, consider using a VCS.
-{.alert .alert-success}
+{% alert "success" %}
+If you're planning on doing a project (whether small, medium, or big) or even just cataloguing your learning process, consider using a VCS.
+{% endalert %}
 
 #### Designing the GUI
 As mentioned before, there are three groups of users: vendors, students, and admins.
@@ -147,7 +149,6 @@ When I asked a student about it this year (2022), they said that the entire syst
 * Spend some time researching the problem you're trying to solve and the possible solutions. You'll accrue less [technical debt][techdebt] and thank yourself in the future.
 * Use a version control system for flexibility and to keep track of history.
 * Don't be afraid to try something new. The journey might just be worth it.
-{.alert .alert-success}
 
 
 [octopus]: https://en.wikipedia.org/wiki/Octopus_card
