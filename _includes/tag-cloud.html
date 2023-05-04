@@ -1,7 +1,7 @@
 {% set tags = collections.tags | dictsort %}
 {% for tag, count in tags %}
     <div class="ms-1" style="display: inline-block;">
-        {% set perc = count * 4 + 80 %}
+        {% set perc = count * 4 + 75 %}
         <a class="tag" href="/tags/{{ tag | slugify }}/" style="font-size: {{perc}}%;">
             {{ tag }}
         </a>
