@@ -6,6 +6,7 @@ tags:
  - qt
  - cpp
  - robotics
+ - software-engineering
  - apps
  - hkust
 thumbnail: /img/posts/projects/rdc-simulator/thumbnail.jpg

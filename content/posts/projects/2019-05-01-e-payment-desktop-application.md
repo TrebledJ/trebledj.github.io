@@ -3,6 +3,7 @@ title:  E-Payment Desktop Application and System
 description: "A reflection of my first large-scale project: an e-payment system plus cross-platform desktop application made using Qt."
 updated: "2022-08-01"
 tags: 
+ - software-engineering
  - qt
  - cpp
  - sql

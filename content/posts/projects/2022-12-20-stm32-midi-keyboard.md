@@ -6,6 +6,7 @@ tags:
  - embedded
  - cpp
  - c
+ - software-engineering
  - programming
  - dsp
  - music
