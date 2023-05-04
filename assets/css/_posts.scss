@@ -196,6 +196,11 @@ a.tag:hover {
 
 .post-article {
 
+    h6,
+    p {
+        line-height: 1.65em;
+    }
+
     ul,
     ol {
         margin-left: 0rem;
@@ -248,6 +253,39 @@ a.tag:hover {
     }
 }
 
+.post-body {
+    .center {
+        text-align: center;
+
+        &-25 {
+            width: 25%;
+        }
+
+        &-50 {
+            width: 50%;
+        }
+
+        &-75 {
+            width: 75%;
+        }
+
+        &-100 {
+            width: 100%;
+        }
+    }
+
+    .no-center {
+        /* This class serves no purpose other than making markdown assign attribute lists correctly. (Needs some whitespace tuning.) */
+    }
+
+    ul {
+        margin-top: 0.2rem;
+        p {
+            margin-bottom: 0rem;
+        }
+    }
+}
+
 .post-share a {
     color: var(--main-text-color) !important;
     cursor: pointer;
@@ -264,4 +302,34 @@ a.tag:hover {
 .footnotes-sep,
 .section-sep {
     margin: 2rem 0;
+}
+
+/* Direct Links / Markdown Headers */
+// .md-anchor {
+// 	font-family: sans-serif;
+// 	text-decoration: none;
+// 	font-style: normal;
+//     font-size: 20px;
+// 	margin-left: .1em;
+// }
+// a[href].md-anchor,
+// a[href].md-anchor:visited {
+// 	color: transparent !important;
+// }
+// a[href].md-anchor:focus,
+// a[href].md-anchor:focus:visited,
+// :hover > a[href].md-anchor,
+// :hover > a[href].md-anchor:visited {
+// 	color: #aaa !important;
+// }
+
+
+// Handle svg images in both light/dark mode.
+
+html[data-theme="light"] .svg-img {
+    filter: invert(0%);
+}
+
+html[data-theme="dark"] .svg-img {
+    filter: invert(100%);
 }
