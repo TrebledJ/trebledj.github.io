@@ -53,7 +53,7 @@ The diagram below demonstrates aliasing, which happens when our sample rate is t
 <sup>(a) Sampling a 20kHz signal at 40kHz captures the original signal correctly. (b) Sampling the same 20kHz signal at 30kHz captures an aliased (low frequency ghost) signal. (Source: Embedded Media Processing.[^emp])</sup>
 {.center}
 
-[^emp]: Katz, D; Gentile, R. 2005. *Embedded Media Processing*. They’ve provided [Chapter 5: Embedded Audio Processing](https://www.analog.com/media/en/dsp-documentation/embedded-media-processing/embedded-media-processing-chapter5.pdf) as a preview.
+[^emp]: Katz, D; Gentile, R. 2005. *Embedded Media Processing*. They’ve provided [Chapter 5: Embedded Audio Processing](https://www.analog.com/media/en/dsp-documentation/embedded-media-processing/embedded-media-processing-chapter5.pdf) as a preview. It's a nice read.
 
 {% alert "note" %}
 The Nyquist Theorem explains why we usually sample above 40kHz, but why 44.1kHz specifically? Well, there are historical reasons (pioneering decisions) and mathematical reasons (factoring and downsampling[^factoring]). Also, being lenient with our sampling frequency gives filters more flexibility.[^why-44100]
@@ -64,22 +64,23 @@ The Nyquist Theorem explains why we usually sample above 40kHz, but why 44.1kHz 
 
 ### Quantisation 🪜
 
-While sampling deals with resolution in time, **quantisation** deals with resolution in *dynamics* (or *loudness*). Here, we’re concerned with three things: *signal representation*, *loudness*, and *data storage* (files or RAM).
+While sampling deals with resolution in time, **quantisation** deals with resolution in *dynamics* (or *loudness*). Here, we’re concerned with two things: *quality* and *data storage* (in files or RAM).
 
 1. Like sampling, quantisation affects how well a signal is represented. If we quantise with 1 bit, then each sample has only two possible values (0 or 1). This means we can represent square waves (where high=1, low=0). But we can’t represent sine waves since the values in between that *make up a sine wave* aren’t in our vocabulary.
 
     ![Higher quantisation, better quality.](/img/posts/misc/dsp/quantisation-quality.jpg){.w-90 .rw}
     {.center}
 
-    <sup>Higher quantisation leads to better audio quality.</sup>
+    <sup>Blue: original signal; Red: quantised signal. Higher quantisation leads to better audio quality. With 1 or 2 bits, we can barely tell the signal is reproduced. At higher bits, the signal is reproduced more faithfully.</sup>
     {.center}
 
     {.no-center}
 
-2. In terms of loudness, a quantisation of 1 bit limits us to absolute silence (0) or an ear-shattering loudness (1)... so 1 bit is no good. If we use 2 bits, we get twice as many volume settings (00, 01, 10, and 11). Now we have a couple intermediate options and don’t have to break our ears! The more bits each sample has, the greater the dynamic resolution.
-3. Regarding data storage, the less number of bits needed per sample, the more memory saved. When storing samples in files, most applications quantise to 16-bit integers, which allow for a decent resolution of -32,768 to +32,767 at two bytes per sample (1 byte being 8 bits). 32-bit floats are another common representation, bringing substantially greater detail at the expense of twice the space. How much more detail are we talking about? 32-bit floats range from about -10<sup>38</sup> to +10<sup>38</sup> whereas 32-bit integers range from about -10<sup>9</sup> to +10<sup>9</sup>. Sadly, the increased range of floats comes with a downside: reduced precision. Floats are only precise up to 7 significant figures.[^floats]
+    Higher quantisation also gives us greater dynamic resolution. With 1 bit, we're limited to absolute silence (0) or an ear-shattering loudness (1). With 8 bits, we have 64 different "volume settings" to choose from.
+
+2. Regarding data storage, the less number of bits needed per sample, the more memory saved. When storing samples in files, most applications quantise to 16-bit integers, which allow for a decent resolution of -32,768 to +32,767 at two bytes per sample (1 byte being 8 bits). 32-bit floats are another common representation, bringing substantially greater detail at the expense of twice the space.[^floats]
     
-    [^floats]: For more info on floating points, see [Single-precision floating-point format](https://en.wikipedia.org/wiki/Single-precision_floating-point_format).
+    [^floats]: How much more detail do floats have over integers? 32-bit floats range from about -10<sup>38</sup> to +10<sup>38</sup> whereas 32-bit integers range from about -10<sup>9</sup> to +10<sup>9</sup>. Sadly, the increased range of floats comes with a downside: reduced precision. But that's alright. Floats are precise up to 7 significant figures, which is fine in a lot of cases! For more info on floating points, see the [Wikipedia page on 32-bit floats](https://en.wikipedia.org/wiki/Single-precision_floating-point_format).
 
     ![Lower quantisation, more compact storage.](/img/posts/misc/dsp/quantisation-storage.jpg){.w-90 .rw}
     {.center}
