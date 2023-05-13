@@ -23,9 +23,9 @@ When processing data of any form, we are concerned with the data’s quality. Hi
 
 With audio, we are concerned with two dimensions of quality: sampling (time) and quantisation (bit depth).
 
-### Sampling
+### Sampling 🔪
 
-**Sampling** refers to how much we “chop” a signal. 
+**Sampling** refers to how much we “chop” a signal. For a stew, you may want longer samples. With rice, however, short samples taste better.
 
 ![Want some free samples?](/img/posts/misc/dsp/sampling.png){.w-90}
 {.center}
@@ -59,22 +59,41 @@ The diagram below demonstrates aliasing, which happens when our sample rate is t
 The Nyquist Theorem explains why we usually sample above 40kHz, but why 44.1kHz specifically? Well, there are historical reasons (pioneering decisions) and mathematical reasons (factoring and downsampling[^factoring]). Also, being lenient with our sampling frequency gives filters more flexibility.[^why-44100]
 {% endalert %}
 
-[^factoring]: 44100 can be factored into $44100 = 2^2 \times 3^2 \times 5^2 \times 7^2$, which is useful for downsampling to various applications.
+[^factoring]: 44,100 can be factored into $2^2 \times 3^2 \times 5^2 \times 7^2$, which is useful for downsampling to various applications. It's very easy to downsample by a factor of the original sample. For instance, if we want to downsample by a factor of 2, we simply skip every other sample (or interpolate between).
 [^why-44100]: See also: [Why do we choose 44.1 kHz as recording sampling rate?](https://dsp.stackexchange.com/q/17685/65058)
 
-### Quantisation
+### Quantisation 🪜
 
 While sampling deals with resolution in time, **quantisation** deals with resolution in *dynamics* (or *loudness*). Here, we’re concerned with three things: *signal representation*, *loudness*, and *data storage* (files or RAM).
 
 1. Like sampling, quantisation affects how well a signal is represented. If we quantise with 1 bit, then each sample has only two possible values (0 or 1). This means we can represent square waves (where high=1, low=0). But we can’t represent sine waves since the values in between that *make up a sine wave* aren’t in our vocabulary.
+
+    ![Higher quantisation, better quality.](/img/posts/misc/dsp/quantisation-quality.jpg){.w-100}
+    {.center}
+
+    <sup>Higher quantisation leads to better audio quality.</sup>
+    {.center}
+
+    {.no-center}
+
 2. In terms of loudness, a quantisation of 1 bit limits us to absolute silence (0) or an ear-shattering loudness (1)... so 1 bit is no good. If we use 2 bits, we get twice as many volume settings (00, 01, 10, and 11). Now we have a couple intermediate options and don’t have to break our ears! The more bits each sample has, the greater the dynamic resolution.
-3. Regarding data storage, the less number of bits needed per sample, the more memory saved. When storing samples in files, most applications quantise to 16-bit integers, which allow for a decent resolution of -32,768 to +32,767 at two bytes per sample (1 byte being 8 bits). 32-bit floats are another common representation, bringing substantially greater detail at the expense of twice the space. How much more detail are we talking about? 32-bit floats range from about -10<sup>38</sup> to +10<sup>38</sup> whereas 32-bit integers range from about -10<sup>9</sup> to +10<sup>9</sup>. Sadly, the increased range of floats comes with a downside: reduced precision. Floats are only precise up to 7 significant figures[^floats].
+3. Regarding data storage, the less number of bits needed per sample, the more memory saved. When storing samples in files, most applications quantise to 16-bit integers, which allow for a decent resolution of -32,768 to +32,767 at two bytes per sample (1 byte being 8 bits). 32-bit floats are another common representation, bringing substantially greater detail at the expense of twice the space. How much more detail are we talking about? 32-bit floats range from about -10<sup>38</sup> to +10<sup>38</sup> whereas 32-bit integers range from about -10<sup>9</sup> to +10<sup>9</sup>. Sadly, the increased range of floats comes with a downside: reduced precision. Floats are only precise up to 7 significant figures.[^floats]
     
     [^floats]: For more info on floating points, see [Single-precision floating-point format](https://en.wikipedia.org/wiki/Single-precision_floating-point_format).
+
+    ![Lower quantisation, more compact storage.](/img/posts/misc/dsp/quantisation-storage.jpg){.w-100}
+    {.center}
+
+    <sup>Each block is an audio sample. Lower quantisation leads to more compact storage.[^encoding]</sup>
+    {.center}
+
+    {.no-center}
+
+    [^encoding]: When storing audio in files or transmitting audio, we usually encode and compress the audio to save space. Out of scope for this post though. :(
     
     Now when storing audio in RAM for *audio* *processing*, it's easier to work with floats in the range of -1.0 to 1.0. Why the smaller range? Well, if we work directly with the maxima, we may easily encounter errors.
-    With integers, we would experience [integer overflow](https://en.wikipedia.org/wiki/Integer_overflow), which wrap positive values to negative values.
-    With floats, we would venture into the territory of infinity, which may disrupt subsequent computations.
+    With integers, we would experience [integer overflow](https://en.wikipedia.org/wiki/Integer_overflow), which wraps positive values to negative values—a horrid nightmare!
+    With floats, we would venture into the territory of infinity, which disrupts subsequent computations.
     
     Thus, we use a smaller range to allow room for processing.
 
@@ -139,8 +158,10 @@ In the [next post](/posts/digital-audio-synthesis-for-dummies-part-2), we'll loo
 To recap…
 
 - Fundamental to audio processing is the *quality* of audio data. This comes in two forms: sampling and quantisation.
-    - [Sampling](#sampling) refers to the discretisation and resolution of a signal in *time*. Larger sample rate = more information per second = higher quality.
-    - [Quantisation](#quantisation) refers to the bit depth, the resolution in loudness. Higher bit depth = more degrees of loudness = higher quality.
+    - [Sampling](#sampling) refers to the discretisation and resolution of a signal in *time*.
+      - Larger sample rate = more information per second = higher quality.
+    - [Quantisation](#quantisation) refers to the bit depth, the resolution in loudness.
+      - Higher bit depth = higher quality, but consumes more space.
     - To accurately reconstruct a signal, the **Nyquist Theorem** states the sample rate should be at least *twice the maximum frequency of the signal*.
 - Some common issues to audio processing are aliasing, clipping, and clicks.
     - [Aliasing](#aliasing) occurs when a signal is misinterpreted to be of lower frequency.
