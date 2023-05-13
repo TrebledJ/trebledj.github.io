@@ -33,13 +33,15 @@ With audio, we are concerned with two dimensions of quality: sampling (time) and
 <sup>Green line: original, continuous signal. Black dots: sampled, discrete signal.</sup>
 {.center}
 
-Digital audio signals are represented discretely by storing samples at regular intervals instead of having a single continuous line.
+Digital audio signals are represented discretely by storing samples at regular intervals instead of using a single continuous line.
 
-The **sample rate** refers to how fast we chop, how fast we sample our audio. Choosing an appropriate sample rate for your application is an important consideration. Audio is usually sampled at 44.1kHz or 48kHz (i.e. 44,100 or 48,000 samples per second). But why are these rates so common? To answer this, we first need to learn about the…
+The **sample rate** refers to how fast we chop, how fast we sample our audio. Choosing an appropriate sample rate for your application is an important consideration. A higher rate yields more information per second, at the expense of space.
+
+Audio is usually sampled at 44.1kHz or 48kHz (i.e. 44,100 or 48,000 samples per second). But why are these rates so common? To answer this, we first need to learn about the…
 
 ### Nyquist-Shannon Sampling Theorem
 
-The **Nyquist-Shannon Sampling Theorem** (aka the Nyquist Theorem) is an important consideration when choosing a sample rate for your application. According to this theorem, in order to accurately reconstruct a continuous signal such as audio, it must be sampled at a rate that is *at least **twice** the highest frequency component of the signal*.
+The **Nyquist-Shannon Sampling Theorem** (aka the Nyquist Theorem) is an important consideration when choosing a sample rate for your application. According to this theorem, in order to accurately reconstruct a continuous signal such as audio, it must be sampled at a rate that is *at least **twice** the highest frequency component of the signal*. This threshold is also called the **Nyquist frequency**.
 
 For example, if we want to store a 1kHz audio signal, we would need to sample at 2kHz or more. Humans can hear frequencies in the range 20Hz – 20kHz, so if we want to capture all audible sounds, our sample rate needs to be at least 40kHz.
 
@@ -113,7 +115,7 @@ Sometimes when experimenting with audio, something goes amiss. The most common i
 
 We mentioned aliasing [earlier](#nyquist-shannon-sampling-theorem). Aliasing occurs when a signal is sampled insufficiently, causing it to appear at a lower frequency.
 
-Generally, increasing the sample rate helps (or lowering your expectations for the maximum frequency). In any case, it's wise to be vigilant with your sample rate and frequency range.
+Generally, increasing the sample rate helps (or lowering the maximum frequency). In any case, it's wise to be vigilant with your sample rate and frequency range.
 
 
 ### Clipping ✂️
@@ -132,7 +134,7 @@ Clipping occurs when our samples go out-of-bounds, past the maximum/minimum quan
 <sup>Example of a signal flattened at the peaks and troughs due to clamping.</sup>
 {.center}
 
-Clipping usually happens due to neglecting the dynamic range. It can be addressed by scaling down the signal (achieved by multiplying samples by a factor < 1) or by using [dynamic range compression](https://en.wikipedia.org/wiki/Dynamic_range_compression) (loud noises are dampened, soft noises are left unchanged).
+Clipping arises from neglecting dynamic range. It can be addressed by scaling down the signal (multiplying samples by a factor below 1) or by using [dynamic range compression](https://en.wikipedia.org/wiki/Dynamic_range_compression) (loud noises are dampened, soft noises are left unchanged).
 
 
 ### Clicks
@@ -145,7 +147,7 @@ Clicks (aka pops) occur when a signal behaves discontinuously with large differe
 <sup>Signal jumps from -1.0 to 1.0, causing my speaker to pop and my ear drums to bleed from utter despair.</sup>
 {.center}
 
-Clicks may arise from trimming or combining audio recordings without applying fades. In audio synthesis, they may also arise out of mishandling buffers and samples.[^clicks]
+Clicks may arise from trimming or combining audio recordings without applying fades. In audio synthesis, mismanagement of buffers and samples may also be a factor.[^clicks]
 
 [^clicks]: Fox, Arthur. [*What Causes Speakers To Pop And Crackle, And How To Fix It*](https://mynewmicrophone.com/what-causes-speakers-to-pop-and-crackle-and-how-to-fix-it/)
 
@@ -160,11 +162,13 @@ To recap…
 
 - Fundamental to audio processing is the *quality* of audio data. This comes in two forms: sampling and quantisation.
     - [Sampling](#sampling) refers to the discretisation and resolution of a signal in *time*.
-      - Larger sample rate = more information per second = higher quality.
+      - Higher sample rate = more information per second = higher quality.
     - [Quantisation](#quantisation) refers to the bit depth, the resolution in loudness.
-      - Higher bit depth = higher quality, but consumes more space.
-    - To accurately reconstruct a signal, the **Nyquist Theorem** states the sample rate should be at least *twice the maximum frequency of the signal*.
+      - Higher bit depth = higher quality.
+    - Higher quality comes with the cost of higher memory consumption.
+    - To accurately reconstruct a signal, the [Nyquist Theorem](#nyquist-shannon-sampling-theorem) states the sample rate should surpass the *Nyquist frequency* (*twice the maximum frequency of the signal*).
+      - Sample rates below the signal's Nyquist frequency are prone to aliasing.
 - Some common issues to audio processing are aliasing, clipping, and clicks.
     - [Aliasing](#aliasing) occurs when a signal is misinterpreted to be of lower frequency.
-    - [Clipping](#clipping) occurs when samples don’t fit into the given dynamic range and are cut.
-    - [Clicks](#clicks) occur when a large difference occurs in samples, causing the speaker to act wonky.
+    - [Clipping](#clipping) occurs when samples exceed the dynamic range and are cut.
+    - [Clicks](#clicks) occur when samples contain a large difference, causing the speaker to vibrate too quickly.
