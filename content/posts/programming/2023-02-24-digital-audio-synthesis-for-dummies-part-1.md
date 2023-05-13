@@ -16,7 +16,7 @@ A while back I worked on a lil’ [MIDI keyboard](/posts/stm32-midi-keyboard) pr
 
 ## Dealing with Data 📈
 
-![Get ready for some Data!](/img/posts/misc/dsp/data.jpg){.w-75}
+![Get ready for some Data!](/img/posts/misc/dsp/data.jpg){.w-75 .rw}
 {.center}
 
 When processing data of any form, we are concerned with the data’s quality. Higher quality data may lead to a more thorough analysis and better user experience, but also demand higher memory and computing requirements.
@@ -27,7 +27,7 @@ With audio, we are concerned with two dimensions of quality: sampling (time) and
 
 **Sampling** refers to how much we “chop” a signal. For a stew, you may want longer samples. With rice, however, short samples taste better.
 
-![Want some free samples?](/img/posts/misc/dsp/sampling.png){.w-90}
+![Want some free samples?](/img/posts/misc/dsp/sampling.png){.w-90 .rw}
 {.center}
 
 <sup>Green line: original, continuous signal. Black dots: sampled, discrete signal.</sup>
@@ -47,7 +47,7 @@ This is important to avoid **aliasing**, which occurs when high frequency compon
 
 The diagram below demonstrates aliasing, which happens when our sample rate is too low.
 
-![Aliasing example.](/img/posts/misc/dsp/aliasing.jpg){.w-100}
+![Aliasing example.](/img/posts/misc/dsp/aliasing.jpg){.w-100 .rw}
 {.center}
 
 <sup>(a) Sampling a 20kHz signal at 40kHz captures the original signal correctly. (b) Sampling the same 20kHz signal at 30kHz captures an aliased (low frequency ghost) signal. (Source: Embedded Media Processing.[^emp])</sup>
@@ -68,7 +68,7 @@ While sampling deals with resolution in time, **quantisation** deals with resolu
 
 1. Like sampling, quantisation affects how well a signal is represented. If we quantise with 1 bit, then each sample has only two possible values (0 or 1). This means we can represent square waves (where high=1, low=0). But we can’t represent sine waves since the values in between that *make up a sine wave* aren’t in our vocabulary.
 
-    ![Higher quantisation, better quality.](/img/posts/misc/dsp/quantisation-quality.jpg){.w-100}
+    ![Higher quantisation, better quality.](/img/posts/misc/dsp/quantisation-quality.jpg){.w-100 .rw}
     {.center}
 
     <sup>Higher quantisation leads to better audio quality.</sup>
@@ -81,7 +81,7 @@ While sampling deals with resolution in time, **quantisation** deals with resolu
     
     [^floats]: For more info on floating points, see [Single-precision floating-point format](https://en.wikipedia.org/wiki/Single-precision_floating-point_format).
 
-    ![Lower quantisation, more compact storage.](/img/posts/misc/dsp/quantisation-storage.jpg){.w-100}
+    ![Lower quantisation, more compact storage.](/img/posts/misc/dsp/quantisation-storage.jpg){.w-100 .rw}
     {.center}
 
     <sup>Each block is an audio sample. Lower quantisation leads to more compact storage.[^encoding]</sup>
@@ -119,13 +119,13 @@ Generally, increasing the sample rate helps (or lowering your expectations for t
 
 Clipping occurs when our samples go out-of-bounds, past the maximum/minimum quantisation value. Clipping may cause our signal to wraparound or flatten at the peaks and troughs.
 
-![Wraparound clippy.](/img/posts/misc/dsp/clipping-2.jpg){.w-100}
+![Wraparound clippy.](/img/posts/misc/dsp/clipping-2.jpg){.w-100 .rw}
 {.center}
 
 <sup>Example of wraparound clipping, typically due to integer overflow/underflow.</sup>
 {.center}
 
-![Clamped clippy.](/img/posts/misc/dsp/clipping-1.jpg){.w-75}
+![Clamped clippy.](/img/posts/misc/dsp/clipping-1.jpg){.w-75 .rw}
 {.center}
 
 <sup>Example of a signal flattened at the peaks and troughs due to clamping.</sup>
@@ -138,7 +138,7 @@ Clipping usually happens due to neglecting the dynamic range. It can be addresse
 
 Clicks (aka pops) occur when a signal behaves discontinuously with large differences between samples. This difference forces the speaker hardware to vibrate quickly… too quickly.
 
-![Jumpy jumpy signal is bad bad.](/img/posts/misc/dsp/click.jpg){.w-90}
+![Jumpy jumpy signal is bad bad.](/img/posts/misc/dsp/click.jpg){.w-90 .rw}
 {.center}
 
 <sup>Signal jumps from -1.0 to 1.0, causing my speaker to pop and my ear drums to bleed from utter despair.</sup>

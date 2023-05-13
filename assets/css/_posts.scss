@@ -337,3 +337,10 @@ html[data-theme="light"] .svg-img {
 html[data-theme="dark"] .svg-img {
     filter: invert(100%);
 }
+
+// Responsive width for mobile.
+@include media-breakpoint-down(sm) {
+    img.rw {
+        width: 100% !important;
+    }
+}
