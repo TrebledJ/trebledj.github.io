@@ -1,26 +1,28 @@
 {% macro icon(faicon) %}
-<span class="fs-4 ms-3 me-n1">
-    <i class="{{faicon}}"></i>
-</span>
+    <span class="fs-4 ms-3 me-n1">
+        <i class="{{faicon}}"></i>
+    </span>
 {% endmacro %}
 {% macro sharer(brand) %}
-<a data-sharer="{{brand}}" data-title="{{title}}" data-url="{{page.url | absoluteUrl}}">
-    {{icon('fab fa-' + brand)}}
-</a>
+    <a data-sharer="{{brand}}" data-title="{{title}}" data-url="{{page.url | absoluteUrl}}">
+        {{icon('fab fa-' + brand)}}
+    </a>
 {% endmacro %}
 
 <script async src="/js/sharer.min.js"></script>
-<div class="post-share d-flex flex-row mt-4 mb-3 align-items-center">
-    <span style="margin-right:-4px;">Share on</span>
-    {{sharer('reddit')}}
-    {{sharer('telegram')}}
-    {{sharer('whatsapp')}}
-    {# {{sharer('line')}} #}
-    {# {{sharer('linkedin')}} #}
-    {{sharer('facebook')}}
-    {{sharer('twitter')}}
-    <a onclick="copyUrlToClipboard()">
-        {{icon('fas fa-link')}}
-    </a>
-    <span class="copied ms-2">Link copied!</span>
+<div class="post-share mt-4 mb-3 d-flex flex-row align-items-top">
+    <span class="pt-1" style="margin-right:-4px;">Share&nbsp;on</span>
+    <div class="d-flex flex-row flex-wrap align-items-center">
+        {{sharer('reddit')}}
+        {{sharer('telegram')}}
+        {{sharer('whatsapp')}}
+        {# {{sharer('line')}} #}
+        {# {{sharer('linkedin')}} #}
+        {{sharer('facebook')}}
+        {{sharer('twitter')}}
+        <a onclick="copyUrlToClipboard()">
+            {{icon('fas fa-link')}}
+        </a>
+        <span class="copied ms-2">Link&nbsp;copied!</span>
+    </div>
 </div>
