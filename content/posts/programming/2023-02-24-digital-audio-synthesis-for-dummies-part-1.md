@@ -35,7 +35,7 @@ With audio, we are concerned with two dimensions of quality: sampling (time) and
 
 Digital audio signals are represented discretely by storing samples at regular intervals instead of having a single continuous line.
 
-The **sample rate** refers to how fast we chop, how fast we sample our audio. Choosing an appropriate sample rate for your application is an important consideration. Audio is usually sampled at 44.1kHz or 48kHz. But why are these rates so common? To answer this, we first need to learn about the…
+The **sample rate** refers to how fast we chop, how fast we sample our audio. Choosing an appropriate sample rate for your application is an important consideration. Audio is usually sampled at 44.1kHz or 48kHz (i.e. 44,100 or 48,000 samples per second). But why are these rates so common? To answer this, we first need to learn about the…
 
 ### Nyquist-Shannon Sampling Theorem
 
@@ -64,20 +64,19 @@ The Nyquist Theorem explains why we usually sample above 40kHz, but why 44.1kHz 
 
 ### Quantisation
 
-While sampling deals with resolution in time, **quantisation** deals with resolution in *dynamics* (or *loudness)*.
+While sampling deals with resolution in time, **quantisation** deals with resolution in *dynamics* (or *loudness*). Here, we’re concerned with three things: *signal representation*, *loudness*, and *data storage* (files or RAM).
 
-Here, we’re mostly concerned with data storage (both files and RAM). If we store our samples using 1 bit, then each sample has only two possible loudness values (0 or 1). But this means our dynamic range is limited to silence (0) or an ear-shattering loudness (1)... so 1 bit is no good. If we use 2 bits, we get twice as many volume settings (00, 01, 10, and 11). Now we have a couple intermediate options and don’t have to break our ears! The more bits each sample has, the greater the dynamic resolution.
-
-When it comes to storing samples in files, most applications use 16-bit integers, which allow for a decent resolution (-32,768 to +32,767) at two bytes per sample. 32-bit floats are another common representation, bringing substantially greater detail at the expense of twice the space. How much more detail are we talking about? 32-bit floats range from about -10<sup>38</sup> to +10<sup>38</sup> whereas 32-bit integers range from about -10<sup>9</sup> to +10<sup>9</sup>. Sadly, the increased range of floats comes with a downside: reduced precision. Floats are only precise up to 7 significant figures[^floats].
-
-[^floats]: For more info on floating points, see [Single-precision floating-point format](https://en.wikipedia.org/wiki/Single-precision_floating-point_format).
-
-Now when it comes to audio *processing*, it's easier to work with floats in the range of -1.0 to 1.0. Why the smaller range? Well, if we work directly with the maximum bounds, we may easily encounter errors.
-With integers, we would experience [integer overflow](https://en.wikipedia.org/wiki/Integer_overflow), which would wrap positive values to negative values.
-With floats, we would venture into the territory of infinity, which may disrupt subsequent computations.
-
-Thus, we use a smaller range to allow room for processing.
-
+1. Like sampling, quantisation affects how well a signal is represented. If we quantise with 1 bit, then each sample has only two possible values (0 or 1). This means we can represent square waves (where high=1, low=0). But we can’t represent sine waves since the values in between that *make up a sine wave* aren’t in our vocabulary.
+2. In terms of loudness, a quantisation of 1 bit limits us to absolute silence (0) or an ear-shattering loudness (1)... so 1 bit is no good. If we use 2 bits, we get twice as many volume settings (00, 01, 10, and 11). Now we have a couple intermediate options and don’t have to break our ears! The more bits each sample has, the greater the dynamic resolution.
+3. Regarding data storage, the less number of bits needed per sample, the more memory saved. When storing samples in files, most applications quantise to 16-bit integers, which allow for a decent resolution of -32,768 to +32,767 at two bytes per sample (1 byte being 8 bits). 32-bit floats are another common representation, bringing substantially greater detail at the expense of twice the space. How much more detail are we talking about? 32-bit floats range from about -10<sup>38</sup> to +10<sup>38</sup> whereas 32-bit integers range from about -10<sup>9</sup> to +10<sup>9</sup>. Sadly, the increased range of floats comes with a downside: reduced precision. Floats are only precise up to 7 significant figures[^floats].
+    
+    [^floats]: For more info on floating points, see [Single-precision floating-point format](https://en.wikipedia.org/wiki/Single-precision_floating-point_format).
+    
+    Now when storing audio in RAM for *audio* *processing*, it's easier to work with floats in the range of -1.0 to 1.0. Why the smaller range? Well, if we work directly with the maxima, we may easily encounter errors.
+    With integers, we would experience [integer overflow](https://en.wikipedia.org/wiki/Integer_overflow), which wrap positive values to negative values.
+    With floats, we would venture into the territory of infinity, which may disrupt subsequent computations.
+    
+    Thus, we use a smaller range to allow room for processing.
 
 ## Audio Mishaps and Bugs 🐞
 
