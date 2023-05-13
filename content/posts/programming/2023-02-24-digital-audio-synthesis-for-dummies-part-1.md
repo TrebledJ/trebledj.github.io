@@ -68,7 +68,7 @@ While sampling deals with resolution in time, **quantisation** deals with resolu
 
 1. Like sampling, quantisation affects how well a signal is represented. If we quantise with 1 bit, then each sample has only two possible values (0 or 1). This means we can represent square waves (where high=1, low=0). But we can’t represent sine waves since the values in between that *make up a sine wave* aren’t in our vocabulary.
 
-    ![Higher quantisation, better quality.](/img/posts/misc/dsp/quantisation-quality.jpg){.w-100 .rw}
+    ![Higher quantisation, better quality.](/img/posts/misc/dsp/quantisation-quality.jpg){.w-90 .rw}
     {.center}
 
     <sup>Higher quantisation leads to better audio quality.</sup>
@@ -81,7 +81,7 @@ While sampling deals with resolution in time, **quantisation** deals with resolu
     
     [^floats]: For more info on floating points, see [Single-precision floating-point format](https://en.wikipedia.org/wiki/Single-precision_floating-point_format).
 
-    ![Lower quantisation, more compact storage.](/img/posts/misc/dsp/quantisation-storage.jpg){.w-100 .rw}
+    ![Lower quantisation, more compact storage.](/img/posts/misc/dsp/quantisation-storage.jpg){.w-90 .rw}
     {.center}
 
     <sup>Each block is an audio sample. Lower quantisation leads to more compact storage.[^encoding]</sup>
