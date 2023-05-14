@@ -9,24 +9,24 @@
         font-size: 12px;
     }
 
-    .toc-container,
-    .related-sidebar-container,
-    .comments-sidebar-container {
-        a {
-            color: var(--main-text-color) !important;
-            cursor: pointer;
-        }
-
-        a.active {
-            color: var(--bold-color) !important;
-            font-weight: 600;
-        }
-    }
-
     .related-sidebar-container,
     .comments-sidebar-container {
         font-size: 12px;
         padding-left: 1rem;
+    }
+}
+
+.toc-container,
+.related-sidebar-container,
+.comments-sidebar-container {
+    a {
+        color: var(--main-text-color) !important;
+        cursor: pointer;
+    }
+
+    a.active {
+        color: var(--bold-color) !important;
+        font-weight: 600;
     }
 
     ol {
@@ -37,6 +37,13 @@
         li {
             margin-top: 0.4rem;
         }
+    }
+}
+
+#btn-mobile-toc {
+    /* No padding on outer-most list. */
+    nav.toc > ol {
+        padding-left: 0rem;
     }
 }
 
