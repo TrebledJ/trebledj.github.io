@@ -1,4 +1,4 @@
-
+// --- Overarching Container --- //
 .main-container {
     width: 100%;
     padding: 20px;
@@ -11,4 +11,37 @@
         margin-right: auto;
         width: 95%;
     }
+}
+
+// --- Scroll to Top --- //
+// --- Mobile ToC --- //
+#btn-back-to-top,
+#btn-mobile-toc {
+    position: fixed;
+    bottom: 10px;
+    display: none;
+    z-index: 90;
+    background-color: var(--main-background-color);
+    box-shadow: 0 0 10px rgba(0, 0, 0, .05);
+    border: var(--border-width) solid var(--light-border-color);
+    border-radius: var(--border-radius);
+
+    i {
+        color: var(--link-color);
+    }
+}
+
+#btn-back-to-top {
+    right: 10px;
+}
+
+#btn-mobile-toc {
+    left: 10px;
+}
+
+
+// --- Sticky Components --- //
+.sticky {
+    position: -webkit-sticky;
+    position: sticky;
 }

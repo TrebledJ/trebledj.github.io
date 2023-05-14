@@ -1,4 +1,4 @@
-.right-sidebar {
+#right-sidebar {
     top: 5rem;
     right: 0;
     z-index: 2;
@@ -45,11 +45,23 @@
     nav.toc > ol {
         padding-left: 0rem;
     }
+
+    .dropdown-menu {
+        background-color: var(--main-background-color);
+    }
+
+    .toc {
+        margin-left: 0;
+    }
 }
 
 // Small screen: bye bye sidebar.
 @include media-breakpoint-down(lg) {
-    .right-sidebar {
+    #right-sidebar {
         display: none;
+    }
+
+    #btn-mobile-toc {
+        display: block;
     }
 }

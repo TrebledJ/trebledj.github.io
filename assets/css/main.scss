@@ -27,55 +27,6 @@ $enable-negative-margins: true;
 @import '../../node_modules/bootstrap/scss/alert';
 
 
-// --- Scroll to Top --- //
-// --- Mobile ToC --- //
-#btn-back-to-top,
-#btn-mobile-toc {
-    position: fixed;
-    bottom: 10px;
-    display: none;
-    z-index: 90;
-    background-color: var(--main-background-color);
-    box-shadow: 0 0 10px rgba(0, 0, 0, .05);
-    border: var(--border-width) solid var(--light-border-color);
-    border-radius: var(--border-radius);
-
-    i {
-        color: var(--link-color);
-    }
-}
-
-#btn-back-to-top {
-    right: 10px;
-}
-
-#btn-mobile-toc {
-    left: 10px;
-
-    .dropdown-menu {
-        background-color: var(--main-background-color);
-    }
-
-    .toc {
-        margin-left: 0;
-    }
-}
-
-
-@include media-breakpoint-down(lg) {
-    #btn-mobile-toc {
-        display: block;
-    }
-}
-
-
-// --- Sticky Components --- //
-.sticky {
-    position: -webkit-sticky;
-    position: sticky;
-}
-
-
 .tag {
     display: inline-block;
     margin: 3px 0px;

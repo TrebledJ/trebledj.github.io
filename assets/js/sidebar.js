@@ -1,15 +1,15 @@
 $(function () {
     var stickySideBar = function () {
         var show =
-            $(".left-sidebar").find("button").length === 0
+            $("#left-sidebar").find("button").length === 0
                 ? $(window).width() >= 992 // width should match lg bootstrap variable
-                : !$(".left-sidebar").find("button").is(":visible");
+                : !$("#left-sidebar").find("button").is(":visible");
         if (show) {
             // fix
-            $(".left-sidebar").addClass("sticky");
+            $("#left-sidebar").addClass("sticky");
         } else {
             // unfix
-            $(".left-sidebar").removeClass("sticky");
+            $("#left-sidebar").removeClass("sticky");
         }
     };
 
@@ -20,8 +20,8 @@ $(function () {
     });
 
     // Follow menu drop down
-    $(".left-sidebar").find("button").on("click", function () {
+    $("#left-sidebar").find("button").on("click", function () {
         $(".author-social-item-list").toggleClass("hidden");
-        $(".left-sidebar").find("button").toggleClass("open");
+        $("#left-sidebar").find("button").toggleClass("open");
     });
 });
