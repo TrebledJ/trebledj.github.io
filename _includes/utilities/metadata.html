@@ -27,6 +27,12 @@
 {# List a bunch of keywords which make sense for this page. #}
 {% set page_keywords = [] %}
 {% set page_keywords = page_keywords | push(site.author.alias | lower) %}
+{% if title %}
+    {% set page_keywords = page_keywords | push(title | lower) %}
+{% endif %}
+{% if description %}
+    {% set page_keywords = page_keywords | push(description | lower) %}
+{% endif %}
 {% if tags %}
     {% set page_keywords = page_keywords | extend(tags | exclude('posts')) %}
 {% endif %}
