@@ -32,8 +32,10 @@ $(function () {
         }
     };
     const removeActive = (link) => {
-        menu[link].classList.remove("active");
-        menuMobile[link].classList.remove('active');
+        if (menu[link]) {
+            menu[link].classList.remove("active");
+            menuMobile[link].classList.remove('active');
+        }
     };
     const removeAllActive = () =>
         [...Array(sections.length).keys()].forEach((link) =>
