@@ -44,7 +44,8 @@ module.exports = function (eleventyConfig) {
 
 		classes = (typeof classes === 'string' ? classes.split(' ') : typeof classes === 'undefined' ? [] : classes);
 		classes.push('center');
-		classes.push('rw');
+		classes.push('rw'); 	// Full-width on small screens.
+		classes.push('mb-2'); 	// Extra spacing in the bottom.
 		if (classes.every(c => !c.startsWith('w-')))
 			classes.push('w-100'); // Default to full-width;
 
