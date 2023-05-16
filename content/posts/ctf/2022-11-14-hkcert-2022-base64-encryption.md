@@ -52,7 +52,7 @@ Since Base64 simply maps 8-bits to 6-bits, so 3 characters of ASCII would be tra
 {% image "assets/img/posts/misc/ctf/base64-encryption/base64-is-so-cool.png", "Base64 maps three characters to four." %}
 
 <sup>Base64 maps three characters to four. ([Source](https://www.tenminutetutor.com/img/data-formats/binary-encoding/base64.png))</sup>
-{.center}
+{.caption}
 
 
 ```python
@@ -105,7 +105,7 @@ Another idea comes to mind. Remember the plaintext is in English? Well, with Eng
 {% image "assets/img/posts/misc/ctf/base64-encryption/letter-frequencies.jpg", "Frequency of English letters. But we need to be careful with letter cases.", "w-80" %}
 
 <sup>Frequency of the English alphabet. (Source: Wikipedia.)</sup>
-{.center}
+{.caption}
 
 In the same vein, some letters and sequences in the *Base64 encoding* will also appear more frequently than others.
 
@@ -121,7 +121,7 @@ V2UncmUgbm8gc3RyYW5nZXJzIHRvIGxvdmUKWW91IGtub3cgdGhlIHJ1bGVzIGFuZCBzbyBkbyBJIChk
 </p>
 
 <sup>Frequency analysis of plain vs. encrypted Base64.</sup>
-{.center}
+{.caption}
 
 From this, we can deduce that 'w' was mapped from 'G' in the original encoding (due to the gap in frequency).
 
@@ -133,7 +133,7 @@ One useful option is the **bigrams/n-grams** option. We can tell dcode to analys
 </p>
 
 <sup>Frequency analysis of 4-grams in plain vs. encrypted Base64.</sup>
-{.center}
+{.caption}
 
 Observe how "YoJP0H" occurs (relatively) frequently. This corresponds to "IHRoZS", which happens to be the Base64 encoding for " the".
 
@@ -165,7 +165,7 @@ Frequency analysis is useful to group letters into buckets. But using frequency 
     {% image "assets/img/posts/misc/ctf/base64-encryption/progress-1.jpg", "Results!" %}
 
     <sup>Random decoding after frequency analysis.</sup>
-    {.center}
+    {.caption}
 
     {.no-center}
 
@@ -178,7 +178,7 @@ Frequency analysis is useful to group letters into buckets. But using frequency 
     {% image "assets/img/posts/misc/ctf/base64-encryption/progress-2.jpg", "Moar results!!!" %}
 
     <sup>Random decoding after guessing.</sup>
-    {.center}
+    {.caption}
 
     - At this point, we can continue patching "ciphertext", "letters", "potential", etc. Or we could just use...
   

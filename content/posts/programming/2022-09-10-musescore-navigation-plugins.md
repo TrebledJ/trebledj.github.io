@@ -53,9 +53,8 @@ When starting, I took reference of [jeetee’s annotation plugin](https://musesc
 {% image "assets/img/posts/music/musescore/plugin-qtquick2.jpg", "", "w-45 multi" %}
 </p>
 
-
 <sup>Qt Quick Controls 1.0 vs 2.0. The latter comes with barely any default and takes more effort to properly set up.</sup>
-{.center}
+{.caption}
 
 Implementation-wise, the todo-list plugin aims to be self-contained and simple. Self-contained, meaning that everything is in a single .qml file, so that the user doesn’t need to bother with structure too much. Simple, meaning that it doesn’t store too much metadata. The plugin only stores the configuration options mentioned above. I avoid storing data such as measure and staff—which are alike the x and y position in a score—because things get messy when the stored to-do is displaced, e.g. when a user inserts a bunch of measures or removes an instrument.
 
