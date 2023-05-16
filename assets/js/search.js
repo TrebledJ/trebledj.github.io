@@ -79,7 +79,25 @@ $(async function () {
     if (!query.trim())
       return;
 
-    const result = idx.search(query);
+    const result =
+      idx.query(function (q) {
+        query.split(/\s*,\s*/g).forEach(term => {
+          if (!term.trim())
+            return;
+
+          q.term(term, { boost: 1 }); // With stemmer, resolve to similar word.
+
+          if (query[query.length - 1] != ' ') {
+            // Handle continuing words.
+            q.term(term, { usePipeline: false, wildcard: lunr.Query.wildcard.TRAILING, boost: 10 });
+          }
+
+          // Handle possible typos or near words.
+          let d = (term.length >= 8 ? 2 : term.length >= 5 ? 1 : 0);
+          q.term(term, { usePipeline: false, editDistance: d, boost: 1 });
+        })
+      });
+
     addResults(result);
   });
 
