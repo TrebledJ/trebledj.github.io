@@ -25,12 +25,12 @@ With audio, we are concerned with two dimensions of quality: sampling (time) and
 
 ### Sampling 🔪
 
-**Sampling** refers to how much we “chop” a signal. For a stew, you may want longer samples. With rice, however, short samples taste better.
+**Sampling** refers to how much we “chop” a signal. Suppose our signal is a carrot. For a stew, you may want longer samples. With rice, however, shorter samples go better.
 
-![Want some free samples?](/img/posts/misc/dsp/sampling.png){.w-90 .rw}
+![Want some free samples?](/img/posts/misc/dsp/sampling.jpg){.w-90 .rw}
 {.center}
 
-<sup>Green line: original, continuous signal. Black dots: sampled, discrete signal.</sup>
+<sup>Blue line: original, continuous signal. Red line: sampled, discrete signal.</sup>
 {.center}
 
 Digital audio signals are represented discretely by storing samples at regular intervals instead of using a single continuous line.
