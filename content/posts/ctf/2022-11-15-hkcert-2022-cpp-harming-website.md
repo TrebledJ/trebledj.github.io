@@ -22,15 +22,13 @@ We’re provided with the server binary written in C++. No source code. 😟 We
 
 Hmm, I wonder what the website has in store for us. Let’s check it out!
 
-![Website seems to work!](/img/posts/misc/ctf/charming-website/website-seems-to-work.jpg){.w-80}
-{.center}
+{% image "assets/img/posts/misc/ctf/charming-website/website-seems-to-work.jpg", "Website seems to work!", "" %}
 
 How disappointing. Oh well, perhaps the binary is more helpful. Maybe we can find out how to work the website. Might be important. Might not be important. Who knows?[^might-be-important]
 
 Firing up Ghidra and loading the binary, we start by going to `main` (okay so far!). `main` doesn't seem to do much, besides calling `init`, `run`, and `std::cout`. Things get a lot more interesting when we look at `run`:
 
-![You can run, but you can't hide!](/img/posts/misc/ctf/charming-website/decompile-run.jpg){.w-80}
-{.center}
+{% image "assets/img/posts/misc/ctf/charming-website/decompile-run.jpg", "You can run, but you can't hide!", "" %}
 
 It’s easy to be intimidated by such a large application. And it’s in C++, so there’s a ton of garbage (`std`, templates, constructors, destructors, etc.).[^cpp]
 
@@ -54,8 +52,7 @@ After a bit of digging, we uncover quite a bit of info:
       - We can guess which JSON keys are parsed by looking at other strings. It appears the only key used is `message`.
       - We can try to use Postman or whatever to test the endpoint. Let's have a spin:
 
-        ![Postman Pat](/img/posts/misc/ctf/charming-website/postman-pat-postman-pat-postman-pat-and-his-black-and-white-cat.jpg){.w-90}
-        {.center}
+        {% image "assets/img/posts/misc/ctf/charming-website/postman-pat-postman-pat-postman-pat-and-his-black-and-white-cat.jpg", "Postman Pat", "" %}
 
         {.no-center}
 
@@ -64,21 +61,18 @@ After a bit of digging, we uncover quite a bit of info:
     - The function begins by generating a random Initialisation Vector (IV).
     - It then initialises some state using `uc_state_init` with a key.
         
-        ![Juicy init.](/img/posts/misc/ctf/charming-website/decompile-encrypt-1.jpg){.w-70}
-        {.center}
+        {% image "assets/img/posts/misc/ctf/charming-website/decompile-encrypt-1.jpg", "Juicy init.", "w-70" %}
 
         Fortunately, the key is stored in static memory. In plain sight. This is very blursed: blessed, because (from a CTF POV) we don't need much work; and cursed, because (from a dev vs. exploiter POV) we don't need much work.
 
-        ![YAS!](/img/posts/misc/ctf/charming-website/encryption-rev-chal-with-hardcoded-key.jpg){.w-50}
-        {.center}
+        {% image "assets/img/posts/misc/ctf/charming-website/encryption-rev-chal-with-hardcoded-key.jpg", "YAS!", "w-60" %}
 
         {.no-center}
 
 
     - The message is then encrypted using `uc_encrypt`.
 
-        ![Juicy encrypt.](/img/posts/misc/ctf/charming-website/decompile-encrypt-2.jpg){.w-80}
-        {.center}
+        {% image "assets/img/posts/misc/ctf/charming-website/decompile-encrypt-2.jpg", "Juicy encrypt.", "w-80" %}
 
         I have no idea what `puVar[-0x227] = X` does, and apparently it's not important.
 

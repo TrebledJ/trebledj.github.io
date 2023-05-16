@@ -93,8 +93,7 @@ f(x) = a_0\sin(f_0x + b_0) + a_1\sin(f_1x + b_1) + \cdots + a_n\sin(f_nx + b_n)
 $$
 where $a_i$, $f_i$, and $b_i$ are the amplitude, frequency, and phase of each constituent sine wave.
 
-![Skipper's partial to Fourier. They're the best of chums.](/img/posts/misc/dsp/fourier-analysis.jpg){.w-80}
-{.center}
+{% image "assets/img/posts/misc/dsp/fourier-analysis.jpg", "Skipper's partial to Fourier. They're the best of chums.", "w-80" %}
 
 {% alert "fact" %}
 The Fourier Theorem and Fourier Transform are ubiquitous in modern day technology. It is the basis for many audio processing techniques such as filtering, equalisation, and noise cancellation. By manipulating the individual sine waves that make up a sound, we can alter its characteristics and create new sounds. The Fourier Transform is also a key component in compression, such as the JPG image format.

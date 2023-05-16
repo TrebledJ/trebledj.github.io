@@ -102,8 +102,7 @@ subchars_not_in_ascii = [get_inverted_chars_with_mask(m) for m in in_ascii] # ch
 
 Another idea comes to mind. Remember the plaintext is in English? Well, with English text, some letters appear more frequently than others. The same applies to words and sequences. 
 
-![Frequency of English letters. But we need to be careful with letter cases.](/img/posts/misc/ctf/base64-encryption/letter-frequencies.jpg){.w-80}
-{.center}
+{% image "assets/img/posts/misc/ctf/base64-encryption/letter-frequencies.jpg", "Frequency of English letters. But we need to be careful with letter cases.", "w-80" %}
 
 <sup>Frequency of the English alphabet. (Source: Wikipedia.)</sup>
 {.center}
@@ -116,9 +115,10 @@ With this in mind, we can compare the ciphertext to the Base64 encoding of some 
 V2UncmUgbm8gc3RyYW5nZXJzIHRvIGxvdmUKWW91IGtub3cgdGhlIHJ1bGVzIGFuZCBzbyBkbyBJIChkbyBJKQpBIGZ1bGwgY29tbWl0bWVudCdzIHdoYXQgSSdtIHRoaW5raW5nIG9mCllvdSB3b3VsZG4ndCBnZXQgdGhpcyBmcm9tIGFueSBvdGhlciBndXkKSSBqdXN0IHdhbm5hIHRlbGwgeW91IGhvdyBJJ20gZmVlbGluZwpHb3R0YSBtYWtlIHlvdSB1bmRlcnN0YW5kCk5ldmVyIGdvbm5hIGdpdmUgeW91IHVwCk5ldmVyIGdvbm5hIGxldCB5b3UgZG93bgpOZXZlciBnb25uYSBydW4gYXJvdW5kIGFuZCBkZXNlcnQgeW91Ck5ldmVyIGdvbm5hIG1ha2UgeW91IGNyeQpOZXZlciBnb25uYSBzYXkgZ29vZGJ5ZQpOZXZlciBnb25uYSB0ZWxsIGEgbGllIGFuZCBodXJ0IHlvdQo=
 ```
 
-![dcode.fr frequency analysis for normal Base64.](/img/posts/misc/ctf/base64-encryption/b64-plain-1gram.jpg){.w-40}
-![dcode.fr frequency analysis for encrypted Base64.](/img/posts/misc/ctf/base64-encryption/b64-crypt-1gram.jpg){.w-40}
-{.center}
+<p class="center">
+{% image "assets/img/posts/misc/ctf/base64-encryption/b64-plain-1gram.jpg", "dcode.fr frequency analysis for normal Base64.", "w-45 multi" %}
+{% image "assets/img/posts/misc/ctf/base64-encryption/b64-crypt-1gram.jpg", "dcode.fr frequency analysis for encrypted Base64.", "w-45 multi" %}
+</p>
 
 <sup>Frequency analysis of plain vs. encrypted Base64.</sup>
 {.center}
@@ -127,9 +127,10 @@ From this, we can deduce that 'w' was mapped from 'G' in the original encoding (
 
 One useful option is the **bigrams/n-grams** option. We can tell dcode to analyse frequencies of *groups of characters* with a sliding window. This is useful to identify words and sequences.
 
-![dcode.fr 4-gram for normal Base64.](/img/posts/misc/ctf/base64-encryption/b64-plain-4gram.jpg){.w-40}
-![dcode.fr 4-gram for encrypted Base64.](/img/posts/misc/ctf/base64-encryption/b64-crypt-4gram.jpg){.w-40}
-{.center}
+<p class="center">
+{% image "assets/img/posts/misc/ctf/base64-encryption/b64-plain-4gram.jpg", "dcode.fr 4-gram for normal Base64.", "w-45 multi" %}
+{% image "assets/img/posts/misc/ctf/base64-encryption/b64-crypt-4gram.jpg", "dcode.fr 4-gram for encrypted Base64.", "w-45 multi" %}
+</p>
 
 <sup>Frequency analysis of 4-grams in plain vs. encrypted Base64.</sup>
 {.center}

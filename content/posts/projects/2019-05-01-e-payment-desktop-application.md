@@ -23,8 +23,7 @@ To give a bit more background, our school cafeteria has five to six different lo
 
 Also, some background about the card: it's a [radio frequency ID (RFID)][rfid] card. I won't go into the technical details of it, but basically you scan the card on a dedicated reader, and it can read a unique ID.
 
-![Exhibit A: an RFID](/img/posts/projects/studentcard/rfid.jpg){.w-60}
-{.center}
+{% image "assets/img/posts/projects/studentcard/rfid.jpg", "Exhibit A: an RFID", "w-60" %}
 
 ### Development
 #### A Painful Start
@@ -39,8 +38,7 @@ Initially I started developing the application using SFML, since it was the only
 * There are UI classes for widgets (e.g. pushbuttons, checkboxes, listviews), so I didn't have to reinvent the wheel.
 * It was cross-platform, which was convenient in case the school's computer operating system is different.
 
-![SFML is not cute.](/img/posts/memes/sfml-is-not-cute.jpg){.w-60}
-{.center}
+{% image "assets/img/posts/memes/sfml-is-not-cute.jpg", "SFML is not cute.", "w-60" %}
 
 {% alert "success" %}
 If there was one thing I learned, it was to understand the problem first, research the appropriate tools, and *then* start developing the solution. I wasted maybe two to four weeks coding a good GUI with SFML and scratching my head.
@@ -67,8 +65,7 @@ A better alternative was to use MySQL or Microsoft SQL Server, which is designed
 
 How does MySQL and SQL Server connect with multiple clients across the network? This is something you'll have to ask the experts. :D
 
-![Net-what?](/img/posts/memes/netwhat.jpg){.w-60}
-{.center}
+{% image "assets/img/posts/memes/netwhat.jpg", "Net-what?", "w-60" %}
 
 #### Sidenote on Version Control
 When undertaking *any* project, it is crucial to have flexibility. A version control system offers this.
@@ -117,14 +114,14 @@ But these are not very interesting.
 
 Admins, of course, have a more powerful role. These peeps can view *and* **update** student's balances (but the actual flows are pretty boring TBH). (Unfortunately I did not save any screenshots of the GUI, and I'm not bothered to redownload Qt just to build the app once. >.>)
 
-![Unnnnnlliiiimmiiitted pooower!.](/img/posts/memes/unlimited-power.jpg){.w-80}
-{.center}
+{% image "assets/img/posts/memes/unlimited-power.jpg", "Unnnnnlliiiimmiiitted pooower!.", "w-80" %}
 
 Students have the most ***exciting*** user flow of all.
 
-![Standby UI, before scanning.](/img/posts/projects/studentcard/standby.jpg){.w-45}
-![Standby UI, after scanning.](/img/posts/projects/studentcard/standby-scanned.jpg){.w-45}
-{.center}
+<p class="center">
+{% image "assets/img/posts/projects/studentcard/standby.jpg", "Standby UI, before scanning.", "w-45 multi" %}
+{% image "assets/img/posts/projects/studentcard/standby-scanned.jpg", "Standby UI, after scanning.", "w-45 multi" %}
+</p>
 
 And since they have an exciting flow, I'll describe it for fun:
 

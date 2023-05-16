@@ -32,25 +32,37 @@ module.exports = function (eleventyConfig) {
 	// Eleventy Image shortcode
 	// https://www.11ty.dev/docs/plugins/image/
 	eleventyConfig.addAsyncShortcode("image", async function imageShortcode(src, alt, classes) {
+		const useDefaultIf = ['gif'].find(ext => src.endsWith(ext));
+		const ext = useDefaultIf || 'webp';
+		const animated = src.endsWith('gif');
+
 		// Full list of formats here: https://www.11ty.dev/docs/plugins/image/#output-formats
-		let formats = ["webp"/* , "auto" */];
+		const formats = [ext];
 		// let file = relativeToInputPath(this.page.inputPath, src);
-		let file = src;
-		let metadata = await eleventyImage(file, {
+		const file = src;
+		const metadata = await eleventyImage(file, {
 			widths: ["auto"],
 			formats,
 			outputDir: path.join(eleventyConfig.dir.output, "img"),
+			sharpOptions: {
+				animated,
+			},
 		});
 
 		classes = (typeof classes === 'string' ? classes.split(' ') : typeof classes === 'undefined' ? [] : classes);
-		classes.push('center');
-		classes.push('rw'); 	// Full-width on small screens.
-		classes.push('mb-2'); 	// Extra spacing in the bottom.
+		classes.reverse(); // Add classes to the front.
 		if (classes.every(c => !c.startsWith('w-')))
 			classes.push('w-100'); // Default to full-width;
+		if (!classes.includes('multi')) {
+			// Solo image.
+			classes.push('center');
+			classes.push('rw'); 	// Full-width on small screens.
+			classes.push('mb-2'); 	// Extra spacing in the bottom.
+		}
+		classes.reverse();
 
-		let data = metadata.webp[metadata.webp.length - 1];
-		let ratio = `aspect-ratio: auto ${data.width} / ${data.height};`; // Alleviate content layout shift.
+		const data = metadata[ext][metadata[ext].length - 1];
+		const ratio = `aspect-ratio: auto ${data.width} / ${data.height};`; // Alleviate content layout shift.
 
 		return `<img src="${data.url}" class="${classes.join(' ')}" alt="${alt}" title="${alt}" loading="lazy" decoding="async" style="${ratio}">`;
 	});

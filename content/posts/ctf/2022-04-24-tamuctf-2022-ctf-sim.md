@@ -332,8 +332,7 @@ Our breakpoint gets triggered. Notice the interesting chain of addresses in the 
 
 So *this* is what happens when we call a virtual function... InTeReStInG!
 
-![](/img/posts/memes/interesting.jpg){.w-75}
-{.center}
+{% image "assets/img/posts/memes/interesting.jpg", "", "w-75" %}
 
 Let's continue so that it finishes `delete`-ing the chunk, and let's check the heap state again:
 

@@ -75,7 +75,7 @@ Full-width image.
 
 Centred image.  
 
-![](/img/thumbnail.png){.w-80}
+{% image "assets/img/thumbnail.png", "", "w-80" %}
 {.efdef style="text-align: center;"}
 
 ## Add-Ons

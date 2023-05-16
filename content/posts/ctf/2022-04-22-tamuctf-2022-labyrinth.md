@@ -116,15 +116,13 @@ Now we'll try some good ol' angr `explore()` and see what turns up.
 #### Path Explosion
 Unfortunately, this takes forever to run due to *path explosion*. Notice how the control flow makes the paths diverge in one of the binaries:
 
-![Paths go boom.](/img/posts/misc/ctf/labyrinth/labyrinth-path-explosion-graph.jpg){.w-75}
-{.center}
+{% image "assets/img/posts/misc/ctf/labyrinth/labyrinth-path-explosion-graph.jpg", "Paths go boom.", "w-75" %}
 
 Now angr is pretty smart, but not too smart. angr will simulate all paths and if it encounters a branch, it will simulate both branches together. However, it will treat the `function_133` branches as separate states...
 
 To get a more concrete view of paths exploding, Gru tried calling `simgr.run(n=50)`—which simulates 50 steps...
 
-![Good going, Gru!](/img/posts/misc/ctf/labyrinth/labyrinth-path-explosion-gru.jpg){.w-75}
-{.center}
+{% image "assets/img/posts/misc/ctf/labyrinth/labyrinth-path-explosion-gru.jpg", "Good going, Gru!", "w-75" %}
 
 90 active states is quite a lot! Usually we'd want to limit ourselves to around 10 active states to ensure good simulation speed.
 
@@ -133,10 +131,11 @@ With 50 steps and already 90 active states, the situation is pretty dismal. We'l
 #### CFGs to the Rescue
 **Control flow graphs** (CFGs) are directed graphs where nodes are blocks of code and edges indicate the direction the code can take. By translating the program into a graph, we can utilise the many graph algorithms at our disposal. In particular, we're interested in the *shortest path between a start node and target node*.
 
-![Path explosion 1.](/img/posts/misc/ctf/labyrinth/labyrinth-path-explosion-1.jpg){.w-30}
-![Path explosion 2.](/img/posts/misc/ctf/labyrinth/labyrinth-path-explosion-2.jpg){.w-30}
-![Path explosion 3.](/img/posts/misc/ctf/labyrinth/labyrinth-path-explosion-3.jpg){.w-30}
-{.center}
+<p class="center">
+{% image "assets/img/posts/misc/ctf/labyrinth/labyrinth-path-explosion-1.jpg", "Path explosion 1.", "w-30 multi" %}
+{% image "assets/img/posts/misc/ctf/labyrinth/labyrinth-path-explosion-2.jpg", "Path explosion 2.", "w-30 multi" %}
+{% image "assets/img/posts/misc/ctf/labyrinth/labyrinth-path-explosion-3.jpg", "Path explosion 3.", "w-30 multi" %}
+</p>
 
 angr comes with a bundle of analysis modules; these include two CFG analysis strategies: `CFGFast` and `CFGEmulated`. The former analyses the program statically (without actually simulating the code!), whereas the latter analyses the program dynamically (i.e. by simulating the code).
 

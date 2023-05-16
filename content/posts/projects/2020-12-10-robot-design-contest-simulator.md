@@ -119,8 +119,7 @@ For physics, we ended up choosing Box2D. We decided to go with this library sinc
 
 One pain point I encountered was that the `b2vec2` constructor does not have default values! This caused me grief, since objects were beginning to fly ***everywhere***. And it took a LONG TIME TO DEBUGGGGG!!! I had assumed that since it was a C++-based library, it would have reasonable defaults. Well apparently not.
 
-![box2d y u no embrace c++](/img/posts/projects/rdc-simulator/b2vec2.jpg){.w-75}
-{.center}
+{% image "assets/img/posts/projects/rdc-simulator/b2vec2.jpg", "box2d y u no embrace c++", "w-75" %}
 
 #### Documentation
 There are various sources for documentation on the RDC simulator. We have [documentation related to setup, installation, and administrative procedures][emulator-start] and another set of [documentation for coding a user program][emulator-docs].
