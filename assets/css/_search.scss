@@ -20,7 +20,16 @@
     }
 
     .modal-header {
-        border-bottom: 2px solid var(--light-border-color);
+        border-bottom: none;
+    }
+
+    .modal-hint {
+        font-size: 0.8rem;
+        opacity: var(--opacity-lowest);
+    }
+
+    .modal-body {
+        border-top: 2px solid var(--light-border-color);
     }
 
     .border-bottom {

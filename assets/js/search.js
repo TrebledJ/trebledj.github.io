@@ -19,8 +19,6 @@ $(async function () {
     }
   });
 
-  lunr.tokenizer.separator = /\s*,\s*/g;
-
   const resultdiv = $('#search-results-list');
   const searchBox = $('input#search-box');
 
