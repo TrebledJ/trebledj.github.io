@@ -21,8 +21,7 @@ Another automatic binary challenge! This time there's more emphasis on `pwn`, sp
 #### Preliminary Observations
 Decompiling with Ghidra, we immediately notice an unsuspicious section of code labelled `gadgets`. This contains loads of arithmetic gadgets. Our objective is to set `rax` to a certain value, presumably, using the gadgets we're given here.
 
-![](/img/posts/misc/ctf/quick-mafs-1.jpg){.w-100}
-{.center}
+{% image "assets/img/posts/misc/ctf/quick-mafs-1.jpg", "" %}
 
 The first gadget we see is a simple MOV instruction. This allows us to set the initial value of `rax`.
 

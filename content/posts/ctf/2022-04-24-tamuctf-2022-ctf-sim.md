@@ -274,8 +274,7 @@ r
 heap chunks
 ```
 
-![](/img/posts/misc/ctf/ctf-sim/ctf-sim-1-heap-init.jpg){.w-100}
-{.center}
+{% image "assets/img/posts/misc/ctf/ctf-sim/ctf-sim-1-heap-init.jpg", "" %}
 
 Ooo, looks a bit busy, even though we haven't `malloc`ed or `new`ed anything yet! These are probably allocations from iostream buffers used to buffer the input and output streams. We'll ignore these for now as they aren't very important.
 
@@ -288,8 +287,7 @@ c
 0
 ```
 
-![](/img/posts/misc/ctf/ctf-sim/ctf-sim-2-input-1.jpg){.w-100}
-{.center}
+{% image "assets/img/posts/misc/ctf/ctf-sim/ctf-sim-2-input-1.jpg", "" %}
 
 Let's pause again and check the state of the heap.
 
@@ -298,15 +296,13 @@ Let's pause again and check the state of the heap.
 heap chunks
 ```
 
-![](/img/posts/misc/ctf/ctf-sim/ctf-sim-3a-heap-after-input-1.jpg){.w-100}
-{.center}
+{% image "assets/img/posts/misc/ctf/ctf-sim/ctf-sim-3a-heap-after-input-1.jpg", "" %}
 
 Notice that there is now a new chunk with size `0x20` with some data in the first few bytes. Since we just allocated a `forensics` object, this is likely the vptr of that object.
 
 Indeed, if we peek into the binary's memory using `x /20wx 0x403d38`, we see what looks like some vtables having a party:
 
-![](/img/posts/misc/ctf/ctf-sim/ctf-sim-3b-vtables-party.jpg){.w-100}
-{.center}
+{% image "assets/img/posts/misc/ctf/ctf-sim/ctf-sim-3b-vtables-party.jpg", "" %}
 
 We'll move on to the second step: solving the challenge. This step is rather simple, but I want to show how the vtable magic is done in assembly. Let's disassemble the `solveChallenge()` function and set a breakpoint near the hotspot.
 
@@ -315,11 +311,9 @@ disas solveChallenge
 b *solveChallenge+191
 ```
 
-![](/img/posts/misc/ctf/ctf-sim/ctf-sim-4a-disas-1.jpg){.w-100}
-{.center}
+{% image "assets/img/posts/misc/ctf/ctf-sim/ctf-sim-4a-disas-1.jpg", "" %}
 
-![](/img/posts/misc/ctf/ctf-sim/ctf-sim-4b-disas-2.jpg){.w-100}
-{.center}
+{% image "assets/img/posts/misc/ctf/ctf-sim/ctf-sim-4b-disas-2.jpg", "" %}
 
 Now we'll continue running and feed it input for solving our `forensics` challenge.
 ```sh
@@ -334,8 +328,7 @@ Our breakpoint gets triggered. Notice the interesting chain of addresses in the 
 3. the address of `forensics::solve`...
     * which is eventually called in assembly (`call rax`)
 
-![](/img/posts/misc/ctf/ctf-sim/ctf-sim-4c-double-deref-in-first-solve.jpg){.w-100}
-{.center}
+{% image "assets/img/posts/misc/ctf/ctf-sim/ctf-sim-4c-double-deref-in-first-solve.jpg", "" %}
 
 So *this* is what happens when we call a virtual function... InTeReStInG!
 
@@ -350,8 +343,7 @@ c
 heap chunks
 ```
 
-![](/img/posts/misc/ctf/ctf-sim/ctf-sim-5-heap-after-input-2.jpg){.w-100}
-{.center}
+{% image "assets/img/posts/misc/ctf/ctf-sim/ctf-sim-5-heap-after-input-2.jpg", "" %}
 
 It appears that our `forensics` vptr has been replaced with some other data. 😢 But no worries! We'll just continue with our third action: submitting a writeup.
 
@@ -364,8 +356,7 @@ c
 AABBCCDD
 ```
 
-![](/img/posts/misc/ctf/ctf-sim/ctf-sim-6-input-3.jpg){.w-100}
-{.center}
+{% image "assets/img/posts/misc/ctf/ctf-sim/ctf-sim-6-input-3.jpg", "" %}
 
 Let's check our heap.
 ```sh
@@ -373,8 +364,7 @@ Let's check our heap.
 heap chunks
 ```
 
-![](/img/posts/misc/ctf/ctf-sim/ctf-sim-7-heap-after-input-3.jpg){.w-100}
-{.center}
+{% image "assets/img/posts/misc/ctf/ctf-sim/ctf-sim-7-heap-after-input-3.jpg", "" %}
 
 Sweet! We've overwritten the first 8 bytes of the chunk with our payload. Effectively, we've assigned a custom vptr to the `forensics` object.
 
@@ -390,8 +380,7 @@ Boom! Exploit.
 
 If we continue running the program, a SIGSEGV occurs since it tries to dereference `0x4444434342424141` (which is `"AABBCCDD"`, but packed to 64 bits).
 
-![](/img/posts/misc/ctf/ctf-sim/ctf-sim-9-sigsev.jpg){.w-100}
-{.center}
+{% image "assets/img/posts/misc/ctf/ctf-sim/ctf-sim-9-sigsev.jpg", "" %}
 
 Later on, we'll use `win_addr` instead of `"AABBCCDD"` for our payload; so that when the `solve()` virtual function does its magic, it will call `win()` instead.
 

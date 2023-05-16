@@ -39,8 +39,7 @@ In the rest of this post, I'll use the terms "trainee" and "user" interchangeabl
 ### High-Level Overview
 To give an idea of what the simulator looks like, here's a little annotated screenshot of an early version:
 
-![Annotation of the UI](/img/posts/projects/rdc-simulator/setup.jpg){.w-100}
-{.center}
+{% image "assets/img/posts/projects/rdc-simulator/setup.jpg", "Annotation of the UI" %}
 
 Its core features?
 
@@ -90,8 +89,7 @@ The communication model was inspired by Codingame's turn-based games. However, C
 #### Project Management
 We used our good friend GitHub projects and GitHub issues for project management and issue tracking.
 
-![List of GitHub issues (most of them resolved).](/img/posts/projects/rdc-simulator/issues.png){.w-100}
-{.center}
+{% image "assets/img/posts/projects/rdc-simulator/issues.png", "List of GitHub issues (most of them resolved)." %}
 
 Some general thoughts looking back:
 
@@ -132,8 +130,7 @@ Being a rather detail-oriented person, I have become quite fond of checking and 
 ### Conclusion
 At least two software trainee teams managed to complete the game and score full points.
 
-![The winning team!](/img/posts/projects/rdc-simulator/winner.jpg){.w-100}
-{.center}
+{% image "assets/img/posts/projects/rdc-simulator/winner.jpg", "The winning team!" %}
 
 * So was the RDC playable? Yes.
   * ~~When developing the simulator, we didn't have a working program to test if the game can be completed. So it was a relief when some teams managed to finish.~~

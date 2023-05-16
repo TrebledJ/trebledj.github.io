@@ -92,7 +92,7 @@ As mentioned before, there are three groups of users: vendors, students, and adm
 
 This is what the design for the vendor interface looks like:
 
-![Vendor ordering UI.](/img/posts/projects/studentcard/vendor-order.jpg){.w-100}
+{% image "assets/img/posts/projects/studentcard/vendor-order.jpg", "Vendor ordering UI." %}
 
 Giant buttons on the left to select their customers' orders. A list of selected items on the right. And some buttons down below.
 

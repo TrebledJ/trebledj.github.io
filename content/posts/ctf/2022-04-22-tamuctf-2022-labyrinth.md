@@ -54,11 +54,15 @@ Sadly, not the scrumptious dessert. Position-independent executable is a securit
 
 Next, we decompile our elves using Ghidra and make some observations.
 
-![Labyrinth decompiled 1.](/img/posts/misc/ctf/labyrinth/labyrinth-1.jpg){.w-100}
-{.center}
+{% image "assets/img/posts/misc/ctf/labyrinth/labyrinth-1.jpg", "Labyrinth decompiled 1." %}
 
-![Labyrinth decompiled 2.](/img/posts/misc/ctf/labyrinth/labyrinth-2.jpg){.w-100}
-{.center}
+<sup>Only one function contains `exit(0)`.</sup>
+{.caption}
+
+{% image "assets/img/posts/misc/ctf/labyrinth/labyrinth-2.jpg", "Labyrinth decompiled 2." %}
+
+<sup>Other functions seem to perform some sort of check and lead to more functions.</sup>
+{.caption}
 
 * Each binary contains a thousand (1000) functions (excluding `main`). The symbols are `function_0`, `function_1`, `function_2`, and so on.
 * Each of these functions will:
