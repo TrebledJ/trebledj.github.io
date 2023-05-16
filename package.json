@@ -9,8 +9,9 @@
 		"benchmark": "DEBUG=Eleventy:Benchmark* npx @11ty/eleventy",
 		"watch:sass": "sass --watch assets/css:_site/css",
 		"build:sass": "sass assets/css:_site/css",
-		"watch:eleventy": "eleventy --serve",
+		"watch:eleventy": "eleventy --serve --quiet",
 		"build:eleventy": "eleventy",
+		"build:rake": "cd eleventy/detail/rake-js && npm run build",
 		"start": "npm-run-all build:sass --parallel watch:*",
 		"build": "npm-run-all build:*"
 	},

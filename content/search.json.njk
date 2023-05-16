@@ -10,7 +10,7 @@ permalink: /search.json
 "title": "{{post.data.title}}",
 "tags": {{post.data.tags | exclude("posts") | jsonify | safe}},
 "description": "{{post.data.description}}",
-"content": {{post.content | striptags | jsonify | safe}},
+"content": {{post.content | striptags | keywords | jsonify | safe}},
 "url": "{{post.url}}"
 }
 {% endfor %}

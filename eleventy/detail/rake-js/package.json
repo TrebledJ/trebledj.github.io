@@ -1,0 +1,43 @@
+{
+    "name": "rake-js",
+    "version": "0.1.1",
+    "description": "A pure JS implementation of the Rapid Automated Keyword Extraction (RAKE) algorithm.",
+    "main": "dist/lib/index.js",
+    "scripts": {
+        "build": "rm -rf dist && tsc -p .",
+        "lint": "tslint -c tslint.json './**/*.ts' --fix",
+        "test": "npm run build && mocha --opts .mocha",
+        "watch": "mocha-typescript-watch --opts .mocha",
+        "prepublish": "npm run test"
+    },
+    "keywords": [
+        "RAKE",
+        "keyword",
+        "keywords",
+        "extraction",
+        "keyword",
+        "extraction",
+        "tag",
+        "tags",
+        "auto-tagging"
+    ],
+    "author": "Maximilian Stroh (github/Anonyfox)",
+    "license": "LGPL-3.0",
+    "devDependencies": {
+        "@types/mocha": "^10.0.1",
+        "@types/node": "^20.1.5",
+        "chai": "^4.3.7",
+        "mocha": "^10.2.0",
+        "mocha-typescript": "^1.1.14",
+        "prettier": "^2.8.8",
+        "source-map-support": "^0.5.21",
+        "tslint": "^6.1.3",
+        "tslint-config-prettier": "^1.18.0",
+        "typescript": "^5.0.4"
+    },
+    "dependencies": {
+        "franc": "^6.1.0",
+        "lodash": "^4.17.21",
+        "snowball": "^0.3.1"
+    }
+}

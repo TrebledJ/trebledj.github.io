@@ -1,6 +1,7 @@
 const { DateTime } = require("luxon");
 
 const findPostsRelatedTo = require('./detail/related')
+const findKeywords = require('./detail/keywords')
 
 
 module.exports = function (eleventyConfig) {
@@ -103,6 +104,8 @@ module.exports = function (eleventyConfig) {
 	eleventyConfig.addFilter("jsonify", (object) =>
 		JSON.stringify(object)
 	);
+
+	eleventyConfig.addFilter("keywords", findKeywords);
 
 	eleventyConfig.addPairedShortcode("alert", async function (content, role, emoji) {
 		const alert = {
