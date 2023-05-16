@@ -274,6 +274,17 @@ a.tag:hover {
         }
     }
 
+    .caption {
+        text-align: center;
+        margin-top: 1rem;
+    }
+
+    img.center {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
     .no-center {
         /* This class serves no purpose other than making markdown assign attribute lists correctly. (Needs some whitespace tuning.) */
     }

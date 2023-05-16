@@ -9,7 +9,7 @@ const eleventySass = require("eleventy-sass");
 
 
 module.exports = function (eleventyConfig) {
-    eleventyConfig.addPlugin(pluginRss);
+	eleventyConfig.addPlugin(pluginRss);
 	eleventyConfig.addPlugin(pluginSyntaxHighlight);
 	eleventyConfig.addPlugin(pluginNavigation);
 	eleventyConfig.addPlugin(EleventyHtmlBasePlugin);
@@ -22,35 +22,39 @@ module.exports = function (eleventyConfig) {
 		}
 	} */);
 
+	function relativeToInputPath(inputPath, relativeFilePath) {
+		let split = inputPath.split("/");
+		split.pop();
+
+		return path.resolve(split.join(path.sep), relativeFilePath);
+	}
+
 	// Eleventy Image shortcode
 	// https://www.11ty.dev/docs/plugins/image/
-	eleventyConfig.addPlugin(eleventyConfig => {
-		function relativeToInputPath(inputPath, relativeFilePath) {
-			let split = inputPath.split("/");
-			split.pop();
-
-			return path.resolve(split.join(path.sep), relativeFilePath);
-		}
-
-		eleventyConfig.addAsyncShortcode("image", async function imageShortcode(src, alt, sizes) {
-			let file = relativeToInputPath(this.page.inputPath, src);
-			let metadata = await eleventyImage(file, {
-				widths: ["auto"],
-				// You can add "avif" or "jpeg" here if you’d like!
-				formats: ["webp", "png"],
-				outputDir: path.join(eleventyConfig.dir.output, "img"), // Advanced usage note: `eleventyConfig.dir` works here because we’re using addPlugin.
-			});
-			let imageAttributes = {
-				alt,
-				sizes,
-				loading: "lazy",
-				decoding: "async",
-			};
-			return eleventyImage.generateHTML(metadata, imageAttributes);
+	eleventyConfig.addAsyncShortcode("image", async function imageShortcode(src, alt, classes) {
+		// Full list of formats here: https://www.11ty.dev/docs/plugins/image/#output-formats
+		let formats = ["webp"/* , "auto" */];
+		// let file = relativeToInputPath(this.page.inputPath, src);
+		let file = src;
+		let metadata = await eleventyImage(file, {
+			widths: ["auto"],
+			formats,
+			outputDir: path.join(eleventyConfig.dir.output, "img"),
 		});
+
+		classes = (typeof classes === 'string' ? classes.split(' ') : typeof classes === 'undefined' ? [] : classes);
+		classes.push('center');
+		classes.push('rw');
+		if (classes.every(c => !c.startsWith('w-')))
+			classes.push('w-100'); // Default to full-width;
+
+		let data = metadata.webp[metadata.webp.length - 1];
+		let ratio = `aspect-ratio: auto ${data.width} / ${data.height};`; // Alleviate content layout shift.
+
+		return `<img src="${data.url}" class="${classes.join(' ')}" alt="${alt}" title="${alt}" loading="lazy" decoding="async" style="${ratio}">`;
 	});
 
-    // Drafts implementation, see `content/content.11tydata.js` for additional code.
+	// Drafts implementation, see `content/content.11tydata.js` for additional code.
 	// This section *could* be simplified to an environment variable in an npm script,
 	// but this way an ENV is not required and this code works cross-platform.
 	eleventyConfig.addPlugin(function enableDrafts(eleventyConfig) {
