@@ -1,6 +1,6 @@
 <div id="left-sidebar-container" class="d-flex">
     <div id="left-sidebar-bio-container" class="d-flex">
-        <img src="/img/{{ site.author.logo }}" class="profile-img"/>
+        <img src="/img/{{ site.author.logo }}" class="profile-img" loading="lazy" decoding="async"/>
         <div class="author-info d-flex flex-column align-items-start">
             <h4 class="profile-name">{{ site.author.alias | default(site.author.name) }}</h4>
             <p class="profile-bio">{{ site.subtitle }}</p>
