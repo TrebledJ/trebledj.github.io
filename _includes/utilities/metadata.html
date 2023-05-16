@@ -28,10 +28,10 @@
 {% set page_keywords = [] %}
 {% set page_keywords = page_keywords | push(site.author.alias | lower) %}
 {% if title %}
-    {% set page_keywords = page_keywords | push(title | lower) %}
+    {% set page_keywords = page_keywords | push(title | lower | e) %}
 {% endif %}
 {% if description %}
-    {% set page_keywords = page_keywords | push(description | lower) %}
+    {% set page_keywords = page_keywords | push(description | lower | e) %}
 {% endif %}
 {% if tags %}
     {% set page_keywords = page_keywords | extend(tags | exclude('posts')) %}
