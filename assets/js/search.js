@@ -81,7 +81,7 @@ $(async function () {
 
     const result =
       idx.query(function (q) {
-        query.split(/\s*,\s*/g).forEach(term => {
+        query.split(lunr.tokenizer.separator).forEach(term => {
           if (!term.trim())
             return;
 
