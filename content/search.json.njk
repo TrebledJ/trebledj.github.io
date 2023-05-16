@@ -8,10 +8,24 @@ permalink: /search.json
 {
 "type": "post",
 "title": "{{post.data.title}}",
-"tags": {{post.data.tags | exclude("posts") | jsonify | safe}},
 "description": "{{post.data.description}}",
-"content": {{post.content | striptags | keywords | jsonify | safe}},
+"keywords": {{post.content | striptags | keywords | jsonify | safe}},
+"tags": {{post.data.tags | exclude("posts") | jsonify | safe}},
 "url": "{{post.url}}"
 }
+{% endfor %}
+{% for page in collections.all %}
+{% set xs = page.url | split('/') %}
+{% if xs[1] == 'tags' %}{{ comma() }}
+{% set clean = page.content | striptags %}
+{
+"type": "tag",
+"title": "{{page.data.title}}",
+"description": {{clean | truncatewords(20) | jsonify | safe}},
+"keywords": {{clean | keywords | jsonify | safe}},
+"tags": [],
+"url": "{{page.url}}"
+}
+{% endif %}
 {% endfor %}
 ]

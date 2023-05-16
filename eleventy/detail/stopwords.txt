@@ -572,3 +572,11 @@ z
 zero
 &gt;
 &lt;
+&quot;
+&amp;
+lil
+lot
+made
+e.g
+i.e
+ve

@@ -44,6 +44,22 @@ module.exports = function (eleventyConfig) {
 		return str ? str.split(delimiter || ' ') : [];
 	});
 
+	// A smarter truncate filter?
+	eleventyConfig.addFilter("truncatewords", (str, nwords, append='...') => {
+		const truncated = str.split(' ').slice(0, nwords).join(' ');
+		const punc = '.?!';
+		const punk = ','; // Wassup punk!
+		if (punc.includes(truncated[truncated.length - 1])) {
+			return truncated; // No need to append a (...).
+		}
+		if (punk.includes(truncated[truncated.length - 1])) {
+			// Delete and append.
+			return truncated.slice(0, truncated.length - 1) + append;
+		}
+		// Append :).
+		return truncated + append;
+	});
+
 	eleventyConfig.addFilter('htmlDateString', (dateObj) => {
 		// dateObj input: https://html.spec.whatwg.org/multipage/common-microsyntaxes.html#valid-date-string
 		return DateTime.fromJSDate(dateObj, { zone: 'utc' }).toFormat('yyyy-LL-dd');
