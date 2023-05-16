@@ -2,9 +2,9 @@
     <a href="{{post.url}}"></a>
     <div class="d-flex flex-column">
         <a class="post-thumbnail flex-column" href="{{post.url}}">
-            <img class="post-img-blurred-bg" src="{{post.data.thumbnail}}" alt="{{ post.data.title }}">
+            <img class="post-img-blurred-bg" src="{{post.data.thumbnail}}" alt="{{ post.data.title }}" loading="lazy" decoding="async">
             <div class="post-img-container d-flex w-100 h-100">
-                <img class="post-img-contain" src="{{post.data.thumbnail}}" alt="{{ post.data.title }}">
+                <img class="post-img-contain" src="{{post.data.thumbnail}}" alt="{{ post.data.title }}" loading="lazy" decoding="async">
             </div>
         </a>
 
