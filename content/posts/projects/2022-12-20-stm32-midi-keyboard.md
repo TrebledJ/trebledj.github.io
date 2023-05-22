@@ -7,7 +7,6 @@ tags:
  - cpp
  - c
  - software-engineering
- - programming
  - dsp
  - music
  - hkust
