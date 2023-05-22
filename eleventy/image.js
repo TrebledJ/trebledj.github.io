@@ -51,6 +51,10 @@ module.exports = function (eleventyConfig) {
         return classes;
     }
 
+    function makeImage(src, classes, alt, style) {
+        return `<img src="${src}" class="${classes}" alt="${alt}" title="${alt}" style="${style}" loading="lazy" decoding="async">`;
+    }
+
 
     async function imageAsyncShortcode(src, altText, classes) {
         const { ext, file, options } = getOptions(src);
@@ -61,10 +65,19 @@ module.exports = function (eleventyConfig) {
         const data = metadata[ext][metadata[ext].length - 1];
         const ratio = `aspect-ratio: auto ${data.width} / ${data.height};`; // Alleviate content layout shift.
 
-        return `<img src="${data.url}" class="${classes.join(' ')}" alt="${altText}" title="${altText}" style="${ratio}" loading="lazy" decoding="async">`;
+        return makeImage(data.url, classes.join(' '), altText, ratio)
     }
 
     function imageSyncShortcode(src, altText, classes) {
+        if (process.env.ENVIRONMENT !== 'production') {
+            // Skip image plugin.
+            classes = amendClasses(classes);
+            if (src.startsWith('assets')) {
+                src = src.split('/').slice(1).join('/');
+            }
+            return makeImage(src, classes.join(' '), altText, '')
+        }
+
         const { ext, file, options } = getOptions(src);
         eleventyImage(file, options);
 
@@ -74,7 +87,7 @@ module.exports = function (eleventyConfig) {
         const data = metadata[ext][metadata[ext].length - 1];
         const ratio = `aspect-ratio: auto ${data.width} / ${data.height};`; // Alleviate content layout shift.
 
-        return `<img src="${data.url}" class="${classes.join(' ')}" alt="${altText}" title="${altText}" style="${ratio}" loading="lazy" decoding="async">`;
+        return makeImage(data.url, classes.join(' '), altText, ratio)
     }
 
     // Eleventy Image shortcode
