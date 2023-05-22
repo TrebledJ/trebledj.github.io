@@ -29,7 +29,7 @@ With audio, we are concerned with two dimensions of quality: sampling (time) and
 
 {% image "assets/img/posts/misc/dsp/sampling.jpg", "Want some free samples?", "post1" %}
 
-<sup>Blue line: original, continuous signal. Red line: sampled, discrete signal.</sup>
+<sup>Blue line: original, continuous signal. Red dots: sampled, discrete signal. At higher sample rates, we chop densely, and more information is retained. At lower sample rates, we chop sparsely, but the sampled signal struggles to capture the peaks and troughs.</sup>
 {.caption}
 
 Digital audio signals are represented discretely by storing samples at regular intervals instead of using a single continuous line.
