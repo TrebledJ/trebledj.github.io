@@ -31,7 +31,7 @@ module.exports = function (eleventyConfig) {
 
 	// Eleventy Image shortcode
 	// https://www.11ty.dev/docs/plugins/image/
-	eleventyConfig.addAsyncShortcode("image", async function imageShortcode(src, alt, classes) {
+	eleventyConfig.addAsyncShortcode("image", async function imageShortcode(src, altText, classes) {
 		const useDefaultIf = ['gif'].find(ext => src.endsWith(ext));
 		const ext = useDefaultIf || 'webp';
 		const animated = src.endsWith('gif');
@@ -64,7 +64,7 @@ module.exports = function (eleventyConfig) {
 		const data = metadata[ext][metadata[ext].length - 1];
 		const ratio = `aspect-ratio: auto ${data.width} / ${data.height};`; // Alleviate content layout shift.
 
-		return `<img src="${data.url}" class="${classes.join(' ')}" alt="${alt}" title="${alt}" loading="lazy" decoding="async" style="${ratio}">`;
+		return `<img src="${data.url}" class="${classes.join(' ')}" alt="${altText}" title="${altText}" loading="lazy" decoding="async" style="${ratio}">`;
 	});
 
 	// Drafts implementation, see `content/content.11tydata.js` for additional code.
