@@ -10,6 +10,6 @@ logo: tag
 <div class="post-preview-list">
     {% set slug = tag | default(title) | slugify %}
     {% for post in collections[slug] | reverse %}
-        {{ render_preview(post) }}
+        {{ render_preview(post, excludeTags=[slug]) }}
     {% endfor %}
 </div>
