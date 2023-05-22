@@ -60,7 +60,7 @@ module.exports = function (eleventyConfig) {
 
 			// Solo image.
 			classes.push('center');
-			classes.push('rw'); 	// Full-width on small screens.
+			classes.push('rw'); 	// Responsive-width for small screens.
 			classes.push('mb-2'); 	// Extra spacing in the bottom.
 		}
 		classes.reverse();
