@@ -14,7 +14,7 @@ This post contains a brief explanation of this site’s migration and improvemen
 
 Jekyll and Eleventy (aka 11ty) are static site generators (SSGs)—programs that take us from templated code + blog posts written in Markdown to full-fledged static websites. 11ty is one of the newer, growing SSGs out there. Of course, we can't have a migration post without the appropriate meme, so let's start with that:
 
-{% image "assets/img/posts/memes/ogle-ogle-eleventy.jpg", "Weow eleventy looks pretty!", "w-80" %}
+{% image "assets/img/posts/memes/ogle-ogle-eleventy.jpg", "Weow eleventy looks pretty!", "post1 w-80" %}
 
 ## Rambling About Eleventy
 

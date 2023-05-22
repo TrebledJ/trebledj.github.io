@@ -54,12 +54,12 @@ Sadly, not the scrumptious dessert. Position-independent executable is a securit
 
 Next, we decompile our elves using Ghidra and make some observations.
 
-{% image "assets/img/posts/misc/ctf/labyrinth/labyrinth-1.jpg", "Labyrinth decompiled 1." %}
+{% image "assets/img/posts/misc/ctf/labyrinth/labyrinth-1.jpg", "Labyrinth decompiled 1.", "post1" %}
 
 <sup>Only one function contains `exit(0)`.</sup>
 {.caption}
 
-{% image "assets/img/posts/misc/ctf/labyrinth/labyrinth-2.jpg", "Labyrinth decompiled 2." %}
+{% image "assets/img/posts/misc/ctf/labyrinth/labyrinth-2.jpg", "Labyrinth decompiled 2.", "post1" %}
 
 <sup>Other functions seem to perform some sort of check and lead to more functions.</sup>
 {.caption}
@@ -116,13 +116,13 @@ Now we'll try some good ol' angr `explore()` and see what turns up.
 #### Path Explosion
 Unfortunately, this takes forever to run due to *path explosion*. Notice how the control flow makes the paths diverge in one of the binaries:
 
-{% image "assets/img/posts/misc/ctf/labyrinth/labyrinth-path-explosion-graph.jpg", "Paths go boom.", "w-75" %}
+{% image "assets/img/posts/misc/ctf/labyrinth/labyrinth-path-explosion-graph.jpg", "Paths go boom.", "post1 w-75" %}
 
 Now angr is pretty smart, but not too smart. angr will simulate all paths and if it encounters a branch, it will simulate both branches together. However, it will treat the `function_133` branches as separate states...
 
 To get a more concrete view of paths exploding, Gru tried calling `simgr.run(n=50)`—which simulates 50 steps...
 
-{% image "assets/img/posts/misc/ctf/labyrinth/labyrinth-path-explosion-gru.jpg", "Good going, Gru!", "w-75" %}
+{% image "assets/img/posts/misc/ctf/labyrinth/labyrinth-path-explosion-gru.jpg", "Good going, Gru!", "post1 w-75" %}
 
 90 active states is quite a lot! Usually we'd want to limit ourselves to around 10 active states to ensure good simulation speed.
 

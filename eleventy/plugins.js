@@ -51,9 +51,13 @@ module.exports = function (eleventyConfig) {
 
 		classes = (typeof classes === 'string' ? classes.split(' ') : typeof classes === 'undefined' ? [] : classes);
 		classes.reverse(); // Add classes to the front.
-		if (classes.every(c => !c.startsWith('w-')))
-			classes.push('w-100'); // Default to full-width;
-		if (!classes.includes('multi')) {
+		if (classes.includes('post1')) {
+			// Remove class.
+			classes.splice(classes.indexOf('post1'), 1);
+
+			if (classes.every(c => !c.startsWith('w-')))
+				classes.push('w-100'); // Default to full-width;
+
 			// Solo image.
 			classes.push('center');
 			classes.push('rw'); 	// Full-width on small screens.

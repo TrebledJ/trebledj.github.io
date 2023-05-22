@@ -39,7 +39,7 @@ In the rest of this post, I'll use the terms "trainee" and "user" interchangeabl
 ### High-Level Overview
 To give an idea of what the simulator looks like, here's a little annotated screenshot of an early version:
 
-{% image "assets/img/posts/projects/rdc-simulator/setup.jpg", "Annotation of the UI" %}
+{% image "assets/img/posts/projects/rdc-simulator/setup.jpg", "Annotation of the UI", "post1" %}
 
 Its core features?
 
@@ -89,7 +89,7 @@ The communication model was inspired by Codingame's turn-based games. However, C
 #### Project Management
 We used our good friend GitHub projects and GitHub issues for project management and issue tracking.
 
-{% image "assets/img/posts/projects/rdc-simulator/issues.png", "List of GitHub issues (most of them resolved)." %}
+{% image "assets/img/posts/projects/rdc-simulator/issues.png", "List of GitHub issues (most of them resolved).", "post1" %}
 
 Some general thoughts looking back:
 
@@ -119,7 +119,7 @@ For physics, we ended up choosing Box2D. We decided to go with this library sinc
 
 One pain point I encountered was that the `b2vec2` constructor does not have default values! This caused me grief, since objects were beginning to fly ***everywhere***. And it took a LONG TIME TO DEBUGGGGG!!! I had assumed that since it was a C++-based library, it would have reasonable defaults. Well apparently not.
 
-{% image "assets/img/posts/projects/rdc-simulator/b2vec2.jpg", "box2d y u no embrace c++", "w-75" %}
+{% image "assets/img/posts/projects/rdc-simulator/b2vec2.jpg", "box2d y u no embrace c++", "post1 w-75" %}
 
 #### Documentation
 There are various sources for documentation on the RDC simulator. We have [documentation related to setup, installation, and administrative procedures][emulator-start] and another set of [documentation for coding a user program][emulator-docs].
@@ -129,7 +129,7 @@ Being a rather detail-oriented person, I have become quite fond of checking and 
 ### Conclusion
 At least two software trainee teams managed to complete the game and score full points.
 
-{% image "assets/img/posts/projects/rdc-simulator/winner.jpg", "The winning team!" %}
+{% image "assets/img/posts/projects/rdc-simulator/winner.jpg", "The winning team!", "post1" %}
 
 * So was the RDC playable? Yes.
   * ~~When developing the simulator, we didn't have a working program to test if the game can be completed. So it was a relief when some teams managed to finish.~~

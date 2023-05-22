@@ -38,7 +38,7 @@ Here are some examples of to-dos I might encounter while composing:
 - TODO: Revise counterpoint.
 - TODO: Add bowing articulation to strings.
 
-{% image "assets/img/posts/music/musescore/plugin-todo-list.jpg", "" %}
+{% image "assets/img/posts/music/musescore/plugin-todo-list.jpg", "", "post1" %}
 
 To allow for different to-do styles and text, I provided several settings for the user to modify. These are listed in on the [GitHub readme](https://github.com/TrebledJ/musescore-todo-list).
 

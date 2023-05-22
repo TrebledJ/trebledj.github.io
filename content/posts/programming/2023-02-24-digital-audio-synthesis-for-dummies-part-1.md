@@ -16,7 +16,7 @@ A while back I worked on a lil’ [MIDI keyboard](/posts/stm32-midi-keyboard) pr
 
 ## Dealing with Data 📈
 
-{% image "assets/img/posts/misc/dsp/data.jpg", "Get ready for some Data!", "w-75" %}
+{% image "assets/img/posts/misc/dsp/data.jpg", "Get ready for some Data!", "post1 w-75" %}
 
 
 When processing data of any form, we are concerned with the data’s quality. Higher quality data may lead to a more thorough analysis and better user experience, but also demand higher memory and computing requirements.
@@ -27,7 +27,7 @@ With audio, we are concerned with two dimensions of quality: sampling (time) and
 
 **Sampling** refers to how much we “chop” a signal. Suppose our signal is a carrot. For a stew, you may want longer samples. With rice, however, shorter samples go better.
 
-{% image "assets/img/posts/misc/dsp/sampling.jpg", "Want some free samples?" %}
+{% image "assets/img/posts/misc/dsp/sampling.jpg", "Want some free samples?", "post1" %}
 
 <sup>Blue line: original, continuous signal. Red line: sampled, discrete signal.</sup>
 {.caption}
@@ -48,7 +48,7 @@ This is important to avoid **aliasing**, which occurs when high frequency compon
 
 The diagram below demonstrates aliasing, which happens when our sample rate is too low.
 
-{% image "assets/img/posts/misc/dsp/aliasing.jpg", "Aliasing example." %}
+{% image "assets/img/posts/misc/dsp/aliasing.jpg", "Aliasing example.", "post1" %}
 
 <sup>(a) Sampling a 20kHz signal at 40kHz captures the original signal correctly. (b) Sampling the same 20kHz signal at 30kHz captures an aliased (low frequency ghost) signal. (Source: Embedded Media Processing.[^emp])</sup>
 {.caption}
@@ -68,7 +68,7 @@ While sampling deals with resolution in time, **quantisation** deals with resolu
 
 1. Like sampling, quantisation affects how well a signal is represented. If we quantise with 1 bit, then each sample has only two possible values (0 or 1). This means we can represent square waves (where high=1, low=0). But we can’t represent sine waves since the values in between that *make up a sine wave* aren’t in our vocabulary.
 
-    {% image "assets/img/posts/misc/dsp/quantisation-quality.jpg", "Higher quantisation, better quality.", "w-90" %}
+    {% image "assets/img/posts/misc/dsp/quantisation-quality.jpg", "Higher quantisation, better quality.", "post1 w-90" %}
 
     <sup>Blue: original signal; Red: quantised signal. Higher quantisation leads to better audio quality. With 1 or 2 bits, we can barely tell the signal is reproduced. At higher bits, the signal is reproduced more faithfully.</sup>
     {.caption}
@@ -81,7 +81,7 @@ While sampling deals with resolution in time, **quantisation** deals with resolu
     
     [^floats]: How much more detail do floats have over integers? 32-bit floats range from about -10<sup>38</sup> to +10<sup>38</sup> whereas 32-bit integers range from about -10<sup>9</sup> to +10<sup>9</sup>. Sadly, the increased range of floats comes with a downside: reduced precision. But that's alright. Floats are precise up to 7 significant figures, which is fine in a lot of cases! For more info on floating points, see the [Wikipedia page on 32-bit floats](https://en.wikipedia.org/wiki/Single-precision_floating-point_format).
 
-    {% image "assets/img/posts/misc/dsp/quantisation-storage.jpg", "Lower quantisation, more compact storage.", "w-90" %}
+    {% image "assets/img/posts/misc/dsp/quantisation-storage.jpg", "Lower quantisation, more compact storage.", "post1 w-90" %}
 
     <sup>Each block is an audio sample. Lower quantisation leads to more compact storage.[^encoding]</sup>
     {.caption}
@@ -118,12 +118,12 @@ Generally, increasing the sample rate helps (or lowering the maximum frequency).
 
 Clipping occurs when our samples go out-of-bounds, past the maximum/minimum quantisation value. Clipping may cause our signal to wraparound or flatten at the peaks and troughs.
 
-{% image "assets/img/posts/misc/dsp/clipping-2.jpg", "Wraparound clippy." %}
+{% image "assets/img/posts/misc/dsp/clipping-2.jpg", "Wraparound clippy.", "post1" %}
 
 <sup>Example of wraparound clipping, typically due to integer overflow/underflow.</sup>
 {.caption}
 
-{% image "assets/img/posts/misc/dsp/clipping-1.jpg", "Clamped clippy.", "w-75" %}
+{% image "assets/img/posts/misc/dsp/clipping-1.jpg", "Clamped clippy.", "post1 w-75" %}
 
 <sup>Example of a signal flattened at the peaks and troughs due to clamping.</sup>
 {.caption}
@@ -135,7 +135,7 @@ Clipping arises from neglecting dynamic range. It can be addressed by scaling do
 
 Clicks (aka pops) occur when a signal behaves discontinuously with large differences between samples. This difference forces the speaker hardware to vibrate quickly… too quickly.
 
-{% image "assets/img/posts/misc/dsp/click.jpg", "Jumpy jumpy signal is bad bad.", "w-90" %}
+{% image "assets/img/posts/misc/dsp/click.jpg", "Jumpy jumpy signal is bad bad.", "post1 w-90" %}
 
 <sup>Signal jumps from -1.0 to 1.0, causing my speaker to pop and my ear drums to bleed from utter despair.</sup>
 {.caption}

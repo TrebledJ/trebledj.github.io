@@ -49,7 +49,7 @@ Here’s one idea: since the plaintext is an English article, this means that mo
 
 Since Base64 simply maps 8-bits to 6-bits, so 3 characters of ASCII would be translated to 4 characters of Base64.
 
-{% image "assets/img/posts/misc/ctf/base64-encryption/base64-is-so-cool.png", "Base64 maps three characters to four." %}
+{% image "assets/img/posts/misc/ctf/base64-encryption/base64-is-so-cool.png", "Base64 maps three characters to four.", "post1" %}
 
 <sup>Base64 maps three characters to four. ([Source](https://www.tenminutetutor.com/img/data-formats/binary-encoding/base64.png))</sup>
 {.caption}
@@ -102,7 +102,7 @@ subchars_not_in_ascii = [get_inverted_chars_with_mask(m) for m in in_ascii] # ch
 
 Another idea comes to mind. Remember the plaintext is in English? Well, with English text, some letters appear more frequently than others. The same applies to words and sequences. 
 
-{% image "assets/img/posts/misc/ctf/base64-encryption/letter-frequencies.jpg", "Frequency of English letters. But we need to be careful with letter cases.", "w-80" %}
+{% image "assets/img/posts/misc/ctf/base64-encryption/letter-frequencies.jpg", "Frequency of English letters. But we need to be careful with letter cases.", "post1 w-80" %}
 
 <sup>Frequency of the English alphabet. (Source: Wikipedia.)</sup>
 {.caption}
@@ -162,7 +162,7 @@ Frequency analysis is useful to group letters into buckets. But using frequency 
 
     <br/>
 
-    {% image "assets/img/posts/misc/ctf/base64-encryption/progress-1.jpg", "Results!" %}
+    {% image "assets/img/posts/misc/ctf/base64-encryption/progress-1.jpg", "Results!", "post1" %}
 
     <sup>Random decoding after frequency analysis.</sup>
     {.caption}
@@ -175,7 +175,7 @@ Frequency analysis is useful to group letters into buckets. But using frequency 
 
     <br/>
 
-    {% image "assets/img/posts/misc/ctf/base64-encryption/progress-2.jpg", "Moar results!!!" %}
+    {% image "assets/img/posts/misc/ctf/base64-encryption/progress-2.jpg", "Moar results!!!", "post1" %}
 
     <sup>Random decoding after guessing.</sup>
     {.caption}
@@ -187,7 +187,7 @@ Frequency analysis is useful to group letters into buckets. But using frequency 
 - Google: after decoding a sizeable portion, let's pray and hope the plaintext is open-source. Then use the plaintext to derive the rest of the mapping.
     - It turns out the plaintext is—quite aptly—the [Wikipedia summary of frequency analysis](https://en.wikipedia.org/wiki/Frequency_analysis).
     
-        {% image "assets/img/posts/misc/ctf/base64-encryption/wikipedia-frequency-analysis.jpg", "Rrrreeeeeeeeeeeee." %}
+        {% image "assets/img/posts/misc/ctf/base64-encryption/wikipedia-frequency-analysis.jpg", "Rrrreeeeeeeeeeeee.", "post1" %}
     
 Finding the rest of the mappings was quite easy. After a bit more tuning, we get the flag.
 
