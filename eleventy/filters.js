@@ -31,6 +31,15 @@ module.exports = function (eleventyConfig) {
 		return array2;
 	});
 
+	// Push in-place.
+	eleventyConfig.addFilter("pushi", (array, item) => {
+		if (array === undefined) {
+			throw new Error('push: array is undefined');
+		}
+		array.push(item);
+		return array;
+	});
+
 	eleventyConfig.addFilter("extend", (array, items) => {
 		if (array === undefined) {
 			throw new Error('extend: array is undefined');
