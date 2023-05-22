@@ -7,7 +7,7 @@ tags:
  - python
  - music
  - hkust
-thumbnail: /img/posts/projects/midi-editor.jpg
+thumbnail: /img/posts/projects/midi-reimagined.jpg
 include_thumbnail: true
 pitch: Developed a browser-based MIDI editor enabled with audio-to-MIDI conversion features.
 related:
@@ -20,6 +20,11 @@ As a composer and programmer, I wanted to create a tool that would make MIDI edi
 If you’re a composer, transcriber, or musician, you may find the audio import features helpful. The editor enables users to import WAV files, or record directly using their device’s microphone. These audio files are then converted to MIDI before being displayed. This way, you can upload an audio file, sing, or play an instrument to transcribe it to MIDI.[^backend]
 
 [^backend]: The audio file is sent to the backend to be converted to MIDI, then sent back to the frontend for display and editing.
+
+{% image "assets/img/posts/projects/midi-editor.jpg" %}
+
+<sup>Screenshot of the MIDI editor.</sup>
+{.caption}
 
 Although it’s meant to be browser-based, I have yet to deploy the site. You can still spin up a local development environment to play with it though. See [setup instructions](https://github.com/TrebledJ/midi-editor/#setup) for details.
 
