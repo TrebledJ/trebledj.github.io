@@ -25,7 +25,7 @@ With audio, we are concerned with two dimensions of quality: sampling (time) and
 
 ### Sampling 🔪
 
-**Sampling** refers to how much we “chop” a signal. Suppose our signal is a carrot. For a stew, you may want longer samples. With rice, however, shorter samples go better.
+**Sampling** refers to how much we “chop” a signal. Suppose our signal is a carrot. For a stew, we may want longer samples, sparser chops. With rice, however, it's better to go with shorter samples, denser chops.
 
 {% image "assets/img/posts/misc/dsp/sampling.jpg", "Want some free samples?", "post1" %}
 
