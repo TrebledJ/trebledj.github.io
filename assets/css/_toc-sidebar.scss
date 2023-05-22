@@ -32,17 +32,29 @@
     ol {
         list-style-type: none;
         margin-left: 0;
+        margin-bottom: 0;
         padding-left: 1rem;
 
         li {
             margin-top: 0.4rem;
         }
     }
+
+    hr {
+        margin-left: 10px;
+    }
+
+    br {
+        display: block;
+        content: "";
+        margin-top: 10px;
+    }
 }
 
 #btn-mobile-toc {
+
     /* No padding on outer-most list. */
-    nav.toc > ol {
+    nav.toc>ol {
         padding-left: 0rem;
     }
 
