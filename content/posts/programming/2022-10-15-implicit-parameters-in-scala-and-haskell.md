@@ -6,7 +6,7 @@ tags:
  - scala
  - haskell
  - cpp
-thumbnail: /img/posts/tutorials/implicits/implicits-thumbnail.jpg
+thumbnail: assets/img/posts/tutorials/implicits/implicits-thumbnail.jpg
 related:
   tags: [programming]
 ---

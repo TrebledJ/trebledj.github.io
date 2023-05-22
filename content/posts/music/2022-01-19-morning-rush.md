@@ -5,7 +5,7 @@ updated: "2022-07-28"
 tags:
  - band
 keywords: [guitars, drums, upbeat]
-thumbnail: /img/posts/music/neo-bus.jpg
+thumbnail: assets/img/posts/music/neo-bus.jpg
 track_id: 1199278129
 score_id: 8527520
 related:

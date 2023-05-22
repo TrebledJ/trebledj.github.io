@@ -6,7 +6,7 @@ tags:
  - strings
  - hkust
 keywords: [oboe, major, minor, covid19]
-thumbnail: /img/posts/music/swirling-wisps-2.jpg
+thumbnail: assets/img/posts/music/swirling-wisps-2.jpg
 track_id: 1329509965
 score_id: 8527388
 related:

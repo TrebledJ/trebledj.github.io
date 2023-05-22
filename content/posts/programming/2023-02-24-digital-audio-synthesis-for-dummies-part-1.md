@@ -5,7 +5,7 @@ updated: '2023-03-09'
 tags:
  - tutorial
  - dsp
-thumbnail: /img/posts/misc/dsp/sine-oscilloscope.jpg
+thumbnail: assets/img/posts/misc/dsp/sine-oscilloscope.jpg
 usemathjax: true
 related:
     posts: [stm32-midi-keyboard, digital-audio-synthesis-for-dummies-part-2]

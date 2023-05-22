@@ -6,7 +6,7 @@ tags:
  - python
  - cpp
  - programming
-thumbnail: /img/posts/misc/ctf/ctf-sim/ctf-sim-thumbnail.jpg
+thumbnail: assets/img/posts/misc/ctf/ctf-sim/ctf-sim-thumbnail.jpg
 keywords: [vpointer, vptr, ctf, virtual function, vtable, gdb]
 ---
 

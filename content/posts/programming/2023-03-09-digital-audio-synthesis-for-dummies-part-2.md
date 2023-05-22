@@ -8,7 +8,7 @@ tags:
  - c
  - cpp
  - music
-thumbnail: /img/posts/misc/dsp/sine-oscilloscope.jpg
+thumbnail: assets/img/posts/misc/dsp/sine-oscilloscope.jpg
 usemathjax: true
 related:
     posts: [stm32-midi-keyboard, digital-audio-synthesis-for-dummies-part-1]

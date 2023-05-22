@@ -4,7 +4,7 @@ description: "And yet another school year begins."
 tags:
  - electronic
 keywords: [sidechain compression, synth, surge, penguins, space, learn-to-fly]
-thumbnail: /img/posts/music/space-penguin.jpg
+thumbnail: assets/img/posts/music/space-penguin.jpg
 track_id: 1331667688
 related:
     tags: [electronic]

@@ -4,7 +4,7 @@ description: "Programming isn't about mindlessly typing away on a keyboard. Ther
 tags:
  - mathematics
  - haskell
-thumbnail: /img/posts/misc/abstract.jpg
+thumbnail: assets/img/posts/misc/abstract.jpg
 # include_thumbnail: true
 usemathjax: true
 related:

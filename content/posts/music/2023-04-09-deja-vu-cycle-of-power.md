@@ -7,7 +7,7 @@ tags:
  - faith
  - deja-vu
  - diatribe
-thumbnail: /img/posts/music/easter-tomb-sq.jpg
+thumbnail: assets/img/posts/music/easter-tomb-sq.jpg
 track_id: 1488692758
 # score_id: 
 related:

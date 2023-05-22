@@ -4,6 +4,7 @@ const plugins = require('./eleventy/plugins');
 const filters = require('./eleventy/filters');
 const markdown = require('./eleventy/markdown');
 const collections = require('./eleventy/collections');
+const image = require('./eleventy/image');
 
 module.exports = function (eleventyConfig) {
 	process.env.ENVIRONMENT = process.env.ENVIRONMENT || 'development';
@@ -42,14 +43,10 @@ module.exports = function (eleventyConfig) {
 	});
 
 
-	// Plugins
 	plugins(eleventyConfig);
-
-	// Collections
 	collections(eleventyConfig);
-
-	// Filters
 	filters(eleventyConfig);
+	image(eleventyConfig);
 
 	// Transforms
 	if (process.env.ENVIRONMENT === 'production') {

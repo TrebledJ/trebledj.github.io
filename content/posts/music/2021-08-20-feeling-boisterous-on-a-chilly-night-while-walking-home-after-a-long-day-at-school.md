@@ -6,7 +6,7 @@ tags:
  - electronic
  - hkust
 keywords: [synth, drums, edm]
-thumbnail: /img/posts/music/winter-road.jpg
+thumbnail: assets/img/posts/music/winter-road.jpg
 track_id: 1146309223
 related:
     tags: [electronic]

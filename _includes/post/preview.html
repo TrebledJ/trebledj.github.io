@@ -3,9 +3,9 @@
     <a href="{{post.url}}"></a>
     <div class="post-preview-container d-flex">
         <a class="post-thumbnail" href="{{post.url}}">
-            <img class="post-img-blurred-bg" src="{{post.data.thumbnail}}" alt="{{ post.data.title }}" loading="lazy" decoding="async">
+            {% imageSync post.data.thumbnail, post.data.title, "post-img-blurred-bg" %}
             <div class="post-img-container d-flex w-100 h-100">
-                <img class="post-img-contain" src="{{post.data.thumbnail}}" alt="{{ post.data.title }}" loading="lazy" decoding="async">
+                {% imageSync post.data.thumbnail, post.data.title, "post-img-contain" %}
             </div>
         </a>
     

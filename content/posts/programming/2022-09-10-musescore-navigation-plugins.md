@@ -9,7 +9,7 @@ tags:
  - apps
  - qt
  - music
-thumbnail: /img/posts/music/piano-keys.jpg
+thumbnail: assets/img/posts/music/piano-keys.jpg
 pitch: Developed MuseScore quality-of-life plugins for navigation and score editing using QML/JS.
 related: false
 ---

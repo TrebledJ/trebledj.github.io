@@ -6,7 +6,7 @@ description: "short summary of post"
 author: trebledj
 date: '2021-02-28 1:35:23 +0530' # not really needed
 tags: list of tags
-thumbnail: /img/to/thumbnail.jpg
+thumbnail: assets/img/to/thumbnail.jpg
 keywords: key words  # Not really important.
 comments: true      # Enable comments
 usemathjax: false
