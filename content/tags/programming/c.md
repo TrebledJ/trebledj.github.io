@@ -8,6 +8,6 @@ C is a general-purpose computer [programming](/tags/programming) language. It wa
 #include <stdio.h>
 
 int main() {
-    printf("Hello world!");
+    printf("Hello world!\n");
 }
 ```
