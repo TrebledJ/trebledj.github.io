@@ -2,7 +2,7 @@
 title: Browser-Based MIDI Editor
 description: MIDI transcription and editing localised in your browser.
 tags:
- - dsp
+ - apps
  - js
  - python
  - music
