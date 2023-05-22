@@ -168,6 +168,25 @@ a.tag:hover {
     }
 }
 
+.thin-preview .post-preview {
+    .post-preview-container {
+        flex-direction: column;
+    }
+
+    .post-img-container {
+        align-items: inherit;
+    }
+
+    .post-thumbnail {
+        width: 100%;
+        min-height: 200px;
+    }
+
+    .post-content {
+        width: 100%;
+    }
+}
+
 .post-preview-list {
     display: flex;
     flex-wrap: wrap;
@@ -184,6 +203,17 @@ a.tag:hover {
 .post-words {
     font-size: 12px;
 }
+
+@include media-breakpoint-down(sm) {
+    .post-preview {
+
+        .metadata-container,
+        .metadata-tag-container {
+            display: none !important;
+        }
+    }
+}
+
 
 .article-header .post-title {
     font-size: 40px;
@@ -286,6 +316,7 @@ a.tag:hover {
 
     ul {
         margin-top: 0.2rem;
+
         p {
             margin-bottom: 0rem;
         }
@@ -316,7 +347,7 @@ img.center {
     margin: 2rem 0;
 }
 
-.alert-content > p:last-child {
+.alert-content>p:last-child {
     margin-bottom: 0;
 }
 

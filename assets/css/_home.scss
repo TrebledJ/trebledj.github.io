@@ -31,6 +31,19 @@ html[data-theme="light"] .hero-section {
     }
 }
 
+#recents-carousel {
+    height: 550px;
+}
+
+@include media-breakpoint-down(md) {
+    #recents-carousel {
+        .collection-list > div:nth-child(2) {
+            display: none;
+        }
+    }
+}
+
+
 // @include media-breakpoint-down(md) {
 //     .about-me {
 //         .image-col {

@@ -14,8 +14,14 @@
     </div>
     <br/>
 
-    {% for post in collections['cat-' + name | slugify] | reverse | head(nposts) %}
-        {{ render_preview(post, excludeTags=excludeTags) }}
-    {% endfor %}
+    <div class="container thin-preview">
+        <div class="row collection-list">
+            {% for post in collections['cat-' + name | slugify] | reverse | head(nposts) %}
+                <div class="col-md-6">
+                    {{ render_preview(post, excludeTags=excludeTags) }}
+                </div>
+            {% endfor %}
+        </div>
+    </div>
 
 {% endmacro %}

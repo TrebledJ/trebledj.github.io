@@ -1,13 +1,47 @@
 {% from "home/tag-preview.html" import render_tag_preview %}
 
 <div class="container mt-4">
+    <div class="row d-flex align-items-center">
+        <div class="col-1 d-flex align-items-center justify-content-center">
+            <a type="button" data-bs-target="#recents-carousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </a>
+        </div>
+        <div class="col-10">
+            <div id="recents-carousel" class="carousel slide" data-bs-ride="true">
+                <div class="carousel-indicators">
+                    {% for cat in categories %}
+                        <button type="button" data-bs-target="#recents-carousel" data-bs-slide-to="{{loop.index0}}" class="{{"active" if loop.first}}" aria-label="Slide {{loop.index}}"></button>
+                    {% endfor %}
+
+                </div>
+                <div class="carousel-inner">
+                    {% for cat in categories %}
+                        <div class="carousel-item {{"active" if loop.first}}">
+                            {{render_tag_preview(collections, cat.name, cat.tag, cat.about, cat.excludeTags, nposts=2)}}
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <div class="col-1 d-flex align-items-center justify-content-center">
+            <a type="button" data-bs-target="#recents-carousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </a>
+        </div>
+    </div>
+</div>
+
+{# <div class="container mt-4">
     <div class="col-lg-12 p-3">
         <div class="row gx-5">
             {% for cat in categories %}
                 <div class="col-lg-6">
-                    {{render_tag_preview(collections, cat.name, cat.tag, cat.about, cat.exclude)}}
+                    {{render_tag_preview(collections, cat.name, cat.tag, cat.about, cat.excludeTags)}}
                 </div>
             {% endfor %}
         </div>
     </div>
-</div>
+</div> #}
