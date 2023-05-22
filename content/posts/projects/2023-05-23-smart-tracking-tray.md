@@ -2,10 +2,10 @@
 title: Smart-Tracking Tray
 description: Enhancing wet labs with IoT.
 tags:
- - experience
  - embedded
  - software-engineering
  - cpp
+ - experience
  - hkust
 thumbnail: /img/posts/projects/smart-tray.jpg
 include_thumbnail: true
