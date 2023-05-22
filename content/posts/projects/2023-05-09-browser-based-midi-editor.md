@@ -19,7 +19,7 @@ As a composer and programmer, I wanted to create a tool that would make MIDI edi
 
 If you’re a composer, transcriber, or musician, you may find the audio import features helpful. The editor enables users to import WAV files, or record directly using their device’s microphone. These audio files are then converted to MIDI before being displayed. This way, you can upload an audio file, sing, or play an instrument to transcribe it to MIDI.[^backend]
 
-[^backend]: The audio file is sent to the backend to be converted to MIDI, then sent back to the frontend for display and editing.
+[^backend]: The audio file is sent to a Python backend to be converted to MIDI, then sent back to the frontend for display and editing.
 
 {% image "assets/img/posts/projects/midi-editor.jpg" %}
 
