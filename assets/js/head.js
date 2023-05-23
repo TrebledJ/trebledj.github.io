@@ -48,4 +48,13 @@ $(function () {
 
     /* Load Tooltips */
     $("body").tooltip({ selector: '[data-toggle=tooltip]' });
+
+    // Compress SoundCloud embed for small screens.
+    if ($(window).width() < 600) {
+        const s = $(".soundcloud-track iframe");
+        s.each(function() {
+            $(this).attr('src', $(this).attr('src') + '&visual=true');
+        });
+        console.log('#s:', s.length)
+    }
 });

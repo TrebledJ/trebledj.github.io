@@ -12,14 +12,11 @@
             {% for track_id in featured_tracks %}
                 <div class="col-md-6">
 
-                    {% set visual = true %}
                     {% include "track.html" %}
 
                     {% for post in collections.composition %}
                         {% if track_id == post.data.track_id %}
-                            <div>
-                                <b>{{post.data.title}}</b>
-                            </div>
+                            <h6>{{post.data.title}}</h6>
                             <div class="d-flex flex-row flex-wrap align-items-center">
                                 <span>
                                     <i class="fa fa-tag post-meta-icon me-2"></i>
