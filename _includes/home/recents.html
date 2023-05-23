@@ -16,12 +16,12 @@
 
                     {% for post in collections.composition %}
                         {% if track_id == post.data.track_id %}
-                            <h6>{{post.data.title}}</h6>
+                            <h6><a href="{{post.url}}">{{post.data.title}}</a></h6>
                             <div class="d-flex flex-row flex-wrap align-items-center">
                                 <span>
                                     <i class="fa fa-tag post-meta-icon me-2"></i>
                                 </span>
-                                {{render_tag_list(post.data.tags, 3)}}
+                                {{render_tag_list(post.data.tags | exclude(['composition', 'music']), 3)}}
                             </div>
 
                             <div class="my-2">
