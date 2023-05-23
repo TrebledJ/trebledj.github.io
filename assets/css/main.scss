@@ -1,6 +1,6 @@
 $enable-negative-margins: true;
 // $carousel-transition-duration: 2s;
-$carousel-transition: opacity .5s ease-in, transform 2s ease, opacity 1.5s ease-out;
+$carousel-transition: transform 2s ease, opacity 1.5s ease-out .5s;
 
 @import '../../node_modules/bootstrap/scss/mixins';
 @import '../../node_modules/bootstrap/scss/functions';
