@@ -8,7 +8,7 @@ const image = require('./eleventy/image');
 
 module.exports = function (eleventyConfig) {
 	process.env.ENVIRONMENT = process.env.ENVIRONMENT || 'development';
-	console.log(`environment: ${process.env.ENVIRONMENT}`);
+	// console.log(`environment: ${process.env.ENVIRONMENT}`);
 
 	// Copy the contents of the `public` folder to the output folder
 	// For example, `./public/css/` ends up in `_site/css/`
@@ -28,20 +28,17 @@ module.exports = function (eleventyConfig) {
 	// https://www.11ty.dev/docs/watch-serve/#add-your-own-watch-targets
 
 	// Process content images to the image pipeline.
-	eleventyConfig.addWatchTarget("assets/**/*.{png,jpg}");
+	eleventyConfig.addWatchTarget("assets/**/*.{png,jpg,gif,webp}");
+	eleventyConfig.watchIgnores.add("{package,package-lock}.json");
 
 	eleventyConfig.setWatchThrottleWaitTime(100);
 
 	eleventyConfig.setServerOptions({
 		liveReload: true,
 		watch: [
-			'./_site/css/**/*.css',
-			'./_site/posts/*',
-			'./_site/tags/*',
-			'./_site/music',
+			'./_site/**/*.css',
 		]
 	});
-
 
 	plugins(eleventyConfig);
 	collections(eleventyConfig);
