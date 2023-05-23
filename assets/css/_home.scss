@@ -31,12 +31,12 @@ html[data-theme="light"] .hero-section {
     }
 }
 
-#recents-carousel {
+#home .carousel {
     height: 550px;
 }
 
 @include media-breakpoint-down(md) {
-    #recents-carousel {
+    #home .carousel {
         .collection-list > div:nth-child(2) {
             display: none;
         }

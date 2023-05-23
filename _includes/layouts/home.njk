@@ -1,26 +1,48 @@
 ---
 layout: layouts/default-full
-categories:
- - 
-    name: Programming
-    tag: programming
-    about: Typey typey type. Writings on various programming topics I encounter.
-    excludeTags: [programming]
- - 
-    name: Music
-    tag: composition
-    about: Compositions by yours truly.
-    excludeTags: [composition, music]
+featured_tracks: [1488692758, 1433470732]
+
+carousel_interval: 10000
+
+post_categories:
+- 
+   name: Programming
+   tag: "programming"
+   about: Typey typey type. Writings on various programming topics I encounter.
+   excludeTags: []
+- 
+   name: Faith
+   tag: faith
+   about: Musings of and for the soul.
+   excludeTags: []
+- 
+   name: Music
+   tag: composition
+   about: Compositions by yours truly.
+   excludeTags: [music]
+#- 
+#  name: Essays
+#  tag: diatribe
+#  about: Rants on various issues I'm concerned with.
+#  excludeTags: [diatribe]
+-
+   name: CTFs
+   tag: ctf
+   about: Let's learn cybersecurity through a gamified experience!
+   excludeTags: [writeup]
+
+project_categories:
  -
-    name: Projects
-    tag: project
-    about: Adventurous undertakings!
-    excludeTags: [project]
+   name: Projects
+   tag: project
+   about: Adventurous undertakings!
+   excludeTags: [experience]
  -
-    name: CTFs
-    tag: ctf
-    about: Let's learn cybersecurity through a gamified experience!
-    excludeTags: [ctf, writeup]
+   name: Experiences
+   tag: experience
+   about: Journeys I've gone through.
+   excludeTags: [project]
+
 redirect_from: [/profile]
 ---
 
@@ -28,7 +50,12 @@ redirect_from: [/profile]
 <link rel="stylesheet" href="/css/shooting-stars.css"/>
 {% endblock %}
 
+<div id="home">
 {% include "home/hero.html" %}
-{% include "home/about-me.html" %}
-{% include "home/recents.html" %}
-{% include "home/contact.html" %}
+
+   <div class="container">
+   {% include "home/about-me.html" %}
+   {% include "home/recents.html" %}
+   {% include "home/contact.html" %}
+   </div>
+</div>

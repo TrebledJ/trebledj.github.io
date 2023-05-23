@@ -51,8 +51,8 @@ render_tag_list %}
         <i class="fa fa-tag post-meta-icon me-2"></i>
     </span>
     <div class="tag-list d-flex flex-row flex-wrap align-items-center">
-    {% block post_metadata_tags %}
-        {{ render_tag_list(tags, 20) }}
-    {% endblock %}
-</div>
+        {% block post_metadata_tags %}
+            {{ render_tag_list(tags, 20) }}
+        {% endblock %}
+    </div>
 </div>

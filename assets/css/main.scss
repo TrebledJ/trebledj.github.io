@@ -1,4 +1,6 @@
 $enable-negative-margins: true;
+// $carousel-transition-duration: 2s;
+$carousel-transition: opacity .5s ease-in, transform 2s ease, opacity 1.5s ease-out;
 
 @import '../../node_modules/bootstrap/scss/mixins';
 @import '../../node_modules/bootstrap/scss/functions';
@@ -25,6 +27,7 @@ $enable-negative-margins: true;
 @import "theme-switch";
 
 @import '../../node_modules/bootstrap/scss/alert';
+@import '../../node_modules/bootstrap/scss/carousel';
 
 
 .tag {
@@ -46,7 +49,7 @@ $enable-negative-margins: true;
     border-radius: 50%;
 }
 
-
+.carousel-title .btn,
 .recent-posts .btn {
     border: var(--border-width) solid var(--light-border-color);
     background-color: var(--background-color);
