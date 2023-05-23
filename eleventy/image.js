@@ -73,7 +73,7 @@ module.exports = function (eleventyConfig) {
             // Skip image plugin.
             classes = amendClasses(classes);
             if (src.startsWith('assets')) {
-                src = src.split('/').slice(1).join('/');
+                src = '/' + src.split('/').slice(1).join('/');
             }
             return makeImage(src, classes.join(' '), altText, '')
         }
