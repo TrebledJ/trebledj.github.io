@@ -60,9 +60,9 @@ Feel free to [reach out](#contact) for whatever reason. ヽ(・∀・)ﾉ
 		connect-src 'self' https://hcaptcha.com https://*.hcaptcha.com;
 		`,
 		contact_placeholder: {
-			name: 'Optimus Prime',
-			email: 'optimus@autobots.woot',
-			subject: "Autobots—roll out!",
+			name: 'Humpty Dumpty',
+			email: 'jumpy@wumpy.lumpy',
+			subject: "I had a great fall!",
 			message: `Got suggestions, feedback, or comments? Lemme know!`,
 		},
 	};
