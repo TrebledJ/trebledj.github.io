@@ -52,9 +52,17 @@ $(function () {
     // Compress SoundCloud embed for small screens.
     if ($(window).width() < 600) {
         const s = $(".soundcloud-track iframe");
-        s.each(function() {
+        s.each(function () {
             $(this).attr('src', $(this).attr('src') + '&visual=true');
         });
         console.log('#s:', s.length)
     }
+
+    $('.carousel').each(function () {
+        const id = $(this).attr('id');
+        $(this).on('slide.bs.carousel', event => {
+            $(`#${id}-tab${event.from+1}-label`).removeClass('active');
+            $(`#${id}-tab${event.to+1}-label`).addClass('active');
+        });
+    });
 });

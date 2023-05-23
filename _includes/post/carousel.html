@@ -23,6 +23,16 @@
                         <button type="button" data-bs-target="#{{carouselId}}" data-bs-slide-to="{{loop.index0}}" class="{{"active" if loop.first}}" aria-label="Slide {{loop.index}}"></button>
                     {% endfor %}
                 </div> #}
+                <div class="d-flex justify-content-center mb-2">
+                    <div class="btn-group carousel-tab-group" role="group" aria-label="Carousel radio button group">
+                        {% for cat in categories %}
+                            <input type="radio" class="btn-check" name="{{carouselId}}-tab" id="{{carouselId}}-tab{{loop.index}}" autocomplete="off"
+                                data-bs-target="#{{carouselId}}" data-bs-slide-to="{{loop.index0}}">
+                            <label id="{{carouselId}}-tab{{loop.index}}-label" class="btn {{'active' if loop.first}} fs-5" for="{{carouselId}}-tab{{loop.index}}">{{cat.name}}</label>
+                        {% endfor %}
+                    </div>
+                </div>
+
                 <div class="carousel-inner">
                     {% for cat in categories %}
                         <div class="carousel-item {{"active" if loop.first}}" data-bs-interval="{{interval}}">

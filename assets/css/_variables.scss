@@ -58,7 +58,7 @@ html {
 
 html[data-theme="dark"] {
     --bold-color: rgb(188, 188, 188);
-    --highlight-color: rgb(153, 153, 153);
+    --highlight-color: rgb(75, 75, 75);
     --light-border-color: rgb(58, 57, 60);
     --light-text-color: rgb(199, 199, 204);
     --link-color: rgb(255, 138, 15);
@@ -71,7 +71,7 @@ html[data-theme="dark"] {
 
 html[data-theme="light"] {
     --bold-color: rgb(0, 0, 0);
-    --highlight-color: rgb(185, 185, 185);
+    --highlight-color: rgb(190, 190, 190);
     --light-border-color: rgb(230, 230, 230);
     --light-text-color: rgb(72, 72, 74);
     --link-color: rgb(230, 125, 20);
