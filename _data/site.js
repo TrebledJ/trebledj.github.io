@@ -41,7 +41,7 @@ Feel free to [reach out](#contact) for whatever reason. ヽ(・∀・)ﾉ
 		social: [
 			{ name: "GitHub", icon: "fab fa-github", color: 'rgb(150, 60, 180)', link: "http://github.com/TrebledJ" },
 			{ name: "StackOverflow", icon: "fab fa-stack-overflow", color: 'rgb(236, 124, 34)', link: "https://stackoverflow.com/users/10239789/trebledj" },
-			// { name: "CodinGame", img: "/img/logos/codingame.png", link: "https://www.codingame.com/profile/8444100ecb9723c1ec542346b0630aaa2821532" },
+			{ name: "CodinGame", img: "/img/logos/codingame.png", link: "https://www.codingame.com/profile/8444100ecb9723c1ec542346b0630aaa2821532" },
 			{ name: "SoundCloud", icon: "fab fa-soundcloud", color: 'rgb(237, 110, 30)', link: "https://soundcloud.com/trebledj" },
 			{ name: "MuseScore", img: "/img/logos/musescore.png", link: "https://musescore.com/user/20636901" },
 			// {name: "Spotify", icon: "fab fa-spotify", link: "https://open.spotify.com/user/24i9exez29k1jr85olljuy94g?si=4213a229649f4ceb"},
