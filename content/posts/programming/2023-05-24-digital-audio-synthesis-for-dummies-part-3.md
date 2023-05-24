@@ -406,8 +406,9 @@ while (1) {
     // Start the DMA.
     // --snip--
 
-    // Swap the buffer so that we prepare the next buffer,
-    // while this one is being sent.
+    // Point to the other buffer, so that we'll
+    // prepare the other buffer while tbe
+    // previous one is being sent.
     curr = !curr;
 }
 ```
