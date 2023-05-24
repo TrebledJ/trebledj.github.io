@@ -157,10 +157,10 @@ module.exports = function (eleventyConfig) {
 			emoji_line = `<i class="fa fa-${emoji} ms-1 me-3 mt-1 fs-4" role="img"></i>`;
 		}
 
-		return `<div class="alert alert-${state} d-flex align-items-start">${emoji_line}<div class="alert-content">`;
+		return `<div class="alert alert-${state} d-flex align-items-start">${emoji_line}<div class="alert-content">\n`;
 	});
 
 	eleventyConfig.addShortcode("endalert", function () {
-		return `</div></div>`;
+		return `\n</div></div>`;
 	});
 };
