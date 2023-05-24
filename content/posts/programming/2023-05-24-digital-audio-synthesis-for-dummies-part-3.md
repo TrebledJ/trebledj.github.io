@@ -55,7 +55,7 @@ There are various ways to configure a timer, too many to cover in this post. But
 
 In case you were wondering how timers derive their frequency from the clock…
 
-The following diagram illustrates how the clock signal is divided. There are two divisors: the prescaler and auto-reload.
+The following diagram illustrates how the clock signal is divided. There are two divisors: the prescaler and auto-reload. We'll study them more closely in the upcoming examples.
 
 {% image "assets/img/posts/misc/dsp/timing-diagram.jpg", "Timing diagram of timer signal derived from a clock signal.", "post1" %}
 
