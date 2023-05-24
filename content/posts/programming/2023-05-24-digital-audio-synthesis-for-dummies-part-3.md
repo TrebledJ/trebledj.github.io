@@ -96,7 +96,7 @@ We can use STM32 CubeMX, a GUI for configuring hardware options, to initialise o
 <sup>In CubeMX, we first select a timer on the left. We then enable a channel (here Channel 4) to generate PWM.[^chtim] We also set the prescaler and auto-reload so that our timer frequency is 42,000Hz.</sup>
 {.caption}
 
-[^chtim]: We chose Timer 8 with Channel 4 because its pins were available, and other timers had occupied pins. The timer and channel you use depends on your STM board and model. If you’re following along this post, make sure to choose a timer which has DMA generation. When in doubt, refer to the reference manual.[^rm0090]
+[^chtim]: We chose Timer 8 with Channel 4 because its pins were available, and other timers had occupied pins. The timer and channel you use depends on your STM board and model. If you’re following along with this post, make sure to choose a timer which has DMA generation. When in doubt, refer to the reference manual.[^rm0090]
 
 {% alert "warning" %}
 The PSC (prescaler) and ARR (auto-reload) are 16-bit *registers*, meaning they range from 0 to 65,535. A PSC of 0 denotes a prescaler divisor of 1. Thus, by setting `PSC = 0` and `ARR = 3999`, we obtain a divisor of $(0 + 1) \times (3999 + 1) = 4000$.
@@ -111,7 +111,7 @@ In the previous section's example, we had a prescaler divisor of 2 and auto-relo
 
 Remember to generate code once done.[^codegen] CubeMX should generate the following code in `main.c`:
 
-[^codegen]: In CubeMX, you can generate code by clicking the *Project* > *Generate Code* menu option. Keep in mind that only code between `USER CODE BEGIN` and `USER CODE END` comments will be preserved by ST's code generator.
+[^codegen]: In CubeMX, you can generate code by choosing the *Project* > *Generate Code* menu option. Keep in mind that only code between `USER CODE BEGIN` and `USER CODE END` comments will be preserved by ST's code generator.
 
 ```cpp
 static void MX_TIM8_Init(void)
@@ -179,10 +179,6 @@ Functions for other modes (e.g. PWM) are available in `stm32f4xx_hal_tim.h`.
 
 There are three representations of audio: sound waves (physical), electrical voltages (analogue), and binary data (digital).
 
-- Our ~~audio hardware—localised on the sides of our head~~ ears are designed to perceive *sound waves*.
-- Audio equipment, such as microphones and speakers, are designed to interface between sound waves and *analogue* signals.
-- Computer chips and processors work primarily with *digital* signals.
-
 {% image "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c7/CPT-Sound-ADC-DAC.svg/1200px-CPT-Sound-ADC-DAC.svg.png", "Tolkien's world looks nothing like the three realms here.", "post1" %}
 
 Since signal representations vastly differ, we need interfaces to bridge the different worlds. Between the analogue and digital realms, we have DACs (Digital-to-Analogue Converters) and ADCs (Analogue-to-Digital Converters) as mediators. Generally, DACs are used for output while ADCs are for input.
@@ -197,7 +193,7 @@ Remember [sampling](/posts/digital-audio-synthesis-for-dummies-part-1#sampling)?
 
 While an ADC takes us from continuous to discrete, a DAC takes us from discrete to continuous. (Well, it tries to anyway.[^lossy]) The shape of the resulting analogue waveform depends on the DAC implementation. Simple DACs will stagger the output at discrete levels. More complex DACs may interpolate between two discrete samples to “guess” the intermediate values. Some of these guesses will be off, but at least the signal is smoother.
 
-[^lossy]: Keep in mind that sampling a continuous signal is a lossy conversion. Information is bound to be loss. A DAC can only replicate the original signal so much.
+[^lossy]: Sampling a continuous signal is a lossy conversion. Information is bound to be loss. A DAC can only replicate the original signal so much...
 
 ### Example: Initialising the DAC
 
@@ -423,7 +419,7 @@ Now our 440Hz sine wave is unblemished.
 
 With some minor changes, we can make our device generate audio for multiple notes. Let’s go ahead and play an A major chord![^amajor]
 
-[^amajor]: I like minor chords as well, but it's not appropriate to play A minor.
+[^amajor]: I love minor chords too, but it's not appropriate to play A minor. I'll see myself out. Hope you enjoyed the read.
 
 ```cpp
 // Prep the buffer.
