@@ -40,6 +40,7 @@ It turns out kitchens and embedded systems aren’t that different after all! Bo
 
 {% image "assets/img/posts/misc/dsp/tick-tock.jpg", "Tick tock likey embedded timers?", "post1" %}
 
+<br/>  
 
 ### Tick Tock
 
