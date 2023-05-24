@@ -37,14 +37,14 @@ $(function () {
     });
 
     /* Nanobar */
-    var options = {
-        classname: 'load-progress-bar',
-        id: 'my-id'
-    };
-    var nanobar = new Nanobar(options);
-    nanobar.go(30);
-    nanobar.go(76);
-    nanobar.go(100);
+    if (Nanobar) {
+        var nanobar = new Nanobar({
+            id: 'load-progress-bar'
+        });
+        nanobar.go(30);
+        nanobar.go(76);
+        nanobar.go(100);
+    }
 
     /* Load Tooltips */
     $("body").tooltip({ selector: '[data-toggle=tooltip]' });
@@ -61,8 +61,8 @@ $(function () {
     $('.carousel').each(function () {
         const id = $(this).attr('id');
         $(this).on('slide.bs.carousel', event => {
-            $(`#${id}-tab${event.from+1}-label`).removeClass('active');
-            $(`#${id}-tab${event.to+1}-label`).addClass('active');
+            $(`#${id}-tab${event.from + 1}-label`).removeClass('active');
+            $(`#${id}-tab${event.to + 1}-label`).addClass('active');
         });
     });
 });
