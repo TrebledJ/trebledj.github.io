@@ -9,7 +9,7 @@
     <hr/>
     <div class="card-body p-0 post-body" itemprop="articleBody">
         {% if include_thumbnail and thumbnail %}
-            {% image thumbnail, title, "post1" %}
+            {% banner thumbnail, title, "post1" %}
         {% endif %}
         {{ content | safe }}
     </div>

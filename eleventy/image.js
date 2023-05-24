@@ -51,12 +51,12 @@ module.exports = function (eleventyConfig) {
         return classes;
     }
 
-    function makeImage(src, classes, alt, style) {
-        return `<img src="${src}" class="${classes}" alt="${alt}" title="${alt}" style="${style}" loading="lazy" decoding="async">`;
+    function makeImage(src, classes, alt, style, loading = 'lazy', decoding = 'async') {
+        return `<img src="${src}" class="${classes}" alt="${alt}" title="${alt}" style="${style}" loading="${loading}" decoding="${decoding}">`;
     }
 
 
-    async function imageAsyncShortcode(src, altText, classes) {
+    async function imageShortcode(src, altText, classes, loading = 'lazy') {
         const { ext, file, options } = getOptions(src);
         const metadata = await eleventyImage(file, options);
 
@@ -65,10 +65,16 @@ module.exports = function (eleventyConfig) {
         const data = metadata[ext][metadata[ext].length - 1];
         const ratio = `aspect-ratio: auto ${data.width} / ${data.height};`; // Alleviate content layout shift.
 
-        return makeImage(data.url, classes.join(' '), altText, ratio)
+        return makeImage(data.url, classes.join(' '), altText, ratio, loading = loading);
     }
 
-    function imageSyncShortcode(src, altText, classes) {
+    async function bannerImageShortcode(src, altText, classes) {
+        // Image gets displayed near the top, so it'll almost always be displayed.
+        // Load eagerly, to push first contentful paint.
+        return imageShortcode(src, altText, classes, loading = 'eager');
+    }
+
+    function thumbnailShortcode(src, altText, classes) {
         if (process.env.ENVIRONMENT !== 'production') {
             // Skip image plugin.
             classes = amendClasses(classes);
@@ -87,14 +93,16 @@ module.exports = function (eleventyConfig) {
         const data = metadata[ext][metadata[ext].length - 1];
         const ratio = `aspect-ratio: auto ${data.width} / ${data.height};`; // Alleviate content layout shift.
 
-        return makeImage(data.url, classes.join(' '), altText, ratio)
+        return makeImage(data.url, classes.join(' '), altText, ratio);
     }
 
     // Eleventy Image shortcode
     // https://www.11ty.dev/docs/plugins/image/
-    eleventyConfig.addAsyncShortcode("image", imageAsyncShortcode);
+    eleventyConfig.addAsyncShortcode("image", imageShortcode);
+
+    eleventyConfig.addAsyncShortcode("banner", bannerImageShortcode);
 
     // Synchronous shortcode. Useful for Nunjucks macro.
     // Doesn't work with remote URLs.
-    eleventyConfig.addShortcode("imageSync", imageSyncShortcode);
+    eleventyConfig.addShortcode("thumbnail", thumbnailShortcode);
 };

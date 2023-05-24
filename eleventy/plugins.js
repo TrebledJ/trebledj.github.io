@@ -3,7 +3,6 @@ const path = require("path");
 const pluginRss = require("@11ty/eleventy-plugin-rss");
 const pluginSyntaxHighlight = require("@11ty/eleventy-plugin-syntaxhighlight");
 const pluginNavigation = require("@11ty/eleventy-navigation");
-const eleventyImage = require("@11ty/eleventy-img");
 const { EleventyHtmlBasePlugin } = require("@11ty/eleventy");
 const eleventySass = require("eleventy-sass");
 
@@ -28,99 +27,6 @@ module.exports = function (eleventyConfig) {
 
 		return path.resolve(split.join(path.sep), relativeFilePath);
 	}
-
-	// Eleventy Image shortcode
-	// https://www.11ty.dev/docs/plugins/image/
-	eleventyConfig.addAsyncShortcode("image", async function imageShortcode(src, altText, classes) {
-		const useDefaultIf = ['gif'].find(ext => src.endsWith(ext));
-		const ext = useDefaultIf || 'webp';
-		const animated = src.endsWith('gif');
-		const isRemoteURL = (src.startsWith('http'));
-
-		// Full list of formats here: https://www.11ty.dev/docs/plugins/image/#output-formats
-		const formats = [ext];
-		// let file = relativeToInputPath(this.page.inputPath, src);
-		const file = src;
-		const options = {
-			widths: ["auto"],
-			formats,
-			outputDir: path.join(eleventyConfig.dir.output, "img"),
-			sharpOptions: {
-				animated,
-			},
-		};
-		const metadata = await eleventyImage(file, options);
-
-		classes = (typeof classes === 'string' ? classes.split(' ') : typeof classes === 'undefined' ? [] : classes);
-		classes.reverse(); // Add classes to the front.
-		if (classes.includes('post1')) {
-			// Remove class.
-			classes.splice(classes.indexOf('post1'), 1);
-
-			if (classes.every(c => !c.startsWith('w-')))
-				classes.push('w-100'); // Default to full-width;
-
-			// Solo image.
-			classes.push('center');
-			classes.push('rw'); 	// Responsive-width for small screens.
-			classes.push('mb-2'); 	// Extra spacing in the bottom.
-		}
-		classes.reverse();
-
-		const data = metadata[ext][metadata[ext].length - 1];
-		const ratio = `aspect-ratio: auto ${data.width} / ${data.height};`; // Alleviate content layout shift.
-
-		return `<img src="${data.url}" class="${classes.join(' ')}" alt="${altText}" title="${altText}" loading="lazy" decoding="async" style="${ratio}">`;
-	});
-
-	// Synchronous shortcode. Useful for Nunjucks macro.
-	// Doesn't work with remote URLs.
-	eleventyConfig.addShortcode("imageSync", function imageShortcode(src, altText, classes) {
-		const isRemoteURL = (src.startsWith('http'));
-		if (isRemoteURL) {
-			throw new Error("You bad bad nah. This shortcode don't work with remote URLs.");
-		}
-
-		const useDefaultIf = ['gif'].find(ext => src.endsWith(ext));
-		const ext = useDefaultIf || 'webp';
-		const animated = src.endsWith('gif');
-
-		// Full list of formats here: https://www.11ty.dev/docs/plugins/image/#output-formats
-		const formats = [ext];
-		// let file = relativeToInputPath(this.page.inputPath, src);
-		const file = src;
-		const options = {
-			widths: ["auto"],
-			formats,
-			outputDir: path.join(eleventyConfig.dir.output, "img"),
-			sharpOptions: {
-				animated,
-			},
-		};
-		eleventyImage(file, options);
-		
-		classes = (typeof classes === 'string' ? classes.split(' ') : typeof classes === 'undefined' ? [] : classes);
-		classes.reverse(); // Add classes to the front.
-		if (classes.includes('post1')) {
-			// Remove class.
-			classes.splice(classes.indexOf('post1'), 1);
-
-			if (classes.every(c => !c.startsWith('w-')))
-				classes.push('w-100'); // Default to full-width;
-
-			// Solo image.
-			classes.push('center');
-			classes.push('rw'); 	// Responsive-width for small screens.
-			classes.push('mb-2'); 	// Extra spacing in the bottom.
-		}
-		classes.reverse();
-
-		const metadata = eleventyImage.statsSync(file, options);
-		const data = metadata[ext][metadata[ext].length - 1];
-		const ratio = `aspect-ratio: auto ${data.width} / ${data.height};`; // Alleviate content layout shift.
-
-		return `<img src="${data.url}" class="${classes.join(' ')}" alt="${altText}" title="${altText}" loading="lazy" decoding="async" style="${ratio}">`;
-	});
 
 	// Drafts implementation, see `content/content.11tydata.js` for additional code.
 	// This section *could* be simplified to an environment variable in an npm script,
