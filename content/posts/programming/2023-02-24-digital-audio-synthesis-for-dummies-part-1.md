@@ -8,7 +8,7 @@ tags:
 thumbnail: assets/img/posts/misc/dsp/sine-oscilloscope.jpg
 usemathjax: true
 related:
-    posts: [stm32-midi-keyboard, digital-audio-synthesis-for-dummies-part-2]
+    posts: [stm32-midi-keyboard, r/digital-audio-synthesis-for-dummies-part-.*]
     auto: false
 ---
 

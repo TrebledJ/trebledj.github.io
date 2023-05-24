@@ -11,7 +11,7 @@ tags:
 thumbnail: assets/img/posts/misc/dsp/sine-oscilloscope.jpg
 usemathjax: true
 related:
-    posts: [stm32-midi-keyboard, digital-audio-synthesis-for-dummies-part-1]
+    posts: [stm32-midi-keyboard, r/digital-audio-synthesis-for-dummies-part-.*]
     auto: false
 ---
 
@@ -241,7 +241,7 @@ Besides this software approach, we can also leverage hardware to speed up proces
 
 Audio generation is pretty fun once we dive deep, as are its applications: toys, electronic instruments, virtual instruments, digital synths, speakers, hearing aids, and whatnot.  As before, I hope we communicated on the same wavelength and the information on this post did not experience aliasing. 😏
 
-In the next post, we'll dive even deeper into audio synthesis (particularly in embedded systems) and engineer a simple tone generator.
+In the [next post](/posts/digital-audio-synthesis-for-dummies-part-3), we'll dive even deeper into audio synthesis (particularly in embedded systems) and engineer a simple tone generator.
 
 To recap…
 

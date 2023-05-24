@@ -14,7 +14,7 @@ thumbnail: assets/img/posts/projects/midi-keyboard.jpg
 include_thumbnail: true
 pitch: Developed a MIDI keyboard using an STM32F4 microcontroller.
 related:
-  posts: [digital-audio-synthesis-for-dummies-part-1, digital-audio-synthesis-for-dummies-part-2]
+  posts: [r/digital-audio-synthesis-for-dummies-part-.*]
 ---
 
 This project was made for a course on embedded systems and is published [online](https://github.com/TrebledJ/stm32-midi-keyboard).
@@ -70,8 +70,9 @@ If you're interested in trying something similar, here are some things we planne
 
 I've also published some follow-up tutorials on digital audio synthesis:
 
-* [Part 1: Audio Basics](/posts/digital-audio-synthesis-for-dummies-part-1)
-* [Part 2: Audio Synthesis](/posts/digital-audio-synthesis-for-dummies-part-2)
+* [Part 1: Digital Signal Processing Basics](/posts/digital-audio-synthesis-for-dummies-part-1)
+* [Part 2: Audio Synthesis Basics](/posts/digital-audio-synthesis-for-dummies-part-2)
+* [Part 3: Audio Synthesis on Embedded Systems](/posts/digital-audio-synthesis-for-dummies-part-3)
 
 [fsvector]: https://github.com/TrebledJ/stm32-midi-keyboard/blob/main/Core/Inc/utils/tinyvector.hpp
 [menum]: https://github.com/Neargye/magic_enum

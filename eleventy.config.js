@@ -36,7 +36,8 @@ module.exports = function (eleventyConfig) {
 	eleventyConfig.setServerOptions({
 		liveReload: true,
 		watch: [
-			// './_site/**/*.css',
+			'./_site/**/*.css',
+			'./_site/**/*.html',
 		]
 	});
 

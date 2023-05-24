@@ -54,7 +54,7 @@ module.exports = function (eleventyConfig) {
 	});
 
 	// A smarter truncate filter?
-	eleventyConfig.addFilter("truncatewords", (str, nwords, append='...') => {
+	eleventyConfig.addFilter("truncatewords", (str, nwords, append = '...') => {
 		const truncated = str.split(' ').slice(0, nwords).join(' ');
 		const punc = '.?!';
 		const punk = ','; // Wassup punk!
@@ -132,7 +132,7 @@ module.exports = function (eleventyConfig) {
 
 	eleventyConfig.addFilter("keywords", findKeywords);
 
-	eleventyConfig.addPairedShortcode("alert", async function (content, role, emoji) {
+	eleventyConfig.addShortcode("alert", async function (role, emoji) {
 		const alert = {
 			primary: ['info', ''],
 			note: ['primary', 'pencil'],
@@ -157,9 +157,10 @@ module.exports = function (eleventyConfig) {
 			emoji_line = `<i class="fa fa-${emoji} ms-1 me-3 mt-1 fs-4" role="img"></i>`;
 		}
 
-		return `<div class="alert alert-${state} d-flex align-items-start">${emoji_line}
-		<div class="alert-content">
-		${content.trimEnd()}
-		</div></div>`;
+		return `<div class="alert alert-${state} d-flex align-items-start">${emoji_line}<div class="alert-content">`;
+	});
+
+	eleventyConfig.addShortcode("endalert", function () {
+		return `</div></div>`;
 	});
 };

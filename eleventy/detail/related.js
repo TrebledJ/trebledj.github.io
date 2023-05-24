@@ -24,34 +24,47 @@ const chalk = require('chalk');
  * @returns An array of related posts.
  */
 module.exports = function (posts, thisPost, related) {
-    let n = related.num || 0; // Number of related elements to find.
+    const n = related.num || 0; // Number of related elements to find.
 
     // In auto checking, if a post has at least this many percentage of common tags, then it is considered related.
-    let autoCommonTagsThreshold = related.autoCommonTagsThreshold || 0.4;
+    const autoCommonTagsThreshold = related.autoCommonTagsThreshold || 0.4;
 
-    let final_related = new Set(); // Final array of related posts.
+    const final_related = new Set(); // Final array of related posts.
+
+    function add_posts(posts) {
+        for (let i = 0; i < posts.length; i++) {
+            if (final_related.size >= n)
+                break;
+            if (posts[i].page.fileSlug === thisPost.fileSlug)
+                continue;
+
+            final_related.add(posts[i]);
+        }
+    }
 
     // Force related posts into the array.
     if (related.posts) {
-        for (let slug of related.posts) {
+        for (const slug of related.posts) {
             if (final_related.size >= n) {
                 break;
             }
 
             // Find post...
-            let post = posts.find(e => e.page.fileSlug === slug);
-            if (!post) {
-                console.error(chalk.red(`[related] Could not find post ${slug} provided in related.posts of ${thisPost.fileSlug}.`));
+            const pattern = (slug.startsWith('r/') ? slug.slice(2) : `^${slug}$`);
+            const regex = new RegExp(pattern, 'g');
+            const matches = posts.filter(e => e.page.fileSlug.match(regex));
+            if (!matches) {
+                console.error(chalk.red(`[related] No matches for post regex '${pattern}' provided in related.posts of ${thisPost.fileSlug}.`));
                 continue;
             }
 
-            final_related.add(post);
+            add_posts(matches);
         }
     }
 
     // Find relevant posts with same tags as `related.tags`.
     if (related.tags) {
-        for (let post of posts) {
+        for (const post of posts) {
             if (final_related.size >= n) {
                 break;
             }
@@ -76,8 +89,8 @@ module.exports = function (posts, thisPost, related) {
 
     if (related.auto) {
         // Find posts that have common tags with this post.
-        let thisTags = thisPost.data.tags;
-        for (let post of posts) {
+        const thisTags = thisPost.data.tags;
+        for (const post of posts) {
             if (final_related.size >= n) {
                 break;
             }
