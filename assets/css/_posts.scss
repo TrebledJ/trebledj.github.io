@@ -347,6 +347,10 @@ img.center {
     margin: 2rem 0;
 }
 
+.alert-content {
+    display: grid; // Workaround to force children within bounds.
+}
+
 .alert-content>p:last-child {
     margin-bottom: 0;
 }
