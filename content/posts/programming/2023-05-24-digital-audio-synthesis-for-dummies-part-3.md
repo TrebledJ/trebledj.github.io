@@ -1,6 +1,6 @@
 ---
 title: "Digital Audio Synthesis for Dummies: Part 3"
-description: A tutorial on efficiently outputting audio on embedded systems (with examples in STM32).
+description: Efficiently streaming audio to speakers on embedded systems (with examples in STM32).
 tags:
  - tutorial
  - dsp
@@ -8,10 +8,11 @@ tags:
  - c
  - cpp
  - music
-thumbnail: assets/img/posts/misc/dsp/sine-oscilloscope.jpg
+thumbnail: assets/img/posts/misc/dsp/synthwave-a-major-space-3.jpg
+include_thumbnail: true
 usemathjax: true
 related:
-    posts: [stm32-midi-keyboard, r/digital-audio-synthesis-for-dummies-part-.*]
+    posts: [r/digital-audio-synthesis-for-dummies-part-.*/r, stm32-midi-keyboard]
     auto: false
 ---
 
@@ -517,6 +518,7 @@ When combined, we save processing time and power, which can then be used on addi
 Other things to explore are:
 
 - Generating stereo audio. We’ve generated audio for Channel 1. What about stereo audio for Channel 2? We could reuse the same buffer for channel 2. But if you’re using reverb or echo effects and wish for a fuller stereo sound, you’ll need an extra pair of buffers (and more processing!).
+- Streaming via UART. It's possible to use DMA with other forms of output.
 - SIMD instructions to buffer two (or possibly more) samples at the same time.
 - RTOS for multitasking.
 - Other boards or hardware with specialised audio features.

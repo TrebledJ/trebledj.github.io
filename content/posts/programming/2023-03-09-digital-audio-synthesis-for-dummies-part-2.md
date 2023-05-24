@@ -8,10 +8,11 @@ tags:
  - c
  - cpp
  - music
-thumbnail: assets/img/posts/misc/dsp/sine-oscilloscope.jpg
+thumbnail: assets/img/posts/misc/dsp/synthwave-a-major-space-2.jpg
+include_thumbnail: true
 usemathjax: true
 related:
-    posts: [stm32-midi-keyboard, r/digital-audio-synthesis-for-dummies-part-.*]
+    posts: [r/digital-audio-synthesis-for-dummies-part-.*/r, stm32-midi-keyboard]
     auto: false
 ---
 
