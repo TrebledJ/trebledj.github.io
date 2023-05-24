@@ -59,10 +59,12 @@ The following diagram illustrates how the clock signal is divided. There are two
 
 {% image "assets/img/posts/misc/dsp/timing-diagram.jpg", "Timing diagram of timer signal derived from a clock signal.", "post1" %}
 
-<sup>Example of a clock signal divided by a prescaler of 2, then an auto-reload of 6. On every overflow (arrow shooting up), the timer starts a new period and triggers an interrupt. This interrupt will be used later to trigger a DAC/DMA send. (Adapted from uPesy.[^upesy])</sup>
+<sup>Diagram adapted from uPesy.[^upesy]</sup>
 {.caption}
 
 [^upesy]: [How do microcontroller timers work?](https://www.upesy.com/blogs/tutorials/how-works-timers-in-micro-controllers) – A decent article on timers. Diagrams are in French though.
+
+In the diagram, the clock signal is first divided by a prescaler of 2, then divided by an auto-reload of 6. On every overflow (arrow shooting up), the timer starts a new period and triggers an interrupt. This interrupt will be used later to trigger a DAC/DMA send.
 {% endalert %}
 
 
