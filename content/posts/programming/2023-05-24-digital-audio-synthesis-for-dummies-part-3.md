@@ -379,12 +379,6 @@ With double buffering, we introduce an additional buffer. While one buffer is be
 In code, we’ll add another buffer by declaring `uint16_t[2][BUFFER_SIZE]` instead of an `uint16_t[BUFFER_SIZE]`. We’ll also declare a variable `curr` (0 or 1) to index which buffer is currently available.
 
 ```cpp
-#include <math.h>
-
-#define SAMPLE_RATE 42000
-#define BUFFER_SIZE 1024
-#define FREQUENCY   440
-
 uint16_t buffers[2][BUFFER_SIZE]; // New: add a second buffer.
 uint8_t curr = 0;                 // Index of current buffer.
 uint32_t t   = 0;
@@ -393,19 +387,13 @@ uint32_t t   = 0;
 HAL_TIM_Base_Start(&htim8);
 
 while (1) {
-    // Prep the buffer.
     uint16_t* buffer = buffers[curr]; // Get the buffer being written.
-    for (int i = 0; i < BUFFER_SIZE; i++, t++) {
-        float val = sin(2 * M_PI * FREQUENCY * t / SAMPLE_RATE);
-        buffer[i] = 2047 * val + 2047;
-    }
 
+    // --snip-- Same as before...
+    // Prep the buffer.
     // Wait for DAC to be ready.
-    while (HAL_DAC_GetState(&hdac) != HAL_DAC_STATE_READY)
-        ;
-
     // Start the DMA.
-    HAL_DAC_Start_DMA(&hdac, DAC_CHANNEL_1, (uint32_t*)buffer, BUFFER_SIZE, DAC_ALIGN_12B_R);
+    // --snip--
 
     // Swap the buffer so that we prepare the next buffer,
     // while this one is being sent.
@@ -456,13 +444,13 @@ There are a few common tricks to speed up buffering:
     
     ```cpp
     // Precompute a factor of the 440Hz signal.
-
     float two_pi_f_over_sr = 2 * M_PI * FREQUENCY / SAMPLE_RATE;
     
     while (1) {
         // Prep the buffer.
         uint16_t* buffer = buffers[curr];
         for (int i = 0; i < BUFFER_SIZE; i++, t++) {
+            // Use the precomputed value...
             buffer[i] = 2047 * sin(two_pi_f_over_sr * t) + 2047;
         }
     
