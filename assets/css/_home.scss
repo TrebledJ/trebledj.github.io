@@ -47,6 +47,13 @@ html[data-theme="light"] .hero-section {
     }
 }
 
+html[data-theme="light"] {
+    .carousel-control-prev-icon,
+    .carousel-control-next-icon {
+        filter: invert(100%);
+    }
+}
+
 @include media-breakpoint-down(md) {
     // Small view, display only one post.
     #home .carousel {
