@@ -1,4 +1,4 @@
-const process = require('./rake-js/dist/index').default;
+// const process = require('./rake-js/dist/index').default;
 
 const fs = require('fs');
 const stopwords = fs.readFileSync('./eleventy/detail/stopwords.txt', 'utf8').split('\n');
