@@ -370,7 +370,7 @@ The results? As expected, artefacts (nefarious little glitches) invade our signa
 <sup>Artefacts distort the signal from time to time.</sup>
 {.caption}
 
-But what if we prep, then start, then wait? This way, the buffer will be secure; but this causes the signal to stall while prepping.
+But what if we prep, then start, then wait? This way, the buffer won't be overwritten; but this causes the signal to stall while prepping.
 
 <a id="stall-img"></a>
 {% image "assets/img/posts/misc/dsp/osc-sine-440-stall.jpg", "Oscilloscope of sine wave with stalls (horizontal breaks with no change).", "post1" %}
