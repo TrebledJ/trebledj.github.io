@@ -52,7 +52,6 @@ There are various ways to configure a timer, too many to cover in this post. But
 [^clock]: The MCU clock is like the backbone of a controller. It controls the processing speed and pretty much everything!—timers, ADC, DAC, communication protocols, and whatnot.
 
 {% alert "fact" %}
-
 In case you were wondering how timers derive their frequency from the clock…
 
 The following diagram illustrates how the clock signal is divided. There are two divisors: the prescaler and auto-reload. We'll study them more closely in the upcoming examples.
@@ -63,7 +62,6 @@ The following diagram illustrates how the clock signal is divided. There are two
 {.caption}
 
 [^upesy]: [How do microcontroller timers work?](https://www.upesy.com/blogs/tutorials/how-works-timers-in-micro-controllers) – A decent article on timers. Diagrams are in French though.
-
 {% endalert %}
 
 
@@ -97,13 +95,10 @@ We can use STM32 CubeMX, a GUI for configuring hardware options, to initialise o
 
 [^chtim]: We chose Timer 8 with Channel 4 because its pins were available, and other timers had occupied pins. The timer and channel you use depends on your STM board and model. If you’re following along this post, make sure to choose a timer which has DMA generation. When in doubt, refer to the reference manual.[^rm0090]
 
-
 {% alert "fact" %}
-
 Note that since the PSC (prescaler) and ARR (auto-reload) variables are 16-bit *registers*, they range from 0 to 65,535. So a PSC of 0 means a prescaler divisor of 1. Thus, by setting `PSC = 0` and `ARR = 3999`, we obtain a divisor of $(0 + 1) \times (3999 + 1) = 4000$.
 
 In the diagram of the previous section, if we want a prescaler divisor of 2 and auto-reload divisor of 6, we would set `PSC = 1` and `ARR = 5`.
-
 {% endalert %}
 
 {% image "assets/img/posts/misc/dsp/stm32-cubemx-timer-2.jpg", "More timer settings from CubeMX.", "post1" %}
@@ -260,7 +255,6 @@ This generates a square wave with a period of 10ms, for a frequency of 100Hz.
 {.caption}
 
 {% alert "warning" %}
-
 An aside. The default `HAL_Delay()` provided by STM will add 1ms to the delay time—well, at least in my version. I overrode it using a separate definition so that it sleeps the given number of ms.
 
 ```cpp
@@ -270,7 +264,6 @@ void HAL_Delay(uint32_t ms)
     while ((HAL_GetTick() - start) < ms);
 }
 ```
-
 {% endalert %}
 
 But there are two issues with this method:
@@ -291,9 +284,7 @@ Further Reading:
 Direct Memory Access (DMA) appears to be three random words smushed together, but it’s a powerful tool in the embedded programmer’s arsenal. How?
 
 {% alert "success" %}
-
 **DMA enables data transfer without consuming processor resources.** (Well, it consumes minimal resources, but only for setup.) This frees up the processor to do other things while DMA takes care of moving data. We could use this saved time to prepare the next set of buffers, render the GUI, etc.
-
 {% endalert %}
 
 DMA can be used to transfer data from memory-to-peripheral (e.g. DAC, UART TX, SPI TX), from peripheral-to-memory (e.g. ADC, UART RX), across peripherals, or across memory. In this post, we're concerned with memory-to-peripheral transfer: DAC.
@@ -307,7 +298,6 @@ Further Reading:
 If you’ve read this far, I presume you’ve followed the [previous section](#example-initialising-the-dac) by initialising DMA and generating code with CubeMX.
 
 {% alert "note" %}
-
 Be aware that DMA introduces synchronisation issues. After preparing a second round of buffers, how do we know if the first round has already finished?
 
 As with all process which depend on a separate event, there are two approaches: polling and interrupts. We could block and wait until the first round is finished, then send… or we could trigger an interrupt when it finishes, then start the next round inside the interrupt handler. The approach depends on your application.
@@ -318,7 +308,6 @@ In our examples, we’ll poll to check if DMA is finished:
 while (HAL_DAC_GetState(&hdac) != HAL_DAC_STATE_READY)
     ;
 ```
-
 {% endalert %}
 
 With DMA, we’ll need to first [buffer](/posts/digital-audio-synthesis-for-dummies-part-2/#buffering) an array of samples. Our loop will run like this:
@@ -451,9 +440,7 @@ for (int i = 0; i < BUFFER_SIZE; i++, t++) {
 If you flash the above code and feed output to an oscilloscope, you may find it doesn’t really work. Our signal [stalls](#stall-img), for similar reasons as before.
 
 {% alert "warning" %}
-
 Even with DMA, stalls may occur. This is usually a sign that DMA finished long before buffering has. The takeaway is that buffering (and other processes) consumes too much time. The onus is on you, the software engineer, to speed things up.
-
 {% endalert %}
 
 ### Optimisations 🏎
