@@ -307,14 +307,14 @@ Further Reading:
 
 - [Baeldung: How Do DMA Controllers Work?](https://www.baeldung.com/cs/dma-controllers)
 
-### Example: DMA
+### Example: DMA with Single Buffering
 
 If you’ve read this far, I presume you’ve followed the [previous section](#example-initialising-the-dac) by initialising DMA and generating code with CubeMX.
 
 {% alert "note" %}
 Be aware that DMA introduces synchronisation issues. After preparing a second round of buffers, how do we know if the first round has already finished?
 
-As with all process which depend on a separate event, there are two approaches: polling and interrupts. We could block and wait until the first round is finished, then send… or we could trigger an interrupt when it finishes, then start the next round inside the interrupt handler. The approach depends on your application.
+As with all processes which depend on a separate event, there are two approaches: polling and interrupts. We could block and wait until the first round is finished, then send… or we could trigger an interrupt when it finishes, then start the next round inside the interrupt handler. The approach depends on your application.
 
 In our examples, we’ll poll to check if DMA is finished:
 
@@ -363,7 +363,7 @@ while (1) {
 }
 ```
 
-The results? As expected, artefacts (nefarious little glitches) invade our signal due to our buffer being overwritten during DMA transfer. This may also result in [clipping](/posts/digital-audio-synthesis-for-dummies-part-1#clipping).
+The results? As expected, artefacts (nefarious little glitches) invade our signal due to our buffer being overwritten during DMA transfer. This may also result in [unpleasant clips in audio](/posts/digital-audio-synthesis-for-dummies-part-1#clipping).
 
 {% image "assets/img/posts/misc/dsp/osc-sine-440-glitch.jpg", "Artefacts distort the signal, resulting in occasionally clips and sound defects.", "post1" %}
 
