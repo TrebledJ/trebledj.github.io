@@ -25,18 +25,22 @@ This is the third (and culminating) post in a series on digital audio synthesis.
 
 Now suppose we want to play a continuous, uninterrupted stream of audio. We'd need to keep sending audio samples every few microseconds. Buffering alone isn’t good enough.
 
-In this post, we’ll discover how to effectively implement an audio synthesiser on an embedded device by marrying hardware (timers, DACs, DMA) and software (double buffering).[^subtopics] To understand these concepts even better, we’ll look at examples on an STM32.[^stm] These examples are inspired from a [MIDI keyboard project](/posts/stm32-midi-keyboard) I previously worked on.
-
+In this post, we’ll discover how to effectively implement an audio synthesiser on an embedded device by marrying hardware (timers, DACs, DMA) and software (double buffering).[^subtopics]
 [^subtopics]: Each of these components (especially hardware) deserve their own post to be properly introduced; but for the sake of keeping this post short, I’ll only introduce them briefly and link to other resources for further perusal.
 
+To understand these concepts even better, we’ll look at examples on an STM32.[^stm] These examples are inspired from a [MIDI keyboard project](/posts/stm32-midi-keyboard) I previously worked on.
+I'll be working with an STM32F405 board in our examples. If you plan to follow along with your own board, make sure it's capable of timer-triggered DMA and DAC.
+
 [^stm]: There are several popular microcontroller brands each with their pros and cons. STM is one such brand. It’s a bit overkill for demonstrating audio synthesis, but I chose it here because of my familiarity, and to demonstrate my STM32 MIDI Keyboard project. Rest assured the concepts are transferable, though hardware implementations may differ between brands.
+
+This post is much longer than I expected. My suggested angle of attack is to first gain a high-level understanding, then dig into the examples for details.
 
 
 ## Timers ⏳
 
 It turns out kitchens and embedded systems aren’t that different after all! Both perform input and output, and both have timers! Who knew? Tick-Tock Croc, perhaps.[^ticktock]
 
-[^ticktock]: The only culinary experience Tick-Tock’s familiar with is hunting Captain Hook. As for embedded systems, I’m sure he has experience demolishing them out of pure enjoyment.
+[^ticktock]: I think it's safe to say that Tick-Tock Croc also performs input-output and has a timer between his eyes. So Tick-Tock isn't too different from a kitchen! Or an embedded controller, for that matter.
 
 {% image "assets/img/posts/misc/dsp/tick-tock.jpg", "Tick tock likey embedded timers?", "post1" %}
 
