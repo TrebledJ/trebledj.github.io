@@ -68,7 +68,7 @@ If you're interested in trying something similar, here are some things we planne
 * Explore and use [FluidSynth](https://github.com/FluidSynth/fluidsynth)
 * More instrument options
 
-I've also published some follow-up tutorials on digital audio synthesis:
+I've also published some follow-up tutorials on digital audio synthesis, in case you're interested in getting your feet wet with audio processing:
 
 * [Part 1: Digital Signal Processing Basics](/posts/digital-audio-synthesis-for-dummies-part-1)
 * [Part 2: Audio Synthesis Basics](/posts/digital-audio-synthesis-for-dummies-part-2)
