@@ -97,7 +97,7 @@ We can use STM32 CubeMX, a GUI for configuring hardware options, to initialise o
 [^chtim]: We chose Timer 8 with Channel 4 because its pins were available, and other timers had occupied pins. The timer and channel you use depends on your STM board and model. If you’re following along this post, make sure to choose a timer which has DMA generation. When in doubt, refer to the reference manual.[^rm0090]
 
 
-{% alert "note" %}
+{% alert "fact" %}
 
 Note that since the PSC (prescaler) and ARR (auto-reload) variables are 16-bit *registers*, they range from 0 to 65,535. So a PSC of 0 means a prescaler divisor of 1. Thus, by setting `PSC = 0` and `ARR = 3999`, we obtain a divisor of $(0 + 1) \times (3999 + 1) = 4000$.
 
@@ -179,7 +179,7 @@ Since signal representations vastly differ, we need interfaces to translate, to 
 
 Since our topic today is synthesis, we’ll focus on DACs—going from binary data to sound waves.
 
-### A Closer Look at DACs
+### A Closer Look at DACs 
 
 Remember [sampling](/posts/digital-audio-synthesis-for-dummies-part-1#sampling)? We took a continuous analogue signal and selected discrete points at regular intervals. An ADC is like a glorified sampler.
 
@@ -295,17 +295,17 @@ Direct Memory Access (DMA) appears to be three random words smushed together, bu
 
 {% endalert %}
 
-DMA can be used to transfer data from memory to peripheral (e.g. DAC, UART TX, SPI TX), from peripheral to memory (e.g. ADC, UART RX), across peripherals, or across memory.
+DMA can be used to transfer data from memory-to-peripheral (e.g. DAC, UART TX, SPI TX), from peripheral-to-memory (e.g. ADC, UART RX), across peripherals, or across memory. In this post, we're concerned with memory-to-peripheral transfer: DAC.
 
 Further Reading:
 
-- [Wikipedia: Direct Memory Access](https://en.wikipedia.org/wiki/Direct_memory_access)
+- [Baeldung: How Do DMA Controllers Work?](https://www.baeldung.com/cs/dma-controllers)
 
 ### Example: DMA
 
 If you’ve read this far, I presume you’ve followed the [previous section](#example-initialising-the-dac) by initialising DMA and generating code with CubeMX.
 
-{% alert "fact" %}
+{% alert "note" %}
 
 Be aware that DMA introduces synchronisation issues. After preparing a second round of buffers, how do we know if the first round has already finished?
 
@@ -427,7 +427,7 @@ Now our 440Hz sine wave is unblemished.
 <sup>Waveform of a pure 440Hz sine tone.</sup>
 {.caption}
 
-### Example: Playing Multiple Notes with DMA and Double Buffering
+### Example: Playing Multiple Notes with DMA and Double Buffering 🎶
 
 With some minor changes, we can make our device generate audio for multiple notes. Let’s go ahead and play an A major chord![^amajor]
 
@@ -455,7 +455,7 @@ Even with DMA, stalls may occur. This is usually a sign that DMA finished long b
 
 {% endalert %}
 
-### Optimisations
+### Optimisations 🏎
 
 So our code is slow. How do we speed it up? We really want to play an A major chord!
 
@@ -499,7 +499,7 @@ After all this hassle, we get a beautiful chord.
 <sup>A nifty waveform of an A major chord (440Hz + 554.37Hz + 659.25Hz).</sup>
 {.caption}
 
-## Recap
+## Recap 🔁
 
 By utilising both hardware and software, we reap the benefits of parallel processing while implementing an efficient, robust audio application. On the hardware side, we explored:
 
