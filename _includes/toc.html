@@ -1,7 +1,7 @@
 {% set toc = content | toc %}
 <div class="toc-container">
     <span>
-        <a onclick="$('#btn-back-to-top').trigger('click')">Contents</a>
+        <a onclick="$('#btn-back-to-top').trigger('click')">Content</a>
     </span>
     {% if toc and title != '404' %}
         {{toc | safe}}
