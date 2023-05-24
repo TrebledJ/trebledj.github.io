@@ -22,13 +22,14 @@ Ah… embedded systems—the intersection of robust hardware and versatile softw
 
 This is the third (and culminating) post in a series on digital audio synthesis. In the [first post](/posts/digital-audio-synthesis-for-dummies-part-1), we introduced basic concepts in audio processing. In the [second post](/posts/digital-audio-synthesis-for-dummies-part-2), we dived into audio synthesis and generation.
 
-Now suppose we want to play a continuous, uninterrupted stream of audio. We would need to constantly send out samples every few microseconds. Buffering alone isn’t good enough.
+Now suppose we want to play a continuous, uninterrupted stream of audio. We'd need to keep sending audio samples every few microseconds. Buffering alone isn’t good enough.
 
-In this post, we’ll discover how to effectively implement an audio synthesiser on an embedded device by marrying various hardware components (timers, DACs, DMA) and software components (double buffering).[^subtopics] To understand these concepts better, we’ll look at examples on an STM32.[^stm]
+In this post, we’ll discover how to effectively implement an audio synthesiser on an embedded device by marrying hardware (timers, DACs, DMA) and software (double buffering).[^subtopics] To understand these concepts even better, we’ll look at examples on an STM32.[^stm] These examples are inspired from a [MIDI keyboard project](/posts/stm32-midi-keyboard) I previously worked on.
 
 [^subtopics]: Each of these components (especially hardware) deserve their own post to be properly introduced; but for the sake of keeping this post short, I’ll only introduce them briefly and link to other resources for further perusal.
 
 [^stm]: There are several popular microcontroller brands each with their pros and cons. STM is one such brand. It’s a bit overkill for demonstrating audio synthesis, but I chose it here because of my familiarity, and to demonstrate my STM32 MIDI Keyboard project. Rest assured the concepts are transferable, though hardware implementations may differ between brands.
+
 
 ## Timers ⏳
 
@@ -49,7 +50,7 @@ There are various ways to configure a timer, too many to cover in this post. But
 
 [^clock]: The MCU clock is like the backbone of a controller. It controls the processing speed and pretty much everything!—timers, ADC, DAC, communication protocols, and whatnot.
 
-{% alert "note" %}
+{% alert "fact" %}
 
 In case you were wondering how timers derive their frequency from the clock…
 
@@ -367,6 +368,7 @@ The results? As expected, artefacts (nefarious little glitches) invade our signa
 
 But what if we prep, then start, then wait? This way, the buffer will be secure; but this causes the signal to stall while prepping.
 
+<a id="stall-img"></a>
 {% image "assets/img/posts/misc/dsp/osc-sine-440-stall.jpg", "Oscilloscope of sine wave with stalls (horizontal breaks with no change).", "post1" %}
 
 <sup>The signal stalls (shown by horizontal lines) because the DAC isn’t updated while buffering.</sup>
@@ -445,7 +447,7 @@ for (int i = 0; i < BUFFER_SIZE; i++, t++) {
 }
 ```
 
-If you feed this to an oscilloscope, you may find this doesn’t really work. Our signal stalls, for similar reasons as before.
+If you flash the above code and feed output to an oscilloscope, you may find it doesn’t really work. Our signal [stalls](#stall-img), for similar reasons as before.
 
 {% alert "warning" %}
 
@@ -484,17 +486,17 @@ There are a few common tricks to speed up buffering:
     
 - Decrease the sample rate. If all else fails, we can decrease the load by lowering the sample rate, say from 42000Hz to 21000Hz. With a buffer size of 1024, that means we’ve gone from a constraint of 1024/42000 = 24.4ms to 1024/21000 = 48.8ms per buffer.
 
-To avoid complicating things, I lowered the sample rate to 21000Hz. This means changing the auto-reload register to 7999, so that our timer frequency is $\frac{168,000,000}{7,999\\ +\\ 1} = 21,000$ Hz.
+To avoid complicating things, I lowered the sample rate to 21000Hz. This means changing the auto-reload register to 7999, so that our timer frequency is $\frac{168,000,000}{7,999 + 1} = 21,\\!000$ Hz.
 
 ```cpp
-TIM8->ARR = 8000 - 1;
+TIM8->ARR = 7999;
 ```
 
 After all this hassle, we get a beautiful chord.
 
 {% image "assets/img/posts/misc/dsp/osc-a-major.jpg", "The curves are mesmerising.", "post1" %}
 
-<sup>Waveform of an A major chord (440Hz + 554.37Hz + 659.25Hz). Note the frequency can’t be easily deduced by the oscillator, since it’s not a simple waveform.</sup>
+<sup>A nifty waveform of an A major chord (440Hz + 554.37Hz + 659.25Hz).</sup>
 {.caption}
 
 ## Recap
