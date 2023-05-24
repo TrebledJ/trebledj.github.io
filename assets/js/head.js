@@ -36,16 +36,6 @@ $(function () {
         document.documentElement.scrollTop = 0;
     });
 
-    /* Nanobar */
-    if (Nanobar) {
-        var nanobar = new Nanobar({
-            id: 'load-progress-bar'
-        });
-        nanobar.go(30);
-        nanobar.go(76);
-        nanobar.go(100);
-    }
-
     /* Load Tooltips */
     $("body").tooltip({ selector: '[data-toggle=tooltip]' });
 
