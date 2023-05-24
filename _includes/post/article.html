@@ -7,7 +7,7 @@
         {% include "post/metadata.html" %}
     </div>
     <hr/>
-    <div class="card-body p-0 post-body" itemprop="articleBody">
+    <div class="post-body" itemprop="articleBody">
         {% if include_thumbnail and thumbnail %}
             {% banner thumbnail, title, "post1" %}
         {% endif %}
