@@ -204,16 +204,6 @@ a.tag:hover {
     font-size: 12px;
 }
 
-@include media-breakpoint-down(sm) {
-    .post-preview {
-
-        .metadata-container,
-        .metadata-tag-container {
-            display: none !important;
-        }
-    }
-}
-
 
 .article-header .post-title {
     font-size: 40px;

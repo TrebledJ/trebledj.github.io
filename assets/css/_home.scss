@@ -48,9 +48,26 @@ html[data-theme="light"] .hero-section {
 }
 
 @include media-breakpoint-down(md) {
+    // Small view, display only one post.
     #home .carousel {
         .collection-list>div:nth-child(2) {
             display: none;
+        }
+    }
+}
+
+@include media-breakpoint-down(sm) {
+    // Small view, compress the preview.
+    #home {
+        .post-preview {
+            p {
+                margin-bottom: 0;
+            }
+    
+            .metadata-container,
+            .metadata-tag-container {
+                display: none !important;
+            }
         }
     }
 }
