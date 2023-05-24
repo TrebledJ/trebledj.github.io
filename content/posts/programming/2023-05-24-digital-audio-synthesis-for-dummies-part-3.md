@@ -55,7 +55,7 @@ There are various ways to configure a timer, too many to cover in this post. But
 {% alert "fact" %}
 In case you were wondering how timers derive their frequency from the clock…
 
-The following diagram illustrates how the clock signal is divided. There are two divisors: the prescaler and auto-reload. We'll study them more closely in the upcoming examples.
+The following diagram illustrates how the clock signal is divided. There are two divisors: the prescaler and auto-reload.
 
 {% image "assets/img/posts/misc/dsp/timing-diagram.jpg", "Timing diagram of timer signal derived from a clock signal.", "post1" %}
 
@@ -64,7 +64,7 @@ The following diagram illustrates how the clock signal is divided. There are two
 
 [^upesy]: [How do microcontroller timers work?](https://www.upesy.com/blogs/tutorials/how-works-timers-in-micro-controllers) – A decent article on timers. Diagrams are in French though.
 
-In the diagram, the clock signal is first divided by a prescaler of 2, then divided by an auto-reload of 6. On every overflow (arrow shooting up), the timer starts a new period and triggers an interrupt. This interrupt will be used later to trigger a DAC/DMA send.
+Here, the clock signal is first divided by a prescaler of 2, then divided by an auto-reload of 6. On every overflow (arrow shooting up), the timer starts a new period and triggers an interrupt. This interrupt will be used later to trigger a DAC/DMA send.
 {% endalert %}
 
 
@@ -85,7 +85,7 @@ Further Reading:
 
 Suppose we want to send a stream of audio output, we can use a timer which triggers at a certain frequency.
 
-On our STM32F405, the configured (and max) clock cycle is 168MHz. If we’re aiming for an output sample rate of 42,000Hz, we’d need to divide our clock signal by 4,000, so that we correctly get $\frac{168,000,000}{4,000} = 42,\!000$. This division can be achieved by setting a timer’s PSC (prescaler) and ARR (auto-reload) registers.
+On our STM32F405, the configured (and max) clock cycle is 168MHz. If we’re aiming for an output sample rate of 42,000Hz, we’d need to divide our clock signal by 4,000, so that we correctly get $\frac{168,000,000}{4,000} = 42,\\!000$. This division can be achieved by setting a timer’s PSC (prescaler) and ARR (auto-reload) registers.
 
 We can use STM32 CubeMX, a GUI for configuring hardware options, to initialise our timer parameters.[^cubeide] CubeMX allows us to generate code from these options, handling the conundrum of modifying the appropriate registers.
 
@@ -98,10 +98,10 @@ We can use STM32 CubeMX, a GUI for configuring hardware options, to initialise o
 
 [^chtim]: We chose Timer 8 with Channel 4 because its pins were available, and other timers had occupied pins. The timer and channel you use depends on your STM board and model. If you’re following along this post, make sure to choose a timer which has DMA generation. When in doubt, refer to the reference manual.[^rm0090]
 
-{% alert "fact" %}
-Note that since the PSC (prescaler) and ARR (auto-reload) variables are 16-bit *registers*, they range from 0 to 65,535. So a PSC of 0 means a prescaler divisor of 1. Thus, by setting `PSC = 0` and `ARR = 3999`, we obtain a divisor of $(0 + 1) \times (3999 + 1) = 4000$.
+{% alert "warning" %}
+The PSC (prescaler) and ARR (auto-reload) are 16-bit *registers*, meaning they range from 0 to 65,535. A PSC of 0 denotes a prescaler divisor of 1. Thus, by setting `PSC = 0` and `ARR = 3999`, we obtain a divisor of $(0 + 1) \times (3999 + 1) = 4000$.
 
-In the diagram of the previous section, if we want a prescaler divisor of 2 and auto-reload divisor of 6, we would set `PSC = 1` and `ARR = 5`.
+In the previous section's example, we had a prescaler divisor of 2 and auto-reload divisor of 6, so we would set `PSC = 1` and `ARR = 5`.
 {% endalert %}
 
 {% image "assets/img/posts/misc/dsp/stm32-cubemx-timer-2.jpg", "More timer settings from CubeMX.", "post1" %}
@@ -141,12 +141,27 @@ static void MX_TIM8_Init(void)
 }
 ```
 
-Later on, we can change the timer frequency at runtime by setting the prescaler and auto-reload registers.
+After initialisation, it's possible to change the timer frequency by setting the prescaler and auto-reload registers like so:
 
 ```cpp
 TIM8->PSC = 0;    // Prescaler: 1
 TIM8->ARR = 3999; // Auto-Reload: 4000
 ```
+
+This is more useful for applications where the frequency is dynamic (e.g. playing music with a piezoelectric buzzer), but it's also useful when we're too lazy to modify the .ioc file.
+
+{% alert "fact" %}
+You can play around and try different pairs of PSC and ARR.
+I suggest coming back to this section after getting DAC + DMA + double buffering to work, and experiment!
+
+For example, these pairs will all yield the same timer frequency: PSC = 1, ARR = 1999; PSC = 3, ARR = 999; and PSC = 1999, ARR = 1.
+
+Exercises for the reader (no pressure 🙃):
+
+* Why will the above pairs of PSC and ARR generate the same timer frequency?
+* What is the difference between different pairs? (Hint: counter.)
+* Is there a PSC/ARR pair that is "better"? What if we're using the timer to generate a PWM signal?
+{% endalert %}
 
 ### Example: Playing with Timers
 
@@ -174,7 +189,7 @@ There are three representations of audio: sound waves (physical), electrical vol
 
 {% image "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c7/CPT-Sound-ADC-DAC.svg/1200px-CPT-Sound-ADC-DAC.svg.png", "Tolkien's world looks nothing like the three realms here.", "post1" %}
 
-Since signal representations vastly differ, we need interfaces to translate, to bridge the worlds. Between the analogue and digital realms, we have DACs (Digital-to-Analogue Converters) and ADCs (Analogue-to-Digital Converters) as mediators. Generally, DACs are used for output while ADCs are for input.
+Since signal representations vastly differ, we need interfaces to bridge the different worlds. Between the analogue and digital realms, we have DACs (Digital-to-Analogue Converters) and ADCs (Analogue-to-Digital Converters) as mediators. Generally, DACs are used for output while ADCs are for input.
 
 Since our topic today is synthesis, we’ll focus on DACs—going from binary data to sound waves.
 
@@ -465,7 +480,7 @@ There are a few common tricks to speed up buffering:
     
 - Decrease the sample rate. If all else fails, we can decrease the load by lowering the sample rate, say from 42000Hz to 21000Hz. With a buffer size of 1024, that means we’ve gone from a constraint of 1024/42000 = 24.4ms to 1024/21000 = 48.8ms per buffer.
 
-To avoid complicating things, I lowered the sample rate to 21000Hz. This means changing the auto-reload register to 7999, so that our timer frequency is $\frac{168,000,000}{7,999 + 1} = 21,\\!000$ Hz.
+To avoid complicating things, I lowered the sample rate to 21000Hz. This means changing the auto-reload register to 7999, so that our timer frequency is $\frac{168,000,000}{(0 + 1) \times (7,999 + 1)} = 21,\\!000$ Hz.
 
 ```cpp
 TIM8->ARR = 7999;
