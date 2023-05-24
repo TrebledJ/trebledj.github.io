@@ -168,7 +168,7 @@ HAL_TIM_PWM_Stop(&htim8);   // Start the timer (as PWM).
 
 There are three representations of audio: sound waves (physical), electrical voltages (analogue), and binary data (digital).
 
-- Our audio hardware—localised on the sides of our head—are designed to perceive *sound waves*.
+- Our ~~audio hardware—localised on the sides of our head~~ ears are designed to perceive *sound waves*.
 - Audio equipment, such as microphones and speakers, are designed to interface between sound waves and *analogue* signals.
 - Computer chips and processors work primarily with *digital* signals.
 
