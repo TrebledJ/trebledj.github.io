@@ -170,14 +170,10 @@ STM’s HAL library provides ready-made functions to interface with hardware.
 ```cpp
 HAL_TIM_Base_Start(&htim8); // Start the timer.
 HAL_TIM_Base_Stop(&htim8);  // Stop the timer.
-
-HAL_TIM_PWM_Start(&htim8);  // Start the timer (as PWM).
-HAL_TIM_PWM_Stop(&htim8);   // Start the timer (as PWM).
 ```
 
-`HAL_TIM_Base_Start` is used to start a timer in base mode for basic timing and event counting applications, while `HAL_TIM_PWM_Start` is used to start a timer in PWM mode for generating periodic PWM signals. The choice of function depends on the specific application and the functionality required. For us, base mode is good enough.
-
-`Base` and `PWM` are two modes available with this timer. Functions for other modes are available in `stm32f4xx_hal_tim.h`.
+`HAL_TIM_Base_Start` is used to start a timer for basic timing and event counting applications.
+Functions for other modes (e.g. PWM) are available in `stm32f4xx_hal_tim.h`.
 
 ## Digital-to-Analogue Converters (DACs) 🌉
 
@@ -224,7 +220,7 @@ Let’s return to CubeMX to set up our DAC.
 
 Again, remember to generate code when finished.[^codegen] The `MX_DAC_Init()` function should contain the generated DAC setup code and should already be called in `main()`.
 
-### Example: Using DAC
+### Example: Using the DAC
 
 On our STM32, DAC accepts samples [quantised](/posts/digital-audio-synthesis-for-dummies-part-1#quantisation) to 8 bits or 12 bits.[^dacalignment] We’ll go with superior resolution: 12 bits!
 
