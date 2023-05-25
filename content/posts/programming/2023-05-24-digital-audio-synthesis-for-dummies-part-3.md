@@ -21,9 +21,9 @@ related:
 
 Ah… embedded systems—the intersection of robust hardware and versatile software.
 
-This is the third (and culminating) post in a series on digital audio synthesis. In the [first post](/posts/digital-audio-synthesis-for-dummies-part-1), we introduced basic concepts in audio processing. In the [second post](/posts/digital-audio-synthesis-for-dummies-part-2), we dived into audio synthesis and generation.
+This is the third (and culminating) post in a series on digital audio synthesis. In the [first post](/posts/digital-audio-synthesis-for-dummies-part-1), we introduced basic concepts on audio processing. In the [second post](/posts/digital-audio-synthesis-for-dummies-part-2), we dived into audio synthesis and generation.
 
-Now suppose we want to play a continuous, uninterrupted stream of audio. We'd need to keep sending audio samples every few microseconds. Buffering alone isn’t good enough.
+Now suppose we want to play a continuous, uninterrupted stream of audio. We'd need to keep feeding our speaker with audio samples every few microseconds. On a microcontroller, buffering alone isn’t good enough.
 
 In this post, we’ll discover how to effectively implement an audio synthesiser on an embedded device by marrying hardware (timers, DACs, DMA) and software (double buffering).[^subtopics]
 
@@ -34,8 +34,9 @@ I'll be working with an STM32F405 board in our examples. If you plan to follow a
 
 [^stm]: There are several popular microcontroller brands each with their pros and cons. STM is one such brand. It’s a bit overkill for demonstrating audio synthesis, but I chose it here because of my familiarity, and to demonstrate my STM32 MIDI Keyboard project. Rest assured the concepts are transferable, though hardware implementations may differ between brands.
 
+{% alert "simple" %}
 This post is much longer than I expected. My suggested approach of reading is to first gain a high-level understanding, then dig into the examples for details.
-
+{% endalert %}
 
 ## Timers ⏳
 
@@ -237,15 +238,30 @@ On our STM32, DAC accepts samples [quantised](/posts/digital-audio-synthesis-for
 For simplicity, let’s start with sending 1 DAC sample. This can be done like so:
 
 ```cpp
+// Start the DAC peripheral.
 HAL_DAC_Start(&hdac, DAC_CHANNEL_1);
+
+// Set the DAC value.
 HAL_DAC_SetValue(&hdac, DAC_CHANNEL_1, DAC_ALIGN_12B_R, 1024);
 ```
 
-This should output a voltage level of $\frac{1024}{4096} = 25\%$ of the reference voltage $V_{\text{REF}}$.
+This should output a voltage level of $\frac{1024}{4096} = 25\%$ of the reference voltage $V_{\text{REF}}$. Once started, the DAC will continue outputting at that voltage until we change the DAC value or call `HAL_DAC_Stop()`.
 
-Once started, the DAC will continue outputting at that voltage until we change the DAC value or call `HAL_DAC_Stop()`. We use `DAC_CHANNEL_1` to select the first channel, and use `DAC_ALIGN_12B_R` to accept 12-bit samples aligned right.
+We use `DAC_CHANNEL_1` to select the first channel, and use `DAC_ALIGN_12B_R` to accept 12-bit samples aligned right.
 
-To fire an entire buffer of samples, we could use a loop and call `HAL_DAC_SetValue` repeatedly. Let’s try generating a simple square wave.
+To fire a continuous stream of samples, we could use a loop and call `HAL_DAC_SetValue()` repeatedly. Let’s use this method to generate a simple square wave.
+
+{% alert "warning" %}
+An aside. The default `HAL_Delay()` provided by STM will add 1ms to the delay time—well, at least in my version. I overrode it using a separate definition so that it sleeps the given number of ms.
+
+```cpp
+void HAL_Delay(uint32_t ms)
+{
+    uint32_t start = HAL_GetTick();
+    while ((HAL_GetTick() - start) < ms);
+}
+```
+{% endalert %}
 
 ```cpp
 HAL_DAC_Start(&hdac, DAC_CHANNEL_1);
@@ -269,19 +285,7 @@ This generates a square wave with a period of 10ms, for a frequency of 100Hz.
 <sup>Oscilloscope view of the signal. This is very useful for debugging signals, especially periodic ones.</sup>
 {.caption}
 
-{% alert "warning" %}
-An aside. The default `HAL_Delay()` provided by STM will add 1ms to the delay time—well, at least in my version. I overrode it using a separate definition so that it sleeps the given number of ms.
-
-```cpp
-void HAL_Delay(uint32_t ms)
-{
-    uint32_t start = HAL_GetTick();
-    while ((HAL_GetTick() - start) < ms);
-}
-```
-{% endalert %}
-
-But there are two issues with this method:
+But there are two issues with this looping method:
 
 1. Using a while loop blocks the thread, meaning we block the processor from doing other things while outputting the sine wave.
 2. Since `HAL_Delay()` delays in milliseconds, it becomes impossible to generate complex waveforms at high frequencies, since that requires us to send samples at **microsecond** intervals.
@@ -325,13 +329,13 @@ while (HAL_DAC_GetState(&hdac) != HAL_DAC_STATE_READY)
 ```
 {% endalert %}
 
-With DMA, we’ll need to first [buffer](/posts/digital-audio-synthesis-for-dummies-part-2/#buffering) an array of samples. Our loop will run like this:
+With DMA, we’ll first need to [buffer](/posts/digital-audio-synthesis-for-dummies-part-2/#buffering) an array of samples. Our loop will run like this:
 
 1. Buffer samples.
 2. Wait for DMA to be ready.
 3. Start the DMA.
 
-Do you notice a flaw in this approach? Since we’re using a *single* buffer, we risk overwriting the buffer while it’s being sent. Hence, some wonky effects might infect our signal!
+Do you notice a flaw in this approach? Since we’re using a *single* buffer, we risk overwriting the buffer while it’s being sent.
 
 Let’s try to implement it anyway and play a simple 440Hz sine wave.
 
@@ -364,11 +368,11 @@ while (1) {
 }
 ```
 
-The results? As expected, artefacts (nefarious little glitches) invade our signal due to our buffer being overwritten during DMA transfer. This may also result in [unpleasant clicks in audio](/posts/digital-audio-synthesis-for-dummies-part-1#clicks).
+The results? As expected, artefacts (nefarious little glitches) invade our signal due to our buffer being overwritten during DMA transfer. This may also result in [unpleasant clicks from our speaker](/posts/digital-audio-synthesis-for-dummies-part-1#clicks).
 
 {% image "assets/img/posts/misc/dsp/osc-sine-440-glitch.jpg", "Artefacts distort the signal, resulting in occasionally clips and sound defects.", "post1" %}
 
-<sup>Artefacts distort the signal from time to time.</sup>
+<sup>Prep, wait, start, repeat. Artefacts distort the signal from time to time.</sup>
 {.caption}
 
 But what if we prep, then start, then wait? This way, the buffer won't be overwritten; but this causes the signal to stall while prepping.
@@ -376,10 +380,10 @@ But what if we prep, then start, then wait? This way, the buffer won't be overwr
 <a id="stall-img"></a>
 {% image "assets/img/posts/misc/dsp/osc-sine-440-stall.jpg", "Oscilloscope of sine wave with stalls (horizontal breaks with no change).", "post1" %}
 
-<sup>The signal stalls (shown by horizontal lines) because the DAC isn’t updated while buffering.</sup>
+<sup>Prep, start, wait, repeat. The signal stalls (shown by horizontal lines) because the DAC isn’t updated while buffering.</sup>
 {.caption}
 
-To resolve these issues, we need to unleash the final weapon in our arsenal.
+To resolve these issues, we'll unleash the final weapon in our arsenal.
 
 
 ### Example: DMA with Double Buffering
@@ -388,7 +392,7 @@ While the timer and DMA are happily shooting out a bufferful of audio, we can fo
 
 With double buffering, we introduce an additional buffer. While one buffer is being displayed/streamed, the other buffer is updated. This ensures our audio can be delivered in one continuous stream.
 
-In code, we’ll add another buffer by declaring `uint16_t[2][BUFFER_SIZE]` instead of an `uint16_t[BUFFER_SIZE]`. We’ll also declare a variable `curr` (0 or 1) to index which buffer is currently available.
+In code, we’ll add another buffer by declaring `uint16_t[2][BUFFER_SIZE]` instead of `uint16_t[BUFFER_SIZE]`. We’ll also declare a variable `curr` (0 or 1) to index which buffer is currently available.
 
 ```cpp
 uint16_t buffers[2][BUFFER_SIZE]; // New: add a second buffer.
@@ -407,9 +411,9 @@ while (1) {
     // Start the DMA.
     // --snip--
 
-    // Point to the other buffer, so that we'll
-    // prepare the other buffer while tbe
-    // previous one is being sent.
+    // Point to the other buffer, so that we
+    // prepare it while the previous one
+    // is being sent.
     curr = !curr;
 }
 ```
@@ -441,19 +445,21 @@ for (int i = 0; i < BUFFER_SIZE; i++, t++) {
 }
 ```
 
-If you flash the above code and feed output to an oscilloscope, you may find it doesn’t really work. Our signal [stalls](#stall-img), for similar reasons as before.
+If you flash the above code and feed the output to an oscilloscope, you may find it doesn’t really work. Our signal [stalls](#stall-img), for similar reasons as before.
 
 {% alert "warning" %}
-Even with DMA, stalls may occur. This is usually a sign that DMA finished long before buffering has. The takeaway is that buffering (and other processes) consumes too much time. The onus is on you, the software engineer, to speed things up.
+Even with DMA, stalls may occur. This is usually a sign that buffering (and other processes) consume too much time. Once DMA is finished, nothing is being sent out.
 {% endalert %}
 
 ### Optimisations 🏎
 
-So our code is slow. How do we speed it up? We really want to play an A major chord!
+So our code is slow. How do we speed it up?
 
-There are a few common tricks to speed up buffering:
+Here are a few common tricks:
 
-- Precompute constants. Instead of computing `2 * M_PI * FREQUENCY / SAMPLE_RATE` on every iteration, we can precompute it before the loop, saving many multiplication instructions.
+- **Precompute constants**.
+
+    Instead of computing `2 * M_PI * FREQUENCY / SAMPLE_RATE` every iteration, we can precompute it before the loop, saving many arithmetic instructions.
     
     ```cpp
     // Precompute a factor of the 440Hz signal.
@@ -471,12 +477,17 @@ There are a few common tricks to speed up buffering:
     }
     ```
     
-- [Wavetable synthesis](/posts/digital-audio-synthesis-for-dummies-part-2/#wavetable-synthesis). Math functions such as `sin` can be computationally expensive, especially when used a lot. By caching the waveform in a lookup table, we can simply speed up and interpolate
-- Increase the buffer size. By increasing the buffer size, we spend less overhead switching between tasks.
+- [**Wavetable synthesis**](/posts/digital-audio-synthesis-for-dummies-part-2/#wavetable-synthesis).
+
+    Math functions such as `sin` can be computationally expensive, especially when used a lot. By caching the waveform in a lookup table, we can speed up the process of computing samples.
+
+- **Increase the buffer size**.
+
+    By increasing the buffer size, we spend less overhead switching between tasks.
     
-    But on a single-threaded program, we need to be aware of time constraints in other tasks. For instance, if we have a GUI and need it to render smoothly (<50 ms between paints), we’ll need to somehow manage our processing resources.
-    
-- Decrease the sample rate. If all else fails, we can decrease the load by lowering the sample rate, say from 42000Hz to 21000Hz. With a buffer size of 1024, that means we’ve gone from a constraint of 1024/42000 = 24.4ms to 1024/21000 = 48.8ms per buffer.
+- **Decrease the sample rate**.
+
+    If all else fails, we can decrease the load by compromising the sample rate, say from 42000Hz to 21000Hz. With a buffer size of 1024, that means we’ve gone from a constraint of $\frac{1,024}{42,000} = 24.4$ms to $\frac{1,024}{21,000} = 48.8$ms per buffer.
 
 To avoid complicating things, I lowered the sample rate to 21000Hz. This means changing the auto-reload register to 7999, so that our timer frequency is $\frac{168,000,000}{(0 + 1) \times (7,999 + 1)} = 21,\\!000$ Hz.
 
@@ -495,24 +506,26 @@ After all this hassle, we get a beautiful chord.
 
 By utilising both hardware and software, we reap the benefits of parallel processing while implementing an efficient, robust audio application. On the hardware side, we explored:
 
-- [Timers](#timers), which are useful for automatically triggering actions at regular intervals.
-- [DACs](#digital-to-analogue-converters-dacs), which enable us to communicate with the speaker by translating our digital samples to an analogue signal.
-- [DMA](#direct-memory-access-dma), which enable data transfer with minimal processor resources, so that we could process other things while sending out audio.
+- [Timers](#timers), which are an useful and inexpensive way to trigger actions at regular intervals.
+- [DACs](#digital-to-analogue-converters-dacs), which enable us to communicate with a speaker by translating digital samples into analogue signals.
+- [DMA](#direct-memory-access-dma), which enables data transfer with minimal processor resources. This way, we can process other things while streaming audio.
 
 In software, we explored:
 
 - [Double buffering](#example-dma-with-double-buffering), a software technique for buffering data to achieve continuous or faster output.
-- [Various optimisations](#optimisations), which enable us to squeeze more audio processing into our tiny board.
+- [Various optimisations](#optimisations), which enable us to squeeze more processing into our tiny board.
 
-When combined, we save processing time and power, which can then be used on additional features.
+When combined, we save processing resources, which can possibly be spent on additional features.
 
-Other things to explore are:
+In case you want to go further, here are some other things to explore:
 
-- Generating stereo audio. We’ve generated audio for Channel 1. What about stereo audio for Channel 2? We could reuse the same buffer for channel 2. But if you’re using reverb or echo effects and wish for a fuller stereo sound, you’ll need an extra pair of buffers (and more processing!).
-- Streaming via UART. It's possible to use DMA with other forms of output.
-- SIMD instructions to buffer two (or possibly more) samples at the same time.
+- Generating stereo audio. We’ve generated audio for Channel 1. What about stereo audio for Channel 2? If you’re using reverb effects and wish for a fuller stereo sound, you’ll need an extra pair of buffers (and more processing!).
+- Streaming via UART. It's possible to use DMA with other peripherals. Definitely worth exploring.
+- Using SIMD instructions to buffer two (or more) samples at the same time.
 - RTOS for multitasking.
 - Other boards or hardware with specialised audio features.
+
+Hope you enjoyed this series of posts! Leave a comment if you'd like to see more or have any feedback!
 
 ## Full Code
 
