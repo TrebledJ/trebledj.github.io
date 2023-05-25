@@ -53,20 +53,26 @@ module.exports = function (eleventyConfig) {
 		return str ? str.split(delimiter || ' ') : [];
 	});
 
-	// A smarter truncate filter?
-	eleventyConfig.addFilter("truncatewords", (str, nwords, append = '...') => {
-		const truncated = str.split(' ').slice(0, nwords).join(' ');
-		const punc = '.?!';
-		const punk = ','; // Wassup punk!
-		if (punc.includes(truncated[truncated.length - 1])) {
+	// Smarter truncate filter.
+	function appendAfterTruncate(truncated, append = '...', keepIf = '.?!', deleteIf = ',') {
+		if (keepIf.includes(truncated[truncated.length - 1])) {
 			return truncated; // No need to append a (...).
 		}
-		if (punk.includes(truncated[truncated.length - 1])) {
+		if (deleteIf.includes(truncated[truncated.length - 1])) {
 			// Delete and append.
 			return truncated.slice(0, truncated.length - 1) + append;
 		}
 		// Append :).
 		return truncated + append;
+	}
+	eleventyConfig.addFilter("truncateChars", (str, nchars, append = '...') => {
+		let truncated = str.slice(0, nchars);
+		truncated = truncated.slice(0, truncated.lastIndexOf(' ')); // Truncate to last word.
+		return appendAfterTruncate(truncated, append);
+	});
+	eleventyConfig.addFilter("truncateWords", (str, nwords, append = '...') => {
+		const truncated = str.split(' ').slice(0, nwords).join(' ');
+		return appendAfterTruncate(truncated, append);
 	});
 
 	eleventyConfig.addFilter('htmlDateString', (dateObj) => {

@@ -21,7 +21,7 @@ permalink: /search.json
 {
 "type": "tag",
 "title": "{{page.data.title}}",
-"description": {{clean | truncatewords(20) | jsonify | safe}},
+"description": {{clean | truncateWords(20) | jsonify | safe}},
 "keywords": {{clean | keywords | jsonify | safe}},
 "tags": [],
 "url": "{{page.url}}"
