@@ -366,7 +366,9 @@ html[data-theme="dark"] .svg-img {
 
 // Responsive width for mobile.
 @include media-breakpoint-down(sm) {
-    img.rw {
-        width: 100% !important;
+    .post-body {
+        .rw {
+            width: 100% !important;
+        }
     }
 }
