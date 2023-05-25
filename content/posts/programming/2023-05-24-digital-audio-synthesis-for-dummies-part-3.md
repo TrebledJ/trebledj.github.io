@@ -26,6 +26,7 @@ This is the third (and culminating) post in a series on digital audio synthesis.
 Now suppose we want to play a continuous, uninterrupted stream of audio. We'd need to keep sending audio samples every few microseconds. Buffering alone isn’t good enough.
 
 In this post, we’ll discover how to effectively implement an audio synthesiser on an embedded device by marrying hardware (timers, DACs, DMA) and software (double buffering).[^subtopics]
+
 [^subtopics]: Each of these components (especially hardware) deserve their own post to be properly introduced; but for the sake of keeping this post short, I’ll only introduce them briefly and link to other resources for further perusal.
 
 To understand these concepts even better, we’ll look at examples on an STM32.[^stm] These examples are inspired from a [MIDI keyboard project](/posts/stm32-midi-keyboard) I previously worked on.
