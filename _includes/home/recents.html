@@ -3,7 +3,7 @@
 
 <div class="mt-4">
     {# Recent Posts Section #}
-    {{render_carousel(collections, "Recent Posts", post_categories, carouselAutoInterval)}}
+    {{render_carousel(collections, "Recent Posts", post_categories, carouselAutoInterval, nposts=npostsPerTab)}}
 
     {# Recent Music Section #}
     {% if featuredTracks %}
@@ -24,7 +24,7 @@
                                 <span>
                                     <i class="fa fa-tag post-meta-icon me-2"></i>
                                 </span>
-                                {{render_tag_list(post.data.tags | exclude(['composition', 'music']), 3)}}
+                                {{render_tag_list(post.data.tags | exclude(['composition', 'music']), limit=3)}}
                             </div>
 
                             <div class="my-2">
@@ -42,5 +42,5 @@
     {% endif %}
 
     {# Recent Projects and Experiences Section #}
-    {{render_carousel(collections, "Projects and Experiences", project_categories, carouselAutoInterval)}}
+    {{render_carousel(collections, "Projects and Experiences", project_categories, carouselAutoInterval, nposts=npostsPerTab)}}
 </div>

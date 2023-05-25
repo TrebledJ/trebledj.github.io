@@ -1,6 +1,6 @@
 {% from "home/topic-preview.html" import render_topic_preview %}
 
-{% macro render_carousel(collections, name, categories, interval) %}
+{% macro render_carousel(collections, name, categories, interval, nposts) %}
     {# Title #}
     <div class="carousel-title d-flex flex-row justify-content-between align-items-center">
         <h2 class="mb-0">{{name}}</h2>
@@ -37,7 +37,7 @@
                 <div class="carousel-inner">
                     {% for cat in categories %}
                         <div class="carousel-item {{"active" if loop.first}}" data-bs-interval="{{interval}}">
-                            {{render_topic_preview(collections, cat.name, cat.tag, cat.about, cat.excludeTags, uniqueSet=uniqueSet, nposts=npostsPerTab)}}
+                            {{render_topic_preview(collections, cat.name, cat.tag, cat.about, cat.excludeTags, uniqueSet=uniqueSet, nposts=nposts)}}
                         </div>
                     {% endfor %}
                 </div>
