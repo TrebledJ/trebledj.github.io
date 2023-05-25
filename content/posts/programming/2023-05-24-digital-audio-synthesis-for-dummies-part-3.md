@@ -43,7 +43,7 @@ It turns out kitchens and embedded systems aren’t that different after all! Bo
 
 [^ticktock]: I think it's safe to say that Tick-Tock Croc also performs input-output and has a timer between his eyes. So Tick-Tock isn't too different from a kitchen! Or an embedded controller, for that matter.
 
-{% image "assets/img/posts/misc/dsp/tick-tock.jpg", "Tick tock likey embedded timers?", "post1" %}
+{% image "assets/img/posts/misc/dsp/tick-tock.jpg", "Tick tock likey embedded timers?", "post1 w-90" %}
 
 <br/>  
 
