@@ -253,6 +253,9 @@ To recap…
   - This also allows us to play multiple pitches simultaneously (chords).
 - We can generate complex waveforms by using [wavetable synthesis](#wavetable-synthesis), which trades memory for speed by sampling pre-generated signals.
 
+Further Reading:
+
+- [Beginner’s Guide: Everything you need to know about synthesis in music production](https://musictech.com/guides/essential-guide/beginners-guide-to-synthesis-in-music-production/) – Introduces more forms of audio synthesis, geared towards music production.
 
 [prev-post]: /posts/digital-audio-synthesis-for-dummies-part-1
 [prev-post-quantisation]: /posts/digital-audio-synthesis-for-dummies-part-1#quantisation
