@@ -523,7 +523,7 @@ In case you want to go further, here are some other things to explore:
 - RTOS for multitasking.
 - Other boards or hardware with specialised audio features.
 
-Hope you enjoyed this series of posts! Leave a comment if you'd like to see more or have any feedback!
+Hope you enjoyed this series of posts! Leave a comment if you like to see more or have any feedback!
 
 ## Full Code
 
