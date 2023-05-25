@@ -33,7 +33,7 @@ I'll be working with an STM32F405 board in our examples. If you plan to follow a
 
 [^stm]: There are several popular microcontroller brands each with their pros and cons. STM is one such brand. It’s a bit overkill for demonstrating audio synthesis, but I chose it here because of my familiarity, and to demonstrate my STM32 MIDI Keyboard project. Rest assured the concepts are transferable, though hardware implementations may differ between brands.
 
-This post is much longer than I expected. My suggested angle of attack is to first gain a high-level understanding, then dig into the examples for details.
+This post is much longer than I expected. My suggested approach of reading is to first gain a high-level understanding, then dig into the examples for details.
 
 
 ## Timers ⏳
