@@ -3,6 +3,8 @@ const eleventyImage = require("@11ty/eleventy-img");
 
 
 module.exports = function (eleventyConfig) {
+    const breakpoints = (process.env.ENVIRONMENT === 'production' ? [512, 1024] : []);
+
     function relativeToInputPath(inputPath, relativeFilePath) {
         let split = inputPath.split("/");
         split.pop();
@@ -21,7 +23,7 @@ module.exports = function (eleventyConfig) {
         // let file = relativeToInputPath(this.page.inputPath, src);
         const file = src;
         const options = {
-            widths: ["auto"],
+            widths: [...breakpoints, "auto"],
             formats,
             outputDir: path.join(eleventyConfig.dir.output, "img"),
             sharpOptions: {
@@ -44,8 +46,8 @@ module.exports = function (eleventyConfig) {
 
             // Solo image.
             classes.push('center');
-            classes.push('rw'); 	// Responsive-width for small screens.
-            classes.push('mb-2'); 	// Extra spacing in the bottom.
+            classes.push('rw');     // Responsive-width for small screens.
+            classes.push('mb-2');     // Extra spacing in the bottom.
         }
         classes.reverse();
         return classes;
@@ -55,6 +57,18 @@ module.exports = function (eleventyConfig) {
         return `<img src="${src}" class="${classes}" alt="${alt}" title="${alt}" style="${style}" loading="${loading}" decoding="${decoding}">`;
     }
 
+    function makeImageFromMetadata(metadata, ext, classes, alt, loading = 'lazy') {
+        const fmt = metadata[ext];
+        let auto = fmt.filter(e => !breakpoints.includes(e.width))[0]; // Get default (auto) image.
+        if (!auto) // auto clashed with a breakpoint width.
+            auto = fmt[fmt.length - 1]; // Use largest res item as default.
+
+        const max_width = fmt[fmt.length - 1].width;
+        const srcset = fmt.map(entry => entry.srcset).join(", ");
+        const sizes = [...breakpoints.filter(bp => bp <= max_width).map(bp => `(max-width: ${bp}px) ${bp}px`), `${auto.width}px`].join(', ');
+        return `<img class="${classes.join(' ')}" src="${auto.url}" alt="${alt}" title="${alt}" srcset="${srcset}" sizes="${sizes}" loading="${loading}" decoding="async" />`.replaceAll(/\s{2,}/g, ' ');
+    }
+
 
     async function imageShortcode(src, altText, classes, loading = 'lazy') {
         const { ext, file, options } = getOptions(src);
@@ -62,10 +76,11 @@ module.exports = function (eleventyConfig) {
 
         classes = amendClasses(classes);
 
-        const data = metadata[ext][metadata[ext].length - 1];
-        const ratio = `aspect-ratio: auto ${data.width} / ${data.height};`; // Alleviate content layout shift.
+        // const data = metadata[ext][metadata[ext].length - 1];
+        // const ratio = `aspect-ratio: auto ${data.width} / ${data.height};`; // Alleviate content layout shift.
 
-        return makeImage(data.url, classes.join(' '), altText, ratio, loading = loading);
+        // return makeImage(data.url, classes.join(' '), altText, ratio, loading = loading);
+        return makeImageFromMetadata(metadata, ext, classes, altText, loading);
     }
 
     async function bannerImageShortcode(src, altText, classes) {
@@ -90,10 +105,11 @@ module.exports = function (eleventyConfig) {
         classes = amendClasses(classes);
 
         const metadata = eleventyImage.statsSync(file, options);
-        const data = metadata[ext][metadata[ext].length - 1];
-        const ratio = `aspect-ratio: auto ${data.width} / ${data.height};`; // Alleviate content layout shift.
+        // const data = metadata[ext][metadata[ext].length - 1];
+        // const ratio = `aspect-ratio: auto ${data.width} / ${data.height};`; // Alleviate content layout shift.
 
-        return makeImage(data.url, classes.join(' '), altText, ratio);
+        // return makeImage(data.url, classes.join(' '), altText, ratio);
+        return makeImageFromMetadata(metadata, ext, classes, altText);
     }
 
     // Eleventy Image shortcode
