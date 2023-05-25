@@ -363,7 +363,7 @@ while (1) {
 }
 ```
 
-The results? As expected, artefacts (nefarious little glitches) invade our signal due to our buffer being overwritten during DMA transfer. This may also result in [unpleasant clips in audio](/posts/digital-audio-synthesis-for-dummies-part-1#clipping).
+The results? As expected, artefacts (nefarious little glitches) invade our signal due to our buffer being overwritten during DMA transfer. This may also result in [unpleasant clicks in audio](/posts/digital-audio-synthesis-for-dummies-part-1#clicks).
 
 {% image "assets/img/posts/misc/dsp/osc-sine-440-glitch.jpg", "Artefacts distort the signal, resulting in occasionally clips and sound defects.", "post1" %}
 
