@@ -87,7 +87,7 @@ Further Reading:
 
 ### Example: Initialising the Timer
 
-Suppose we want to send a stream of audio output, we can use a timer which triggers at a certain frequency.
+Suppose we want to send a stream of audio output. We can use a timer that triggers at our desired [sample rate](/posts/digital-audio-synthesis-for-dummies-part-1#sampling).
 
 On our STM32F405, the configured (and max) clock cycle is 168MHz. If we’re aiming for an output sample rate of 42,000Hz, we’d need to divide our clock signal by 4,000, so that we correctly get $\frac{168,000,000}{4,000} = 42,\\!000$. This division can be achieved by setting a timer’s PSC (prescaler) and ARR (auto-reload) registers.
 
