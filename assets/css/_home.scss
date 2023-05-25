@@ -39,7 +39,7 @@ html[data-theme="light"] .hero-section {
     .btn {
         border: var(--light-border-color) solid 1px !important;
         color: var(--main-text-color) !important;
-        
+
         &.active {
             background-color: var(--highlight-color) !important;
             color: var(--medium-text-color) !important;
@@ -48,17 +48,30 @@ html[data-theme="light"] .hero-section {
 }
 
 html[data-theme="light"] {
+
     .carousel-control-prev-icon,
     .carousel-control-next-icon {
         filter: invert(100%);
     }
 }
 
-@include media-breakpoint-down(md) {
-    // Small view, display only one post.
-    #home .carousel {
-        .collection-list>div:nth-child(2) {
-            display: none;
+@include media-breakpoint-down(lg) {
+    #home {
+        .container {
+            max-width: none;
+            padding-left: 2rem;
+            padding-right: 2rem;
+        }
+
+        // Small view, display only one post.
+        .carousel {
+            .tag-list span:nth-child(3) {
+                display: none;
+            }
+
+            .collection-list>div:nth-child(2) {
+                display: none;
+            }
         }
     }
 }
@@ -70,20 +83,15 @@ html[data-theme="light"] {
             p {
                 margin-bottom: 0;
             }
-    
-            .metadata-container,
-            .metadata-tag-container {
+
+            .metadata-container {
                 display: none !important;
             }
         }
+
+        .container {
+            padding-left: 1rem;
+            padding-right: 1rem;
+        }
     }
 }
-
-
-// @include media-breakpoint-down(md) {
-//     .about-me {
-//         .image-col {
-//             display: none;
-//         }
-//     }
-// }
