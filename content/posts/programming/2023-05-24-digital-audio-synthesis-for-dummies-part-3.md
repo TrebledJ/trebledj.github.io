@@ -74,12 +74,10 @@ Here, the clock signal is first divided by a prescaler of 2, then divided by an 
 {% endalert %}
 
 
-Some additional properties of embedded timers make them suitable for our application:
+Besides being able to trigger continuously, timers can be used to trigger other events such as interrupts (special functions to be executed), ADC conversions, and DMA transfers.[^timer-events] Heck, they can even be used to trigger other timers!
 
-- continuity. They can be set to repeat (indefinitely!).
-- connectivity. Timers can trigger other events such as interrupts (special functions to be executed), ADC conversions, and DMA transfers.[^timer-events] Heck, they can even be used to trigger other timers!
-    - Triggering ADC conversions is useful to regularly sample analogue signals.
-    - Triggering DMA transfers is useful for feeding samples to the DAC at the right moment. (More on this later!)
+- Triggering ADC conversions is useful to regularly sample analogue signals.
+- Triggering DMA transfers is useful for feeding samples to the DAC at the right moment. (More on this later!)
 
 [^timer-events]: The extent of timer events depends on hardware support. Timers can do a lot on ST boards. For other brands, you may need to check the datasheet or reference manual.
 
