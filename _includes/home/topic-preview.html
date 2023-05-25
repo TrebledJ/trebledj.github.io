@@ -1,12 +1,14 @@
 {% from "post/preview.html" import render_preview %}
 
-{% macro render_tag_preview(collections, name, tag, about, excludeTags, uniqueSet, nposts = 3) %}
+{% macro render_topic_preview(collections, name, tag, about, excludeTags, uniqueSet, nposts = 3) %}
+    {# Description #}
     <div class="recent-posts d-flex flex-row justify-content-between align-items-center mb-3">
         <span>{{about}} (See all <a href="/tags/{{tag}}">posts in this topic</a>.)</span>
     </div>
 
     {% set excludeTags = excludeTags | push(tag) %}
 
+    {# Get a few posts with the relevant tag. #}
     <div class="thin-preview">
         <div class="row collection-list">
             {% set count = 0 %}
