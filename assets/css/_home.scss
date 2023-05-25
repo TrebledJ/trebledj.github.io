@@ -32,7 +32,7 @@ html[data-theme="light"] .hero-section {
 }
 
 #home .carousel {
-    height: 550px;
+    height: 600px;
 }
 
 .carousel-tab-group {
@@ -68,7 +68,14 @@ html[data-theme="light"] {
             .tag-list span:nth-child(3) {
                 display: none;
             }
+        }
+    }
+}
 
+@include media-breakpoint-down(md) {
+    // Small view, display only one post.
+    #home {
+        .carousel {
             .collection-list>div:nth-child(2) {
                 display: none;
             }
