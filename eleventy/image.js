@@ -57,7 +57,7 @@ module.exports = function (eleventyConfig) {
         return `<img src="${src}" class="${classes}" alt="${alt}" title="${alt}" style="${style}" loading="${loading}" decoding="${decoding}">`;
     }
 
-    function makeImageFromMetadata(metadata, ext, classes, alt, loading = 'lazy') {
+    function makeImageFromMetadata(metadata, ext, classes, alt, loading = 'lazy', attrs={}) {
         const fmt = metadata[ext];
         let auto = fmt.filter(e => !breakpoints.includes(e.width))[0]; // Get default (auto) image.
         if (!auto) // auto clashed with a breakpoint width.
@@ -66,7 +66,8 @@ module.exports = function (eleventyConfig) {
         const max_width = fmt[fmt.length - 1].width;
         const srcset = fmt.map(entry => entry.srcset).join(", ");
         const sizes = [...breakpoints.filter(bp => bp <= max_width).map(bp => `(max-width: ${bp}px) ${bp}px`), `${auto.width}px`].join(', ');
-        return `<img class="${classes.join(' ')}" src="${auto.url}" alt="${alt}" title="${alt}" srcset="${srcset}" sizes="${sizes}" loading="${loading}" decoding="async" />`.replaceAll(/\s{2,}/g, ' ');
+        const attr_str = Object.entries(attrs).map((k, v) => `${k}="${v}"`).join(' ');
+        return `<img class="${classes.join(' ')}" src="${auto.url}" alt="${alt}" title="${alt}" srcset="${srcset}" sizes="${sizes}" loading="${loading}" decoding="async" style="aspect-ratio: auto ${auto.width} / ${auto.height}" />`.replaceAll(/\s{2,}/g, ' ');
     }
 
 
