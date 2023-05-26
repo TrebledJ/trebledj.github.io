@@ -14,7 +14,7 @@ related:
 
 {% image "assets/img/posts/memes/off-ramp-robotics.jpg", "Bye bye CGA.", "post1 w-60" %}
 
-The Fall term. It’s that time of year again when the team goes out in full to attract fresh talent.
+Ah Fall... the time of year when undergrads decide what activities, societies, and extra-curriculars to join.
 
 The purpose of this post is to reflect on and share about this experience. The first several sections provide background on my journey in the team. The final section is more reflective. Hopefully the reader finds something meaningful in this jumble of words.
 
@@ -30,11 +30,11 @@ I joined the HKUST Robotics Team in my first year of university. In the Fall sem
 
 ### The Workshop 🔨
 
-I found out about the team from an email about a free robotics exploration workshop. (Keyword is *free*.) So of course I signed up. It was a fun little experience to kickstart my university life.
+I found out about the team from an email about a free robotics exploration workshop. (Keyword is *free*.) So of course I signed up. It was a fun little experience to kickstart my university life, even though I lacked robotics experience. I thought it would be a good opportunity to explore different things while in uni.
 
 {% image "assets/img/posts/experiences/robotics/chassis-example.jpg", "Example of the chassis used.", "post1 w-50" %}
 
-In the workshop, we were given a chassis (like the one shown above) and were asked to build and program a bot to dribble a ping-pong ball across a maze. The workshop closed with an interview asking us about our interests.
+In the workshop, we were given a chassis (like the one shown above) and were asked to build and program a bot to dribble a ping-pong ball across a maze. The workshop closed with a casual interview asking about our interests.
 
 We were asked to pick a division (or department, as some call it): mechanical, hardware (electrical), or software engineering. Having had prior programming experience and wanting to boost my skills I decided to go with the software division.
 
@@ -50,9 +50,11 @@ There was classwork and homework assigned for each tutorial. They were quite cha
 
 ### The Internal ⚙️
 
-Lastly, to top off the recruitment process, trainees would form groups to compete in an internal contest. The contest follows a similar format to a Robocon game with formal game rules, clear objectives, and scoring.
+Lastly, to top off the recruitment process, trainees would form groups to compete in an internal contest. The contest tries to combine elements from the different robotics subdivisions: Robocon (2v2 robots), ROV (underwater robotics[^rov]), and Smart Car (racing). Rules are rigorous, and robots need to be carefully designed to meet the criteria and complete tasks to gain the most points.
 
-The primary objective of the internal contest is to observe how well candidates work with others and at the same time, being able to apply the technical skills gained in the tutorial. Whether you win 1st place or not—that is secondary. Winning doesn’t guarantee you a spot in the team. Similarly, losing doesn’t guarantee you get kicked out immediately. Let this be a life lesson. :P
+[^rov]: It's hard to incorporate underwater robotics into an internal game, so they usually settle on combining the business aspects, i.e. presentations.
+
+The primary objective of the internal contest is to observe how well candidates work with others and at the same time, how well we apply the technical skills gained in the tutorial. (You may also find yourself self-learning to solve problems better.) Whether you win 1st place or not—that is secondary. Winning doesn’t guarantee you a spot in the team. Similarly, losing doesn’t guarantee you get kicked out immediately. Let this be a life lesson. :P
 
 Unfortunately, due to the protests and temporary closure of the university, the contest was cancelled T_T and we jumped straight to peer evaluation followed by the next phase: entering subteams.
 
@@ -94,12 +96,14 @@ In robotics and control theory, PID is one of the core elements contributing to 
 
 PID stands for proportional, integral, and derivative—rather mathy terms, and quite so, because that’s how PID controls are computed.
 
-But this post is supposed to be a reflection, so why am I blabbering about PID? It’s because there is another PID I’d like to draw attention to (and to the computer geeks, no, I don’t mean Process ID :P). I’m referring to personal improvement/development, ~~which is something I sort of made up, so don’t be surprised if searching “PID personal development” doesn’t yield any results.~~
+But this post is supposed to be a reflection, so why am I blabbering about PID? It’s because there is another PID I’d like to draw attention to (and to the computer geeks, no, I don’t mean Process ID :P). I’m referring to personal improvement/development, ~~which is something I sort of made up, so don’t be surprised if searching “PID personal development” doesn’t yield any results~~.
 
 Through the robotics team experience, one of my biggest areas of growth is in soft skills, in particular communication and mentoring. Communicating in a group project for a course almost always seems superficial and is usually short-term.
 
 {% alert "info" %}
-In Robocon, it’s different. We’re stuck with our members for half a year. It takes skill to decide when and how to reprimand someone, and patience to mentor. Communication between divisions is also important. The best way to kill a team is to minimise communication. Of course, communication needs to be effective and should be followed up with action. In the end, it’s about becoming better humans in society.
+You would be forgiven to think, oh what makes it different from other team activities or group projects. In Robocon, it’s different. We’re stuck with our teammates for half a year—maybe more. There's lots of room for bondage and growth. It takes skill to decide when and how to reprimand someone, and patience to mentor.
+
+Communication between divisions is also important. The best way to kill a team is to minimise communication. Of course, communication needs to be effective and should be followed up with action. In the end, it’s about becoming better humans in society.
 {% endalert %}
 
 I’ve mentioned this in some other posts, but I am quite terrible when it comes to dealing with people. I’ve learned a great deal over the past couple years, and I’m still learning—it’s a process.
