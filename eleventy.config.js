@@ -30,6 +30,7 @@ module.exports = function (eleventyConfig) {
 	// Process content images to the image pipeline.
 	eleventyConfig.addWatchTarget("assets/**/*.{png,jpg,gif,webp}");
 	eleventyConfig.watchIgnores.add("{package,package-lock}.json");
+	eleventyConfig.watchIgnores.add(".gitignore");
 
 	eleventyConfig.setWatchThrottleWaitTime(100);
 

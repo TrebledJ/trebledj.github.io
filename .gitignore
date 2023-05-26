@@ -8,5 +8,8 @@ node_modules/
 # Eleventy image cache.
 .cache/
 
+__pycache__/
+scripts/**/media/
+
 # Typescript build cache.
 dist/
