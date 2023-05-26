@@ -9,12 +9,12 @@ import numpy as np
 
 
 # Wavetable Parameters
-table_size = 32     # Size of the wavetable (lookup table).
+table_size = 32  # Size of the wavetable (lookup table).
 
 # Generation Parameters
-freq = 8            # Frequency of the sine wave to generate (in Hz).
-sample_rate = 100   # Sampling rate of the generated signal.
-nsamples = 25       # Number of samples to generate.
+freq = 8  # Frequency of the sine wave to generate (in Hz).
+sample_rate = 100  # Sampling rate of the generated signal.
+nsamples = 25  # Number of samples to generate.
 
 # Animation Parameters
 # Save the animation (True) or play the animation using Matplotlib's rendering (False).
@@ -46,6 +46,8 @@ def generate_samples(wavetable, freq, sample_rate, *, once=False, nsamples=20):
     ### Returns
      - A generator yielding (phases, samples), i.e. (x, y) values along the wavetable.
     """
+    yield None
+
     phases = []  # Stores phases (x).
     samples = []  # Stores samples (y).
 
@@ -58,8 +60,8 @@ def generate_samples(wavetable, freq, sample_rate, *, once=False, nsamples=20):
         if once and phase > table_size:
             break
 
-        idx = int(phase)   # Integer part.
-        frac = phase - idx # Decimal part.
+        idx = int(phase)  # Integer part.
+        frac = phase - idx  # Decimal part.
 
         samp0 = wavetable[idx]
         samp1 = wavetable[(idx + 1) % table_size]
@@ -84,12 +86,12 @@ wavetable = np.sin(2 * np.pi * t)
 
 fig, ax = plt.subplots(2, 1)
 
-ax[0].plot(t * table_size, wavetable, 'bo-')
+ax[0].plot(t * table_size, wavetable, "bo-")
 ax[0].set_title("Wavetable (Lookup Table)")
-ax[0].axis('off')
+ax[0].axis("off")
 
-ax[1].set_title('Samples')
-ax[1].set_xlim(-0.5, nsamples + 0.5)
+ax[1].set_title("Samples")
+ax[1].set_xlim(-0.5, nsamples - 0.5)
 ax[1].set_ylim(-1.1, 1.1)
 ax[1].xaxis.set_major_locator(mticker.MultipleLocator(5))
 
@@ -103,46 +105,45 @@ def update(frame):
     """
     Update the animation frame with the next sample.
     """
-    if frame is None:
-        # Finished!
-        try:
-            points[-1].remove()
-            connections[-1].remove()
-        except:
-            pass
 
-        # Freeze!
-        ani.pause()
-        return fig,
+    for p in points:
+        p.remove()
+    for c in connections:
+        c.remove()
+    points.clear()
+    connections.clear()
+
+    if frame is None:
+        # Pause for a frame.
+        return
 
     ph, samples = frame
 
     wt_x = ph[-1] % table_size
     wt_y = samples[-1]
-    p = ax[0].plot([wt_x], [wt_y], 'ro', ms=4)
-    ax[1].plot(np.arange(len(samples)), samples, 'ro')
+    p = ax[0].plot([wt_x], [wt_y], "ro", ms=4)
+    ax[1].plot(np.arange(len(samples)), samples, "ro")
 
     # Magic line between axs.
-    con = ConnectionPatch(xyA=(wt_x, wt_y), xyB=(len(samples) - 1, samples[-1]), coordsA=ax[0].transData, coordsB=ax[1].transData,
-                          color="red")
+    con = ConnectionPatch(
+        xyA=(wt_x, wt_y),
+        xyB=(len(samples) - 1, samples[-1]),
+        coordsA=ax[0].transData,
+        coordsB=ax[1].transData,
+        color="red",
+    )
     fig.add_artist(con)
-
-    try:
-        points[-1].remove()
-        connections[-1].remove()
-    except:
-        pass
 
     points.append(p[0])
     connections.append(con)
 
-    return fig,
+    return (fig,)
 
 
 gen = generate_samples(wavetable, freq, sample_rate, nsamples=nsamples)
 ani = FuncAnimation(fig, update, gen, interval=interval)
 
 if save_animation:
-    ani.save('output/wavetable-synthesis.mp4', fps=1000 // interval)
+    ani.save("output/wavetable-synthesis.mp4", fps=1000 // interval)
 else:
     plt.show()
