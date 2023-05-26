@@ -73,7 +73,9 @@ def generate_samples(wavetable, freq, sample_rate, *, once=False, nsamples=20):
         phase += table_size * freq / sample_rate
         phase %= table_size
 
-    yield None
+    # Pause animation.
+    for _ in range(5):
+        yield None
 
 
 t = np.linspace(0, 1, table_size + 1)
@@ -141,6 +143,6 @@ gen = generate_samples(wavetable, freq, sample_rate, nsamples=nsamples)
 ani = FuncAnimation(fig, update, gen, interval=interval)
 
 if save_animation:
-    ani.save('wavetable-synthesis.gif', writer='imagemagick', fps=1000 // interval)
+    ani.save('output/wavetable-synthesis.mp4', fps=1000 // interval)
 else:
     plt.show()

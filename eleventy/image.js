@@ -47,7 +47,7 @@ module.exports = function (eleventyConfig) {
             // Solo image.
             classes.push('center');
             classes.push('rw');     // Responsive-width for small screens.
-            classes.push('mb-2');     // Extra spacing in the bottom.
+            classes.push('mb-2');   // Extra spacing in the bottom.
         }
         classes.reverse();
         return classes;
@@ -57,7 +57,7 @@ module.exports = function (eleventyConfig) {
         return `<img src="${src}" class="${classes}" alt="${alt}" title="${alt}" style="${style}" loading="${loading}" decoding="${decoding}">`;
     }
 
-    function makeImageFromMetadata(metadata, ext, classes, alt, loading = 'lazy', attrs={}) {
+    function makeImageFromMetadata(metadata, ext, classes, alt, loading = 'lazy', attrs = {}) {
         const fmt = metadata[ext];
         let auto = fmt.filter(e => !breakpoints.includes(e.width))[0]; // Get default (auto) image.
         if (!auto) // auto clashed with a breakpoint width.
@@ -122,4 +122,13 @@ module.exports = function (eleventyConfig) {
     // Synchronous shortcode. Useful for Nunjucks macro.
     // Doesn't work with remote URLs.
     eleventyConfig.addShortcode("thumbnail", thumbnailShortcode);
+
+    eleventyConfig.addShortcode("video", function (src, classes) {
+        classes = amendClasses(classes);
+        if (src.startsWith('assets/')) {
+            src = src.replace(/^assets/, '');
+        }
+        const ext = src.split('.').pop();
+        return `<div class="${classes.join(' ')}"><video autoplay loop muted class="w-100"><source src="${src}" type="video/${ext}"></video></div>`;
+    });
 };
