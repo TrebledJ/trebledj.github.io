@@ -4,16 +4,20 @@ $(function () {
     });
 
     let strings = [
-        'Playing with code 💻',
+        'Coding 💻',
         'Playing with embedded systems ⚡️',
-        'Composing with style (￣▽￣)/♫•*¨*•.¸¸♪',
+        'Composing (￣▽￣)/♫•*¨*•.¸¸♪',
         'Studying 📖',
-        'Playing CTFs 🚩',
-        'Tinkering with this website 🌐',
+        'Capturing flags 🚩',
+        'Writing articles on this site 📄',
+        'Tinkering with this site 🌐',
         'Napping (＿ ＿*) Z z z',
-        'Playing with music ♪♪♪ ヽ(ˇ∀ˇ )ゞ',
+        'Noodling with music ♪♪♪ ヽ(ˇ∀ˇ )ゞ',
         'Making koalaty memes (－‸ლ)',
-    ];
+    ]
+        .map(value => ({ value, sort: Math.random() }))
+        .sort((a, b) => a.sort - b.sort)
+        .map(({ value }) => value);
 
     typewriter.typeString('');
 
