@@ -416,12 +416,17 @@ while (1) {
 }
 ```
 
-Now our 440Hz sine wave is unblemished.
+Now our 440Hz sine wave is unblemished!
 
 {% image "assets/img/posts/misc/dsp/osc-sine-440-2.jpg", "Pure sine goodness. A proper 440Hz sine displaying properly.", "post1" %}
 
 <sup>Waveform of a pure 440Hz sine tone.</sup>
 {.caption}
+
+{% alert "fact" %}
+Double buffering is also used for video and displays, where each buffer stores a 2D frame instead of a 1D signal.
+{% endalert %}
+
 
 ### Example: Playing Multiple Notes with DMA and Double Buffering 🎶
 
