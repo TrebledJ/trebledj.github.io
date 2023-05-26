@@ -23,9 +23,7 @@ Ah… embedded systems—the intersection of robust hardware and versatile softw
 
 This is the third (and culminating) post in a series on digital audio synthesis. In the [first post](/posts/digital-audio-synthesis-for-dummies-part-1), we introduced basic concepts on audio processing. In the [second post](/posts/digital-audio-synthesis-for-dummies-part-2), we dived into audio synthesis and generation.
 
-Now suppose we want to play a continuous, uninterrupted stream of audio. We'd need to keep feeding our speaker with audio samples every few microseconds. On a microcontroller, buffering alone isn’t good enough.
-
-In this post, we’ll discover how to effectively implement an audio synthesiser on an embedded device by marrying hardware (timers, DACs, DMA) and software (double buffering).[^subtopics]
+In this post, we’ll discover how to effectively implement an audio synthesiser and player on an embedded device by marrying hardware (timers, DACs, DMA) and software (double buffering plus other optimisations).[^subtopics]
 
 [^subtopics]: Each of these components (especially hardware) deserve their own post to be properly introduced; but for the sake of keeping this post short, I’ll only introduce them briefly and link to other resources for further perusal.
 
@@ -50,18 +48,18 @@ It turns out kitchens and embedded systems aren’t that different after all! Bo
 
 ### Tick Tock
 
-Timers in embedded systems are similar to those in the kitchen: they count down for a period of time and signal an event when finished. They’re *really* flexible (especially on boards like STM).
+Timers in embedded systems are similar to those in the kitchen: they tick for a period of time and signal an event when finished. However unlike kitchen timers, embedded timers can be set to trigger repeatedly, making them immensely useful in various applications.
 
-So how do they work? When do they fire?
-
-There are various ways to configure a timer, too many to cover in this post. But we’re interested in making a timer fire repeatedly at regular intervals. We can set the speed of the timer based on the MCU clock.[^clock]
-
-[^clock]: The MCU clock is like the backbone of a controller. It controls the processing speed and pretty much everything!—timers, ADC, DAC, communication protocols, and whatnot.
+So what makes timers tick? The MCU clock!
 
 {% alert "fact" %}
-In case you were wondering how timers derive their frequency from the clock…
+The MCU clock is the *backbone* of a controller. It controls the processing speed and pretty much everything!—timers, ADC, DAC, communication protocols, and whatnot.
 
-The following diagram illustrates how the clock signal is divided. There are two divisors: the prescaler and auto-reload.
+The clock runs at a fixed frequency (e.g. 168MHz on our board).
+By dividing against it, we can achieve lower frequencies.
+{% endalert %}
+
+The following diagram illustrates how the clock signal is divided on an STM. There are two divisors: the prescaler and auto-reload.
 
 {% image "assets/img/posts/misc/dsp/timing-diagram.jpg", "Timing diagram of timer signal derived from a clock signal.", "post1" %}
 
@@ -70,26 +68,29 @@ The following diagram illustrates how the clock signal is divided. There are two
 
 [^upesy]: [How do microcontroller timers work?](https://www.upesy.com/blogs/tutorials/how-works-timers-in-micro-controllers) – A decent article on timers. Diagrams are in French though.
 
-Here, the clock signal is first divided by a prescaler of 2, then divided by an auto-reload of 6. On every overflow (arrow shooting up), the timer starts a new period and triggers an interrupt. This interrupt will be used later to trigger a DAC/DMA send.
-{% endalert %}
+Here, the clock signal is first divided by a prescaler of 2, then divided by an auto-reload of 6. Thus, the timer runs at $\frac{1}{12}$ the speed of the clock. On every overflow (arrow shooting up), the timer starts a new period and triggers an interrupt. This interrupt will be used later to trigger a DAC/DMA send.
 
+{# TODO insert timer formula somewhere #}
 
-Besides being able to trigger continuously, timers can be used to trigger other events such as interrupts (special functions to be executed), ADC conversions, and DMA transfers.[^timer-events] Heck, they can even be used to trigger other timers!
-
-- Triggering ADC conversions is useful to regularly sample analogue signals.
-- Triggering DMA transfers is useful for feeding samples to the DAC at the right moment. (More on this later!)
+Timers can be used to trigger events through interrupts, which can trigger things such as ADC conversions and DMA transfers (something we'll look at later).[^timer-events] Heck, they can even be used to trigger other timers!
 
 [^timer-events]: The extent of timer events depends on hardware support. Timers can do a lot on ST boards. For other brands, you may need to check the datasheet or reference manual.
 
 Further Reading:
 
+- [How do microcontroller timers work?](https://www.upesy.com/blogs/tutorials/how-works-timers-in-micro-controllers)
 - [Getting Started with STM32: Timers and Timer Interrupts](https://www.digikey.com/en/maker/projects/getting-started-with-stm32-timers-and-timer-interrupts/d08e6493cefa486fb1e79c43c0b08cc6)
+
 
 ### Example: Initialising the Timer
 
 Suppose we want to send a stream of audio output. We can use a timer that triggers at our desired [sample rate](/posts/digital-audio-synthesis-for-dummies-part-1#sampling).
 
-On our STM32F405, the configured (and max) clock cycle is 168MHz. If we’re aiming for an output sample rate of 42,000Hz, we’d need to divide our clock signal by 4,000, so that we correctly get $\frac{168,000,000}{4,000} = 42,\\!000$. This division can be achieved by setting a timer’s PSC (prescaler) and ARR (auto-reload) registers.
+On our STM32F405, we configured the clock to the maximun possible speed: 168MHz. If we’re aiming for an output sample rate of 42,000Hz, we’d need to divide our clock signal by 4,000, so that we correctly get $\frac{168,000,000}{4,000} = 42,\\!000$.
+
+This division can be achieved by setting a timer’s PSC (prescaler) and ARR (auto-reload) registers.
+
+{# We'll choose a prescaler and auto-reload divisor if 1 and 4000. #}
 
 We can use STM32 CubeMX, a GUI for configuring hardware options, to initialise our timer parameters.[^cubeide] CubeMX allows us to generate code from these options, handling the conundrum of modifying the appropriate registers.
 
@@ -176,8 +177,9 @@ HAL_TIM_Base_Start(&htim8); // Start the timer.
 HAL_TIM_Base_Stop(&htim8);  // Stop the timer.
 ```
 
-`HAL_TIM_Base_Start` is used to start a timer for basic timing and event counting applications.
-Functions for other modes (e.g. PWM) are available in `stm32f4xx_hal_tim.h`.
+These functions are used to start/stop timers for basic timing and counting applications.
+Functions for more specialised modes (e.g. PWM) are available in `stm32f4xx_hal_tim.h`.
+
 
 ## Digital-to-Analogue Converters (DACs) 🌉
 
