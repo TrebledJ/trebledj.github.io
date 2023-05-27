@@ -1,8 +1,22 @@
 ---
 title: Posts
-layout: layouts/posts
+layout: layouts/page-default
 pagination:
     data: collections.postsr
     size: 7
 permalink: /posts{% if pagination.pageNumber > 0 %}/{{ pagination.pageNumber }}{% endif %}/index.html
 ---
+
+{% from "post/preview.html" import render_preview %}
+
+<div class="col-lg-9">
+    {% include "pagination-links.html" %}
+    
+    <div class="post-preview-list">
+        {% for post in pagination.items %}
+            {{ render_preview(post) }}
+        {% endfor %}
+    </div>
+
+    {% include "pagination-links.html" %}
+</div>
