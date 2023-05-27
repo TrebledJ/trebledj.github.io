@@ -68,11 +68,9 @@ The following diagram illustrates how the clock signal is divided on an STM. The
 
 [^upesy]: [How do microcontroller timers work?](https://www.upesy.com/blogs/tutorials/how-works-timers-in-micro-controllers) – A decent article on timers. Diagrams are in French though.
 
-Here, the clock signal is first divided by a prescaler of 2, then divided by an auto-reload of 6. Thus, the timer runs at $\frac{1}{12}$ the speed of the clock. On every overflow (arrow shooting up), the timer starts a new period and triggers an interrupt. This interrupt will be used later to trigger a DAC/DMA send.
+Here, the clock signal is first divided by a prescaler of 2, then divided by an auto-reload of 6. Thus, the timer runs at $\frac{1}{12}$ the speed of the clock. On every overflow (arrow shooting up), the timer triggers an interrupt.
 
-{# TODO insert timer formula somewhere #}
-
-Timers can be used to trigger events through interrupts, which can trigger things such as ADC conversions and DMA transfers (something we'll look at later).[^timer-events] Heck, they can even be used to trigger other timers!
+These interrupts can trigger functionality such as  DMA transfers (explored later) and ADC conversions.[^timer-events] Heck, they can even be used to trigger other timers!
 
 [^timer-events]: The extent of timer events depends on hardware support. Timers can do a lot on ST boards. For other brands, you may need to check the datasheet or reference manual.
 
@@ -81,20 +79,41 @@ Further Reading:
 - [How do microcontroller timers work?](https://www.upesy.com/blogs/tutorials/how-works-timers-in-micro-controllers)
 - [Getting Started with STM32: Timers and Timer Interrupts](https://www.digikey.com/en/maker/projects/getting-started-with-stm32-timers-and-timer-interrupts/d08e6493cefa486fb1e79c43c0b08cc6)
 
-
 ### Example: Initialising the Timer
 
-Suppose we want to send a stream of audio output. We can use a timer that triggers at our desired [sample rate](/posts/digital-audio-synthesis-for-dummies-part-1#sampling).
+Suppose we want to send a stream of audio output. We can use a timer with a frequency set to our desired [sample rate](notion://www.notion.so/posts/digital-audio-synthesis-for-dummies-part-1#sampling).
 
-On our STM32F405, we configured the clock to the maximun possible speed: 168MHz. If we’re aiming for an output sample rate of 42,000Hz, we’d need to divide our clock signal by 4,000, so that we correctly get $\frac{168,000,000}{4,000} = 42,\\!000$.
+We can derive the prescaler and auto-reload by finding any integer factors that satisfy the relationship:
 
-This division can be achieved by setting a timer’s PSC (prescaler) and ARR (auto-reload) registers.
+$$
+\text{freq}\_\text{timer} = \frac{\text{freq}\_\text{clock}}{(\text{PSC} + 1) \times (\text{ARR} + 1)}
+$$
 
-{# We'll choose a prescaler and auto-reload divisor if 1 and 4000. #}
+where $\text{freq}\_\text{timer}$ is the timer frequency (or specifically in our case, the sample rate) and $\text{freq}\_\text{clock}$ is the clock frequency. PSC and ARR are registers used to divide the clock signal.
 
-We can use STM32 CubeMX, a GUI for configuring hardware options, to initialise our timer parameters.[^cubeide] CubeMX allows us to generate code from these options, handling the conundrum of modifying the appropriate registers.
+On our STM32F405, we configured $\text{freq}\_\text{clock}$ to the maximum possible speed: 168MHz. If we’re aiming for an output sample rate of 42,000Hz, we’d need to divide our clock signal by 4,000, so that we correctly get $\frac{168,000,000}{4,000} = 42,\\!000$. For now, we’ll choose register values of `PSC = 0` and `ARR = 3999`.
 
-[^cubeide]: STM32 CubeIDE also has CubeMX features built-in, along with jank Eclipse IDE support. Useful if you’re switching back and forth a lot between code and hardware.
+{% alert "fact" %}
+Why do we add $+1$ to the PSC and ARR in the relationship above?
+
+The PSC and ARR are 16-bit *registers*, meaning they range from 0 to 65,535. To save space and enhance program correctness, we assign meaningful behaviour to the value 0.
+{% endalert %}
+
+{% alert "fact" %}
+Why `0` and `3999`?
+
+Different pairs of PSC and ARR work, as long as they satisfy the relationship.
+
+You can play around and try different pairs of PSC and ARR.
+I suggest coming back to this section after getting DAC + DMA + double buffering to work, and experiment!
+
+Exercises for the reader:
+
+* What is the difference between different pairs, such as `PSC = 0`, `ARR = 3999` vs. `PSC = 1`, `ARR = 1999`? (Hint: counter.)
+* Is there a PSC/ARR pair that is "better"? What if we're using the timer to generate a PWM signal?
+{% endalert %}
+
+We can use STM32 CubeMX, a GUI for configuring hardware, to initialise timer parameters. CubeMX allows us to generate code from these options, handling the conundrum of modifying the appropriate registers.
 
 {% image "assets/img/posts/misc/dsp/stm32-cubemx-timer-1.jpg", "Timer settings from CubeMX.", "post1" %}
 
@@ -103,15 +122,9 @@ We can use STM32 CubeMX, a GUI for configuring hardware options, to initialise o
 
 [^chtim]: We chose Timer 8 with Channel 4 because its pins were available, and other timers had occupied pins. The timer and channel you use depends on your STM board and model. If you’re following along with this post, make sure to choose a timer which has DMA generation. When in doubt, refer to the reference manual.[^rm0090]
 
-{% alert "warning" %}
-The PSC (prescaler) and ARR (auto-reload) are 16-bit *registers*, meaning they range from 0 to 65,535. A PSC of 0 denotes a prescaler divisor of 1. Thus, by setting `PSC = 0` and `ARR = 3999`, we obtain a divisor of $(0 + 1) \times (3999 + 1) = 4000$.
+{% image "assets/img/posts/misc/dsp/stm32-cubemx-timer-2-raw.jpg", "More timer settings from CubeMX.", "post1" %}
 
-In the previous section's example, we had a prescaler divisor of 2 and auto-reload divisor of 6, so we would set `PSC = 1` and `ARR = 5`.
-{% endalert %}
-
-{% image "assets/img/posts/misc/dsp/stm32-cubemx-timer-2.jpg", "More timer settings from CubeMX.", "post1" %}
-
-<sup>Some other settings in CubeMX to check. The pulse (aka Compare Value) affects the duty cycle of the [PWM](https://docs.arduino.cc/learn/microcontrollers/analog-output) signal. Higher pulse, higher duty cycle.</sup>
+<sup>Some other settings in CubeMX to check.</sup>
 {.caption}
 
 Remember to generate code once done.[^codegen] CubeMX should generate the following code in `main.c`:
@@ -153,20 +166,8 @@ TIM8->PSC = 0;    // Prescaler: 1
 TIM8->ARR = 3999; // Auto-Reload: 4000
 ```
 
-This is more useful for applications where the frequency is dynamic (e.g. playing music with a piezoelectric buzzer), but it's also useful when we're too lazy to modify the .ioc file.
+This is useful for applications where the frequency is dynamic (e.g. playing music with a piezoelectric buzzer), but it's also useful when we're too lazy to modify the .ioc file.
 
-{% alert "fact" %}
-You can play around and try different pairs of PSC and ARR.
-I suggest coming back to this section after getting DAC + DMA + double buffering to work, and experiment!
-
-For example, these pairs will all yield the same timer frequency: PSC = 1, ARR = 1999; PSC = 3, ARR = 999; and PSC = 1999, ARR = 1.
-
-Exercises for the reader (no pressure 🙃):
-
-* Why will the above pairs of PSC and ARR generate the same timer frequency?
-* What is the difference between different pairs? (Hint: counter.)
-* Is there a PSC/ARR pair that is "better"? What if we're using the timer to generate a PWM signal?
-{% endalert %}
 
 ### Example: Playing with Timers
 
@@ -197,7 +198,7 @@ Remember [sampling](/posts/digital-audio-synthesis-for-dummies-part-1#sampling)?
 
 {% image "assets/img/posts/misc/dsp/sampling.jpg", "Free samples have returned!", "post1" %}
 
-While an ADC takes us from continuous to discrete, a DAC takes us from discrete to continuous. (Well, it tries to anyway.[^lossy]) The shape of the resulting analogue waveform depends on the DAC implementation. Simple DACs will stagger the output at discrete levels. More complex DACs may interpolate between two discrete samples to “guess” the intermediate values. Some of these guesses will be off, but at least the signal is smoother.
+While an ADC takes us from continuous to discrete, a DAC takes us from discrete to continuous. (Well, it tries anyway.[^lossy]) The shape of the resulting analogue waveform depends on the DAC implementation. Simple DACs will stagger the output at discrete levels. More complex DACs may interpolate between two discrete samples to “guess” the intermediate values. Some of these guesses will be off, but at least the signal is smoother.
 
 [^lossy]: Sampling a continuous signal is a lossy conversion. Information is bound to be loss. A DAC can only replicate the original signal so much...
 
