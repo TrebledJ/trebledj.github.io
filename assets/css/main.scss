@@ -65,7 +65,7 @@ $carousel-transition: transform 2s ease, opacity 1.5s ease-out .5s;
     }
 
     .active .page-link {
-        border: var(--border-width) solid var(--highlight-color);
+        border: var(--border-width) solid var(--bold-color);
     }
 }
 
