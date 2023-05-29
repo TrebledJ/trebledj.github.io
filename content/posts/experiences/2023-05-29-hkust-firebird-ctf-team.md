@@ -51,7 +51,7 @@ In the third and final stage of Firebird's CTF training, we evolve into senior s
 
 In this part of training, we learn through teaching and mentoring. Teaching not only provides us an opportunity to share our knowledge and experience, but also the opportunity to give back to the community, to reinforce our understanding of the material, and to develop soft skills.
 
-I focused on teaching reverse engineering topics, which largely consists of disassembly, decompilation, and symbolic execution—three 2-hour presentations in total.[^meassembly] I had loads of fun designing [challenges](https://github.com/TrebledJ/USTSim) (especially for the internal CTF), helping out on Discord, and [rick-rolling](https://youtu.be/dQw4w9WgXcQ) oblivious trainees.
+I focused on teaching reverse engineering topics, which largely consists of disassembly, decompilation, and symbolic execution—three 2-hour presentations in total.[^meassembly] I had loads of fun designing [challenges](https://github.com/TrebledJ/USTSim) (especially for the internal CTF), helping out on Discord, and rick-rolling oblivious trainees.
 
 [^meassembly]: Why do I like reverse engineering? Analysing assembly can be pretty fun, and it’s also crucial when analysing performance of software systems. This is especially important in low-level environments such as embedded devices, or in general for benchmarking. Finding out how things work under the hood is one way to learn.
 
