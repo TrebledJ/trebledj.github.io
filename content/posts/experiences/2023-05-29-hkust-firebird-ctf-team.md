@@ -27,6 +27,10 @@ Each week, senior Firebird members mentor us on various categories of CTF, inclu
 
 Two topics are presented each week, and include in-class exercises and homework to reinforce concepts learned. These challenges are similar to CTF challenges, which require us to find a flag. For example, we may need to use a software to reverse-engineer a binary or exploit a web vulnerability. The homework is usually more challenging than the exercises and require more time and effort.
 
+Some challenges are easier to solve. But don't be fooled! There are more where they came from!
+
+{% image "assets/img/posts/experiences/firebird/hacker.jpg", "You know, I'm something of an idiot myself.", "post1 w-75" %}
+
 We participated in two (plus one extra) CTF competitions this term. In November, we participated in the [HKCERT CTF competition](https://www.hkcert.org/event/capture-the-flag-challenge-2021), a regional event where secondary and tertiary schools from all over HK (and invited teams outside) compete to hunt for flags.
 
 In December, some of us were selected to participate in the PwC Hackaday CTF. The format for this CTF was different, where points can be spent to buy hints. Aside from the format, the vibe was much more exhilarating too, as we get to compete in person. (The other events were held online, so they were relatively lacklustre.)
