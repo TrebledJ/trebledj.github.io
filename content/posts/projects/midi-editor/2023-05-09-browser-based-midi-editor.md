@@ -7,7 +7,7 @@ tags:
  - python
  - music
  - hkust
-thumbnail: assets/img/posts/projects/midi-reimagined.jpg
+thumbnail: assets/midi-reimagined.jpg
 include_thumbnail: true
 pitch: Developed a browser-based MIDI editor enabled with audio-to-MIDI conversion features.
 related:
@@ -21,7 +21,7 @@ If you’re a composer, transcriber, or musician, you may find the audio import 
 
 [^backend]: The audio file is sent to a Python backend to be converted to MIDI, then sent back to the frontend for display and editing.
 
-{% image "assets/img/posts/projects/midi-editor.jpg", "", "post1" %}
+{% image "assets/midi-editor.jpg", "", "post1" %}
 
 <sup>Screenshot of the MIDI editor.</sup>
 {.caption}

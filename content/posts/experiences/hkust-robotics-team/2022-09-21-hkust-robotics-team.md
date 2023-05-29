@@ -5,13 +5,13 @@ tags:
  - robotics
  - software-engineering
  - hkust
-thumbnail: assets/img/posts/experiences/robotics/wallpaper-2.jpg
+thumbnail: /assets/img/posts/thumbnail/robotics-team-wallpaper-2.jpg
 pitch: Senior software engineer in the HKUST Robotics Team. Trained and mentored junior team members. Transformed and modularised project architecture and pipeline with Git submodules. Orchestrated software R&D projects.
 related:
     tags: [hkust, robotics]
 ---
 
-{% image "assets/img/posts/memes/off-ramp-robotics.jpg", "Bye bye CGA.", "post1 w-60" %}
+{% image "assets/off-ramp-robotics.jpg", "Bye bye CGA.", "post1 w-60" %}
 
 Ah Fall... the time of year when undergrads decide what activities, societies, and extra-curriculars to join.
 
@@ -31,7 +31,7 @@ I joined the HKUST Robotics Team in my first year of university. In the Fall sem
 
 I found out about the team from an email about a free robotics exploration workshop. (Keyword is *free*.) So of course I signed up. It was a fun little experience to kickstart my university life, even though I lacked robotics experience. I thought it would be a good opportunity to explore different things while in uni.
 
-{% image "assets/img/posts/experiences/robotics/chassis-example.jpg", "Example of the chassis used.", "post1 w-50" %}
+{% image "assets/chassis-example.jpg", "Example of the chassis used.", "post1 w-50" %}
 
 In the workshop, we were given a chassis (like the one shown above) and were asked to build and program a bot to dribble a ping-pong ball across a maze. The workshop closed with a casual interview asking about our interests.
 
@@ -39,7 +39,7 @@ We were asked to pick a division (or department, as some call it): mechanical, h
 
 ### The Training ✏️
 
-{% image "assets/img/posts/memes/training.jpg", "Training is tuff!", "post1 w-80" %}
+{% image "assets/training.jpg", "Training is tuff!", "post1 w-80" %}
 
 Next up were the tutorials. The first software tutorial was on basic programming using the C language. My prior experience with C++ helped a lot here.
 

@@ -6,7 +6,7 @@ tags:
  - electronic
  - fusion
  - band
-thumbnail: assets/img/posts/music/midnight-enigma.jpg
+thumbnail: assets/midnight-enigma.jpg
 track_id: 1490881297
 score_id: 10353301
 related:

@@ -7,7 +7,7 @@ tags:
  - cpp
  - experience
  - hkust
-thumbnail: assets/img/posts/projects/smart-tray.jpg
+thumbnail: assets/smart-tray.jpg
 include_thumbnail: true
 pitch: Programmed an embedded device for efficient smart-tracking of lab chemicals.
 related:

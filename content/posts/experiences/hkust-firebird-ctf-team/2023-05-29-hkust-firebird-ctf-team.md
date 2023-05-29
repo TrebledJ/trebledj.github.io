@@ -4,20 +4,20 @@ description: Experiences and reflections journeying with the HKUST Firebird CTF 
 tags:
  - ctf
  - hkust
-thumbnail: assets/img/posts/experiences/firebird/firebird.png
+thumbnail: /assets/img/posts/thumbnail/firebird.png
 pitch: Senior member of the HKUST Firebird CTF Team. Trained and mentoring new team members, remodularise project structure, and managing R&D projects.
 related:
     tags: [experiences, hkust]
 ---
 
-{% image "assets/img/posts/experiences/firebird/ctf-dunning-kruger-2.jpg", "CTFs explained through the Dunning-Kruger effect. I'm sure there are a lot more trenches.", "post1" %}
+{% image "assets/ctf-dunning-kruger-2.jpg", "CTFs explained through the Dunning-Kruger effect. I'm sure there are a lot more trenches.", "post1" %}
 
 
 As an avid programmer with a passion for technology and programming, I was always intrigued by the world of cybersecurity. In my last two years of university, I was thrilled to explore this field further by joining the HKUST Firebird CTF Team. As someone with a programming background but no cybersecurity knowledge (besides rudimentary SQL injection), I was excited to develop my skills in this field.
 
 Note that my experiences don’t speak for everyone and may not reflect the current situation of the team. With that said, let me introduce the process a bit more. The training is structured as three stages/courses, each taking place over a semester.
 
-{% image "assets/img/posts/experiences/firebird/firebird-stages.jpg", "Evolution stages of a firebird trainee.", "post1" %}
+{% image "assets/firebird-stages.jpg", "Evolution stages of a firebird trainee.", "post1" %}
 
 ## Torchic, the Hatchling
 
@@ -29,7 +29,7 @@ Two topics are presented each week, and include in-class exercises and homework 
 
 Some challenges are easier to solve. But don't be fooled! There's more where they came from!
 
-{% image "assets/img/posts/experiences/firebird/hacker.jpg", "You know, I'm something of an idiot myself.", "post1 w-75" %}
+{% image "assets/hacker.jpg", "You know, I'm something of an idiot myself.", "post1 w-75" %}
 
 We participated in two (plus one extra) CTF competitions this term. In November, we participated in the [HKCERT CTF competition](https://www.hkcert.org/event/capture-the-flag-challenge-2021), a regional event where secondary and tertiary schools from all over HK (and invited teams outside) compete to hunt for flags.
 

@@ -5,7 +5,7 @@ updated: "2022-08-23"
 tags:
  - band
 keywords: [guitars, drums, upbeat, glockenspiel]
-thumbnail: assets/img/posts/music/candy-swirls.jpg
+thumbnail: assets/candy-swirls.jpg
 track_id: 1329504610
 score_id: 8527178
 related:

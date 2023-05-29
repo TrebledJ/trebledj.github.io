@@ -5,7 +5,7 @@ updated: "2022-07-28"
 tags:
  - band
 keywords: [guitars, drums, upbeat]
-thumbnail: assets/img/posts/music/joyride.jpg
+thumbnail: assets/joyride.jpg
 track_id: 1199278825
 score_id: 8527562
 related:
