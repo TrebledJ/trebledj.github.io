@@ -27,7 +27,7 @@ Each week, senior Firebird members mentor us on various categories of CTF, inclu
 
 Two topics are presented each week, and include in-class exercises and homework to reinforce concepts learned. These challenges are similar to CTF challenges, which require us to find a flag. For example, we may need to use a software to reverse-engineer a binary or exploit a web vulnerability. The homework is usually more challenging than the exercises and require more time and effort.
 
-Some challenges are easier to solve. But don't be fooled! There are more where they came from!
+Some challenges are easier to solve. But don't be fooled! There's more where they came from!
 
 {% image "assets/img/posts/experiences/firebird/hacker.jpg", "You know, I'm something of an idiot myself.", "post1 w-75" %}
 
