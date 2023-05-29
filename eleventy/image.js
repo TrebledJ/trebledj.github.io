@@ -57,15 +57,34 @@ module.exports = function (eleventyConfig) {
         return `<img src="${src}" class="${classes}" alt="${alt}" title="${alt}" style="${style}" loading="${loading}" decoding="${decoding}">`;
     }
 
-    function makeImageFromMetadata(metadata, ext, classes, alt, loading = 'lazy', attrs = {}) {
+    function makeImageFromMetadata(metadata, ext, classes, alt, loading = 'lazy', thumbnail = false, attrs = {}) {
         const fmt = metadata[ext];
         let auto = fmt.filter(e => !breakpoints.includes(e.width))[0]; // Get default (auto) image.
         if (!auto) // auto clashed with a breakpoint width.
             auto = fmt[fmt.length - 1]; // Use largest res item as default.
 
+        function makeSizes() {
+            const _default = `${auto.width}px`;
+            if (thumbnail) {
+                const special = 512, specialBreak = 2000;
+                const max = Math.max(...breakpoints, auto.width);
+                if (breakpoints.includes(special)) {
+                    const bps = [`(max-width: ${specialBreak-1}px) ${special}px`, `(min-width: ${specialBreak}px) ${max}px`];
+                    return [...bps, _default].join(', ');
+                } else {
+                    console.warn(`${special}px is not breakpoint size. Skipping thumbnail calculations.`);
+
+                    return _default;
+                }
+            } else {
+                const bps = [...breakpoints.filter(bp => bp <= max_width).map(bp => `(max-width: ${bp}px) ${bp}px`)];
+                return [...bps, _default].join(', ');
+            }
+        }
+
         const max_width = fmt[fmt.length - 1].width;
         const srcset = fmt.map(entry => entry.srcset).join(", ");
-        const sizes = [...breakpoints.filter(bp => bp <= max_width).map(bp => `(max-width: ${bp}px) ${bp}px`), `${auto.width}px`].join(', ');
+        const sizes = makeSizes();
         const attr_str = Object.entries(attrs).map((k, v) => `${k}="${v}"`).join(' ');
         return `<img class="${classes.join(' ')}" src="${auto.url}" alt="${alt}" title="${alt}" srcset="${srcset}" sizes="${sizes}" loading="${loading}" decoding="async" style="aspect-ratio: auto ${auto.width} / ${auto.height}" />`.replaceAll(/\s{2,}/g, ' ');
     }
@@ -110,7 +129,7 @@ module.exports = function (eleventyConfig) {
         // const ratio = `aspect-ratio: auto ${data.width} / ${data.height};`; // Alleviate content layout shift.
 
         // return makeImage(data.url, classes.join(' '), altText, ratio);
-        return makeImageFromMetadata(metadata, ext, classes, altText);
+        return makeImageFromMetadata(metadata, ext, classes, altText, thumbnail = true);
     }
 
     // Eleventy Image shortcode
