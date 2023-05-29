@@ -137,7 +137,6 @@ module.exports = function (eleventyConfig) {
     function resolveSmartPath(page, src) {
         const postsPath = 'content/posts/';
 
-        console.log('image:', page ? page.inputPath : '(no input path)', src);
         if (page !== undefined && page.inputPath.includes(postsPath)) {
             // Image in a page.
             if (src.startsWith('http')) {
