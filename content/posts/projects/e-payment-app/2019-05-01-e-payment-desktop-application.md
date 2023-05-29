@@ -114,7 +114,7 @@ But these are not very interesting.
 
 Admins, of course, have a more powerful role. These peeps can view *and* **update** student's balances (but the actual flows are pretty boring TBH). (Unfortunately I did not save any screenshots of the GUI, and I'm not bothered to redownload Qt just to build the app once. >.>)
 
-{% image "assets/unlimited-power.jpg", "Unnnnnlliiiimmiiitted pooower!.", "post1 w-80" %}
+{% image "/assets/img/memes/unlimited-power.jpg", "Unnnnnlliiiimmiiitted pooower!.", "post1 w-80" %}
 
 Students have the most ***exciting*** user flow of all.
 
