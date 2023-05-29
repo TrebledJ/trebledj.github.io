@@ -9,7 +9,7 @@
     <hr/>
     <div class="post-body" itemprop="articleBody">
         {% if include_thumbnail and thumbnail %}
-            {% banner thumbnail, title, "post1" %}
+            {% banner thumbnail | resolveImagePath(page), title, "post1" %}
         {% endif %}
         {{ content | safe }}
     </div>

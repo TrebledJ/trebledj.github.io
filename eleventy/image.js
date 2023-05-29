@@ -140,21 +140,15 @@ module.exports = function (eleventyConfig) {
         console.log('image:', page ? page.inputPath : '(no input path)', src);
         if (page !== undefined && page.inputPath.includes(postsPath)) {
             // Image in a page.
-            if (src.startsWith('/')) {
+            if (src.startsWith('http')) {
+                // Don't touch.
+            } else if (src.startsWith('/')) {
                 // Absolute.
                 src = src.slice(1);
             } else {
                 // Relative to page.
                 return relativeToInputPath(page.inputPath, src);
             }
-        } else {
-            // // Image in template.
-            // if (src.startsWith('/assets/')) {
-            //     // Map to output directory.
-            //     // Follow the pattern from addPassthroughCopy in config.
-            //     // src = src.slice(8);
-            //     src = src.slice(1);
-            // }
         }
         return src;
     }
