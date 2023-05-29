@@ -31,20 +31,20 @@ module.exports = function (eleventyConfig) {
 	// Drafts implementation, see `content/content.11tydata.js` for additional code.
 	// This section *could* be simplified to an environment variable in an npm script,
 	// but this way an ENV is not required and this code works cross-platform.
-	// eleventyConfig.addPlugin(function enableDrafts(eleventyConfig) {
-	// 	let logged = false;
-	// 	eleventyConfig.on("eleventy.before", ({ runMode }) => {
-	// 		// Only show drafts in serve/watch modes
-	// 		if (runMode === "serve" || runMode === "watch") {
-	// 			process.env.BUILD_DRAFTS = true;
+	eleventyConfig.addPlugin(function enableDrafts(eleventyConfig) {
+		let logged = false;
+		eleventyConfig.on("eleventy.before", ({ runMode }) => {
+			// Only show drafts in serve/watch modes
+			if (runMode === "serve" || runMode === "watch") {
+				process.env.BUILD_DRAFTS = true;
 
-	// 			// Only log once.
-	// 			if (!logged) {
-	// 				console.log("[11ty] including `draft: true` posts");
-	// 			}
+				// Only log once.
+				if (!logged) {
+					console.log("[11ty] including `draft: true` posts");
+				}
 
-	// 			logged = true;
-	// 		}
-	// 	});
-	// })
+				logged = true;
+			}
+		});
+	})
 };
