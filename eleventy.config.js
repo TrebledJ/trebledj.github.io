@@ -14,6 +14,7 @@ module.exports = function (eleventyConfig) {
 	// For example, `./public/css/` ends up in `_site/css/`
 	eleventyConfig.addPassthroughCopy({
 		"./assets/img": "/img",
+		"./content/**/assets/*.{png,jpg,gif,webp,mp4}": "/img",
 		"./assets/webfonts": "/webfonts",
 		"./node_modules/bootstrap/dist/": "/",
 		"./assets/js/**/*.js": "/js/",
@@ -28,7 +29,7 @@ module.exports = function (eleventyConfig) {
 	// https://www.11ty.dev/docs/watch-serve/#add-your-own-watch-targets
 
 	// Process content images to the image pipeline.
-	eleventyConfig.addWatchTarget("assets/**/*.{png,jpg,gif,webp}");
+	eleventyConfig.addWatchTarget("content/**/*.{png,jpg,gif,webp}");
 	eleventyConfig.watchIgnores.add("{package,package-lock}.json");
 	eleventyConfig.watchIgnores.add(".gitignore");
 

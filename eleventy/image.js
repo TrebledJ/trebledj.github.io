@@ -3,10 +3,10 @@ const eleventyImage = require("@11ty/eleventy-img");
 
 
 module.exports = function (eleventyConfig) {
-    const breakpoints = (process.env.ENVIRONMENT === 'production' ? [512, 1024] : []);
+    const breakpoints = (process.env.ENVIRONMENT === 'production' ? [512, 1024] : [200]);
 
     function relativeToInputPath(inputPath, relativeFilePath) {
-        let split = inputPath.split("/");
+        let split = inputPath.split(path.sep);
         split.pop();
 
         return path.resolve(split.join(path.sep), relativeFilePath);
@@ -20,7 +20,6 @@ module.exports = function (eleventyConfig) {
 
         // Full list of formats here: https://www.11ty.dev/docs/plugins/image/#output-formats
         const formats = [ext];
-        // let file = relativeToInputPath(this.page.inputPath, src);
         const file = src;
         const options = {
             widths: [...breakpoints, "auto"],
@@ -69,7 +68,7 @@ module.exports = function (eleventyConfig) {
                 const special = 512, specialBreak = 2000;
                 const max = Math.max(...breakpoints, auto.width);
                 if (breakpoints.includes(special)) {
-                    const bps = [`(max-width: ${specialBreak-1}px) ${special}px`, `(min-width: ${specialBreak}px) ${max}px`];
+                    const bps = [`(max-width: ${specialBreak - 1}px) ${special}px`, `(min-width: ${specialBreak}px) ${max}px`];
                     return [...bps, _default].join(', ');
                 } else {
                     console.warn(`${special}px is not breakpoint size. Skipping thumbnail calculations.`);
@@ -110,14 +109,17 @@ module.exports = function (eleventyConfig) {
     }
 
     function thumbnailShortcode(src, altText, classes) {
-        if (process.env.ENVIRONMENT !== 'production') {
-            // Skip image plugin.
-            classes = amendClasses(classes);
-            if (src.startsWith('assets')) {
-                src = '/' + src.split('/').slice(1).join('/');
-            }
-            return makeImage(src, classes.join(' '), altText, '')
-        }
+        // if (process.env.ENVIRONMENT !== 'production') {
+        //     // Skip image plugin.
+        //     classes = amendClasses(classes);
+        // //     if (src.startsWith('assets')) {
+        // //         src = '/' + src.split('/').slice(1).join('/');
+        // //     }
+        //     else if (src.startsWith('assets')) {
+        //         src = '/' + src;
+        //     }
+        //     return makeImage(src, classes.join(' '), altText, '')
+        // }
 
         const { ext, file, options } = getOptions(src);
         eleventyImage(file, options);
@@ -132,9 +134,41 @@ module.exports = function (eleventyConfig) {
         return makeImageFromMetadata(metadata, ext, classes, altText, thumbnail = true);
     }
 
+    function resolveSmartPath(page, src) {
+        const postsPath = 'content/posts/';
+
+        console.log('image:', page ? page.inputPath : '(no input path)', src);
+        if (page !== undefined && page.inputPath.includes(postsPath)) {
+            // Image in a page.
+            if (src.startsWith('/')) {
+                // Absolute.
+                src = src.slice(1);
+            } else {
+                // Relative to page.
+                return relativeToInputPath(page.inputPath, src);
+            }
+        } else {
+            // // Image in template.
+            // if (src.startsWith('/assets/')) {
+            //     // Map to output directory.
+            //     // Follow the pattern from addPassthroughCopy in config.
+            //     // src = src.slice(8);
+            //     src = src.slice(1);
+            // }
+        }
+        return src;
+    }
+
+    eleventyConfig.addFilter("resolveImagePath", function (src, page) {
+        return resolveSmartPath(page, src);
+    });
+
     // Eleventy Image shortcode
     // https://www.11ty.dev/docs/plugins/image/
-    eleventyConfig.addAsyncShortcode("image", imageShortcode);
+    eleventyConfig.addAsyncShortcode("image", async function (src, ...args) {
+        const file = resolveSmartPath(this.page, src);
+        return imageShortcode(file, ...args);
+    });
 
     eleventyConfig.addAsyncShortcode("banner", bannerImageShortcode);
 

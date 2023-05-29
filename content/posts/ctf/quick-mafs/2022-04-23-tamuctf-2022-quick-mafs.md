@@ -6,7 +6,7 @@ tags:
  - pwn
  - python
  - programming
-thumbnail: assets/img/posts/misc/ctf/inspector-gadget.png
+thumbnail: assets/inspector-gadget.png
 usemathjax: true
 ---
 
@@ -21,7 +21,7 @@ Another automatic binary challenge! This time there's more emphasis on `pwn`, sp
 #### Preliminary Observations
 Decompiling with Ghidra, we immediately notice an unsuspicious section of code labelled `gadgets`. This contains loads of arithmetic gadgets. Our objective is to set `rax` to a certain value, presumably, using the gadgets we're given here.
 
-{% image "assets/img/posts/misc/ctf/quick-mafs-1.jpg", "", "post1" %}
+{% image "assets/quick-mafs-1.jpg", "", "post1" %}
 
 The first gadget we see is a simple MOV instruction. This allows us to set the initial value of `rax`.
 
@@ -45,7 +45,7 @@ This means:
 * We should add 8 bytes to call `print` after the gadget payload.
 
 #### Inspect-our Gadgets
-{% image "assets/img/posts/misc/ctf/inspector-gadget.png", "", "post1 w-40" %}
+{% image "assets/inspector-gadget.png", "", "post1 w-40" %}
 
 Firstly, we'll load all the provided arithmetic gadgets into a list for convenience. Using [`ROPgadget`](https://github.com/JonathanSalwan/ROPgadget) and hacking a bit into the tool, we start with the following code:
 
