@@ -539,4 +539,4 @@ Hope you enjoyed this series of posts! Leave a comment if you like to see more o
 
 ## Full Code
 
-The complete code for DMA with double buffering has been uploaded as a [GitHub Gist](https://gist.github.com/TrebledJ/5c45ba3366918352a3d56625a636bafa).
+The complete code for DMA with double buffering has been uploaded as a [GitHub Gist](https://gist.github.com/TrebledJ/5c45ba3366918352a3d56625a636bafa). It hasn't been fully optimised yet. I'll leave that as an exercise for the reader.
