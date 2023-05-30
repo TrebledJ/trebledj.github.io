@@ -31,7 +31,7 @@ To understand these concepts even better, we’ll look at examples on an {% abbr
 I'll be using an STM32F405RGT board in the examples. If you plan to follow along with your own board, make sure it's capable of timer-triggered DMA and DAC. An oscilloscope would also be handy for checking DAC output.
 
 {% alert "simple" %}
-This post is much longer than I expected. My suggested approach of reading is to first gain a high-level understanding, then dig into the examples for details.
+This post is much longer than I expected. My suggested approach of reading is to first gain a high-level understanding (possibly skipping the nitty gritty examples), then dig into the examples for details.
 {% endalert %}
 
 ## Timers ⏳
@@ -88,7 +88,7 @@ $$
 \text{freq}\_\text{timer} = \frac{\text{freq}\_\text{clock}}{(\text{PSC} + 1) \times (\text{ARR} + 1)}
 $$
 
-where $\text{freq}\_\text{timer}$ is the timer frequency (or specifically in our case, the sample rate) and $\text{freq}\_\text{clock}$ is the clock frequency.
+where $\text{freq}\_\text{timer}$ is the timer frequency (or specifically in our case, the sample rate), $\text{freq}\_\text{clock}$ is the clock frequency.
 
 On our STM32F405, we configured $\text{freq}\_\text{clock}$ to the maximum possible speed: 168MHz. If we’re aiming for an output sample rate of 42,000Hz, we’d need to divide our clock signal by 4,000, so that we correctly get $\frac{168,000,000}{4,000} = 42,\\!000$. For now, we’ll choose register values of `PSC = 0` and `ARR = 3999`.
 
@@ -183,14 +183,14 @@ Functions for more specialised modes (e.g. PWM) are available in `stm32f4xx_hal_
 
 Let's delve into our second topic today: digital-to-analogue converters (DACs).
 
-Audio is comes in several forms: sound waves (physical analogue), electrical voltages (analogue), and binary data (digital).
+Audio comes in several forms: sound waves, electrical voltages, and binary data.
 
 {% image "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c7/CPT-Sound-ADC-DAC.svg/1200px-CPT-Sound-ADC-DAC.svg.png", "Tolkien's world looks nothing like the three realms here.", "post1" %}
 
-<sup>Audio manifests in various ways. DACs transform our signal from the digital realm to the analogue world. (Source: Wikimedia Commons.)</sup>
+<sup>Audio manifests in various forms. DACs transform our signal from the digital realm to the analogue world. (Source: Wikimedia Commons.)</sup>
 {.caption}
 
-Since signal representations vastly differ, we need interfaces to bridge the different worlds. Between the digital and analogue realms, we have {% abbr "DACs", "Digital-to-Analogue Converters" %} and {% abbr "ADCs", "Analogue-to-Digital Converters" %} as mediators. Generally, DACs are used for output while ADCs are for input.
+Since representations vastly differ, hence the need for interfaces to bridge the worlds. Between the digital and analogue realms, we have DACs and {% abbr "ADCs", "Analogue-to-Digital Converters" %} as mediators. Generally, DACs are used for output while ADCs are for input.
 
 
 ### A Closer Look at DACs 
@@ -199,11 +199,12 @@ Remember [sampling](/posts/digital-audio-synthesis-for-dummies-part-1#sampling)?
 
 {% image "assets/sampling.jpg", "Free samples have returned!", "post1" %}
 
-<sup>ADC: line to dots. DAC: dots to line.</sup>
-{.caption}
-
 While ADCs take us from continuous to discrete, DACs (try to) take us from discrete to continuous. (Well, it tries anyway.) The shape of the resulting analogue waveform depends on the DAC implementation. Simple DACs will stagger the output at discrete levels. More complex DACs may interpolate between two discrete samples to “guess” the intermediate values. Some of these guesses will be off, but at least the signal is smoother.
 
+{% image "assets/reconstruction.jpg", "Free samples have returned!", "post1" %}
+
+<sup>On our STM board, signal reconstruction is staggered, like old platformer games—not that I've played any. At higher sampling rates, the staggered-ness is less apparent and the resulting curve is smoother.</sup>
+{.caption}
 
 ### Example: Initialising the DAC
 
