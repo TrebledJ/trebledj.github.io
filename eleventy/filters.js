@@ -168,4 +168,8 @@ module.exports = function (eleventyConfig) {
 	eleventyConfig.addShortcode("endalert", function () {
 		return `\n</div></div>`;
 	});
+
+	eleventyConfig.addShortcode("abbr", function (term, expansion) {
+		return `<abbr data-placement="top" data-toggle="tooltip" title="${expansion}">${term}</abbr>`;
+	});
 };

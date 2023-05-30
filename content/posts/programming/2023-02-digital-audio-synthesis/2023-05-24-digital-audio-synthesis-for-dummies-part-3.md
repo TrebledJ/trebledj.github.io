@@ -23,14 +23,12 @@ Ah… embedded systems—the intersection of robust hardware and versatile softw
 
 This is the third (and culminating) post in a series on digital audio synthesis. In the [first post](/posts/digital-audio-synthesis-for-dummies-part-1), we introduced basic concepts on audio processing. In the [second post](/posts/digital-audio-synthesis-for-dummies-part-2), we dived into audio synthesis and generation.
 
-In this post, we’ll discover how to effectively implement an audio synthesiser and player on an embedded device by marrying hardware (timers, DACs, DMA) and software (double buffering plus other optimisations).[^subtopics]
+In this post, we’ll discover how to effectively implement an audio synthesiser and player on an embedded device by marrying hardware (timers, {% abbr "DACs", "Digital-to-Analogue Converters; explained later!" %}, {% abbr "DMA", "Direct Memory Access; explained later!" %}) and software (double buffering plus other optimisations).[^subtopics]
 
 [^subtopics]: Each of these components (especially hardware) deserve their own post to be properly introduced; but for the sake of keeping this post short, I’ll only introduce them briefly and link to other resources for further perusal.
 
-To understand these concepts even better, we’ll look at examples on an STM32.[^stm] These examples are inspired from a [MIDI keyboard project](/posts/stm32-midi-keyboard) I previously worked on.
-I'll be working with an STM32F405 board in our examples. If you plan to follow along with your own board, make sure it's capable of timer-triggered DMA and DAC.
-
-[^stm]: There are several popular microcontroller brands each with their pros and cons. STM is one such brand. It’s a bit overkill for demonstrating audio synthesis, but I chose it here because of my familiarity, and to demonstrate my STM32 MIDI Keyboard project. Rest assured the concepts are transferable, though hardware implementations may differ between brands.
+To understand these concepts even better, we’ll look at examples on an {% abbr "STM32", "A family of 32-bit microcontrollers." %}. These examples are inspired from a [MIDI keyboard project](/posts/stm32-midi-keyboard) I previously worked on.
+I'll be using an STM32F405RGT board in the examples. If you plan to follow along with your own board, make sure it's capable of timer-triggered DMA and DAC.
 
 {% alert "simple" %}
 This post is much longer than I expected. My suggested approach of reading is to first gain a high-level understanding, then dig into the examples for details.
@@ -48,36 +46,36 @@ It turns out kitchens and embedded systems aren’t that different after all! Bo
 
 ### Tick Tock
 
-Timers in embedded systems are similar to those in the kitchen: they tick for a period of time and signal an event when finished. However unlike kitchen timers, embedded timers can be set to trigger repeatedly, making them immensely useful in various applications.
+Timers in embedded systems are similar to those in the kitchen: they tick for a period of time and signal an event when finished. However, embedded timers are much fancier than kitchen timers, making them immensely useful in various applications. They can trigger repeatedly (via auto-reload), count up/down, and be used to generate rectangular (PWM) waves.
 
-So what makes timers tick? The MCU clock!
+So what makes timers tick?
+
+The {% abbr "MCU", "Microcontroller Unit. No, not the Marvel Cinematic Universe!" %} clock!
 
 {% alert "fact" %}
 The MCU clock is the *backbone* of a controller. It controls the processing speed and pretty much everything!—timers, ADC, DAC, communication protocols, and whatnot.
 
-The clock runs at a fixed frequency (e.g. 168MHz on our board).
+The clock runs at a fixed frequency (168MHz on our board).
 By dividing against it, we can achieve lower frequencies.
 {% endalert %}
 
-The following diagram illustrates how the clock signal is divided on an STM. There are two divisors: the prescaler and auto-reload.
+The following diagram illustrates how the clock signal is divided on an STM. There are two divisors: the prescaler and auto-reload (aka counter period).
 
 {% image "assets/timing-diagram.jpg", "Timing diagram of timer signal derived from a clock signal.", "post1" %}
 
-<sup>Diagram adapted from uPesy.[^upesy]</sup>
+<sup>Deriving timer frequency from the clock signal. (Diagram adapted from uPesy.^[[How do microcontroller timers work?](https://www.upesy.com/blogs/tutorials/how-works-timers-in-micro-controllers) – A decent article on timers. Diagrams are in French though.])</sup>
 {.caption}
 
-[^upesy]: [How do microcontroller timers work?](https://www.upesy.com/blogs/tutorials/how-works-timers-in-micro-controllers) – A decent article on timers. Diagrams are in French though.
+Here, the clock signal is first divided by a prescaler of 2, then further "divided" by an auto-reload of 6. On every overflow (arrow shooting up), the timer triggers an interrupt. Thus, the timer runs at $\frac{1}{12}$ the speed of the clock.
 
-Here, the clock signal is first divided by a prescaler of 2, then divided by an auto-reload of 6. Thus, the timer runs at $\frac{1}{12}$ the speed of the clock. On every overflow (arrow shooting up), the timer triggers an interrupt.
-
-These interrupts can trigger functionality such as  DMA transfers (explored later) and ADC conversions.[^timer-events] Heck, they can even be used to trigger other timers!
-
-[^timer-events]: The extent of timer events depends on hardware support. Timers can do a lot on ST boards. For other brands, you may need to check the datasheet or reference manual.
+These interrupts can trigger functionality such as DMA transfers (explored later) and ADC conversions.^[The extent of timer events depends on hardware support. Timers can do a lot on ST boards. For other brands, you may need to check the datasheet or reference manual.]
+Heck, they can even be used to trigger other timers!
 
 Further Reading:
 
 - [How do microcontroller timers work?](https://www.upesy.com/blogs/tutorials/how-works-timers-in-micro-controllers)
 - [Getting Started with STM32: Timers and Timer Interrupts](https://www.digikey.com/en/maker/projects/getting-started-with-stm32-timers-and-timer-interrupts/d08e6493cefa486fb1e79c43c0b08cc6)
+  - There are more prescalers behind the scenes! (APB2)
 
 ### Example: Initialising the Timer
 
@@ -120,7 +118,7 @@ We can use STM32 CubeMX, a GUI for configuring hardware, to initialise timer par
 <sup>In CubeMX, we first select a timer on the left. We then enable a channel (here Channel 4) to generate PWM.[^chtim] We also set the prescaler and auto-reload so that our timer frequency is 42,000Hz.</sup>
 {.caption}
 
-[^chtim]: We chose Timer 8 with Channel 4 because its pins were available, and other timers had occupied pins. The timer and channel you use depends on your STM board and model. If you’re following along with this post, make sure to choose a timer which has DMA generation. When in doubt, refer to the reference manual.[^rm0090]
+[^chtim]: We chose Timer 8 (with Channel 4) because it's an advanced control timer (a beefy boi!), capable of a lot, though probably overkill for our simple examples. The timer and channel you use depends on your STM board and model. If you’re following along with this post, make sure to choose a timer which has DMA generation. When in doubt, refer to the reference manual.[^rm0090]
 
 {% image "assets/stm32-cubemx-timer-2-raw.jpg", "More timer settings from CubeMX.", "post1" %}
 
@@ -184,13 +182,17 @@ Functions for more specialised modes (e.g. PWM) are available in `stm32f4xx_hal_
 
 ## Digital-to-Analogue Converters (DACs) 🌉
 
-There are three representations of audio: sound waves (physical), electrical voltages (analogue), and binary data (digital).
+Let's delve into our second topic today: digital-to-analogue converters (DACs).
+
+Audio is comes in several forms: sound waves (physical analogue), electrical voltages (analogue), and binary data (digital).
 
 {% image "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c7/CPT-Sound-ADC-DAC.svg/1200px-CPT-Sound-ADC-DAC.svg.png", "Tolkien's world looks nothing like the three realms here.", "post1" %}
 
-Since signal representations vastly differ, we need interfaces to bridge the different worlds. Between the analogue and digital realms, we have DACs (Digital-to-Analogue Converters) and ADCs (Analogue-to-Digital Converters) as mediators. Generally, DACs are used for output while ADCs are for input.
+<sup>Audio manifests in various ways. DACs transform our signal from the digital realm to the analogue world. (Source: Wikimedia Commons.)</sup>
+{.caption}
 
-Since our topic today is synthesis, we’ll focus on DACs—going from binary data to sound waves.
+Since signal representations vastly differ, we need interfaces to bridge the different worlds. Between the digital and analogue realms, we have {% abbr "DACs", "Digital-to-Analogue Converters" %} and {% abbr "ADCs", "Analogue-to-Digital Converters" %} as mediators. Generally, DACs are used for output while ADCs are for input.
+
 
 ### A Closer Look at DACs 
 
@@ -198,9 +200,11 @@ Remember [sampling](/posts/digital-audio-synthesis-for-dummies-part-1#sampling)?
 
 {% image "assets/sampling.jpg", "Free samples have returned!", "post1" %}
 
-While an ADC takes us from continuous to discrete, a DAC takes us from discrete to continuous. (Well, it tries anyway.[^lossy]) The shape of the resulting analogue waveform depends on the DAC implementation. Simple DACs will stagger the output at discrete levels. More complex DACs may interpolate between two discrete samples to “guess” the intermediate values. Some of these guesses will be off, but at least the signal is smoother.
+<sup>ADC: line to dots. DAC: dots to line.</sup>
+{.caption}
 
-[^lossy]: Sampling a continuous signal is a lossy conversion. Information is bound to be loss. A DAC can only replicate the original signal so much...
+While ADCs take us from continuous to discrete, DACs (try to) take us from discrete to continuous. (Well, it tries anyway.) The shape of the resulting analogue waveform depends on the DAC implementation. Simple DACs will stagger the output at discrete levels. More complex DACs may interpolate between two discrete samples to “guess” the intermediate values. Some of these guesses will be off, but at least the signal is smoother.
+
 
 ### Example: Initialising the DAC
 
@@ -301,13 +305,13 @@ Further Reading:
 
 ## Direct Memory Access (DMA) 💉🧠
 
-Direct Memory Access (DMA) appears to be three random words smushed together, but it’s a powerful tool in the embedded programmer’s arsenal. How?
+The final item on our agenda today! Direct Memory Access (DMA) may seem like three random words strung together, but it’s quite a powerful tool in the embedded programmer’s arsenal. How, you ask?
 
 {% alert "success" %}
-**DMA enables data transfer without consuming processor resources.** (Well, it consumes minimal resources, but only for setup.) This frees up the processor to do other things while DMA takes care of moving data. We could use this saved time to prepare the next set of buffers, render the GUI, etc.
+**DMA enables data transfer without consuming processor resources.** (Well, it consumes some resources, but mainly for setup.) This frees up the processor to do other things while DMA takes care of moving data. We could use this saved time to prepare the next set of buffers, render the GUI, etc.
 {% endalert %}
 
-DMA can be used to transfer data from memory-to-peripheral (e.g. DAC, UART TX, SPI TX), from peripheral-to-memory (e.g. ADC, UART RX), across peripherals, or across memory. In this post, we're concerned with memory-to-peripheral transfer: DAC.
+DMA can be used to transfer data from memory-to-peripheral (e.g. DAC, {% abbr "UART", "A common asynchronous communication protocol in the embedded world." %} {% abbr "TX", "transfer" %}, SPI TX), from peripheral-to-memory (e.g. ADC, UART {% abbr "RX", "receive" %}), across peripherals, or across memory. In this post, we're concerned with one particular memory-to-peripheral transfer: DAC.
 
 Further Reading:
 
@@ -315,7 +319,10 @@ Further Reading:
 
 ### Example: DMA with Single Buffering
 
+We'll now try using DMA with a single buffer, see why this is problematic, and motivate the need for double buffering.
 If you’ve read this far, I presume you’ve followed the [previous section](#example-initialising-the-dac) by initialising DMA and generating code with CubeMX.
+
+{% image "assets/single-buffer.jpg", "Single buffers... forever alone.", "post1 w-75" %}
 
 {% alert "note" %}
 Be aware that DMA introduces synchronisation issues. After preparing a second round of buffers, how do we know if the first round has already finished?
@@ -336,7 +343,7 @@ With DMA, we’ll first need to [buffer](/posts/digital-audio-synthesis-for-dumm
 2. Wait for DMA to be ready.
 3. Start the DMA.
 
-Do you notice a flaw in this approach? Since we’re using a *single* buffer, we risk overwriting the buffer while it’s being sent.
+Do you notice a flaw in this approach? After starting DMA, we start buffering samples on the next iteration. We risk overwriting the buffer while it’s being sent.
 
 Let’s try to implement it anyway and play a simple 440Hz sine wave.
 
@@ -369,14 +376,14 @@ while (1) {
 }
 ```
 
-The results? As expected, artefacts (nefarious little glitches) invade our signal due to our buffer being overwritten during DMA transfer. This may also result in [unpleasant clicks from our speaker](/posts/digital-audio-synthesis-for-dummies-part-1#clicks).
+The results? As expected, artefacts (nefarious little glitches) invade our signal, since our buffer is updated during DMA transfer. This may result in [unpleasant clicks from our speaker](/posts/digital-audio-synthesis-for-dummies-part-1#clicks).
 
 {% image "assets/osc-sine-440-glitch.jpg", "Artefacts distort the signal, resulting in occasionally clips and sound defects.", "post1" %}
 
 <sup>Prep, wait, start, repeat. Artefacts distort the signal from time to time.</sup>
 {.caption}
 
-But what if we prep, then start, then wait? This way, the buffer won't be overwritten; but this causes the signal to stall while prepping.
+But what if we prep, then start, then wait? This way, the buffer won't be overwritten; but this causes the signal to stall while prepping.^[Not sure if *stall* is the right word. Let me know if there's a better one.]
 
 <a id="stall-img"></a>
 {% image "assets/osc-sine-440-stall.jpg", "Oscilloscope of sine wave with stalls (horizontal breaks with no change).", "post1" %}
@@ -389,8 +396,7 @@ To resolve these issues, we'll unleash the final weapon in our arsenal.
 
 ### Example: DMA with Double Buffering
 
-While the timer and DMA are happily shooting out a bufferful of audio, we can focus on preparing the next round to be sent.
-
+We saw previously how a single buffer spectacularly fails to deal with "concurrent" buffering.
 With double buffering, we introduce an additional buffer. While one buffer is being displayed/streamed, the other buffer is updated. This ensures our audio can be delivered in one continuous stream.
 
 In code, we’ll add another buffer by declaring `uint16_t[2][BUFFER_SIZE]` instead of `uint16_t[BUFFER_SIZE]`. We’ll also declare a variable `curr` (0 or 1) to index which buffer is currently available.
@@ -433,9 +439,7 @@ Double buffering is also used for video and displays, where each buffer stores a
 
 ### Example: Playing Multiple Notes with DMA and Double Buffering 🎶
 
-With some minor changes, we can make our device generate audio for multiple notes. Let’s go ahead and play an A major chord![^amajor]
-
-[^amajor]: I love minor chords too, but it's not appropriate to play A minor. I'll see myself out. Hope you enjoyed the read.
+With some minor changes, we can make our device generate audio for multiple notes. Let’s go ahead and play an A major chord!^[I love minor chords too, but it's not appropriate to play A minor. I'll see myself out. Hope you enjoyed the read.]
 
 ```cpp
 // Prep the buffer.
@@ -495,7 +499,7 @@ Here are a few common tricks:
 
     If all else fails, we can decrease the load by compromising the sample rate, say from 42000Hz to 21000Hz. With a buffer size of 1024, that means we’ve gone from a constraint of $\frac{1,024}{42,000} = 24.4$ms to $\frac{1,024}{21,000} = 48.8$ms per buffer.
 
-To avoid complicating things, I lowered the sample rate to 21000Hz. This means changing the auto-reload register to 7999, so that our timer frequency is $\frac{168,000,000}{(0 + 1) \times (7,999 + 1)} = 21,\\!000$ Hz.
+To avoid complicating things, I lowered the sample rate to 21000Hz. This means changing the auto-reload register to 7999, so that our timer frequency is $$\frac{168,000,000}{(0 + 1) \times (7,999 + 1)} = 21,\\!000\text{Hz.}$$
 
 ```cpp
 TIM8->ARR = 7999;
@@ -527,8 +531,8 @@ In case you want to go further, here are some other things to explore:
 
 - Generating stereo audio. We’ve generated audio for Channel 1. What about stereo audio for Channel 2? If you’re using reverb effects and wish for a fuller stereo sound, you’ll need an extra pair of buffers (and more processing!).
 - Streaming via UART. It's possible to use DMA with other peripherals. Definitely worth exploring.
-- Using SIMD instructions to buffer two (or more) samples at the same time.
-- RTOS for multitasking.
+- Using {% abbr "SIMD", "Single Instruction, Multiple Data" %} instructions to buffer two (or more) samples at the same time.
+- {% abbr "RTOS", "Real-Time Operating System" %} for multitasking.
 - Other boards or hardware with specialised audio features.
 
 Hope you enjoyed this series of posts! Leave a comment if you like to see more or have any feedback!
