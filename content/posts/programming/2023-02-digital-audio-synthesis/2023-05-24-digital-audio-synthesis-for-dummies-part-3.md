@@ -28,7 +28,7 @@ In this post, we’ll discover how to effectively implement an audio synthesiser
 [^subtopics]: Each of these components (especially hardware) deserve their own post to be properly introduced; but for the sake of keeping this post short, I’ll only introduce them briefly and link to other resources for further perusal.
 
 To understand these concepts even better, we’ll look at examples on an {% abbr "STM32", "A family of 32-bit microcontrollers." %}. These examples are inspired from a [MIDI keyboard project](/posts/stm32-midi-keyboard) I previously worked on.
-I'll be using an STM32F405RGT board in the examples. If you plan to follow along with your own board, make sure it's capable of timer-triggered DMA and DAC.
+I'll be using an STM32F405RGT board in the examples. If you plan to follow along with your own board, make sure it's capable of timer-triggered DMA and DAC. An oscilloscope would also be handy for checking DAC output.
 
 {% alert "simple" %}
 This post is much longer than I expected. My suggested approach of reading is to first gain a high-level understanding, then dig into the examples for details.
