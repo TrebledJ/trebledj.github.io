@@ -17,7 +17,7 @@ related:
 ---
 
 > *Slap a timer, DMA, and DAC together, and BAM—non-blocking audio output!*  
-> — TrebledJ, 2022
+> — TrebledJ, [2022](https://trebledj.github.io/posts/stm32-midi-keyboard/)
 
 Ah… embedded systems—the intersection of robust hardware and versatile software.
 
@@ -63,7 +63,7 @@ The following diagram illustrates how the clock signal is divided on an STM. The
 
 {% image "assets/timing-diagram.jpg", "Timing diagram of timer signal derived from a clock signal.", "post1" %}
 
-<sup>Deriving timer frequency from the clock signal. (Diagram adapted from uPesy.^[[How do microcontroller timers work?](https://www.upesy.com/blogs/tutorials/how-works-timers-in-micro-controllers) – A decent article on timers. Diagrams are in French though.])</sup>
+<sup>How a timer frequency is derived from the clock signal. (Diagram adapted from uPesy.^[[How do microcontroller timers work?](https://www.upesy.com/blogs/tutorials/how-works-timers-in-micro-controllers) – A decent article on timers. Diagrams are in French though.])</sup>
 {.caption}
 
 Here, the clock signal is first divided by a prescaler of 2, then further "divided" by an auto-reload of 6. On every overflow (arrow shooting up), the timer triggers an interrupt. Thus, the timer runs at $\frac{1}{12}$ the speed of the clock.
@@ -81,29 +81,28 @@ Further Reading:
 
 Suppose we want to send a stream of audio output. We can use a timer with a frequency set to our desired [sample rate](notion://www.notion.so/posts/digital-audio-synthesis-for-dummies-part-1#sampling).
 
-We can derive the prescaler and auto-reload by finding any integer factors that satisfy the relationship:
+We can derive the prescaler (PSC) and auto-reload (ARR) by finding integer factors that satisfy the following relationship.
 
+<a id='timer-relationship'></a>
 $$
 \text{freq}\_\text{timer} = \frac{\text{freq}\_\text{clock}}{(\text{PSC} + 1) \times (\text{ARR} + 1)}
 $$
 
-where $\text{freq}\_\text{timer}$ is the timer frequency (or specifically in our case, the sample rate) and $\text{freq}\_\text{clock}$ is the clock frequency. PSC and ARR are registers used to divide the clock signal.
+where $\text{freq}\_\text{timer}$ is the timer frequency (or specifically in our case, the sample rate) and $\text{freq}\_\text{clock}$ is the clock frequency.
 
 On our STM32F405, we configured $\text{freq}\_\text{clock}$ to the maximum possible speed: 168MHz. If we’re aiming for an output sample rate of 42,000Hz, we’d need to divide our clock signal by 4,000, so that we correctly get $\frac{168,000,000}{4,000} = 42,\\!000$. For now, we’ll choose register values of `PSC = 0` and `ARR = 3999`.
 
 {% alert "fact" %}
 Why do we add $+1$ to the PSC and ARR in the relationship above?
 
-The PSC and ARR are 16-bit *registers*, meaning they range from 0 to 65,535. To save space and enhance program correctness, we assign meaningful behaviour to the value 0.
+The PSC and ARR are 16-bit *registers*, meaning they range from 0 to 65,535.^[Well, some ARR registers are 32-bit. But we can achieve a lot with 16-bits.]
+To save space and enhance program correctness, we assign meaningful behaviour to the value 0.
 {% endalert %}
 
 {% alert "fact" %}
-Why `0` and `3999`?
+Why `0` and `3999` specifically?
 
-Different pairs of PSC and ARR work, as long as they satisfy the relationship.
-
-You can play around and try different pairs of PSC and ARR.
-I suggest coming back to this section after getting DAC + DMA + double buffering to work, and experiment!
+These aren't the only pairs of PSC and ARR which will work. As long as they satisfy the [relationship](#timer-relationship), you're good to go. Play around and try different pairs of PSC and ARR! I suggest coming back to this section after getting DAC + DMA + double buffering to work, and experiment!
 
 Exercises for the reader:
 
