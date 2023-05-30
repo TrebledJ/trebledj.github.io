@@ -242,7 +242,9 @@ Besides this software approach, we can also leverage hardware to speed up proces
 
 Audio generation is pretty fun once we dive deep, as are its applications: toys, electronic instruments, virtual instruments, digital synths, speakers, hearing aids, and whatnot.  As before, I hope we communicated on the same wavelength and the information on this post did not experience aliasing. 😏
 
-In the [next post](/posts/digital-audio-synthesis-for-dummies-part-3), we'll dive even deeper into audio synthesis (particularly in embedded systems) and engineer a simple tone generator.
+In the [next post][next-post], we'll dive even deeper into audio synthesis (particularly in embedded systems) and engineer a simple tone generator.
+
+[next-post]: /posts/digital-audio-synthesis-for-dummies-part-3
 
 To recap…
 
@@ -255,6 +257,10 @@ To recap…
 
 Further Reading:
 
+- Waveforms (Sine, Square, Triangle, Sawtooth)
+  - Most audio synthesis tutorials cover simple waveforms; but as internet content is saturated here, I'll just drop a couple links. I couldn't find an article I like that introduces these waveforms in all their glory. If you know of better articles, let me know.
+  - [Perfect Circuit](https://www.perfectcircuit.com/signal/difference-between-waveforms) (conceptual, high-level)
+  - [Electronics Tutorial](https://www.electronics-tutorials.ws/waveforms/waveforms.html) (geared towards electronics; would be a nice read to prepare for the [next post][next-post])
 - [Beginner’s Guide: Everything you need to know about synthesis in music production](https://musictech.com/guides/essential-guide/beginners-guide-to-synthesis-in-music-production/) – Introduces more forms of audio synthesis, geared towards music production.
 
 [prev-post]: /posts/digital-audio-synthesis-for-dummies-part-1
