@@ -21,9 +21,7 @@ related:
 
 Ah… embedded systems—the intersection of robust hardware and versatile software.
 
-This is the third (and culminating) post in a series on digital audio synthesis. In the [first post](/posts/digital-audio-synthesis-for-dummies-part-1), we introduced basic concepts on audio processing. In the [second post](/posts/digital-audio-synthesis-for-dummies-part-2), we dived into audio synthesis and generation.
-
-In this post, we’ll discover how to effectively implement an audio synthesiser and player on an embedded device by marrying hardware (timers, {% abbr "DACs", "Digital-to-Analogue Converters; explained later!" %}, {% abbr "DMA", "Direct Memory Access; explained later!" %}) and software (double buffering plus other optimisations).[^subtopics]
+This is the third (and culminating) post in a series on digital audio synthesis; but the first (and only?) post touching embedded hardware. In the [first post](/posts/digital-audio-synthesis-for-dummies-part-1), we introduced basic concepts on audio processing. In the [second post](/posts/digital-audio-synthesis-for-dummies-part-2), we dived into audio synthesis and generation. In this post, we’ll discover how to effectively implement an audio synthesiser and player on an embedded device by marrying hardware (timers, {% abbr "DACs", "Digital-to-Analogue Converters; explained later!" %}, {% abbr "DMA", "Direct Memory Access; explained later!" %}) and software (double buffering plus other optimisations).[^subtopics]
 
 [^subtopics]: Each of these components (especially hardware) deserve their own post to be properly introduced; but for the sake of keeping this post short, I’ll only introduce them briefly and link to other resources for further perusal.
 
@@ -36,9 +34,7 @@ This post is much longer than I expected. My suggested approach of reading is to
 
 ## Timers ⏳
 
-It turns out kitchens and embedded systems aren’t that different after all! Both perform input and output, and both have timers! Who knew? Tick-Tock Croc, perhaps.[^ticktock]
-
-[^ticktock]: I think it's safe to say that Tick-Tock Croc also performs input-output and has a timer between his eyes. So Tick-Tock isn't too different from a kitchen! Or an embedded controller, for that matter.
+It turns out kitchens and embedded systems aren’t that different after all! Both perform input and output, and both have timers! Who knew? Tick-Tock Croc, perhaps.^[I think it's safe to say that Tick-Tock Croc also performs input-output and has a timer between his eyes. So Tick-Tock isn't too different from a kitchen! Or an embedded controller, for that matter.]
 
 {% image "assets/tick-tock.jpg", "Tick tock likey embedded timers?", "post1 w-90" %}
 
