@@ -1,13 +1,10 @@
 <a id="comments"></a>
 {% if site.environment == 'production' %}
-    {# <div id="disqus_thread"></div> #}
     <div class="disqus"></div>
     <script defer src="/js/jquery.disqusloader.min.js"></script>
-    <script>
-    </script>
     <script defer src="/js/disqus.js"></script>
     <noscript>Please enable JavaScript to view the
-        <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        <a href="https://disqus.com/?ref_noscript">comments powered by Disqus</a>.
     </noscript>
 {% else %}
     {# Never enable Disqus comments in non-prod. It'll mess with their identifier machinery. #}
