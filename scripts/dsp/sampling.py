@@ -21,9 +21,9 @@ plt.figure(figsize=(8, 4))
 
 for i, sr in enumerate(srs):
     plt.subplot(len(srs), 1, i+1)
-    plt.plot(t(1000), x(t(1000)), 'b-')
+    plt.plot(t(1000), x(t(1000)), 'b-', label='original')
 
-    marks, stems, base = plt.stem(t(sr), x(t(sr)), linefmt='r--', markerfmt='ro', basefmt='k-')
+    marks, stems, base = plt.stem(t(sr), x(t(sr)), linefmt='r--', markerfmt='ro', basefmt='k-', label='samples')
     # plt.setp(marks, 'markersize', 3)
     plt.setp(stems, 'linewidth', 1)
     plt.setp(stems, 'alpha', 0.4)
@@ -34,6 +34,8 @@ for i, sr in enumerate(srs):
     plt.xlim(0, end)
     plt.title(f'Sampling at {sr} Hz')
 
+
+plt.legend()
 plt.tight_layout()
 plt.savefig('output/sampling.jpg')
 
