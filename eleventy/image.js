@@ -152,8 +152,21 @@ module.exports = function (eleventyConfig) {
         return src;
     }
 
+    // Returns path of image relative to the project directory.
     eleventyConfig.addFilter("resolveImageUserPath", function (src, page) {
         return resolveSmartPath(page, src);
+    });
+
+    // Returns path of image relative to _site.
+    eleventyConfig.addFilter("resolveImageSitePath", function (src) {
+        if (src.startsWith('/assets/')) {
+            // Absolute.
+            src = src.slice('/assets/'.length);
+        } else {
+            // Relative.
+            src = 'img/' + src.replace(/^assets\//, '');
+        }
+        return src;
     });
 
     // Eleventy Image shortcode
