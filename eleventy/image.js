@@ -152,7 +152,7 @@ module.exports = function (eleventyConfig) {
         return src;
     }
 
-    eleventyConfig.addFilter("resolveImagePath", function (src, page) {
+    eleventyConfig.addFilter("resolveImageUserPath", function (src, page) {
         return resolveSmartPath(page, src);
     });
 
