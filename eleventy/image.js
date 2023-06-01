@@ -113,9 +113,11 @@ module.exports = function (eleventyConfig) {
         if (process.env.ENVIRONMENT !== 'production') {
             // Skip image plugin.
             classes = amendClasses(classes);
-            
+
             // These are kinda hardcoded... :(
             if (src.includes('/img/')) {
+                src = '/img/' + src.split('/img/').pop();
+            } else if (src.includes('/img/')) {
                 src = '/' + src.split('/img/').pop();
             } else if (src.includes('/content/') && src.includes('/assets/')) {
                 src = '/img/' + src.split('/assets/').pop();
