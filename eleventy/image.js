@@ -65,14 +65,15 @@ module.exports = function (eleventyConfig) {
         function makeSizes() {
             const _default = `${auto.width}px`;
             if (thumbnail) {
+                // Force smaller images, since thumbnails are small anyways.
                 const special = 512, specialBreak = 2000;
                 const max = Math.max(...breakpoints, auto.width);
                 if (breakpoints.includes(special)) {
+                    // Images of size 512 will work on most screens.
                     const bps = [`(max-width: ${specialBreak - 1}px) ${special}px`, `(min-width: ${specialBreak}px) ${max}px`];
                     return [...bps, _default].join(', ');
                 } else {
                     console.warn(`${special}px is not breakpoint size. Skipping thumbnail calculations.`);
-
                     return _default;
                 }
             } else {
@@ -109,17 +110,20 @@ module.exports = function (eleventyConfig) {
     }
 
     function thumbnailShortcode(src, altText, classes) {
-        // if (process.env.ENVIRONMENT !== 'production') {
-        //     // Skip image plugin.
-        //     classes = amendClasses(classes);
-        // //     if (src.startsWith('assets')) {
-        // //         src = '/' + src.split('/').slice(1).join('/');
-        // //     }
-        //     else if (src.startsWith('assets')) {
-        //         src = '/' + src;
-        //     }
-        //     return makeImage(src, classes.join(' '), altText, '')
-        // }
+        if (process.env.ENVIRONMENT !== 'production') {
+            // Skip image plugin.
+            classes = amendClasses(classes);
+            
+            // These are kinda hardcoded... :(
+            if (src.includes('/img/')) {
+                src = '/' + src.split('/img/').pop();
+            } else if (src.includes('/content/') && src.includes('/assets/')) {
+                src = '/img/' + src.split('/assets/').pop();
+            } else {
+                throw new Error(`[thumbnail]: unknown image source format: ${src}`);
+            }
+            return `<img src="${src}" alt="${altText}" class="${classes.join(' ')}"/>`
+        }
 
         const { ext, file, options } = getOptions(src);
         eleventyImage(file, options);
