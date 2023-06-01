@@ -15,5 +15,4 @@ module.exports = {
 			return data.permalink;
 		},
 	},
-	eleventyExcludeFromCollections: true,
 };
