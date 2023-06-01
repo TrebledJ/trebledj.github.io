@@ -39,6 +39,10 @@ html[data-theme="light"] .hero-section {
     .btn {
         border: var(--light-border-color) solid 1px !important;
         color: var(--main-text-color);
+        
+        &:hover {
+            color: var(--main-text-color);
+        }
     }
 }
 
