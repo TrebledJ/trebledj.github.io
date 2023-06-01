@@ -51,8 +51,8 @@ $(function () {
     $('.carousel').each(function () {
         const id = $(this).attr('id');
         $(this).on('slide.bs.carousel', event => {
-            $(`#${id}-tab${event.from + 1}-label`).removeClass('active');
-            $(`#${id}-tab${event.to + 1}-label`).addClass('active');
+            $(`#${id}-tab${event.from + 1}-label`).removeClass('bg-primary text-white');
+            $(`#${id}-tab${event.to + 1}-label`).addClass('bg-primary text-white');
         });
     });
 });

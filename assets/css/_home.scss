@@ -38,12 +38,7 @@ html[data-theme="light"] .hero-section {
 .carousel-tab-group {
     .btn {
         border: var(--light-border-color) solid 1px !important;
-        color: var(--main-text-color) !important;
-
-        &.active {
-            background-color: var(--highlight-color) !important;
-            color: var(--medium-text-color) !important;
-        }
+        color: var(--main-text-color);
     }
 }
 

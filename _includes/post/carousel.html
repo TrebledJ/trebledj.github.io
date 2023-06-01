@@ -28,7 +28,7 @@
                         {% for cat in categories %}
                             <input type="radio" class="btn-check" name="{{carouselId}}-tab" id="{{carouselId}}-tab{{loop.index}}" autocomplete="off"
                                 data-bs-target="#{{carouselId}}" data-bs-slide-to="{{loop.index0}}">
-                            <label id="{{carouselId}}-tab{{loop.index}}-label" class="btn {{'active' if loop.first}} fs-5" for="{{carouselId}}-tab{{loop.index}}">{{cat.name}}</label>
+                            <label id="{{carouselId}}-tab{{loop.index}}-label" class="btn {{'bg-primary text-white' if loop.first}} fs-5" for="{{carouselId}}-tab{{loop.index}}">{{cat.name}}</label>
                         {% endfor %}
                     </div>
                 </div>
