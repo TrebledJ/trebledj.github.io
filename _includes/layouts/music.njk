@@ -2,37 +2,36 @@
 layout: layouts/page-default
 ---
 
-<div class="col-lg-9">
-    <div class="d-flex justify-content-center">
-        <div id="track-list" class="container-fluid"></div>
+<div class="d-flex justify-content-center">
+    <div id="track-list" class="container-fluid"></div>
 
-        <script src="/js/infinite-loader.js"></script>
-        <script>
-            document.addEventListener("DOMContentLoaded", () => {
-                (function ($) {
-                    const visual = ($(window).width() < 600);
-                    const l = InfiniteLoader({
-                        data: '/tracks.json',
-                        items: {
-                            num: 4,
-                            after: 2
-                        },
-                        append: '#track-list',
-                        html: (item, index) => {
-                            const toHTMLTag = t => `<a class="post-tags tag" href="{{ site.baseurl }}/tags/${t}">${t}</a>`;
+    <script src="/js/infinite-loader.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            (function ($) {
+                const visual = ($(window).width() < 600);
+                const l = InfiniteLoader({
+                    data: '/tracks.json',
+                    items: {
+                        num: 4,
+                        after: 2
+                    },
+                    append: '#track-list',
+                    html: (item, index) => {
+                        const toHTMLTag = t => `<a class="post-tags tag" href="{{ site.baseurl }}/tags/${t}">${t}</a>`;
 
-                            /* Exclude common tags and convert into html code. */
-                            const tags = item
-                                .tags
-                                .map(toHTMLTag)
-                                .join("\n");
+                        /* Exclude common tags and convert into html code. */
+                        const tags = item
+                            .tags
+                            .map(toHTMLTag)
+                            .join("\n");
 
-                            /* No break on the first item. */
-                            const brk = index
-                                ? '<br/>'
-                                : '';
+                        /* No break on the first item. */
+                        const brk = index
+                            ? '<br/>'
+                            : '';
 
-                            return `
+                        return `
                         <div>
                             ${brk}
                             <iframe title="SoundCloud Track ${item.track_id}" allow="autoplay" frameborder="no" height="166" scrolling="no"
@@ -52,11 +51,10 @@ layout: layouts/page-default
                                 <a href="{{ site.baseurl }}${item.url}">(continue reading)</a>
                             </div>
                         </div>`;
-                        }
-                    });
-                })(jQuery);
-            });
-        </script>
-    </div>
-    <div class="infinite-spinner"></div>
+                    }
+                });
+            })(jQuery);
+        });
+    </script>
 </div>
+<div class="infinite-spinner"></div>

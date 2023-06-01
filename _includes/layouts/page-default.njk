@@ -7,6 +7,8 @@ layout: layouts/default-container
         <div class="col-lg-3">
             {% include "sidebar-left.html" %}
         </div>
-        {{ content | safe }}
+        <div class="col-lg-9">
+            {{ content | safe }}
+        </div>
     </div>
 </div>
