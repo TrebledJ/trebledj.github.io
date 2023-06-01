@@ -1,9 +1,16 @@
 {% from "post/preview.html" import render_preview %}
+{% from "tag.html" import render_tag %}
 
 {% macro render_topic_preview(collections, name, tag, about, excludeTags, uniqueSet, nposts = 3) %}
     {# Description #}
     <div class="recent-posts d-flex flex-row justify-content-between align-items-center mb-3">
-        <span>{{about}} (See all <a href="/tags/{{tag}}">posts in this topic</a>.)</span>
+        <span>{{about}}</span>
+        <div>
+            <span>
+                <i class="fa fa-tag fs-6 position-relative" style="top:2px"></i>
+            </span>
+            {{ render_tag(tag) }}
+        </div>
     </div>
 
     {% set excludeTags = excludeTags | push(tag) %}
