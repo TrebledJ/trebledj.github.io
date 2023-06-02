@@ -71,7 +71,7 @@ While sampling deals with resolution in time, **quantisation** deals with resolu
 
     {% image "assets/quantisation-quality.jpg", "Higher quantisation, better quality.", "post1 w-90" %}
 
-    <sup>Blue: original signal; Red: quantised signal. Higher quantisation leads to better audio quality. With 1 or 2 bits, we can barely tell the signal is reproduced. At higher bits, the signal is reproduced more faithfully.</sup>
+    <sup>Blue: original signal; Red: quantised signal. Higher quantisation leads to better audio quality. With 1 or 2 bits, we can barely tell the signal is reproduced. With more bits, the signal is more faithfully reproduced.</sup>
     {.caption}
 
     {.no-center}
