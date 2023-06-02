@@ -76,7 +76,7 @@ While sampling deals with resolution in time, **quantisation** deals with resolu
 
     {.no-center}
 
-    Higher quantisation also gives us greater dynamic resolution. With 1 bit, we're limited to absolute silence (0) or an ear-shattering loudness (1). With 8 bits, we have $2^8 = 256$ different "volume settings" to choose from.
+    Higher quantisation also gives us greater dynamic resolution. With 1 bit, we're limited to absolute silence (0) or an ear-shattering loudness (1). With 8 bits, we have $2^8 = 256$ different "volume settings" to choose from—much more quality than simple 1s and 0s!
 
 2. Regarding data storage, the less number of bits needed per sample, the more memory saved. When storing samples in files, most applications quantise to 16-bit integers, which allow for a decent resolution of -32,768 to +32,767 at two bytes per sample (1 byte being 8 bits). 32-bit floats are another common representation, bringing substantially greater detail at the expense of twice the space.[^floats]
     
