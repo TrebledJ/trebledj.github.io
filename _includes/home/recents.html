@@ -3,11 +3,11 @@
 
 <div class="mt-4">
     {# Recent Posts Section #}
-    {{render_carousel(collections, "Recent Posts", post_categories, carouselAutoInterval, nposts=npostsPerTab)}}
+    {{render_carousel(collections, "Recent Posts", "pencil", post_categories, carouselAutoInterval, nposts=npostsPerTab)}}
 
     {# Recent Music Section #}
     {% if featuredTracks %}
-        <h2 class="mb-0">Recent Music</h2>
+        <h2 id="recent-music" class="mb-0">Recent Music <i class="fas fa-music ms-1"></i></h2>
         <br/>
 
         <div class="row">
@@ -42,5 +42,5 @@
     {% endif %}
 
     {# Recent Projects and Experiences Section #}
-    {{render_carousel(collections, "Projects and Experiences", project_categories, carouselAutoInterval, nposts=npostsPerTab)}}
+    {{render_carousel(collections, "Projects and Experiences", "star", project_categories, carouselAutoInterval, nposts=npostsPerTab)}}
 </div>
