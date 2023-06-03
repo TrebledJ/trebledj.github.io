@@ -40,6 +40,13 @@ $carousel-transition: transform 2s ease, opacity 1.5s ease-out .5s;
     border-radius: var(--border-radius-small);
     position: relative;
     z-index: 1;
+    
+    pointer-events: all;
+    font-size: 12px;
+
+    &:hover {
+        color: var(--link-color) !important;
+    }
 }
 
 

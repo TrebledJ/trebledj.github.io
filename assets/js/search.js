@@ -28,13 +28,13 @@ $(async function () {
       case "tag":
         return {
           icon: "fa fa-tag",
-          head: `<a class="post-tags tag" href="${item.url}">${item.title}</a>`,
+          head: `<a class="tag" href="${item.url}">${item.title}</a>`,
           desc: item.description,
         };
       case "post":
         var tags = item.tags;
         var head = `<a href="${item.url}">${item.title}</a>
-                  <a class="post-tags tag ms-2" href="/tags/${tags[0]}">${tags[0]}</a>`;
+                  <a class="tag ms-2" href="/tags/${tags[0]}">${tags[0]}</a>`;
         var desc = item.description;
 
         if (tags.includes("project")) {

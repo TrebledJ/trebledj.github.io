@@ -1,5 +1,5 @@
 {% macro render_tag(name) %}
-    <a class="post-tags tag" href="/tags/{{name}}">{{name}}</a>
+    <a class="tag" href="/tags/{{name}}">{{name}}</a>
 {% endmacro %}
 
 {% macro render_tag_list(tags, limit = 3) %}
