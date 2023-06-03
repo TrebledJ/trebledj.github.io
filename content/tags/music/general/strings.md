@@ -2,4 +2,4 @@
 title: Strings
 ---
 
-Compositions containing silky strings.
+Compositions that primarily feature soothing strings.
