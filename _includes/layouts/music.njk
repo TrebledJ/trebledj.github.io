@@ -18,7 +18,7 @@ layout: layouts/page-default
                     },
                     append: '#track-list',
                     html: (item, index) => {
-                        const toHTMLTag = t => `<a class="post-tags tag" href="{{ site.baseurl }}/tags/${t}">${t}</a>`;
+                        const toHTMLTag = t => `<a class="tag" href="{{ site.baseurl }}/tags/${t}">${t}</a>`;
 
                         /* Exclude common tags and convert into html code. */
                         const tags = item
