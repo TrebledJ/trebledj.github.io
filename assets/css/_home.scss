@@ -39,7 +39,7 @@ html[data-theme="light"] .hero-section {
     .btn {
         border: var(--light-border-color) solid 1px !important;
         color: var(--main-text-color);
-        
+
         &:hover {
             color: var(--main-text-color);
         }
@@ -72,6 +72,7 @@ html[data-theme="light"] {
 }
 
 @include media-breakpoint-down(md) {
+
     // Small view, display only one post.
     #home {
         .carousel {
@@ -83,8 +84,13 @@ html[data-theme="light"] {
 }
 
 @include media-breakpoint-down(sm) {
+
     // Small view, compress the preview.
     #home {
+        .topic-title {
+            display: none;
+        }
+
         .post-preview {
             p {
                 margin-bottom: 0;
