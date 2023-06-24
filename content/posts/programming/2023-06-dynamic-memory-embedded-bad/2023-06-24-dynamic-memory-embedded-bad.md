@@ -21,6 +21,8 @@ related:
 
 I keep explaining why dynamically allocating on embedded systems is a disagreeable idea, so thought I’d throw it on a post. This is a confusing topic for many junior developers who were taught to use `new` and `delete` in early C++ courses. And the backlash is always—why? In desktop/web application programming, dynamic allocation is everywhere.^[Even if you don’t use it directly, it’s still there. Most garbage-collected languages (think Java, JS, Python) will allocate primitives on the stack, and all other objects on the heap.] Not so in embedded.
 
+To clarify, dynamic memory allocation isn't *always* bad, just as [`goto` isn't *always* bad](https://stackoverflow.com/a/3517765/10239789). Both dynamic allocation or `goto` have appropriate uses, but are often misused. As engineers, it's our duty to understand which situations call for these features and to make sound choices.
+
 {% image "assets/dynamic-memory-2.jpg", "Ooooh, dynamic memory—fancy!", "post1 w-80" %}
 
 <sup>Clueless software engineers thinking "the more advanced the concept, the better". Don't be clueless.</sup>
@@ -37,9 +39,9 @@ Because of **Memory Fragmentation**. This occurs when we keep allocating and dea
 <sup>Memory becomes fragmented after multiple allocs and deallocs, leading to wasted memory space. ([source](https://er.yuvayana.org/memory-fragmentation-in-operating-system/))</sup>
 {.caption}
 
-Since embedded systems tend to require sustained uptime (think 1 year), constantly using dynamic memory may lead to highly fragmented memory.
+Since embedded systems tend to require sustained uptime, constantly using dynamic memory may lead to highly fragmented memory.
 
-This is a serious issue. Persistence, backup, and resets should be considered when developing embedded applications, but buggy resets—say, due to {% abbr "OOM", "out-of-memory" %} crashes—should be avoided.
+This is a serious issue. Persistence, backup, and resets should be considered when developing embedded applications, but buggy resets—say, due to {% abbr "OOM", "out-of-memory" %} crashes—should be avoided. Maybe not an issue if you're working with [missiles](https://devblogs.microsoft.com/oldnewthing/20180228-00/?p=98125) though.
 
 ### What alternatives are there?
 
@@ -100,6 +102,7 @@ Dynamic allocation isn't bad in all cases, if used properly. Some exceptions are
     
     > Since networking like what [ESP32] IDF is used in is so extremely variable in data sizes, it's impossible to predict memory usage up front. Furthermore, networking is extremely not hard real time compatible, especially wireless. All these combined relax the constraints and allow the usage of malloc.
 
+There are various ways to [implement dynamic allocation](https://en.wikipedia.org/wiki/Memory_management). The "best" method depends on your specific scenario. [Memory pools](https://en.wikipedia.org/wiki/Memory_pool) are one such implementation, simple and lightweight. FreeRTOS documents other [heap implementations](https://www.freertos.org/a00111.html) which aim to be thread-safe. [Heap 4](https://www.freertos.org/a00111.html#heap_4) is of particular interest, as it mitigates fragmentation.
 
 {% alert "fact" %}
 What about polymorphism? With dynamic polymorphism, the alternative is—guess what—static polymorphism! This can be achieved via sum types (e.g. [`std::variant`](https://en.cppreference.com/w/cpp/utility/variant)) or [CRTP](https://en.wikipedia.org/wiki/Curiously_recurring_template_pattern#Static_polymorphism). The latter is more flexible in terms of OOP compatibility, but we lose the ability for a polymorphic container (e.g. `vector<Animal*>`, `vector<Shape*>`). Sometimes virtual classes are a necessary ~~evil~~ abstraction.
