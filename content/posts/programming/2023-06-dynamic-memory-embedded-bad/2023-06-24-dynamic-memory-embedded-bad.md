@@ -101,16 +101,16 @@ What about polymorphism? With dynamic polymorphism, the alternative is—guess w
 
 Thus, it’s crucial to consider the design requirements of the software being developed. How long do the strings need to be? Can they be limited by a maximum length? How many items will our vector hold at most? Is it more maintainable to use virtual classes here? 
 
-### Is dynamic allocation always bad?
+### Is dynamic memory always bad?
 
-Dynamic allocation isn't bad in all cases, if used properly. Some appropriate situations:
+Dynamic memory isn't bad in all cases, if used properly. Some appropriate situations:
 
 - You only allocate during init. For example, we want to allocate memory based on a setting from a config file, and that setting doesn't change throughout runtime.
 - It's difficult to decide on a maximum bound. To quote a [Reddit comment](https://www.reddit.com/r/embedded/comments/8rc2vz/comment/e0qmr9s):
     
     > Since networking like what [ESP32] IDF is used in is so extremely variable in data sizes, it's impossible to predict memory usage up front. Furthermore, networking is extremely not hard real time compatible, especially wireless. All these combined relax the constraints and allow the usage of malloc.
 
-There are various ways to [implement dynamic allocation](https://en.wikipedia.org/wiki/Memory_management). The "best" method depends on your specific scenario. [Memory pools](https://en.wikipedia.org/wiki/Memory_pool) are one such implementation, simple and lightweight. FreeRTOS documents other [heap implementations](https://www.freertos.org/a00111.html) which aim to be thread-safe. [Heap 4](https://www.freertos.org/a00111.html#heap_4) is of particular interest, as it mitigates fragmentation.
+There are [various ways to implement dynamic memory allocation](https://en.wikipedia.org/wiki/Memory_management). The "best" method depends on your specific scenario. [Memory pools](https://en.wikipedia.org/wiki/Memory_pool) are one such implementation, simple and lightweight. FreeRTOS documents other [heap implementations](https://www.freertos.org/a00111.html) which aim to be thread-safe. [Heap 4](https://www.freertos.org/a00111.html#heap_4) is of particular interest, as it mitigates fragmentation.
 
 ### Summary
 
