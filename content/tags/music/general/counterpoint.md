@@ -1,5 +1,4 @@
 ---
-title: Counterpoint
 ---
 
 Pieces that feature heavy use of counterpoint or polyphony crafted in detail.

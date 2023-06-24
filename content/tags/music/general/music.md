@@ -1,5 +1,4 @@
 ---
-title: Music
 ---
 
 A general tag for all music-related stuff. For a tag of my compositions, see [*compositions*](/tags/composition).

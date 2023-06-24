@@ -1,5 +1,4 @@
 ---
-title: Education
 ---
 
 A necessary foundation and institution for learning in today's age but sadly one that is sometimes exploited and mishandled.

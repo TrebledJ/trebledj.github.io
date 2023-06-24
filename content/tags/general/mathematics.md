@@ -1,5 +1,4 @@
 ---
-title: Mathematics
 ---
 
 The purest of subjects. Well, maybe besides philosophy.
