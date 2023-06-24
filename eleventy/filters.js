@@ -144,7 +144,7 @@ module.exports = function (eleventyConfig) {
 			info: ['info', ''],
 			fact: ['info', 'lightbulb'],
 			warning: ['warning', 'triangle-exclamation'],
-			success: ['success', 'rocket'],
+			success: ['success', 'paper-plane'],
 			danger: ['danger', 'radiation'],
 			simple: ['secondary', ''],
 		};
