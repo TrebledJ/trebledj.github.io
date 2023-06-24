@@ -292,7 +292,7 @@
     ul {
         margin-top: 0.2rem;
 
-        p {
+        p:not(:last-child) {
             margin-bottom: 0rem;
         }
     }
