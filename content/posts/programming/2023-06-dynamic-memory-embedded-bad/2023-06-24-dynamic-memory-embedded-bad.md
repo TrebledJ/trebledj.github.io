@@ -40,7 +40,9 @@ This is a serious issue. Persistence, backup, and resets should be considered wh
 
 ### What alternatives are there?
 
-Dynamic memory allocation is core to many C++ standard library containers: strings, vectors, maps. The Arduino `String` also uses dynamic memory. No doubt, these libraries are immensely useful for organising and manipulating data.
+In C, dynamic memory is largely optional.
+
+In C++, it's more of a hassle. Dynamic memory allocation is core to many standard library containers: strings, vectors, maps. The Arduino `String` also uses dynamic memory. No doubt, these libraries are immensely useful for organising and manipulating data.
 
 The alternative is to use **static allocation**, by providing a maximum bound to our array sizes. This is what ETL containers achieve, as opposed to STL containers.
 
