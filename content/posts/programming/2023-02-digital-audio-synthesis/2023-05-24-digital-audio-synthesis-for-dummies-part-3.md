@@ -7,6 +7,7 @@ tags:
  - embedded
  - c
  - cpp
+ - stm32
  - music
 thumbnail: assets/synthwave-a-major-space-3.jpg
 include_thumbnail: true

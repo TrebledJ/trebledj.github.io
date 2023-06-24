@@ -6,6 +6,7 @@ tags:
  - embedded
  - cpp
  - c
+ - stm32
  - software-engineering
  - dsp
  - music

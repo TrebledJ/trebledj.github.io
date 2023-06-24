@@ -5,6 +5,7 @@ tags:
  - iot
  - embedded
  - cpp
+ - esp32
  - software-engineering
  - experience
  - hkust
