@@ -95,20 +95,22 @@ etl::vector<int, 10> vec2 = {1,2,3};
 
 One benefit of static allocation is speed. With *dynamic*, allocators need to figure out size constraints and reallocate. If the allocator is good, it may save time by reusing a previously freed bin; but this still consumes time. With *static*, memory is either pre-allocated (in the case of global variables) or allocated with a single instruction (subtracting the stack pointer).^[And if your function uses multiple statically-allocated variables, the allocation will be combined in one *giant* stack subtraction. You can thank your compiler for this static bonus.] Hence, better performance at the expense of flexibility.
 
-Dynamic allocation isn't bad in all cases, if used properly. Some exceptions are:
+{% alert "fact" %}
+What about polymorphism? With dynamic polymorphism, the alternative is—guess what—static polymorphism! This can be achieved via sum types (e.g. [`std::variant`](https://en.cppreference.com/w/cpp/utility/variant)) or [CRTP](https://en.wikipedia.org/wiki/Curiously_recurring_template_pattern#Static_polymorphism). The latter is more flexible in terms of OOP compatibility, but we lose the ability for a polymorphic container (e.g. `vector<Animal*>`, `vector<Shape*>`). Sometimes virtual classes are a necessary ~~evil~~ abstraction.
+{% endalert %}
 
-- You only allocate during init. For example, we want to allocate memory based on a setting from a config file, and that setting barely changes throughout runtime.
+Thus, it’s crucial to consider the design requirements of the software being developed. How long do the strings need to be? Can they be limited by a maximum length? How many items will our vector hold at most? Is it more maintainable to use virtual classes here? 
+
+### Is dynamic allocation always bad?
+
+Dynamic allocation isn't bad in all cases, if used properly. Some appropriate situations:
+
+- You only allocate during init. For example, we want to allocate memory based on a setting from a config file, and that setting doesn't change throughout runtime.
 - It's difficult to decide on a maximum bound. To quote a [Reddit comment](https://www.reddit.com/r/embedded/comments/8rc2vz/comment/e0qmr9s):
     
     > Since networking like what [ESP32] IDF is used in is so extremely variable in data sizes, it's impossible to predict memory usage up front. Furthermore, networking is extremely not hard real time compatible, especially wireless. All these combined relax the constraints and allow the usage of malloc.
 
 There are various ways to [implement dynamic allocation](https://en.wikipedia.org/wiki/Memory_management). The "best" method depends on your specific scenario. [Memory pools](https://en.wikipedia.org/wiki/Memory_pool) are one such implementation, simple and lightweight. FreeRTOS documents other [heap implementations](https://www.freertos.org/a00111.html) which aim to be thread-safe. [Heap 4](https://www.freertos.org/a00111.html#heap_4) is of particular interest, as it mitigates fragmentation.
-
-{% alert "fact" %}
-What about polymorphism? With dynamic polymorphism, the alternative is—guess what—static polymorphism! This can be achieved via sum types (e.g. [`std::variant`](https://en.cppreference.com/w/cpp/utility/variant)) or [CRTP](https://en.wikipedia.org/wiki/Curiously_recurring_template_pattern#Static_polymorphism). The latter is more flexible in terms of OOP compatibility, but we lose the ability for a polymorphic container (e.g. `vector<Animal*>`, `vector<Shape*>`). Sometimes virtual classes are a necessary ~~evil~~ abstraction.
-{% endalert %}
-
-Thus, it’s crucial to consider the design requirements of the software being developed. How long do the strings need to be? Can they be limited to maximum length? How many items will our vector hold at most? Is it more maintainable to use virtual classes here?
 
 ### Summary
 
