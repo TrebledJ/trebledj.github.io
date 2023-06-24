@@ -19,11 +19,11 @@ related:
 {.caption}
 
 
-I keep explaining why dynamically allocating on embedded systems is a disagreeable idea, so thought I’d throw it on a post. This is a confusing topic for many junior developers who were taught to use `new` and `delete` in their early C++ courses. In desktop/web application programming, dynamic allocation is ubiquitous.^[Even if you don’t use it directly, it’s still there. Most garbage-collected languages (think Java, JS, Python) will allocate primitives on the stack, and all other objects on the heap.] Not so in embedded.
+I keep explaining why dynamically allocating on embedded systems is a disagreeable idea, so thought I’d throw it on a post. This is a confusing topic for many junior developers who were taught to use `new` and `delete` in early C++ courses. And the backlash is always—why? In desktop/web application programming, dynamic allocation is ubiquitous.^[Even if you don’t use it directly, it’s still there. Most garbage-collected languages (think Java, JS, Python) will allocate primitives on the stack, and all other objects on the heap.] Not so in embedded.
 
 {% image "assets/dynamic-memory-2.jpg", "Ooooh, dynamic memory—fancy!", "post1 w-80" %}
 
-It's not just allocation which is an issue. Virtual classes, exceptions, runtime type information (RTTI)—these are all no-nos in some places. They're all avoided on embedded for the same reasons: performance degradation and code bloat. In essence, not enough time and not enough space. With dynamic memory, there's another reason.
+It's not just allocation which is an issue. Virtual classes, exceptions, runtime type information (RTTI)—these are all no-nos for some embedded companies. They're all avoided for the same reasons: performance degradation and code bloat. In essence, not enough time and not enough space. With dynamic memory, there's another reason.
 
 ### So why is dynamic memory bad?
 
