@@ -142,9 +142,9 @@ module.exports = function (eleventyConfig) {
 		const alert = {
 			note: ['primary', 'pencil'],
 			info: ['info', ''],
-			fact: ['info', 'lightbulb'],
+			fact: ['info', 'bolt'],
 			warning: ['warning', 'triangle-exclamation'],
-			success: ['success', 'paper-plane'],
+			success: ['success', 'lightbulb'],
 			danger: ['danger', 'radiation'],
 			simple: ['secondary', ''],
 		};
