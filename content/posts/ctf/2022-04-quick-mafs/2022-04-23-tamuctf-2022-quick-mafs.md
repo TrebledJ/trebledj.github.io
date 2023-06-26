@@ -124,9 +124,9 @@ Now we have everything we need to construct our [equation](#equation). We have:
 
 * $c$ (`rax_init_value`),
 * $r$ (`target`, provided as a function parameter),
-* $a_i$ (`add_gadgets[i].const`),
-* $s_i$ (`sub_gadgets[i].const`),
-* $x_i$ (`xor_gadgets[i].const`),
+* $a_i$ (`add_gadgets[i]['const']`),
+* $s_i$ (`sub_gadgets[i]['const']`),
+* $x_i$ (`xor_gadgets[i]['const']`),
 * $m_i$ (`add_vars`),
 * $n_i$ (`sub_vars`), and
 * $p_i$ (`xor_vars`).
