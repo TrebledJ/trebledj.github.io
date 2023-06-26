@@ -292,6 +292,8 @@
     ul {
         margin-top: 0.2rem;
 
+        // li:not(:last-child) p,
+        li p,
         p:not(:last-child) {
             margin-bottom: 0rem;
         }
@@ -324,7 +326,7 @@ img.center {
 }
 
 .alert-content {
-    display: grid; // Workaround to force children within bounds.
+    overflow: auto;
 }
 
 .alert-content>p:last-child {

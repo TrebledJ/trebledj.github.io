@@ -168,6 +168,8 @@ Frequency analysis is useful to group letters into buckets. But using frequency 
     {.caption}
 
     {.no-center}
+    
+    <br/>
 
 - Guesswork: guess English from the ~~nonsense~~ existing characters.
     - e.g. "Eog:ish" → "English", "qepqesents" → "represents", "pqese&ved" → "preserved"
