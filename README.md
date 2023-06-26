@@ -29,7 +29,7 @@ npm run start
     * SASS: Enables rapid CSS development
     * Scroll progress
     * Navbar
-  * Things I hate
+  * Things I dislike
     * Bizarre coding standards and codebase
     * Some nonsensical CSS rules
 * [Minimal Mistakes](https://mmistakes.github.io/minimal-mistakes/)
@@ -38,7 +38,7 @@ npm run start
     * Clean, organised codebase (easy to hack)
     * Alerts (coloured boxes), but I eventually changed to Bootstrap alerts.
     * Sticky profile sidebar on left
-  * Things I hate
+  * Things I dislike
     * Hand-spun CSS/JS? Nyeh.
     * Search bar
 * [Chirpy](https://jamstackthemes.dev/demo/theme/eleventy-chirpy-blog-template/)
