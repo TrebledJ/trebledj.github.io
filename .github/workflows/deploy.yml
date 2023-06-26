@@ -87,11 +87,11 @@ jobs:
 
           commit_options: '--no-verify --signoff'
           add_options: '-u'
-          push_options: ''
+          push_options: '--force'
 
-          skip_dirty_check: true
+          # skip_dirty_check: true
+          # skip_checkout: true
           skip_fetch: true
-          skip_checkout: true
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
