@@ -81,9 +81,9 @@ jobs:
           branch: site
           create_branch: true
 
-          file_pattern: '_site/**'
+          file_pattern: '_site'
 
-          commit_options: '--no-verify --signoff'
+          commit_options: '--no-verify --signoff -f'
           add_options: '-u -f'
           push_options: ''
 
