@@ -29,7 +29,7 @@ module.exports = function (eleventyConfig) {
 	// https://www.11ty.dev/docs/watch-serve/#add-your-own-watch-targets
 
 	// Process content images to the image pipeline.
-	eleventyConfig.addWatchTarget("content/**/*.{png,jpg,gif,webp}");
+	eleventyConfig.addWatchTarget("content/**/*.{png,jpg,gif,webp,svg}");
 	eleventyConfig.watchIgnores.add("{package,package-lock}.json");
 	eleventyConfig.watchIgnores.add(".gitignore");
 
@@ -39,7 +39,7 @@ module.exports = function (eleventyConfig) {
 		liveReload: true,
 		watch: [
 			'./_site/**/*.css',
-			'./_site/**/*.html',
+	// 		'./_site/**/*.html',
 		]
 	});
 
