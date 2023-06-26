@@ -1,9 +1,46 @@
-const { getGitCommitDateFromPath } = require("eleventy-plugin-git-commit-date");
+// const { getGitCommitDateFromPath } = require("eleventy-plugin-git-commit-date");
 
 const path = require("path");
 const spawn = require("cross-spawn");
 
-function getGitCommitDateFromPathByMessage(filePath, regex) {
+function getGitCommitDate(filePath, options) {
+	return options ? getGitCommitDateFiltered(filePath, options) : getGitCommitDateFast(filePath);
+};
+
+function getGitCommitDateFast(filePath) {
+	let output;
+
+	try {
+		output = spawn.sync(
+			"git",
+			["log", "-1", "--format=%at", path.basename(filePath)],
+			{ cwd: path.dirname(filePath) }
+		);
+	} catch {
+		throw new Error("Fail to run 'git log'");
+	}
+
+	if (output && output.stdout) {
+		const ts = parseInt(output.stdout.toString("utf-8"), 10) * 1000;
+
+		// Paths not commited to Git returns empty timestamps, resulting in NaN.
+		// So, convert only valid timestamps.
+		if (!isNaN(ts)) {
+			return new Date(ts);
+		}
+	}
+}
+
+function getGitCommitDateFiltered(filePath, options) {
+	const { keep, ignore } = options || {};
+
+	function matchesWhitelist(subject) {
+		return keep ? subject.match(keep) : true;
+	}
+	function matchesBlacklist(subject) {
+		return ignore ? !subject.match(ignore) : true;
+	}
+
 	let output;
 
 	try {
@@ -19,8 +56,11 @@ function getGitCommitDateFromPathByMessage(filePath, regex) {
 	if (output && output.stdout) {
 		const commits = output.stdout.toString("utf-8").split('\n');
 
-		// Filter commits which match the regex.
-		const filtered = !regex ? commits : commits.filter(s => s.substring(s.indexOf(' ') + 1).match(regex));
+		// Filter commits which match filter options.
+		const filtered = commits.filter(s => {
+			const subject = s.substring(s.indexOf(' ') + 1);
+			return matchesWhitelist(subject) && matchesBlacklist(subject);
+		});
 
 		if (filtered && filtered[0]) {
 			// Grab latest commit timestamp.
@@ -34,7 +74,7 @@ function getGitCommitDateFromPathByMessage(filePath, regex) {
 			}
 		}
 	}
-};
+}
 
 
 module.exports = {
@@ -45,7 +85,7 @@ module.exports = {
 	eleventyComputed: {
 		// If ever the updated date is wrong in production, just increase checkout fetch-depth in deploy.yml.
 		// This is because git log couldn't find the old commits.
-		updated: data => process.env.ENVIRONMENT === 'development' ? new Date() : getGitCommitDateFromPathByMessage(data.page.inputPath, /^content/),
+		updated: data => process.env.ENVIRONMENT === 'development' ? new Date() : getGitCommitDate(data.page.inputPath, { keep: /^content/ }),
 		permalink: data => '/posts/' + data.page.fileSlug + '/index.html',
 	},
 	author: "trebledj",
