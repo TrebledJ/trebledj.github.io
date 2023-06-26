@@ -18,5 +18,5 @@ jobs:
         id: lychee
         uses: lycheeverse/lychee-action@v1.8.0
         with:
-          args: --verbose --no-progress --include-verbatim _site
+          args: --verbose --no-progress --include-verbatim .site
           fail: true

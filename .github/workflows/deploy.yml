@@ -74,6 +74,8 @@ jobs:
         run: ${{ steps.detect-package-manager.outputs.manager }} ${{ steps.detect-package-manager.outputs.command }}
       - name: Build
         run: ${{ steps.detect-package-manager.outputs.manager }} run build-ghpages 
+      - name: Copy Site Path  # Duplicate site so that we can easily avoid gitignore and git-add headaches.
+        run: cp -R _site .site
       - name: Commit & Push Site Build
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
@@ -81,10 +83,10 @@ jobs:
           branch: site
           create_branch: true
 
-          file_pattern: '_site'
+          file_pattern: '.site'
 
           commit_options: '--no-verify --signoff'
-          add_options: '-u -f'
+          add_options: '-u'
           push_options: ''
 
           skip_dirty_check: true
