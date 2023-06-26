@@ -75,7 +75,7 @@ void generate_samples(float freq) {
 
 And that’s it—we’ve just whooshed pure sine tone goodness from nothing! Granted, there are some flaws with this method (it could be more efficient, and the signal clicks when repeated); but hey, it demonstrates synthesis.
 
-{% alert "note" %}
+{% alert "fact" %}
 Note on Buffers: Usually, the buffer size is medium-sized power of 2 (e.g. 512, 1024, 2048, 4096...). This enhances cache loads and processing speed (dividing by a power of 2 is super easy for processors!).[^buffers]
 {% endalert %}
 

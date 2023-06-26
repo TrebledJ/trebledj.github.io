@@ -140,8 +140,7 @@ module.exports = function (eleventyConfig) {
 
 	eleventyConfig.addShortcode("alert", async function (role, emoji) {
 		const alert = {
-			note: ['primary', 'pencil'],
-			info: ['info', ''],
+			info: ['info', 'circle-info'],
 			fact: ['info', 'bolt'],
 			warning: ['warning', 'triangle-exclamation'],
 			success: ['success', 'lightbulb'],

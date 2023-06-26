@@ -99,7 +99,7 @@ def solve(file='elf'):
     tar_addr = 0x4011c8
 ```
 
-{% alert "note" %}
+{% alert "fact" %}
 Ghidra will load PIE assembly at offset `0x100000`, but angr loads it at `0x400000` by default. So all addresses in the previous section were offset by an additional `0x300000` to account for this difference. There's a way to make angr load at a custom offset, but I forgot what the option was called. (But the option exists!)
 {% endalert %}
 

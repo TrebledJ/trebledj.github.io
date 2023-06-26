@@ -321,7 +321,7 @@ If you’ve read this far, I presume you’ve followed the [previous section](#e
 
 {% image "assets/single-buffer.jpg", "Single buffers... forever alone.", "post1 w-75" %}
 
-{% alert "note" %}
+{% alert "warning" %}
 Be aware that DMA introduces synchronisation issues. After preparing a second round of buffers, how do we know if the first round has already finished?
 
 As with all processes which depend on a separate event, there are two approaches: polling and interrupts. We could block and wait until the first round is finished, then send… or we could trigger an interrupt when it finishes, then start the next round inside the interrupt handler. The approach depends on your application.

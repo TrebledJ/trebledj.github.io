@@ -219,7 +219,7 @@ The astute may notice that product types combine types in an “***and***” fas
 
 In the following parts, we'll explore how types relate to math and apply algebraic principles similar to those from elementary!
 
-{% alert "note" %}
+{% alert "info" %}
 A word on notation.
 
 * Monospaced letters ($\texttt{a}$) denote types/code,
