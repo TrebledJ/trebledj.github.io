@@ -18,7 +18,7 @@ related:
 ---
 
 > *Slap a timer, DMA, and DAC together, and BAM—non-blocking audio output!*  
-> — TrebledJ, [2022](https://trebledj.github.io/posts/stm32-midi-keyboard/)
+> — TrebledJ, [2022](/posts/stm32-midi-keyboard/)
 
 Ah… embedded systems—the intersection of robust hardware and versatile software.
 
