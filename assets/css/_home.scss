@@ -32,7 +32,7 @@ html[data-theme="light"] .hero-section {
 }
 
 #home .carousel {
-    height: 600px;
+    height: 550px;
 }
 
 .carousel-tab-group {
@@ -44,6 +44,16 @@ html[data-theme="light"] .hero-section {
             color: var(--main-text-color);
         }
     }
+}
+
+.carousel-control-container {
+    flex: 0 0 auto;
+    width: 5%;
+}
+
+.carousel-content-container {
+    flex: 0 0 auto;
+    width: 90%;
 }
 
 html[data-theme="light"] {
