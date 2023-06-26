@@ -12,7 +12,7 @@ usemathjax: true
 
 350 points. 4/5 ⭐️. 4/311 solves.
 
-> Seems someone encrypt their flag with [some weird online website](http://chal.hkcert22.pwnable.hk:28248/). And seems the website is written in C++...
+> Seems someone encrypt their flag with some weird online website. And seems the website is written in C++...
 > 
 > Does anyone even use C++ to write their web server? I guess C++ is still charm but it must be easy to reverse.... right?
 

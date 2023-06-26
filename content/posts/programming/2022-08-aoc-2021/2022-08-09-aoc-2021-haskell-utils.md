@@ -276,7 +276,7 @@ instance ParseLike Parser where
 
 {% image "assets/parselike.jpg", "", "post1 w-75" %}
 
-Here's an example usage from [Day 1](https://github.com/TrebledJ/aoc/blob/master/2021/haskell/app/D01.hs):
+Here's an example usage from [Day 1](https://github.com/TrebledJ/aoc/blob/master/2021/haskell/src/Days/D01.hs):
 
 ```haskell
 main :: IO ()
@@ -314,7 +314,7 @@ criterionMain defaultFile parse getBench = do
 
 Criterion is an excellent benchmarking library with various config options and output formats. To integrate Criterion with my pre-existing options, I hand-spun another default-main for benchmarking. So instead of passing my parsed input to part 1/2 functions, I pass it to benchmarks.
 
-Example usage from [Day 22](https://github.com/TrebledJ/aoc/blob/master/2021/haskell/app/D22.hs):
+Example usage from [Day 22](https://github.com/TrebledJ/aoc/blob/master/2021/haskell/src/Days/D22.hs):
 
 ```haskell
 main :: IO ()

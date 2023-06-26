@@ -61,7 +61,7 @@ Feel free to [reach out](#contact) for whatever reason. ヽ(・∀・)ﾉ
 		`,
 		contact_placeholder: {
 			name: 'Humpty Dumpty',
-			email: 'jumpy@wumpy.lumpy',
+			email: 'example@gmail.com',
 			subject: "I had a great fall!",
 			message: `Got suggestions, feedback, or comments? Lemme know!`,
 		},
