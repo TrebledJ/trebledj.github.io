@@ -1,5 +1,6 @@
 // Bootstrap alerts.
 html[data-theme="dark"] {
+
     // Generate contextual modifier classes for colorizing the alert.
     @each $state,
     $value in $theme-colors {
@@ -12,7 +13,18 @@ html[data-theme="dark"] {
         }
 
         .alert-#{$state} {
-            @include alert-variant($alert-background, $alert-border, $alert-color);
+            --#{$prefix}alert-color: #{$alert-color};
+            --#{$prefix}alert-bg: #{$alert-background};
+            --#{$prefix}alert-border-color: #{$alert-border};
+            --#{$prefix}alert-link-color: #{shade-color($alert-color, 20%)};
+
+            @if $enable-gradients {
+                background-image: var(--#{$prefix}gradient);
+            }
+
+            .alert-link {
+                color: var(--#{$prefix}alert-link-color);
+            }
         }
     }
 }
