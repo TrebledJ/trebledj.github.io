@@ -83,7 +83,8 @@ jobs:
 
           file_pattern: '_site'
 
-          commit_options: '--no-verify --signoff -f'
+          commit_options: '--no-verify --signoff'
+          status_options: '--ignored=matching'
           add_options: '-u -f'
           push_options: ''
 
