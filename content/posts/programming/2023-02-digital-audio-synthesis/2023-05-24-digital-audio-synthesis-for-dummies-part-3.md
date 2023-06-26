@@ -76,7 +76,7 @@ Further Reading:
 
 ### Example: Initialising the Timer
 
-Suppose we want to send a stream of audio output. We can use a timer with a frequency set to our desired [sample rate](notion://www.notion.so/posts/digital-audio-synthesis-for-dummies-part-1#sampling).
+Suppose we want to send a stream of audio output. We can use a timer with a frequency set to our desired [sample rate](/posts/digital-audio-synthesis-for-dummies-part-1/#sampling).
 
 We can derive the prescaler (PSC) and auto-reload (ARR) by finding integer factors that satisfy the following relationship.
 
