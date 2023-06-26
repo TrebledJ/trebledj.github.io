@@ -1,5 +1,5 @@
 # Sample workflow for building and deploying an Eleventy site to GitHub Pages
-name: Deploy Eleventy site to Pages
+name: Deploy Eleventy Site to Pages
 
 on:
   # Runs on pushes targeting the default branch
