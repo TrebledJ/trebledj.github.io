@@ -81,7 +81,7 @@ jobs:
           branch: site
           create_branch: true
 
-          file_pattern: '_site/**'
+          file_pattern: '_site/** .lycheeignore'
 
           commit_options: '--no-verify --signoff'
           add_options: '-f'
