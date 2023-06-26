@@ -4,7 +4,6 @@ description: "Humans are complicated individuals even though we all start from t
 updated: "2022-07-28"
 tags:
  - minimalism
- - fusion
  - strings
 keywords: [ensemble, string ensemble, emotional, peaceful, serene]
 thumbnail: assets/spring-dawn.jpg
@@ -13,7 +12,7 @@ related:
     posts: [joyride-in-d, morning-rush]
 ---
 
-This piece seeks to paint a diverse set of feelings. Listen for the string ensemble easing in and out of the void, the solemn moments of silence, the lightheartedness of the syncopated pizzicato, the relentless cycle of tension and relief.
+Slow. Growing. Contemplating. Lush. Carefree. Hopeful. Yearning. This piece seeks to paint a diverse set of feelings. Listen for the string ensemble easing in and out of the void, the solemn moments of silence, the lightheartedness of the syncopated pizzicato, the relentless cycle of tension and relief.
 
 In some sections, I aimed for a more contemplative and reflective mood or atmosphere (which is partly why it goes over the 10-minute mark). One key inspirations was Steve Reich's [Music for 18 Musicians](https://en.wikipedia.org/wiki/Music_for_18_Musicians) (an hour-long piece!) where Reich demonstrates the idea of "pulsing", which in this context is just taking a note and repeating it but with an increase then decrease in dynamics. The overall effect is quite serene, making the soundscape ebb in and out.
 
