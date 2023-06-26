@@ -84,9 +84,12 @@ jobs:
           file_pattern: '_site'
 
           commit_options: '--no-verify --signoff'
-          status_options: '--ignored=matching'
           add_options: '-u -f'
           push_options: ''
+
+          skip_dirty_check: true
+          skip_fetch: true
+          skip_checkout: true
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
