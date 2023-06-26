@@ -92,7 +92,7 @@ On our STM32F405, we configured $\text{freq}\_\text{clock}$ to the maximum possi
 {% alert "fact" %}
 Why do we add $+1$ to the PSC and ARR in the relationship above?
 
-The PSC and ARR are 16-bit *registers*, meaning they range from 0 to 65,535.^[Well, some ARR registers are 32-bit. But we can achieve a lot with 16-bits.]
+The PSC and ARR are 16-bit *registers*, meaning they range from 0 to 65,535.^[Some other timers have 32-bit ARR registers. But eh, we can achieve a lot with just 16-bit ones.]
 To save space and enhance program correctness, we assign meaningful behaviour to the value 0.
 {% endalert %}
 
@@ -322,7 +322,7 @@ If you’ve read this far, I presume you’ve followed the [previous section](#e
 {% image "assets/single-buffer.jpg", "Single buffers... forever alone.", "post1 w-75" %}
 
 {% alert "warning" %}
-Be aware that DMA introduces synchronisation issues. After preparing a second round of buffers, how do we know if the first round has already finished?
+DMA introduces syncing issues. After preparing a second round of buffers, how do we know if the first round has already finished?
 
 As with all processes which depend on a separate event, there are two approaches: polling and interrupts. We could block and wait until the first round is finished, then send… or we could trigger an interrupt when it finishes, then start the next round inside the interrupt handler. The approach depends on your application.
 
@@ -527,8 +527,8 @@ When combined, we save processing resources, which can possibly be spent on addi
 In case you want to go further, here are some other things to explore:
 
 - Generating stereo audio. We’ve generated audio for Channel 1. What about stereo audio for Channel 2? If you’re using reverb effects and wish for a fuller stereo sound, you’ll need an extra pair of buffers (and more processing!).
-- Streaming via UART. It's possible to use DMA with other peripherals. Definitely worth exploring.
-- Using {% abbr "SIMD", "Single Instruction, Multiple Data" %} instructions to buffer two (or more) samples at the same time.
+- Streaming via UART (+ DMA).
+- Using {% abbr "SIMD", "Single Instruction, Multiple Data" %} instructions to buffer two (or more?) samples at the same time.
 - {% abbr "RTOS", "Real-Time Operating System" %} for multitasking.
 - Other boards or hardware with specialised audio features.
 
