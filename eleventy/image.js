@@ -65,6 +65,7 @@ module.exports = function (eleventyConfig) {
         function makeSizes() {
             const _default = `${auto.width}px`;
             if (thumbnail) {
+                // TODO: rewrite thumbnail code.
                 // Force smaller images, since thumbnails are small anyways.
                 const special = 512, specialBreak = 2000;
                 const max = Math.max(...breakpoints, auto.width);
@@ -86,9 +87,8 @@ module.exports = function (eleventyConfig) {
         const srcset = fmt.map(entry => entry.srcset).join(", ");
         const sizes = makeSizes();
         const attr_str = Object.entries(attrs).map((k, v) => `${k}="${v}"`).join(' ');
-        return `<img class="${classes.join(' ')}" src="${auto.url}" alt="${alt}" title="${alt}" srcset="${srcset}" sizes="${sizes}" loading="${loading}" decoding="async" style="aspect-ratio: auto ${auto.width} / ${auto.height}" />`.replaceAll(/\s{2,}/g, ' ');
+        return `<img class="${classes.join(' ')}" src="${auto.url}" alt="${alt}" title="${alt}" srcset="${srcset}" sizes="${sizes}" loading="${loading}" decoding="async" ${attr_str} style="aspect-ratio: auto ${auto.width} / ${auto.height}" />`.replaceAll(/\s{2,}/g, ' ');
     }
-
 
     async function imageShortcode(src, altText, classes, loading = 'lazy') {
         const { ext, file, options } = getOptions(src);
