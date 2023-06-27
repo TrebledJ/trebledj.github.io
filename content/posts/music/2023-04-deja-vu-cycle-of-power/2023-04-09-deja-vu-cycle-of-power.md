@@ -2,9 +2,9 @@
 title: Déjà Vu – Cycle of Power
 description: The first variation in a series exploring repetition and meaning in life.
 tags:
+ - faith
  - orchestral
  - fusion
- - faith
  - deja-vu
  - diatribe
 thumbnail: assets/easter-tomb-sq.jpg
