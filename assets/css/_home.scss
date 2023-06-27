@@ -41,7 +41,7 @@ html[data-theme="light"] .hero-section {
     //     white-space: nowrap;
     //     text-overflow: ellipsis;
     // }
-    
+
     // Faded bottom items.
     // .carousel-item {
     //     height: 450px;
@@ -105,6 +105,14 @@ html[data-theme="light"] {
             .collection-list>div:nth-child(2) {
                 display: none;
             }
+        }
+
+        .carousel-control-container {
+            width: 8%;
+        }
+
+        .carousel-content-container {
+            width: 84%;
         }
     }
 }
