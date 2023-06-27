@@ -52,12 +52,12 @@ Feel free to [reach out](#contact) for whatever reason. ヽ(・∀・)ﾉ
 		environment: process.env.ENVIRONMENT || 'development',
 		content_security_policy: `
 		default-src 'self';
-		script-src 'self' 'unsafe-inline' *.disqus.com *.disquscdn.com code.jquery.com gist.github.com cdn.jsdelivr.net https://hcaptcha.com https://*.hcaptcha.com launchpad-wrapper.privacymanager.io;
-		style-src 'self' 'unsafe-inline' *.disquscdn.com cdn.jsdelivr.net github.githubassets.com https://hcaptcha.com https://*.hcaptcha.com;
+		script-src 'self' 'unsafe-inline' *.disqus.com *.disquscdn.com code.jquery.com gist.github.com cdn.jsdelivr.net launchpad-wrapper.privacymanager.io;
+		style-src 'self' 'unsafe-inline' *.disquscdn.com cdn.jsdelivr.net github.githubassets.com;
 		font-src 'self' data: cdn.jsdelivr.net;
 		img-src 'self' data: *;
-		frame-src disqus.com *.soundcloud.com https://hcaptcha.com https://*.hcaptcha.com;
-		connect-src 'self' https://hcaptcha.com https://*.hcaptcha.com;
+		frame-src disqus.com *.soundcloud.com;
+		connect-src 'self';
 		`,
 		contact_placeholder: {
 			name: 'Humpty Dumpty',
