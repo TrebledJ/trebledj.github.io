@@ -124,7 +124,7 @@ module.exports = function (eleventyConfig) {
 
 	const md = require("markdown-it")({
 		html: false,
-		breaks: true,
+		breaks: false,
 		linkify: true,
 	});
 
