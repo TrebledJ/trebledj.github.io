@@ -137,6 +137,13 @@ module.exports = function (eleventyConfig) {
 	);
 
 	eleventyConfig.addFilter("keywords", findKeywords);
+	
+	eleventyConfig.addFilter("maxDate", (a, b) => {
+		if (!b)
+			return undefined;
+		const da = new Date(a), db = new Date(b);
+		return da > db ? da : db;
+	});
 
 	eleventyConfig.addShortcode("alert", async function (role, emoji) {
 		const alert = {
