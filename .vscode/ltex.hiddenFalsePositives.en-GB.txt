@@ -36,3 +36,5 @@
 {"rule":"ENGLISH_WORD_REPEAT_BEGINNING_RULE","sentence":"^\\QIn C++, it's \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q and \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q^expected.\\E$"}
 {"rule":"CAPITALIZATION_NNP_DERIVED","sentence":"^\\QThough being limited to two octaves bordered on draconian, I made do.\\E$"}
 {"rule":"MORFOLOGIK_RULE_EN_GB","sentence":"^\\QWhile the timer and DMA are happily shooting out a bufferful of audio, we can focus on preparing the next round to be sent.\\E$"}
+{"rule":"YOUR_YOU_2","sentence":"^\\QWhen I give up You light in me another flame\\E$"}
+{"rule":"YOUR_YOU_2","sentence":"^\\QWhen I give up You light in me another flame To follow You No matter where You lead me to\\E$"}
