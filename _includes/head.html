@@ -9,10 +9,10 @@
     <link rel="stylesheet" href="/css/prism-diff.css">
     {# <link href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.15.1/devicon.min.css" rel="stylesheet"> #}
     <link rel="stylesheet" href="/css/main.css"/>
-    
+
     <script>
-    var base_url = '{{site.baseurl}}';
-    var soundcloud_color = '{{site.soundcloud_color}}';
+        var base_url = '{{site.baseurl}}';
+        var soundcloud_color = '{{site.soundcloud_color}}';
     </script>
     {% include "utilities/theme-switch.html" %}
 
@@ -27,8 +27,14 @@
     <script defer src="/js/head.js"></script>
     <script defer src="/js/search.js"></script>
     <script defer src="/js/sidebar.js"></script>
-    {% block head_assets_ext %}
-    {% endblock %}
+
+    {% if site.environment == 'production' %}
+        <!-- Cloudflare Web Analytics -->
+        <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "0c1f01f6fd2340a9a7c7abb8072e3857"}'></script>
+        <!-- End Cloudflare Web Analytics -->
+    {% endif %}
+
+    {% block head_assets_ext %}{% endblock %}
 
     {% if usemathjax %}
         {% include "utilities/mathjax.html" %}
