@@ -9,6 +9,7 @@ tags:
  - software-engineering
  - apps
  - hkust
+ - reflection
 thumbnail: assets/thumbnail.jpg
 pitch: Led and managed the development of a desktop simulator used in a recruitment competition for the HKUST Robotics Team.
 related:

@@ -8,6 +8,7 @@ tags:
  - cpp
  - sql
  - apps
+ - reflection
 thumbnail: assets/cashier.jpg
 keywords: [e-payment, desktop application, gui, c++]
 pitch: Developed a Qt/C++ desktop application for a new e-payment system in the school cafeteria. Collaborated with ICT staff in UI design and connecting the application with the school’s SQL Server database.
