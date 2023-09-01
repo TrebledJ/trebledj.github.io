@@ -6,7 +6,7 @@ tags:
  - orchestral
  - fusion
  - deja-vu
- - diatribe
+ - essay
 thumbnail: assets/easter-tomb-sq.jpg
 track_id: 1488692758
 # score_id: 
