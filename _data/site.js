@@ -9,7 +9,7 @@ There's the joy and pain of [app development](/tags/apps), the tension and fun i
 And let's not forget the gritty (yet beautiful) backbone of [programming](/tags/programming).
 
 More about me? I like to solve problems, learn new things, and pass it on through teaching/mentoring.
-In my spare time, I enjoy taking walks, [composing music](/tags/composition), and putting my thoughts down on ~~paper~~ text.
+In my spare time, I enjoy taking walks, [composing music](/tags/composition), play the occasional CTF, and putting my thoughts down on ~~paper~~ text.
 
 Feel free to [reach out](#contact) for whatever reason. ヽ(・∀・)ﾉ
 `.trim();
