@@ -4,7 +4,7 @@ description: You straight to `oops()`. Right away.
 tags:
  - reverse
  - python
- - programming
+#  - programming
 thumbnail: assets/straight-to-oops.jpg
 ---
 
@@ -21,7 +21,7 @@ Medium. 27/1424 solves.
 
 ### Analysis
 
-On decompilation, it seems like an innocent binary which adds and subtracts numbers. The actual program is relatively small and simple.
+On decompilation, it seems like an innocent binary which adds and subtracts numbers. The code itself is relatively simple.
 
 ```c
 // Set the SIGSEGV handler.
@@ -73,7 +73,7 @@ Observations:
 
 [^crumb]: And for the nerds: 4-bits is a nybble/nibble.
 
-The last point is interesting, since there's no way we can get a unique solution, right? There are multiple ways to reach an offset of `0x12000`.
+The last point is interesting, since there's no way we can get a unique solution. There are multiple ways to reach an offset of `0x12000`.
 
 For example, if our crumbs are 3, 1, 1, 1, then we've already arrived at our target address, right? Then we can just fill the rest with 2s and 1s to do nothing to `local_c0`, right? Right? 
 
@@ -122,6 +122,6 @@ I didn't do a step-by-step walkthrough of my solve script this time, but I've li
 
 ## Flag
 
-```
+```txt
 DUCTF{hElCYi8OxUF7PAA5}
 ```
