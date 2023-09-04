@@ -3,7 +3,7 @@ title: DUCTF 2023 – Wrong Signal
 description: You straight to `oops()`. Right away.
 tags:
  - reverse
-thumbnail: /assets/img/posts/thumbnail/hkcert22-thumbnail.jpg
+thumbnail: assets/straight-to-oops.jpg
 usemathjax: true
 ---
 
