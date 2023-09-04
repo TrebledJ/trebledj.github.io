@@ -67,30 +67,33 @@ else {
 
 Observations:
 - A [`sigaction`](https://man7.org/linux/man-pages/man2/sigaction.2.html) handler takes care of any SIGSEGV faults, outputs `Wrong!` and exits. SIGSEGVs occur when there are invalid memory accesses (e.g. reads, writes).
-- The for-loop iterates through *crumbs* (2-bit groups), xors it with static data (`mangle_buf`, and modifies `local_c0` depending on the value of each crumb. Yeah, that eyesore in the switch condition computes the current crumb. Ay c-rumba.
+- The for-loop iterates through *crumbs* (2-bit groups[^crumb]), xors it with static data (`mangle_buf`), and modifies `local_c0` depending on the value of each crumb. Yeah, that eyesore in the switch condition computes the current crumb.
 - Since 16-bytes are read, this means there are 64 crumbs, therefore 64 *operations*.
 - Our goal is to modify `local_c0` so that it goes from `0x13386000` to `0x13398000`—a difference of `0x12000`.
+
+[^crumb]: And for the nerds: 4-bits is a nybble/nibble.
 
 The last point is interesting, since there's no way we can get a unique solution, right? There are multiple ways to reach an offset of `0x12000`.
 
 For example, if our crumbs are 3, 1, 1, 1, then we've already arrived at our target address, right? Then we can just fill the rest with 2s and 1s to do nothing to `local_c0`, right? Right? 
 
-wRoNg!
+wRoNg! Ay c-rumba.
 
 {% image "assets/wrong.png", "Very WrOnG!", "post1 w-50" %}
 
-Using a Z3 script spun by reversing the program, we can output some test payloads. Using `I` as the first letter, we can trigger case 3 (`+0x15000`) as our first operation.^[Verifiable through GDB, with `b *main+245` and `p $rax`.] Turns out we can't do that as our first move, because it catapults us into `oops()`.
+Using a Z3 script spun by reversing the program, we can output some test payloads. Now obviously this isn't the flag, but I'm interested in testing out some cases. Using `I` as the first letter, we trigger case 3 (`+0x15000`) as our first operation.^[Verifiable through GDB, with `b *main+245` and `p $rax`.] Turns out we can't do that as our first move, because it catapults us into `oops()`.
 
 {% image "assets/straight-to-oops.jpg", "You straight to oops. Right away.", "post1" %}
 
 <sup>We have the best flag. Because of `oops()`.</sup>
 {.caption}
 
-There must be something more.
+If instead our first case was 2, the program continues, and we're not thrown straight into ~~jail~~ `oops()`.
+So there must be something we're missing.
 
 ### Where are the segfaults coming from?
 
-While all these observations are fine and dandy, the decompilation misses something crucial. Isn't it weird how `local_c0` seems to be working with addresses and jumping around without actually doing *anything*? Turns out, there's a sneaky little dereference after the switch-case, at `0x401305`.
+While all the above observations are fine and dandy, the decompilation leaves out something crucial. Isn't it weird how `local_c0` seems to be working with addresses and jumping around without actually doing *anything*? Turns out, there's a sneaky little dereference after the switch-case, at `0x401305`.
 ```armasm
 ; 0x4012fe. Load `local_c0` from stack to RAX.
 MOV        RAX,qword ptr [RBP + local_c0]
