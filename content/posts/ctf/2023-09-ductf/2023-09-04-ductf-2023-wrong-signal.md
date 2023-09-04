@@ -3,8 +3,9 @@ title: DUCTF 2023 – Wrong Signal
 description: You straight to `oops()`. Right away.
 tags:
  - reverse
+ - python
+ - programming
 thumbnail: assets/straight-to-oops.jpg
-usemathjax: true
 ---
 
 ## Description
@@ -78,7 +79,7 @@ wRoNg!
 
 {% image "assets/wrong.png", "Very WrOnG!", "post1 w-50" %}
 
-Using a Z3 script spun by reversing the program, we can output some test payloads. Using `I` as the first letter, we can trigger case 3 (`+0x15000`) as our first operation.^[Verifiable through GDB, with `b *main+245` and `p $rax`.] Turns out we can't do that as our first move, because it catapults us into `oops()`. ☹️
+Using a Z3 script spun by reversing the program, we can output some test payloads. Using `I` as the first letter, we can trigger case 3 (`+0x15000`) as our first operation.^[Verifiable through GDB, with `b *main+245` and `p $rax`.] Turns out we can't do that as our first move, because it catapults us into `oops()`.
 
 {% image "assets/straight-to-oops.jpg", "You straight to oops. Right away.", "post1" %}
 
@@ -89,7 +90,7 @@ There must be something more.
 
 ### Where are the segfaults coming from?
 
-While all these observations are fine and dandy, the decompilation misses something crucial. Isn't it weird how `local_c0` seems to be working with addresses and jumping around without actually doing *anything*? Turns out, there's a sneaky little dereference at `0x401305`.
+While all these observations are fine and dandy, the decompilation misses something crucial. Isn't it weird how `local_c0` seems to be working with addresses and jumping around without actually doing *anything*? Turns out, there's a sneaky little dereference after the switch-case, at `0x401305`.
 ```armasm
 ; 0x4012fe. Load `local_c0` from stack to RAX.
 MOV        RAX,qword ptr [RBP + local_c0]
@@ -108,7 +109,7 @@ Yikes! That's a lot of segments. Notice how some of them disallow all permission
 
 ## Concluding Remarks
 
-Peeking at the [official solve script](https://github.com/DownUnderCTF/Challenges_2023_Public/blob/main/rev/wrong-signal/solve/solver.py)... it turns out the challenge was a... *maze*?!? Wut? Didn't expect that. But overall it was a fun little challenge, and a good reminder to not overlook (or completely ignore) the small details such as that hidden byte read.
+Peeking at the [official solve script](https://github.com/DownUnderCTF/Challenges_2023_Public/blob/main/rev/wrong-signal/solve/solver.py)... it turns out the challenge was a... *maze*?!? Wut? Didn't expect that. But overall it was a fun little challenge with some nice surprises, and a good reminder to not overlook (or completely ignore) the small details such as that hidden byte read.
 
 ## Solve Script
 
