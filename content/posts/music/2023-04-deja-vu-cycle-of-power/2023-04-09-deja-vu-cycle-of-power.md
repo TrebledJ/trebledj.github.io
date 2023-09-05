@@ -7,7 +7,7 @@ tags:
  - fusion
  - deja-vu
  - essay
-thumbnail: assets/easter-tomb-sq.jpg
+thumbnail_src: assets/easter-tomb-sq.jpg
 track_id: 1488692758
 # score_id: 
 related:

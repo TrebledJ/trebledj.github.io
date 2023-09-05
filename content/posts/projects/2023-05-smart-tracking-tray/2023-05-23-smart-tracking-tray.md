@@ -9,8 +9,8 @@ tags:
  - software-engineering
  - experience
  - hkust
-thumbnail: assets/smart-tray.jpg
-include_thumbnail: true
+thumbnail_src: assets/smart-tray.jpg
+thumbnail_banner: true
 pitch: Programmed an embedded device for efficient smart-tracking of lab chemicals.
 related:
 ---

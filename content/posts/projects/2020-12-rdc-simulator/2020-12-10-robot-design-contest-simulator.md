@@ -10,7 +10,7 @@ tags:
  - apps
  - hkust
  - reflection
-thumbnail: assets/thumbnail.jpg
+thumbnail_src: assets/thumbnail.jpg
 pitch: Led and managed the development of a desktop simulator used in a recruitment competition for the HKUST Robotics Team.
 related:
   posts: [robocon-2021, robocon-2020, hkust-robotics-team]

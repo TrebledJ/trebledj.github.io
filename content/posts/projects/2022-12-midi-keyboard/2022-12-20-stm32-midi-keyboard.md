@@ -11,8 +11,8 @@ tags:
  - dsp
  - music
  - hkust
-thumbnail: assets/midi-keyboard.jpg
-include_thumbnail: true
+thumbnail_src: assets/midi-keyboard.jpg
+thumbnail_banner: true
 pitch: Developed a MIDI keyboard using an STM32F4 microcontroller.
 related:
   posts: [r/digital-audio-synthesis-for-dummies-part-.*/r]

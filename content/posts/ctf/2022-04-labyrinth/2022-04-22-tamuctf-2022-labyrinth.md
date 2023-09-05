@@ -5,7 +5,7 @@ tags:
  - reverse
  - python
  - programming
-thumbnail: assets/labyrinth-thumbnail.jpg
+thumbnail_src: assets/labyrinth-thumbnail.jpg
 ---
 
 ### Challenge Description

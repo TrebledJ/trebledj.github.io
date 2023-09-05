@@ -6,7 +6,7 @@ tags:
  - pwn
  - python
  - programming
-thumbnail: assets/inspector-gadget.png
+thumbnail_src: assets/inspector-gadget.png
 usemathjax: true
 ---
 

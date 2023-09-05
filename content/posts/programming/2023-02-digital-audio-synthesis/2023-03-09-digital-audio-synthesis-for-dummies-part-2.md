@@ -8,8 +8,8 @@ tags:
  - c
  - cpp
  - music
-thumbnail: assets/synthwave-a-major-space-2.jpg
-include_thumbnail: true
+thumbnail_src: assets/synthwave-a-major-space-2.jpg
+thumbnail_banner: true
 usemathjax: true
 related:
     posts: [r/digital-audio-synthesis-for-dummies-part-.*/r, stm32-midi-keyboard]

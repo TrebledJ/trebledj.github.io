@@ -5,7 +5,7 @@ updated: "2022-08-09"
 tags:
  - aoc
  - haskell
-thumbnail: assets/recycle-hs-utils.jpg
+thumbnail_src: assets/recycle-hs-utils.jpg
 usemathjax: true
 related:
   tags: [aoc, haskell]

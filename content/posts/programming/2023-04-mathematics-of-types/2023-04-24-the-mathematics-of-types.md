@@ -5,8 +5,8 @@ tags:
  - mathematics
  - haskell
  - software-engineering
-thumbnail: assets/abstract.jpg
-# include_thumbnail: true
+thumbnail_src: assets/abstract.jpg
+# thumbnail_banner: true
 usemathjax: true
 related:
     auto: true

@@ -5,7 +5,7 @@ module.exports = {
         "music",
     ],
     layout: "layouts/post-music",
-    include_thumbnail: false,
+    // thumbnail_banner: false,
     related: {
         tags: ['composition'],
         sort: 'relevant',

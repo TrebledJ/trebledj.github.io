@@ -6,7 +6,7 @@ tags:
  - minimalism
  - strings
 keywords: [ensemble, string ensemble, emotional, peaceful, serene]
-thumbnail: assets/spring-dawn.jpg
+thumbnail_src: assets/spring-dawn.jpg
 track_id: 1199277217
 related:
     posts: [joyride-in-d, morning-rush]
