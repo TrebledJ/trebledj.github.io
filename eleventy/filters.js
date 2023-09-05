@@ -1,6 +1,7 @@
 const { DateTime } = require("luxon");
 
 const findPostsRelatedTo = require('./detail/related')
+const selectHomePosts = require('./detail/select-home-posts')
 const findKeywords = require('./detail/keywords')
 
 
@@ -120,7 +121,18 @@ module.exports = function (eleventyConfig) {
 	});
 
 	eleventyConfig.addFilter("relatedTo", findPostsRelatedTo);
+	eleventyConfig.addFilter("selectHomePosts", selectHomePosts);
 
+	/**
+	 * Accepts an array of objects, and maps each object to a particular attr.
+	 * 
+	 * Example:
+	 * 	[{id: 1, color: red}, {id: 2, color: green}, {id: 3, color: blue}] | mapattr(color)
+	 *  == [red, green, blue]
+	 */
+	eleventyConfig.addFilter("mapattr", function (array, attr) {
+		return array.map(e => e[attr]);
+	});
 
 	const md = require("markdown-it")({
 		html: false,

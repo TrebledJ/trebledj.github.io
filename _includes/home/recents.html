@@ -2,8 +2,12 @@
 {% from "tag.html" import render_tag_list %}
 
 <div class="mt-4">
+    {# Seperate posts into unique lists. #}
+    {% set tags = post_categories | extend(project_categories) | mapattr('tag') %}
+    {% set uniquePosts = collections.postsr | selectHomePosts(tags, npostsPerTab) %}
+
     {# Recent Posts Section #}
-    {{render_carousel(collections, "Recent Posts", "pencil", post_categories, carouselAutoInterval, nposts=npostsPerTab)}}
+    {{render_carousel(uniquePosts, "Recent Posts", "pencil", post_categories, carouselAutoInterval)}}
 
     {# Recent Music Section #}
     {% if featuredTracks %}
@@ -42,5 +46,5 @@
     {% endif %}
 
     {# Recent Projects and Experiences Section #}
-    {{render_carousel(collections, "Projects and Experiences", "star", project_categories, carouselAutoInterval, nposts=npostsPerTab)}}
+    {{render_carousel(uniquePosts, "Projects and Experiences", "star", project_categories, carouselAutoInterval)}}
 </div>

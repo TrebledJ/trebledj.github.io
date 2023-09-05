@@ -4,7 +4,7 @@ description: You straight to `oops()`. Right away.
 tags:
  - reverse
  - python
-#  - programming
+ - programming
 thumbnail: assets/straight-to-oops.jpg
 ---
 
