@@ -1,5 +1,5 @@
 module.exports = {
-    category: "programming",
+    ogsection: "programming",
     tags: [
         "programming",
     ],

@@ -6,7 +6,7 @@ tags:
  - python
  - cpp
  - programming
-thumbnail: assets/ctf-sim-thumbnail.jpg
+thumbnail_src: assets/ctf-sim-thumbnail.jpg
 keywords: [vpointer, vptr, ctf, virtual function, vtable, gdb]
 ---
 
@@ -332,7 +332,7 @@ Our breakpoint gets triggered. Notice the interesting chain of addresses in the 
 
 So *this* is what happens when we call a virtual function... InTeReStInG!
 
-{% image "/assets/img/memes/interesting.jpg", "", "post1 w-75" %}
+{% image "~/assets/img/memes/interesting.jpg", "", "post1 w-75" %}
 
 Let's continue so that it finishes `delete`-ing the chunk, and let's check the heap state again:
 

@@ -8,7 +8,7 @@ tags:
  - counterpoint
  - hkust
 keywords: [duet, piano, cello, emotional]
-thumbnail: assets/reticence.jpg
+thumbnail_src: assets/reticence.jpg
 track_id: 1146309253
 score_id: 8527097
 related:

@@ -7,8 +7,8 @@ tags:
  - python
  - music
  - hkust
-thumbnail: assets/midi-reimagined.jpg
-include_thumbnail: true
+thumbnail_src: assets/midi-reimagined.jpg
+thumbnail_banner: true
 pitch: Developed a browser-based MIDI editor enabled with audio-to-MIDI conversion features.
 related:
 ---

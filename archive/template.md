@@ -5,12 +5,15 @@ title:  "title of post"
 description: "short summary of post"
 author: trebledj
 date: '2021-02-28 1:35:23 +0530' # not really needed
-tags: list of tags
-thumbnail: assets/img/to/thumbnail.jpg
+tags:
+ - list
+ - of
+ - tags
+thumbnail_src: ~/assets/img/to/thumbnail.jpg  # Start with ./... for images relative to your directory.
+thumbnail_banner: true # or false depending if you want the thumbnail to show on the post's page.
 keywords: key words  # Not really important.
-comments: true      # Enable comments
+comments: true      # Enable comments.
 usemathjax: false
-include_thumbnail: true # or false depending if you want the thumbnail to show on the post's page
 pitch: A description displayed in the profile.
 track_id: 00000011 # soundcloud track id
 score_id: 00000012 # musescore track id

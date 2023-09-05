@@ -6,8 +6,8 @@ tags:
  - c
  - cpp
  - software-engineering
-thumbnail: assets/dynamic-memory-1.jpg
-# include_thumbnail: true
+thumbnail_src: assets/dynamic-memory-1.jpg
+# thumbnail_banner: true
 usemathjax: true
 related:
     auto: true

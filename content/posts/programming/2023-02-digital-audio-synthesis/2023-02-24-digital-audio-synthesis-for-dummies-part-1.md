@@ -5,8 +5,8 @@ updated: '2023-03-09'
 tags:
  - tutorial
  - dsp
-thumbnail: assets/synthwave-a-major-space-1.jpg
-include_thumbnail: true
+thumbnail_src: assets/synthwave-a-major-space-1.jpg
+thumbnail_banner: true
 usemathjax: true
 related:
     posts: [r/digital-audio-synthesis-for-dummies-part-.*/r, stm32-midi-keyboard]

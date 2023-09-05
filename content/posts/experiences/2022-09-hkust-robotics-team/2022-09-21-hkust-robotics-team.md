@@ -6,7 +6,7 @@ tags:
  - software-engineering
  - hkust
  - reflection
-thumbnail: /assets/img/posts/thumbnail/robotics-team-wallpaper-2.jpg
+thumbnail_src: ~/assets/img/posts/thumbnail/robotics-team-wallpaper-2.jpg
 pitch: Senior software engineer in the HKUST Robotics Team. Trained and mentored junior team members. Transformed and modularised project architecture and pipeline with Git submodules. Orchestrated software R&D projects.
 related:
     tags: [hkust, robotics]

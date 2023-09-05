@@ -5,7 +5,7 @@ tags:
  - reverse
  - python
  - programming
-thumbnail: assets/straight-to-oops.jpg
+thumbnail_src: assets/straight-to-oops.jpg
 ---
 
 ## Description

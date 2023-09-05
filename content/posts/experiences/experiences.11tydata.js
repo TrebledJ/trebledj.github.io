@@ -1,5 +1,5 @@
 module.exports = {
-	category: "experience",
+	ogsection: "experience",
 	tags: [
 		"experience"
 	],

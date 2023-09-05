@@ -5,7 +5,7 @@ updated: '2023-03-09'
 tags:
  - meta
  - js
-thumbnail: assets/ogle-ogle-eleventy.jpg
+thumbnail_src: assets/ogle-ogle-eleventy.jpg
 related:
     disable: true
 ---

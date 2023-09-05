@@ -3,13 +3,14 @@ const eleventyImage = require("@11ty/eleventy-img");
 
 
 module.exports = function (eleventyConfig) {
-    const breakpoints = (process.env.ENVIRONMENT === 'production' ? [512, 1024] : [200]);
+    const thumbWidth = 512; // Thumbnail default max width.
+    const breakpoints = (process.env.ENVIRONMENT === 'production' ? [256, thumbWidth, 1024] : [thumbWidth]);
+    const imageWidths = [...breakpoints, "auto"];
 
+    // Returns a path relative to a file.
+    // For example, relativeToInputPath(./content/posts/a/foo.md, assets/image.jpg) --> ./content/posts/a/assets/image.jpg.
     function relativeToInputPath(inputPath, relativeFilePath) {
-        let split = inputPath.split(path.sep);
-        split.pop();
-
-        return path.resolve(split.join(path.sep), relativeFilePath);
+        return path.dirname(inputPath) + path.sep + relativeFilePath;
     }
 
     // Get settings and options.
@@ -19,11 +20,10 @@ module.exports = function (eleventyConfig) {
         const animated = src.endsWith('gif');
 
         // Full list of formats here: https://www.11ty.dev/docs/plugins/image/#output-formats
-        const formats = [ext];
         const file = src;
         const options = {
-            widths: [...breakpoints, "auto"],
-            formats,
+            widths: imageWidths,
+            formats: [ext],
             outputDir: path.join(eleventyConfig.dir.output, "img"),
             sharpOptions: {
                 animated,
@@ -52,133 +52,106 @@ module.exports = function (eleventyConfig) {
         return classes;
     }
 
-    function makeImage(src, classes, alt, style, loading = 'lazy', decoding = 'async') {
-        return `<img src="${src}" class="${classes}" alt="${alt}" title="${alt}" style="${style}" loading="${loading}" decoding="${decoding}">`;
-    }
-
     function makeImageFromMetadata(metadata, ext, classes, alt, loading = 'lazy', thumbnail = false, attrs = {}) {
         const fmt = metadata[ext];
-        let auto = fmt.filter(e => !breakpoints.includes(e.width))[0]; // Get default (auto) image.
-        if (!auto) // auto clashed with a breakpoint width.
-            auto = fmt[fmt.length - 1]; // Use largest res item as default.
-
-        function makeSizes() {
-            const _default = `${auto.width}px`;
-            if (thumbnail) {
-                // TODO: rewrite thumbnail code.
-                // Force smaller images, since thumbnails are small anyways.
-                const special = 512, specialBreak = 2000;
-                const max = Math.max(...breakpoints, auto.width);
-                if (breakpoints.includes(special)) {
-                    // Images of size 512 will work on most screens.
-                    const bps = [`(max-width: ${specialBreak - 1}px) ${special}px`, `(min-width: ${specialBreak}px) ${max}px`];
-                    return [...bps, _default].join(', ');
-                } else {
-                    console.warn(`${special}px is not breakpoint size. Skipping thumbnail calculations.`);
-                    return _default;
-                }
-            } else {
-                const bps = [...breakpoints.filter(bp => bp <= max_width).map(bp => `(max-width: ${bp}px) ${bp}px`)];
-                return [...bps, _default].join(', ');
-            }
+        // Get default ("auto" width) image.
+        let defsrc = fmt.filter(e => !breakpoints.includes(e.width))[0];
+        if (thumbnail) {
+            // For thumbnails, use the prescribed-width image.
+            defsrc = fmt.filter(e => e.width == thumbWidth)[0] || defsrc;
+        }
+        if (!defsrc) {
+            // Use largest res item as default.
+            defsrc = fmt[fmt.length - 1];
         }
 
-        const max_width = fmt[fmt.length - 1].width;
+        // Use a smaller max width for thumbnails.
+        const maxWidth = thumbnail ? thumbWidth : fmt[fmt.length - 1].width;
+
+        // Construct srcset/sizes.
         const srcset = fmt.map(entry => entry.srcset).join(", ");
-        const sizes = makeSizes();
-        const attr_str = Object.entries(attrs).map((k, v) => `${k}="${v}"`).join(' ');
-        return `<img class="${classes.join(' ')}" src="${auto.url}" alt="${alt}" title="${alt}" srcset="${srcset}" sizes="${sizes}" loading="${loading}" decoding="async" ${attr_str} style="aspect-ratio: auto ${auto.width} / ${auto.height}" />`.replaceAll(/\s{2,}/g, ' ');
+        const bps = breakpoints.filter(bp => bp <= maxWidth);
+        const sizes = [...bps.map(bp => `(max-width: ${bp}px) ${bp}px`), `${defsrc.width}px`].join(', ');
+
+        // Overwrite params.
+        attrs = {
+            decoding: 'async',
+            style: '',
+            ...attrs,
+            srcset,
+            sizes,
+            loading,
+        };
+
+        attrs.style += `aspect-ratio: auto ${defsrc.width} / ${defsrc.height}`;
+
+        const attr_str = Object.entries(attrs).map(e => `${e[0]}="${e[1]}"`).join(' ');
+        return `<img class="${classes.join(' ')}" alt="${alt}" title="${alt}" src="${defsrc.url}" ${attr_str} />`.replaceAll(/\s{2,}/g, ' ');
     }
 
     async function imageShortcode(src, altText, classes, loading = 'lazy') {
         const { ext, file, options } = getOptions(src);
         const metadata = await eleventyImage(file, options);
-
         classes = amendClasses(classes);
-
-        // const data = metadata[ext][metadata[ext].length - 1];
-        // const ratio = `aspect-ratio: auto ${data.width} / ${data.height};`; // Alleviate content layout shift.
-
-        // return makeImage(data.url, classes.join(' '), altText, ratio, loading = loading);
         return makeImageFromMetadata(metadata, ext, classes, altText, loading);
     }
 
     async function bannerImageShortcode(src, altText, classes) {
         // Image gets displayed near the top, so it'll almost always be displayed.
         // Load eagerly, to push first contentful paint.
+        src = resolveResourcePath(this.page, src);
         return imageShortcode(src, altText, classes, loading = 'eager');
     }
 
-    function thumbnailShortcode(src, altText, classes) {
-        if (process.env.ENVIRONMENT !== 'production') {
-            // Skip image plugin.
-            classes = amendClasses(classes);
-
-            // These are kinda hardcoded... :(
-            if (src.includes('/img/')) {
-                src = '/img/' + src.split('/img/').pop();
-            } else if (src.includes('/img/')) {
-                src = '/' + src.split('/img/').pop();
-            } else if (src.includes('/content/') && src.includes('/assets/')) {
-                src = '/img/' + src.split('/assets/').pop();
-            } else {
-                throw new Error(`[thumbnail]: unknown image source format: ${src}`);
-            }
-            return `<img src="${src}" alt="${altText}" class="${classes.join(' ')}"/>`
-        }
+    function thumbnailShortcode(post, classes) {
+        const page = post.page;
+        const src = resolveResourcePath(page, post.data.thumbnail_src);
+        const altText = post.data.title;
 
         const { ext, file, options } = getOptions(src);
         eleventyImage(file, options);
-
         classes = amendClasses(classes);
-
         const metadata = eleventyImage.statsSync(file, options);
-        // const data = metadata[ext][metadata[ext].length - 1];
-        // const ratio = `aspect-ratio: auto ${data.width} / ${data.height};`; // Alleviate content layout shift.
-
-        // return makeImage(data.url, classes.join(' '), altText, ratio);
+        
         return makeImageFromMetadata(metadata, ext, classes, altText, thumbnail = true);
     }
 
-    function resolveSmartPath(page, src) {
-        const contentFolder = 'content';
-
-        if (page !== undefined && page.inputPath.split('/').includes(contentFolder)) {
-            // Image in a page.
+    /**
+     * Resolve a resource path from a post (.md) context to an input path relative to the project dir.
+     * 
+     * Example:
+     * 
+     * Suppose we're writing in ./content/posts/a/b.md
+     *  ~/assets/img/c.jpg  ~>  ./assets/img/c.jpg
+     *  ./assets/img/d.jpg  ~>  ./content/posts/a/d.jpg
+     */
+    function resolveResourcePath(page, src) {
+        if (page !== undefined) {
             if (src.startsWith('http')) {
-                // Don't touch.
-            } else if (src.startsWith('/')) {
-                // Absolute.
-                src = src.slice(1);
+                // Online resource. Don't touch.
+            } else if (src.startsWith('~/')) {
+                // Relative to the project folder.
+                src = './' + src.slice(2);
             } else {
-                // Relative to page.
-                return relativeToInputPath(page.inputPath, src);
+                // Relative to the current page.
+                src = relativeToInputPath(page.inputPath, src);
             }
         }
         return src;
     }
 
-    // Returns path of image relative to the project directory.
-    eleventyConfig.addFilter("resolveImageUserPath", function (src, page) {
-        return resolveSmartPath(page, src);
-    });
-
     // Returns path of image relative to _site.
-    eleventyConfig.addFilter("resolveImageSitePath", function (src) {
-        if (src.startsWith('/assets/')) {
-            // Absolute.
-            src = src.slice('/assets/'.length);
-        } else {
-            // Relative.
-            src = 'img/' + src.replace(/^assets\//, '');
-        }
-        return src;
+    eleventyConfig.addFilter("resolveImageOutputPath", function (src, page) {
+        const path = resolveResourcePath(page, src);
+        const { ext, file, options } = getOptions(path);
+        const metadata = eleventyImage.statsSync(file, options);
+        return metadata[ext][0].url;
     });
 
     // Eleventy Image shortcode
     // https://www.11ty.dev/docs/plugins/image/
     eleventyConfig.addAsyncShortcode("image", async function (src, ...args) {
-        const file = resolveSmartPath(this.page, src);
+        const file = resolveResourcePath(this.page, src);
         return imageShortcode(file, ...args);
     });
 
