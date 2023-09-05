@@ -88,8 +88,8 @@
     <meta content="{{ updated | dateISO }}" property="article:modified_time"/>
 {% endif %}
 <meta content="{{ site.author.alias }}" property="article:author"/>
-{% if category %}
-    <meta content="{{ category }}" property="article:section"/>
+{% if ogsection %}
+    <meta content="{{ ogsection }}" property="article:section"/>
 {% endif %}
 {% if tags %}
     {% for t in tags | exclude('posts') %}

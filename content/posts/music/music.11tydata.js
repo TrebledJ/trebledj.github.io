@@ -1,5 +1,5 @@
 module.exports = {
-    category: "music",
+    ogsection: "music",
     tags: [
         "composition",
         "music",
