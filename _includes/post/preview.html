@@ -3,9 +3,9 @@
     <a href="{{post.url}}"></a>
     <div class="post-preview-container d-flex">
         <a class="post-thumbnail" href="{{post.url}}">
-            {% thumbnail post.data.thumbnail | resolveImageUserPath(post.page), post.data.title, "post-img-blurred-bg" %}
+            {% thumbnail post, "post-img-blurred-bg" %}
             <div class="post-img-container d-flex w-100 h-100">
-                {% thumbnail post.data.thumbnail | resolveImageUserPath(post.page), post.data.title, "post-img-contain" %}
+                {% thumbnail post, "post-img-contain" %}
             </div>
         </a>
     

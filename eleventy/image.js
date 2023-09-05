@@ -99,14 +99,20 @@ module.exports = function (eleventyConfig) {
     async function bannerImageShortcode(src, altText, classes) {
         // Image gets displayed near the top, so it'll almost always be displayed.
         // Load eagerly, to push first contentful paint.
+        src = resolveResourcePath(this.page, src);
         return imageShortcode(src, altText, classes, loading = 'eager');
     }
 
-    function thumbnailShortcode(src, altText, classes) {
+    function thumbnailShortcode(post, classes) {
+        const page = post.page;
+        const src = resolveResourcePath(page, post.data.thumbnail);
+        const altText = post.data.title;
+
         const { ext, file, options } = getOptions(src);
         eleventyImage(file, options);
         classes = amendClasses(classes);
         const metadata = eleventyImage.statsSync(file, options);
+        
         return makeImageFromMetadata(metadata, ext, classes, altText, thumbnail = true);
     }
 
@@ -125,13 +131,8 @@ module.exports = function (eleventyConfig) {
         return src;
     }
 
-    // Returns path of image relative to the project directory.
-    eleventyConfig.addFilter("resolveImageUserPath", function (src, page) {
-        return resolveResourcePath(page, src);
-    });
-
     // Returns path of image relative to _site.
-    eleventyConfig.addFilter("resolveImageSitePath", function (src, page) {
+    eleventyConfig.addFilter("resolveImageOutputPath", function (src, page) {
         const path = resolveResourcePath(page, src);
         const { ext, file, options } = getOptions(path);
         const metadata = eleventyImage.statsSync(file, options);

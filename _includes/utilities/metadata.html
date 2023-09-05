@@ -79,7 +79,7 @@
     <meta content="{{ site.url }}{{ page.url }}" property="og:url"/>
 {% endif %}
 {% if thumbnail %}
-    <meta content="{{ site.url }}/{{ thumbnail | resolveImageSitePath }}" property="og:image"/>
+    <meta content="{{ site.url }}{{ thumbnail | resolveImageOutputPath(page) }}" property="og:image"/>
 {% endif %}
 {% if page.date %}
     <meta content="{{ page.date | dateISO }}" property="article:published_time"/>
