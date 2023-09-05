@@ -105,7 +105,7 @@ module.exports = function (eleventyConfig) {
 
     function thumbnailShortcode(post, classes) {
         const page = post.page;
-        const src = resolveResourcePath(page, post.data.thumbnail);
+        const src = resolveResourcePath(page, post.data.thumbnail_src);
         const altText = post.data.title;
 
         const { ext, file, options } = getOptions(src);
