@@ -116,6 +116,15 @@ module.exports = function (eleventyConfig) {
         return makeImageFromMetadata(metadata, ext, classes, altText, thumbnail = true);
     }
 
+    /**
+     * Resolve a resource path from a post (.md) context to an input path relative to the project dir.
+     * 
+     * Example:
+     * 
+     * Suppose we're writing in ./content/posts/a/b.md
+     *  ~/assets/img/c.jpg  ~>  ./assets/img/c.jpg
+     *  ./assets/img/d.jpg  ~>  ./content/posts/a/d.jpg
+     */
     function resolveResourcePath(page, src) {
         if (page !== undefined) {
             if (src.startsWith('http')) {
