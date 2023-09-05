@@ -39,7 +39,7 @@
 {% if keywords %}
     {% set page_keywords = page_keywords | extend(keywords) %}
 {% endif %}
-<meta name="keywords" content="{{page_keywords | join(',') | safe}}" />
+<meta name="keywords" content="{{page_keywords | join(',') | safe}}"/>
 
 {# Meta: Robots #}
 {# Configure how the page is indexed and crawled. #}
