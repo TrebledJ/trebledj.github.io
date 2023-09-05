@@ -5,7 +5,7 @@
  * first, rather than `programming`. Only if the `ctf` bucket is full, will it be considered
  * for the `programming` bucket.
  * 
- * @param {Array[object]} posts Array of all posts, ordered by most recent. Just pass `collections.postsr` here.
+ * @param {Array[post]} posts Array of all posts, ordered by most recent. Just pass `collections.postsr` here.
  * @param {Array[string]} topics Array of tags, e.g. ["programming", "music", "ctf"].
  * @param {number} nposts The number of posts to bucket into each topic.
  * @returns An object, keys are topics, values are post objects.

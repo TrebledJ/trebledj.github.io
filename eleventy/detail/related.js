@@ -2,7 +2,7 @@ const chalk = require('chalk');
 
 /**
  * Helper function to convert a string pattern to a regex.
- * @param {*} string 
+ * @param {string} slug 
  */
 function makeRelatedPostRegex(slug) {
     if (slug.startsWith('r/')) {
@@ -27,9 +27,9 @@ function makeRelatedPostRegex(slug) {
 
 /**
  * Find posts related to a particular post.
- * @param {*} posts All relevant posts to link.
- * @param {*} thisPost The post to target.
- * @param {*} related Settings and options.
+ * @param {Array[post]} posts All relevant posts to link.
+ * @param {post} thisPost The post to target.
+ * @param {object} related Settings and options.
  *  - disable: bool
  *      - Whether to disable the related posts section. (Handled in templating, not here.)
  *  - num: int
