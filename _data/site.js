@@ -2,7 +2,7 @@ module.exports = function () {
 	const email = "trebledjjj@gmail.com"
 	const bio = `
 Hi! (｡＾ ᴗ＾)ﾉ
-I'm a recent graduate from the [Hong Kong University of Science and Technology (HKUST)](http://hkust.edu.hk/).
+I'm a recent graduate of the [Hong Kong University of Science and Technology (HKUST)](http://hkust.edu.hk/).
 I'm passionate in a wide range of fields, from [software engineering](/tags/software-engineering) to [music](/tags/music).
 Software engineering is such a vast field.
 There's the joy and pain of [app development](/tags/apps), the tension and fun in [cybersecurity](/tags/ctf), and the tangible excitement of [robotics](/tags/robotics).
