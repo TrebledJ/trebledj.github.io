@@ -1,3 +1,5 @@
+const csp = require('./csp');
+
 module.exports = function () {
 	const email = "trebledjjj@gmail.com"
 	const bio = `
@@ -53,15 +55,7 @@ Feel free to [reach out](#contact) for whatever reason. ヽ(・∀・)ﾉ
 			{ name: "Feeds", icon: "fas fa-rss", link: "/feeds" },
 		],
 		environment: process.env.ENVIRONMENT || 'development',
-		content_security_policy: `
-		default-src 'self';
-		script-src 'self' 'unsafe-inline' *.disqus.com *.disquscdn.com code.jquery.com gist.github.com cdn.jsdelivr.net static.cloudflareinsights.com launchpad-wrapper.privacymanager.io;
-		style-src 'self' 'unsafe-inline' *.disquscdn.com cdn.jsdelivr.net github.githubassets.com;
-		font-src 'self' data: cdn.jsdelivr.net;
-		img-src 'self' data: *;
-		frame-src disqus.com *.soundcloud.com;
-		connect-src 'self' cloudflareinsights.com;
-		`,
+		content_security_policy: csp,
 		contact_placeholder: {
 			name: 'Humpty Dumpty',
 			email: 'example@gmail.com',
