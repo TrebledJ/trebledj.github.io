@@ -1,4 +1,5 @@
 const htmlmin = require("html-minifier");
+const htmlcsp = require("./eleventy/detail/html-csp-transform");
 
 const plugins = require('./eleventy/plugins');
 const filters = require('./eleventy/filters');
@@ -39,7 +40,7 @@ module.exports = function (eleventyConfig) {
 		liveReload: true,
 		watch: [
 			'./_site/**/*.css',
-	// 		'./_site/**/*.html',
+			// 		'./_site/**/*.html',
 		]
 	});
 
@@ -67,6 +68,7 @@ module.exports = function (eleventyConfig) {
 		});
 	}
 
+	eleventyConfig.addTransform("htmlcsp", htmlcsp);
 
 	// Customize Markdown library settings:
 	markdown(eleventyConfig);

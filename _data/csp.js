@@ -23,7 +23,7 @@ function compile_csp(...tags) {
 module.exports = compile_csp(
     tag('default'),
     tag('script')
-        .add(`'unsafe-inline'`)
+        // .add(`'unsafe-inline'`)
         .add('*.disqus.com', '*.disquscdn.com')
         .add('code.jquery.com', 'cdn.jsdelivr.net')
         .add('gist.github.com')
@@ -31,7 +31,8 @@ module.exports = compile_csp(
         .add('launchpad-wrapper.privacymanager.io')
     ,
     tag('style')
-        .add(`'unsafe-inline'`)
+        // .add(`'unsafe-inline'`)
+        .add(`'unsafe-hashes'`)
         .add('*.disquscdn.com')
         .add('cdn.jsdelivr.net')
         .add('cdnjs.cloudflare.com')

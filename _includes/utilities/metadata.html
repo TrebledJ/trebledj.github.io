@@ -51,7 +51,7 @@
 <meta name="robots" content="{{index}},follow"/>
 
 {# Meta: CSP #}
-<meta http-equiv='Content-Security-Policy' content="{{site.content_security_policy}}"/>
+<meta http-equiv='Content-Security-Policy' content="{{site.content_security_policy | safe}}"/>
 
 {# Meta: RSS Auto-Discovery #}
 <link href="/feeds/posts.xml" rel="alternate" title="RSS Feed for {{site.title}}" type="application/rss+xml"/>
