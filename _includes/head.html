@@ -20,7 +20,6 @@
     <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     {# <script async src="/js/jquery.easing.min.js"></script> #}
     {# <script async src="/js/jquery.mousewheel.min.js"></script> #}
-    <script defer src="/js/typewriter.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script>
 
@@ -29,9 +28,9 @@
     <script defer src="/js/sidebar.js"></script>
 
     {% if site.environment == 'production' %}
-        <!-- Cloudflare Web Analytics -->
+        {# Cloudflare Web Analytics #}
         <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "0c1f01f6fd2340a9a7c7abb8072e3857"}'></script>
-        <!-- End Cloudflare Web Analytics -->
+        {# End Cloudflare Web Analytics #}
     {% endif %}
 
     {% block head_assets_ext %}{% endblock %}
