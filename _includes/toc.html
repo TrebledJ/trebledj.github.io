@@ -2,7 +2,7 @@
 <div class="toc-container">
     {% if title != '404' %}
         <span>
-            <a onclick="$('#btn-back-to-top').trigger('click')">Content</a>
+            <a id="toc-content">Content</a>
         </span>
         {% if toc %}
             {{toc | safe}}

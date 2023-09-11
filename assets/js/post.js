@@ -12,6 +12,11 @@ $(function () {
         $(".copied").animate({ opacity: 0 }, 1000);
     });
 
+    // --- Content Header -> Back to Top --- //
+    $('#toc-content').on('click', () => {
+        $('#btn-back-to-top').trigger('click');
+    })
+
     // --- TOC Current Section Highlight --- //
     const headerOffset = 150;
     const sections = document.querySelectorAll(".post-article h2,.post-article h3");
