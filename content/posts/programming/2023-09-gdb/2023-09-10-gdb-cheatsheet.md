@@ -12,7 +12,7 @@ related:
 
 (No, the subtitle is not a comment on gender.)
 
-These are a curated collection of GDB/GEF commands which I find incredibly useful for dynamic analysis and reverse engineering. These are mainly personal notes and may be incomplete, but suggestions are welcomed! If there's a useful GDB/GEF command you use that's not on this list, do [leave a comment](#comments) or [let me know](/#contact) so that I can add it. :)
+This is a curated collection of GDB/GEF commands which I find incredibly useful for dynamic analysis and reverse engineering. These are mainly personal notes and may be incomplete, but suggestions are welcome! If there's a useful GDB/GEF command you use that's not on this list, do [leave a comment](#comments) or [let me know](/#contact) so that I can add it. :)
 
 ## The Basics
 
@@ -59,8 +59,8 @@ We want to inspect a program in the guts. But how do we stop it where we want?
 
 - `^C` during program execution. (Also throws a {% abbr "`SIGINT`", "SIGnal INTerrupt." %}.)
 - Use `start` instead of `run`. {% abbr "Breaks", "Stops (pauses) the program" %} after starting the program.
-- Use [Breakpoints](#breakpoints) (break on address).
-- Use [Watchpoints](#watchpoints) (break on data).
+- Use [breakpoints](#breakpoints) (break on address).
+- Use [watchpoints](#watchpoints) (break on data).
 
 ### Step Debugging
 
@@ -311,7 +311,7 @@ disable <breakpoint-id>
 delete <breakpoint-id>
 ```
 
-Skip `n` times.
+Skip breakpoints `n` times.
 
 ```sh
 continue <ignore-count>
