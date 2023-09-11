@@ -40,7 +40,7 @@ module.exports = function (eleventyConfig) {
 		liveReload: true,
 		watch: [
 			'./_site/**/*.css',
-			// 		'./_site/**/*.html',
+			'./_site/**/*.html',
 		]
 	});
 
