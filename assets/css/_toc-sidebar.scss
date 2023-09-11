@@ -4,6 +4,7 @@
     z-index: 2;
     height: calc(100vh - 11rem);
     overflow-y: auto;
+    line-height: var(--line-height-compact);
 
     .toc {
         font-size: 12px;
@@ -36,7 +37,7 @@
         padding-left: 1rem;
 
         li {
-            margin-top: 0.4rem;
+            margin-top: 0.25rem;
         }
     }
 
