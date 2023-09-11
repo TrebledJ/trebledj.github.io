@@ -5,3 +5,7 @@ A necessary foundation and institution for learning in today's age but sadly one
 
 > *Intellectual growth should commence at birth and cease only at death.*  
 >  – Albert Einstein
+
+Tools for learners and for learning.
+
+See also: {% tag "tutorial" %}.

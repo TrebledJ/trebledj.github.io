@@ -5,6 +5,7 @@ tags:
  - ctf
  - pwn
  - reverse
+ - learning
 thumbnail_src: assets/gef.png
 related:
     tags: [ctf]
