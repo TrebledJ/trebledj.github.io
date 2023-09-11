@@ -31,8 +31,8 @@ module.exports = compile_csp(
         .add('launchpad-wrapper.privacymanager.io')
     ,
     tag('style')
-        // .add(`'unsafe-inline'`)
-        .add(`'unsafe-hashes'`)
+        .add(`'unsafe-inline'`)
+        // .add(`'unsafe-hashes'`)
         .add('*.disquscdn.com')
         .add('cdn.jsdelivr.net')
         .add('cdnjs.cloudflare.com')

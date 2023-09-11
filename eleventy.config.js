@@ -1,5 +1,5 @@
 const htmlmin = require("html-minifier");
-const htmlcsp = require("./eleventy/detail/html-csp-transform");
+const collectHashes = require("./eleventy/detail/html-csp-transform-collect");
 
 const plugins = require('./eleventy/plugins');
 const filters = require('./eleventy/filters');
@@ -68,7 +68,16 @@ module.exports = function (eleventyConfig) {
 		});
 	}
 
-	eleventyConfig.addTransform("htmlcsp", htmlcsp);
+	eleventyConfig.addTransform("htmlcsp", function (content) {
+		if (this.page.outputPath && this.page.outputPath.endsWith(".html")) {
+			const hashes = collectHashes('sha256', content);
+	
+			return content
+				.replace(/\bscript-src (.*?'self')/, `script-src $1 ${Array.from(new Set(hashes.script)).join(' ')}`)
+				// .replace(/\bstyle-src (.*?'self')/, `style-src $1 ${Array.from(new Set(hashes.style)).join(' ')}`)
+		}
+		return content;
+	});
 
 	// Customize Markdown library settings:
 	markdown(eleventyConfig);
