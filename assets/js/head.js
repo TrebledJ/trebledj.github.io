@@ -45,7 +45,6 @@ $(function () {
         s.each(function () {
             $(this).attr('src', $(this).attr('src') + '&visual=true');
         });
-        console.log('#s:', s.length)
     }
 
     $('.carousel').each(function () {
