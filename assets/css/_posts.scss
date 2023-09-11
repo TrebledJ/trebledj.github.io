@@ -277,18 +277,34 @@
     }
 
     // Default most elements to have top margin instead of bottom margin.
-    *:not(ul,ol,li,hr), &>ul, &>ol {
-        margin-top: 1rem;
-        margin-bottom: 0;
-    }
-
-    &, div, blockquote {
-        & > *:first-child {
-            margin-top: 0;
+    // *:not(ul, ol, li, hr, svg, p>a, .gist *) 
+    p,
+    blockquote,
+    img,
+    table,
+    pre,
+    .alert {
+        &:not(.gist *) {
+            margin-top: 1rem;
+            margin-bottom: 0;
         }
     }
 
-    div > *:last-child {
+    &,
+    .alert-content,
+    blockquote {
+        &>*:first-child {
+            margin-top: 0;
+        }
+
+        &>ul,
+        &>ol {
+            margin-top: 1rem;
+            margin-bottom: 0;
+        }
+    }
+
+    div>*:last-child {
         margin-bottom: 0;
     }
 
@@ -337,12 +353,14 @@ img.center {
 }
 
 .alert-content {
-    overflow: auto;
-}
+    overflow-x: auto;
+    overflow-y: hidden;
 
-// .alert-content>p:last-child {
-//     margin-bottom: 0;
-// }
+    &>ul,
+    &>ol {
+        padding-left: 1rem;
+    }
+}
 
 /* Direct Links / Markdown Headers */
 // .md-anchor {
