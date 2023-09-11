@@ -216,21 +216,6 @@
 }
 
 .post-article {
-
-    h6,
-    p {
-        line-height: 1.65em;
-    }
-
-    ul,
-    ol {
-        margin-left: 0rem;
-    }
-
-    li {
-        margin-bottom: 0.1rem;
-    }
-
     .post-meta-icon {
         font-size: 16px;
     }
@@ -275,6 +260,8 @@
 }
 
 .post-body {
+
+    // Add article text CSS here.
     .center {
         text-align: center;
     }
@@ -297,6 +284,39 @@
         p:not(:last-child) {
             margin-bottom: 0rem;
         }
+    }
+
+    .h1,
+    .h2,
+    .h3,
+    .h4,
+    .h5,
+    .h6,
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        margin-top: 1rem;
+    }
+
+    ul,
+    ol {
+        margin-left: 0rem;
+    }
+
+    li {
+        margin-bottom: 0.1rem;
+    }
+
+    p {
+        &:first-of-type {
+            margin-top: 0;
+        }
+        
+        margin-top: 1rem;
+        margin-bottom: 0;
     }
 }
 
