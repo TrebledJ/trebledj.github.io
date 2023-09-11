@@ -276,15 +276,15 @@
         /* This class serves no purpose other than making markdown assign attribute lists correctly. (Needs some whitespace tuning.) */
     }
 
-    ul {
-        margin-top: 0.2rem;
+    // ul {
+    //     margin-top: 0.2rem;
 
-        // li:not(:last-child) p,
-        li p,
-        p:not(:last-child) {
-            margin-bottom: 0rem;
-        }
-    }
+    //     // li:not(:last-child) p,
+    //     li p,
+    //     p:not(:last-child) {
+    //         margin-bottom: 0rem;
+    //     }
+    // }
 
     .h1,
     .h2,
@@ -310,7 +310,7 @@
         margin-bottom: 0.1rem;
     }
 
-    * {
+    *:not(li) {
         margin-top: 1rem;
         margin-bottom: 0;
     }
@@ -321,6 +321,10 @@
 
     div > *:last-child {
         margin-bottom: 0;
+    }
+
+    .tag {
+        font-size: 14px;
     }
 }
 

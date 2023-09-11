@@ -89,7 +89,7 @@ module.exports = {
 		permalink: data => '/posts/' + data.page.fileSlug + '/index.html',
 	},
 	author: "trebledj",
-	thumbnail_src: "/img/posts/thumbnail/default.png",
+	thumbnail_src: "~/assets/img/posts/thumbnail/default.png",
 	thumbnail_banner: false,
 	sharable: true,
 	comments: true,

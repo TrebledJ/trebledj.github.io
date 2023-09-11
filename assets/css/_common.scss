@@ -59,6 +59,7 @@ blockquote {
 
 blockquote p {
     border-radius: var(--border-radius);
+
     &:last-child {
         margin-bottom: 0;
     }
@@ -98,7 +99,56 @@ hr {
 }
 
 pre {
-    display: block;
-    font-size: 87.5%;
-    color: #d4d4d4;
+    // display: block;
+    // font-size: 87.5%;
+    // color: #d4d4d4;
+}
+
+
+table {
+    border-spacing: 0;
+    border-collapse: collapse;
+    // display: block;
+    width: 100%;
+    max-width: 100%;
+    overflow: auto;
+    margin-top: 0;
+    margin-bottom: 16px;
+
+    th {
+        font-weight: 600;
+    }
+    
+    th,
+    td {
+        padding: 6px 13px;
+        border: 1px solid var(--light-border-color);
+    }
+    
+    tr {
+        background-color: var(--main-background-color);
+        border-top: 1px solid var(--light-border-color);
+    }
+    
+    tr:nth-child(2n) {
+        background-color: var(--medium-background-color);
+    }
+    
+    img {
+        background-color: transparent;
+    }
+}
+
+td,
+th {
+    padding: 0;
+}
+
+
+details summary {
+    cursor: pointer;
+}
+
+details:not([open])>*:not(summary) {
+    display: none !important;
 }

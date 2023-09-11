@@ -13,6 +13,7 @@ thumbnail_src: ~/assets/img/to/thumbnail.jpg  # Start with ./... for images rela
 thumbnail_banner: true # or false depending if you want the thumbnail to show on the post's page.
 keywords: key words  # Not really important.
 comments: true      # Enable comments.
+sharable: false     # Enable share buttons.
 usemathjax: false
 pitch: A description displayed in the profile.
 track_id: 00000011 # soundcloud track id
@@ -23,9 +24,10 @@ related:
     tags: [tag1, tag2, tag3]  # Any post containing all these tags is marked as related.
     auto: true # Use an auto algorithm to determine whether a post is related.
     # See more params in related.js.
+draft: true  # Set true to not publish.
 noindex: true # Set true to add a noindex metadata, to indicate SE robots to not index this page.
 permalink: /posts/permalink/to/post/
-published: false # keep as draft
+redirect_from: [/link-to-post, /link-to-other-post] # Endpoints to redirect from.
 sitemap: false # don't put in sitemap
 ---
 
