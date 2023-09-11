@@ -310,13 +310,15 @@
         margin-bottom: 0.1rem;
     }
 
-    *:not(li) {
+    *:not(ul,ol,li), &>ul, &>ol {
         margin-top: 1rem;
         margin-bottom: 0;
     }
 
-    *:first-child {
-        margin-top: 0;
+    &, div, blockquote {
+        & > *:first-child {
+            margin-top: 0;
+        }
     }
 
     div > *:last-child {
