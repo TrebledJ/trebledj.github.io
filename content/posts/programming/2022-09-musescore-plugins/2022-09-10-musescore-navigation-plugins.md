@@ -24,6 +24,10 @@ In this post, I’ll introduce my first set of MuseScore plugins and give a brie
 
 ## todo-list
 
+{% alert "info" %}
+An update has been published for MuseScore 4.1+. Please refer to the [new release](https://github.com/TrebledJ/musescore-todo-list/releases/tag/v4.0.0).
+{% endalert %}
+
 View the project on: [MuseScore](https://musescore.org/en/project/musescore-do-list) / [GitHub](https://github.com/TrebledJ/musescore-todo-list).
 
 In software development, to-dos are commonly added into source code as reminders to the poor developers toiling away writing code. To-dos come in many forms: bugs to be fixed, issues to be resolved, feature requests, etc.
