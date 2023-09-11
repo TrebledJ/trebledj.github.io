@@ -32,6 +32,9 @@ function makeRelatedPostRegex(slug) {
  * @param {object} related Settings and options.
  *  - disable: bool
  *      - Whether to disable the related posts section. (Handled in templating, not here.)
+ *  - excludeOthers: bool
+ *      - Whether to disable OTHER posts from linking to THIS post in their
+ *        related section via tags/auto-algorithms.
  *  - num: int
  *      - Maximum number of posts to find.
  *  - posts: Array[string]
@@ -59,14 +62,19 @@ module.exports = function (posts, thisPost, related) {
 
     const final_related = new Set(); // Final array of related posts.
 
-    function add_posts(posts) {
-        for (let i = 0; i < posts.length; i++) {
+    function add_posts(posts, force=false) {
+        for (const post of posts) {
             if (final_related.size >= n)
                 break;
-            if (posts[i].page.fileSlug === thisPost.fileSlug)
+            if (post.page.fileSlug === thisPost.fileSlug || final_related.has(post))
                 continue;
 
-            final_related.add(posts[i]);
+            if (!force && post.data.related.excludeOthers) {
+                console.log(chalk.green(`[related] Excluding '${post.page.fileSlug}' from inclusion into ${thisPost.fileSlug}.`));
+                continue;
+            }
+
+            final_related.add(post);
         }
     }
 
@@ -78,7 +86,7 @@ module.exports = function (posts, thisPost, related) {
             }
 
             // Find post(s)...
-            const {regex, flags} = makeRelatedPostRegex(slug);
+            const { regex, flags } = makeRelatedPostRegex(slug);
             const matches = posts.filter(e => e.page.fileSlug.match(regex));
             if (!matches) {
                 console.error(chalk.red(`[related] No matches for post regex '${pattern}' provided in related.posts of ${thisPost.fileSlug}.`));
@@ -89,7 +97,7 @@ module.exports = function (posts, thisPost, related) {
                 matches.reverse();
             }
 
-            add_posts(matches);
+            add_posts(matches, force=true);
         }
     }
 
@@ -99,12 +107,8 @@ module.exports = function (posts, thisPost, related) {
             if (final_related.size >= n) {
                 break;
             }
-            if (post == thisPost || final_related.has(post)) {
-                continue; // Already marked as related. Skip.
-            }
-
             if (related.tags.every(t => post.data.tags.includes(t))) {
-                final_related.add(post);
+                add_posts([post]);
             }
         }
     }
@@ -125,12 +129,9 @@ module.exports = function (posts, thisPost, related) {
             if (final_related.size >= n) {
                 break;
             }
-            if (post == thisPost || final_related.has(post)) {
-                continue; // Already marked as related. Skip.
-            }
 
             if (countCommon(thisTags, post.data.tags) - 1 >= Math.ceil(thisTags.length * autoCommonTagsThreshold)) {
-                final_related.add(post);
+                add_posts([post]);
             }
         }
     }
