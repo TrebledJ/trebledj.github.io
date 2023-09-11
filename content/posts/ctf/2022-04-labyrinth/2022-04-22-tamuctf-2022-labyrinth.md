@@ -106,9 +106,9 @@ Ghidra will load PIE assembly at offset `0x100000`, but angr loads it at `0x4000
 Now we'll try some good ol' angr `explore()` and see what turns up.
 
 ```py
-    state = p.factory.entry_state(addr=start_addr) # Construct the state when we "start" the executable at `start_addr`.
-    simgr = p.factory.simgr(state) # Get a simulation manager. This will... manage our simulations.
-    simgr.explore(find=tar_addr)  # GOGOGO!!!
+state = p.factory.entry_state(addr=start_addr) # Construct the state when we "start" the executable at `start_addr`.
+simgr = p.factory.simgr(state) # Get a simulation manager. This will... manage our simulations.
+simgr.explore(find=tar_addr)  # GOGOGO!!!
 ```
 
 `explore()` is the most straightforward command in angr. With the `find=tar_addr` parameter, we tell `explore()` to *simulate* and *look for* states which will execute the instruction at `tar_addr`.
@@ -144,21 +144,21 @@ Since the labyrinth elf only contains simple if-statements and function calls, a
 Working with graphs and nodes in angr is fairly straightforward. angr CFGs are just instances of `networkx` graphs (a python graph library), so we'll need to import it to use its handy `shortest_path` function.
 
 ```py
-    # Construct a CFG from the 1000 functions. 
-    # Restrict analysis to the relevant region to save time.
-    region = [(0x401155, 0x400000 + elf.sym['__libc_csu_init'])]
-    cfg = p.analyses.CFGFast(regions=region)
+# Construct a CFG from the 1000 functions. 
+# Restrict analysis to the relevant region to save time.
+region = [(0x401155, 0x400000 + elf.sym['__libc_csu_init'])]
+cfg = p.analyses.CFGFast(regions=region)
 
-    # Get networkx nodes for start and target addresses in CFG.
-    src_node = cfg.model.get_any_node(start_addr, anyaddr=True)
-    tar_node = cfg.model.get_any_node(tar_addr, anyaddr=True)
+# Get networkx nodes for start and target addresses in CFG.
+src_node = cfg.model.get_any_node(start_addr, anyaddr=True)
+tar_node = cfg.model.get_any_node(tar_addr, anyaddr=True)
 
-    # Ensure nodes exist. shortest_path works differently if a node is None.
-    assert src_node is not None and tar_node is not None
+# Ensure nodes exist. shortest_path works differently if a node is None.
+assert src_node is not None and tar_node is not None
 
-    # Construct the shortest path from src to tar. This will be a list of CFGNodes.
-    from networkx import shortest_path
-    path = shortest_path(cfg.graph, src_node, tar_node)
+# Construct the shortest path from src to tar. This will be a list of CFGNodes.
+from networkx import shortest_path
+path = shortest_path(cfg.graph, src_node, tar_node)
 ```
 
 Now that we have a direct sequence of nodes from `main` to our `exit(0)` function, we just need to guide angr's simulation manager along the path, function-by-function.
@@ -166,24 +166,24 @@ Now that we have a direct sequence of nodes from `main` to our `exit(0)` functio
 <!-- But there's one more thing we should take care of. Our path is currently a path of blocks, not functions. To make the exploration consistent of stepping through functions, we'll group the  -->
 
 ```py
-    # Walk through the rest of the path.
-    state = p.factory.blank_state(addr=start_addr)
-    for node in path:
-        # Let the simulator engine works its magic.
-        simgr = p.factory.simgr(state)
-        simgr.explore(find=node.addr)
-        assert len(simgr.found) > 0
-        
-        # Keep the found state for next iteration.
-        state = simgr.found[0]
+# Walk through the rest of the path.
+state = p.factory.blank_state(addr=start_addr)
+for node in path:
+    # Let the simulator engine works its magic.
+    simgr = p.factory.simgr(state)
+    simgr.explore(find=node.addr)
+    assert len(simgr.found) > 0
+    
+    # Keep the found state for next iteration.
+    state = simgr.found[0]
 ```
 
 Our last step is to get the input used. angr's constraint solver should have it figured out.
 
 ```py
-    # Get input which will get us from main to exit(0).
-    chain = state.posix.dumps(0)
-    return chain
+# Get input which will get us from main to exit(0).
+chain = state.posix.dumps(0)
+return chain
 ```
 
 On my computer, this solve process takes roughly 30-40 seconds... which is good enough, since it falls within the allotted time of one minute per solve. Putting it together with the solver template and running it, the server kindly hands us the flag!

@@ -455,7 +455,7 @@ for (int i = 0; i < BUFFER_SIZE; i++, t++) {
 If you flash the above code and feed the output to an oscilloscope, you may find it doesn’t really work. Our signal [stalls](#stall-img), for similar reasons as before.
 
 {% alert "warning" %}
-Even with DMA, stalls may occur. This is usually a sign that buffering (and other processes) consume too much time. Once DMA is finished, nothing is being sent out.
+Even with DMA, stalls may occur. This is usually a sign that buffering (and other processes) consume too much time. In this case, breaks in the data occur—the stream is no longer continuous, because the buffer doesn't finish prepping on time.
 {% endalert %}
 
 ### Optimisations 🏎

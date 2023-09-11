@@ -57,7 +57,7 @@ The diagram below demonstrates aliasing, which happens when our sample rate is t
 [^emp]: Katz, D; Gentile, R. 2005. *Embedded Media Processing*. They’ve provided [Chapter 5: Embedded Audio Processing](https://www.analog.com/media/en/dsp-documentation/embedded-media-processing/embedded-media-processing-chapter5.pdf) as a preview. It's a nice read.
 
 {% alert "fact" %}
-The Nyquist Theorem explains why we usually sample above 40kHz, but why 44.1kHz specifically? Well, there are historical reasons (pioneering decisions) and mathematical reasons (factoring and downsampling[^factoring]). Also, being lenient with our sampling frequency gives filters more flexibility.[^why-44100]
+The Nyquist Theorem explains why we usually sample above 40kHz, but why 44.1kHz specifically? Well, there are historical reasons (pioneering decisions) and mathematical reasons (factoring and downsampling).[^factoring] Also, being lenient with our sampling frequency gives filters more flexibility.[^why-44100]
 {% endalert %}
 
 [^factoring]: 44,100 can be factored into $2^2 \times 3^2 \times 5^2 \times 7^2$, which is useful for downsampling to various applications. It's very easy to downsample by a factor of the original sample. For instance, if we want to downsample by a factor of 2, we simply skip every other sample (or interpolate between).

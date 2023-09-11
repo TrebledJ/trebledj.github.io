@@ -49,7 +49,7 @@ A better approach is to use a *buffer* and work in batches. The buffer will hold
 We'll focus more on step 1 (processing) for now. We'll cover step 2 (output) in the next post.
 
 {% alert "info" %}
-Remember how we mentioned different [quantisation][prev-post-quantisation] representations in the previous post? Since we're concerned with audio processing, we'll be using floats and quantising from -1 to 1.
+In a previous post, we discussed [quantisation][prev-post-quantisation] and how different representations (such as integers and floats) are suited for different tasks. Since we're concerned with audio processing, we'll be using floats and quantising from -1 to 1.
 {% endalert %}
 
 In C/C++, we can generate a sine tone like so:

