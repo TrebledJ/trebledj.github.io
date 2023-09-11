@@ -288,7 +288,7 @@ Notice how information is preserved, i.e. $\texttt{toLHS }(\texttt{toRHS } x) = 
 In the same vein, the following types are also equivalent:
 
 - $\texttt{Maybe (Maybe a)} \equiv \texttt{Either Bool a}$
-- $\texttt{Maybe (Either (a, a) (Bool, a))} \break \equiv \texttt{(Maybe a, Maybe a)}$
+- $\texttt{Maybe (Either (a, a) (Bool, a))} \allowbreak \equiv \texttt{(Maybe a, Maybe a)}$
 
 ### Unit Values in the Algebra of Types
 
@@ -307,7 +307,6 @@ With these funky creatures, we can write isomorphisms such as:
 - $\texttt{Either Void a} \equiv \texttt{a}$
     - Corresponds to $0 + a = a$.
     - Bijection:
-    
         ```haskell
         toRHS :: Either Void a -> a
         toRHS (Right x) = x
@@ -320,7 +319,6 @@ With these funky creatures, we can write isomorphisms such as:
 - $\texttt{((), a)} \equiv \texttt{a}$
     - Corresponds to $1 \times a = a$.
     - Bijection:
-    
         ```haskell
         toRHS :: ((), a) -> a
         toRHS ((), x) = x
