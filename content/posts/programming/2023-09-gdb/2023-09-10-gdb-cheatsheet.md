@@ -337,8 +337,6 @@ This includes:
  - when an address is **read** from. (`rwatch`, `awatch`)
  - when an expression evaluates to a given value. (`watch`)
 
-They can be enabled/disabled/deleted like breakpoints.
-
 ```sh
 watch <expression>
 
@@ -355,7 +353,7 @@ watch *{uint32_t*}0x7fffffffd000 == 0xdeadbeef
 watch *(0x7fffffffd000 as *const u32) == 0xdeadbeef
 ```
 
-List watchpoints.
+Watchpoints can be enabled/disabled/deleted like breakpoints, but you can also list them separately.
 ```sh
 # Displays table of watchpoints.
 info watchpoint
