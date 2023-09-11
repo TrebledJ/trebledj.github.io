@@ -298,7 +298,7 @@
     h4,
     h5,
     h6 {
-        margin-top: 1rem;
+        margin-top: 1.5rem;
     }
 
     ul,
@@ -310,12 +310,17 @@
         margin-bottom: 0.1rem;
     }
 
-    p {
-        &:first-of-type {
-            margin-top: 0;
-        }
-        
+    *:not(.alert-content) {
+
         margin-top: 1rem;
+        margin-bottom: 0;
+    }
+
+    *:first-child {
+        margin-top: 0;
+    }
+
+    div > *:last-child {
         margin-bottom: 0;
     }
 }
@@ -349,9 +354,9 @@ img.center {
     overflow: auto;
 }
 
-.alert-content>p:last-child {
-    margin-bottom: 0;
-}
+// .alert-content>p:last-child {
+//     margin-bottom: 0;
+// }
 
 /* Direct Links / Markdown Headers */
 // .md-anchor {
