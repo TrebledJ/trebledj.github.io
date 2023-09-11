@@ -42,6 +42,7 @@ body {
     height: 100%;
     margin: 0;
     text-rendering: optimizeLegibility;
+    line-height: 1.65em;
     padding-top: 33px;
     overflow-x: hidden;
     overflow-y: scroll;
@@ -55,12 +56,12 @@ blockquote {
     background: var(--main-background-color);
     border: none;
     border-left: var(--border-width-thick) solid #3642df;
-}
 
-blockquote p {
-    border-radius: var(--border-radius);
-
-    &:last-child {
+    p {
+        border-radius: var(--border-radius);
+    }
+    
+    & > *:last-child {
         margin-bottom: 0;
     }
 }
@@ -75,12 +76,6 @@ footer {
     color: var(--main-text-color);
 }
 
-.h1,
-.h2,
-.h3,
-.h4,
-.h5,
-.h6,
 h1,
 h2,
 h3,
@@ -88,10 +83,6 @@ h4,
 h5,
 h6 {
     color: var(--bold-color);
-}
-
-p {
-    line-height: 1.65em;
 }
 
 hr {
