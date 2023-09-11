@@ -70,7 +70,7 @@ module.exports = function (posts, thisPost, related) {
                 continue;
 
             if (!force && post.data.related.excludeOthers) {
-                console.log(chalk.green(`[related] Excluding '${post.page.fileSlug}' from inclusion into ${thisPost.fileSlug}.`));
+                // console.log(chalk.green(`[related] Excluding '${post.page.fileSlug}' from inclusion into ${thisPost.fileSlug}.`));
                 continue;
             }
 
