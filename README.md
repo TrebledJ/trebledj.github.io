@@ -12,6 +12,8 @@ Feel free to refer to my code—sewn together from various sources—for your in
 Aside from that, please don't plagiarise any of my blog content.
 You may be a stackoverflow-code-copypasta guru, but don't be so low as to copypasta my writing.
 
+Please respect the copyright. (c) TrebledJ. 
+
 ## Setup
 
 To run locally:
@@ -20,29 +22,42 @@ To run locally:
 npm run start
 ```
 
-## Inspirations
+## Credits
 
-### Themes
+This site was inspired and built from many different libraries. Mentioning all of them would be a nigh impossible task, as even listing node modules is a nightmare. Regardless, here are some key projects that played a significant role in this site.
+
+* [11ty](https://www.11ty.dev) – Fast and modular SSG. Also: helpful community.
+  * [Image Plugin](https://www.11ty.dev/docs/plugins/image/)
+  * [Git Commit Date Plugin](https://github.com/saneef/eleventy-plugin-git-commit-date)
+* [Lychee](https://github.com/lycheeverse/lychee) – Fast link checker.
+* [CSP Hashes](https://github.com/localnerve/csp-hashes) – Extract CSP hashes from HTML. Reduces attack vector, because we would need to use `unsafe-inline` otherwise...
+* MDN – Excellent documentation and guides as always.
+  * [Responsive Images](https://developer.mozilla.org/en-US/docs/Learn/HTML/Multimedia_and_embedding/Responsive_images)
+* [Infinite Jekyll](https://github.com/tobiasahlin/infinite-jekyll) – Fit infinite lists on a page.
+  * I attempted a [generalisation for SSGs: Infinite Loader](https://github.com/TrebledJ/infinite-loader).
 * [Devlopr – Jekyll](https://github.com/sujaykundu777/devlopr-jekyll)
-  * Things I like
-    * Bootstrap/jQuery: Good for starters and prototyping
-    * SASS: Enables rapid CSS development
-    * Scroll progress
-    * Navbar
-  * Things I dislike
-    * Bizarre coding standards and codebase
-    * Some nonsensical CSS rules
+  * Base project that got me started. Even though I've moved on from Jekyll and a lot of the original code, it was still a rewarding (but annoying) experience fixing all the small persistent issues and bugs. What doesn't kill makes me stronger.
+  * I still like some things from the original project:
+    * Bootstrap/jQuery: Good for starters and prototyping.
+    * SCSS: Enables rapid CSS development. Less headaches.
+    * Scroll progress.
+    * Navbar.
+* GitHub Pages – Hosting.
+* Bootstrap.
+  * Examples, documentation, guides.
+  * Core functionality, without which the site would be much weaker.
+  * Alerts. Tooltips. Dropdowns. Modals. Buttons.
+
+### Inspirations
+Indirect credits that deserve mentioning.
+
 * [Minimal Mistakes](https://mmistakes.github.io/minimal-mistakes/)
   * Things I like
     * Minimalistic design
     * Clean, organised codebase (easy to hack)
     * Alerts (coloured boxes), but I eventually changed to Bootstrap alerts.
     * Sticky profile sidebar on left
-  * Things I dislike
-    * Hand-spun CSS/JS? Nyeh.
-    * Search bar
 * [Chirpy](https://jamstackthemes.dev/demo/theme/eleventy-chirpy-blog-template/)
   * Things I like
     * Sticky TOC sidebar on right
-    * Share button
-
+    * Share buttons
