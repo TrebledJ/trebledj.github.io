@@ -44,7 +44,7 @@ Cat ipsum dolor sit amet, always hungry. **Poop** on *grasses* ~~i show my fluff
 
 ### Text
 
-Number one. **Steady hand.** One day, *yakuza boss* need ***new heart***. I do `operation`. But ~~mistake~~ oopsie! Yakuza boss ~~vanquished~~ die! Yakuza very ~~angr~~ mad! I hide `fishing` boat, come to America. No English, no food, no money. Darryl give me job. Now I have house, American car and new woman. Darryl save {% tag "faith", "life" %}.
+Number one. **Steady hand.** One day, *yakuza boss* need ***new heart***. I do `operation`. But ~~mistake~~ oopsie! Yakuza boss ~~vanquished~~ die! Yakuza very ~~angr~~ mad! I hide `fishing` boat, come to America. No English, no food, no money. Darryl give me job. Now I have house, American car and new woman. Darryl save {% tag "life", "faith" %}.
 
 My big secret. I kill [yakuza boss](https://www.youtube.com/watch?v=dQw4w9WgXcQ) on purpose. I good surgeon. The best!
 
@@ -178,9 +178,9 @@ Check line breaks here:
 - $Maybe (Either (a, a) (Bool, a)) \equiv (Maybe a, Maybe a)$
 - $1 + 2 + 3 + 4 + 5 \break + \cdots + 15 + 20 + 25 \break + \cdots + 100 + 200 + 300 \break + \cdots + 500 + 100 + 1500 \break + \cdots + \cdots + \cdots + 0 \break = -1$
 
-### Quotes
+### Blockquotes
 
-> Cat ipsum dolor sit amet, always hungry. **Poop** on *grasses* ~~i show my fluffy belly~~ <sup>but it's a trap!</sup> if you pet it i will tear up your hand and sniff sniff sniff sniff but step on your keyboard while you're gaming and then turn in a {% tag "learning", "circle" %} but human is washing you why halp oh the horror flee scratch hiss bite hell is other people.
+> {% abbr "Cat", "Wild tigress!" %} ipsum dolor sit amet, always hungry. **Poop** on *grasses* ~~i show my fluffy belly~~ <sup>but it's a trap!</sup> if you pet it i will tear up your hand and sniff sniff sniff sniff but step on your keyboard while you're gaming and then turn in a {% tag "circle", "learning" %} but human is washing you why halp oh the horror flee scratch hiss bite hell is other people.
 >
 > ```cpp
 > #include <iostream>
@@ -227,14 +227,14 @@ Check line breaks here:
 
 | Name        | Age | Gender | Occupation                                   |
 |-------------|-----|--------|----------------------------------------------|
-| **John**    | 30  | Male   | {% tag "software-engineering", "Engineer" %} |
+| **John**    | 30  | Male   | {% tag "Engineer", "software-engineering" %} |
 | *Sarah*     | 25  | Female | Teacher[^educate]                            |
 | ~~Michael~~ | 35  | Male   | Doctor                                       |
-| `Emily`     | 28  | Female | Marketing                                    |
+| `Emily`     | 28  | Female | {% abbr "Marketing", '"Creative BS"' %}      |
 | David       | 40  | Male   | Architect                                    |
 | Lisa        | 32  | Female | Lawyer                                       |
 
-[^educate]: {% tag "learning", "Education" %} is a crucial social construct for learning.
+[^educate]: {% tag "Education", "learning" %} is a crucial social construct for learning.
 
 | Long                                   | Table |
 |----------------------------------------|-------|
@@ -278,7 +278,7 @@ echo "Hello world!"
 Supercalifragilisticespieladocious! Supercalifragilisticespieladocious! Supercalifragilisticespieladocious! Supercalifragilisticespieladocious! Supercalifragilisticespieladocious! Supercalifragilisticespieladocious! 
 ```
 
-## Filters
+## Custom
 
 ### Tags
 
@@ -286,7 +286,13 @@ Standalone: {% tag "programming" %} {% tag "software-engineering" %}
 
 In {% tag "tutorial" %} between {% tag "cpp" %} words {% tag "haskell" %}, well, {% tag "music" %} it {% tag "learning" %} seems to work.
 
-With {% tag "reflection", "thoughts" %} aliases {% tag "composition", "meddlings" %}, {% tag "diatribe", "essay" %}.
+With {% tag "thoughts", "reflection" %} aliases {% tag "meddlings", "composition" %}, {% tag "diatribe", "essay" %}.
+
+### Abbreviations
+
+{% abbr "Hi", "Hello world!" %}, with {% abbr "**bold**", "BOLD!" %}, with {% abbr "*emphasis*", "EMPHASIS!" %}, with {% abbr "~~strikethrough~~", "such ninja!" %}, with {% abbr "`code`", "</>" %}.
+
+Does it work with {% abbr '{% tag "tags", "meta" %}', 'Probably not...' %}?
 
 ## Next-Gen Elements
 
@@ -336,7 +342,7 @@ Some other superheroes that may take issue with you:
 {% endalert %}
 
 {% alert "simple" %}
-> A boring lil' box.
+> A boring lil' {% abbr "box", "Read: awesome container!" %}.
 {% endalert %}
 
 

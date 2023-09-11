@@ -191,8 +191,8 @@ module.exports = function (eleventyConfig) {
 		return `<abbr data-placement="top" data-toggle="tooltip" title="${expansion}">${term}</abbr>`;
 	});
 
-	eleventyConfig.addShortcode("tag", function (tag, text) {
-		text ||= tag;
+	eleventyConfig.addShortcode("tag", function (text, tag) {
+		tag ||= text;
 		return `<a class="tag" href="/tags/${tag}/">${text}</a>`
 	});
 };
