@@ -238,7 +238,7 @@ See also: [View Memory](#view-memory).
 info frame
 ```
 
-**Stack Trace**
+**Stack Trace**  
 Show a trace of previous stack frames.
 ```sh
 backtrace
