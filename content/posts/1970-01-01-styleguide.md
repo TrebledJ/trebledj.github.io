@@ -234,7 +234,7 @@ Check line breaks here:
 | David       | 40  | Male   | Architect                                    |
 | Lisa        | 32  | Female | Lawyer                                       |
 
-[^educate]: {% tag "Education", "learning" %} is a crucial social construct for learning.
+[^educate]: {% tag "Education", "learning" %} is a social construct.
 
 | Long                                   | Table |
 |----------------------------------------|-------|
