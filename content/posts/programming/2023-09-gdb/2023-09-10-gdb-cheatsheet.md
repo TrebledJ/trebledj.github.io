@@ -23,7 +23,6 @@ These are a curated collection of GDB/GEF commands which I find incredibly usefu
 help
 help [command]
 help info
-help help
 help breakpoint
 ```
 
