@@ -1,4 +1,12 @@
 {# Code for handling theme switches. #}
+{#
+Note [Inlined JS]
+---
+This script is INLINED into HTML so that it loads FAST. Previously, some users
+have reported the background flashes annoyingly on page load. Although the
+convention is to avoid inline scripts, for the sake of UX, keep this script
+inlined.
+#}
 <script>
     var defaultTheme = "dark";
     var reloadDisqus = undefined;
@@ -50,4 +58,11 @@
     }
 
     modeInit();
+    document.addEventListener("DOMContentLoaded", () => {
+        const toggle = document.getElementById('theme-toggle')
+        toggle.checked = isLightTheme();
+        toggle.addEventListener("click", () => {
+            modeSwitcher();
+        });
+    });
 </script>
