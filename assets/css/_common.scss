@@ -59,6 +59,9 @@ blockquote {
 
 blockquote p {
     border-radius: var(--border-radius);
+    &:last-child {
+        margin-bottom: 0;
+    }
 }
 
 footer {
