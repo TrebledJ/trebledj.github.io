@@ -1,26 +1,25 @@
-// --- Copy URL --- //
-const copyUrlToClipboard = async () => {
-    try {
-        await navigator.clipboard.writeText(location.href);
-    } catch (err) {
-        console.error("Failed to copy: ", err);
-        return;
-    }
-
-    $(".copied").css({ top: 0, opacity: 1 });
-    $(".copied").animate({ top: -25, opacity: 0 }, 1000);
-};
-
-
-// --- TOC Current Section Highlight --- //
 $(function () {
+    // --- Copy URL --- //
+    $("#copyLinkButton").on("click", async () => {
+        try {
+            await navigator.clipboard.writeText(location.href);
+        } catch (err) {
+            console.error("Failed to copy: ", err);
+            return;
+        }
+
+        $(".copied").css({ opacity: 1 });
+        $(".copied").animate({ opacity: 0 }, 1000);
+    });
+
+    // --- TOC Current Section Highlight --- //
     const headerOffset = 150;
     const sections = document.querySelectorAll(".post-article h2,.post-article h3");
     const menu = document.querySelectorAll("#right-sidebar nav.toc a");
     const menuMobile = document.querySelectorAll("#btn-mobile-toc nav.toc a");
 
     if (menu.length !== menuMobile.length)
-        console.log("Welp. Lengths aren't the same here. But they should be. This probably shouldn't cause too much of a problem tho. (Hopefully.)");
+        console.warn("Welp. Lengths aren't the same here. But they should be. This probably shouldn't cause too much of a problem tho. (Hopefully.)");
 
     const hash = window.location.hash;
     const articleEnd = document.querySelector("#end-of-article").offsetTop;
@@ -73,7 +72,7 @@ $(function () {
         }
     };
 
-    
+
     if (hash) {
         // Set pre-selected item.
         for (let i = 0; i < menu.length; i++) {
