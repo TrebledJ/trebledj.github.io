@@ -28,7 +28,6 @@ module.exports = compile_csp(
         .add('code.jquery.com', 'cdn.jsdelivr.net')
         .add('gist.github.com')
         .add('static.cloudflareinsights.com')
-        .add('launchpad-wrapper.privacymanager.io')
     ,
     tag('style')
         .add(`'unsafe-inline'`)
