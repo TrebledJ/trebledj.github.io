@@ -29,6 +29,7 @@ related:
     auto: true # Use an auto algorithm to determine whether a post is related.
     excludeOthers: true
     # See more params in related.js.
+noindex: true
 # draft: true
 ---
 
