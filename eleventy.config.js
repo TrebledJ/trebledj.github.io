@@ -7,6 +7,9 @@ const mdshortcodes = require('./eleventy/mdshortcodes');
 const markdown = require('./eleventy/markdown');
 const collections = require('./eleventy/collections');
 
+const { minify } = require('terser');
+const { Transform } = require('stream');
+
 module.exports = function (eleventyConfig) {
 	process.env.ENVIRONMENT = process.env.ENVIRONMENT || 'development';
 	// console.log(`environment: ${process.env.ENVIRONMENT}`);
@@ -17,13 +20,24 @@ module.exports = function (eleventyConfig) {
 		"./assets/img": "/img",
 		"./content/**/assets/*.{png,jpg,gif,webp,mp4}": "/img",
 		"./assets/webfonts": "/webfonts",
-		"./node_modules/bootstrap/dist/": "/",
 		"./assets/js/**/*.js": "/js/",
-		"./node_modules/@popperjs/core/dist/umd/popper.min.{js,js.map}": "/js/",
-		"./node_modules/lunr/*.js": "/js/",
-		"./node_modules/sharer.js/*.js": "/js/",
 		"./assets/css/**/*.{css,map}": "/css/",
 		"./node_modules/prismjs/themes/prism-okaidia.css": "/css/prism-okaidia.css",
+	}, {
+		transform: function (src, dest, stats) {
+			if (!src.endsWith('.js') || src.includes('third-party')) {
+				return null;
+			}
+			return new Transform({
+				transform(chunk, encoding, callback) {
+					minify(chunk.toString())
+						.then(res => {
+							callback(null, res.code);
+						});
+				},
+			});
+		}
+
 	});
 
 	// Run Eleventy when these files change:
