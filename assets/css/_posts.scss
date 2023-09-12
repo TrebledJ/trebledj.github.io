@@ -281,10 +281,11 @@
     p,
     blockquote,
     img,
-    table,
+    table:not(.gist *),
+    details,
     pre,
     .alert {
-        &:not(.gist *) {
+        & {
             margin-top: 1rem;
             margin-bottom: 0;
         }
@@ -292,7 +293,8 @@
 
     &,
     .alert-content,
-    blockquote {
+    blockquote,
+    .details-content {
         &>*:first-child {
             margin-top: 0;
         }

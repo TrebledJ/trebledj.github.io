@@ -27,4 +27,8 @@ html[data-theme="dark"] {
             }
         }
     }
+
+    .alert-secondary {
+        --bs-alert-bg: var(--light-background-color);
+    }
 }

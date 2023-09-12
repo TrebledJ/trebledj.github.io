@@ -9,7 +9,7 @@ module.exports = function (eleventyConfig) {
 	image(eleventyConfig);
 
 
-	eleventyConfig.addShortcode("alert", async function (role, emoji) {
+	eleventyConfig.addShortcode("alert", function (role, emoji) {
 		const alert = {
 			info: ['info', 'circle-info'],
 			fact: ['info', 'bolt'],
@@ -38,6 +38,17 @@ module.exports = function (eleventyConfig) {
 	// Paired shortcode workaround: see Note [endalert Workaround].
 	eleventyConfig.addShortcode("endalert", function () {
 		return `</div></div>`;
+	});
+
+
+	eleventyConfig.addShortcode("details", function (summary, state) {
+		state ||= '';
+		return `<details ${state}><summary>${summary}</summary><div class="details-content">\n`;
+	});
+
+	// Paired shortcode workaround: see Note [endalert Workaround].
+	eleventyConfig.addShortcode("enddetails", function () {
+		return `</div></details>`;
 	});
 
 	

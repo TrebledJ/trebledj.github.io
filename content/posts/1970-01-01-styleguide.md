@@ -232,6 +232,7 @@ Check line breaks here:
 <sup>...even if it's just two...</sup>
 {.caption}
 
+
 ### Tables
 
 | Name        | Age | Gender | Occupation                                   |
@@ -287,6 +288,7 @@ echo "Hello world!"
 Supercalifragilisticespieladocious! Supercalifragilisticespieladocious! Supercalifragilisticespieladocious! Supercalifragilisticespieladocious! Supercalifragilisticespieladocious! Supercalifragilisticespieladocious! 
 ```
 
+
 ## Custom
 
 ### Tags
@@ -302,6 +304,7 @@ With {% tag "thoughts", "reflection" %} aliases {% tag "meddlings", "composition
 {% abbr "Hi", "Hello world!" %}, with {% abbr "**bold**", "BOLD!" %}, with {% abbr "*emphasis*", "EMPHASIS!" %}, with {% abbr "~~strikethrough~~", "such ninja!" %}, with {% abbr "`code`", "</>" %}.
 
 Does it work with {% abbr '{% tag "tags", "meta" %}', 'Probably not...' %}?
+
 
 ## Next-Gen Elements
 
@@ -356,6 +359,39 @@ Some other superheroes that may take issue with you:
 
 
 ### Details
+
+{% details "Details" %}
+Something small enough to escape casual notice.
+{% enddetails %}
+
+{% details "According to all known laws of aviation, there is no way a bee should be able to fly." %}
+
+{% alert "danger" %}
+Don't do drugs, kids!^[Hear hear!]
+{% endalert %}
+
+- It's not a pretty sight...
+- the site of rotten faeces...
+- dripping onto my windshield...
+    1. fire
+    2. earth
+    3. water
+    4. air
+{% enddetails %}
+
+{% details "Elements" %}
+> *The only thing we have to fear is fear itself.*
+> \- Franklin D. Roosevelt
+
+{% details "Oh, looky, more good stuff!", "open" %}
+$$1 + 2 = 3$$
+{% enddetails %}
+
+{% abbr "Hi", "Hello world!" %}, with {% abbr "**bold**", "BOLD!" %}, with {% abbr "*emphasis*", "EMPHASIS!" %}, with {% abbr "~~strikethrough~~", "such ninja!" %}, with {% abbr "`code`", "</>" %}.
+
+Tags: {% tag "ctf" %} {% tag "programming" %} {% tag "music" %} {% tag "electronic" %}
+
+{% enddetails %}
 
 
 ## Embeds
