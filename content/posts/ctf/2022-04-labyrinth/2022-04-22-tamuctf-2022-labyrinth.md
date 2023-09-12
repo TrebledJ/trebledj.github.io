@@ -131,11 +131,11 @@ With 50 steps and already 90 active states, the situation is pretty dismal. We'l
 #### CFGs to the Rescue
 **Control flow graphs** (CFGs) are directed graphs where nodes are blocks of code and edges indicate the direction the code can take. By translating the program into a graph, we can utilise the many graph algorithms at our disposal. In particular, we're interested in the *shortest path between a start node and target node*.
 
-<p class="center">
-{% image "assets/labyrinth-path-explosion-1.jpg", "Path explosion 1.", "w-30 multi" %}
-{% image "assets/labyrinth-path-explosion-2.jpg", "Path explosion 2.", "w-30 multi" %}
-{% image "assets/labyrinth-path-explosion-3.jpg", "Path explosion 3.", "w-30 multi" %}
-</p>
+{% images %}
+{% image "assets/labyrinth-path-explosion-1.jpg", "Path explosion 1." %}
+{% image "assets/labyrinth-path-explosion-2.jpg", "Path explosion 2." %}
+{% image "assets/labyrinth-path-explosion-3.jpg", "Path explosion 3." %}
+{% endimages %}
 
 angr comes with a bundle of analysis modules; these include two CFG analysis strategies: `CFGFast` and `CFGEmulated`. The former analyses the program statically (without actually simulating the code!), whereas the latter analyses the program dynamically (i.e. by simulating the code).
 

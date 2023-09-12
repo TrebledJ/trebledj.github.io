@@ -119,10 +119,10 @@ Admins, of course, have a more powerful role. These peeps can view *and* **updat
 
 Students have the most ***exciting*** user flow of all.
 
-<p class="center">
-{% image "assets/standby.jpg", "Standby UI, before scanning.", "w-45 multi" %}
-{% image "assets/standby-scanned.jpg", "Standby UI, after scanning.", "w-45 multi" %}
-</p>
+{% images %}
+{% image "assets/standby.jpg", "Standby UI, before scanning." %}
+{% image "assets/standby-scanned.jpg", "Standby UI, after scanning." %}
+{% endimages %}
 
 And since they have an exciting flow, I'll describe it for fun:
 
