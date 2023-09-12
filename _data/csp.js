@@ -38,11 +38,13 @@ module.exports = compile_csp(
         .add('github.githubassets.com')
     ,
     tag('font')
-        .add('data: cdn.jsdelivr.net')
+        .add('data:')
+        .add('cdn.jsdelivr.net')
         .add('cdnjs.cloudflare.com')
     ,
     tag('img')
-        .add('data: *')
+        .add('data:')
+        // .add('*')
     ,
     tag('frame')
         .add('disqus.com')
