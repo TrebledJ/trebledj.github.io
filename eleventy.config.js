@@ -25,9 +25,12 @@ module.exports = function (eleventyConfig) {
 		"./node_modules/prismjs/themes/prism-okaidia.css": "/css/prism-okaidia.css",
 	}, {
 		transform: function (src, dest, stats) {
-			if (!src.endsWith('.js') || src.includes('third-party')) {
+			if (process.env.ENVIRONMENT !== 'production')
 				return null;
-			}
+			
+			if (!src.endsWith('.js') || src.includes('third-party'))
+				return null;
+
 			return new Transform({
 				transform(chunk, encoding, callback) {
 					minify(chunk.toString())
@@ -66,7 +69,6 @@ module.exports = function (eleventyConfig) {
 	// Transforms
 	if (process.env.ENVIRONMENT === 'production') {
 		eleventyConfig.addTransform("htmlmin", function (content) {
-			// Prior to Eleventy 2.0: use this.outputPath instead
 			if (this.page.outputPath && this.page.outputPath.endsWith(".html")) {
 				let minified = htmlmin.minify(content, {
 					removeComments: true,
@@ -80,9 +82,17 @@ module.exports = function (eleventyConfig) {
 
 			return content;
 		});
+
+		eleventyConfig.addTransform("jsonmin", async function (content) {
+			if (this.page.outputPath && this.page.outputPath.endsWith(".json")) {
+				return JSON.stringify(JSON.parse(content));
+			}
+			return content;
+		});
 	}
 
 	eleventyConfig.addTransform("htmlcsp", htmlcsp);
+
 
 	// Customize Markdown library settings:
 	markdown(eleventyConfig);
