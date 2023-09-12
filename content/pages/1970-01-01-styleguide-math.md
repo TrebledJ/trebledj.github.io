@@ -14,9 +14,17 @@ Inline math is useful: $A + B + \underbrace{C + D}_{\small\text{Floppy disk!}}$.
 
 Monospaced math: $\texttt{char} \subset \texttt{int} \subset \texttt{long}$.
 
-But centred equations are also fun!
+Centred equations are also fun!
 
 $$
+e^{i\pi} + 1 = 0
+\qquad
+1^{2^{3^{4^5}}}
+$$
+
+$$
+e^{i\pi} + 1 = 0
+\qquad
 \begin{align}
 x + y + z &= 1 \\\\
 2x - y + 3z &= 2 \\\\
@@ -24,10 +32,27 @@ x + y + z &= 1 \\\\
 \end{align}
 $$
 
+$$
+\begin{bmatrix}
+1 & 0 & 0 \\\\
+0 & 1 & 0 \\\\
+0 & 0 & 1 \\\\
+\end{bmatrix}
+$$
+
 Check line breaks here:
 
-- $\texttt{The quick brown } \text{fox jumps } \textsf{over the lazy dog}\dots\ \texttt{And over the rainbow dost thy chicken poop fly}\dots$
-- $1 + 2 + 3 + 4 + 5 \break + \cdots + 15 + 20 + 25 \break + \cdots + 100 + 200 + 300 \break + \cdots + 500 + 100 + 1500 \break + \cdots + \cdots + \cdots + 0 \break = -1$
+- `\text` and friends: $\texttt{The quick brown } \text{fox jumps } \textsf{over the lazy dog}\dots\ \texttt{And } \texttt{over } \texttt{the } \texttt{rainbow } \texttt{dost } \texttt{thy } \texttt{chicken } \texttt{poop } \texttt{fly}\dots$
+
+- `\text` + `\break`: $\texttt{The quick brown } \text{fox jumps } \textsf{over the lazy dog}\dots\ \break \texttt{And } \texttt{over } \texttt{the } \break\texttt{rainbow } \texttt{dost } \break \texttt{thy } \texttt{chicken } \texttt{poop } \texttt{fly}\dots$
+
+- `\text` + `\break` + `\equiv`: $\texttt{Maybe (Either (a, a) (Bool, a))} \break \equiv \texttt{(Maybe a, Maybe a)}$
+- `\text` + `\break` + `=`: $\texttt{Maybe (Either (a, a) (Bool, a))} \break = \texttt{(Maybe a, Maybe a)}$
+- `\break`: $F \break 1$
+
+- `\text` + `\goodbreak`: $\texttt{The quick brown } \text{fox jumps } \textsf{over the lazy dog}\dots\ \goodbreak \texttt{And } \texttt{over } \texttt{the } \goodbreak\texttt{rainbow } \texttt{dost } \goodbreak \texttt{thy } \texttt{chicken } \texttt{poop } \texttt{fly}\dots$
+  
+- `\break`: $1 + 2 + 3 + 4 + 5 \break + \cdots + 15 + 20 + 25 \break + \cdots + 100 + 200 + 300 \break + \cdots + 500 + 100 + 1500 \break + \cdots + \cdots + \cdots + 0 \break = -1$
 
 
 $$
