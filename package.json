@@ -8,11 +8,12 @@
 		"debugstart": "DEBUG=Eleventy* npx @11ty/eleventy --serve --quiet",
 		"benchmark": "DEBUG=Eleventy:Benchmark* npx @11ty/eleventy",
 		"watch:sass": "sass --watch assets/css:_site/css --quiet",
-		"build:sass": "sass assets/css:_site/css",
+		"build-dev:sass": "sass assets/css:_site/css",
+		"build:sass": "sass --style=compressed assets/css:_site/css",
 		"watch:eleventy": "eleventy --serve --quiet",
 		"build:eleventy": "eleventy",
 		"dont-build:rake": "cd eleventy/detail/rake-js && npm install --ignore-scripts && npm run build",
-		"start": "npm-run-all build:sass --parallel watch:*",
+		"start": "npm-run-all build-dev:sass --parallel watch:*",
 		"build": "npm-run-all --parallel build:*"
 	},
 	"repository": {
