@@ -179,7 +179,6 @@ module.exports = function (eleventyConfig) {
             3: 'w-30',
         };
         const numImages = [...images.matchAll(/<img.*?>/g)].length;
-        console.log(numImages, 'images');
 
         if (!widths[numImages]) {
             throw new Error(`{% images %} is only implemented for ${Object.keys(widths).join(',')} images`)
