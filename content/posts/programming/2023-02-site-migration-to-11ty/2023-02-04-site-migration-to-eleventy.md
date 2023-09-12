@@ -49,6 +49,11 @@ Not everything is rainbows and sunshine. Time to be salty now. Some things I fee
 
 - 404 doesn’t work in localhost. It forces(?) me to use a Content Security Policy, which makes the site more secure in hindsight, but it’s annoying to deal with. One reason I decided to remove Google Analytics[^a] was to escape from such trouble. Although... I _was_ using the beta version... so there were bound to be bugs...
 - Still haven’t figured out how to minify CSS and JS. The architecting involved seems a bit weird… I may check it out again some time.
+    {% alert "success" %}
+        **Update!**
+
+        After digging through [GitHub issues](https://github.com/11ty/eleventy/issues/344), I finally got JS minifying to work using [Passthrough Copy](https://www.11ty.dev/docs/copy/) and an underlying [`transform` option](https://github.com/timkendrick/recursive-copy#usage).
+    {% endalert %}
 - Less mature. Granted, new technology is always less mature. 11ty has fewer examples compared to Jekyll, but [the][starter-1] [ones][starter-2] that are available are pretty good.
 
 [starter-1]: https://github.com/11ty/eleventy-base-blog
