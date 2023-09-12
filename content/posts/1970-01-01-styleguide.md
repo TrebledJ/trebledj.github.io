@@ -215,13 +215,21 @@ Check line breaks here:
 <sup>Have you heard of Darth Plagueis the Wise?^[No? Then allow me to entertain you...]</sup>
 {.caption}
 
-<p class="center">
-{% image "~/assets/img/memes/404-1.jpg", "first", "w-30 multi" %}
-{% image "~/assets/img/memes/404-2.jpg", "second", "w-30 multi" %}
-{% image "~/assets/img/memes/404-3.jpg", "third", "w-30 multi" %}
-</p>
+{% images %}
+{% image "~/assets/img/memes/404-1.jpg", "first" %}
+{% image "~/assets/img/memes/404-2.jpg", "second" %}
+{% image "~/assets/img/memes/404-3.jpg", "third" %}
+{% endimages %}
 
 <sup>Although this isn't the multiverse, multi-images are great fun too!</sup>
+{.caption}
+
+{% images %}
+{% image "~/assets/img/memes/404-4.jpg", "first" %}
+{% image "~/assets/img/memes/interesting.jpg", "second" %}
+{% endimages %}
+
+<sup>...even if it's just two...</sup>
 {.caption}
 
 ### Tables

@@ -90,6 +90,8 @@ module.exports = function (eleventyConfig) {
     }
 
     async function imageShortcode(src, altText, classes, loading = 'lazy') {
+        altText ||= '';
+        classes ||= '';
         const { ext, file, options } = getOptions(src);
         const metadata = await eleventyImage(file, options);
         classes = amendClasses(classes);
@@ -112,7 +114,7 @@ module.exports = function (eleventyConfig) {
         eleventyImage(file, options);
         classes = amendClasses(classes);
         const metadata = eleventyImage.statsSync(file, options);
-        
+
         return makeImageFromMetadata(metadata, ext, classes, altText, thumbnail = true);
     }
 
@@ -169,4 +171,28 @@ module.exports = function (eleventyConfig) {
         const ext = src.split('.').pop();
         return `<div class="${classes.join(' ')}"><video autoplay loop muted class="w-100"><source src="${src}" type="video/${ext}"></video></div>`;
     });
+
+    // TODO: auto-height option that adjusts widths to make images aligned vertically.
+    eleventyConfig.addPairedShortcode("images", function (images) {
+        const widths = {
+            2: 'w-45',
+            3: 'w-30',
+        };
+        const numImages = [...images.matchAll(/<img.*?>/g)].length;
+        console.log(numImages, 'images');
+
+        if (!widths[numImages]) {
+            throw new Error(`{% images %} is only implemented for ${Object.keys(widths).join(',')} images`)
+        }
+
+        const classes = [
+            widths[numImages],
+            "multi",
+        ];
+
+        images = images.replaceAll(/class="/g, `class="${classes.join(' ')} `)
+
+        return `<p class="center rw">${images}</p>`;
+    });
+
 };
