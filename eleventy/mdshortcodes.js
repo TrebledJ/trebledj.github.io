@@ -40,8 +40,13 @@ module.exports = function (eleventyConfig) {
 		return `</div></div>`;
 	});
 
+	
+	const escapeHtml = (unsafe) => {
+		return unsafe.replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;').replaceAll('"', '&quot;').replaceAll("'", '&#039;');
+	}
+
 	eleventyConfig.addShortcode("abbr", function (term, expansion) {
-		return `<abbr data-placement="top" data-toggle="tooltip" title="${expansion}">${term}</abbr>`;
+		return `<abbr data-placement="top" data-toggle="tooltip" title="${escapeHtml(expansion)}">${term}</abbr>`;
 	});
 
 	eleventyConfig.addShortcode("tag", function (text, tag) {
