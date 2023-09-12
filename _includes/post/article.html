@@ -8,7 +8,7 @@
     </div>
     <hr/>
     <div class="post-body" itemprop="articleBody">
-        {% if include_thumbnail and thumbnail %}
+        {% if thumbnail_banner and thumbnail %}
             {% banner thumbnail, title, "post1" %}
         {% endif %}
         {{ content | safe }}
