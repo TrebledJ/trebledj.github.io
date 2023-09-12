@@ -84,11 +84,6 @@ module.exports = function (eleventyConfig) {
 		return appendAfterTruncate(truncated, append);
 	});
 
-	eleventyConfig.addFilter('htmlDateString', (dateObj) => {
-		// dateObj input: https://html.spec.whatwg.org/multipage/common-microsyntaxes.html#valid-date-string
-		return DateTime.fromJSDate(dateObj, { zone: 'utc' }).toFormat('yyyy-LL-dd');
-	});
-
 	// A filter to murder tags and their children brutally with regex. Please don't take this comment seriously.
 	eleventyConfig.addFilter('annihilateTags', (html, tags) => {
 		let dumbHTMLRegex = tag => new RegExp(`<${tag}(\\s+\\w+\\s*=\\s*("[^"]*"|'[^']*'))*>.*?</${tag}>`, "ig");
@@ -163,44 +158,5 @@ module.exports = function (eleventyConfig) {
 			return undefined;
 		const da = new Date(a), db = new Date(b);
 		return da > db ? da : db;
-	});
-
-	eleventyConfig.addShortcode("alert", async function (role, emoji) {
-		const alert = {
-			info: ['info', 'circle-info'],
-			fact: ['info', 'bolt'],
-			warning: ['warning', 'triangle-exclamation'],
-			success: ['success', 'lightbulb'],
-			danger: ['danger', 'radiation'],
-			simple: ['secondary', ''],
-		};
-		const accepted = Object.keys(alert);
-		if (!accepted.includes(role)) {
-			throw new Error(`Expected a valid alert role (${accepted.join(', ')}), but got ${role}.`);
-		}
-
-		const [state, defaultEmoji] = alert[role];
-		if (!emoji) {
-			emoji = defaultEmoji;
-		}
-		let emoji_line = '';
-		if (emoji) {
-			emoji_line = `<i class="fa fa-${emoji} ms-1 me-3 mt-1 fs-4" role="img"></i>`;
-		}
-
-		return `<div class="alert alert-${state} d-flex align-items-start">${emoji_line}<div class="alert-content flex-fill mt-0">\n`;
-	});
-
-	eleventyConfig.addShortcode("endalert", function () {
-		return `</div></div>`;
-	});
-
-	eleventyConfig.addShortcode("abbr", function (term, expansion) {
-		return `<abbr data-placement="top" data-toggle="tooltip" title="${expansion}">${term}</abbr>`;
-	});
-
-	eleventyConfig.addShortcode("tag", function (text, tag) {
-		tag ||= text;
-		return `<a class="tag" href="/tags/${tag}/">${text}</a>`
 	});
 };

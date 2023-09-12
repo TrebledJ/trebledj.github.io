@@ -3,9 +3,9 @@ const htmlcsp = require("./eleventy/detail/html-csp-transform");
 
 const plugins = require('./eleventy/plugins');
 const filters = require('./eleventy/filters');
+const mdshortcodes = require('./eleventy/mdshortcodes');
 const markdown = require('./eleventy/markdown');
 const collections = require('./eleventy/collections');
-const image = require('./eleventy/image');
 
 module.exports = function (eleventyConfig) {
 	process.env.ENVIRONMENT = process.env.ENVIRONMENT || 'development';
@@ -34,7 +34,7 @@ module.exports = function (eleventyConfig) {
 	eleventyConfig.watchIgnores.add("{package,package-lock}.json");
 	eleventyConfig.watchIgnores.add(".gitignore");
 
-	eleventyConfig.setWatchThrottleWaitTime(100);
+	eleventyConfig.setWatchThrottleWaitTime(10);
 
 	eleventyConfig.setServerOptions({
 		liveReload: true,
@@ -47,7 +47,7 @@ module.exports = function (eleventyConfig) {
 	plugins(eleventyConfig);
 	collections(eleventyConfig);
 	filters(eleventyConfig);
-	image(eleventyConfig);
+	mdshortcodes(eleventyConfig);
 
 	// Transforms
 	if (process.env.ENVIRONMENT === 'production') {
