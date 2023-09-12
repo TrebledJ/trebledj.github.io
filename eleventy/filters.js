@@ -54,6 +54,14 @@ module.exports = function (eleventyConfig) {
 		return str ? str.split(delimiter || ' ') : [];
 	});
 
+	eleventyConfig.addFilter("endsWith", (str, ...args) => {
+		return str.endsWith(...args);
+	});
+
+	eleventyConfig.addFilter("startsWith", (str, ...args) => {
+		return str.startsWith(...args);
+	});
+
 	// Smarter truncate filter.
 	function appendAfterTruncate(truncated, append = '...', keepIf = '.?!', deleteIf = ',') {
 		if (keepIf.includes(truncated[truncated.length - 1])) {

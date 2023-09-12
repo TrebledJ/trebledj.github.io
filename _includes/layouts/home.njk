@@ -55,13 +55,11 @@ project_categories:
    about: Journeys I've gone through.
    excludeTags: [project]
 
+extra_header_assets:
+ - /css/shooting-stars.css
+ 
 redirect_from: [/profile, /cv]
 ---
-
-{% block head_assets_ext %}
-<link rel="stylesheet" href="/css/shooting-stars.css"/>
-{% endblock %}
-
 <div id="home">
 {% include "home/hero.html" %}
 

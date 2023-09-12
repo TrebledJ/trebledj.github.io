@@ -27,13 +27,22 @@
     <script defer src="/js/search.js"></script>
     <script defer src="/js/sidebar.js"></script>
 
+    {% if extra_header_assets %}
+        {% for asset in extra_header_assets %}
+            {% if asset | endsWith(".js") %}
+                <script defer src="{{asset}}"></script>
+            {% endif %}
+            {% if asset | endsWith(".css") %}
+                <link rel="stylesheet" href="{{asset}}"/>
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+
     {% if site.environment == 'production' %}
         {# Cloudflare Web Analytics #}
         <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "0c1f01f6fd2340a9a7c7abb8072e3857"}'></script>
         {# End Cloudflare Web Analytics #}
     {% endif %}
-
-    {% block head_assets_ext %}{% endblock %}
 
     {% if usemathjax %}
         {% include "utilities/mathjax.html" %}
