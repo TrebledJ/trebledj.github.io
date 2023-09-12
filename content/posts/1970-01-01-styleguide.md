@@ -175,7 +175,7 @@ $$
 
 Check line breaks here:
 
-- $\texttt{Maybe (Either (a, a) (Bool, a))} \goodbreak \equiv \texttt{(Maybe a, Maybe a)}$
+- $\texttt{Maybe (Either (a, a) (Bool, a))} \equiv \texttt{(Maybe a, Maybe a)}$
 - $Maybe (Either (a, a) (Bool, a)) \equiv (Maybe a, Maybe a)$
 - $1 + 2 + 3 + 4 + 5 \break + \cdots + 15 + 20 + 25 \break + \cdots + 100 + 200 + 300 \break + \cdots + 500 + 100 + 1500 \break + \cdots + \cdots + \cdots + 0 \break = -1$
 
