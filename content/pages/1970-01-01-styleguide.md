@@ -1,7 +1,6 @@
 ---
 title:  "Styleguide. This is a super long title post. Longer than the distance between my pinky and my elbow. Maybe."
 description: "This is a supperrrrrrrr longggggg description... designed to test the limits of the measly little box that contains it. Who knows if it'll hold?"
-author: trebledj
 tags:
  - qt
  - qml
@@ -15,7 +14,6 @@ tags:
  - music
  - composition
  - learning
-# thumbnail_src: ~/assets/img/to/thumbnail.jpg
 thumbnail_banner: true
 keywords: test key words
 usemathjax: true

@@ -1,18 +1,21 @@
 {% set this = collections.posts | getCollectionItem %}
-{% set relatedPosts = collections.postsr | relatedTo(this, related) %}
+{% if this %}
+    {% set relatedPosts = collections.postsr | relatedTo(this, related) %}
 
-{% if (not related.disable) and relatedPosts | length > 0 %}
-    <hr class="section-sep" />
-    <div id="related" class="w-100 related-container">
-        <h4>
-            <i class="fa fa-circle-nodes me-2"></i>Related
+    {% if (not related.disable) 
+        and relatedPosts | length > 0 %}
+        <hr class="section-sep"/>
+        <div id="related" class="w-100 related-container">
+            <h4>
+                <i class="fa fa-circle-nodes me-2"></i>Related
         </h4>
-        <div class="row mt-4">
-            {% for post in relatedPosts %}
-                <div class="col-md-6">
-                    {% include "post/preview-compressed.html" %}
-                </div>
-            {% endfor %}
+            <div class="row mt-4">
+                {% for post in relatedPosts %}
+                    <div class="col-md-6">
+                        {% include "post/preview-compressed.html" %}
+                    </div>
+                {% endfor %}
+            </div>
         </div>
-    </div>
+    {% endif %}
 {% endif %}
