@@ -4,7 +4,9 @@ permalink: /search.json
 
 [
 {% set comma = joiner() %}
-{% for post in collections.posts %}{{ comma() }}
+{% for post in collections.posts %}
+    {% if not post.data.noindex %}
+        {{ comma() }}
 {
 "type": "post",
 "title": "{{post.data.title}}",
@@ -13,11 +15,12 @@ permalink: /search.json
 "tags": {{post.data.tags | exclude("posts") | jsonify | safe}},
 "url": "{{post.url}}"
 }
+    {% endif %}
 {% endfor %}
 {% for page in collections.all %}
-{% set xs = page.url | split('/') %}
-{% if xs[1] == 'tags' %}{{ comma() }}
-{% set clean = page.content | striptags %}
+    {% set xs = page.url | split('/') %}
+    {% if xs[1] == 'tags' %}{{ comma() }}
+        {% set clean = page.content | striptags %}
 {
 "type": "tag",
 "title": "{{page.data.title}}",
@@ -26,6 +29,6 @@ permalink: /search.json
 "tags": [],
 "url": "{{page.url}}"
 }
-{% endif %}
+    {% endif %}
 {% endfor %}
 ]

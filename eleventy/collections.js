@@ -14,9 +14,4 @@ module.exports = function (eleventyConfig) {
         // Reversed collection.
         return collectionApi.getFilteredByTag('posts').slice().reverse();
     });
-
-    eleventyConfig.addCollection("postsri", function (collectionApi) {
-        // Reversed indexable collection.
-        return collectionApi.getFilteredByTag('posts').slice().reverse().filter(p => !p.data.noindex);
-    });
 };

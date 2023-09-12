@@ -3,7 +3,10 @@ permalink: /posts/demo.json
 ---
 
 [
-  {% for post in collections.postsri %}
+{% set comma = joiner() %}
+{% for post in collections.postsr %}
+  {% if not post.data.noindex %}
+    {{ comma() }}
     {# {
       "title": {{post.data.title | jsonify | safe}},
       "description": {{post.data.description | jsonify | safe}},
@@ -12,7 +15,8 @@ permalink: /posts/demo.json
       "date": {{post.page.date | date | safe | jsonify | safe}},
       "url": {{post.url | jsonify | safe}}
     } #}
+
     {{post.data.title | jsonify | safe}}
-    {% if not loop.last %},{% endif %}
-  {% endfor %}
+  {% endif %}
+{% endfor %}
 ]
