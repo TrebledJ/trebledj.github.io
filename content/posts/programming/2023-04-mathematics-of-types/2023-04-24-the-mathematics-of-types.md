@@ -25,7 +25,7 @@ Second, we want to combine types **concisely**; our types shouldn’t contain re
 
 ADTs offers us two ways to combine types: **product types** and **sum types**.
 
-## Product Types
+### Product Types
 
 If you’ve used structs, tuples, or record types, then you already have a sense of what product types are. Product types combine types together as one. A pizza is like a product type, combining crust, cheese, and toppings. When you bite into a pizza, you enjoy the sensation of all three together.
 
