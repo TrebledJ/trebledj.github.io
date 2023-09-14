@@ -342,7 +342,7 @@ echo "test"
 {% alert "danger" %}
 Don't press the giant red button. **DON'T DO IT!** Metroman has lost enough sweat for the day![^mega]
 
-[^mega]: Ahem. Megamind would a word with you.
+[^mega]: Ahem. Megamind would like a word with you.
 
 Some other superheroes that may take issue with you:
 
