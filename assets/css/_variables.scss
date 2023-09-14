@@ -5,6 +5,13 @@ $space-half: $space-base * 0.5;
 $space-quarter: $space-base * 0.25;
 $space-threehalves: $space-base * 1.5;
 
+$space-container-mult: 1;
+$space-container-base: $space-base * $space-container-mult;
+$space-container-double: $space-double * $space-container-mult;
+$space-container-half: $space-half * $space-container-mult;
+$space-container-quarter: $space-quarter * $space-container-mult;
+$space-container-threehalves: $space-threehalves * $space-container-mult;
+
 
 $header-height: 65px;
 $footer-height: 60px;

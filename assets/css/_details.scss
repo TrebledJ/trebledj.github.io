@@ -8,15 +8,15 @@ details {
 }
 
 .details-content {
-    padding: 1rem;
+    padding: $space-base;
     cursor: default;
 }
 
 .details-collapse-bottom {
     display: flex;
     justify-content: end;
-    margin-top: 1rem;
-    margin-bottom: 0.5rem;
+    margin-top: $space-base;
+    margin-bottom: $space-half;
 
     & a {
         cursor: pointer;
@@ -26,8 +26,8 @@ details {
 summary {
     display: block;
     background: var(--light-background-color);
-    padding: 1rem;
-    padding-left: 2.2rem;
+    padding: $space-base;
+    padding-left: $space-double;
     position: relative;
     border-radius: $border-radius-block;
     cursor: pointer;

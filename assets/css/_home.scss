@@ -85,8 +85,8 @@ html[data-theme="light"] {
     #home {
         .container {
             max-width: none;
-            padding-left: 2rem;
-            padding-right: 2rem;
+            padding-left: $space-double;
+            padding-right: $space-double;
         }
 
         // Small view, display only one post.
@@ -137,8 +137,8 @@ html[data-theme="light"] {
         }
 
         .container {
-            padding-left: 1rem;
-            padding-right: 1rem;
+            padding-left: $space-container-base;
+            padding-right: $space-container-base;
         }
     }
 }
