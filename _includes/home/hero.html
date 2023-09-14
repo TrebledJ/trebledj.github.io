@@ -19,15 +19,9 @@
         </div>
     </div>
     <div class="night">
-        <div class="shooting_star"></div>
-        <div class="shooting_star"></div>
-        <div class="shooting_star"></div>
-        <div class="shooting_star"></div>
-        <div class="shooting_star"></div>
-        <div class="shooting_star"></div>
-        <div class="shooting_star"></div>
-        <div class="shooting_star"></div>
-        <div class="shooting_star"></div>
+        {% for i in range(9) %}
+            <div class="shooting_star"></div>
+        {% endfor %}
     </div>
 </section>
 <script defer src="/js/typewriter.js"></script>
