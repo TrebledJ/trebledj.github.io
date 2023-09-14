@@ -1,5 +1,5 @@
 /* Navigation Bar */
-#topNav {
+.navbar {
     padding-left: 2vw;
     padding-right: 2vw;
     background-color: var(--main-background-color);
@@ -33,7 +33,7 @@
 }
 
 @include media-breakpoint-down(lg) {
-    #topNav {
+    .navbar {
         padding-left: 0;
         padding-right: 0;
     }
