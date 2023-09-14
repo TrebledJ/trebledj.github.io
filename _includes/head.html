@@ -27,15 +27,17 @@
     <script defer src="/js/search.js"></script>
     <script defer src="/js/sidebar.js"></script>
 
-    {% if extra_header_assets %}
-        {% for asset in extra_header_assets %}
-            {% if asset | endsWith(".js") %}
-                <script defer src="{{asset}}"></script>
-            {% endif %}
-            {% if asset | endsWith(".css") %}
+    {% if assets %}
+        {% if assets.css %}
+            {% for asset in assets.css %}
                 <link rel="stylesheet" href="{{asset}}"/>
-            {% endif %}
-        {% endfor %}
+            {% endfor %}
+        {% endif %}
+        {% if assets.js %}
+            {% for asset in assets.js %}
+                <script defer src="{{asset}}"></script>
+            {% endfor %}
+        {% endif %}
     {% endif %}
 
     {% if site.environment == 'production' %}
