@@ -5,36 +5,31 @@
     background-color: var(--main-background-color);
     border-bottom: 1px solid var(--light-border-color);
     width: 100vw;
-
-    // &:not(:has(> div#navbar-container.show)) {
-    height: $header-height;
-    &:has(#navbar-container.collapsing), &:has(#navbar-container.show) {
-        height: auto;
-    }
 }
 
-#navbar-hamburger,
+.navbar-brand {
+    height: 48px;
+    display: flex;
+    align-items: center;
+}
+
+#navbar-toggler-icon,
 #navbar-search {
     color: var(--bold-color);
 }
 
-.navbar-dark .navbar-brand {
+.navbar-brand {
     color: var(--navbar-accent-color) !important;
     font-weight: 600;
 }
 
-.navbar-dark .navbar-nav .nav-link {
+.navbar-nav .nav-link {
     color: var(--main-text-color) !important;
 }
 
-.navbar-dark .navbar-toggler {
+.navbar-toggler {
     border-color: transparent;
     box-shadow: none;
-}
-
-.navbar-brand-img {
-    width: 50px;
-    height: 50px;
 }
 
 @include media-breakpoint-down(lg) {
