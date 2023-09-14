@@ -5,6 +5,12 @@
     background-color: var(--main-background-color);
     border-bottom: 1px solid var(--light-border-color);
     width: 100vw;
+
+    // &:not(:has(> div#navbar-container.show)) {
+    height: $header-height;
+    &:has(#navbar-container.collapsing), &:has(#navbar-container.show) {
+        height: auto;
+    }
 }
 
 #navbar-hamburger,
@@ -78,11 +84,11 @@
     position: fixed;
     width: 100%;
     z-index: 1000;
-    top: $header-height;
+    top: $header-height - 2px;
 }
 
 @include media-breakpoint-down(lg) {
     #scroll-progress-bar {
-        top: 57px;
+        top: $header-height - 2px;
     }
 }
