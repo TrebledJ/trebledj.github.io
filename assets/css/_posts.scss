@@ -3,13 +3,13 @@
     width: 100%;
     max-width: 100%;
     margin-bottom: 1.5rem;
-    -webkit-border-radius: var(--border-radius);
-    border-radius: var(--border-radius);
-    border: var(--border-width) solid var(--light-border-color);
+    -webkit-border-radius: $border-radius;
+    border-radius: $border-radius;
+    border: $border-width-block solid var(--light-border-color);
     overflow: hidden;
-    -webkit-transition: all var(--transition-duration) ease;
-    -o-transition: all var(--transition-duration) ease;
-    transition: all var(--transition-duration) ease;
+    -webkit-transition: all $transition-duration ease;
+    -o-transition: all $transition-duration ease;
+    transition: all $transition-duration ease;
     -webkit-box-shadow: 0 1px 1px 0 rgba(31, 35, 46, 0.15);
     box-shadow: 0 1px 1px 0 rgba(31, 35, 46, 0.15);
 
@@ -248,7 +248,7 @@
 .metadata-tag-container,
 .post-share,
 #right-sidebar {
-    opacity: var(--opacity-lower);
+    opacity: $opacity-lower;
 }
 
 @include media-breakpoint-down(md) {
@@ -268,7 +268,7 @@
 
     .caption {
         text-align: center;
-        line-height: var(--line-height-compact);
+        line-height: $line-height-compact;
         // margin-top: 0.5rem;
     }
 

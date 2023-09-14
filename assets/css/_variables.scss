@@ -12,56 +12,25 @@ $footer-height: 60px;
 // For anchors and jumpy jumping.
 $jump-buffer: $header-height + 10px;
 
-:root {
-    /* an ideal reading width - 48rem - 768px based off 16px:1rem */
-    /* remember to set this to media-queries too if you are not handling it separately */
-    --body-width: 48rem;
-    
-    /* default: minor-third scale progression */
-    --space-ratio: 1.2;
+$border-width: 1px;
+$border-width-thick: 3px;
+$border-width-table: $border-width * 1;
+$border-width-block: $border-width * 1;
 
-    --space-base-px: 16px;
-    --space-base-em: 1em;
-    --space-base-rem: 1rem;
+$border-radius: 10px;
+$border-radius-small: 5px;
+$border-radius-block: $border-radius-small;
 
-    --spacescale0: 1;
-    --spacescale1: var(--space-ratio);
-    /* 1.2   */
-    --spacescale2: calc(var(--space-ratio) * var(--spacescale1));
-    /* 1.44  */
-    --spacescale3: calc(var(--space-ratio) * var(--spacescale2));
-    /* 1.728 */
-    --spacescale4: calc(var(--space-ratio) * var(--spacescale3));
-    /* 2.074 */
-    --spacescale5: calc(var(--space-ratio) * var(--spacescale4));
-    /* 2.488 */
-    --spacescale6: calc(var(--space-ratio) * var(--spacescale5));
-    /* 2.986 */
-    --spacescale7: calc(var(--space-ratio) * var(--spacescale6));
-    /* 3.583 */
+$opacity-full: 1;
+$opacity-low: 0.9;
+$opacity-lower: 0.78;
+$opacity-lowest: 0.6;
 
-    /* space - try to use these */
-    --space-base: var(--space-base-rem);
-    --space-half: calc(var(--space-base-rem) / 2);
-    --space-quarter: calc(var(--space-base-rem) / 4);
-    --space-double: calc(var(--space-base-rem) * 2);
+$line-height-cozy: 1.65rem;
+$line-height-compact: 1.25rem;
 
-    --line-height-cozy: 1.65rem;
-    --line-height-compact: 1.25rem;
+$transition-duration: 0.3s;
 
-    --border-width: 1px;
-    --border-width-thick: 3px;
-
-    --border-radius: 10px;
-    --border-radius-small: 4px;
-
-    --opacity-full: 1;
-    --opacity-low: 0.9;
-    --opacity-lower: 0.78;
-    --opacity-lowest: 0.6;
-
-    --transition-duration: 0.3s;
-}
 
 html {
     --navbar-accent-color: var(--link-color);

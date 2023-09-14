@@ -54,7 +54,7 @@ html[data-theme="light"] .hero-section {
 
 .carousel-tab-group {
     .btn {
-        border: var(--light-border-color) solid 1px !important;
+        border: var(--light-border-color) solid $border-width !important;
         color: var(--main-text-color);
 
         &:hover {

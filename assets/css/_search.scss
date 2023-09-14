@@ -13,8 +13,8 @@
 
     #search-box {
         height: 40px;
-        border: var(--border-width-thick) solid var(--light-border-color);
-        border-radius: var(--border-radius-small);
+        border: $border-width-thick solid var(--light-border-color);
+        border-radius: $border-radius-small;
         background-color: var(--main-background-color);
         color: var(--main-text-color);
     }
@@ -25,7 +25,7 @@
 
     .modal-hint {
         font-size: 0.8rem;
-        opacity: var(--opacity-lowest);
+        opacity: $opacity-lowest;
     }
 
     .modal-body {
@@ -33,7 +33,7 @@
     }
 
     .border-bottom {
-        border-bottom: var(--border-width) solid var(--light-border-color) !important;
+        border-bottom: $border-width solid var(--light-border-color) !important;
     }
     
     .modal-content {

@@ -36,11 +36,11 @@ $carousel-transition: transform 2s ease, opacity 1.5s ease-out .5s;
     padding: 0px 4px;
     background-color: transparent !important;
     color: var(--main-text-color) !important;
-    border: var(--border-width) solid var(--main-text-color);
-    border-radius: var(--border-radius-small);
+    border: $border-width solid var(--main-text-color);
+    border-radius: $border-radius-small;
     position: relative;
     z-index: 1;
-    line-height: var(--line-height-compact);
+    line-height: $line-height-compact;
     
     pointer-events: all;
     font-size: 12px;
@@ -59,7 +59,7 @@ $carousel-transition: transform 2s ease, opacity 1.5s ease-out .5s;
 
 .carousel-title .btn,
 .recent-posts .btn {
-    border: var(--border-width) solid var(--light-border-color);
+    border: $border-width solid var(--light-border-color);
     background-color: var(--background-color);
     color: var(--bold-color) !important;
 }
@@ -69,14 +69,14 @@ $carousel-transition: transform 2s ease, opacity 1.5s ease-out .5s;
     .page-link {
         background-color: var(--main-background-color) !important;
         color: var(--medium-text-color) !important;
-        border: var(--border-width) solid var(--light-border-color);
+        border: $border-width solid var(--light-border-color);
     }
 
     .active .page-link {
-        border: var(--border-width) solid var(--bold-color);
+        border: $border-width solid var(--bold-color);
     }
 }
 
 .faded {
-    opacity: var(--opacity-lowest);
+    opacity: $opacity-lowest;
 }
