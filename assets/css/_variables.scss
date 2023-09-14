@@ -1,13 +1,22 @@
+
+$space-base: 1rem;
+$space-double: $space-base * 2;
+$space-half: $space-base * 0.5;
+$space-quarter: $space-base * 0.25;
+$space-threehalves: $space-base * 1.5;
+
+
+$header-height: 60px;
+$footer-height: 60px;
+
+// For anchors and jumpy jumping.
+$jump-buffer: $header-height + 10px;
+
 :root {
     /* an ideal reading width - 48rem - 768px based off 16px:1rem */
     /* remember to set this to media-queries too if you are not handling it separately */
     --body-width: 48rem;
-    --header-height: 60px;
-    --footer-height: 60px;
-
-    // For anchors and jumpy jumping.
-    --jump-buffer: calc(var(--header-height) + 10px);
-
+    
     /* default: minor-third scale progression */
     --space-ratio: 1.2;
 

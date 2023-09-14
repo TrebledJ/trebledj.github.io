@@ -2,7 +2,7 @@
 .main-container {
     width: 100%;
     padding: 20px;
-    min-height: calc(100vh - var(--footer-height) - var(--header-height));
+    min-height: calc(100vh - ($footer-height + $header-height));
 }
 
 @include media-breakpoint-up(md) {

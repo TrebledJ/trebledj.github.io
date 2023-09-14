@@ -4,7 +4,7 @@
 
 html {
     height: 100vh;
-    scroll-padding-top: var(--jump-buffer);
+    scroll-padding-top: $jump-buffer;
     -moz-osx-font-smoothing: grayscale;
     -webkit-font-smoothing: antialiased;
     scroll-behavior: smooth;
@@ -49,7 +49,7 @@ body {
 }
 
 blockquote {
-    padding: var(--space-base) var(--space-base) var(--space-base) calc(var(--space-base) * 1.5);
+    padding: $space-base $space-base $space-base $space-base * 1.5;
     overflow: auto;
     opacity: var(--opacity-lower);
 
@@ -69,7 +69,7 @@ blockquote {
 footer {
     position: relative;
     width: 100%;
-    height: var(--footer-height);
+    height: $footer-height;
     text-align: center;
     padding: 20px;
     background-color: var(--main-background-color);
