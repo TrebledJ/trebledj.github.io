@@ -37,32 +37,10 @@
         padding-left: 0;
         padding-right: 0;
     }
-
-    #navbar-container {
-        padding-left: 10px;
-    }
-}
-
-@include media-breakpoint-down(md) {
-    .navbar-brand {
-        display: inline-block;
-        padding-top: .3125rem;
-        padding-bottom: .3125rem;
-        margin-right: 1rem;
-        font-size: 1.25rem;
-        line-height: inherit;
-        white-space: nowrap;
-    }
-}
-
-@include media-breakpoint-down(sm) {
-    .navbar-brand {
-        margin-left: -30px;
-    }
 }
 
 /* Search Icon */
-.search-icon {
+#search-icon {
     font-size: 25px !important;
     color: var(--navbar-accent-color);
 }
@@ -80,10 +58,4 @@
     width: 100%;
     z-index: 1000;
     top: $header-height - 2px;
-}
-
-@include media-breakpoint-down(lg) {
-    #scroll-progress-bar {
-        top: $header-height - 2px;
-    }
 }
