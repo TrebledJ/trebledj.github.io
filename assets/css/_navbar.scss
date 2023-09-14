@@ -37,6 +37,11 @@
         padding-left: 0;
         padding-right: 0;
     }
+
+    // Margin for nav-items when hamburger is opened.
+    #navbar-container {
+        padding-left: 10px;
+    }
 }
 
 /* Search Icon */
