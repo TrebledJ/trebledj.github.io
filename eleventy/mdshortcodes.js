@@ -48,7 +48,7 @@ module.exports = function (eleventyConfig) {
 
 	// Paired shortcode workaround: see Note [endalert Workaround].
 	eleventyConfig.addShortcode("enddetails", function () {
-		return `</div></details>`;
+		return `<div class="details-collapse-bottom"><sub><a>(collapse)</a></sub></div></div></details>`;
 	});
 
 	

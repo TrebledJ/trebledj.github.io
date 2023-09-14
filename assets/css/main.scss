@@ -10,6 +10,9 @@ $carousel-transition: transform 2s ease, opacity 1.5s ease-out .5s;
 @import "bootstrap-plus";
 
 @import "common";
+@import "alerts";
+@import "details";
+
 @import "layouts";
 
 @import "timeline";
@@ -19,7 +22,6 @@ $carousel-transition: transform 2s ease, opacity 1.5s ease-out .5s;
 @import "spinner";
 @import "home";
 @import "navbar";
-@import "alerts";
 @import "search";
 @import "profile";
 @import "social-sidebar";

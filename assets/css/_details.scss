@@ -1,0 +1,61 @@
+@use 'sass:math';
+
+details {
+    background: var(--medium-background-color);
+    border: $border-width-block solid var(--highlight-color);
+    border-radius: $border-radius-block;
+    height: fit-content;
+}
+
+.details-content {
+    padding: 1rem;
+    cursor: default;
+}
+
+.details-collapse-bottom {
+    display: flex;
+    justify-content: end;
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+
+    & a {
+        cursor: pointer;
+    }
+}
+
+summary {
+    display: block;
+    background: var(--light-background-color);
+    padding: 1rem;
+    padding-left: 2.2rem;
+    position: relative;
+    border-radius: $border-radius-block;
+    cursor: pointer;
+}
+
+summary:before {
+    content: '';
+    border-width: .4rem;
+    border-style: solid;
+    border-color: transparent transparent transparent var(--bold-color);
+    position: absolute;
+    top: 1.4rem;
+    left: 1.1rem;
+    transform: rotate(0);
+    transform-origin: .2rem 50%;
+    transition: .25s transform ease;
+}
+
+details[open]>summary {
+    &:before {
+        transform: rotate(90deg);
+    }
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    border: solid math.div($border-width-block, 2) transparent;
+    border-bottom-color: var(--highlight-color);
+}
+
+details summary::-webkit-details-marker {
+    display: none;
+}

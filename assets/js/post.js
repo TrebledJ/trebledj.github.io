@@ -94,4 +94,12 @@ $(function () {
 
     $(window).on("scroll", updateTOCHighlight);
     // updateTOCHighlight();
+
+    // --- Details Collapsible --- //
+    $(".details-collapse-bottom a").on('click', function () {
+        const p = this.closest("details");
+        $(p).removeAttr('open');
+        p.scrollIntoView();
+    });
+    
 })
