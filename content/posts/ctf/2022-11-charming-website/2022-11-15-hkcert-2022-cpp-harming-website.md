@@ -21,13 +21,13 @@ We’re provided with the server binary written in C++. No source code. 😟 We
 
 Hmm, I wonder what the website has in store for us. Let’s check it out!
 
-{% image "assets/website-seems-to-work.jpg", "Website seems to work!", "post1 w-60" %}
+{% image "assets/website-seems-to-work.jpg", "Website seems to work!", "post1 w-65" %}
 
 How disappointing. Oh well, perhaps the binary is more helpful. Maybe we can find out how to work the website. Might be important. Might not be important. Who knows?[^might-be-important]
 
 Firing up Ghidra and loading the binary, we start by going to `main` (okay so far!). `main` doesn't seem to do much, besides calling `init`, `run`, and `std::cout`. Things get a lot more interesting when we look at `run`:
 
-{% image "assets/decompile-run.jpg", "You can run, but you can't hide!", "post1 w-80" %}
+{% image "assets/decompile-run.jpg", "You can run, but you can't hide!", "post1 w-85" %}
 
 It’s easy to be intimidated by such a large application. And it’s in C++, so there’s a ton of garbage (`std`, templates, constructors, destructors, etc.).[^cpp]
 
@@ -51,7 +51,7 @@ After a bit of digging, we uncover quite a bit of info:
       - We can guess which JSON keys are parsed by looking at other strings. It appears the only key used is `message`.
       - We can try to use Postman or whatever to test the endpoint. Let's have a spin:
 
-        {% image "assets/postman-pat-postman-pat-postman-pat-and-his-black-and-white-cat.jpg", "Postman Pat", "post1 w-90" %}
+        {% image "assets/postman-pat-postman-pat-postman-pat-and-his-black-and-white-cat.jpg", "Postman Pat", "post1 w-95" %}
 
         {.no-center}
 
@@ -60,18 +60,18 @@ After a bit of digging, we uncover quite a bit of info:
     - The function begins by generating a random Initialisation Vector (IV).
     - It then initialises some state using `uc_state_init` with a key.
         
-        {% image "assets/decompile-encrypt-1.jpg", "Juicy init.", "post1 w-65" %}
+        {% image "assets/decompile-encrypt-1.jpg", "Juicy init.", "post1 w-70" %}
 
         Fortunately, the key is stored in static memory. In plain sight. This is very blursed: blessed, because (from a CTF POV) we don't need much work; and cursed, because (from a dev vs. exploiter POV) we don't need much work.
 
-        {% image "assets/encryption-rev-chal-with-hardcoded-key.jpg", "YAS!", "post1 w-45" %}
+        {% image "assets/encryption-rev-chal-with-hardcoded-key.jpg", "YAS!", "post1 w-50" %}
 
         {.no-center}
 
 
     - The message is then encrypted using `uc_encrypt`.
 
-        {% image "assets/decompile-encrypt-2.jpg", "Juicy encrypt.", "post1 w-65" %}
+        {% image "assets/decompile-encrypt-2.jpg", "Juicy encrypt.", "post1 w-70" %}
 
         I have no idea what `puVar[-0x227] = X` does, and apparently it's not important.
 

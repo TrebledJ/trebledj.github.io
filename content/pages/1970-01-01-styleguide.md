@@ -209,7 +209,7 @@ Check line breaks here:
 
 {% image "https://imgs.xkcd.com/comics/purity.png", "Full-width image.", "post1" %}
 
-{% image "~/assets/img/memes/unlimited-power.jpg", "Muahahahaha! Fear the power of alt text.", "post1 w-80" %}
+{% image "~/assets/img/memes/unlimited-power.jpg", "Muahahahaha! Fear the power of alt text.", "post1 w-85" %}
 
 <sup>Have you heard of Darth Plagueis the Wise?^[No? Then allow me to entertain you...]</sup>
 {.caption}

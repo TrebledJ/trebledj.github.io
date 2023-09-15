@@ -45,7 +45,7 @@ This means:
 * We should add 8 bytes to call `print` after the gadget payload.
 
 #### Inspect-our Gadgets
-{% image "assets/inspector-gadget.png", "", "post1 w-25" %}
+{% image "assets/inspector-gadget.png", "", "post1 w-30" %}
 
 Firstly, we'll load all the provided arithmetic gadgets into a list for convenience. Using [`ROPgadget`](https://github.com/JonathanSalwan/ROPgadget) and hacking a bit into the tool, we start with the following code:
 

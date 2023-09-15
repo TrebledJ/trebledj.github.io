@@ -12,7 +12,7 @@ related:
     auto: true
 ---
 
-{% image "assets/dynamic-memory-1.jpg", "'Memory management is not my concern.' - Clueless Embedded Engineers.", "post1 w-40" %}
+{% image "assets/dynamic-memory-1.jpg", "'Memory management is not my concern.' - Clueless Embedded Engineers.", "post1 w-45" %}
 
 <sup>Getting better hardware is not always the solution. Sometimes; but not always. Don't be clueless.</sup>
 {.caption}
@@ -22,7 +22,7 @@ I keep explaining why dynamically allocating on embedded systems is a disagreeab
 
 To clarify, dynamic memory allocation (in embedded) isn't *always* bad, just as [`goto` isn't *always* bad](https://stackoverflow.com/a/3517765/10239789). Both dynamic allocation and `goto` have appropriate uses, but are often misused. As engineers, it's our duty to understand which situations call for these features and to make sound choices.
 
-{% image "assets/dynamic-memory-2.jpg", "Ooooh, dynamic memory—fancy!", "post1 w-60" %}
+{% image "assets/dynamic-memory-2.jpg", "Ooooh, dynamic memory—fancy!", "post1 w-65" %}
 
 <sup>Clueless software engineers thinking "the more advanced the concept, the better". Don't be clueless.</sup>
 {.caption}
@@ -33,7 +33,7 @@ Not only is allocation an issue. Virtual classes, exceptions, runtime type infor
 
 Because of **Memory Fragmentation**. This occurs when we keep allocating and deallocating memory in various sizes. This may lead to wasted memory, leading to slower allocations (due to the need to reallocate and compact memory) or our worst nightmare: an out-of-memory exception. 🤯
 
-{% image "assets/memory-fragmentation.jpg", "Memory is fragmented, like buildings with alleys in between, where rats and other vermin fester.", "post1 w-80" %}
+{% image "assets/memory-fragmentation.jpg", "Memory is fragmented, like buildings with alleys in between, where rats and other vermin fester.", "post1 w-85" %}
 
 <sup>Memory becomes fragmented after multiple allocs and deallocs, leading to wasted memory space. ([source](https://er.yuvayana.org/memory-fragmentation-in-operating-system/))</sup>
 {.caption}

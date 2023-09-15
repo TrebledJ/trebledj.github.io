@@ -40,7 +40,7 @@ In the rest of this post, I'll use the terms "trainee" and "user" interchangeabl
 ### High-Level Overview
 To give an idea of what the simulator looks like, here's a little annotated screenshot of an early version:
 
-{% image "assets/setup.jpg", "Annotation of the UI", "post1 w-80" %}
+{% image "assets/setup.jpg", "Annotation of the UI", "post1 w-85" %}
 
 Its core features?
 
@@ -120,7 +120,7 @@ For physics, we ended up choosing Box2D. We decided to go with this library sinc
 
 One pain point I encountered was that the `b2vec2` constructor does not have default values! This caused me grief, since objects were beginning to fly ***everywhere***. And it took a LONG TIME TO DEBUGGGGG!!! I had assumed that since it was a C++-based library, it would have reasonable defaults. Well apparently not.
 
-{% image "assets/b2vec2.jpg", "box2d y u no embrace c++", "post1 w-60" %}
+{% image "assets/b2vec2.jpg", "box2d y u no embrace c++", "post1 w-65" %}
 
 #### Documentation
 There are various sources for documentation on the RDC simulator. We have [documentation related to setup, installation, and administrative procedures][emulator-start] and another set of [documentation for coding a user program][emulator-docs].
