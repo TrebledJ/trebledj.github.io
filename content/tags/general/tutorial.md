@@ -1,4 +1,4 @@
 ---
 ---
 
-Let's learn together!
+Beginner-friendly discourses on various topics.
