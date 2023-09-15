@@ -165,11 +165,12 @@ module.exports = function (eleventyConfig) {
 
     eleventyConfig.addShortcode("video", function (src, classes) {
         classes = amendClasses(classes);
+        classes.push('video');
         if (src.startsWith('assets/')) {
-            src = src.replace(/^assets/, '');
+            src = src.replace(/^assets\//, '');
         }
         const ext = src.split('.').pop();
-        return `<div class="${classes.join(' ')}"><video autoplay loop muted class="w-100"><source src="${src}" type="video/${ext}"></video></div>`;
+        return `<div class="${classes.join(' ')}"><video autoplay loop muted class="w-100"><source src="/img/${src}" type="video/${ext}"></video></div>`;
     });
 
     // TODO: auto-height option that adjusts widths to make images aligned vertically.
