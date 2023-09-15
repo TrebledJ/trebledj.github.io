@@ -76,6 +76,10 @@
         display: none;
     }
 
+    .page-container .d-flex.flex-row-reverse {
+        --bs-gutter-x: 0rem !important;
+    }
+
     #btn-mobile-toc {
         display: block;
     }
