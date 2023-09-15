@@ -3,13 +3,15 @@ layout: layouts/default-container
 ---
 
 <div class="page-container col-lg-12">
-    {# <div class="row justify-content-center "> #}
+    <div class="container-lg">
+        {# <div class="row justify-content-center "> #}
         {# <div class="col-lg-3">
             {% include "sidebar-left.html" %}
         </div> #}
         {# <div class="col-lg-9">
             {{ content | safe }}
         </div> #}
-    {# </div> #}
-    {{ content | safe }}
+        {# </div> #}
+        {{ content | safe }}
+    </div>
 </div>
