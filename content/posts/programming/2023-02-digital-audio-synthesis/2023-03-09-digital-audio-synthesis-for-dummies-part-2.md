@@ -109,7 +109,7 @@ The principle of **additive synthesis** is pretty straightforward: signals can b
 
 {% image "assets/additive-synthesis.jpg", "Example of additive synthesis, localised on this very webpage.", "post1" %}
 
-<sup>Example of additive synthesis. The first and second signal show pure sine tones at 440Hz ($s1$) and 660Hz ($s2$). The third signal adds the two signals ($s1 + s2$). The fourth signal scales the third signal down to fit within $[-1, 1]$ ($(s1 + s2) / 2$). ([Source Code][addsynthgist])</sup>
+<sup>Example of additive synthesis. The first and second signal show pure sine tones at 440Hz ($s_1$) and 660Hz ($s_2$). The third signal adds the two signals ($s_1 + s_2$). The fourth signal scales the third signal down to fit within $[-1, 1]$ ($(s_1 + s_2) / 2$). ([Source Code][addsynthgist])</sup>
 {.caption}
 
 [addsynthgist]: https://gist.github.com/TrebledJ/14b8842ef3696b09e299c34ba0da9e6c

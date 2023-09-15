@@ -5,7 +5,6 @@ tags:
  - reverse
  - cpp
 thumbnail_src: ~/assets/img/posts/thumbnail/hkcert22-thumbnail.jpg
-usemathjax: true
 ---
 
 ## Description

@@ -80,9 +80,9 @@ def solve(target: int, file='elf'):
 All our arithmetic gadgets are now stored in `good_gadgets`, which is a list of dictionaries. Each dictionary contains has a `vaddr` key (the address of the gadget), an `op` key (the operation of the gadget: `'add'`/`'sub'`/`'xor'`), and a `const` key (the value of the constant being applied). The next step is to separate them into the `add`, `sub`, and `xor` ROP gadgets. Those are the only three categories of arithmetic available.
 
 ```py
-    xor_gadgets = [*filter(lambda g: g['op'] == 'xor', good_gadgets)]
-    add_gadgets = [*filter(lambda g: g['op'] == 'add', good_gadgets)]
-    sub_gadgets = [*filter(lambda g: g['op'] == 'sub', good_gadgets)]
+xor_gadgets = [*filter(lambda g: g['op'] == 'xor', good_gadgets)]
+add_gadgets = [*filter(lambda g: g['op'] == 'add', good_gadgets)]
+sub_gadgets = [*filter(lambda g: g['op'] == 'sub', good_gadgets)]
 ```
 
 Now comes the fun part... solving our way to `rax` using a constraint solver...
@@ -97,7 +97,7 @@ Let $c$ be the init constant, moved to `rax` in the first gadget. Let $r$ be the
 Further, let $m_i$, $n_i$, and $p_i$ be the number of the $i$-th add, subtract, and xor gadget to apply; and constrain $m_i, n_i, p_i \in \mathbb{Z}^+ \cup \{0\}$. These are unknown variables. We want to solve for these sets of variables such that
 
 $$
-c + \sum a_im_i - \sum s_in_i = \left(\bigwedge x_ip_i\right) \wedge r.
+c + \sum a_im_i - \sum s_in_i \goodbreak = \left(\bigwedge x_ip_i\right) \wedge r.
 $$
 {% endalert %}
 

@@ -287,8 +287,8 @@ Notice how information is preserved, i.e. $\texttt{toLHS }(\texttt{toRHS } x) = 
 
 In the same vein, the following types are also equivalent:
 
-- $\texttt{Maybe (Maybe a)} \equiv \texttt{Either Bool a}$
-- $\texttt{Maybe (Either (a, a) (Bool, a))} \equiv \texttt{(Maybe a, Maybe a)}$
+- $\texttt{Maybe (Maybe a)} {} \goodbreak \equiv \texttt{Either Bool a}$
+- $\texttt{Maybe} {} \goodbreak \texttt{(Either (a, a) (Bool, a))} {} \goodbreak \equiv \texttt{(Maybe a, Maybe a)}$
 
 ### Unit Values in the Algebra of Types
 
