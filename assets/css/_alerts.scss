@@ -32,3 +32,10 @@ html[data-theme="dark"] {
         --bs-alert-bg: var(--light-background-color);
     }
 }
+
+
+@include media-breakpoint-down(sm) {
+    .alert i.fa {
+        margin-left: -1.7rem !important;
+    }
+}
