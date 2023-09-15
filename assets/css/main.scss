@@ -82,3 +82,23 @@ $carousel-transition: transform 2s ease, opacity 1.5s ease-out .5s;
 .faded {
     opacity: $opacity-lowest;
 }
+
+@include media-breakpoint-up(xl) {
+    .col-flex-auto-4 {
+        flex: 0 0 auto;
+        width: 33.333333333%;
+    }
+}
+
+@include media-breakpoint-between(sm, xl) {
+    .col-flex-auto-4 {
+        flex: 0 0 auto;
+        width: 50%;
+    }
+}
+
+@include media-breakpoint-down(sm) {
+    .col-flex-auto-4 {
+        width: 100%;
+    }
+}

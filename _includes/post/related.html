@@ -6,12 +6,12 @@
         and relatedPosts | length > 0 %}
         <hr class="section-sep"/>
         <div id="related" class="w-100 related-container">
-            <h4>
+            <h3>
                 <i class="fa fa-circle-nodes me-2"></i>Related
-        </h4>
+            </h3>
             <div class="row mt-4">
                 {% for post in relatedPosts %}
-                    <div class="col-md-6">
+                    <div class="col-flex-auto-4">
                         {% include "post/preview-compressed.html" %}
                     </div>
                 {% endfor %}
