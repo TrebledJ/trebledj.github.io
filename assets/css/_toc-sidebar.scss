@@ -1,9 +1,4 @@
 #right-sidebar {
-    top: 5rem;
-    right: 0;
-    z-index: 2;
-    height: calc(100vh - 11rem);
-    overflow-y: auto;
     line-height: $line-height-compact;
 
     .toc {
