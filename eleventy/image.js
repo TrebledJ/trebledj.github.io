@@ -52,7 +52,7 @@ module.exports = function (eleventyConfig) {
         return classes;
     }
 
-    function makeImageFromMetadata(metadata, ext, classes, alt, loading = 'lazy', thumbnail = false, attrs = {}) {
+    function makeImageFromMetadata(metadata, ext, classes, alt, thumbnail = false, attrs = {}) {
         const fmt = metadata[ext];
         // Get default ("auto" width) image.
         let defsrc = fmt.filter(e => !breakpoints.includes(e.width))[0];
@@ -80,7 +80,6 @@ module.exports = function (eleventyConfig) {
             ...attrs,
             srcset,
             sizes,
-            loading,
         };
 
         attrs.style += `aspect-ratio: auto ${defsrc.width} / ${defsrc.height}`;
@@ -95,14 +94,14 @@ module.exports = function (eleventyConfig) {
         const { ext, file, options } = getOptions(src);
         const metadata = await eleventyImage(file, options);
         classes = amendClasses(classes);
-        return makeImageFromMetadata(metadata, ext, classes, altText, loading);
+        return makeImageFromMetadata(metadata, ext, classes, altText, false, {loading});
     }
 
     async function bannerImageShortcode(src, altText, classes) {
         // Image gets displayed near the top, so it'll almost always be displayed.
         // Load eagerly, to push first contentful paint.
         src = resolveResourcePath(this.page, src);
-        return imageShortcode(src, altText, classes, loading = 'eager');
+        return imageShortcode(src, altText, classes, 'eager');
     }
 
     function thumbnailShortcode(post, classes) {
@@ -115,7 +114,7 @@ module.exports = function (eleventyConfig) {
         classes = amendClasses(classes);
         const metadata = eleventyImage.statsSync(file, options);
 
-        return makeImageFromMetadata(metadata, ext, classes, altText, thumbnail = true);
+        return makeImageFromMetadata(metadata, ext, classes, altText, true, {loading: 'lazy'});
     }
 
     /**
