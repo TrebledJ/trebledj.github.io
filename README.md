@@ -22,19 +22,18 @@ To run locally:
 npm run start
 ```
 
-## Credits
+## Credits / Appreciation
 
 This site was inspired and built from many different libraries. Mentioning all of them would be a nigh impossible task, as even listing node modules is a nightmare. Regardless, here are some key projects that played a significant role in this site.
 
 * [11ty](https://www.11ty.dev) – Fast and modular SSG. Also: helpful community.
   * [Image Plugin](https://www.11ty.dev/docs/plugins/image/)
   * [Git Commit Date Plugin](https://github.com/saneef/eleventy-plugin-git-commit-date)
+  * And many more unmentioned plugins...
 * [Lychee](https://github.com/lycheeverse/lychee) – Fast link checker.
 * [CSP Hashes](https://github.com/localnerve/csp-hashes) – Extract CSP hashes from HTML. Reduces attack vector, because we would need to use `unsafe-inline` otherwise...
 * MDN – Excellent documentation and guides as always.
   * [Responsive Images](https://developer.mozilla.org/en-US/docs/Learn/HTML/Multimedia_and_embedding/Responsive_images)
-* [Infinite Jekyll](https://github.com/tobiasahlin/infinite-jekyll) – Fit infinite lists on a page.
-  * I attempted a [generalisation for SSGs: Infinite Loader](https://github.com/TrebledJ/infinite-loader).
 * [Devlopr – Jekyll](https://github.com/sujaykundu777/devlopr-jekyll)
   * Base project that got me started. Even though I've moved on from Jekyll and a lot of the original code, it was still a rewarding (but annoying) experience fixing all the small persistent issues and bugs. What doesn't kill makes me stronger.
   * I still like some things from the original project:
@@ -43,10 +42,20 @@ This site was inspired and built from many different libraries. Mentioning all o
     * Scroll progress.
     * Navbar.
 * GitHub Pages – Hosting.
+* imgflip – Quintessential Meme Generator.
+* Cloudflare Analytics.
+
+### 3rd Party Libs
+* jQuery.
 * Bootstrap.
   * Examples, documentation, guides.
-  * Core functionality, without which the site would be much weaker.
-  * Alerts. Tooltips. Dropdowns. Modals. Buttons.
+  * Core functionality, without which the site would be much weaker and take a *lot longer* to develop.
+  * Alerts. Tooltips. Dropdowns. Modals. Buttons. Carousels.
+* [MathJax](https://github.com/mathjax/MathJax) – for Fuzzy Wuzzy Math
+* [sharer.js](https://github.com/ellisonleao/sharer.js) – Abstracts away social links. I just need to worry about the icons and UI.
+* [lunr.js](https://github.com/olivernn/lunr.js) – Site-wide Search Engine.
+* [Infinite Jekyll](https://github.com/tobiasahlin/infinite-jekyll) – Fit infinite lists on a page.
+  * I attempted a [generalisation for SSGs: Infinite Loader](https://github.com/TrebledJ/infinite-loader).
 
 ### Inspirations
 Indirect credits that deserve mentioning.
