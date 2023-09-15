@@ -9,7 +9,9 @@ const eleventySass = require("eleventy-sass");
 
 module.exports = function (eleventyConfig) {
 	eleventyConfig.addPlugin(pluginRss);
-	eleventyConfig.addPlugin(pluginSyntaxHighlight);
+	eleventyConfig.addPlugin(pluginSyntaxHighlight, {
+		errorOnInvalidLanguage: true
+	});
 	eleventyConfig.addPlugin(pluginNavigation);
 	eleventyConfig.addPlugin(EleventyHtmlBasePlugin);
 	eleventyConfig.addPlugin(EleventyRenderPlugin);
