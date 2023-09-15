@@ -1,15 +1,56 @@
 ---
-layout: layouts/page-simple
+layout: layouts/page-default
 logo: tag
 ---
 
 {% from "post/preview.html" import render_preview %}
 
-{{ content | safe }}
+<div class="row d-flex flex-row-reverse gx-6">
+    <div class="col-lg-3">
+        {# Sidebar #}
+        {% set data = ([tag] | relatedTags(collections.tags, collections.tagcount))[0] %}
+        <div id="right-sidebar" class="sticky">
+            <h3>
+                <i class="fa fa-tags me-2"></i>Related Tags
+            </h3>
+            <div class="mb-1"><b>{{data.group}}</b></div>
+            <span class="d-flex flex-wrap">
+                {% for t in data.related %}
+                    <span class="me-1">
+                        {% tag t.tag %}
+                    </span>
+                {% endfor %}
+            </span>
+        </div>
+    </div>
 
-<div class="post-preview-list">
-    {% set slug = tag | default(title) | slugify %}
-    {% for post in collections[slug] | reverse %}
-        {{ render_preview(post, excludeTags=[slug]) }}
-    {% endfor %}
+    <div class="col-lg-9">
+        {# Main Content #}
+        {# Heading #}
+        <div class="d-flex flex-row justify-content-between align-items-center">
+            <h3>
+                {% if logo %}
+                    <i class="fa fa-{{logo}} me-1"></i>
+                {% endif %}
+                {{title}}
+            </h3>
+            {% if feedtags | contains(page.fileSlug) %}
+                <abbr data-placement="left" data-toggle="tooltip" title="An RSS feed is available for this tag!">
+                    <a href="{{site.baseurl}}/feeds/{{page.fileSlug}}.xml">
+                        <i class="fa fa-rss fs-4"></i>
+                    </a>
+                </abbr>
+            {% endif %}
+        </div>
+
+        {{ content | safe }}
+
+        {# Preview List #}
+        <div class="post-preview-list">
+            {% set slug = tag | default(title) | slugify %}
+            {% for post in collections[slug] | reverse %}
+                {{ render_preview(post, excludeTags=[slug]) }}
+            {% endfor %}
+        </div>
+    </div>
 </div>

@@ -1,8 +1,10 @@
 ---
 title: Feeds
-layout: layouts/page-simple
+layout: layouts/page-default
 logo: rss
 ---
+
+## <i class="fa fa-rss me-1"></i> Feeds
 
 Hangry for updates? Check out these feeds:
 
