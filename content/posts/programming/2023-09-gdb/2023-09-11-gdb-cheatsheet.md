@@ -207,7 +207,7 @@ find [/sn] ...
 # n: max number of finds
 ```
 
-Combine with [Memory Mapping](#memory-mapping) to determine available regions.
+Combine with [Memory Mapping](#view-memory-segments) to determine available regions.
 
 ### Watch Memory
 
