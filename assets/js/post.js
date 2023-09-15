@@ -1,9 +1,9 @@
 $(function () {
     // --- Author Socials Button --- //
     const authorSocialButton = $("#post-author-container").find("button");
-    button.on("click", function () {
+    authorSocialButton.on("click", function () {
         $(".author-social-item-list").toggleClass("hidden");
-        button.toggleClass("open");
+        authorSocialButton.toggleClass("open");
     });
 
     // --- Copy URL --- //
