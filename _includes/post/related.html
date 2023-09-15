@@ -22,15 +22,22 @@
             </h3>
             {% set relatedTagGroups = tags | relatedTags(collections.tags, collections.tagcount) %}
             {% for data in relatedTagGroups %}
+                {% set sSrcTag %}
+                {% set comma = joiner() %}
+                {% for t in data.src %}{{comma()}} {{t}}{% endfor %}
+                {% endset %}
+                {% set sRelatedTag %}
+                {% for t in data.related %}
+                    {% tag t.tag %}
+                {% endfor %}
+                {% endset %}
                 <div class="mt-3">
-                    <h4>{{data.group}}</h4>
+                    <h4>
+                        <abbr data-placement="top" data-toggle="tooltip" title="Related to {{sSrcTag | trim}}">{{data.group}}</abbr>
+                    </h4>
                     {# <span>similar to {% for t in data.src %}{% tag t %}{% endfor %}</span> #}
                     <span class="d-flex flex-wrap">
-                        {% for t in data.related %}
-                            <span class="me-1">
-                                {% tag t.tag %}
-                            </span>
-                        {% endfor %}
+                        <span class="me-1">{{sRelatedTag | safe}}</span>
                     </span>
                 </div>
             {% endfor %}
