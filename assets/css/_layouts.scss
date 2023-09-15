@@ -5,6 +5,17 @@
     min-height: calc(100vh - ($footer-height + $header-height));
 }
 
+.page-container {
+    padding-left: 0.25rem;
+    padding-right: 0.25rem;
+}
+
+@include media-breakpoint-up(lg) {
+    .page-container {
+        padding-left: 4rem;
+    }
+}
+
 @include media-breakpoint-up(md) {
     .main-container {
         margin-left: auto;
