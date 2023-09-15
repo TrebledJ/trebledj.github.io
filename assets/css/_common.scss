@@ -43,7 +43,7 @@ body {
     margin: 0;
     text-rendering: optimizeLegibility;
     line-height: $line-height-cozy;
-    padding-top: 33px;
+    padding-top: $header-height;
     overflow-x: hidden;
     overflow-y: scroll;
 }

@@ -4,7 +4,7 @@
     align-items: start;
 }
 
-#left-sidebar {
+#left-sidebar-container {
     .author-social-items-wrapper button {
         opacity: $opacity-low;
     }
@@ -85,23 +85,23 @@ i.social-icon-img {
 }
 
 // Large screens.
-@include media-breakpoint-up(lg) {
-    #left-sidebar {
-        top: 5rem;
-        left: 0;
-        z-index: 2;
-        overflow-y: auto;
-        height: calc(100vh - 11rem);
+// @include media-breakpoint-up(lg) {
+//     #left-sidebar {
+//         top: 5rem;
+//         left: 0;
+//         z-index: 2;
+//         overflow-y: auto;
+//         height: calc(100vh - 11rem);
 
-        button {
-            display: none;
-        }
-    }
-}
+//         button {
+//             display: none;
+//         }
+//     }
+// }
 
 // For small screens: collapse column into row, and group social buttons under Follow button.
-@include media-breakpoint-down(lg) {
-    #left-sidebar {
+// @include media-breakpoint-down(lg) {
+    #left-sidebar-container {
         button {
             position: relative;
             margin-bottom: 0;
@@ -140,7 +140,7 @@ i.social-icon-img {
         align-items: center;
     }
 
-    #left-sidebar {
+    #left-sidebar-container {
         .author-info {
             padding-left: 15px;
             padding-right: 15px;
@@ -191,4 +191,4 @@ i.social-icon-img {
             }
         }
     }
-}
+// }

@@ -2,13 +2,14 @@
 layout: layouts/default-container
 ---
 
-<div class="col-lg-12 mt-4">
-    <div class="row justify-content-center g-4">
-        <div class="col-lg-3">
+<div class="col-lg-12 mt-4 ps-6 pe-1">
+    {# <div class="row justify-content-center "> #}
+        {# <div class="col-lg-3">
             {% include "sidebar-left.html" %}
-        </div>
-        <div class="col-lg-9">
+        </div> #}
+        {# <div class="col-lg-9">
             {{ content | safe }}
-        </div>
-    </div>
+        </div> #}
+    {# </div> #}
+    {{ content | safe }}
 </div>

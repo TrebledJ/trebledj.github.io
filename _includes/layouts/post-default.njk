@@ -11,12 +11,12 @@ would lead to the right sidebar being loaded after a noticeable delay.
 
 LMK if you know a better (less hacky) way of doing this.
 #}
-<div class="row d-flex flex-row-reverse">
-    <div class="col-lg-4">
+<div class="row d-flex flex-row-reverse gx-6">
+    <div class="col-lg-3">
         {% include "sidebar-right.html" %}
     </div>
 
-    <div class="col-lg-8">
+    <div class="col-lg-9">
         {% include "post/article.html" %}
         <a id="end-of-article"></a>
         {% if sharable %}
