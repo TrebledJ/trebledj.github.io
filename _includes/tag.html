@@ -5,6 +5,5 @@
 {% macro render_tag_list(tags, limit = 3) %}
     {% for name in tags | exclude('posts') | head(limit) %}
         <span>{{render_tag(name)}}</span>
-        {% if not loop.last %}&nbsp;{% endif %}
     {% endfor %}
 {% endmacro %}
