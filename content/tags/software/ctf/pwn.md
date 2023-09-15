@@ -2,4 +2,4 @@
 title: Binary Pwn
 ---
 
-A type of [CTF](/tags/ctf) challenge which involves a binary with vulnerabilities.
+A type of {% tag "CTF", "ctf" %} challenge which involves a binary with vulnerabilities.

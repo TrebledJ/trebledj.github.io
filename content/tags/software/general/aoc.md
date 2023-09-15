@@ -2,7 +2,7 @@
 title: AOC
 ---
 
-Advent of Code (AOC) is a series of fun [programming](/tags/programming) challenges released annually from December 1 to 25.
+Advent of Code (AOC) is a series of fun {% tag "programming" %} challenges released annually from December 1 to 25.
 
 You can find the challenges here: [https://adventofcode.com/](https://adventofcode.com/).
 

@@ -1,4 +1,4 @@
 ---
 ---
 
-A robust [C++](/tags/cpp) framework for [developing](/tags/programming) cross-platform solutions.
+A robust {% tag "C++", "cpp" %} framework for developing cross-platform solutions.

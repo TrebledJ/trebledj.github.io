@@ -1,4 +1,6 @@
 ---
 ---
 
-Hallelujah! Worship music! Music to glorify God! Woot woot!
+Music to praise and honour the one true God.
+
+See also: {% tag "faith" %}.

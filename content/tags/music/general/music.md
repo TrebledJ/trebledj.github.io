@@ -1,7 +1,7 @@
 ---
 ---
 
-A general tag for all music-related stuff. For a tag of my compositions, see [*compositions*](/tags/composition).
+A general tag for all music-related stuff. For a tag of my compositions, see {% tag "compositions", "composition" %}.
 
 > Every morning will soon turn into evening,  
 > And springtime will soon turn into fall.  
