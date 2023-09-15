@@ -21,7 +21,7 @@ Medium. 27/1424 solves.
 
 ### Analysis
 
-On decompilation, it seems like an innocent binary which adds and subtracts numbers. The code itself is relatively simple.
+On decompilation, the binary appears to be an innocent program which adds and subtracts numbers. The code itself is relatively simple.
 
 ```c
 // Set the SIGSEGV handler.
