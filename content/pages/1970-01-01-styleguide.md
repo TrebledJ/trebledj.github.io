@@ -158,6 +158,7 @@ Let's try that again.
 ### Math
 
 Inline math is useful: $A + B + \underbrace{C + D}_{\small\text{Floppy disk!}}$.
+Fractions are fun. $\frac{1024}{4096} = 25$
 
 Monospaced math: $\texttt{char} \subset \texttt{int} \subset \texttt{long}$.
 
@@ -165,7 +166,7 @@ But centred equations are also fun!
 
 $$
 \begin{align}
-x + y + z &= 1 \\\\
+x + y + z &= \frac{1}{4} \\\\
 2x - y + 3z &= 2 \\\\
 4x - 5y + 10z &= 3 \\\\
 \end{align}
@@ -307,6 +308,11 @@ Does it work with {% abbr '{% tag "tags", "meta" %}', 'Probably not...' %}?
 ## Next-Gen Elements
 
 ### Alerts
+
+{% alert "fact" %}
+Bears eat beets.
+Bears, beets, battlestar galactica.
+{% endalert %}
 
 {% alert "info" %}
 According to all known laws of aviation, there is no way a bee should be able to fly.
