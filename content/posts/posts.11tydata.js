@@ -95,7 +95,7 @@ module.exports = {
 	comments: true,
 	related: {
 		auto: true,
-		num: 4,
+		num: 6,
 		disable: false,
 	},
 	eleventyExcludeFromCollections: false,

@@ -84,21 +84,31 @@ $carousel-transition: transform 2s ease, opacity 1.5s ease-out .5s;
 }
 
 @include media-breakpoint-up(xl) {
-    .col-flex-auto-4 {
+    .related-col-flex-auto-4 {
         flex: 0 0 auto;
         width: 33.333333333%;
     }
 }
 
 @include media-breakpoint-between(sm, xl) {
-    .col-flex-auto-4 {
+    .related-col-flex-auto-4 {
         flex: 0 0 auto;
         width: 50%;
+
+        // Limit number of rows.
+        &:nth-child(n+5) {
+            display: none;
+        }
     }
 }
 
 @include media-breakpoint-down(sm) {
-    .col-flex-auto-4 {
+    .related-col-flex-auto-4 {
         width: 100%;
+
+        // Limit number of rows.
+        &:nth-child(n+4) {
+            display: none;
+        }
     }
 }

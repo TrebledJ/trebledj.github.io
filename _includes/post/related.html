@@ -5,13 +5,13 @@
     {% if (not related.disable) 
         and relatedPosts | length > 0 %}
         <hr class="section-sep"/>
-        <div id="related" class="w-100 related-container">
+        <div id="related" class="w-100">
             <h3>
                 <i class="fa fa-circle-nodes me-2"></i>Related
             </h3>
             <div class="row mt-4">
                 {% for post in relatedPosts %}
-                    <div class="col-flex-auto-4">
+                    <div class="related-col-flex-auto-4">
                         {% include "post/preview-compressed.html" %}
                     </div>
                 {% endfor %}
