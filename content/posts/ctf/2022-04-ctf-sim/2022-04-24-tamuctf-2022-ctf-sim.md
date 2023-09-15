@@ -311,9 +311,9 @@ disas solveChallenge
 b *solveChallenge+191
 ```
 
-{% image "assets/ctf-sim-4a-disas-1.jpg", "", "post1" %}
+{% image "assets/ctf-sim-4a-disas-1.jpg", "", "post1 w-90" %}
 
-{% image "assets/ctf-sim-4b-disas-2.jpg", "", "post1" %}
+{% image "assets/ctf-sim-4b-disas-2.jpg", "", "post1 w-90" %}
 
 Now we'll continue running and feed it input for solving our `forensics` challenge.
 ```sh
@@ -328,11 +328,11 @@ Our breakpoint gets triggered. Notice the interesting chain of addresses in the 
 3. the address of `forensics::solve`...
     * which is eventually called in assembly (`call rax`)
 
-{% image "assets/ctf-sim-4c-double-deref-in-first-solve.jpg", "", "post1" %}
+{% image "assets/ctf-sim-4c-double-deref-in-first-solve.jpg", "", "post1 w-80" %}
 
 So *this* is what happens when we call a virtual function... InTeReStInG!
 
-{% image "~/assets/img/memes/interesting.jpg", "", "post1 w-75" %}
+{% image "~/assets/img/memes/interesting.jpg", "", "post1 w-60" %}
 
 Let's continue so that it finishes `delete`-ing the chunk, and let's check the heap state again:
 

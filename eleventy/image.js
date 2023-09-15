@@ -173,7 +173,9 @@ module.exports = function (eleventyConfig) {
     });
 
     // TODO: auto-height option that adjusts widths to make images aligned vertically.
-    eleventyConfig.addPairedShortcode("images", function (images) {
+    eleventyConfig.addPairedShortcode("images", function (images, containerClasses) {
+        containerClasses ||= '';
+
         const widths = {
             2: 'w-45',
             3: 'w-30',
@@ -191,7 +193,7 @@ module.exports = function (eleventyConfig) {
 
         images = images.replaceAll(/class="/g, `class="${classes.join(' ')} `)
 
-        return `<p class="center rw">${images}</p>`;
+        return `<div class="center rw ${containerClasses}">${images}</div>`;
     });
 
 };

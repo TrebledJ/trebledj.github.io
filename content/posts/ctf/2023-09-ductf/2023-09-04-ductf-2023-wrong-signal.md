@@ -83,7 +83,7 @@ wRoNg! Ay c-rumba.
 
 Using a Z3 script spun by reversing the program, we can output some test payloads. Now obviously this isn't the flag, but I'm interested in testing out some cases. Using `I` as the first letter, we trigger case 3 (`+0x15000`) as our first operation.^[Verifiable through GDB, with `b *main+245` and `p $rax`.] Turns out we can't do that as our first move, because it catapults us into `oops()`.
 
-{% image "assets/straight-to-oops.jpg", "You straight to oops. Right away.", "post1 w-75" %}
+{% image "assets/straight-to-oops.jpg", "You straight to oops. Right away.", "post1 w-50" %}
 
 <sup>We have the best flag. Because of `oops()`.</sup>
 {.caption}

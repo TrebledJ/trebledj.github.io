@@ -80,7 +80,7 @@ In the final example above, we wrote a product type representing a `Person`. All
 
 Sum types are another way to combine types. In contrast to product types, sum types combine types *exclusively*. The choice of crust is like a sum type. Should the crust be thin, thick, or stuffed with cheese? We can only choose one option.
 
-{% image "assets/sheesh-sum-types.jpg", "Sum types stand out from the historic dominance of product types.", "post1 w-80" %}
+{% image "assets/sheesh-sum-types.jpg", "Sum types stand out from the historic dominance of product types.", "post1 w-50" %}
 
 Sum types in their *simplest* form are just enums. In C/C++, we might define them like so:
 
@@ -153,7 +153,7 @@ We call `Just` a *data constructor*. This means we can construct concrete data b
 
 Let’s familiarise ourselves with ADTs and look at a few use cases.
 
-{% image "assets/wild-types.jpg", "std::any — I choose you!", "post1 w-90" %}
+{% image "assets/wild-types.jpg", "std::any — I choose you!", "post1 w-40" %}
 
 ### Product Types in the Wild
 
