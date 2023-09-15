@@ -283,9 +283,10 @@
     img,
     table:not(.gist *),
     .gist,
+    .video,
+    .alert,
     details,
-    pre,
-    .alert {
+    pre {
         & {
             margin-top: $space-base;
             margin-bottom: 0;
