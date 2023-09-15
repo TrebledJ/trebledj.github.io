@@ -1,4 +1,4 @@
-{% set tags = collections.tags | dictsort %}
+{% set tags = collections.tagcount | dictsort %}
 {% for tag, count in tags %}
     <div class="ms-1" style="display: inline-block;">
         {% set perc = count * 4 + 75 %}

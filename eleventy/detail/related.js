@@ -54,7 +54,7 @@ function makeRelatedPostRegex(slug) {
  * 
  * @returns An array of related posts.
  */
-module.exports = function (posts, thisPost, related) {
+function relatedPosts(posts, thisPost, related) {
     const n = related.num || 0; // Number of related elements to find.
 
     // In auto checking, if a post has at least this many percentage of common tags, then it is considered related.
@@ -62,7 +62,7 @@ module.exports = function (posts, thisPost, related) {
 
     const final_related = new Set(); // Final array of related posts.
 
-    function add_posts(posts, force=false) {
+    function add_posts(posts, force = false) {
         for (const post of posts) {
             if (final_related.size >= n)
                 break;
@@ -97,7 +97,7 @@ module.exports = function (posts, thisPost, related) {
                 matches.reverse();
             }
 
-            add_posts(matches, force=true);
+            add_posts(matches, force = true);
         }
     }
 
@@ -137,4 +137,55 @@ module.exports = function (posts, thisPost, related) {
     }
 
     return Array.from(final_related);
-};
+}
+
+/**
+ * Find groups of tags related to some tags.
+ * 
+ * @param {Array[String]} tags The list of tags to query.
+ * @param {Array[Object]} tagPages A collection of tag pages and data.
+ * @param {Object[String, Number]} tagCount Maps a tag to the number of pages containing that tag.
+ */
+function relatedTags(tags, tagPages, tagCount) {
+    const groups = {};
+
+    // Find the groups we're interested in, and create skeletons in the `tags` object.
+    for (const p of tagPages) {
+        if (tags.includes(p.data.tag)) {
+            if (!groups[p.data.group]) {
+                groups[p.data.group] = {
+                    src: [p.data.tag],
+                    related: [],
+                };
+            } else {
+                groups[p.data.group].src.push(p.data.tag);
+            }
+        }
+    }
+
+    const wantedGroups = Object.keys(groups);
+    for (const p of tagPages) {
+        // const includeCurrentTags = !groups[p.data.group].src.includes(p.data.tag);
+        const includeCurrentTags = true;
+        if (wantedGroups.includes(p.data.group) && includeCurrentTags) {
+            groups[p.data.group].related.push(p.data);
+        }
+    }
+
+    let ret = [];
+    for (const g in groups) {
+        groups[g].group = g;
+        ret.push(groups[g]);
+    }
+
+    depth = obj => (obj.group.match(/\./g) || []).length
+    // Sort by "depth" (most number of '.'s appear first).
+    ret.sort((a, b) => depth(b) - depth(a));
+    // Sort related tags by number of posts.
+    ret.forEach(o => o.related.sort((a, b) => tagCount[b.tag] - tagCount[a.tag]));
+    // console.log(JSON.stringify(ret.map(d => d.related.flatMap(p => p.tag + '-' + tagCount[p.tag]))));
+    return ret;
+}
+
+
+module.exports = { relatedPosts, relatedTags };

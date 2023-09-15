@@ -1,13 +1,12 @@
 {% set this = collections.posts | getCollectionItem %}
 {% if this %}
-    {% set relatedPosts = collections.postsr | relatedTo(this, related) %}
+    {% set relatedPosts = collections.postsr | relatedPosts(this, related) %}
 
-    {% if (not related.disable) 
-        and relatedPosts | length > 0 %}
+    {% if (not related.disable) and (relatedPosts | length) > 0 %}
         <hr class="section-sep"/>
         <div id="related" class="w-100">
             <h3>
-                <i class="fa fa-circle-nodes me-2"></i>Related
+                <i class="fa fa-circle-nodes me-2"></i>Related Posts
             </h3>
             <div class="row mt-4">
                 {% for post in relatedPosts %}
@@ -16,6 +15,25 @@
                     </div>
                 {% endfor %}
             </div>
+
+            <hr/>
+            <h3>
+                <i class="fa fa-tags me-2"></i>Related Tags
+            </h3>
+            {% set relatedTagGroups = tags | relatedTags(collections.tags, collections.tagcount) %}
+            {% for data in relatedTagGroups %}
+                <div class="mt-3">
+                    <h4>{{data.group}}</h4>
+                    {# <span>similar to {% for t in data.src %}{% tag t %}{% endfor %}</span> #}
+                    <span class="d-flex flex-wrap">
+                        {% for t in data.related %}
+                            <span class="me-1">
+                                {% tag t.tag %}
+                            </span>
+                        {% endfor %}
+                    </span>
+                </div>
+            {% endfor %}
         </div>
     {% endif %}
 {% endif %}

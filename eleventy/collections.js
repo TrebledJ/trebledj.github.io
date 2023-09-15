@@ -1,6 +1,6 @@
 
 module.exports = function (eleventyConfig) {
-    eleventyConfig.addCollection("tags", function (collectionApi) {
+    eleventyConfig.addCollection("tagcount", function (collectionApi) {
         let counter = {};
         for (let tag of collectionApi.getFilteredByTag('posts').flatMap(post => post.data.tags)) {
             if (!tag || tag === "posts")
@@ -8,6 +8,10 @@ module.exports = function (eleventyConfig) {
             counter[tag] = (counter[tag] ? counter[tag] + 1 : 1);
         }
         return counter;
+    });
+
+    eleventyConfig.addCollection("tags", function (collectionApi) {
+        return collectionApi.getAll().filter(p => p.page.filePathStem.match(/tags\/.+/));
     });
 
     eleventyConfig.addCollection("postsr", function (collectionApi) {

@@ -1,6 +1,6 @@
 {% set this = collections.posts | getCollectionItem %}
 {% if this %}
-    {% set relatedPosts = collections.postsr | relatedTo(this, related) %}
+    {% set relatedPosts = collections.postsr | relatedPosts(this, related) %}
 
     {% if related and (not related.disable)
     and relatedPosts | length > 0 %}
