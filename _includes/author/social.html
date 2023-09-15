@@ -6,8 +6,16 @@
             <p class="profile-bio me-4">{{ site.subtitle }}</p>
         </div>
     </div>
-    <div class="author-social-items-wrapper mt-1">
-        <button class="btn btn-primary py-1">+&nbsp;Social</button>
-        {% include "author/social-links.html" %}
+    <div id="post-social-buttons-container" class="d-flex flex-wrap justify-content-end">
+        <div class="author-social-items-wrapper mt-1">
+            <button class="btn btn-primary py-1">+&nbsp;Social</button>
+            {% include "author/social-links.html" %}
+        </div>
+        {% if sharable %}
+        <div class="author-social-items-wrapper mt-2 ms-2">
+            <button class="btn btn-primary py-1">Share&nbsp;this&nbsp;page!</button>
+            {% include "post/share-links.html" %}
+        </div>
+        {% endif %}
     </div>
 </div>

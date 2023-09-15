@@ -1,10 +1,17 @@
 $(function () {
     // --- Author Socials Button --- //
-    const authorSocialButton = $("#post-author-container").find("button");
-    authorSocialButton.on("click", function () {
-        $(".author-social-item-list").toggleClass("hidden");
-        authorSocialButton.toggleClass("open");
-    });
+    const socialButton = $("#post-author-container button");
+    const socialList = $(".author-social-item-list");
+    for (let i = 0; i < socialButton.length; i++) {
+        $(socialButton[i]).on("click", function () {
+            if (!$(socialButton[i]).hasClass("open")) {
+                socialList.addClass("hidden");
+                socialButton.removeClass("open");
+            }
+            $(socialList[i]).toggleClass("hidden");
+            $(socialButton[i]).toggleClass("open");
+        });
+    }
 
     // --- Copy URL --- //
     $("#copyLinkButton").on("click", async () => {
@@ -15,8 +22,9 @@ $(function () {
             return;
         }
 
-        $(".copied").css({ opacity: 1 });
-        $(".copied").animate({ opacity: 0 }, 1000);
+        $("#copyLinkText").text("Copied!");
+        // $(".copied").css({ opacity: 1 });
+        // $(".copied").animate({ opacity: 0 }, 1000);
     });
 
     // --- Content Header -> Back to Top --- //

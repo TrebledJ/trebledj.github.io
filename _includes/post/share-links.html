@@ -1,0 +1,34 @@
+{% macro icon(faicon, brand) %}
+    <span class="fs-4">
+        <i class="share-icon {{faicon}}"></i>
+    </span>
+{% endmacro %}
+{% macro sharer(brand) %}
+    <li>
+        <a class="d-flex flex-row justify-content-start align-items-center" data-sharer="{{brand | lower}}" data-title="{{title}}" data-url="{{page.url | absoluteUrl}}">
+            {{icon('fab fa-' + brand | lower, brand)}}
+            <span class="fs-7 ms-3">
+                {{brand}}
+            </span>
+        </a>
+    </li>
+{% endmacro %}
+
+<script defer src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script>
+
+<ul class="post-share author-social-item-list hidden">
+    {# <span style="margin-right:-4px;">Share&nbsp;on</span> #}
+    {{sharer('Reddit')}}
+    {{sharer('Telegram')}}
+    {{sharer('WhatsApp')}}
+    {# {{sharer('line')}} #}
+    {# {{sharer('linkedin')}} #}
+    {{sharer('Facebook')}}
+    {{sharer('Twitter / X')}}
+    <a id="copyLinkButton" class="d-flex flex-row justify-content-start align-items-center">
+        {{icon('fas fa-link', 'Copy Link')}}
+        <span id="copyLinkText" class="fs-7 ms-3">
+            Copy Link
+        </span>
+    </a>
+</ul>

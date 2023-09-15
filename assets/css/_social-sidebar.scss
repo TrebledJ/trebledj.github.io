@@ -126,8 +126,8 @@ i.social-icon-img {
         }
 
         .profile-img {
-            width: 32px;
-            height: 32px;
+            width: 50px;
+            height: 50px;
         }
     }
 
@@ -192,4 +192,18 @@ i.social-icon-img {
             }
         }
     }
+// }
+
+// @include media-breakpoint-up(lg) {
+//     #post-social-buttons-container {
+//         flex: row;
+//         justify-content: space-between;
+//     }
+// }
+
+// @include media-breakpoint-up(down) {
+//     #post-social-buttons-container {
+//         flex: column;
+//         align-items: end;
+//     }
 // }

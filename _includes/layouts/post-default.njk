@@ -20,9 +20,11 @@ LMK if you know a better (less hacky) way of doing this.
         <div class="col-lg-9">
             {% include "post/article.html" %}
             <a id="end-of-article"></a>
-            {% if sharable %}
+            <hr/>
+            {% include "author/social.html" %}
+            {# {% if sharable %}
                 {% include "post/share.html" %}
-            {% endif %}
+            {% endif %} #}
             {% if related %}
                 {% include "post/related.html" %}
             {% endif %}
