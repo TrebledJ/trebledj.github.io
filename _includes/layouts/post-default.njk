@@ -23,6 +23,8 @@ LMK if you know a better (less hacky) way of doing this.
             {% if sharable %}
                 {% include "post/share.html" %}
             {% endif %}
+            <hr/>
+            {% include "author/social.html" %}
             {% if related %}
                 {% include "post/related.html" %}
             {% endif %}
