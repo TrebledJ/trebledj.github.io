@@ -12,6 +12,7 @@ $carousel-transition: transform 2s ease, opacity 1.5s ease-out .5s;
 @import "common";
 @import "alerts";
 @import "details";
+@import "gist";
 
 @import "layouts";
 
@@ -58,14 +59,6 @@ $carousel-transition: transform 2s ease, opacity 1.5s ease-out .5s;
     height: 150px;
     border-radius: 50%;
 }
-
-.carousel-title .btn,
-.recent-posts .btn {
-    border: $border-width solid var(--light-border-color);
-    background-color: var(--background-color);
-    color: var(--bold-color) !important;
-}
-
 
 .pagination {
     .page-link {

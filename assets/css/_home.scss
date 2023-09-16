@@ -73,6 +73,13 @@ html[data-theme="light"] .hero-section {
     width: 90%;
 }
 
+.carousel-title .btn,
+.recent-posts .btn {
+    border: $border-width solid var(--light-border-color);
+    background-color: var(--background-color);
+    color: var(--bold-color) !important;
+}
+
 html[data-theme="light"] {
 
     .carousel-control-prev-icon,
