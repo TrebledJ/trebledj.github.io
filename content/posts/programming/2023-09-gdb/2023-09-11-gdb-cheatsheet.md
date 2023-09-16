@@ -479,5 +479,5 @@ gef config context.enable 0
 
 **Enable Context**
 ```sh
-gef config context.enable 0
+gef config context.enable 1
 ```
