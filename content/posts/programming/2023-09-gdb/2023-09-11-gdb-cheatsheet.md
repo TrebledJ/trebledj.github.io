@@ -467,3 +467,17 @@ Use the `pie` commands (`help pie`). Pie breakpoints are separate from regular b
 pie b <addr>    # PIE breakpoint at offset <addr> in code.
 pie run         # Run with pie breakpoints enabled.
 ```
+
+### Disable GEF Context
+
+Sometimes you want to step-debug without GEF's massive spew of text covering the screen.
+
+**Disable Context**
+```sh
+gef config context.enable 0
+```
+
+**Enable Context**
+```sh
+gef config context.enable 0
+```
