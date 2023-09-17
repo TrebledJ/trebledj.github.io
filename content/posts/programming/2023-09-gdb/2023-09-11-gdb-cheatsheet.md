@@ -468,7 +468,16 @@ pie b <addr>    # PIE breakpoint at offset <addr> in code.
 pie run         # Run with pie breakpoints enabled.
 ```
 
-### Disable GEF Context
+## GEF Context
+
+GEF only.
+
+Summary of registers, stack, trace, code, all in one contained view.
+
+```sh
+context
+ctx
+```
 
 Sometimes you want to step-debug without GEF's massive spew of text covering the screen.
 
