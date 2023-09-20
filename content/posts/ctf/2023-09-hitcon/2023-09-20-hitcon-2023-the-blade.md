@@ -347,7 +347,7 @@ A **bijection** is a function where...
 This characteristic is crucial as it *guarantees* an **invertible operation**.
 
 <!-- {% image "assets/bijection.jpg", "Bijection example.", "post1 w-60" %} -->
-{% image "https://d138zd1ktt9iqe.cloudfront.net/media/seo_landing_files/bijective-function-1629606712.png", "Bijection example.", "post1 w-60 svg-img" %}
+{% image "https://d138zd1ktt9iqe.cloudfront.net/media/seo_landing_files/bijective-function-1629606712.png", "Bijection example.", "post1 w-60 alpha-img" %}
 
 <sup>([Image Source](https://www.cuemath.com/algebra/bijective-function/))</sup>
 {.caption}

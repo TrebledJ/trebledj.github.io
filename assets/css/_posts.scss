@@ -400,11 +400,11 @@ img.center {
 
 // Handle svg images in both light/dark mode.
 
-html[data-theme="light"] .svg-img {
+html[data-theme="light"] .alpha-img {
     filter: invert(0%);
 }
 
-html[data-theme="dark"] .svg-img {
+html[data-theme="dark"] .alpha-img {
     filter: invert(100%);
 }
 
