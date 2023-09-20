@@ -329,6 +329,18 @@
     .tag {
         font-size: 13px;
     }
+
+    .spoiler:not(:hover)
+    {
+        background-color: var(--bold-color);
+        color: var(--bold-color);
+        & * {
+            color: var(--bold-color);
+        }
+    }
+    .spoiler {
+        transition: none;
+    }
 }
 
 div.center,

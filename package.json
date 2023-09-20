@@ -41,6 +41,7 @@
 		"sass": "^1.67.0"
 	},
 	"dependencies": {
+		"@traptitech/markdown-it-spoiler": "^1.1.6",
 		"bootstrap": "^5.2.3",
 		"cheerio": "^1.0.0-rc.12",
 		"eleventy-plugin-git-commit-date": "^0.1.3",
