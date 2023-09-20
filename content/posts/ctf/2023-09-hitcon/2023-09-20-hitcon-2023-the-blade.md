@@ -68,14 +68,14 @@ After running, then what? The commands don’t seem to reveal much, and at this 
 
 According to the description, the program contains a flag checker. So presumably we pass the flag as input at some point. But *where* and *how*?
 
-By running `strings`, we find an interesting set of strings: `?flag`, `?help`, `?exit`, `?quit`. This pattern can’t be a coincidence.
+By running `strings`, we find an interesting set of strings: !!`?flag`!!, `?help`, `?exit`, `?quit`. This pattern can’t be a coincidence.
 
-In your favourite decompiler, do a search for the bytes `?flag`. If you can’t find it, try playing with endian settings. This should lead you to !!`seccomp_shell::shell::prompt()`!!.
+In your favourite decompiler, do a search for the bytes !!`?flag`!!. If you can’t find it, try playing with endian settings. This should lead you to !!`seccomp_shell::shell::prompt()`!!.
 
-Under the condition checking for flag, we’re led to !!`seccomp_shell::shell::verify()`!!.
+Under a condition checking for flag, we’re led to !!`seccomp_shell::shell::verify()`!!.
 
 {% alert "info" %}
-Although strings shows `?flag` as the full string, the actual string is just `flag`. Questionable, no? This is because the byte before `flag` happens to be `\x22` (i.e. `?`). `strings` doesn’t know better, because it doesn’t actually disassemble the program.
+Although strings shows !!`?flag`!! as the full string, the actual string is just `flag`. Questionable, no? This is because the byte before `flag` happens to be `\x22` (i.e. `?`). `strings` doesn’t know better, because it doesn’t actually disassemble the program.
 {% endalert %}
 
 So how is the flag actually processed? This requires a careful study of !!`verify()`!!, with a touch of dynamic analysis and experimentation.
@@ -346,7 +346,6 @@ A **bijection** is a function where...
 
 This characteristic is crucial as it *guarantees* an **invertible operation**.
 
-<!-- {% image "assets/bijection.jpg", "Bijection example.", "post1 w-60" %} -->
 {% image "https://d138zd1ktt9iqe.cloudfront.net/media/seo_landing_files/bijective-function-1629606712.png", "Bijection example.", "post1 w-60 alpha-img" %}
 
 <sup>([Image Source](https://www.cuemath.com/algebra/bijective-function/))</sup>
