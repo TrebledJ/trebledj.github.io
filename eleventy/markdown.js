@@ -1,8 +1,8 @@
 const markdownItAnchor = require("markdown-it-anchor");
+const markdownItSpoiler = require("@traptitech/markdown-it-spoiler");
 const markdownItAttrs = require('markdown-it-attrs');
 const markdownItFootnote = require('markdown-it-footnote');
 const pluginTOC = require('eleventy-plugin-toc')
-
 
 
 module.exports = function (eleventyConfig) {
@@ -16,6 +16,7 @@ module.exports = function (eleventyConfig) {
 			level: [2, 3, 4],
 			slugify: eleventyConfig.getFilter("slugify"),
 		});
+		mdLib.use(markdownItSpoiler);
 		mdLib.use(markdownItFootnote);
 		mdLib.renderer.rules.footnote_caption = (tokens, idx/*, options, env, slf*/) => {
 			var n = Number(tokens[idx].meta.id + 1).toString();
