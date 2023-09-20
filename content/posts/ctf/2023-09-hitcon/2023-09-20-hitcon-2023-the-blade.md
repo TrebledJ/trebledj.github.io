@@ -1,6 +1,6 @@
 ---
 title: HITCON 2023 – The Blade
-description: You straight to `oops()`. Right away.
+description: A nifty Rust reversing challenge.
 tags:
  - reverse
  - rust
