@@ -13,7 +13,7 @@ My first Rust {% tag "rev", "reverse" %} solve! Though in hindsight, not much Ru
 
 This writeup is also intended for beginners. I’ll be taking a didactic approach to this writeup, with some sections starting with questions for guidance.^[Also, a good excuse for me to introduce !!spoilers!! to this site!] Anytime there's a set of questions, feel free to pause, challenge yourself, and try thinking through them. :) If you want to follow along, you can grab the challenge binary [*here*](https://github.com/wxrdnx/HITCON-2023-Challenges/tree/main/the-blade).
 
-I'll be mainly using [ghidra](https://ghidra-sre.org/) as my decompiler, along with GDB + GEF. You may find a [GDB cheatsheet](/posts/gdb-cheatsheet) I recently posted to be helpful.
+I'll be mainly using [ghidra](https://ghidra-sre.org/) as my decompiler, along with GDB + GEF. For those unfamiliar with GDB, you may find my [recently posted cheatsheet](/posts/gdb-cheatsheet) helpful.
 
 ## Description
 
