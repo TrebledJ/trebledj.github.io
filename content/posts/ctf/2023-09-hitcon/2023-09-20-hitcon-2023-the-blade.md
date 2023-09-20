@@ -80,7 +80,7 @@ So how is the flag actually processed? This requires a careful study of !!`verif
 
 Like most flag checkers, it turns out we just pass the flag as input (alongside the `flag` command).
 
-```
+```txt
 flag hitcon{AAAABBBBCCCCDDDDEEEEFFFFGGGGHHHHIIIIJJJJKKKKLLLLMMMMNNNN}
 ```
 
@@ -581,16 +581,18 @@ Sometimes the solution is simple and straightforward. But occasionally, we make 
 - Prove inverse function holds. Sounds mathy, but the basic principle is to check if our *reversed output* equals our *input*. In math terms: `f(g(x)) = g(f(x)) = x`, where `g` is the inverse of `f`. If it's not equal, clearly we messed up somewhere.
 	- This is useful for the second part (mapping), because our domain is small, just 0 - 255.
 	- For example, with shellcode encryption, we can do a forward pass, to make sure we're getting the same data.
-	```python
-	def shellenc(a):
-		"""Forward shell encryption."""
-		assert a >= 0
-		u32 = lambda x: x & 0xFFFFFFFF 
-		return neg(ror(u32(a + r12) ^ r13, 0xb)) ^ r14
+        ```python
+        def shellenc(a):
+            """Forward shell encryption."""
+            assert a >= 0
+            u32 = lambda x: x & 0xFFFFFFFF 
+            return neg(ror(u32(a + r12) ^ r13, 0xb)) ^ r14
 
-	assert encrypted == [shellenc(v) for v in decrypted]
-	```
+        assert encrypted == [shellenc(v) for v in decrypted]
+        ```
+
 - Use `assert`s. Great for intermediate checks.
+
 - Verify assumptions with dynamic analysis.
     For example, I had falsely assumed in the shellcode that `r12 == 0`, since seemed to be pushed by the assembly. But as we found out, `r12 == L"FLE\x7f"`.
     However, be wary of the [observer effect](https://en.wikipedia.org/wiki/Observer_effect_(information_technology)), where the program changes behaviour when observed. I haven't seen this much in CTFs, but it's certain to be out there...
