@@ -56,8 +56,6 @@ int main()
 // gcc main.c  -fno-stack-protector -z execstack && gdb ./a.out
 ```
 
-TODO: check for spoilers
-
 After running, then what? The commands don’t seem to reveal much, and at this point it’s a bit guessy. Time to turn to a decompiler.
 
 ### Identifying Interest Points
