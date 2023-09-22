@@ -12,9 +12,11 @@
             <a href="{{post.url}}"></a>
             <div>
                 <b class="post-title">{{post.data.title}}</b>
-                <div class="post-summary">
-                    <p>{{ post.data.description | markdownify | safe }}</p>
-                </div>
+                {% if post.data.description %}
+                    <div class="post-summary">
+                        <p>{{ post.data.description | markdownify | safe }}</p>
+                    </div>
+                {% endif %}
             </div>
         </div>
     </div>

@@ -1,11 +1,14 @@
 {% extends "post/metadata.html" %}
 
-
 {# Show simplified date. #}
-{% block post_metadata_date %}{{ post.page.date | date | safe }}{% endblock %}
+{% block post_metadata_date %}{{ post.page.date | date | safe }}
+{% endblock %}
 
 {# Don't show updated date. #}
 {% block post_metadata_updated %}{% endblock %}
 
 {# Limit the number of tags. #}
-{% block post_metadata_tags %}{{render_tag_list(post.data.tags | exclude(excludeTags), 3)}}{% endblock %}
+{% block post_metadata_tags %}
+    {% if post.data.tags.length > 0 %}{{render_tag_list(post.data.tags | exclude(excludeTags), 3)}}
+    {% endif %}
+{% endblock %}
