@@ -67,7 +67,7 @@ For your reference, here is a collection of third-party services we use and thei
 
 GitHub Pages, jsDelivr, and Cloudflare are guaranteed to be around on HTML pages. Disqus will only be loaded on posts which allow comments, and when the page is scrolled down far enough. SoundCloud embeds will only be loaded on pages containing such embeds.
 
-[^disqus]: Free tier. Comes with advertising
+[^disqus]: Free tier. Supposedly comes with advertising.
 
 ## Contact
 
