@@ -119,9 +119,9 @@ Let’s recognise some highs level patterns.
 It’s easy to be intimidated by the multitude of loops; but really, half the loops are the same, just wearing different clothes.
 
 There are the 3 parts to the encryption:
-- Permutation (`112d10` – `113017`).
-- Mapping (`113020` – `11309c`).
-- Shellcode arithmetic (`11310e` – `1133a5`).
+- !!Permutation (`112d10` – `113017`).!!
+- !!Mapping (`113020` – `11309c`).!!
+- !!Shellcode arithmetic (`11310e` – `1133a5`).!!
 
 The procedure is roughly:
 
