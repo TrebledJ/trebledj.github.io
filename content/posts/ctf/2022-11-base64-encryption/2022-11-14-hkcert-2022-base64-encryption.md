@@ -160,32 +160,26 @@ Frequency analysis is useful to group letters into buckets. But using frequency 
             whitelist[c] = g # Throw away all other values.
         ```
 
-    <br/>
+        {% image "assets/progress-1.jpg", "Results!", "post1" %}
 
-    {% image "assets/progress-1.jpg", "Results!", "post1" %}
+        <sup>Random decoding after frequency analysis.</sup>
+        {.caption}
 
-    <sup>Random decoding after frequency analysis.</sup>
-    {.caption}
-
-    {.no-center}
-    
-    <br/>
+        {.no-center}
 
 - Guesswork: guess English from the ~~nonsense~~ existing characters.
     - e.g. "Eog:ish" → "English", "qepqesents" → "represents", "pqese&ved" → "preserved"
     - Once we patched a word, other words became easier to patch.
 
-    <br/>
+        {% image "assets/progress-2.jpg", "Moar results!!!", "post1" %}
 
-    {% image "assets/progress-2.jpg", "Moar results!!!", "post1" %}
+        <sup>Random decoding after guessing.</sup>
+        {.caption}
 
-    <sup>Random decoding after guessing.</sup>
-    {.caption}
+        {.no-center}
 
     - At this point, we can continue patching "ciphertext", "letters", "potential", etc. Or we could just use...
   
-    <br/>
-
 - Google: after decoding a sizeable portion, let's pray and hope the plaintext is open-source. Then use the plaintext to derive the rest of the mapping.
     - It turns out the plaintext is—quite aptly—the [Wikipedia summary of frequency analysis](https://en.wikipedia.org/wiki/Frequency_analysis).
     

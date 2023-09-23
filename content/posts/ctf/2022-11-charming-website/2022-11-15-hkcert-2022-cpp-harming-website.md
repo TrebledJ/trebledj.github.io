@@ -53,8 +53,6 @@ After a bit of digging, we uncover quite a bit of info:
 
         {% image "assets/postman-pat-postman-pat-postman-pat-and-his-black-and-white-cat.jpg", "Postman Pat", "post1 w-95" %}
 
-        {.no-center}
-
     - There’s also some interesting strings such as “*charm.c*”. But I thought this was a C++ application? Perhaps a third-party library? Maybe we can use this later on.
 - The gold can be found in **`MyController::Encrypt::encrypt`**. This is where all the juicy stuff takes place. You can arrive here through a number of ways (e.g. following XREFs of `uc_encrypt`).
     - The function begins by generating a random Initialisation Vector (IV).
@@ -65,9 +63,6 @@ After a bit of digging, we uncover quite a bit of info:
         Fortunately, the key is stored in static memory. In plain sight. This is very blursed: blessed, because (from a CTF POV) we don't need much work; and cursed, because (from a dev vs. exploiter POV) we don't need much work.
 
         {% image "assets/encryption-rev-chal-with-hardcoded-key.jpg", "YAS!", "post1 w-50" %}
-
-        {.no-center}
-
 
     - The message is then encrypted using `uc_encrypt`.
 

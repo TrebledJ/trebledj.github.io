@@ -100,6 +100,11 @@ Break
        1. Isn't 
             
             {% image "~/assets/img/memes/nou.jpg", "Full width!", "post1" %}
+
+            <sup>(caption)</sup>
+            {.caption}
+
+            {.no-center}
             
        2. that
     
