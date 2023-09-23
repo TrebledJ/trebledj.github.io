@@ -265,7 +265,7 @@ Is there another way to represent the problem? Yes: `(Bool, a)`. We can use the 
 
 In fact, we’ve just constructed an **isomorphism** between types!
 
-The beauty is in the algebra. The equivalence above can be succinctly (and abstractly!) written as $\texttt{Either a a} \equiv \texttt{(Bool, a)}$—or more algebraically, $a + a = 2a$.
+The beauty is in the algebra. The equivalence above can be succinctly (and abstractly!) written as $\texttt{Either a a} {} \equiv \texttt{(Bool, a)}$—or more algebraically, $a + a = 2a$.
 
 {% alert "fact" %}
 More formally, an isomorphism exists between types `a` and `b` if we can *convert between the two types without loss of information*. The most straightforward approach is to define two functions: `toRHS :: a -> b` and `toLHS :: b -> a`. Alternatively with the algebra presented above, we can easily prove isomorphisms by checking the algebraic equivalence of two types!
@@ -283,7 +283,7 @@ toLHS (True, x) = Left x
 toLHS (False, x) = Right x
 ```
 
-Notice how information is preserved, i.e. $\texttt{toLHS }(\texttt{toRHS } x) = x,\ \forall x \in \texttt{Either a a}$ and $\texttt{toRHS } (\texttt{toLHS }y) = y, \ \forall y \in \texttt{(Bool, a)}$.
+Notice how information is preserved, i.e. $\texttt{toLHS }(\texttt{toRHS } x) = x,\ \goodbreak \forall x \badbreak \in \texttt{Either a a}$ and $\texttt{toRHS } (\texttt{toLHS }y) = y, \ \goodbreak \forall y \badbreak \in \texttt{(Bool, a)}$.
 
 In the same vein, the following types are also equivalent:
 

@@ -346,6 +346,12 @@
     .spoiler {
         transition: none;
     }
+
+    @include media-breakpoint-down(sm) {
+        ul, ol {
+            padding-left: 1.5rem;
+        }
+    }
 }
 
 div.center,
