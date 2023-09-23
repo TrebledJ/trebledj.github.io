@@ -9,7 +9,7 @@
 		"benchmark": "DEBUG=Eleventy:Benchmark* npx @11ty/eleventy",
 		"watch:sass": "sass --watch assets/scss:_site/css --quiet",
 		"build-dev:sass": "sass assets/scss:_site/css",
-		"build:sass": "sass --style=compressed assets/scss:_site/css && cleancss --batch --batch-suffix '.min' -O2 _site/css/*.css",
+		"build:sass": "sass --style=compressed assets/scss:_site/css && cleancss --batch --batch-suffix '.min' -O2 _site/css/*.css !_site/css/*.min.css",
 		"watch:eleventy": "eleventy --serve --quiet",
 		"build:eleventy": "eleventy",
 		"dont-build:rake": "cd eleventy/detail/rake-js && npm install --ignore-scripts && npm run build",
