@@ -28,16 +28,17 @@ We collect the following personal data:
 	* Used by Disqus and SoundCloud embeds.
 	* Cloudflare and jsDelivr claim they don't use cookies. ([Cloudflare](https://www.cloudflare.com/web-analytics/#:~:text=Cloudflare%20Web%20Analytics%20does%20not,the%20purpose%20of%20displaying%20analytics.); [jsDelivr](https://www.jsdelivr.com/terms/privacy-policy-jsdelivr-net#:~:text=We%20do%20not%20use%20cookies))
 * **Identity Data**: Name, Email address.
-	* These are **optional** fields in the [Contact Form](/#contact). You have the discretion to *not* fill in those fields.
+	* In the [Contact Form](/#contact), these are **optional** fields. You have the discretion to *not* fill in those fields.
+	* In Disqus guest commenting, these are **mandatory** fields.
 
 ## Data Usage
 
 We use personal data for the following purposes:
 
 - **Technical Data**: To optimise website experience. To draw insights on readers and to improve the site.
-- **Identity Data**: For contact purposes. To respond to comments.
+- **Identity Data**: For contact and communication purposes. To personalise responses to comments.
 
-Third-party services may have other clauses. Please refer to their [privacy policies](#third-party).
+Third-party services may have other clauses, especially for cookies. Please refer to their [privacy policies](#third-party).
 
 ## Data Sharing
 
