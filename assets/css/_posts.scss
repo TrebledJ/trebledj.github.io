@@ -3,13 +3,30 @@
     width: 100%;
     max-width: 100%;
     margin-bottom: $space-threehalves;
+
+    // Nested anchors: https://stackoverflow.com/a/52076345/10239789.
+    position: relative;
+
+    & > a {
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+    }
+
+    // ---
+
     -webkit-border-radius: $border-radius;
     border-radius: $border-radius;
     border: $border-width-block solid var(--light-border-color);
+
     overflow: hidden;
+
     -webkit-transition: all $transition-duration ease;
     -o-transition: all $transition-duration ease;
     transition: all $transition-duration ease;
+
     -webkit-box-shadow: 0 1px 1px 0 rgba(31, 35, 46, 0.15);
     box-shadow: 0 1px 1px 0 rgba(31, 35, 46, 0.15);
 
@@ -48,13 +65,8 @@
         margin: 0 0.5rem 0 0.3rem;
         font-size: 1rem;
     }
-}
 
-@include media-breakpoint-up(lg) {
-
-    .post-preview,
-    .post-preview-compressed {
-
+    @include media-breakpoint-up(lg) {
         &:hover {
             -webkit-transform: translate(-3px, -5px);
             -ms-transform: translate(-3px, -5px);
@@ -62,20 +74,6 @@
             -webkit-box-shadow: 0 15px 45px -10px rgba(5, 8, 17, 0.2);
             box-shadow: 0 15px 45px -10px rgba(5, 8, 17, 0.2);
         }
-    }
-}
-
-// Nested anchors: https://stackoverflow.com/a/52076345/10239789.
-.post-preview,
-.post-preview-compressed {
-    position: relative;
-
-    &>a {
-        position: absolute;
-        top: 0;
-        left: 0;
-        bottom: 0;
-        right: 0;
     }
 }
 
@@ -102,7 +100,6 @@
 }
 
 .post-preview-compressed {
-
     // Smaller title.
     .post-title {
         margin: 0 0 5px;
@@ -126,40 +123,35 @@
     }
 }
 
-@include media-breakpoint-up(sm) {
-    .post-preview {
-        .post-preview-container {
-            flex-direction: row;
-        }
-
-        .post-img-container {
-            align-items: center;
-        }
-
-        .post-content {
-            width: 70%;
-        }
-    }
-
-    .post-preview .post-thumbnail {
-        width: 35%;
-        height: inherit; // height isn't defined, so we'll auto-fit to parent height.
-    }
-}
-
-@include media-breakpoint-down(sm) {
-    .post-preview {
-        .post-preview-container {
+.post-preview {
+    .post-preview-container {
+        flex-direction: row;
+        @include media-breakpoint-down(sm) {
             flex-direction: column;
         }
+    }
 
-        .post-thumbnail {
+    .post-thumbnail {
+        @include media-breakpoint-up(sm) {
+            width: 35%;
+            height: inherit; // height isn't defined, so we'll auto-fit to parent height.
+        }
+        @include media-breakpoint-down(sm) {
             width: 100%;
             min-height: 200px;
         }
+    }
 
-        .post-content {
+    .post-content {
+        width: 70%;
+        @include media-breakpoint-down(sm) {
             width: 100%;
+        }
+    }
+
+    .post-img-container {
+        @include media-breakpoint-up(sm) {
+            align-items: center;
         }
     }
 }
@@ -219,21 +211,21 @@
     .post-meta-icon {
         font-size: 16px;
     }
-}
 
-@include media-breakpoint-up(md) {
-    .post-article {
-        .metadata-container {
+    .metadata-container {
+        @include media-breakpoint-up(md) {
             flex-direction: row;
             align-items: center;
         }
-
-        .post-updated-date-icon {
-            display: none;
+        @include media-breakpoint-down(md) {
+            flex-direction: column;
         }
     }
 
-    .post-article {
+    @include media-breakpoint-up(md) {
+        .post-updated-date-icon {
+            display: none;
+        }
 
         .post-posted-date::after,
         .post-updated-date::after {
@@ -251,16 +243,7 @@
     opacity: $opacity-lower;
 }
 
-@include media-breakpoint-down(md) {
-    .post-article {
-        .metadata-container {
-            flex-direction: column;
-        }
-    }
-}
-
 .post-body {
-
     // Add article text CSS here.
     .center {
         text-align: center;
@@ -297,18 +280,18 @@
     .alert-content,
     blockquote,
     .details-content {
-        &>*:first-child {
+        & > *:first-child {
             margin-top: 0;
         }
 
-        &>ul,
-        &>ol {
+        & > ul,
+        & > ol {
             margin-top: $space-base;
             margin-bottom: 0;
         }
     }
 
-    div>*:last-child {
+    div > *:last-child {
         margin-bottom: 0;
     }
 
@@ -328,6 +311,10 @@
     ul,
     ol {
         margin-left: 0rem;
+
+        @include media-breakpoint-down(sm) {
+            padding-left: 1.5rem;
+        }
     }
 
     .tag {
@@ -345,12 +332,6 @@
 
     .spoiler {
         transition: none;
-    }
-
-    @include media-breakpoint-down(sm) {
-        ul, ol {
-            padding-left: 1.5rem;
-        }
     }
 }
 
@@ -377,16 +358,6 @@ img.center {
 .footnotes-sep,
 .section-sep {
     margin: $space-double 0;
-}
-
-.alert-content {
-    overflow-x: auto;
-    overflow-y: hidden;
-
-    &>ul,
-    &>ol {
-        padding-left: $space-base;
-    }
 }
 
 /* Direct Links / Markdown Headers */

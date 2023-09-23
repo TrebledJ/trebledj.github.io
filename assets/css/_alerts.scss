@@ -38,7 +38,17 @@ html[data-theme="dark"] {
     .alert i.fa {
         margin-left: -1.7rem !important;
     }
-    .alert.alert-success i.fa {
+    .alert i.fa.fa-lightbulb {
         margin-left: -1.5rem !important;
+    }
+}
+
+.alert-content {
+    overflow-x: auto;
+    overflow-y: hidden;
+
+    & > ul,
+    & > ol {
+        padding-left: $space-base;
     }
 }

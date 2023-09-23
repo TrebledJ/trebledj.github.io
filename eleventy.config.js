@@ -20,9 +20,12 @@ module.exports = function (eleventyConfig) {
 		"./assets/img": "/img",
 		"./content/**/assets/*.{png,jpg,gif,webp,mp4}": "/img",
 		"./assets/webfonts": "/webfonts",
+		"./assets/css/third-party/*.{css,map}": "/css/third-party",
+		"./assets/css/[!third-party]**/*.{css,map}": "/css",
+		"./node_modules/prismjs/themes/prism-okaidia.css": "/css/third-party/prism-okaidia.css",
+	});
+	eleventyConfig.addPassthroughCopy({
 		"./assets/js/**/*.js": "/js/",
-		"./assets/css/**/*.{css,map}": "/css/",
-		"./node_modules/prismjs/themes/prism-okaidia.css": "/css/prism-okaidia.css",
 	}, {
 		transform: function (src, dest, stats) {
 			if (process.env.ENVIRONMENT !== 'production')
@@ -47,17 +50,19 @@ module.exports = function (eleventyConfig) {
 	// https://www.11ty.dev/docs/watch-serve/#add-your-own-watch-targets
 
 	// Process content images to the image pipeline.
-	eleventyConfig.addWatchTarget("content/**/*.{png,jpg,gif,webp,svg}");
+	eleventyConfig.addWatchTarget("content/**/*.{html}");
+	// eleventyConfig.addWatchTarget("content/**/*.{png,jpg,gif,webp,svg}");
 	eleventyConfig.watchIgnores.add("{package,package-lock}.json");
 	eleventyConfig.watchIgnores.add(".gitignore");
 
+	// Wait for other files, in case of batch changes.
 	eleventyConfig.setWatchThrottleWaitTime(10);
 
 	eleventyConfig.setServerOptions({
 		liveReload: true,
 		watch: [
 			'./_site/**/*.css',
-			'./_site/**/*.html',
+		// 	'./_site/**/*.html',
 		]
 	});
 

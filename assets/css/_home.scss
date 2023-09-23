@@ -19,7 +19,7 @@ html[data-theme="light"] .hero-section {
     background: radial-gradient(ellipse at bottom, #eba85b 0%, #b6b5b0 100%);
 }
 
-.hero-fg>* {
+.hero-fg > * {
     position: relative;
     z-index: 1;
 }
@@ -32,46 +32,89 @@ html[data-theme="light"] .hero-section {
     }
 }
 
-#home .carousel {
-    height: 550px;
+// --- Carousel ---
 
-    // Nowrap, overflow text.
-    // .post-title,
-    // .post-summary>* {
-    //     overflow: hidden;
-    //     white-space: nowrap;
-    //     text-overflow: ellipsis;
-    // }
+#home {
+    .carousel {
+        height: 550px;
 
-    // Faded bottom items.
-    // .carousel-item {
-    //     height: 450px;
-    //     overflow: hidden;
-    //     mask-image: linear-gradient(180deg, #000 90%, transparent);
-    //     -webkit-mask-image: linear-gradient(180deg, #000 90%, transparent);
-    // }
-}
+        // Nowrap, overflow text.
+        // .post-title,
+        // .post-summary>* {
+        //     overflow: hidden;
+        //     white-space: nowrap;
+        //     text-overflow: ellipsis;
+        // }
 
-.carousel-tab-group {
-    .btn {
-        border: var(--light-border-color) solid $border-width !important;
-        color: var(--main-text-color);
+        // Faded bottom items.
+        // .carousel-item {
+        //     height: 450px;
+        //     overflow: hidden;
+        //     mask-image: linear-gradient(180deg, #000 90%, transparent);
+        //     -webkit-mask-image: linear-gradient(180deg, #000 90%, transparent);
+        // }
 
-        &:hover {
+        @include media-breakpoint-down(lg) {
+            .tag-list span:nth-child(3) {
+                display: none;
+            }
+        }
+
+        // Small view, display only one post.
+        @include media-breakpoint-down(md) {
+            .collection-list > div:nth-child(n+2) {
+                display: none;
+            }
+        }
+    }
+
+    .carousel-control-container {
+        flex: 0 0 auto;
+        @include media-breakpoint-up(md) {
+            width: 5%;
+        }
+        @include media-breakpoint-down(md) {
+            width: 8%;
+        }
+    }
+
+    .carousel-content-container {
+        flex: 0 0 auto;
+        @include media-breakpoint-up(md) {
+            width: 90%;
+        }
+        @include media-breakpoint-down(md) {
+            width: 84%;
+        }
+    }
+
+    .carousel-tab-group {
+        .btn {
+            border: var(--light-border-color) solid $border-width !important;
             color: var(--main-text-color);
+
+            &:hover {
+                color: var(--main-text-color);
+            }
         }
     }
 }
 
-.carousel-control-container {
-    flex: 0 0 auto;
-    width: 5%;
+#home {
+    .container {
+        @include media-breakpoint-down(lg) {
+            max-width: none;
+            padding-left: $space-double;
+            padding-right: $space-double;
+        }
+
+        @include media-breakpoint-down(sm) {
+            padding-left: $space-container-base;
+            padding-right: $space-container-base;
+        }
+    }
 }
 
-.carousel-content-container {
-    flex: 0 0 auto;
-    width: 90%;
-}
 
 .carousel-title .btn,
 .recent-posts .btn {
@@ -81,52 +124,13 @@ html[data-theme="light"] .hero-section {
 }
 
 html[data-theme="light"] {
-
     .carousel-control-prev-icon,
     .carousel-control-next-icon {
         filter: invert(100%);
     }
 }
 
-@include media-breakpoint-down(lg) {
-    #home {
-        .container {
-            max-width: none;
-            padding-left: $space-double;
-            padding-right: $space-double;
-        }
-
-        // Small view, display only one post.
-        .carousel {
-            .tag-list span:nth-child(3) {
-                display: none;
-            }
-        }
-    }
-}
-
-@include media-breakpoint-down(md) {
-
-    // Small view, display only one post.
-    #home {
-        .carousel {
-            .collection-list>div:nth-child(2) {
-                display: none;
-            }
-        }
-
-        .carousel-control-container {
-            width: 8%;
-        }
-
-        .carousel-content-container {
-            width: 84%;
-        }
-    }
-}
-
 @include media-breakpoint-down(sm) {
-
     // Small view, compress the preview.
     #home {
         .topic-title {
@@ -141,11 +145,6 @@ html[data-theme="light"] {
             .metadata-container {
                 display: none !important;
             }
-        }
-
-        .container {
-            padding-left: $space-container-base;
-            padding-right: $space-container-base;
         }
     }
 }

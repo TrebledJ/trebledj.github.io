@@ -1,6 +1,11 @@
 #right-sidebar {
     line-height: $line-height-compact;
 
+    @include media-breakpoint-down(lg) {
+        // Small screen: bye bye sidebar.
+        display: none;
+    }
+
     .toc {
         font-size: 12px;
     }
@@ -48,9 +53,12 @@
 }
 
 #btn-mobile-toc {
+    @include media-breakpoint-down(lg) {
+        display: block;
+    }
 
     /* No padding on outer-most list. */
-    nav.toc>ol {
+    nav.toc > ol {
         padding-left: 0rem;
     }
 
@@ -62,20 +70,5 @@
         margin-left: 0;
         overflow-y: auto;
         max-height: calc(100vh - ($header-height + 100px));
-    }
-}
-
-// Small screen: bye bye sidebar.
-@include media-breakpoint-down(lg) {
-    #right-sidebar {
-        display: none;
-    }
-
-    .page-container .d-flex.flex-row-reverse {
-        --bs-gutter-x: 0rem !important;
-    }
-
-    #btn-mobile-toc {
-        display: block;
     }
 }

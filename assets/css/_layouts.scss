@@ -1,26 +1,22 @@
 // --- Overarching Container --- //
 .main-container {
-    width: 100%;
+    width: 95%;
+    margin-left: auto;
+    margin-right: auto;
     padding: 20px;
     min-height: calc(100vh - ($footer-height + $header-height));
-}
 
-.page-container {
-    padding-left: 0.25rem;
-    padding-right: 0.25rem;
-}
-
-@include media-breakpoint-up(lg) {
-    .page-container {
-        padding-left: 4rem;
+    @include media-breakpoint-down(md) {
+        width: 100%;
     }
 }
 
-@include media-breakpoint-up(md) {
-    .main-container {
-        margin-left: auto;
-        margin-right: auto;
-        width: 95%;
+.page-container {
+    padding-left: 4rem;
+    padding-right: 0.25rem;
+
+    @include media-breakpoint-down(lg) {
+        padding-left: 0.25rem;
     }
 }
 
@@ -65,15 +61,12 @@
 
 // --- 3-Breakpoint Col --- //
 
-@include media-breakpoint-up(xl) {
-    .related-col-flex-auto-4 {
+.related-col-flex-auto-4 {
+    @include media-breakpoint-up(xl) {
         flex: 0 0 auto;
         width: 33.333333333%;
     }
-}
-
-@include media-breakpoint-between(sm, xl) {
-    .related-col-flex-auto-4 {
+    @include media-breakpoint-between(sm, xl) {
         flex: 0 0 auto;
         width: 50%;
 
@@ -82,10 +75,7 @@
             display: none;
         }
     }
-}
-
-@include media-breakpoint-down(sm) {
-    .related-col-flex-auto-4 {
+    @include media-breakpoint-down(sm) {
         width: 100%;
 
         // Limit number of rows.

@@ -85,111 +85,93 @@ i.social-icon-img {
     }
 }
 
-// Large screens.
-// @include media-breakpoint-up(lg) {
-//     #left-sidebar {
-//         top: 5rem;
-//         left: 0;
-//         z-index: 2;
-//         overflow-y: auto;
-//         height: calc(100vh - 11rem);
+#post-author-container {
+    button {
+        position: relative;
+        margin-bottom: 0;
 
-//         button {
-//             display: none;
-//         }
-//     }
-// }
-
-// For small screens: collapse column into row, and group social buttons under Follow button.
-// @include media-breakpoint-down(lg) {
-    #post-author-container {
-        button {
-            position: relative;
-            margin-bottom: 0;
-
-            &.open {
-                &:before {
-                    pointer-events: auto;
-                }
-            }
-        }
-
-        .profile-name {
-            margin-top: 0px;
-            font-size: 18px;
-        }
-
-        .profile-bio {
-            font-size: 14px;
-            margin-bottom: 0px;
-            line-height: $line-height-compact;
-        }
-
-        .profile-img {
-            width: 32px;
-            height: 32px;
-        }
-    }
-
-    #post-author-container,
-    #post-author-bio-container {
-        flex-direction: row;
-        align-items: start;
-    }
-    #post-author-container {
-        justify-content: space-between;
-        align-items: center;
-    }
-
-    #post-author-container {
-        .author-info {
-            padding-left: 15px;
-            padding-right: 15px;
-        }
-    
-        .author-social-item-list {
-            position: absolute;
-            right: 0;
-            margin-top: 15px;
-            z-index: 5;
-            padding: 10px;
-            border: $border-width solid var(--light-border-color);
-            border-radius: $border-radius;
-            background: var(--main-background-color);
-            box-shadow: 0 2px 4px 0 rgba(#000, 0.16), 0 2px 10px 0 rgba(#000, 0.12);
-            opacity: $opacity-full;
-            cursor: default;
-    
-            // Hide social items by default (for small screens).
-            &.hidden {
-                display: none;
-            }
-    
+        &.open {
             &:before {
-                display: block;
-                content: "";
-                position: absolute;
-                top: -11px;
-                left: calc(50% - 10px);
-                width: 0;
-                border-style: solid;
-                border-width: 0 10px 10px;
-                border-color: var(--light-border-color) transparent;
-                z-index: 0;
-            }
-    
-            &:after {
-                display: block;
-                content: "";
-                position: absolute;
-                top: -10px;
-                left: calc(50% - 10px);
-                width: 0;
-                border-style: solid;
-                border-width: 0 10px 10px;
-                border-color: var(--main-background-color) transparent;
-                z-index: 1;
+                pointer-events: auto;
             }
         }
     }
-// }
+
+    .profile-name {
+        margin-top: 0px;
+        font-size: 18px;
+    }
+
+    .profile-bio {
+        font-size: 14px;
+        margin-bottom: 0px;
+        line-height: $line-height-compact;
+    }
+
+    .profile-img {
+        width: 32px;
+        height: 32px;
+    }
+}
+
+#post-author-container,
+#post-author-bio-container {
+    flex-direction: row;
+    align-items: start;
+}
+#post-author-container {
+    justify-content: space-between;
+    align-items: center;
+}
+
+#post-author-container {
+    .author-info {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+
+    .author-social-item-list {
+        position: absolute;
+        right: 0;
+        margin-top: 15px;
+        z-index: 5;
+        padding: 10px;
+        border: $border-width solid var(--light-border-color);
+        border-radius: $border-radius;
+        background: var(--main-background-color);
+        box-shadow: 0 2px 4px 0 rgba(#000, 0.16), 0 2px 10px 0 rgba(#000, 0.12);
+        opacity: $opacity-full;
+        cursor: default;
+
+        // Hide social items by default (for small screens).
+        &.hidden {
+            display: none;
+        }
+
+        &:before {
+            display: block;
+            content: "";
+            position: absolute;
+            top: -11px;
+            left: calc(50% - 10px);
+            width: 0;
+            border-style: solid;
+            border-width: 0 10px 10px;
+            border-color: var(--light-border-color) transparent;
+            z-index: 0;
+        }
+
+        &:after {
+            display: block;
+            content: "";
+            position: absolute;
+            top: -10px;
+            left: calc(50% - 10px);
+            width: 0;
+            border-style: solid;
+            border-width: 0 10px 10px;
+            border-color: var(--main-background-color) transparent;
+            z-index: 1;
+        }
+    }
+}

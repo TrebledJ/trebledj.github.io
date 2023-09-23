@@ -5,6 +5,11 @@
     background-color: var(--main-background-color);
     border-bottom: 1px solid var(--light-border-color);
     width: 100vw;
+
+    @include media-breakpoint-down(lg) {
+        padding-left: 0;
+        padding-right: 0;
+    }
 }
 
 .navbar-brand {
@@ -32,14 +37,9 @@
     box-shadow: none;
 }
 
-@include media-breakpoint-down(lg) {
-    .navbar {
-        padding-left: 0;
-        padding-right: 0;
-    }
-
-    // Margin for nav-items when hamburger is opened.
-    #navbar-container {
+#navbar-container {
+    @include media-breakpoint-down(lg) {
+        // Margin for nav-items when hamburger is opened.
         padding-left: 10px;
     }
 }
