@@ -234,6 +234,8 @@ Check line breaks here:
 
 ### Tables
 
+{% table %}
+
 | Name        | Age | Gender | Occupation                                   |
 |-------------|-----|--------|----------------------------------------------|
 | **John**    | 30  | Male   | {% tag "Engineer", "software-engineering" %} |
@@ -243,11 +245,17 @@ Check line breaks here:
 | David       | 40  | Male   | Architect                                    |
 | Lisa        | 32  | Female | Lawyer                                       |
 
+{% endtable %}
+
 [^educate]: {% tag "Education", "learning" %} is a social construct.
+
+{% table %}
 
 | Long                                   | Table |
 |----------------------------------------|-------|
 | Here is some super duperrr long text that hopefully overflows the boundaries of this table and also the tiny margin Fermat's paper, but still render nicely.  | foo   |
+
+{% endtable %}
 
 
 ### Code
@@ -329,10 +337,14 @@ Its wings are too small to get its fat little body off the ground. The bee, of c
 > In all your ways, submit to Him, and He will make your paths straight.
 > Proverbs 3:5-6
 
+{% table %}
+
 | Long                                                                                                                                | Table |
 |-------------------------------------------------------------------------------------------------------------------------------------|-------|
 | Here is some super duperrr long text that hopefully overflows the boundaries of this table and also the tiny margin Fermat's paper. | foo   |
 | And herrre's a second row!                                                                                                          | a     |
+
+{% endtable %}
 {% endalert %}
 
 {% alert "warning" %}
