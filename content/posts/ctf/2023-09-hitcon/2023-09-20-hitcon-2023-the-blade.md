@@ -99,7 +99,11 @@ if (param_3 != 0x40) {
 }
 ```
 
-When we try sending a flag 64-bytes long, we get something on our other shell. So we're not immediately hit with an "*Incorrect*"!
+When we try sending a flag 64-bytes long, we get something on our other shell. We're not immediately hit with an "*Incorrect*".
+
+```txt
+flag hitcon{AAAABBBBCCCCDDDDEEEEFFFFGGGGHHHHIIIIJJJJKKKKLLLLMMMMNNNN}
+```
 
 {% enddetails %}
 
