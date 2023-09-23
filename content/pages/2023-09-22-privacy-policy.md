@@ -64,14 +64,14 @@ For your reference, here is a collection of third-party services we use and thei
 
 {% table %}
 
-| Service         | Purpose      | Technical Data | Identity Data | Cookies | Privacy Policy                     |
-|-----------------|--------------|:--------------:|:-------------:|:-------:|------------------------------------|
-| GitHub Pages    | Hosting      |       ✓        |               |         | [Link][pghp]                       |
-| jsDelivr        | CDN          |       ✓        |               |         | [Link][pjsd]                       |
-| Cloudflare      | Analytics    |       ✓        |               |         | [Link][pclf] (*End Users*)         |
-| Disqus[^disqus] | Comments     |       ✓        |    ✓[^dq1]    |    ✓    | [Link][pdqs]                       |
-| SoundCloud      | Music Embeds |       ✓        |    ✓[^sc1]    |    ✓    | [Link][pscl] (*SoundCloud Widget*) |
-| Getform         | Forms        |       ✓        |    ✓[^gf1]    | ✓[^gf2] | [Link][pgfm] (*Respondents*)       |
+| Service         | Purpose      | Technical Data[^u] | Identity Data[^u] | Cookies[^u] | Privacy Policy                     |
+|-----------------|--------------|:------------------:|:-----------------:|:-----------:|------------------------------------|
+| GitHub Pages    | Hosting      |         ✓          |                   |             | [Link][pghp]                       |
+| jsDelivr        | CDN          |         ✓          |                   |             | [Link][pjsd]                       |
+| Cloudflare      | Analytics    |         ✓          |                   |             | [Link][pclf] (*End Users*)         |
+| Disqus[^disqus] | Comments     |         ✓          |      ✓[^dq1]      |      ✓      | [Link][pdqs]                       |
+| SoundCloud      | Music Embeds |         ✓          |      ✓[^sc1]      |      ✓      | [Link][pscl] (*SoundCloud Widget*) |
+| Getform         | Forms        |         ✓          |      ✓[^gf1]      |   ✓[^gf2]   | [Link][pgfm] (*Respondents*)       |
 
 {% endtable %}
 
@@ -82,6 +82,7 @@ For your reference, here is a collection of third-party services we use and thei
 [pscl]: https://soundcloud.com/pages/privacy
 [pgfm]: https://getform.io/legal/privacy-policy
 
+[^u]: Third-party data collection as of writing. Their policies may have updated since.
 [^dq1]: Applicable if commenting or logged in.
 [^sc1]: Applicable if logged in.
 [^gf1]: Applicable if filled in.
