@@ -48,8 +48,7 @@ We do not share your personal data with third-parties. Any personal data collect
 
 Whilst personal data helps us improve the site, such data does not reside with us, but with third-party services. For policies on data protection, retention, and rights to access/correct/delete, please refer to their [privacy policies](#third-party) for details.
 
-For names or email addresses, if you'd like to correct/delete data entered into the [Contact Form][contact-form], you may [contact us][contact-form] directly.
-
+For names or email addresses, if you'd like to delete data entered into the [Contact Form][contact-form], you may also [contact us][contact-form] directly.
 
 
 ## Changes to the Privacy Policy
