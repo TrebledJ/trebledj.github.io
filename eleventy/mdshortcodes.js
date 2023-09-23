@@ -52,6 +52,16 @@ module.exports = function (eleventyConfig) {
 	});
 
 	
+	eleventyConfig.addShortcode("table", function () {
+		return `<div class="table-container">`;
+	});
+
+	// Paired shortcode workaround: see Note [endalert Workaround].
+	eleventyConfig.addShortcode("endtable", function () {
+		return `</div>`;
+	});
+
+	
 	const escapeHtml = (unsafe) => {
 		return unsafe.replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;').replaceAll('"', '&quot;').replaceAll("'", '&#039;');
 	}

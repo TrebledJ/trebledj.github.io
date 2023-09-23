@@ -28,7 +28,7 @@ We collect the following personal data:
 	* Used by Disqus and SoundCloud embeds.
 	* Cloudflare and jsDelivr claim they don't use cookies. ([Cloudflare](https://www.cloudflare.com/web-analytics/#:~:text=Cloudflare%20Web%20Analytics%20does%20not,the%20purpose%20of%20displaying%20analytics.); [jsDelivr](https://www.jsdelivr.com/terms/privacy-policy-jsdelivr-net#:~:text=We%20do%20not%20use%20cookies))
 * **Identity Data**: Name, Email address.
-	* In the [Contact Form](/#contact), these are **optional** fields. You have the discretion to *not* fill in those fields.
+	* In the [Contact Form][contact-form], these are **optional** fields. You have the discretion to *not* fill in those fields.
 	* In Disqus guest commenting, these are **mandatory** fields.
 
 ## Data Usage
@@ -48,6 +48,10 @@ We do not share your personal data with third-parties. Any personal data collect
 
 Whilst personal data helps us improve the site, such data does not reside with us, but with third-party services. For policies on data protection, retention, and rights to access/correct/delete, please refer to their [privacy policies](#third-party) for details.
 
+For names or email addresses, if you'd like to correct/delete data entered into the [Contact Form][contact-form], you may [contact us][contact-form] directly.
+
+
+
 ## Changes to the Privacy Policy
 
 We may update this privacy policy from time to time. Changes to this Privacy Policy are effective when they are posted on this page. You are advised to review this Privacy Policy periodically for any changes.
@@ -58,21 +62,43 @@ By using our website, you acknowledge that you have read and understand this pri
 
 For your reference, here is a collection of third-party services we use and their policies.
 
-| Service                  | Privacy Policy                                                                                                |
-|--------------------------|---------------------------------------------------------------------------------------------------------------|
-| GitHub Pages             | [Link](https://docs.github.com/en/pages/getting-started-with-github-pages/about-github-pages#data-collection) |
-| jsDelivr CDN             | [Link](https://www.jsdelivr.com/terms/privacy-policy-jsdelivr-net)                                            |
-| Cloudflare Web Analytics | [Link](https://www.cloudflare.com/privacypolicy) (look for *End Users*)                                       |
-| Disqus Comments[^disqus] | [Link](https://help.disqus.com/en/articles/1717103-disqus-privacy-policy)                                     |
-| SoundCloud Embeds        | [Link](https://soundcloud.com/pages/privacy) (look for *SoundCloud Widget*)                                   |
+{% table %}
 
-GitHub Pages, jsDelivr, and Cloudflare are guaranteed to be around on HTML pages. Disqus will only be loaded on posts which allow comments, and when the page is scrolled down far enough. SoundCloud embeds will only be loaded on pages containing such embeds.
+| Service         | Purpose      | Technical Data | Identity Data | Cookies | Privacy Policy                     |
+|-----------------|--------------|:--------------:|:-------------:|:-------:|------------------------------------|
+| GitHub Pages    | Hosting      |       ✓        |               |         | [Link][pghp]                       |
+| jsDelivr        | CDN          |       ✓        |               |         | [Link][pjsd]                       |
+| Cloudflare      | Analytics    |       ✓        |               |         | [Link][pclf] (*End Users*)         |
+| Disqus[^disqus] | Comments     |       ✓        |    ✓[^dq1]    |    ✓    | [Link][pdqs]                       |
+| SoundCloud      | Music Embeds |       ✓        |    ✓[^sc1]    |    ✓    | [Link][pscl] (*SoundCloud Widget*) |
+| Getform         | Forms        |       ✓        |    ✓[^gf1]    | ✓[^gf2] | [Link][pgfm] (*Respondents*)       |
+
+{% endtable %}
+
+[pghp]: https://docs.github.com/en/pages/getting-started-with-github-pages/about-github-pages#data-collection
+[pjsd]: https://www.jsdelivr.com/terms/privacy-policy-jsdelivr-net
+[pclf]: https://www.cloudflare.com/privacypolicy
+[pdqs]: https://help.disqus.com/en/articles/1717103-disqus-privacy-policy
+[pscl]: https://soundcloud.com/pages/privacy
+[pgfm]: https://getform.io/legal/privacy-policy
+
+[^dq1]: Applicable if commenting or logged in.
+[^sc1]: Applicable if logged in.
+[^gf1]: Applicable if filled in.
+[^gf2]: Applicable when redirected to getform.io.
+
+- GitHub Pages, jsDelivr, and Cloudflare are guaranteed to be around on all HTML pages of our site.
+- Disqus will only be loaded on posts which allow comments, and when the page is scrolled down far enough.
+- SoundCloud embeds will only be loaded on pages containing such embeds.
+- Getform only applies to pages containing forms (e.g. the contact form).
 
 [^disqus]: Free tier. Supposedly comes with advertising.
 
 ## Contact
 
-If you have any questions or concerns about our privacy policy, please [contact us](/#contact).
+If you have any questions or concerns about our privacy policy, please [contact us][contact-form].
 
 Thanks for your patience and understanding.
 
+
+[contact-form]: /#contact

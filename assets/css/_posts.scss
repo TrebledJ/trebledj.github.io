@@ -321,6 +321,10 @@
         margin-top: $space-threehalves;
     }
 
+    .table-container {
+        overflow-x: scroll;
+    }
+
     ul,
     ol {
         margin-left: 0rem;
@@ -330,14 +334,15 @@
         font-size: 13px;
     }
 
-    .spoiler:not(:hover)
-    {
+    .spoiler:not(:hover) {
         background-color: var(--bold-color);
         color: var(--bold-color);
+
         & * {
             color: var(--bold-color);
         }
     }
+
     .spoiler {
         transition: none;
     }
