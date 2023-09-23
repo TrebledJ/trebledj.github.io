@@ -81,16 +81,16 @@ So how is the flag actually processed? This requires a careful study of !!`verif
 Like most flag checkers, it turns out we just pass the flag as input (alongside the `flag` command).
 
 ```txt
-flag hitcon{AAAABBBBCCCCDDDDEEEEFFFFGGGGHHHHIIIIJJJJKKKKLLLLMMMMNNNN}
+flag hitcon{test_flag}
 ```
 
 And like most flag checkers, we’re immediately hit with “*Incorrect*”.
 
-Detail: 
+{% details "We also get some hints about the flag's length..." %}
 
-Glancing at the start of `verify()`, we also get some hints about the flag's length...
+...by glancing at the start of `verify()`...
 
-...64.
+...!!64!!.
 
 ```c
 if (param_3 != 0x40) {
@@ -98,6 +98,10 @@ if (param_3 != 0x40) {
 	return auVar27;
 }
 ```
+
+When we try sending a flag 64-bytes long, we get something on our other shell. So we're not immediately hit with an "*Incorrect*"!
+
+{% enddetails %}
 
 ### Reversing the Encryption
 
