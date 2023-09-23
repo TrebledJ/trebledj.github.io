@@ -148,28 +148,24 @@ i.social-icon-img {
             display: none;
         }
 
-        &:before {
+        &:before, &:after {
             display: block;
             content: "";
             position: absolute;
-            top: -11px;
             left: calc(50% - 10px);
             width: 0;
             border-style: solid;
             border-width: 0 10px 10px;
+        }
+        
+        &:before {
+            top: -11px;
             border-color: var(--light-border-color) transparent;
             z-index: 0;
         }
-
+        
         &:after {
-            display: block;
-            content: "";
-            position: absolute;
             top: -10px;
-            left: calc(50% - 10px);
-            width: 0;
-            border-style: solid;
-            border-width: 0 10px 10px;
             border-color: var(--main-background-color) transparent;
             z-index: 1;
         }
