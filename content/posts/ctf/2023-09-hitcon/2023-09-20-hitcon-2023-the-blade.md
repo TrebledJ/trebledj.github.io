@@ -427,18 +427,18 @@ Small caveat: you'll want to set `context.arch = 'amd64'` for `disasm` to interp
 
 ```arm-asm
 -- snip --
-
-  b4:   58                      pop    rax
-  b5:   48 f7 d0                not    rax
-  b8:   48 c1 e8 1d             shr    rax, 0x1d
-  bc:   48 99                   cqo
-  be:   6a 29                   push   0x29
-  c0:   59                      pop    rcx
-  c1:   48 f7 f1                div    rcx
-  c4:   49 96                   xchg   r14, rax
+  b2:   0f 05                   syscall             ; read from /dev/zero
+  b4:   58                      pop    rax          ; rax = 0
+  b5:   48 f7 d0                not    rax          ; exercise for the reader
+  b8:   48 c1 e8 1d             shr    rax, 0x1d    ;
+  bc:   48 99                   cqo                 ;
+  be:   6a 29                   push   0x29         ;
+  c0:   59                      pop    rcx          ;
+  c1:   48 f7 f1                div    rcx          ;
+  c4:   49 96                   xchg   r14, rax     ; swap r14 and rax
   c6:   6a 03                   push   0x3
-  c8:   58                      pop    rax  ; rax = 3
-  c9:   0f 05                   syscall     ; close()
+  c8:   58                      pop    rax          ; rax = 3
+  c9:   0f 05                   syscall             ; close()
   cb:   b8 ef be ad de          mov    eax, 0xdeadbeef  ; flag input
   d0:   44 01 e0                add    eax, r12d
   d3:   44 31 e8                xor    eax, r13d
@@ -455,7 +455,7 @@ Small caveat: you'll want to set `context.arch = 'amd64'` for `disasm` to interp
 -- snip --
 ```
 
-I've included the juiciest part above (with my annotations). Essentially, we perform several reversible operations (add, xor, ror, not) on 4 bytes of input; and the result is checked against 4 bytes of static data. Finally, it sets `rax = 1` if correct, and `rax = 0` if false.
+I've included the juiciest part above (with some annotations). Essentially, we perform several reversible operations (add, xor, ror, not) on 4 bytes of input; and the result is checked against 4 bytes of static data. Finally, it sets `rax = 1` if correct, and `rax = 0` if false.
 
 In the calculations, three mystery values (`r12`, `r13`, `r14`) are used. These were computed in the preceding shellcode.
 
