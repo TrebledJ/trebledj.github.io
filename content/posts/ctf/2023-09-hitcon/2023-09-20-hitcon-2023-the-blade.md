@@ -444,7 +444,7 @@ Small caveat: you'll want to set `context.arch = 'amd64'` for `disasm` to interp
   d3:   44 31 e8                xor    eax, r13d
   d6:   c1 c8 0b                ror    eax, 0xb
   d9:   f7 d0                   not    eax
-  db:   44 31 f0                xor    eax, r14d        ; eax = ~(roll(0xb, (0xDEADBEEF + r12) ^ r13)) ^ r14
+  db:   44 31 f0                xor    eax, r14d        ; eax = ~(ror(0xb, (0xDEADBEEF + r12) ^ r13)) ^ r14
   de:   3d ef be ad de          cmp    eax, 0xdeadbeef  ; static values (expected output)
   e3:   75 05                   jne    0xea
   e5:   6a 01                   push   0x1
