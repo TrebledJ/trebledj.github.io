@@ -463,7 +463,7 @@ In case you'd like to have a stab at dissecting the assembly, the full (unblemis
 
 {% alert "fact" %}
 - If you're stuck, try using GDB on our shellcode program (main.c) with [watchpoints](/posts/gdb-cheatsheet/#watchpoints).
-- Here's a useful list of Linux x86-64 syscalls: https://filippo.io/linux-syscall-table/.
+- Here's a useful list of Linux x86-64 syscalls: [filippo.io: Linux Syscall Table](https://filippo.io/linux-syscall-table/).
 {% endalert %}
 
 {% details "Full Shellcode" %}
