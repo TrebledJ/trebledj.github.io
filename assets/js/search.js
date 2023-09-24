@@ -2,17 +2,15 @@ $(async function () {
   const store = await (await fetch('/search.json')).json();
   const idx = lunr(function () {
     this.ref('id');
-    this.field('title', { boost: 200 });
-    this.field('description', { boost: 5 });
+    this.field('title', { boost: 50 });
     this.field('keywords');
-    this.field('tags', { boost: 100 });
+    this.field('tags', { boost: 30 });
     this.pipeline.remove(lunr.trimmer);
     this.pipeline.remove(lunr.stopWordFilter);
     for (const i in store) {
       this.add({
         id: i,
         title: store[i].title,
-        description: store[i].description,
         keywords: store[i].keywords,
         tags: store[i].tags,
       });

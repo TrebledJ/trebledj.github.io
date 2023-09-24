@@ -11,7 +11,7 @@ permalink: /search.json
 "type": "post",
 "title": "{{post.data.title}}",
 "description": "{{post.data.description}}",
-"keywords": {{post.content | striptags | keywords | jsonify | safe}},
+"keywords": {{(post.data.description | markdownify + post.content) | striptags | keywords | jsonify | safe}},
 "tags": {{post.data.tags | exclude("posts") | jsonify | safe}},
 "url": "{{post.url}}"
 }
