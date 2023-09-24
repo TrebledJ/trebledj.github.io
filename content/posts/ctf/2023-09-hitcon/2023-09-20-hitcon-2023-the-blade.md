@@ -261,11 +261,13 @@ do {
 
 <sup>Some type-casts were removed to simplify the code.</sup>
 
-If we reverse this statically, it *seems* like we get a one-to-one mapping of sorts... almost a bijection... but perhaps our implementation is wrong? Need to use dynamic analysis to check. 🫠
-
 {% enddetails %}
 
-Like part 1, we *could* reverse this statically... but overflow and types are tricky to get right. So we'll go dynamic again!
+If we reverse this statically, it *seems* like we get a one-to-one mapping of sorts... almost a bijection... but perhaps our implementation is wrong? Better check it with dynamic analysis. 🫠
+
+By "*mapping*", I mean values are *transformed* and mapped from one value to another. For example, `a` (0x61) is mapped to `u` (0x75), while `b` (0x62) is mapped to `q` (0x71).
+
+Like before, we *could* reverse this part statically... but overflow and types are tricky to get right. So we'll go dynamic again!
 
 Let's start with some basic GDB analysis:
 
