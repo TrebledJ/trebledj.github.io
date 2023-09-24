@@ -308,12 +308,12 @@ Two things I'd like to point out:
 > continue
 > # (breakpoint-before-loop triggered)
 
-# Set 8x8 = 64 bytes. (I used a Python script to generate these `set` cmds.)
+# Set 8x8 = 64 bytes. (I used a Python script to generate these `set` cmds from the missing input bytes.)
 > set *(0x5555555d63e0 as *mut u64) = 0x0001020304050607
 > set *(0x5555555d63e8 as *mut u64) = 0x08090a0b0c0d0e0f
 # and so on...
-> set *(0x5555555d6410 as *mut u64) = 0x3031323334353637
-> set *(0x5555555d6418 as *mut u64) = 0x38393a3b3c3d3e3f
+> set *(0x5555555d6410 as *mut u64) = 0x3c3d3e3f405b5c5d
+> set *(0x5555555d6418 as *mut u64) = 0x5e5f607b7c7d7e7f
 
 > continue
 > # (breakpoint-after-loop triggered)
