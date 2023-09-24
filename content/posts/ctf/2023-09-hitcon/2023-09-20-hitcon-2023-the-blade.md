@@ -119,21 +119,20 @@ Let’s recognise some highs level patterns.
 It’s easy to be intimidated by the multitude of loops; but really, half the loops are the same, just wearing different clothes.
 
 There are the 3 parts to the encryption:
-- !!Permutation (`112d10` – `113017`).!!
-- !!Mapping (`113020` – `11309c`).!!
-- !!Shellcode arithmetic (`11310e` – `1133a5`).!!
+- Part 1 !!(`112d10` – `113017`)!!.
+- Part 2 !!(`113020` – `11309c`)!!.
+- Part 3 !!(`11310e` – `1133a5`)!!.
 
 The procedure is roughly:
 
 ```python
 for _ in range(256):
-	permute(flag) # Index map.
-	func(flag)    # Value map.
+	part1(flag)
+	part2(flag)
 
-shellcode(flag, data)
+part3(flag, interesting_data_a7516852)
 ```
 
-Thankfully, these operations are all reversible.
 
 ### 1. Reversing the Permutation
 
@@ -229,11 +228,44 @@ for i, c in enumerate(p):
 
 First part done!
 
+
 ### 2. Constructing An Inverse Map
 
-Address: `113020` – `11309c`,
+Address: `113020` – `11309c`.
 
-Reversing this part is similar to reversing permutation. We can approach it statically, but overflow and types are tricky to reverse. So again, we'll go dynamic!
+{% details "Part 2 Decompile", "open" %}
+
+Looks like a bunch of arithmetic.
+
+```c
+do {
+    uVar23 = 0;
+    uVar18 = 1;
+    uVar3 = __ptr[lVar20] + 1;
+    uVar19 = 0x101;
+    do {
+        uVar25 = uVar3;
+        uVar27 = uVar18;
+        uVar3 = uVar19 % uVar25;
+        iVar24 = (int)uVar27;
+        iVar26 = (int)uVar23;
+        uVar23 = uVar27;
+        uVar18 = (ulong)(iVar26 - (uVar19 / uVar25) * iVar24);
+        uVar19 = uVar25;
+    } while ((short)uVar3 != 0);
+    __ptr[lVar20] = ((uVar27 & 0xffff) >> 0xf) + uVar27 +
+                    ((((uVar27 >> 0xf) - iVar24) + iVar26 & 0xffffU) / 0x101) + 0x71U ^ 0x89;
+    lVar20 += 1;
+} while (lVar20 != 0x40);
+```
+
+<sup>Some type-casts were removed to simplify the code.</sup>
+
+If we reverse this statically, it *seems* like we get a one-to-one mapping of sorts... almost a bijection... but perhaps our implementation is wrong? Need to use dynamic analysis to check. 🫠
+
+{% enddetails %}
+
+Like part 1, we *could* reverse this statically... but overflow and types are tricky to get right. So we'll go dynamic again!
 
 Let's start with some basic GDB analysis:
 
@@ -359,19 +391,33 @@ This characteristic is crucial as it *guarantees* an **invertible operation**.
 
 {% endalert %}
 
+
 ### 3. Cracking the Shellcode
 
 Address: `11310e` – `1133a5`.
 
 The final part. Subtle, but delectable.
 
-Notice how 255 bytes are loaded into a `vec`? Guess what? That also happens to be a shellcode!
+- What are the 255 bytes copied into the Rust `vec`?
 
-```c
-local_278 = alloc::raw_vec::RawVec<T,A>::allocate_in(0xff,0);
-memcpy(local_278._0_8_,&DAT_00162b2b,0xff);
-local_268 = 0xff;
-```
+    ```c
+    local_278 = alloc::raw_vec::RawVec<T,A>::allocate_in(0xff,0);
+    memcpy(local_278._0_8_,&DAT_00162b2b,0xff);
+    ```
+
+- What is the purpose of the data loaded at `11310e`?
+
+    ```c
+    local_238 = 0x526851a7;
+    local_234 = 0x31ff2785;
+    local_230 = 0xc7d28788;
+    local_22c = 0x523f23d3;
+    local_228 = 0xaf1f1055;
+    local_224 = 0x5c94f027;
+    // -- snip --
+    ```
+
+Notice how 255 bytes are loaded into a `vec`? Guess what? That also happens to be a !!shellcode!!!
 
 We can disassemble it with `pwntools.disasm` to get the following ASM.
 
