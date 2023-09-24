@@ -40,7 +40,7 @@ The STM32 MIDI Keyboard was a project aimed to practice [embedded systems](/tags
 
 ## Development
 
-I was lucky to work with [another member](https://github.com/TangYanYee) of the [Robotics Team](/posts/the-hkust-robotics-team) at HKUST. She did the electrical work of designing and soldering the <abbr data-toggle="tooltip" title="The printed circuit board. It's the underlying hardware that makes everything work!">PCB</abbr>. Both of us weren't familiar with mechanical design, so we ended up sticking things onto plywood and screwing things ~~up~~ together. But hey, at least it's a minimum viable product.
+I was lucky to work with [another member](https://github.com/TangYanYee) of the [Robotics Team](/posts/hkust-robotics-team) at HKUST. She did the electrical work of designing and soldering the <abbr data-toggle="tooltip" title="The printed circuit board. It's the underlying hardware that makes everything work!">PCB</abbr>. Both of us weren't familiar with mechanical design, so we ended up sticking things onto plywood and screwing things ~~up~~ together. But hey, at least it's a minimum viable product.
 
 Although the course provided us with a multi-functional board (STM32F103VET6), we ended up using with a different board (STM32F405). The F4 series comes with more processing power, flash memory, and RAM. These are important considerations when it comes to a real-time music system. Audio buffering needs to be fast and steady, and sufficient memory is required for storage and buffering.
 
