@@ -296,6 +296,7 @@ Two things I'd like to point out:
 	- Employ [GDB input tricks](/posts/gdb-cheatsheet/#input-non-printable-characters).
 	- Track cycles of characters.
 	- Break before mapping, and hard-code `__ptr` by [modifying its memory](/posts/gdb-cheatsheet/#modify-memory).
+        Since the goal is to discover the remaining mappings, we'll hard-code `__ptr` with the rest of the bytes outside our Base64 alphabet.
 
    Y'know what? Let's go with the last option!
 
