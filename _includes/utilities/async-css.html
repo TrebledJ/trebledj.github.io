@@ -1,0 +1,10 @@
+{# Async CSS without inline JS. #}
+<script>
+document.querySelectorAll('link[media|="print"]').forEach(e => {
+    e.addEventListener('load', () => e.media = 'all');
+    if (e.sheet) {
+        {# Seems like it already loaded. #}
+        e.media = 'all';
+    }
+});
+</script>
