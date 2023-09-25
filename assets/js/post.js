@@ -7,7 +7,7 @@ $(function () {
     });
 
     // --- Copy URL --- //
-    $("#copyLinkButton").on("click", async () => {
+    $("#copy-link-button").on("click", async () => {
         try {
             await navigator.clipboard.writeText(location.href);
         } catch (err) {
