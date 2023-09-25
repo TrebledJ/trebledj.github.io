@@ -2,7 +2,7 @@
     {% for item in site.social %}
         <li>
             <div class="d-flex flex-row justify-content-start align-items-center">
-                <a href="{{item.link}}">
+                <a href="{{item.link}}" class="d-flex align-items-center">
                     <div class="social-icon-container d-flex align-items-center justify-content-center">
                         {% if item.icon %}
                             <i class="social-icon {{item.icon}}" {% if item.color %}style="color:{{item.color}} !important;"{% endif %}></i>
@@ -10,8 +10,6 @@
                             <i class="social-icon-img d-flex align-items-center"><img src="{{item.img}}" alt=""/></i>
                         {% endif %}
                     </div>
-                </a>
-                <a href="{{item.link}}" class="d-flex align-items-center">
                     <span class="social-link ms-1">{{item.name}}</span>
                 </a>
             </div>
