@@ -55,7 +55,11 @@ $(function () {
 
     let currentActive = 0;
 
+    let debounce = false;    
     const updateTOCHighlight = () => {
+        if (debounce) return;
+        debounce = true;
+
         var docElem = document.documentElement;
         var docBody = document.body;
         var scrollTop = (docBody.scrollTop || docElem.scrollTop);
@@ -80,6 +84,8 @@ $(function () {
             currentActive = currentHeading;
             makeActive(currentHeading);
         }
+
+        debounce = false;
     };
 
 
