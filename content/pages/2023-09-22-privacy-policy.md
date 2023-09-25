@@ -13,7 +13,7 @@ related:
 
 ## Introduction
 
-**{{ site.title }}** is committed to protecting your privacy and security. This privacy policy explains how we collect, use, and protect personal data, and the choices you have regarding that data.
+{{ site.title }} is committed to protecting your privacy and security. This privacy policy explains how we collect, use, and protect personal data, and the choices you have regarding that data.
 
 ## Data Collection
 
@@ -21,7 +21,7 @@ We collect the following personal data:
 
 * **Technical Data**: IP address, Browser type, Device type, Referrer data.
 	* This is collected by GitHub Pages, Cloudflare Web Analytics, Disqus, and jsDelivr.
-	* **{{ site.title }}** will only access such data in aggregate forms, and thus won't (be able to) link this data back to you.
+	* {{ site.title }} will only access such data in aggregate forms, and thus won't (be able to) link this data back to you.
 	* This data is provided automatically by your browser when you load a web page. A VPN may be used to suppress or hide such data.
 * **Cookies**
 	* This is data associated with you and may be used by third-party services to track you.
