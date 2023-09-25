@@ -43,6 +43,10 @@ html[data-theme="light"] .hero-section {
     .carousel {
         height: 550px;
 
+        .post-preview-container {
+            height: 450px;
+        }
+
         // Nowrap, overflow text.
         // .post-title,
         // .post-summary>* {
