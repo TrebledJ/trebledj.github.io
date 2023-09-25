@@ -56,31 +56,29 @@ $(function () {
     let currentActive = 0;
 
     const updateTOCHighlight = () => {
-        {
-            var docElem = document.documentElement;
-            var docBody = document.body;
-            var scrollTop = (docBody.scrollTop || docElem.scrollTop);
+        var docElem = document.documentElement;
+        var docBody = document.body;
+        var scrollTop = (docBody.scrollTop || docElem.scrollTop);
 
-            /* After scrolling past the article end (plus some offset), mark nothing as selected. */
-            if (scrollTop > articleEnd - headerOffset) {
-                if (currentActive !== -1) {
-                    removeAllActive();
-                    currentActive = -1;
-                }
-                return;
-            }
-
-            const currentHeading =
-                sections.length -
-                [...sections].reverse().findIndex((section) => {
-                    return section.offsetTop - headerOffset <= scrollTop;
-                }) - 1;
-
-            if (currentHeading !== currentActive) {
+        /* After scrolling past the article end (plus some offset), mark nothing as selected. */
+        if (scrollTop > articleEnd - headerOffset) {
+            if (currentActive !== -1) {
                 removeAllActive();
-                currentActive = currentHeading;
-                makeActive(currentHeading);
+                currentActive = -1;
             }
+            return;
+        }
+
+        const currentHeading =
+            sections.length -
+            [...sections].reverse().findIndex((section) => {
+                return section.offsetTop - headerOffset <= scrollTop;
+            }) - 1;
+
+        if (currentHeading !== currentActive) {
+            removeAllActive();
+            currentActive = currentHeading;
+            makeActive(currentHeading);
         }
     };
 
@@ -108,5 +106,4 @@ $(function () {
         $(p).removeAttr('open');
         p.scrollIntoView();
     });
-    
 })
