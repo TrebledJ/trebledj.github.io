@@ -1,5 +1,5 @@
 $(function () {
-    var typewriter = new Typewriter('#typewriteText', {
+    var typewriter = new Typewriter('#typewrite-text', {
         loop: true
     });
 
