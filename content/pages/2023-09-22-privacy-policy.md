@@ -89,7 +89,7 @@ For your reference, here is a collection of third-party services we use and thei
 
 - GitHub Pages, jsDelivr, and Cloudflare are present on all HTML pages of our site.
 - Disqus will only be loaded on posts which allow comments, and when the page is scrolled down far enough.
-- SoundCloud embeds will only be loaded on pages containing such embeds.
+- SoundCloud embeds are only loaded on relevant pages (music pages, home page, etc.).
 - Getform only applies to pages containing forms (e.g. the contact form).
 
 [^disqus]: Free tier. Supposedly comes with advertising.
