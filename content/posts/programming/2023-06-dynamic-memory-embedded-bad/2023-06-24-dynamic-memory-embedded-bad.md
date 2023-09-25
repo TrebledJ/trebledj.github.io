@@ -29,7 +29,7 @@ To clarify, dynamic memory allocation (in embedded) isn't *always* bad, just as 
 
 Not only is allocation an issue. Virtual classes, exceptions, runtime type information (RTTI)—these are all no-nos for some embedded companies. They're all avoided for the same reasons: performance degradation and code bloat. In essence, not enough time and not enough space. With dynamic memory, there's another reason.
 
-### So why is dynamic memory bad?
+## So why is dynamic memory bad?
 
 Because of **Memory Fragmentation**. This occurs when we keep allocating and deallocating memory in various sizes. This may lead to wasted memory, leading to slower allocations (due to the need to reallocate and compact memory) or our worst nightmare: an out-of-memory exception. 🤯
 
@@ -42,7 +42,7 @@ Since embedded systems tend to require sustained uptime, constantly using dynami
 
 This is a serious issue. Persistence, backup, and resets should be considered when developing embedded applications, but buggy resets—say, due to {% abbr "OOM", "out-of-memory" %} crashes—should be avoided. Maybe not an issue if you're working with [missiles](https://devblogs.microsoft.com/oldnewthing/20180228-00/?p=98125) though.
 
-### What alternatives are there?
+## What alternatives are there?
 
 In C, dynamic allocation is largely optional.^[By this, I mean the C standard library rarely depends on it; except maybe for IO. Though on an embedded device, we probably won't be dealing with IO much.]
 
@@ -100,7 +100,7 @@ What about polymorphism? We can achieve static polymorphism via [CRTP](https://e
 
 Thus, it’s crucial to consider the design requirements of the software being developed. How long do the strings need to be? Can they be limited by a maximum length? How many items will our vector hold at most? Is it more maintainable to use virtual classes here? 
 
-### Is dynamic memory always bad?
+## Is dynamic memory always bad?
 
 Dynamic memory isn't bad in all cases, if used properly. Some appropriate situations:
 
@@ -111,7 +111,7 @@ Dynamic memory isn't bad in all cases, if used properly. Some appropriate situat
 
 There are [various ways to implement dynamic memory allocation](https://en.wikipedia.org/wiki/Memory_management). The "best" method depends on your specific scenario. [Memory pools](https://en.wikipedia.org/wiki/Memory_pool) are one such implementation, simple and lightweight. FreeRTOS documents other [heap implementations](https://www.freertos.org/a00111.html) which aim to be thread-safe. [Heap 4](https://www.freertos.org/a00111.html#heap_4) is of particular interest, as it mitigates fragmentation.
 
-### Summary
+## Summary
 
 In a recent discussion between Uncle Bob and Casey Muratori on clean code and performance, Bob summarises:
 
