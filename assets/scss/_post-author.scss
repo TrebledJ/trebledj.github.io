@@ -16,20 +16,20 @@
         opacity: $opacity-lower;
     }
 
-    .profile-name {
-        margin-top: 20px;
-        font-size: 24px;
-    }
+    // .profile-name {
+    //     margin-top: 20px;
+    //     font-size: 24px;
+    // }
 
-    .profile-bio {
-        font-size: 16px;
-    }
+    // .profile-bio {
+    //     font-size: 16px;
+    // }
 
-    .profile-img {
-        width: 100px;
-        height: 100px;
-        border-radius: 50%;
-    }
+    // .profile-img {
+    //     width: 100px;
+    //     height: 100px;
+    //     border-radius: 50%;
+    // }
 }
 
 .profile-links {
@@ -99,7 +99,9 @@ i.social-icon-img {
 
     .profile-name {
         margin-top: 0px;
+        margin-bottom: 0.5rem;
         font-size: 18px;
+        font-weight: 600;
     }
 
     .profile-bio {
@@ -111,6 +113,7 @@ i.social-icon-img {
     .profile-img {
         width: 32px;
         height: 32px;
+        border-radius: 50%;
     }
 }
 

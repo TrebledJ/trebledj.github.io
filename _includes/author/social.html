@@ -2,7 +2,7 @@
     <div id="post-author-bio-container" class="d-flex">
         <img src="/img/{{ site.author.logo }}" class="profile-img" alt="" loading="lazy" decoding="async"/>
         <div class="author-info d-flex flex-column align-items-start">
-            <h4 class="profile-name">{{ site.author.alias | default(site.author.name) }}</h4>
+            <p class="profile-name">{{ site.author.alias | default(site.author.name) }}</p>
             <p class="profile-bio me-2">{{ site.subtitle }}</p>
         </div>
     </div>
