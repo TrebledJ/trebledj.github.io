@@ -420,7 +420,9 @@ The final part. Subtle, but delectable.
     // -- snip --
     ```
 
-Notice how 255 bytes are loaded into a `vec`? Guess what? That also happens to be a !!shellcode!!!
+The 255 bytes loaded into a `vec`? Guess what? That also happens to be a !!shellcode!!!
+
+- Follow-up question: if this is !!shellcode!!, what does it do? how is it run?
 
 We can disassemble it with `pwntools.disasm` to get the following ASM.
 
@@ -460,7 +462,32 @@ Small caveat: you'll want to set `context.arch = 'amd64'` for `disasm` to interp
 
 I've included the juiciest part above (with some annotations). Essentially, we perform several reversible operations (add, xor, ror, not) on 4 bytes of input; and the result is checked against 4 bytes of static data. Finally, it sets `rax = 1` if correct, and `rax = 0` if false.
 
-In the calculations, three mystery values (`r12`, `r13`, `r14`) are used. These were computed in the preceding shellcode.
+But are we *actually* comparing `0xdeadbeef`. Nope—we're comparing something else instead.
+
+- What are the two `0xdeadbeef` being replaced with?
+
+{% details "The Guts: What does the shellcode load?" %}
+Here is some (simplified) code which overwrites `0xdeadbeef` values at instruction `113168`. Remember, `vec` is the shellcode and `__ptr` is our permuted + mapped input.
+
+```c
+vec[0xcc] = __ptr[0];
+vec[0xdf] = 0xA7;
+vec[0xcd] = __ptr[1];
+vec[0xe0] = 0x51;
+vec[0xce] = __ptr[2];
+vec[0xe1] = 0x68;
+vec[0xcf] = __ptr[2];
+vec[0xe2] = 0x52;
+```
+
+Does `0xA7`, `0x51`, `0x68`, and `0x52` look familiar? 🙃 Check the wall of bytes in `11310e`.
+
+Effectively, the Rust performs a little surgery on shellcode before using it.
+{% enddetails %}
+
+By now, you probably know what the shellcode does: !!flag-checking!!. But there are a few more things we need to reverse...
+
+In the calculations, three mystery values (`r12`, `r13`, `r14`) are used. These were computed in the preceding shellcode. To efficiently obtain our flag input from the expected output, we need to find out what these mystery values are.
 
 In case you'd like to have a stab at dissecting the assembly, the full (unblemished) shellcode is in the box below. Try to figure out what `r12`, `r13`, and `r14` are!
 
