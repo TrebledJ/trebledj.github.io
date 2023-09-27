@@ -494,7 +494,8 @@ In the calculations, three mystery values (`r12`, `r13`, `r14`) are used. These 
 In case you'd like to have a stab at dissecting the assembly, the full (unblemished) shellcode is in the box below. Try to figure out what `r12`, `r13`, and `r14` are!
 
 {% alert "fact" %}
-- If you're stuck, try using GDB on our shellcode program (main.c) with [watchpoints](/posts/gdb-cheatsheet/#watchpoints).
+- If you're stuck, try using GDB on our shellcode program (main.c from [Running the Server](#running-the-server)) with [watchpoints](/posts/gdb-cheatsheet/#watchpoints).
+  - **Important**: the shellcode we saw when [starting the server](#running-the-server) is different from the shellcode we're reversing here! The former acts as a client, receiving commands and executing them. The latter is a flag-checker payload that is sent to the client over the network.
 - Here's a useful list of Linux x86-64 syscalls: [filippo.io: Linux Syscall Table](https://filippo.io/linux-syscall-table/).
 {% endalert %}
 
