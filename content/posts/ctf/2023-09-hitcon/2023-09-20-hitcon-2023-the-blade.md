@@ -483,6 +483,8 @@ vec[0xe2] = 0x52;
 Does `0xA7`, `0x51`, `0x68`, and `0x52` look familiar? 🙃 Check the wall of bytes in `11310e`.
 
 Effectively, the Rust performs a little surgery on shellcode before using it.
+
+But how is it used? Leafing around the decompiled code, you may notice Rust IO write and read functions... those seem sus...
 {% enddetails %}
 
 By now, you probably know what the shellcode does: !!flag-checking!!. But there are a few more things we need to reverse...
