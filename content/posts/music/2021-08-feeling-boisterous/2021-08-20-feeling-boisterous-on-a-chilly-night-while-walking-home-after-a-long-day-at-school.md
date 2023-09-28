@@ -10,6 +10,7 @@ thumbnail_src: assets/winter-road.jpg
 track_id: 1146309223
 related:
     tags: [electronic]
+archive: true
 ---
 
 That feeling when you boisterously walk (or bike, drive, swim, fly) home on a chilly night after a long day at school.

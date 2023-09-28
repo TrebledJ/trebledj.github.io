@@ -5,7 +5,7 @@ permalink: /search.json
 [
 {% set comma = joiner() %}
 {% for post in collections.posts %}
-    {% if not post.data.noindex %}
+    {% if not post.data.noindex and post.data.permalink %}
         {{ comma() }}
 {
 "type": "post",

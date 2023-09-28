@@ -86,7 +86,6 @@ module.exports = {
 		// If ever the updated date is wrong in production, just increase checkout fetch-depth in deploy.yml.
 		// This is because git log couldn't find the old commits.
 		lastContentCommit: data => process.env.ENVIRONMENT === 'development' ? undefined : getGitCommitDate(data.page.inputPath, { keep: /^content/ }),
-		permalink: data => '/posts/' + data.page.fileSlug + '/index.html',
 	},
 	author: "trebledj",
 	thumbnail_src: "~/assets/img/posts/thumbnail/default.png",

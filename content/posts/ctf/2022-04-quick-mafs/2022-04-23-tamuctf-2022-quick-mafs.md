@@ -8,6 +8,7 @@ tags:
  - programming
 thumbnail_src: assets/inspector-gadget.png
 usemathjax: true
+archive: true
 ---
 
 ### Challenge Description
