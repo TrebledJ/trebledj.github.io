@@ -103,7 +103,7 @@ module.exports = function (eleventyConfig) {
         return makeImageFromMetadata(metadata, ext, classes, altText, false, {loading});
     }
 
-    async function bannerImageShortcode(src, altText, classes) {
+    async function heroImageShortcode(src, altText, classes) {
         // Image gets displayed near the top, so it'll almost always be displayed.
         // Load eagerly, to push first contentful paint.
         src = resolveResourcePath(this.page, src);
@@ -162,7 +162,7 @@ module.exports = function (eleventyConfig) {
         return imageShortcode(file, ...args);
     });
 
-    eleventyConfig.addAsyncShortcode("banner", bannerImageShortcode);
+    eleventyConfig.addAsyncShortcode("hero", heroImageShortcode);
 
     // Synchronous shortcode. Useful for Nunjucks macro.
     // Doesn't work with remote URLs.
