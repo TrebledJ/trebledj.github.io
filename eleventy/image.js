@@ -28,6 +28,12 @@ module.exports = function (eleventyConfig) {
             sharpOptions: {
                 animated,
             },
+            filenameFormat: function (id, src, width, format, options) {
+                const extension = path.extname(src);
+                const name = path.basename(src, extension);
+        
+                return `${name}-${width}w.${format}`;
+            },
         };
         return { ext, file, options };
     }

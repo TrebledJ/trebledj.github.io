@@ -7,6 +7,7 @@
 		"debug": "DEBUG=Eleventy* npx @11ty/eleventy",
 		"debugstart": "DEBUG=Eleventy* npx @11ty/eleventy --serve --quiet",
 		"benchmark": "DEBUG=Eleventy:Benchmark* npx @11ty/eleventy",
+		"check-links": "lychee --base https://trebledj.github.io --no-progress --accept '200,201,202,203,204,403,429' --include-verbatim --exclude-mail --exclude-path _site/404.html _site",
 		"watch:sass": "sass --watch assets/scss:_site/css --quiet",
 		"build-dev:sass": "sass assets/scss:_site/css",
 		"build:sass": "sass --style=compressed assets/scss:_site/css && cleancss --batch --batch-suffix '.min' -O2 _site/css/*.css !_site/css/*.min.css",
