@@ -20,6 +20,14 @@
     }
 }
 
+.page-content-container {
+    flex-direction: row-reverse;
+    @include media-breakpoint-down(lg) {
+        flex-direction: column-reverse;
+    }
+}
+
+
 // --- Scroll to Top --- //
 // --- Mobile ToC --- //
 #btn-back-to-top,
@@ -49,13 +57,14 @@
 
 // --- Sticky Components --- //
 .sticky-right {
-    top: 5rem;
-    right: 0;
-    z-index: 2;
-    height: calc(100vh - 11rem);
-    overflow-y: auto;
-    position: -webkit-sticky;
-    position: sticky;
+    @include media-breakpoint-up(lg) {
+        top: 5rem;
+        right: 0;
+        z-index: 2;
+        height: calc(100vh - 11rem);
+        overflow-y: auto;
+        position: sticky;
+    }
 }
 
 
