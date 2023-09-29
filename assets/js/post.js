@@ -2,7 +2,7 @@ $(function () {
     // --- Author Socials Button --- //
     const authorSocialButton = $("#post-author-container").find("button");
     authorSocialButton.on("click", function () {
-        $(".author-social-item-list").toggleClass("hidden");
+        $(".social-item-list").toggleClass("hidden");
         authorSocialButton.toggleClass("open");
     });
 

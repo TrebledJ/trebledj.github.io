@@ -21,7 +21,7 @@ $(function () {
 
     // Follow menu drop down
     $("#post-author-container").find("button").on("click", function () {
-        $(".author-social-item-list").toggleClass("hidden");
+        $(".social-item-list").toggleClass("hidden");
         $("#post-author-container").find("button").toggleClass("open");
     });
 });

@@ -1,12 +1,10 @@
-<div id="post-author-container" class="d-flex">
-    <div id="post-author-bio-container" class="d-flex">
-        <img src="/img/{{ site.author.logo }}" class="profile-img" alt="" loading="lazy" decoding="async"/>
-        <div class="author-info d-flex flex-column align-items-start">
-            <p class="profile-name">{{ site.author.alias | default(site.author.name) }}</p>
-            <p class="profile-bio me-2">{{ site.subtitle }}</p>
-        </div>
+<div id="post-author-container" class="d-flex justify-content-between align-items-center">
+    <img src="/img/{{ site.author.logo }}" class="profile-img me-3" alt="" loading="lazy" decoding="async"/>
+    <div class="author-info d-flex flex-column me-3">
+        <p class="profile-name">{{ site.author.alias | default(site.author.name) }}</p>
+        <p class="profile-bio">{{ site.subtitle }}</p>
     </div>
-    <div class="author-social-items-wrapper mt-1">
+    <div id="post-author-social-items-wrapper" class="ms-auto mt-1">
         <button class="btn btn-primary py-1">+&nbsp;Social</button>
         {% include "author/social-links.html" %}
     </div>
