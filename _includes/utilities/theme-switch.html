@@ -4,8 +4,7 @@ Note [Inlined JS]
 ---
 This script is INLINED into HTML so that it loads FAST. Previously, some users
 have reported the background flashes annoyingly on page load. Although the
-convention is to avoid inline scripts, for the sake of UX, keep this script
-inlined.
+convention is to avoid inline scripts, keep this script inlined for the sake of UX.
 #}
 <script>
     var defaultTheme = "dark";
@@ -27,7 +26,7 @@ inlined.
     }
 
     function modeSwitcher() {
-        let currentTheme = localStorage.getItem("theme");
+        const currentTheme = localStorage.getItem("theme");
         if (currentTheme === "dark") {
             setMode("light");
             if (reloadDisqus) 
@@ -59,8 +58,7 @@ inlined.
 
     modeInit();
     document.addEventListener("DOMContentLoaded", () => {
-        const toggle = document.getElementById('theme-toggle')
-        toggle.checked = isLightTheme();
+        const toggle = document.getElementById('mode-switch')
         toggle.addEventListener("click", () => {
             modeSwitcher();
         });

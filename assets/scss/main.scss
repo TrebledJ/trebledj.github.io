@@ -58,7 +58,7 @@ $carousel-transition: transform 2s ease, opacity 1.5s ease-out .5s;
 
 @import "layouts";
 
-@import "timeline";
+// @import "timeline";
 // @import "timeline2";
 
 @import "posts";
@@ -69,10 +69,6 @@ $carousel-transition: transform 2s ease, opacity 1.5s ease-out .5s;
 @import "profile";
 @import "post-author";
 @import "toc-sidebar";
-@import "theme-switch";
-
-// @import '../../node_modules/bootstrap/scss/alert';
-// @import '../../node_modules/bootstrap/scss/carousel';
 
 
 .tag {
