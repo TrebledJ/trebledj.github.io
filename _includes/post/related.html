@@ -35,10 +35,7 @@
                     <h4>
                         <abbr data-placement="top" data-toggle="tooltip" title="Related to {{sSrcTag | trim}}">{{data.group}}</abbr>
                     </h4>
-                    {# <span>similar to {% for t in data.src %}{% tag t %}{% endfor %}</span> #}
-                    <span class="d-flex flex-wrap">
-                        <span class="me-1">{{sRelatedTag | safe}}</span>
-                    </span>
+                    <span class="d-flex flex-wrap">{{sRelatedTag | safe}}</span>
                 </div>
             {% endfor %}
         </div>
