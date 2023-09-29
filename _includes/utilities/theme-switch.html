@@ -68,7 +68,7 @@ convention is to avoid inline scripts, keep this script inlined for the sake of 
     modeInit();
     document.addEventListener("DOMContentLoaded", () => {
         const toggle = document.getElementById('mode-switch')
-        icon = toggle.childNodes[1];
+        icon = toggle.lastChild;
         if (isLightTheme()) {
             icon.classList.remove('fa-sun');
             icon.classList.add('fa-moon');
