@@ -57,6 +57,14 @@
     width: 40px;
 }
 
+#mode-switch-icon {
+    transition: transform .75s;
+}
+
+.mode-switch-transform {
+    transform: rotate(180deg);
+}
+
 /* On-Load Progress Bar */
 #load-progress-bar .bar {
     background: var(--link-color);
