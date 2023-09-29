@@ -18,7 +18,7 @@ module.exports = function (eleventyConfig) {
 	// For example, `./public/css/` ends up in `_site/css/`
 	eleventyConfig.addPassthroughCopy({
 		"./assets/img": "/img",
-		"./content/**/assets/*.{mp4}": "/img",
+		"./content/**/assets/*.mp4": "/img",
 		"./assets/webfonts": "/webfonts",
 		"./assets/css/third-party/*.{css,map}": "/css/third-party",
 		"./assets/css/[!third-party]**/*.{css,map}": "/css",
