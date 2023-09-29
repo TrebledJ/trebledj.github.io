@@ -70,8 +70,8 @@ convention is to avoid inline scripts, keep this script inlined for the sake of 
         const toggle = document.getElementById('mode-switch')
         icon = toggle.lastChild;
         if (isLightTheme()) {
-            icon.classList.remove('fa-sun');
-            icon.classList.add('fa-moon');
+            icon.classList.add('fa-sun');
+            icon.classList.remove('fa-moon');
         }
         toggle.addEventListener("click", () => {
             modeSwitcher();
