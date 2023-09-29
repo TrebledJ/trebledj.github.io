@@ -58,6 +58,6 @@
 		"markdown-it-footnote": "^3.0.3",
 		"nanobar": "^0.4.2",
 		"sharer.js": "^0.5.1",
-		"terser": "^5.19.4"
+		"terser": "^5.20.0"
 	}
 }
