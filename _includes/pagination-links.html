@@ -1,51 +1,49 @@
-<div class="row">
-    <!-- Pagination links -->
-    {% set npages = pagination.pages.length %}
-    {% if npages > 1 %}
-        <ul class="pagination pagination-sm justify-content-center">
-            {% if pagination.pageNumber > 0 %}
-                <li class="page-item">
-                    <a class="page-link" href="{{pagination.href.first}}">&laquo;</a>
-                </li>
-                <li class="page-item">
-                    <a class="page-link" href="{{pagination.href.previous}}">Prev</a>
+<!-- Pagination links -->
+{% set npages = pagination.pages.length %}
+{% if npages > 1 %}
+    <ul class="pagination pagination-sm justify-content-center">
+        {% if pagination.pageNumber > 0 %}
+            <li class="page-item">
+                <a class="page-link" href="{{pagination.href.first}}">&laquo;</a>
+            </li>
+            <li class="page-item">
+                <a class="page-link" href="{{pagination.href.previous}}">Prev</a>
+            </li>
+        {% else %}
+            <li class="page-item faded">
+                <span class="page-link">&laquo;</a>
+            </li>
+            <li class="page-item faded">
+                <span class="page-link">Prev</a>
+            </li>
+        {% endif %}
+
+        {% for idx in range(0, npages) %}
+            {% if idx == pagination.pageNumber %}
+                <li class="page-item active" aria-current="page">
+                    <span class="page-link"><span>{{ idx }}</span></span>
                 </li>
             {% else %}
-                <li class="page-item faded">
-                    <span class="page-link">&laquo;</a>
-                </li>
-                <li class="page-item faded">
-                    <span class="page-link">Prev</a>
+                <li class="page-item">
+                    <a class="page-link" href="{{pagination.hrefs[idx]}}"><span>{{ idx }}</span></a>
                 </li>
             {% endif %}
+        {% endfor %}
 
-            {% for idx in range(0, npages) %}
-                {% if idx == pagination.pageNumber %}
-                    <li class="page-item active" aria-current="page">
-                        <span class="page-link">{{ idx }}</a>
-                    </li>
-                {% else %}
-                    <li class="page-item">
-                        <a class="page-link" href="{{pagination.hrefs[idx]}}">{{ idx }}</a>
-                    </li>
-                {% endif %}
-            {% endfor %}
-
-            {% if pagination.pageNumber + 1 < npages %}
-                <li class="page-item">
-                    <a class="page-link" href="{{pagination.href.next}}">Next</a>
-                </li>
-                <li class="page-item">
-                    <a class="page-link" href="{{ pagination.href.last }}">&raquo;</a>
-                </li>
-            {% else %}
-                <li class="page-item faded">
-                    <span class="page-link">Next</a>
-                </li>
-                <li class="page-item faded">
-                    <span class="page-link">&raquo;</a>
-                </li>
-            {% endif %}
-        </ul>
-    {% endif %}
-</div>
+        {% if pagination.pageNumber + 1 < npages %}
+            <li class="page-item">
+                <a class="page-link" href="{{pagination.href.next}}">Next</a>
+            </li>
+            <li class="page-item">
+                <a class="page-link" href="{{ pagination.href.last }}">&raquo;</a>
+            </li>
+        {% else %}
+            <li class="page-item faded">
+                <span class="page-link">Next</a>
+            </li>
+            <li class="page-item faded">
+                <span class="page-link">&raquo;</a>
+            </li>
+        {% endif %}
+    </ul>
+{% endif %}
