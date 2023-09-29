@@ -70,6 +70,23 @@ $carousel-transition: transform 2s ease, opacity 1.5s ease-out .5s;
     .active .page-link {
         border: $border-width solid var(--bold-color);
     }
+
+    @include media-breakpoint-down(sm) {
+        // Comment when less than 5 pages of posts.
+        li:nth-child(n+6):nth-last-child(n+5) {
+            display: none;
+        }
+        li:nth-child(5) {
+            .page-link {
+                span {
+                    display: none;
+                }
+                &::after {
+                    content: " ... ";
+                }
+            }
+        }
+    }
 }
 
 .faded {
