@@ -7,10 +7,6 @@ module.exports = {
 				permalink = `/posts/${data.page.fileSlug}/index.html`;
 			}
 
-			if (data.archive) {
-				return false;
-			}
-			
 			if (data.draft) {
 				// BUILD_DRAFTS is set in eleventy.config.js
 				if (process.env.BUILD_DRAFTS) {

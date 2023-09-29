@@ -11,7 +11,6 @@ thumbnail_src: assets/midi-reimagined.jpg
 thumbnail_banner: true
 pitch: Developed a browser-based MIDI editor enabled with audio-to-MIDI conversion features.
 related:
-archive: true
 ---
 
 This project was made for a course on multimedia computing and is published [online](https://github.com/TrebledJ/midi-editor/).
