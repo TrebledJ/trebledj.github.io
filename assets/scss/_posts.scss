@@ -270,6 +270,7 @@
     .video,
     .alert,
     details,
+    pre[class*=language-], // Keep to override prism.
     pre {
         & {
             margin-top: $space-base;
