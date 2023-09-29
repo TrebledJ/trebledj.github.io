@@ -7,8 +7,9 @@ have reported the background flashes annoyingly on page load. Although the
 convention is to avoid inline scripts, keep this script inlined for the sake of UX.
 #}
 <script>
-    var defaultTheme = "dark";
-    var reloadDisqus = undefined;
+    let defaultTheme = "dark";
+    let reloadDisqus = undefined;
+    let icon = undefined;
 
     function modeInit() {
         let currentTheme = localStorage.getItem("theme");
@@ -47,11 +48,19 @@ convention is to avoid inline scripts, keep this script inlined for the sake of 
             document
                 .documentElement
                 .setAttribute("data-theme", "dark");
+            if (icon) {
+                icon.classList.add('fa-moon');
+                icon.classList.remove('fa-sun');
+            }
             localStorage.setItem("theme", "dark");
         } else if (mode === "light") {
             document
                 .documentElement
                 .setAttribute("data-theme", "light");
+            if (icon) {
+                icon.classList.add('fa-sun');
+                icon.classList.remove('fa-moon');
+            }
             localStorage.setItem("theme", "light");
         }
     }
@@ -59,6 +68,11 @@ convention is to avoid inline scripts, keep this script inlined for the sake of 
     modeInit();
     document.addEventListener("DOMContentLoaded", () => {
         const toggle = document.getElementById('mode-switch')
+        icon = toggle.childNodes[1];
+        if (isLightTheme()) {
+            icon.classList.remove('fa-sun');
+            icon.classList.add('fa-moon');
+        }
         toggle.addEventListener("click", () => {
             modeSwitcher();
         });

@@ -53,6 +53,10 @@
     color: var(--navbar-accent-color);
 }
 
+#mode-switch {
+    width: 40px;
+}
+
 /* On-Load Progress Bar */
 #load-progress-bar .bar {
     background: var(--link-color);
