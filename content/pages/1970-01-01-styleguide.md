@@ -300,6 +300,13 @@ echo "Hello world!"
 Supercalifragilisticespieladocious! Supercalifragilisticespieladocious! Supercalifragilisticespieladocious! Supercalifragilisticespieladocious! Supercalifragilisticespieladocious! Supercalifragilisticespieladocious! 
 ```
 
+```diff-js
++function myFunction() {
+   // …
+-  return true;
+ }
+```
+
 
 ## Custom
 
