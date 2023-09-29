@@ -2,6 +2,8 @@
 // $carousel-transition-duration: 2s;
 $carousel-transition: transform 2s ease, opacity 1.5s ease-out .5s;
 
+// https://getbootstrap.com/docs/5.3/customize/optimize/
+
 @import '../../node_modules/bootstrap/scss/mixins';
 @import '../../node_modules/bootstrap/scss/functions';
 @import '../../node_modules/bootstrap/scss/variables';
@@ -35,18 +37,16 @@ $carousel-transition: transform 2s ease, opacity 1.5s ease-out .5s;
 // @import "../../node_modules/bootstrap/scss/toasts";
 @import "../../node_modules/bootstrap/scss/modal";
 @import "../../node_modules/bootstrap/scss/tooltip";
-// @import "../../node_modules/bootstrap/scss/popover";
 @import "../../node_modules/bootstrap/scss/carousel";
-// @import "../../node_modules/bootstrap/scss/spinners";
-// @import "../../node_modules/bootstrap/scss/offcanvas";
-// @import "../../node_modules/bootstrap/scss/placeholders";
 
 // Helpers
-@import "../../node_modules/bootstrap/scss/helpers";
+@import "../../node_modules/bootstrap/scss/helpers/color-bg";
+@import "../../node_modules/bootstrap/scss/helpers/visually-hidden";
 
 // Utilities
 @import "../../node_modules/bootstrap/scss/utilities";
 @import "../../node_modules/bootstrap/scss/utilities/api";
+
 
 @import "variables";
 @import "bootstrap-plus";
@@ -71,8 +71,8 @@ $carousel-transition: transform 2s ease, opacity 1.5s ease-out .5s;
 @import "toc-sidebar";
 @import "theme-switch";
 
-@import '../../node_modules/bootstrap/scss/alert';
-@import '../../node_modules/bootstrap/scss/carousel';
+// @import '../../node_modules/bootstrap/scss/alert';
+// @import '../../node_modules/bootstrap/scss/carousel';
 
 
 .tag {
