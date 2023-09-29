@@ -39,6 +39,7 @@ Feel free to [reach out](#contact) for whatever reason. ヽ(・∀・)ﾉ
 		github_username: "TrebledJ",
 		musescore_id: "20636901",
 		// google_analytics: "G-7TQ4WV0LMK",
+		cloudflare_analytics: "0c1f01f6fd2340a9a7c7abb8072e3857",
 		disqus_shortname: "trebledj",
 		soundcloud_color: "2631c8",
 		getform_endpoint: "3b2a26ea-31c4-49ef-a496-d4d765773e59",

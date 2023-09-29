@@ -29,12 +29,6 @@
             {% endif %}
         {% endif %}
 
-        {% if site.environment == 'production' %}
-            {# Cloudflare Web Analytics #}
-            <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "0c1f01f6fd2340a9a7c7abb8072e3857"}'></script>
-            {# End Cloudflare Web Analytics #}
-        {% endif %}
-
         {% if usemathjax %}
             {% include "utilities/mathjax.html" %}
         {% endif %}
