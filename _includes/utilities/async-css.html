@@ -3,7 +3,7 @@
 document.querySelectorAll('link[media|="print"]').forEach(e => {
     e.addEventListener('load', () => e.media = 'all');
     if (e.sheet) {
-        {# Seems like it already loaded. #}
+        /* already loaded */
         e.media = 'all';
     }
 });
