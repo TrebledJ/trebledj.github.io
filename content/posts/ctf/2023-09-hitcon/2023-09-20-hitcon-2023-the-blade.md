@@ -1,6 +1,6 @@
 ---
 title: HITCON 2023 – The Blade
-description: A nifty Rust reversing challenge.
+description: Beginner-friendly writeup for a nifty Rust reversing challenge.
 tags:
  - reverse
  - rust
