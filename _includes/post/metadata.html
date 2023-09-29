@@ -1,5 +1,4 @@
-{% from "tag.html" import render_tag,
-render_tag_list %}
+{% from "tag.html" import render_tag, render_tag_list %}
 
 {# Parameters:
 * post (default: page): a post/page object containing _.tags _.content _.title etc.
@@ -47,7 +46,6 @@ render_tag_list %}
 </div>
 
 {# Tags #}
-{% if tags.length > 0 %}
 <div class="metadata-tag-container d-flex flex-row align-items-center mt-1">
     <span>
         <i class="fa fa-tag post-meta-icon me-2"></i>
@@ -58,4 +56,3 @@ render_tag_list %}
         {% endblock %}
     </div>
 </div>
-{% endif %}
