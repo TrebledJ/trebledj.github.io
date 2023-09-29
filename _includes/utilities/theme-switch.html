@@ -7,18 +7,26 @@ have reported the background flashes annoyingly on page load. Although the
 convention is to avoid inline scripts, keep this script inlined for the sake of UX.
 #}
 <script>
-    let defaultTheme = "dark";
+    const defaultTheme = "dark";
     let icon = undefined;
     var reloadDisqus = undefined;
 
     function modeInit() {
-        let currentTheme = localStorage.getItem("theme");
+        const currentTheme = localStorage.getItem("theme");
         if (currentTheme === "dark") {
             setMode("dark");
         } else if (currentTheme === "light") {
             setMode("light");
         } else {
             setMode(defaultTheme);
+        }
+    }
+
+    function modeInitIcon() {
+        icon = document.getElementById('mode-switch-icon');
+        if (isLightTheme()) {
+            icon.classList.remove('fa-moon');
+            icon.classList.add('fa-sun');
         }
     }
 
@@ -49,8 +57,8 @@ convention is to avoid inline scripts, keep this script inlined for the sake of 
                 .documentElement
                 .setAttribute("data-theme", "dark");
             if (icon) {
-                icon.classList.add('fa-moon');
                 icon.classList.remove('fa-sun');
+                icon.classList.add('fa-moon');
             }
             localStorage.setItem("theme", "dark");
         } else if (mode === "light") {
@@ -58,8 +66,8 @@ convention is to avoid inline scripts, keep this script inlined for the sake of 
                 .documentElement
                 .setAttribute("data-theme", "light");
             if (icon) {
-                icon.classList.add('fa-sun');
                 icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
             }
             localStorage.setItem("theme", "light");
         }
@@ -68,11 +76,6 @@ convention is to avoid inline scripts, keep this script inlined for the sake of 
     modeInit();
     document.addEventListener("DOMContentLoaded", () => {
         const toggle = document.getElementById('mode-switch')
-        icon = toggle.lastChild;
-        if (isLightTheme()) {
-            icon.classList.add('fa-sun');
-            icon.classList.remove('fa-moon');
-        }
         toggle.addEventListener("click", () => {
             modeSwitcher();
         });
