@@ -59,7 +59,7 @@ shell echo Hi
 We want to inspect a program in the guts. But how do we stop it where we want?
 
 - `^C` during program execution. (Also throws a {% abbr "`SIGINT`", "SIGnal INTerrupt." %}.)
-- Use `start` instead of `run`. {% abbr "Breaks", "Stops (pauses) the program" %} after starting the program.
+- Use `start` instead of `run`. {% abbr "Breaks", "Pauses the program" %} after starting the program.
 - Use [breakpoints](#breakpoints) (break on address).
 - Use [watchpoints](#watchpoints) (break on data).
 
@@ -265,7 +265,7 @@ heap bins
 
 ## Breakpoints
 
-{% abbr "Breaks", "Stops the program" %} when address reaches an instruction.
+{% abbr "Breaks", "Pauses the program" %} when address reaches an instruction.
 
 ```sh
 break *<address>
@@ -280,7 +280,7 @@ b *0x401234
 break *main+200
 
 # Line number and expression.
-break iter.c:6 if i == 5
+break main.c:6 if i == 5
 ```
 
 Further reading:
@@ -290,14 +290,14 @@ Further reading:
 
 Sometimes we only want to fire certain breakpoints. These commands come handy then. They also apply to watchpoints.
 
-Get info on breakpoints.
+**Get Breakpoint Info**
 
 ```sh
 info breakpoints
 info b
 ```
 
-Control breakpoints.
+**Control Breakpoints**
 
 ```sh
 # Enable/disable all breakpoints.
@@ -312,7 +312,7 @@ disable <breakpoint-id>
 delete <breakpoint-id>
 ```
 
-Skip breakpoints `n` times.
+**Skip `n` Breakpoints**
 
 ```sh
 continue <ignore-count>
@@ -321,7 +321,7 @@ continue <ignore-count>
 continue 32
 ```
 
-Hit breakpoint once.
+**Hit Breakpoint Once**
 
 ```sh
 # Enable the breakpoint once.
@@ -331,7 +331,7 @@ enable once <breakpoint-id>
 
 ### Watchpoints
 
-{% abbr "Breaks", "Stops the program" %} when data changes. More specifically, whenever the *value of an expression* changes, a break occurs.
+{% abbr "Breaks", "Pauses the program" %} when data changes. More specifically, whenever the *value of an expression* changes, a break occurs.
 
 This includes:
  - when an address is **written** to. (`watch`, `awatch`)
@@ -387,17 +387,17 @@ Further Reading:
 ```sh
 # via the install script
 ## using curl
-$ bash -c "$(curl -fsSL https://gef.blah.cat/sh)"
+bash -c "$(curl -fsSL https://gef.blah.cat/sh)"
 
 ## using wget
-$ bash -c "$(wget https://gef.blah.cat/sh -O -)"
+bash -c "$(wget https://gef.blah.cat/sh -O -)"
 
 # or manually
-$ wget -O ~/.gdbinit-gef.py -q https://gef.blah.cat/py
-$ echo source ~/.gdbinit-gef.py >> ~/.gdbinit
+wget -O ~/.gdbinit-gef.py -q https://gef.blah.cat/py
+echo source ~/.gdbinit-gef.py >> ~/.gdbinit
 
 # or alternatively from inside gdb directly
-$ gdb -q
+gdb -q
 (gdb) pi import urllib.request as u, tempfile as t; g=t.NamedTemporaryFile(suffix='-gef.py'); open(g.name, 'wb+').write(u.urlopen('https://tinyurl.com/gef-main').read()); gdb.execute('source %s' % g.name)
 ```
 
@@ -434,7 +434,7 @@ r </tmp/input
 {% alert "danger" %}
 I don't recommend using Python 3 to generate strings on-the-fly, as its string/byte-string mechanics are unintuitive. Prefer `perl` or `echo` instead.
 
-For example: `python -c 'print("\xc0")'` prints `\xc3\x80` (À) instead of `\xc0`. Why? Because the Python string `"\xc0"` is interpreted as U+00C0, and `\xc3\x80` is the UTF-8 encoded version.
+For example: `python -c 'print("\xc0")'` prints `\xc3\x80` (À) instead of `\xc0`. Why? Because the Python string `"\xc0"` is interpreted as U+00C0, which is `\xc3\x80` in UTF-8.
 
 ```py
 assert '\xc0'.encode() == b'\xc3\x80'
@@ -442,6 +442,29 @@ assert '\xc0'.encode() == b'\xc3\x80'
 
 Printing bytes in Python is [difficult to do concisely](https://stackoverflow.com/q/908331/10239789).
 {% endalert %}
+
+**Using `pwnlib.gdb.attach`**
+
+```python
+from pwn import *
+
+bash = process('bash')
+
+# Attach the debugger
+gdb.attach(bash, '''
+set follow-fork-mode child
+break execve
+continue
+''')
+
+# Interact with the process
+bash.sendline(b"echo '\x01\x02\x03\x04'")
+```
+
+Further Reading:
+
+ - [SO: `gdb.attach` Example](https://stackoverflow.com/a/62014210/10239789)
+ - [`gdb.attach` Documentation](https://docs.pwntools.com/en/stable/gdb.html#pwnlib.gdb.attach)
 
 ### Enable ASLR
 
@@ -452,6 +475,8 @@ ASLR is disabled by default in GDB. To re-enable:
 ```sh
 set disable-randomization off
 ```
+
+Useful for pwn challenges.
 
 ### PIE Breakpoints
 
@@ -468,7 +493,7 @@ pie b <addr>    # PIE breakpoint at offset <addr> in code.
 pie run         # Run with pie breakpoints enabled.
 ```
 
-## GEF Context
+### GEF Context
 
 GEF only.
 
