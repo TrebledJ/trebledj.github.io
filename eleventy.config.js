@@ -22,7 +22,6 @@ module.exports = function (eleventyConfig) {
 		"./assets/webfonts": "/webfonts",
 		"./assets/css/third-party/*.{css,map}": "/css/third-party",
 		"./assets/css/[!third-party]**/*.{css,map}": "/css",
-		"./node_modules/prismjs/themes/prism-okaidia.css": "/css/third-party/prism-okaidia.css",
 	});
 	eleventyConfig.addPassthroughCopy({
 		"./assets/js/**/*.js": "/js/",
