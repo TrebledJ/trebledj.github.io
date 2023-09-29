@@ -27,7 +27,7 @@ $(function () {
     // --- TOC Current Section Highlight --- //
     const headerOffset = 150;
     const sections = document.querySelectorAll(".post-article h2,.post-article h3");
-    const menu = document.querySelectorAll("#right-sidebar nav.toc a");
+    const menu = document.querySelectorAll("#toc-sidebar nav.toc a");
     const menuMobile = document.querySelectorAll("#btn-mobile-toc nav.toc a");
 
     if (menu.length !== menuMobile.length)

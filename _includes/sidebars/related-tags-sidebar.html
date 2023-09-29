@@ -1,0 +1,12 @@
+{% set data = ([tag] | relatedTags(collections.tags, collections.tagcount))[0] %}
+<div class="sticky-right">
+    <h3><i class="fa fa-tags me-2"></i>Related Tags</h3>
+    <div class="mb-1">
+        <b>{{data.group}}</b>
+    </div>
+    <span class="d-flex flex-wrap">
+        {% for t in data.related %}
+            <span class="me-1">{% tag t.tag %}</span>
+        {% endfor %}
+    </span>
+</div>

@@ -1,0 +1,27 @@
+<div id="toc-sidebar" class="sticky-right">
+    {% include "toc.html" %}
+    
+    {# Related #}
+    {% set this = collections.posts | getCollectionItem %}
+    {% if this %}
+        {% set relatedPosts = collections.postsr | relatedPosts(this, related) %}
+
+        {% if related and (not related.disable)
+        and relatedPosts | length > 0 %}
+            <div class="related-sidebar-container mb-2">
+                <span>
+                    <a href="#related">Related</a>
+                </span>
+            </div>
+        {% endif %}
+    {% endif %}
+
+    {# Comments #}
+    {% if comments %}
+        <div class="comments-sidebar-container">
+            <span>
+                <a href="#comments">Comments</a>
+            </span>
+        </div>
+    {% endif %}
+</div>
