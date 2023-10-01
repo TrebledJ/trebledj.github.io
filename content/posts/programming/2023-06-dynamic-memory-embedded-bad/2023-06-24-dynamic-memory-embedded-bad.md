@@ -20,7 +20,11 @@ related:
 
 I keep explaining why dynamically allocating on embedded systems is a disagreeable idea, so thought I’d throw it on a post. This is a confusing topic for many junior developers who were taught to use `new` and `delete` in early C++ courses. In desktop/web application programming, dynamic allocation is everywhere.^[Even if you don’t use it directly, it’s still there. Most garbage-collected languages (think Java, JS, Python) will allocate primitives on the stack, and all other objects on the heap.] Not so in embedded.
 
+{% alert "success" %}
+
 To clarify, dynamic memory allocation (in embedded) isn't *always* bad, just as [`goto` isn't *always* bad](https://stackoverflow.com/a/3517765/10239789). Both dynamic allocation and `goto` have appropriate uses, but are often misused. As engineers, it's our duty to understand which situations call for these features and to make sound choices.
+
+{% endalert %}
 
 {% image "assets/dynamic-memory-2.jpg", "Ooooh, dynamic memory—fancy!", "post1 w-65" %}
 
@@ -44,11 +48,11 @@ This is a serious issue. Persistence, backup, and resets should be considered wh
 
 ## What alternatives are there?
 
-In C, dynamic allocation is largely optional.^[By this, I mean the C standard library rarely depends on it; except maybe for IO. Though on an embedded device, we probably won't be dealing with IO much.]
+In C, dynamic allocation is largely optional; you, the programmer, have more control over memory usage.^[Also, the C standard library rarely depends on dynamic allocation; except maybe for file IO.]
 
-In C++, it's more of a hassle. Dynamic memory allocation is core to many standard library containers: strings, vectors, maps. The Arduino `String` also uses dynamic memory. No doubt, these libraries are immensely useful for organising and manipulating data.
+In C++, it's more of a hassle. Dynamic memory allocation is core to many standard library containers: strings, vectors, maps. The Arduino `String` also uses dynamic memory. No doubt, these libraries are immensely useful for organising and manipulating data, but they come with dynamic allocation.^[Sure, `std` containers allow custom allocators, and that can be a topic for an entire series of posts... but it also means additional indirection, whether at compile-time or runtime.]
 
-The alternative is to use **static allocation**, by providing a maximum bound to our array sizes. Sometimes, it's as simple as changing your array declarations.
+The alternative is to use **static allocation**, by providing a maximum bound to our allocations. Sometimes, it's as simple as changing your array declarations.
 
 ```cpp
 // --- Dynamic ---
@@ -92,7 +96,7 @@ etl::vector<int, 10> vec2 = {1,2,3};
 ```
 {% endalert %}
 
-One benefit of static allocation is speed. With *dynamic*, allocators need to figure out size constraints and reallocate. If the allocator is good, it may save time by reusing a previously freed bin; but this still consumes time. With *static*, memory is either pre-allocated (in the case of global variables) or allocated with a single instruction (subtracting the stack pointer).^[And if your function uses multiple statically-allocated variables, the allocation will be combined in one *giant* stack subtraction. You can thank your compiler for this static bonus.] Hence, better performance at the expense of flexibility.
+One benefit of static allocation is *speed*. With dynamic, allocators need to figure out size constraints and reallocate. If the allocator is good, it may save time by reusing a previously freed bin; but this still consumes time. With *static*, memory is either pre-allocated (in the case of global variables) or allocated with a single instruction (subtracting the stack pointer).^[And if your function uses multiple statically-allocated variables, the allocation will be combined in one *giant* stack subtraction. You can thank your compiler for this static bonus.] Hence, better performance at the expense of flexibility.
 
 {% alert "fact" %}
 What about polymorphism? We can achieve static polymorphism via [CRTP](https://en.wikipedia.org/wiki/Curiously_recurring_template_pattern#Static_polymorphism); but we lose the ability for a polymorphic container (e.g. `vector<Animal*>`, `vector<Shape*>`). We could also use sum types (e.g. [`std::variant`](https://en.cppreference.com/w/cpp/utility/variant)); but this increases the memory footprint. Sometimes virtual classes are a necessary ~~evil~~ abstraction.
