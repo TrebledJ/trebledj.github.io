@@ -4,7 +4,9 @@ description: "Programming isn't about mindlessly typing away on a keyboard. Ther
 tags:
  - mathematics
  - haskell
+ - types
  - software-engineering
+ - programming-languages
 thumbnail_src: assets/abstract.jpg
 # thumbnail_banner: true
 usemathjax: true

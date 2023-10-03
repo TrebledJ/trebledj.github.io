@@ -7,6 +7,7 @@ tags:
  - types
  - mathematics
  - programming
+ - programming-languages
 usemathjax: true
 thumbnail_src: assets/thumbnail.jpg
 ---
