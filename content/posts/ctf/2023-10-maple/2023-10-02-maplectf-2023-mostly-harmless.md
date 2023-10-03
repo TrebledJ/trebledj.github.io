@@ -60,7 +60,7 @@ Still, let's look at some key insights:
 
 And guess what? That's all we need! Just follow the indices like how Alice follows the White Rabbit!
 
-{% image "assets/shocker.jpg", "Naur way!!!", "post1 w-60" %}
+{% image "assets/shocker.jpg", "Naur way!!!", "post1 w-45" %}
 
 ### Script
 
@@ -315,7 +315,7 @@ Now $\texttt{MyList[Reverse]} <: \texttt{MyList[Challenge]}$ is true, and the pr
 
 ## Metaprogramming with Type Hints
 
-{% image "assets/magic.jpg", "SpongeBob agrees: it's all magic.", "post1 w-60" %}
+{% image "assets/magic.jpg", "SpongeBob agrees: it's all magic.", "post1 w-50" %}
 
 {% alert "warning" %}
 **Disclaimer: Here be dragons.**
