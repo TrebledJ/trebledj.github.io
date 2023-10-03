@@ -31,6 +31,8 @@ logo: tag
 
         {{ content | safe }}
 
+        <br/>
+
         {# Preview List #}
         <div class="post-preview-list">
             {% set slug = tag | default(title) | slugify %}
