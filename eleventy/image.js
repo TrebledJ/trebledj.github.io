@@ -189,15 +189,13 @@ module.exports = function (eleventyConfig) {
         const numImages = [...images.matchAll(/<img.*?>/g)].length;
 
         if (!widths[numImages]) {
-            throw new Error(`{% images %} is only implemented for ${Object.keys(widths).join(',')} images`)
+            throw new Error(`{% images %} is only implemented for ${Object.keys(widths).join(',')} images`);
         }
 
-        const classes = [
-            widths[numImages],
-            "multi",
-        ];
-
-        images = images.replaceAll(/class="/g, `class="${classes.join(' ')} `)
+        // Don't add width if already added.
+        images = images.replaceAll(/class="(?![A-Za-z0-9_\- ]*\bw-(\d)+)/g, `class="${widths[numImages]} `);
+        // Always add multi.
+        images = images.replaceAll(/class="/g, `class="multi `);
 
         return `<div class="center rw ${containerClasses}">${images}</div>`;
     });
