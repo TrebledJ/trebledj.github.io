@@ -39,3 +39,4 @@
 {"rule":"YOUR_YOU_2","sentence":"^\\QWhen I give up You light in me another flame\\E$"}
 {"rule":"YOUR_YOU_2","sentence":"^\\QWhen I give up You light in me another flame To follow You No matter where You lead me to\\E$"}
 {"rule":"EN_UNPAIRED_BRACKETS","sentence":"^\\Q{% details \"Oh, looky, more good stuff!\", \"open\" %}\\E$"}
+{"rule":"ENGLISH_WORD_REPEAT_BEGINNING_RULE","sentence":"^\\QWe declare three classes: \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q, \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q, \\E(?:Dummy|Ina|Jimmy-)[0-9]+$"}
