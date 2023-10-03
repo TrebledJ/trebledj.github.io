@@ -389,12 +389,16 @@ _: N[C[U]] = C[T]()  # Subtype query: CT <: NCU.
 `"C[C[x]]"` is quoted to forward-reference `C`. (We declare and use it in the same statement.)
 {% endalert %}
 
+And here's the applied rules:
+
 1. $CT <:^? NCU$
 2. $\rightsquigarrow NNCCT <:^? NCU$ (**Super**)
 3. $\rightsquigarrow NCCT :>^? CU$ (**Cancel**)
 4. $\rightsquigarrow NCCT :>^? NNCCU$ (**Super**)
 5. $\rightsquigarrow CCT <:^? NCCU$ (**Cancel**)
 6. (and so on...)
+
+As you may notice, we started with $CT <:^? NCU$, but after 4 steps, another $C$ joined the party. Inductively, this will continue to grow forever (or until `mypy` runs out of space).
 
 
 ### Python Type Hints are Turing Complete
