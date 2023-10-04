@@ -2,10 +2,11 @@
 title: Subtype Metaprogramming is Mostly Harmless
 description: Inheritance go brrrrrrrr...
 tags:
- - reverse
- - python
  - types
+ - python
+ - tutorial
  - mathematics
+ - reverse
  - programming
  - programming-languages
 usemathjax: true
