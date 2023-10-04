@@ -44,6 +44,7 @@ module.exports = compile_csp(
     ,
     tag('img')
         .add('data:')
+        .add('c.disquscdn.com')
         // .add('*')
     ,
     tag('frame')
