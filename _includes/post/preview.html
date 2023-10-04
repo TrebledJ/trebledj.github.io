@@ -17,7 +17,7 @@
                 </h2>
                 {% if post.data.description %}
                 <div class="post-summary">
-                    {{ post.data.description | mdInline | safe }}
+                    <p>{{ post.data.description | mdInline | safe }}</p>
                 </div>
                 {% endif %}
             </div>
