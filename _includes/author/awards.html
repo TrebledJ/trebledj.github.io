@@ -4,9 +4,9 @@
         <div class="timeline-arrow"></div>
         <h2 class="h5 mb-1">
             {% if award.url %}
-            <a href="{{award.url}}">{{award.name | markdownify}}</a>
+            <a href="{{award.url}}">{{award.name | mdInline}}</a>
             {% else %}
-            {{award.name | markdownify}}
+            {{award.name | mdInline}}
             {% endif %}
         </h2>
         <h3 class="h6">
@@ -21,7 +21,7 @@
             <i class="fa fa-calendar"></i>
             {{award.time}}
         </span>
-        <p class="text-small mt-2 font-weight-light">{{award.description | markdownify}}</p>
+        <p class="text-small mt-2 font-weight-light">{{award.description | mdInline}}</p>
     </li>
     {% endfor %}
 </ul>

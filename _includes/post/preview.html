@@ -13,11 +13,11 @@
             <a href="{{post.url}}" tabindex="-1"></a>
             <div>
                 <h2 class="post-title mb-3">
-                    {{ post.data.title | markdownifyInline | safe }}
+                    {{ post.data.title | mdInline | safe }}
                 </h2>
                 {% if post.data.description %}
                 <div class="post-summary">
-                    {{ post.data.description | markdownifyInline | safe }}
+                    {{ post.data.description | mdInline | safe }}
                 </div>
                 {% endif %}
             </div>

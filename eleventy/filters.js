@@ -145,10 +145,10 @@ module.exports = function (eleventyConfig) {
 	});
 
 	eleventyConfig.addFilter("markdownify", (markdownString) => md.render(markdownString));
-	eleventyConfig.addFilter("markdownifyInline", (markdownString) => md.renderInline(markdownString));
+	eleventyConfig.addFilter("mdInline", (markdownString) => md.renderInline(markdownString));
 
 	eleventyConfig.addFilter("md", eleventyConfig.getFilter("markdownify"));
-	eleventyConfig.addFilter("mdInline", eleventyConfig.getFilter("markdownifyInline"));
+	eleventyConfig.addFilter("mdInline", eleventyConfig.getFilter("mdInline"));
 
 	eleventyConfig.addFilter("jsonify", (object) =>
 		JSON.stringify(object)

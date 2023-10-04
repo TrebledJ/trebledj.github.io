@@ -14,7 +14,7 @@
 </title>
 
 {% if description %}
-    <meta name="description" content="{{ description | markdownify | safe | striptags }}">
+    <meta name="description" content="{{ description | mdInline | safe | striptags }}">
 {% else %}
     <meta name="description" content="{{ site.description }}">
 {% endif %}

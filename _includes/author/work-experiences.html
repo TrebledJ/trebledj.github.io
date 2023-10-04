@@ -18,7 +18,7 @@
                     –
                     {{exp.date_end}}
                 </span>
-                <p class="text-small mt-2 font-weight-light">{{exp.description | markdownify}}</p>
+                <p class="text-small mt-2 font-weight-light">{{exp.description | mdInline}}</p>
             </li>
         {% endif %}
     {% endfor %}

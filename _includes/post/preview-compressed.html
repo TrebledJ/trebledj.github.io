@@ -11,10 +11,10 @@
         <div class="post-content d-flex flex-column justify-content-between">
             <a href="{{post.url}}"></a>
             <div>
-                <b class="post-title">{{ post.data.title | markdownifyInline | safe }}</b>
+                <b class="post-title">{{ post.data.title | mdInline | safe }}</b>
                 {% if post.data.description %}
                     <div class="post-summary">
-                        <p>{{ post.data.description | markdownifyInline | safe }}</p>
+                        <p>{{ post.data.description | mdInline | safe }}</p>
                     </div>
                 {% endif %}
             </div>
