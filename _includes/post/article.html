@@ -10,8 +10,8 @@
     </div>
     <hr/>
     <div class="post-body" itemprop="articleBody">
-        {% if thumbnail_banner and thumbnail %}
-            {% hero thumbnail, title, "post1" %}
+        {% if thumbnail_banner and thumbnail_src %}
+            {% hero thumbnail_src, title, "post1" %}
         {% endif %}
         {{ content | safe }}
     </div>
