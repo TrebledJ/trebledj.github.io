@@ -16,7 +16,7 @@ permalink: /posts/demo.json
       "url": {{post.url | jsonify | safe}}
     } #}
 
-    {{post.data.title | jsonify | safe}}
+    {{post.data.title | annihilateTags(['sup', 'sub']) | striptags | jsonify | safe}}
   {% endif %}
 {% endfor %}
 ]

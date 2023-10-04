@@ -139,21 +139,23 @@ module.exports = function (eleventyConfig) {
 	});
 
 	const md = require("markdown-it")({
-		html: false,
+		html: true,
 		breaks: false,
 		linkify: true,
 	});
 
-	eleventyConfig.addFilter("markdownify", (markdownString) =>
-		md.render(markdownString)
-	);
+	eleventyConfig.addFilter("markdownify", (markdownString) => md.render(markdownString));
+	eleventyConfig.addFilter("markdownifyInline", (markdownString) => md.renderInline(markdownString));
+
+	eleventyConfig.addFilter("md", eleventyConfig.getFilter("markdownify"));
+	eleventyConfig.addFilter("mdInline", eleventyConfig.getFilter("markdownifyInline"));
 
 	eleventyConfig.addFilter("jsonify", (object) =>
 		JSON.stringify(object)
 	);
 
 	eleventyConfig.addFilter("keywords", findKeywords);
-	
+
 	eleventyConfig.addFilter("maxDate", (a, b) => {
 		if (!b)
 			return undefined;

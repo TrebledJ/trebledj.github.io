@@ -1,9 +1,9 @@
 
 <article class="w-100 post-article" itemscope itemtype="http://schema.org/BlogPosting">
     <div class="article-header">
-        <h1 class="post-title" id="top" itemprop="name headline">{{ title }}</h1>
+        <h1 class="post-title" id="top" itemprop="name headline">{{ title | markdownifyInline | safe }}</h1>
         {% if description %}
-        <p class="post-desc">{{ description | markdownify | safe | replace("<p>", "") | replace("</p>", "") }}</p>
+        <p class="post-desc">{{ description | markdownifyInline | safe }}</p>
         {% endif %}
         {% set post = collections.posts | getCollectionItem %}
         {% include "post/metadata.html" %}
@@ -11,7 +11,7 @@
     <hr/>
     <div class="post-body" itemprop="articleBody">
         {% if thumbnail_banner and thumbnail_src %}
-            {% hero thumbnail_src, title, "post1" %}
+            {% hero thumbnail_src, title | annihilateTags(['sup', 'sub']) | striptags, "post1" %}
         {% endif %}
         {{ content | safe }}
     </div>

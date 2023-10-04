@@ -1,5 +1,5 @@
 ---
-title: Subtype Metaprogramming is Mostly Harmless
+title: <sub><sup>N[</sup></sub>Subtype Metaprogramming<sub><sup>]</sup></sub> is <sub><sup>N[</sup></sub>Mostly Harmless<sub><sup>]</sup></sub>
 description: Inheritance go brrrrrrrr...
 tags:
  - types
@@ -11,6 +11,7 @@ tags:
  - programming-languages
 usemathjax: true
 thumbnail_src: assets/thumbnail.jpg
+thumbnail_banner: true
 ---
 
 Types are cool! But y'know what's even cooler? A CTF challenge on types!
@@ -47,7 +48,7 @@ Still, let's look at some key insights:
 
 <!-- - `output.py` contains a bunch of `class` declarations: these indicate subtype relationships. -->
 * The final line of `output.py` is built by stacking input in a recursive fashion: `L_<INPUT[i]>[N[ L_<INPUT[i-1]>[N[ ... ]] ]]`.
-* Thus, **characters are encoded by the `L_*` classes**.
+  * Thus, **characters are encoded by the `L_*` classes**.
 * There are a bunch of `Q*_s*` classes, with indices from 1 to 71. Possibly indices? Or just references?
 * Any clue to the relationship between these symbols? Yes! We see interesting stuff from lines 320 to 459.
     ```python
@@ -114,7 +115,7 @@ This section attempts to bolster the reader's understanding of programming and t
 
 ### Classes
 
-Classes are a fundamental concept in object-oriented programming (OOP) that allow us to define objects with attributes (variables) and behaviours (methods/functions). They serve as blueprints or templates for creating instances of objects. With classes, we can create custom types.
+Classes are a fundamental concept in object-oriented programming (OOP) that allow us to define objects with attributes (variables) and behaviours (methods/functions). They serve as blueprints or templates for creating instances of objects. In the functional realm, classes are used to create new types.
 
 {% alert "info" %}
 From here on, *class* and *type* are interchangeable.
@@ -228,7 +229,7 @@ z: Challenge = Web()
 
 {% alert "warning" %}
 Beware, `Challenge` takes on two roles here:
-* Type. When inheriting `Reverse` or annotating `x`, `Challenge` is treated as a type.
+* Type. When inheriting (in the declaration of `class Reverse`) or when annotating `x`, `Challenge` is treated as a type.
 * Constructor. When calling `Challenge()`, we are instantiating an object.
 {% endalert %}
   
@@ -250,7 +251,7 @@ When we run `mypy` on this file, the type-checker will:
 * $\texttt{object} :> \texttt{int}$
 {% endalert %}
 
-The type-check passes if the values are subtypes of the annotations. This is also called a **subtype query** (distinguished by $<:^?$). Other examples of subtype queries:
+The type-check passes if the values are subtypes of the annotations. This is also called a **subtype query** (distinguished by $<:^?$).^[N.B. Grigore's and Roth's paper use a different notation ($\blacktriangleleft$ / $\blacktriangleright$) for subtype queries, but I opted to use $<:^?$ / $:>^?$ instead.] Other examples of subtype queries:
 
 ```python
 x: int = 5                  # Is type(5) a subtype of int? ✓
@@ -313,6 +314,8 @@ T = TypeVar('T', covariant=True)
 
 Now $\texttt{MyList[Reverse]} <: \texttt{MyList[Challenge]}$ is true, and the program compiles.
 
+At this point, if you understand contravariance, you should get the play-on-words in the title: *N[Subtype Metaprogramming] is N[Mostly Harmless]*.
+
 
 ## Metaprogramming with Type Hints
 
@@ -373,7 +376,7 @@ Here, choosing $BAT$ allows us to cancel $B$ in the next step.
 
 ### Subtype-Checking Example
 
-Let’s walk through an example of an infinite subtyping query.^[Blatantly taken from Roth's paper[^roth2023].] Here's the code:
+Let’s walk through an example of an infinite subtyping query.^[Blatantly taken from Roth's paper.[^roth2023]] Here's the code:
 
 ```python
 from typing import TypeVar, Generic, Any
@@ -410,7 +413,7 @@ It turns out that Python type hints are Turing Complete thanks to two characteri
     {% alert "info" %}
     In this section, we assume all type parameters are contravariant.
     {% endalert %}
-* **Expansive-Recursive Inheritance** is more complicated to define, but the implications are that we can inherit recursively, and generate infinite, undecidable subtype queries. We saw an example of this in a [previous section](#be-a-subtype-checker). (Read more in §2 of Roth's paper[^roth2023].)
+* **Expansive-Recursive Inheritance** is more complicated to define, but the implications are that we can inherit recursively, and generate infinite, undecidable subtype queries. We saw an example of this in a [previous section](#be-a-subtype-checker). (Read more in §2 of Roth's paper.[^roth2023])
 
 With these, Python type hints can (slowly) simulate any Turing machine or computation!
 
@@ -425,6 +428,7 @@ Get some intuition by playing the [Turing Machine Google Doodle](https://www.goo
 {% enddetails %}
 
 The whole ordeal is rather complicated. Essentially, there are two things to be aware of:
+
 * Type Encoding. Different aspects of the tape machine are encoded as types. For example, the `L_*` encode the set of possible values (excluding $\bot$, i.e. no value), and `ML` encodes the machine head.
     
     {% image "assets/table1.png", "Table showing various symbols in Grigore's encoding; copied from Roth's paper.", "post1 w-70" %}
@@ -439,7 +443,7 @@ type parameter $x$, except $Z$, which is monomorphic. The superscripts vary.[^ro
 
     {% image "assets/table4.png", "Table showing various inheritance rules; copied from Roth's paper.", "post1 w-80" %}
 
-    <sup>Roth's subtyping inheritance rules. These differ from Grigore's and aren't the inheritance rules used in this challenge. This image is here to illustrate the rules. The first 4 rows encode Turing Machine state transitions. The type parameter $x$ is contravariant.[^roth2023]</sup>
+    <sup>Roth's subtyping inheritance rules. These differ from Grigore's and aren't the inheritance rules used in this challenge. This image is included to illustrate the rules. The first 4 rows encode Turing Machine state transitions. The type parameter $x$ is contravariant.[^roth2023]</sup>
     {.caption}
 
     {.no-center}
