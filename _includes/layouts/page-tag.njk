@@ -18,7 +18,7 @@ logo: tag
                 {% if logo %}
                     <i class="fa fa-{{logo}} me-1"></i>
                 {% endif %}
-                {{title}}
+                {{title | mdInline | safe}}
             </h3>
             {% if feedtags | contains(page.fileSlug) %}
                 <abbr data-placement="left" data-toggle="tooltip" title="An RSS feed is available for this tag!">

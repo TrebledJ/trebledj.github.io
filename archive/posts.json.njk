@@ -8,7 +8,7 @@ permalink: /posts/demo.json
   {% if not post.data.noindex %}
     {{ comma() }}
     {# {
-      "title": {{post.data.title | jsonify | safe}},
+      "title": {{post.data.title | annihilateTags(['sup', 'sub']) | striptags | jsonify | safe}},
       "description": {{post.data.description | jsonify | safe}},
       "excerpt": {{post.content | striptags | truncate(120, false, "...") | jsonify | safe}},
       "tags": {{post.data.tags | exclude("posts") | jsonify | safe}},

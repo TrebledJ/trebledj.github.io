@@ -3,7 +3,7 @@
 {# Title / Description #}
 <title>
     {% if title %}
-        {{ title }}
+        {{ title | annihilateTags(['sup', 'sub']) | striptags }}
             -
             {{ site.title }}
     {% else %}
@@ -28,7 +28,7 @@
 {% set page_keywords = [] %}
 {% set page_keywords = page_keywords | push(site.author.alias | lower) %}
 {% if title %}
-    {% set page_keywords = page_keywords | push(title | lower | e) %}
+    {% set page_keywords = page_keywords | push(title | annihilateTags(['sup', 'sub']) | striptags | lower | e) %}
 {% endif %}
 {% if description %}
     {% set page_keywords = page_keywords | push(description | lower | e) %}
@@ -64,14 +64,14 @@
 {# See https://ogp.me/. #}
 <meta content="{{ site.title }}" property="og:site_name"/>
 {% if title %}
-    <meta content="{{ title }}" property="og:title"/>
+    <meta content="{{ title | annihilateTags(['sup', 'sub']) | striptags }}" property="og:title"/>
     <meta content="article" property="og:type"/>
 {% else %}
     <meta content="{{ site.title }}" property="og:title"/>
     <meta content="website" property="og:type"/>
 {% endif %}
 {% if description %}
-    <meta content="{{ description | markdownify | striptags }}" property="og:description"/>
+    <meta content="{{ description | mdInline | striptags }}" property="og:description"/>
 {% else %}
     <meta content="{{ site.description }}" property="og:description"/>
 {% endif %}
