@@ -3,4 +3,4 @@
 
 What's your type?
 
-<!-- TODO -->
+Static? Dynamic? Structural? Polymorphic? Algebraic?
