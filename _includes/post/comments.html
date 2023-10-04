@@ -1,8 +1,8 @@
 <a id="comments"></a>
 {% if site.environment == 'production' %}
     <div class="disqus"></div>
-    <script defer src="/js/jquery.disqusloader.min.js"></script>
-    <script defer src="/js/disqus.js"></script>
+    {# <script id="script-disqusloader" defer src="/js/jquery.disqusloader.min.js"></script> #}
+    {% include "utilities/disqus.html" %}
     <noscript>Please enable JavaScript to view the
         <a href="https://disqus.com/?ref_noscript">comments powered by Disqus</a>.
     </noscript>

@@ -1,6 +1,4 @@
----
-permalink: /js/disqus.js
----
+<script>
 var disqus_options = {
     /*
         @type: string (url)
@@ -36,9 +34,9 @@ var disqus_options = {
         Disqus-native options. Check Disqus' manual for more information.
     */
     disqusConfig: function () {
-        this.page.title = '{{title}}';
-        this.page.url = '{{url}}';
-        this.page.identifier = '{{url}}';
+        this.page.title = "{{title}}";
+        this.page.url = "{{url}}";
+        this.page.identifier = "{{url}}";
     }
 };
 
@@ -56,6 +54,14 @@ function reloadDisqus() {
     setTimeout(loadDisqus, 1000);
 }
 
-document.addEventListener("DOMContentLoaded", () => {
+const loader = document.createElement("script");
+loader.src = "/js/jquery.disqusloader.min.js";
+loader.onload = () => {
     loadDisqus();
-});
+};
+document.body.appendChild(loader);
+
+{# document.addEventListener("DOMContentLoaded", () => {
+    loadDisqus();
+}); #}
+</script>

@@ -9,7 +9,7 @@ convention is to avoid inline scripts, keep this script inlined for the sake of 
 <script>
     const defaultTheme = "dark";
     let icon = undefined;
-    var reloadDisqus = undefined;
+    var reloadDisqus = undefined; // Forward-declare the reloadDisqus() function.
 
     function modeInit() {
         const currentTheme = localStorage.getItem("theme");
