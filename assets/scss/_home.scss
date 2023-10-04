@@ -41,10 +41,23 @@ html[data-theme="light"] .hero-section {
 
 #home {
     .carousel {
-        height: 550px;
+        @include media-breakpoint-up(md) {
+            height: 580px;
+        }
+        @include media-breakpoint-down(md) {
+            height: 550px;
+        }
 
         .post-preview-container {
-            height: 480px;
+            @include media-breakpoint-up(md) {
+                height: 480px;
+            }
+            .post-title {
+                margin-bottom: 0.5rem !important;
+            }
+            .post-summary {
+                margin-bottom: 0.5rem;
+            }
         }
 
         // Nowrap, overflow text.
@@ -124,6 +137,20 @@ html[data-theme="light"] .hero-section {
     }
 }
 
+
+.recent-posts {
+    line-height: $line-height-compact;
+
+    @include media-breakpoint-up(md) {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+    @include media-breakpoint-down(md) {
+        flex-direction: column;
+        justify-content: left;
+    }
+}
 
 .carousel-title .btn,
 .recent-posts .btn {

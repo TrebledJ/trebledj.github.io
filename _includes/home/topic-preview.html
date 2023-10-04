@@ -3,8 +3,8 @@
 
 {% macro render_topic_preview(name, tag, about, excludeTags, uniquePosts) %}
     {# Description #}
-    <div class="recent-posts d-flex flex-row justify-content-between align-items-center mb-3">
-        <span class="me-2">{{about}}</span>
+    <div class="recent-posts d-flex mb-3">
+        <span class="me-2 mb-1">{{about}}</span>
         <div>
             {{ render_tag(tag) }}
         </div>
