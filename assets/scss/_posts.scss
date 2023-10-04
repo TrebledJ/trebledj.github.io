@@ -195,6 +195,10 @@
 
 .article-header .post-title {
     font-size: 40px;
+    
+    // Don't break out of width.
+    overflow-wrap: break-word;
+    word-wrap: break-word;
 }
 
 .post-title,

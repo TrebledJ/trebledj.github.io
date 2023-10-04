@@ -295,7 +295,7 @@ display(MyList[Reverse]())
 
 (N.B. For the sake of this section, I've used a custom `MyList` type instead of `typing.List`.)
 
-But why did this error? Although `mypy` deduced that $\texttt{Reverse} <: \texttt{Challenge}$, it couldn't deduce that our subtype query $\texttt{MyList[Reverse]} <:^? \texttt{MyList[Challenge]}$ holds.
+But why did this error? Although `mypy` deduced that $\texttt{Reverse} <: \texttt{Challenge}$, it couldn't deduce that our subtype query $\texttt{MyList[Reverse]} {} \goodbreak <:^? \texttt{MyList[Challenge]}$ holds.
 
 This is where covariance and contravariance come into play. With these two bad bois, we can derive further relationships on generic types. The two are similar, with a minor difference.
 
@@ -312,7 +312,7 @@ Hence, in the previous code example, we can fix the code by adding `covariant=Tr
 T = TypeVar('T', covariant=True)
 ```
 
-Now $\texttt{MyList[Reverse]} <: \texttt{MyList[Challenge]}$ is true, and the program compiles.
+Now $\texttt{MyList[Reverse]} {} \goodbreak <: \texttt{MyList[Challenge]}$, and the program compiles.
 
 At this point, if you understand contravariance, you should get the play-on-words in the title: *N[Subtype Metaprogramming] is N[Mostly Harmless]*.
 
