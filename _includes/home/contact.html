@@ -2,7 +2,7 @@
     <div class="col">
         <div class="row gx-4">
             <div class="col-md-6 d-flex justify-content-center align-items-center">
-                <form id="contact-form" class="w-100" action="https://getform.io/f/{{site.getform_endpoint}}" method="POST">
+                <form id="contact-form" class="w-100" action="https://getform.io/f/{{site.id.getform}}" method="POST">
                     <h2 id="contact">Contact <i class="fas fa-link ms-1"></i></h2>
                     <div class="row mb-3">
                         <div class="col">
@@ -26,7 +26,7 @@
                     <input type="hidden" name="_gotcha" class="d-none">
 
                     {# <script src="https://js.hcaptcha.com/1/api.js" async defer></script> #}
-                    {# <div class="h-captcha" data-sitekey="{{site.hcaptcha_sitekey}}"></div> #}
+                    {# <div class="h-captcha" data-sitekey="{{site.id.hcaptcha}}"></div> #}
 
                     <button type="submit" class="btn btn-primary btn-block mb-4">Send</button>
                 </form>
