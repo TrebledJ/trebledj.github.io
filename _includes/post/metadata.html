@@ -20,13 +20,13 @@
     {# Updated Date #}
     <div class="d-flex flex-row align-items-center">
         {% block post_metadata_updated %}
-            {% set updated = lastContentCommit | maxDate(updated) %}
-            {% if updated %}
+            {% set updatedDate = lastContentCommit | maxDate(updated) %}
+            {% if updatedDate %}
                 <span class="post-updated-date-icon">
                     <i class="fa fa-calendar post-meta-icon me-1"></i>
                 </span>
                 <span class="post-date post-updated-date">
-                Updated on {{ updated | date | safe }}
+                Updated on {{ updatedDate | date | safe }}
                 </span>
             {% endif %}
         {% endblock %}
