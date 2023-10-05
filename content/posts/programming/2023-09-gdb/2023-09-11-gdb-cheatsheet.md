@@ -406,13 +406,13 @@ Further Reading:
 
 ### Input Non-Printable Characters
 
-<!--
 **Directly from GDB: With `run`**
 ```sh
 # Runs with 'AAAA\x01\x02\x01\x02' as stdin.
-r <<< $(perl -e 'print "A"x4 . "\x01\x02"x2;')
+r <<<$(perl -e 'print "A"x4 . "\x01\x02"x2;')
 ```
--->
+
+This uses a Bash [here-string](https://www.gnu.org/savannah-checkouts/gnu/bash/manual/bash.html#Here-Strings) to feed goodies into input.
 
 <!--
 **Directly from GDB: Continue**
@@ -423,12 +423,26 @@ c -A < <(perl -e 'print "\x00\x40\x3d\x38"')
 -->
 
 **Directly from GDB: With Temporary File**
+
+Slightly more convoluted than the previous method, but is more portable.
 ```sh
 # Prints 'AAAA\x01\x02\x01\x02' to a temporary file.
 shell perl -e 'print "A"x4 . "\x01\x02"x2;' >/tmp/input
 
 # Run the program, use the file as stdin.
 r </tmp/input
+```
+
+**Reset GDB Arguments**
+
+```sh
+set args
+```
+
+This empties `args`. You can also use this command to set arbitrary arguments. The full command is:
+
+```sh
+set args [arguments...]
 ```
 
 {% alert "danger" %}
