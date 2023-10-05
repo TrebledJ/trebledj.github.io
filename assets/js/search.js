@@ -25,29 +25,22 @@ $(async function () {
     switch (item.type) {
       case "tag":
         return {
-          icon: "fa fa-tag",
+          icon: "tag",
           head: `<a class="tag" href="${item.url}">${item.title}</a>`,
           desc: item.description,
         };
       case "post":
-        var tags = item.tags;
-        var head = `<a href="${item.url}">${item.title}</a>
+        const tags = item.tags;
+        const head = `<a href="${item.url}">${item.title}</a>
                   <a class="tag ms-2" href="/tags/${tags[0]}">${tags[0]}</a>`;
-        var desc = item.description;
+        const desc = item.description;
 
-        if (tags.includes("project")) {
-          return { icon: "fa fa-cube", head, desc };
-        } else if (tags.includes("experience")) {
-          return { icon: "fa fa-star", head, desc };
-        } else if (tags.includes("ctf")) {
-          return { icon: "fa fa-flag", head, desc };
-        } else if (tags.includes("composition")) {
-          return { icon: "fa fa-music", head, desc };
-        } else if (tags.includes("programming")) {
-          return { icon: "fa fa-laptop", head, desc };
-        } else {
-          return { icon: "fa fa-book", head, desc };
+        for (const {tag, icon} of searchResultIcons) {
+          if (tags.includes(tag))
+            return {icon, head, desc};
         }
+
+        return { icon: searchResultDefaultIcon, head, desc };
     }
   }
 
@@ -61,7 +54,7 @@ $(async function () {
 
       const child = $(`
       <div class="d-flex flex-row align-items-center p-2 border-bottom search-results-list__item">
-          <i class="${icon} fs-5"></i>
+          <i class="fa fa-${icon} fs-5"></i>
           <div class="d-flex flex-column ms-3">
               <h6 class="d-flex align-items-center mb-0">${head}</h6>
               <span>${desc}</span>

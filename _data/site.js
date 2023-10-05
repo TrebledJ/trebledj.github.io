@@ -36,6 +36,18 @@ Feel free to [reach out](#contact) for whatever reason. ヽ(・∀・)ﾉ
 			{ text: 'Projects', url: '/tags/project' },
 			{ text: 'Music', url: '/music' },
 		],
+		search: {
+			// https://fontawesome.com/icons/
+			resultIcons: [
+				{ tag: "project", icon: "star" },
+				{ tag: "experience", icon: "rocket" },
+				{ tag: "ctf", icon: "flag" },
+				{ tag: "composition", icon: "music" },
+				{ tag: "embedded", icon: "bolt" },
+				{ tag: "programming", icon: "code" },
+			],
+			resultDefaultIcon: "book",
+		},
 		github_username: "TrebledJ",
 		musescore_id: "20636901",
 		// google_analytics: "G-7TQ4WV0LMK",

@@ -12,6 +12,8 @@
     <script>
         var base_url = '{{site.baseurl}}';
         var soundcloud_color = '{{site.soundcloud_color}}';
+        var searchResultIcons = {{site.search.resultIcons | dump | safe}};
+        var searchResultDefaultIcon = '{{site.search.resultDefaultIcon}}';
     </script>
     {% include "utilities/theme-switch.html" %}
 
