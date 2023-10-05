@@ -288,7 +288,7 @@ Further reading:
 
 ### Breakpoint Control
 
-Sometimes we only want to fire certain breakpoints. These commands come handy then. They also apply to watchpoints.
+Sometimes we only want to enable or disable certain breakpoints. These commands come handy then. They also apply to watchpoints.
 
 **Get Breakpoint Info**
 
