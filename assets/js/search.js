@@ -74,8 +74,9 @@ $(async function () {
 
   searchBox.on('keyup', function () {
     const query = $(this).val().toLowerCase();
-    if (!query.trim())
-      return;
+
+    // if (!query.trim())
+    //   return; // Ignore empty input.
 
     const result =
       idx.query(function (q) {
@@ -100,6 +101,7 @@ $(async function () {
   });
 
   $('.modal').on('shown.bs.modal', function () {
-    $(this).find('[autofocus]').focus();
+    $(this).find('[autofocus]').trigger("focus");
+    searchBox.trigger("keyup");
   });
 });
