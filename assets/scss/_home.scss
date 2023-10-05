@@ -47,6 +47,9 @@ html[data-theme="light"] .hero-section {
             @include media-breakpoint-up(md) {
                 height: 450px;
             }
+            @include media-breakpoint-down(md) {
+                height: 430px;
+            }
             .post-title {
                 margin-bottom: 0.5rem !important;
             }
