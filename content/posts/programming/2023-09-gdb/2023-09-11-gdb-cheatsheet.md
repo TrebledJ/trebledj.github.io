@@ -406,6 +406,18 @@ Further Reading:
 
 ### Input Non-Printable Characters
 
+{% alert "danger" %}
+I don't recommend using Python 3 to generate strings on-the-fly, as its string/byte-string mechanics are unintuitive. Prefer `perl` or `echo` instead.
+
+For example: `python -c 'print("\xc0")'` prints `\xc3\x80` (À) instead of `\xc0`. Why? Because the Python string `"\xc0"` is interpreted as U+00C0, which is `\xc3\x80` in UTF-8.
+
+```py
+assert '\xc0'.encode() == b'\xc3\x80'
+```
+
+Printing bytes in Python is [difficult to do concisely](https://stackoverflow.com/q/908331/10239789).
+{% endalert %}
+
 **Directly from GDB: With `run`**
 ```sh
 # Runs with 'AAAA\x01\x02\x01\x02' as stdin.
@@ -444,18 +456,6 @@ This empties `args`. You can also use this command to set arbitrary arguments. T
 ```sh
 set args [arguments...]
 ```
-
-{% alert "danger" %}
-I don't recommend using Python 3 to generate strings on-the-fly, as its string/byte-string mechanics are unintuitive. Prefer `perl` or `echo` instead.
-
-For example: `python -c 'print("\xc0")'` prints `\xc3\x80` (À) instead of `\xc0`. Why? Because the Python string `"\xc0"` is interpreted as U+00C0, which is `\xc3\x80` in UTF-8.
-
-```py
-assert '\xc0'.encode() == b'\xc3\x80'
-```
-
-Printing bytes in Python is [difficult to do concisely](https://stackoverflow.com/q/908331/10239789).
-{% endalert %}
 
 **Using `pwnlib.gdb.attach`**
 
