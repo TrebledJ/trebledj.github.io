@@ -4,6 +4,7 @@
     padding-right: 2vw;
     background-color: var(--main-background-color);
     border-bottom: 1px solid var(--light-border-color);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, .05);
     width: 100vw;
 
     @include media-breakpoint-down(lg) {
