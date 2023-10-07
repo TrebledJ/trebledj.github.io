@@ -43,7 +43,8 @@ module.exports = function (eleventyConfig) {
 
 	eleventyConfig.addShortcode("details", function (summary, state) {
 		state ||= '';
-		return `<details ${state}><summary>${summary}</summary><div class="details-content">\n`;
+		const md = eleventyConfig.getFilter("mdInline");
+		return `<details ${state}><summary>${md(summary)}</summary><div class="details-content">\n`;
 	});
 
 	// Paired shortcode workaround: see Note [endalert Workaround].

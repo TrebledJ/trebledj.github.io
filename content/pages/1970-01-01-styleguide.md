@@ -388,7 +388,7 @@ Some other superheroes that may take issue with you:
 
 ### Details
 
-{% details "Details" %}
+{% details "Details **details** *details* ~~details~~<sup>Smoll details.</sup>" %}
 Something small enough to escape casual notice.
 {% enddetails %}
 
