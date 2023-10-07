@@ -21,12 +21,10 @@ This is the second post in a series of posts on Digital Audio Processing. Simila
 
 ## Audio Synthesis 🎶
 
-<!-- TODO: abbreviations -->
-
 Where do audio signals come from? Our signal might be…
 
-- recorded. Sound waves are picked up by special hardware (e.g. a microphone) and translated to a digital signal through an ADC.
-- loaded from a file. There are many audio formats out there, but the most common ones are .wav and .mp3. The .wav format is the simplest: it just stores samples as-is. Other formats compress audio to achieve smaller file sizes (which in turn, means faster upload/download speeds).
+- recorded. Sound waves are picked up by special hardware (e.g. a microphone) and translated to a digital signal through an {% abbr "ADC", "Analog-to-Digital Converter" %}.
+- loaded from a file. There are many audio formats out there, but the most common ones are .wav and .mp3. The .wav format is simple: just store the samples as-is. Other formats compress audio to achieve smaller file sizes (which in turn, means faster upload/download speeds).
 - synthesised. We generate audio out of thin air (or rather, code and electronics).
 
 I’ll mainly focus on **synthesis**. We’ll start by finding out how to generate a single tone, then learn how to generate multiple tones simultaneously.
@@ -37,7 +35,7 @@ I’ll mainly focus on **synthesis**. We’ll start by finding out how to genera
 A naive approach to generate audio might be:
 
 1. Process one sample
-2. Feed it to the DAC/speaker
+2. Feed it to the {% abbr "DAC", "Digital-to-Analogue Converter" %}/speaker
 
 But there are several issues with this: function call overhead may impact performance, and we have little room left to do other things. For the sound to play smoothly while sampling at 44100Hz, each sample needs to be delivered within $\frac{1}{44100}$ s = $22.6$ µs.
 
@@ -49,7 +47,7 @@ A better approach is to use a *buffer* and work in batches. The buffer will hold
 We'll focus more on step 1 (processing) for now. We'll cover step 2 (output) in the next post.
 
 {% alert "info" %}
-In a previous post, we discussed [quantisation][prev-post-quantisation] and how different representations (such as integers and floats) are suited for different tasks. Since we're concerned with audio processing, we'll be using floats and quantising from -1 to 1.
+In a previous post, we discussed [quantisation][prev-post-quantisation] and how different representations (such as integers and floats) are suited for different tasks. Integers are discrete numbers, while floats are (imprecise) real numbers. Since we're concerned with audio processing, we'll be using floats and quantising from -1 to 1.
 {% endalert %}
 
 In C/C++, we can generate a sine tone like so:
@@ -153,8 +151,30 @@ During playback, Audacity will combine the samples from both tracks by summing t
 
 You can try layering other frequencies (554Hz, 659Hz) to play a nifty A Major chord.
 
-<!-- ### Fundamental Frequency -->
-<!-- TODO: fundamentals? -->
+
+## Fundamental Frequency
+
+A side note. When combining two frequencies with additive synthesis, something subtle happens. The ground shifts and our feet fumble! The fundamental frequency implicitly changes!
+
+{% alert "success" %}
+**DIY Example**
+
+1. Fire up Audacity.
+2. Generate a 400Hz sine tone. (Generate > Tone...)
+3. Generate a 402Hz sine tone on a different track.
+4. Play the audio and observe. How many times does the audio {% abbr "peak", "i.e. hit a maximum point" %} per second?
+
+It peaks !!twice!! per second. (That is, we implicitly added a !!2Hz!! signal beneath!)
+{% endalert %}
+
+Specifically, the fundamental changes to the **greatest common divisor** (GCD) of the two frequencies.
+
+More notes:
+- When we play a note and its 5th (in *Just Temperament*), say 440Hz and 660Hz, our fundamental is 220Hz.
+- With octaves, the fundamental frequency is just the frequency of the lower note.
+- This also leads to some interesting phenomena.
+  - When we play two super-low-register notes a semitone apart, we get funny, dissonant pulses emanating from our keyboard or piano.
+  - This may also lead to unpleasant buzzes when mixing synths, possibly due to frequency modulation on top of a steady tone.
 
 
 ## Wavetable Synthesis 🌊
@@ -225,7 +245,7 @@ For a sine wave, we don't gain much in terms of performance. But when it comes t
 [^leaf]: Guess what? There are more ways to optimise wavetable synthesis—so it'll rock even more! See the open source [LEAF](https://github.com/spiricom/LEAF/blob/a0b0b7915cce3792ea00f06d0a6861be1a73d609/leaf/Src/leaf-oscillators.c#L67) library for an example of heavily optimised wavetable synthesis.
 
 {% alert "fact" %}
-Wavetable synthesis is commonly used by MIDI to generate sounds. Each instrument has its own *soundfont*, which is a collection of wavetables of different pitches. This unifies the synthesis approach for all instruments, as some may be simple to generate (e.g. clarinet) while others are more complex.
+Wavetable synthesis is commonly used by {% abbr "MIDI", "a protocol for music" %} to generate sounds. Each instrument has its own *soundfont*, which is a collection of wavetables of different pitches. This unifies the synthesis approach for all instruments, as some may be simple to generate (e.g. clarinet) while others are more complex.
 {% endalert %}
 
 {% alert "success" %}
