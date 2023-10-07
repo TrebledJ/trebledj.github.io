@@ -109,7 +109,13 @@ $(function () {
     // --- Details Collapsible --- //
     $(".details-collapse-bottom a").on('click', function () {
         const p = this.closest("details");
-        $(p).removeAttr('open');
-        p.scrollIntoView();
+        const sp = $(p);
+        sp.removeAttr('open');
+
+        const elementTop = sp.offset().top;
+        const viewportTop = $(window).scrollTop();
+        if (elementTop < viewportTop) {
+            p.scrollIntoView();
+        }
     });
 })
