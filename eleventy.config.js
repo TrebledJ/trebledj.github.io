@@ -3,7 +3,7 @@ const htmlcsp = require("./eleventy/detail/html-csp-transform");
 
 const plugins = require('./eleventy/plugins');
 const filters = require('./eleventy/filters');
-const mdshortcodes = require('./eleventy/mdshortcodes');
+const shortcodes = require('./eleventy/shortcodes');
 const markdown = require('./eleventy/markdown');
 const collections = require('./eleventy/collections');
 
@@ -67,7 +67,7 @@ module.exports = function (eleventyConfig) {
 	plugins(eleventyConfig);
 	collections(eleventyConfig);
 	filters(eleventyConfig);
-	mdshortcodes(eleventyConfig);
+	shortcodes(eleventyConfig);
 
 	// Transforms
 	if (process.env.ENVIRONMENT === 'production') {
