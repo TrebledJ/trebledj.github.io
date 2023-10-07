@@ -196,7 +196,7 @@
 
 .article-header .post-title {
     font-size: 40px;
-    
+
     // Don't break out of width.
     overflow-wrap: break-word;
     word-wrap: break-word;
@@ -276,7 +276,8 @@
     .video,
     .alert,
     details,
-    pre[class*=language-], // Keep to override prism.
+    pre[class*=language-],
+    // Keep to override prism.
     pre {
         & {
             margin-top: $space-base;
@@ -399,8 +400,32 @@ html[data-theme="dark"] .alpha-img {
 }
 
 // Responsive width for mobile.
-@include media-breakpoint-down(sm) {
-    .rw {
+.rw {
+    @include media-breakpoint-down(sm) {
         width: 100% !important;
+    }
+}
+
+.rw-md {
+    @include media-breakpoint-down(md) {
+        width: 100% !important;
+    }
+}
+
+@include media-breakpoint-up(sm) {
+    .float-left {
+        float: left;
+    }
+    .float-right {
+        float: right;
+    }
+}
+
+@include media-breakpoint-up(md) {
+    .float-left-md {
+        float: left;
+    }
+    .float-right-md {
+        float: right;
     }
 }
