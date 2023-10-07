@@ -42,18 +42,32 @@ module.exports = function (eleventyConfig) {
     function amendClasses(classes) {
         classes = (typeof classes === 'string' ? classes.split(' ') : typeof classes === 'undefined' ? [] : classes);
         classes.reverse(); // Add classes to the front.
-        if (classes.includes('post1')) {
-            // Remove class.
-            classes.splice(classes.indexOf('post1'), 1);
 
-            if (classes.every(c => !c.startsWith('w-')))
-                classes.push('w-100'); // Default to full-width;
+        const substitutions = {
+            'post1': [
+                'center',
+                'rw',       // Responsive-width for small screens.
+                'mb-2',     // Extra spacing in the bottom.
+            ],
+            'floatl1': ['m-1', 'float-left', 'rw'],
+            'floatr1': ['m-1', 'float-right', 'rw'],
+            'floatl1-md': ['m-1', 'float-left-md', 'rw-md'],
+            'floatr1-md': ['m-1', 'float-right-md', 'rw-md'],
+        };
 
-            // Solo image.
-            classes.push('center');
-            classes.push('rw');     // Responsive-width for small screens.
-            classes.push('mb-2');   // Extra spacing in the bottom.
+        for (const key of Object.keys(substitutions)) {
+            if (classes.includes(key)) {
+                // Remove class.
+                classes.splice(classes.indexOf(key), 1);
+
+                if (classes.every(c => !c.startsWith('w-')))
+                    classes.push('w-100'); // Default to full-width;
+        
+                // Push rest of classes.
+                classes.push(...substitutions[key]);
+            }
         }
+        
         classes.reverse();
         return classes;
     }

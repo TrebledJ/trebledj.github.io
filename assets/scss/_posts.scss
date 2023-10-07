@@ -399,15 +399,10 @@ html[data-theme="dark"] .alpha-img {
     filter: invert(100%);
 }
 
-// Responsive width for mobile.
-.rw {
-    @include media-breakpoint-down(sm) {
-        width: 100% !important;
-    }
-}
 
-.rw-md {
-    @include media-breakpoint-down(md) {
+@include media-breakpoint-down(sm) {
+    // Responsive width for mobile.
+    .rw {
         width: 100% !important;
     }
 }
@@ -416,16 +411,27 @@ html[data-theme="dark"] .alpha-img {
     .float-left {
         float: left;
     }
+
     .float-right {
         float: right;
     }
 }
 
-@include media-breakpoint-up(md) {
-    .float-left-md {
-        float: left;
+$breakpoints: sm, md, lg;
+
+@each $b in $breakpoints {
+    @include media-breakpoint-down(#{$b}) {
+        .rw-#{$b} {
+            width: 100% !important;
+        }
     }
-    .float-right-md {
-        float: right;
+
+    @include media-breakpoint-up(#{$b}) {
+        .float-left-#{$b} {
+            float: left;
+        }
+        .float-right-#{$b} {
+            float: right;
+        }
     }
 }
