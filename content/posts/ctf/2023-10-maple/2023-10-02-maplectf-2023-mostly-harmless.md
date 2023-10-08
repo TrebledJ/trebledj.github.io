@@ -5,7 +5,6 @@ tags:
  - types
  - python
  - tutorial
- - mathematics
  - reverse
  - programming
  - programming-languages
