@@ -109,7 +109,7 @@ So let's go deeper! The rest of this post attempts to dissect the type theory be
 ## Back to the Basics
 
 {% alert "warning" %}
-This section attempts to bolster the reader's understanding of programming and type theory in order to understand the nitty gritty of the challenge. If you're comfortable with types and variance, feel free to skip. If you have any questions, do [let me](#comments) [know](/#contact).
+This section attempts to bolster the reader's understanding of programming and type theory in order to understand the nitty gritty of the challenge. If you're comfortable with types and variance, feel free to [skip to the next section](#metaprogramming-with-type-hints). If you have any questions, do [let me](#comments) [know](/#contact).
 {% endalert %}
 
 ### Classes
@@ -258,7 +258,7 @@ y: float = "abc"            # Is type("abc") a subtype of float? ✗
 z: Challenge = Reverse()    # Is type(Reverse()) a subtype of Challenge? ✓
 ```
 
-We discuss later [how to resolve subtype queries](#be-a-subtype-checker). (That is, how to figure out if a class is a subtype of another class.)
+We'll find out later how to resolve subtype queries. That is, we'll look at how to figure out if a class is a subtype of another class. ([Jump](#be-a-subtype-checker).)
 
 Subtypes are great for [polymorphism](https://www.programiz.com/python-programming/polymorphism) as they allow us to construct containers (lists, arrays, maps) in a concise and type-safe manner. Here's a simple example:
 
@@ -313,7 +313,7 @@ T = TypeVar('T', covariant=True)
 
 Now $\texttt{MyList[Reverse]} {} \goodbreak <: \texttt{MyList[Challenge]}$, and the program compiles.
 
-At this point, if you understand contravariance, you should get the play-on-words in the title: *N[Subtype Metaprogramming] is N[Mostly Harmless]*.
+At this point, you should be able to appreciate the double entendre in the title: *N[Subtype Metaprogramming] is N[Mostly Harmless]*.
 
 
 ## Metaprogramming with Type Hints
@@ -336,6 +336,8 @@ Back to the challenge. The program leverages the `mypy` type-checker to perform 
 To answer this subtype query, we need to search for a trail of supertypes leading us from the supposed subtype (`QRW_s29[L___TAPE_END__[N[...]]]`) to the upper type (`E[E[Z]]`).
 
 {% alert "info" %}
+A quick aside.
+
 * We use "$\rightsquigarrow$" to denote a resolution step in the checker.
 * For convenience, we simplify expressions by ignoring brackets: $C[D[E[A]]]$ becomes $CDEA$.
 {% endalert %}
