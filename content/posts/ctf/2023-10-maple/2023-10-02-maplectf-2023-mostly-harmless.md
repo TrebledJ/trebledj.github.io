@@ -443,8 +443,7 @@ The whole ordeal is rather complicated. Essentially, there are two things to be 
     
     {% image "assets/table1.png", "Table showing various symbols in Grigore's encoding; copied from Roth's paper.", "post1 w-70" %}
 
-    <sup>The components of Grigore’s subtyping machine. All types use a single contravariant
-type parameter $x$, except $Z$, which is monomorphic. The superscripts vary.[^roth2023]</sup>
+    <sup>The components of Grigore’s subtyping machine. All classes are parameterised by a contravariant type parameter $x$, except $Z$, which is monomorphic.[^roth2023]</sup>
     {.caption}
 
     {.no-center}
@@ -453,7 +452,7 @@ type parameter $x$, except $Z$, which is monomorphic. The superscripts vary.[^ro
 
     {% image "assets/table4.png", "Table showing various inheritance rules; copied from Roth's paper.", "post1 w-80" %}
 
-    <sup>Roth's subtyping inheritance rules. These differ from Grigore's and aren't the inheritance rules used in this challenge. This image is included to illustrate the rules. The first 4 rows encode Turing Machine state transitions. The type parameter $x$ is contravariant.[^roth2023]</sup>
+    <sup>Roth's subtyping inheritance rules. This image is included to illustrate inheritance rules. They differ from the rules in the challenge (which are based on Grigore's work). The first 4 rows encode Turing Machine state transitions. Again, the type parameter $x$ is contravariant.[^roth2023]</sup>
     {.caption}
 
     {.no-center}
