@@ -61,12 +61,12 @@ Still, let's look at some key insights:
     # Line 378.
     class QL_s29(Generic[T], L_n["N[QLW_s31[L_x[N[MR[N[T]]]]]]"]): ...
     #          │               │          │
-    #          │               │          └── Next index
+    #          │               │          └── Next number
     #          │               └── Next letter in flag
-    #          └── Current index
+    #          └── Current number
     ```
 
-And guess what? That's all we need! Just follow the indices like how Alice follows the White Rabbit!
+And guess what? That's all we need! Just follow the numbers like how Alice follows the White Rabbit!
 
 {% image "assets/shocker.jpg", "Naur way!!!", "post1 w-45" %}
 
@@ -358,7 +358,7 @@ How does the search go? Meet the two **subtyping rules** used by the type-checke
     In English, if $C$ has a supertype $D$, we can "go up a level" to *search* for a match.
 2. **Cancel**.^[In the paper, they use **Var** instead of **Cancel**, but I think the latter conveys the operation better.] Remove the outermost type from both sides of the query. (And flip, since all type parameters are assumed to be contravariant!)
     $$
-    EA <: EB \rightsquigarrow B <: A
+    EA <: EB \rightsquigarrow A <: B
     $$
     This just comes from our definition of contravariance.
 
@@ -366,6 +366,8 @@ The search terminates once we find a match $A <: A$.
 
 {% alert "success" %}
 What if there are multiple supertypes (due to multiple inheritance)? Wouldn't our paths diverge? Which one do we choose?
+
+Keep in mind we're performing a *search*.
 
 A good heuristic is to choose a supertype that cancels out the outer type on the other side.
 
@@ -376,9 +378,9 @@ _: B[C[C[T]]] = C[C[T]]
 ```
 Here, choosing $BAT$ allows us to cancel $B$ in the next step.
 
-1. $CCT <:^? BCCT$
-2. $\rightsquigarrow BCCT <:^? BCCT$ (**Super**)
-2. $\rightsquigarrow ACT :>^? CCT$ (**Cancel**)
+1. $CCZ <:^? BCCZ$
+2. $\rightsquigarrow BACZ <:^? BCCZ$ (**Super**)
+2. $\rightsquigarrow ACZ :>^? CCZ$ (**Cancel**)
 {% endalert %}
 
 
@@ -398,7 +400,7 @@ _: N[C[U]] = C[T]()  # Subtype query: CT <: NCU.
 ```
 
 {% alert "info" %}
-`"C[C[x]]"` is quoted to forward-reference `C`. (We declare and use it in the same statement.)
+`"C[C[x]]"` is quoted in order to forward-reference `C`. (We declare and use it in the same statement.)
 {% endalert %}
 
 And here's the applied rules:
