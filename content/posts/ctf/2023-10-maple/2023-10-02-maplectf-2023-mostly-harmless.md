@@ -29,10 +29,13 @@ This year's MapleCTF graced us with a challenge involving much class, much inher
 Author: [apropos](https://apropos.codes/)  
 17/291 solves.
 
-The {% abbr "chal", "challenge" %} is also humorously tagged with "cursed" and "misc". Well, that's reassuring...
+The {% abbr "chal", "challenge" %} is also humorously tagged "cursed" and "misc". Well, that's reassuring...
 
-We're presented with two files:
-* `app.py`: Driver code to convert the flag (input) to a mysterious line of output, then calls `mypy output.py`.
+Anyways, we're presented with two files:
+* `app.py`: Driver code to convert the flag (input) to a mysterious line of output, then opens a subprocess and runs
+    ```shell
+    mypy output.py
+    ```
 * `output.py`: A template file full of class declarations and inheritance. Utter gibberish on first sight.
 
 You can follow along by getting these files [*here*](https://github.com/TrebledJ/ctf-binaries/tree/main/maplectf-2023/mostly-harmless).
@@ -41,14 +44,18 @@ You can follow along by getting these files [*here*](https://github.com/TrebledJ
 ## Solve
 What? A section titled "solve"? Already? What about the usual analysis and observations?
 
-Usually I begin my writeups with an extensive analysis and observations section. Contrary to this, *Mostly Harmless* is one of those blursed challenges where those with strong guess-fu can solve it; but the challenge is so intellectually challenging and ***deep***, that to properly reverse (let alone understand) it would take ~~a PhD,~~ ~~years,~~ extra study post-CTF.
+Usually I begin my writeups with an extensive analysis section. Contrary to this, *Mostly Harmless* is one of those blursed challenges which favours those with strong guess-fu; but the challenge is so intellectually challenging and ***deep***, that to properly reverse (let alone understand) it would take ~~a PhD,~~ ~~years,~~ extra study post-CTF.
 
 Still, let's look at some key insights:
 
 <!-- - `output.py` contains a bunch of `class` declarations: these indicate subtype relationships. -->
-* The final line of `output.py` is built by stacking input in a recursive fashion: `L_<INPUT[i]>[N[ L_<INPUT[i-1]>[N[ ... ]] ]]`.
+* The final line of `output.py` is built by stacking input in a recursive fashion:
+    ```python
+    L_<INPUT[i]>[N[ L_<INPUT[i-1]>[N[ ... ]] ]]
+    ```
   * Thus, **characters are encoded by the `L_*` classes**.
-* There are a bunch of `Q*_s*` classes, with indices from 1 to 71. Possibly indices? Or just references?
+  * The chain also begins (or ends?) with `QRW_s29`.
+* There are a bunch of `Q*_s*` classes, numbered from 1 to 71. Indices, perhaps? Or just references?
 * Any clue to the relationship between these symbols? Yes! We see interesting stuff from lines 320 to 459.
     ```python
     # Line 378.
