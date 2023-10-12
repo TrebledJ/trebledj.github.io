@@ -29,10 +29,13 @@ This year's MapleCTF graced us with a challenge involving much class, much inher
 Author: [apropos](https://apropos.codes/)  
 17/291 solves.
 
-The {% abbr "chal", "challenge" %} is also humorously tagged with "cursed" and "misc". Well, that's reassuring...
+The {% abbr "chal", "challenge" %} is also humorously tagged "cursed" and "misc". Well, that's reassuring...
 
-We're presented with two files:
-* `app.py`: Driver code to convert the flag (input) to a mysterious line of output, then calls `mypy output.py`.
+Anyways, we're presented with two files:
+* `app.py`: Driver code to convert the flag (input) to a mysterious line of output, then opens a subprocess and runs
+    ```shell
+    mypy output.py
+    ```
 * `output.py`: A template file full of class declarations and inheritance. Utter gibberish on first sight.
 
 You can follow along by getting these files [*here*](https://github.com/TrebledJ/ctf-binaries/tree/main/maplectf-2023/mostly-harmless).
@@ -41,25 +44,29 @@ You can follow along by getting these files [*here*](https://github.com/TrebledJ
 ## Solve
 What? A section titled "solve"? Already? What about the usual analysis and observations?
 
-Usually I begin my writeups with an extensive analysis and observations section. Contrary to this, *Mostly Harmless* is one of those blursed challenges where those with strong guess-fu can solve it; but the challenge is so intellectually challenging and ***deep***, that to properly reverse (let alone understand) it would take ~~a PhD,~~ ~~years,~~ extra study post-CTF.
+Usually I begin my writeups with an extensive analysis section. Contrary to this, *Mostly Harmless* is one of those blursed challenges which favours those with strong guess-fu; but the challenge is so intellectually challenging and ***deep***, that to properly reverse (let alone understand) it would take ~~a PhD,~~ ~~years,~~ extra study post-CTF.
 
 Still, let's look at some key insights:
 
 <!-- - `output.py` contains a bunch of `class` declarations: these indicate subtype relationships. -->
-* The final line of `output.py` is built by stacking input in a recursive fashion: `L_<INPUT[i]>[N[ L_<INPUT[i-1]>[N[ ... ]] ]]`.
+* The final line of `output.py` is built by stacking input in a recursive fashion:
+    ```python
+    L_<INPUT[i]>[N[ L_<INPUT[i-1]>[N[ ... ]] ]]
+    ```
   * Thus, **characters are encoded by the `L_*` classes**.
-* There are a bunch of `Q*_s*` classes, with indices from 1 to 71. Possibly indices? Or just references?
+  * The chain also begins (or ends?) with `QRW_s29`.
+* There are a bunch of `Q*_s*` classes, numbered from 1 to 71. Indices, perhaps? Or just references?
 * Any clue to the relationship between these symbols? Yes! We see interesting stuff from lines 320 to 459.
     ```python
     # Line 378.
     class QL_s29(Generic[T], L_n["N[QLW_s31[L_x[N[MR[N[T]]]]]]"]): ...
     #          │               │          │
-    #          │               │          └── Next index
+    #          │               │          └── Next number
     #          │               └── Next letter in flag
-    #          └── Current index
+    #          └── Current number
     ```
 
-And guess what? That's all we need! Just follow the indices like how Alice follows the White Rabbit!
+And guess what? That's all we need! Just follow the numbers like how Alice follows the White Rabbit!
 
 {% image "assets/shocker.jpg", "Naur way!!!", "post1 w-45" %}
 
@@ -109,7 +116,7 @@ So let's go deeper! The rest of this post attempts to dissect the type theory be
 ## Back to the Basics
 
 {% alert "warning" %}
-This section attempts to bolster the reader's understanding of programming and type theory in order to understand the nitty gritty of the challenge. If you're comfortable with types and variance, feel free to skip. If you have any questions, do [let me](#comments) [know](/#contact).
+This section attempts to bolster the reader's understanding of programming and type theory in order to understand the nitty gritty of the challenge. If you're comfortable with types and variance, feel free to [skip to the next section](#metaprogramming-with-type-hints). If you have any questions, do [let me](#comments) [know](/#contact).
 {% endalert %}
 
 ### Classes
@@ -258,7 +265,7 @@ y: float = "abc"            # Is type("abc") a subtype of float? ✗
 z: Challenge = Reverse()    # Is type(Reverse()) a subtype of Challenge? ✓
 ```
 
-We discuss later [how to resolve subtype queries](#be-a-subtype-checker). (That is, how to figure out if a class is a subtype of another class.)
+We'll find out later how to resolve subtype queries. That is, we'll look at how to figure out if a class is a subtype of another class. ([Jump](#be-a-subtype-checker).)
 
 Subtypes are great for [polymorphism](https://www.programiz.com/python-programming/polymorphism) as they allow us to construct containers (lists, arrays, maps) in a concise and type-safe manner. Here's a simple example:
 
@@ -313,7 +320,7 @@ T = TypeVar('T', covariant=True)
 
 Now $\texttt{MyList[Reverse]} {} \goodbreak <: \texttt{MyList[Challenge]}$, and the program compiles.
 
-At this point, if you understand contravariance, you should get the play-on-words in the title: *N[Subtype Metaprogramming] is N[Mostly Harmless]*.
+At this point, you should be able to appreciate the double entendre in the title: *N[Subtype Metaprogramming] is N[Mostly Harmless]*.
 
 
 ## Metaprogramming with Type Hints
@@ -336,6 +343,8 @@ Back to the challenge. The program leverages the `mypy` type-checker to perform 
 To answer this subtype query, we need to search for a trail of supertypes leading us from the supposed subtype (`QRW_s29[L___TAPE_END__[N[...]]]`) to the upper type (`E[E[Z]]`).
 
 {% alert "info" %}
+A quick aside.
+
 * We use "$\rightsquigarrow$" to denote a resolution step in the checker.
 * For convenience, we simplify expressions by ignoring brackets: $C[D[E[A]]]$ becomes $CDEA$.
 {% endalert %}
@@ -349,7 +358,7 @@ How does the search go? Meet the two **subtyping rules** used by the type-checke
     In English, if $C$ has a supertype $D$, we can "go up a level" to *search* for a match.
 2. **Cancel**.^[In the paper, they use **Var** instead of **Cancel**, but I think the latter conveys the operation better.] Remove the outermost type from both sides of the query. (And flip, since all type parameters are assumed to be contravariant!)
     $$
-    EA <: EB \rightsquigarrow B <: A
+    EA <: EB \rightsquigarrow A <: B
     $$
     This just comes from our definition of contravariance.
 
@@ -357,6 +366,8 @@ The search terminates once we find a match $A <: A$.
 
 {% alert "success" %}
 What if there are multiple supertypes (due to multiple inheritance)? Wouldn't our paths diverge? Which one do we choose?
+
+Keep in mind we're performing a *search*.
 
 A good heuristic is to choose a supertype that cancels out the outer type on the other side.
 
@@ -367,9 +378,9 @@ _: B[C[C[T]]] = C[C[T]]
 ```
 Here, choosing $BAT$ allows us to cancel $B$ in the next step.
 
-1. $CCT <:^? BCCT$
-2. $\rightsquigarrow BCCT <:^? BCCT$ (**Super**)
-2. $\rightsquigarrow ACT :>^? CCT$ (**Cancel**)
+1. $CCZ <:^? BCCZ$
+2. $\rightsquigarrow BACZ <:^? BCCZ$ (**Super**)
+2. $\rightsquigarrow ACZ :>^? CCZ$ (**Cancel**)
 {% endalert %}
 
 
@@ -389,7 +400,7 @@ _: N[C[U]] = C[T]()  # Subtype query: CT <: NCU.
 ```
 
 {% alert "info" %}
-`"C[C[x]]"` is quoted to forward-reference `C`. (We declare and use it in the same statement.)
+`"C[C[x]]"` is quoted in order to forward-reference `C`. (We declare and use it in the same statement.)
 {% endalert %}
 
 And here's the applied rules:
@@ -432,8 +443,7 @@ The whole ordeal is rather complicated. Essentially, there are two things to be 
     
     {% image "assets/table1.png", "Table showing various symbols in Grigore's encoding; copied from Roth's paper.", "post1 w-70" %}
 
-    <sup>The components of Grigore’s subtyping machine. All types use a single contravariant
-type parameter $x$, except $Z$, which is monomorphic. The superscripts vary.[^roth2023]</sup>
+    <sup>The components of Grigore’s subtyping machine. All classes are parameterised by a contravariant type parameter $x$, except $Z$, which is monomorphic.[^roth2023]</sup>
     {.caption}
 
     {.no-center}
@@ -442,7 +452,7 @@ type parameter $x$, except $Z$, which is monomorphic. The superscripts vary.[^ro
 
     {% image "assets/table4.png", "Table showing various inheritance rules; copied from Roth's paper.", "post1 w-80" %}
 
-    <sup>Roth's subtyping inheritance rules. These differ from Grigore's and aren't the inheritance rules used in this challenge. This image is included to illustrate the rules. The first 4 rows encode Turing Machine state transitions. The type parameter $x$ is contravariant.[^roth2023]</sup>
+    <sup>Roth's subtyping inheritance rules. This image is included to illustrate inheritance rules. They differ from the rules in the challenge (which are based on Grigore's work). The first 4 rows encode Turing Machine state transitions. Again, the type parameter $x$ is contravariant.[^roth2023]</sup>
     {.caption}
 
     {.no-center}
