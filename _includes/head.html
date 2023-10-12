@@ -10,7 +10,6 @@
 
     {% include "utilities/async-css.html" %}
     <script>
-        var base_url = '{{site.baseurl}}';
         var searchResultIcons = {{site.search.resultIcons | dump | safe}};
         var searchResultDefaultIcon = '{{site.search.resultDefaultIcon}}';
     </script>
@@ -18,7 +17,7 @@
 
     <link rel="icon" href="/img/favicon.ico" type="image/png" sizes="16x16"/>
 
-    {# Load important scripts here. Other scripts should go at end of body to avoid blocking DOM load. #}
+    {# Critical scripts here. Other scripts should go at end of body to avoid blocking DOM load. #}
     <script defer src="https://cdn.jsdelivr.net/npm/jquery@3.7.0/dist/jquery.min.js"></script>
 
     <html class="no-js"></html>
