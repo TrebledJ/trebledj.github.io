@@ -10,12 +10,12 @@ layout: layouts/page-default
                 <i class="fa fa-tags me-2"></i>Tags
             </h3>
             {% for data in groups %}
-                <div class="mb-1">
+                <div class="mt-2 mb-1">
                     <b>{{data.group}}</b>
                 </div>
                 <span class="d-flex flex-wrap">
                     {% for t in data.related %}
-                        <span class="me-1">{% tag t.tag %}</span>
+                        <span>{% tag t.tag %}</span>
                     {% endfor %}
                 </span>
             {% endfor %}
