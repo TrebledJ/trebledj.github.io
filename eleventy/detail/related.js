@@ -191,7 +191,7 @@ function getRelatedTags(tags, tagPages, tagCount) {
  * Get groups of tags by their directory prefix.
  * (Based on DIRECTORY, not title!)
  */
-function getTagsByPrefix(tagPages, prefix) {
+function getTagsByPrefix(prefix, tagPages) {
     const groups = {};
 
     // Find the groups we're interested in, and create skeletons in the `tags` object.
