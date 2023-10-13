@@ -15,12 +15,6 @@
         <script defer src="/js/search.js"></script>
 
         {% if assets %}
-            {% if assets.css %}
-                {% for asset in assets.css %}
-                    <link rel="stylesheet" href="{{asset}}" media="print"/>
-                {% endfor %}
-                {% include "utilities/async-css.html" %}
-            {% endif %}
             {% if assets.js %}
                 {% for asset in assets.js %}
                     <script defer src="{{asset}}"></script>

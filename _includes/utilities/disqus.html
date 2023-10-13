@@ -54,14 +54,11 @@ function reloadDisqus() {
     setTimeout(loadDisqus, 1000);
 }
 
+/* Note: We manually .createElement so that we can attach an onload and bypass CSP. */
 const loader = document.createElement("script");
 loader.src = "/js/jquery.disqusloader.min.js";
 loader.onload = () => {
     loadDisqus();
 };
 document.body.appendChild(loader);
-
-{# document.addEventListener("DOMContentLoaded", () => {
-    loadDisqus();
-}); #}
 </script>
