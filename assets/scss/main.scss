@@ -130,3 +130,7 @@ $carousel-transition: transform 2s ease, opacity 1.5s ease-out .5s;
 .faded {
     opacity: $opacity-lowest;
 }
+
+.track-desc {
+    line-height: $line-height-compact;
+}

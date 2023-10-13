@@ -5,11 +5,34 @@ layout: layouts/page-default
 <div class="d-flex justify-content-center">
     <div id="track-list" class="container-fluid"></div>
 
+    <template id="template-track">
+        <div>
+            {# ${brk} #}
+            <iframe title="SoundCloud Track ${item.track_id}" allow="autoplay" frameborder="no" height="166" scrolling="no"
+            {# src="link..." #}
+            width="100%" loading="lazy"></iframe>
+            <div class="d-flex flex-row align-items-center">
+                <span>
+                    <i class="fa fa-tag post-meta-icon me-1"></i>
+                </span>
+                <div class="track-tags">{# ${tags} #}</div>
+            </div>
+            <div class="post-meta">
+                <p class="track-desc">
+                    {# ${item.description} #}
+                    <a class="track-link" {# href="link..." #}>(continue reading)</a>
+                </p>
+            </div>
+        </div>
+    </template>
+
     <script src="/js/infinite-loader.js"></script>
     <script>
         document.addEventListener("DOMContentLoaded", () => {
             (function ($) {
                 const visual = ($(window).width() < 600);
+                const template = $($("#template-track").html());
+
                 const l = InfiniteLoader({
                     data: '/tracks.json',
                     items: {
@@ -18,39 +41,31 @@ layout: layouts/page-default
                     },
                     append: '#track-list',
                     html: (item, index) => {
-                        const toHTMLTag = t => `<a class="tag" href="{{ site.baseurl }}/tags/${t}">${t}</a>`;
+                        const el = template.clone();
+
+                        const track = el.find("iframe");
+                        track.attr("title", `Track: ${item.title}`);
+                        track.attr("src", `https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/${item.track_id}&color=%23{{ site.color.soundcloud }}&auto_play=false&hide_related=true&show_comments=true&show_user=true&show_reposts=false&show_teaser=false&visual=${visual}`);
+
+                        const toHTMLTag = t => `<span><a class="tag" href="{{ site.baseurl }}/tags/${t}">${t}</a></span>`;
 
                         /* Exclude common tags and convert into html code. */
                         const tags = item
                             .tags
                             .map(toHTMLTag)
-                            .join("\n");
+                            .join("");
+                        el.find(".track-tags").html(tags);
 
-                        /* No break on the first item. */
-                        const brk = index
-                            ? '<br/>'
-                            : '';
+                        /* Fill description and link. */
+                        el.find(".track-desc").prepend(item.description);
+                        el.find(".track-link").attr("href", `{{ site.baseurl }}${item.url}`);
 
-                        return `
-                        <div>
-                            ${brk}
-                            <iframe title="SoundCloud Track ${item.track_id}" allow="autoplay" frameborder="no" height="166" scrolling="no"
-                                src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/${item.track_id}&color=%23{{ site.color.soundcloud }}&auto_play=false&hide_related=true&show_comments=true&show_user=true&show_reposts=false&show_teaser=false&visual=${visual}"
-                                width="100%" loading="lazy">
-                            </iframe>
-                            <div class="d-flex flex-row align-items-center">
-                                {# <span class="post-date"><i class="fa fa-calendar post-meta-icon me-1"></i>${item.date}</span>
-                                <span class="fs-6">&nbsp;•&nbsp;</span> #}
-                                <span><i class="fa fa-tag post-meta-icon me-1"></i></span>
-                                <div>
-                                ${tags}
-                                </div>
-                            </div>
-                            <div class="post-meta">
-                                <span>${item.description}</span> 
-                                <a href="{{ site.baseurl }}${item.url}">(continue reading)</a>
-                            </div>
-                        </div>`;
+                        /* No spacing before first item. */
+                        if (index > 0) {
+                            el.prepend("<br/>");
+                        }
+
+                        return el;
                     }
                 });
             })(jQuery);

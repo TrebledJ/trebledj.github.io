@@ -12,6 +12,7 @@ permalink: /tracks.json
       "score_id": {{post.data.score_id | default(0)}},
       "tags": ["{{post.data.tags | exclude(["posts", "composition", "music"]) | join('", "') | safe}}"],
       "date": "{{post.page.date | date | safe}}",
+      "title": "{{post.data.title}}",
       {# Remove footnote markings (sup) and headers. #}
       "description": "{{post.content | annihilateTags(['sup', 'h1', 'h2', 'h3']) | striptags | truncate(150, false, "...") | safe}}",
       "url": "{{post.url}}"
