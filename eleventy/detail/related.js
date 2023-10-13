@@ -187,5 +187,39 @@ function relatedTags(tags, tagPages, tagCount) {
     return ret;
 }
 
+/**
+ * Get groups of tags by their directory prefix.
+ * (Based on DIRECTORY, not title!)
+ */
+function getTagsByPrefix(tagPages, prefix) {
+    const groups = {};
 
-module.exports = { relatedPosts, relatedTags };
+    // Find the groups we're interested in, and create skeletons in the `tags` object.
+    for (const p of tagPages) {
+        if (p.data.group.startsWith(prefix)) {
+            if (!groups[p.data.group]) {
+                groups[p.data.group] = {
+                    src: [],
+                    related: [p.data],
+                };
+            } else {
+                groups[p.data.group].related.push(p.data);
+            }
+        }
+    }
+
+    let ret = [];
+    for (const g in groups) {
+        groups[g].group = g;
+        ret.push(groups[g]);
+    }
+
+    depth = obj => (obj.group.match(/\./g) || []).length
+    // Sort by "depth" (least number of '.'s appear first).
+    ret.sort((a, b) => depth(a) - depth(b));
+
+    return ret;
+}
+
+
+module.exports = { relatedPosts, relatedTags, getTagsByPrefix };

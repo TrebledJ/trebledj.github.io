@@ -2,74 +2,105 @@
 layout: layouts/page-default
 ---
 
-<div class="d-flex justify-content-center">
-    <div id="track-list" class="container-fluid"></div>
+<div class="page-content-container d-flex row gx-6">
+    <div class="col-lg-4">
+        {% set groups = collections.tags | getTagsByPrefix("music.") %}
+        <div class="sticky-right">
+            <h3>
+                <i class="fa fa-tags me-2"></i>Tags
+            </h3>
+            {% for data in groups %}
+                <div class="mb-1">
+                    <b>{{data.group}}</b>
+                </div>
+                <span class="d-flex flex-wrap">
+                    {% for t in data.related %}
+                        <span class="me-1">{% tag t.tag %}</span>
+                    {% endfor %}
+                </span>
+            {% endfor %}
+        </div>
+    </div>
 
-    <template id="template-track">
-        <div>
-            {# ${brk} #}
-            <iframe title="SoundCloud Track ${item.track_id}" allow="autoplay" frameborder="no" height="166" scrolling="no"
+    <div class="col-lg-8">
+        {# Main Content #}
+        <div id="track-list" class="container-fluid"></div>
+
+        <template id="template-track">
+            <div>
+                {# ${brk} #}
+                <iframe title="SoundCloud Track ${item.track_id}" allow="autoplay" frameborder="no" height="166" scrolling="no"
             {# src="link..." #}
             width="100%" loading="lazy"></iframe>
-            <div class="d-flex flex-row align-items-center mt-1">
-                <span>
-                    <i class="fa fa-tag post-meta-icon me-1"></i>
-                </span>
-                <div class="track-tags">{# ${tags} #}</div>
+                <div class="d-flex flex-row align-items-center mt-1">
+                    <span>
+                        <i class="fa fa-tag post-meta-icon me-1"></i>
+                    </span>
+                    <div class="track-tags">
+                        {# ${tags} #}
+                    </div>
+                </div>
+                <div class="post-meta mt-1">
+                    <p class="track-desc mb-0">
+                        {# ${item.description} #}
+                        <a class="track-link" {# href="link..." #}>(continue reading)</a>
+                    </p>
+                </div>
             </div>
-            <div class="post-meta mt-1">
-                <p class="track-desc mb-0">
-                    {# ${item.description} #}
-                    <a class="track-link" {# href="link..." #}>(continue reading)</a>
-                </p>
-            </div>
-        </div>
-    </template>
+        </template>
 
-    <script src="/js/infinite-loader.js"></script>
-    <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            (function ($) {
-                const visual = ($(window).width() < 600);
-                const template = $($("#template-track").html());
+        <script src="/js/infinite-loader.js"></script>
+        <script>
+            document.addEventListener("DOMContentLoaded", () => {
+                (function ($) {
+                    const visual = ($(window).width() < 600);
+                    const template = $($("#template-track").html());
 
-                const l = InfiniteLoader({
-                    data: '/tracks.json',
-                    items: {
-                        num: 4,
-                        after: 2
-                    },
-                    append: '#track-list',
-                    html: (item, index) => {
-                        const el = template.clone();
+                    const l = InfiniteLoader({
+                        data: '/tracks.json',
+                        items: {
+                            num: 4,
+                            after: 2
+                        },
+                        append: '#track-list',
+                        html: (item, index) => {
+                            const el = template.clone();
 
-                        const track = el.find("iframe");
-                        track.attr("title", `Track: ${item.title}`);
-                        track.attr("src", `https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/${item.track_id}&color=%23{{ site.color.soundcloud }}&auto_play=false&hide_related=true&show_comments=true&show_user=true&show_reposts=false&show_teaser=false&visual=${visual}`);
+                            const track = el.find("iframe");
+                            track.attr("title", `Track: ${item.title}`);
+                            track.attr("src", `https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/${item.track_id}&color=%23{{ site.color.soundcloud }}&auto_play=false&hide_related=true&show_comments=true&show_user=true&show_reposts=false&show_teaser=false&visual=${visual}`);
 
-                        const toHTMLTag = t => `<span><a class="tag" href="{{ site.baseurl }}/tags/${t}">${t}</a></span>`;
+                            const toHTMLTag = t => `<span><a class="tag" href="{{ site.baseurl }}/tags/${t}">${t}</a></span>`;
 
-                        /* Exclude common tags and convert into html code. */
-                        const tags = item
-                            .tags
-                            .map(toHTMLTag)
-                            .join("");
-                        el.find(".track-tags").html(tags);
+                            /* Exclude common tags and convert into html code. */
+                            const tags = item
+                                .tags
+                                .map(toHTMLTag)
+                                .join("");
+                            el
+                                .find(".track-tags")
+                                .html(tags);
 
-                        /* Fill description and link. */
-                        el.find(".track-desc").prepend(item.description);
-                        el.find(".track-link").attr("href", `{{ site.baseurl }}${item.url}`);
+                            /* Fill description and link. */
+                            el
+                                .find(".track-desc")
+                                .prepend(item.description);
+                            el
+                                .find(".track-link")
+                                .attr("href", `{{ site.baseurl }}${item.url}`);
 
-                        /* No spacing before first item. */
-                        if (index > 0) {
-                            el.prepend("<br/>");
+                            /* No spacing before first item. */
+                            if (index > 0) {
+                                el.prepend("<br/>");
+                            }
+
+                            return el;
                         }
+                    });
+                })(jQuery);
+            });
+        </script>
 
-                        return el;
-                    }
-                });
-            })(jQuery);
-        });
-    </script>
+        <div class="infinite-spinner"></div>
+    </div>
 </div>
-<div class="infinite-spinner"></div>
