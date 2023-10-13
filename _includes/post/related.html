@@ -1,6 +1,6 @@
 {% set this = collections.posts | getCollectionItem %}
 {% if this %}
-    {% set relatedPosts = collections.postsr | relatedPosts(this, related) %}
+    {% set relatedPosts = collections.postsr | getRelatedPosts(this, related) %}
 
     {% if (not related.disable) and (relatedPosts | length) > 0 %}
         <hr class="section-sep"/>
@@ -20,7 +20,7 @@
             <h3>
                 <i class="fa fa-tags me-2"></i>Related Tags
             </h3>
-            {% set relatedTagGroups = tags | relatedTags(collections.tags, collections.tagcount) %}
+            {% set relatedTagGroups = tags | getRelatedTags(collections.tags, collections.tagcount) %}
             {% for data in relatedTagGroups %}
                 {% set sSrcTag %}
                 {% set comma = joiner() %}

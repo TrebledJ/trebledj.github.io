@@ -1,4 +1,4 @@
-{% set data = ([tag] | relatedTags(collections.tags, collections.tagcount))[0] %}
+{% set data = ([tag] | getRelatedTags(collections.tags, collections.tagcount))[0] %}
 <div class="sticky-right">
     <h3><i class="fa fa-tags me-2"></i>Related Tags</h3>
     <div class="mb-1">

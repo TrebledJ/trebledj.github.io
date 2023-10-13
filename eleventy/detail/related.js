@@ -54,7 +54,7 @@ function makeRelatedPostRegex(slug) {
  * 
  * @returns An array of related posts.
  */
-function relatedPosts(posts, thisPost, related) {
+function getRelatedPosts(posts, thisPost, related) {
     const n = related.num || 0; // Number of related elements to find.
 
     // In auto checking, if a post has at least this many percentage of common tags, then it is considered related.
@@ -146,7 +146,7 @@ function relatedPosts(posts, thisPost, related) {
  * @param {Array[Object]} tagPages A collection of tag pages and data.
  * @param {Object[String, Number]} tagCount Maps a tag to the number of pages containing that tag.
  */
-function relatedTags(tags, tagPages, tagCount) {
+function getRelatedTags(tags, tagPages, tagCount) {
     const groups = {};
 
     // Find the groups we're interested in, and create skeletons in the `tags` object.
@@ -222,4 +222,4 @@ function getTagsByPrefix(tagPages, prefix) {
 }
 
 
-module.exports = { relatedPosts, relatedTags, getTagsByPrefix };
+module.exports = { getRelatedPosts, getRelatedTags, getTagsByPrefix };

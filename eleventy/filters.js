@@ -1,6 +1,6 @@
 const { DateTime } = require("luxon");
 
-const { relatedPosts, relatedTags, getTagsByPrefix } = require('./detail/related')
+const { getRelatedPosts, getRelatedTags, getTagsByPrefix } = require('./detail/related')
 const selectHomePosts = require('./detail/select-home-posts')
 const findKeywords = require('./detail/keywords')
 
@@ -123,8 +123,8 @@ module.exports = function (eleventyConfig) {
 		return (tags || []).filter(tag => ["all", "nav", "post", "posts"].indexOf(tag) === -1);
 	});
 
-	eleventyConfig.addFilter("relatedPosts", relatedPosts);
-	eleventyConfig.addFilter("relatedTags", relatedTags);
+	eleventyConfig.addFilter("getRelatedPosts", getRelatedPosts);
+	eleventyConfig.addFilter("getRelatedTags", getRelatedTags);
 	eleventyConfig.addFilter("getTagsByPrefix", getTagsByPrefix);
 	eleventyConfig.addFilter("selectHomePosts", selectHomePosts);
 
