@@ -43,37 +43,6 @@ html[data-theme="light"] .hero-section {
     .carousel {
         height: 550px;
 
-        .post-preview-container {
-            @include media-breakpoint-up(md) {
-                height: 450px;
-            }
-            @include media-breakpoint-down(md) {
-                height: 430px;
-            }
-            .post-title {
-                margin-bottom: 0.5rem !important;
-            }
-            .post-summary {
-                margin-bottom: 0.5rem;
-            }
-        }
-
-        // Nowrap, overflow text.
-        // .post-title,
-        // .post-summary>* {
-        //     overflow: hidden;
-        //     white-space: nowrap;
-        //     text-overflow: ellipsis;
-        // }
-
-        // Faded bottom items.
-        // .carousel-item {
-        //     height: 450px;
-        //     overflow: hidden;
-        //     mask-image: linear-gradient(180deg, #000 90%, transparent);
-        //     -webkit-mask-image: linear-gradient(180deg, #000 90%, transparent);
-        // }
-
         @include media-breakpoint-down(lg) {
             .tag-list span:nth-child(3) {
                 display: none;
@@ -169,16 +138,6 @@ html[data-theme="light"] {
     #home {
         .topic-title {
             display: none;
-        }
-
-        .post-preview {
-            p {
-                margin-bottom: 0;
-            }
-
-            .metadata-container {
-                display: none !important;
-            }
         }
     }
 }

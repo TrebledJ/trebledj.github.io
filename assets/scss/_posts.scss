@@ -1,5 +1,6 @@
 .post-preview,
-.post-preview-compressed {
+.post-compressed-preview,
+.post-minified-preview {
     width: 100%;
     max-width: 100%;
     margin-bottom: $space-threehalves;
@@ -77,17 +78,41 @@
     }
 }
 
-.post-preview {
+.post-preview,
+.post-compressed-preview {
     .post-title {
         margin: 0 0 10px;
         font-size: 24px;
         font-weight: 400;
 
-        a,
-        a:hover {
-            color: var(--bold-color) !important;
-        }
+        // a,
+        // a:hover {
+        //     color: var(--bold-color) !important;
+        // }
     }
+}
+
+.post-compressed-preview {
+    .post-title {
+        // flex: 1;
+    }
+    // .post-summary {
+    // display: flex;
+    // flex-direction: column;
+    // }
+    .post-summary p {
+        // overflow: hidden;
+        // text-overflow: ellipsis;
+        // white-space: no-wrap;
+        // flex: 1;
+        // margin-bottom: 0.5rem;
+    }
+
+    // .post-thumbnail {
+    //     height: 200px;
+    // }
+
+
 }
 
 // Nested anchors: https://stackoverflow.com/a/52076345/10239789.
@@ -99,21 +124,23 @@
     }
 }
 
-.post-preview-compressed {
+.post-minified-preview {
     // Smaller title.
     .post-title {
         margin: 0 0 5px;
         font-size: 18px;
         font-weight: 700;
+        line-height: $line-height-cozy;
 
-        a,
-        a:hover {
-            color: var(--bold-color) !important;
-        }
+        // a,
+        // a:hover {
+        //     color: var(--bold-color) !important;
+        // }
     }
 
     // Use the vertical layout.
     .post-thumbnail {
+        flex-direction: column;
         width: 100%;
         min-height: 200px;
     }
@@ -156,26 +183,56 @@
     }
 }
 
-.thin-preview .post-preview {
-    .post-preview-container {
-        flex-direction: column;
-    }
-
+.post-compressed-preview {
     .post-img-container {
         align-items: inherit;
     }
 
     .post-thumbnail {
         width: 100%;
-        min-height: 150px;
-        height: inherit;
+        height: 200px;
     }
 
     .post-content {
         width: 100%;
         line-height: $line-height-compact;
     }
+
+    .post-compressed-preview-container {
+        @include media-breakpoint-up(md) {
+            height: 435px;
+        }
+        @include media-breakpoint-down(md) {
+            height: 410px;
+        }
+    }
+
+    .post-title,
+    .post-summary p {
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        text-overflow: ellipsis;
+        overflow: hidden;
+    }
+    .post-title {
+        -webkit-line-clamp: 3;
+        min-height: 57.59px; // 2 rows of title.
+    }
+    .post-summary p {
+        -webkit-line-clamp: 2;
+    }
+
+    @include media-breakpoint-down(sm) {
+        .post-summary p {
+            margin-bottom: 0;
+        }
+
+        .metadata-container {
+            display: none !important;
+        }
+    }
 }
+
 
 .post-preview-list {
     display: flex;
@@ -202,9 +259,11 @@
     word-wrap: break-word;
 }
 
-.post-title,
-.post-summary {
+.post-title {
     color: var(--bold-color);
+}
+.post-summary {
+    color: var(--main-text-color)
 }
 
 .post-desc {

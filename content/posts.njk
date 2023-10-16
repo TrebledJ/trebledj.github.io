@@ -7,7 +7,7 @@ pagination:
 permalink: /posts{% if pagination.pageNumber > 0 %}/{{ pagination.pageNumber }}{% endif %}/index.html
 ---
 
-{% from "post/preview.html" import render_preview %}
+{% from "post/preview.html" import render_post_preview %}
 
 <div class="page-content-container d-flex row gx-6">
     <div class="col-lg-4">
@@ -20,7 +20,7 @@ permalink: /posts{% if pagination.pageNumber > 0 %}/{{ pagination.pageNumber }}{
 
         <div class="post-preview-list">
             {% for post in pagination.items %}
-                {{ render_preview(post) }}
+                {{ render_post_preview(post) }}
             {% endfor %}
         </div>
 
