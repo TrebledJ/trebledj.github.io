@@ -25,7 +25,7 @@ module.exports = function () {
 			And let's not forget the gritty (yet beautiful) art of [programming](/tags/programming)—simply enjoying [languages](/tags/programming-languages) for their succinctness or ability to express complex thoughts.
 			
 			More about me? I like to solve problems, learn new things, and pass it on through teaching.
-			In my spare time, I enjoy taking walks, [composing music](/tags/composition), playing the occasional CTF, and putting my thoughts down to ~~paper~~ text.
+			In my spare time, I enjoy taking walks, [composing music](/tags/composition), playing the occasional [CTF](/tags/ctf), and putting my thoughts down to ~~paper~~ text.
 			
 			Feel free to [reach out](#contact) for whatever reason. ヽ(・∀・)ﾉ
 			`.trim().replace(/^[ \t]+/gm, ''),
