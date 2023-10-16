@@ -62,12 +62,13 @@ $carousel-transition: transform 2s ease, opacity 1.5s ease-out .5s;
 // @import "timeline2";
 
 @import "posts";
+@import "posts-preview";
+@import "post-author";
 @import "spinner";
 @import "home";
 @import "navbar";
 @import "search";
 @import "profile";
-@import "post-author";
 @import "toc-sidebar";
 
 
