@@ -1,6 +1,6 @@
 ---
 title: GDB/GEF Cheatsheet
-description: Quick command reference for binary enthusiasts.
+description: Quick command reference on one of the most powerful tools for dynamic analysis.
 tags:
  - ctf
  - pwn
@@ -10,8 +10,6 @@ thumbnail_src: assets/gef.png
 related:
     tags: [ctf]
 ---
-
-(No, the subtitle is not a comment on gender.)
 
 This is a curated collection of GDB/GEF commands which I find incredibly useful for dynamic analysis and reverse engineering. These are mainly personal notes and may be incomplete, but suggestions are welcome! If there's a useful GDB/GEF command you use that's not on this list, do [leave a comment](#comments) or [let me know](/#contact) so that I can add it. :)
 
