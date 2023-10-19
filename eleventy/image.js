@@ -1,4 +1,5 @@
 const path = require("path");
+const cheerio = require('cheerio');
 const eleventyImage = require("@11ty/eleventy-img");
 
 
@@ -196,20 +197,63 @@ module.exports = function (eleventyConfig) {
     eleventyConfig.addPairedShortcode("images", function (images, containerClasses) {
         containerClasses ||= '';
 
-        const widths = {
+        const defaultWidths = {
             2: 'w-45',
             3: 'w-30',
         };
         const numImages = [...images.matchAll(/<img.*?>/g)].length;
 
-        if (!widths[numImages]) {
-            throw new Error(`{% images %} is only implemented for ${Object.keys(widths).join(',')} images`);
+        const $ = cheerio.load(images, null, false); // Load images (in fragment mode).
+        const imgNodes = $("img");
+        // console.log(images);
+        // console.log(imgNodes);
+        // console.log(imgNodes.attr("class"));
+
+        const imgClasses = [...imgNodes.map(i => imgNodes[i].attribs.class)];
+        // console.log(imgClasses);
+
+        const wh = [...imgNodes].map(e => e.attribs.style.match(/(\d+) \/ (\d+)/).slice(1).map(n => +n));
+
+        const widths = wh.map(x => x[0]);
+        const heights = wh.map(x => x[1]);
+
+        if (containerClasses.split(' ').includes('h-auto')) {
+            // h-auto: Make images have equal height so it appears as one seamless block.
+            
+            // Make equal height.
+            for (let i = 1; i < widths.length; i++) {
+                scale = heights[0] / heights[i];
+                widths[i] *= scale;
+                heights[i] *= scale;
+            }
+            
+            // Calculate width ratios.
+            const totalWidth = widths.reduce((a, b) => a + b, 0);
+            const ratios = widths.map(w => w / totalWidth);
+            const fitWidth = 0.92; // Shrink the ratio so that it fits within the screen.
+
+            for (let i = 0; i < widths.length; i++) {
+                imgNodes.slice(i, 1).addClass('multi');
+
+                // Express ratio as percentage, rounded to two dp.
+                perc = Math.round((ratios[i] * fitWidth * 100 + Number.EPSILON) * 100) / 100;
+                imgNodes[i].attribs.style = `width:${perc}%;` + imgNodes[i].attribs.style;
+            }
+
+            images = $.html();
+        } else {
+            // Fixed-equal-width.
+    
+            if (!defaultWidths[numImages]) {
+                throw new Error(`{% images %} is only implemented for ${Object.keys(defaultWidths).join(',')} images`);
+            }
+
+            // Don't add width if already added.
+            images = images.replaceAll(/class="(?![A-Za-z0-9_\- ]*\bw-(\d)+)/g, `class="${defaultWidths[numImages]} `);
         }
 
-        // Don't add width if already added.
-        images = images.replaceAll(/class="(?![A-Za-z0-9_\- ]*\bw-(\d)+)/g, `class="${widths[numImages]} `);
         // Always add multi.
-        images = images.replaceAll(/class="/g, `class="multi `);
+        // images = images.replaceAll(/class="/g, `class="multi `);
 
         return `<div class="center rw ${containerClasses}">${images}</div>`;
     });

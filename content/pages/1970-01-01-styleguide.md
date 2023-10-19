@@ -219,7 +219,7 @@ Check line breaks here:
 <sup>Have you heard of Darth Plagueis the Wise?^[No? Then allow me to entertain you...]</sup>
 {.caption}
 
-{% images %}
+{% images "h-auto" %}
 {% image "~/assets/img/memes/404-1.jpg", "first" %}
 {% image "~/assets/img/memes/404-2.jpg", "second" %}
 {% image "~/assets/img/memes/404-3.jpg", "third" %}
@@ -228,7 +228,7 @@ Check line breaks here:
 <sup>Although this isn't the multiverse, multi-images are great fun too!</sup>
 {.caption}
 
-{% images %}
+{% images "h-auto w-80" %}
 {% image "~/assets/img/memes/404-4.jpg", "first" %}
 {% image "~/assets/img/memes/interesting.jpg", "second" %}
 {% endimages %}
