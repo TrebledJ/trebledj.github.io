@@ -199,7 +199,7 @@ module.exports = function (eleventyConfig) {
         const H_AUTO_WIDTH_RATIO_THRESHOLD = 0.2;
 
         // Multiplier to shrink the effective width so that images fit within the container.
-        const CONTAINER_EFFECTIVE_WIDTH = 0.92;
+        const CONTAINER_EFFECTIVE_WIDTH = 0.95;
 
         containerClasses ||= '';
 

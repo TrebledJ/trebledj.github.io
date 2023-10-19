@@ -245,7 +245,7 @@ Did I mention that equal-height layouts are a thing!? This is made possible with
 {% image "~/assets/img/memes/interesting.jpg", "second" %}
 {% endimages %}
 
-<sup>No `h-auto` here. (`images ""`)</sup>
+<sup>Equal-width. No `h-auto` here. (`images ""`)</sup>
 {.caption}
 
 ### Tables

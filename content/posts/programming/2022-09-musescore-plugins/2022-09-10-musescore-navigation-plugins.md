@@ -52,7 +52,7 @@ This plugin is inspired by the todo-tree plugin in VSCode, which searches files 
 
 When starting, I took reference of [jeetee’s annotation plugin](https://musescore.org/en/project/annotations). I noticed jeetee used Qt Quick Controls 1.0 instead of 2.0 used in some other plugins. Apparently, QML had made some drastic changes to the styling of controls (buttons, checkboxes, etc.). In 1.0, controls used the native style (e.g. Apple’s aqua style for macs). On the other hand, 2.0 controls require developers to customise styling; this may sound great for design flexibility, but in my experience it’s annoying to get it working with both light and dark themes.
 
-{% images %}
+{% images "h-auto" %}
 {% image "assets/plugin-qtquick1.jpg", "Qt-Quick examples." %}
 {% image "assets/plugin-qtquick2.jpg", "Qt-Quick examples." %}
 {% endimages %}

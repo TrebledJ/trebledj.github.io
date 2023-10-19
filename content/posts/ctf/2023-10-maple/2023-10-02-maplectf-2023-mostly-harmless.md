@@ -17,9 +17,9 @@ Types are cool! But y'know what's even cooler? A CTF challenge on types!
 
 This year's MapleCTF graced us with a challenge involving much class, much inheritance, much confuzzlement, and much eyesore.
 
-{% images %}
-{% image "assets/output.jpg", "Screenshot of output.py.", "w-70" %}
-{% image "assets/doge-much-class.jpg", "Much harm.", "w-25" %}
+{% images "h-auto" %}
+{% image "assets/output.jpg", "Screenshot of output.py." %}
+{% image "assets/doge-much-class.jpg", "Much harm." %}
 {% endimages %}
 
 ## Description

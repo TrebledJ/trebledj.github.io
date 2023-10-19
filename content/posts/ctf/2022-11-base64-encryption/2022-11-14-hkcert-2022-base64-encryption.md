@@ -115,7 +115,7 @@ With this in mind, we can compare the ciphertext to the Base64 encoding of some 
 V2UncmUgbm8gc3RyYW5nZXJzIHRvIGxvdmUKWW91IGtub3cgdGhlIHJ1bGVzIGFuZCBzbyBkbyBJIChkbyBJKQpBIGZ1bGwgY29tbWl0bWVudCdzIHdoYXQgSSdtIHRoaW5raW5nIG9mCllvdSB3b3VsZG4ndCBnZXQgdGhpcyBmcm9tIGFueSBvdGhlciBndXkKSSBqdXN0IHdhbm5hIHRlbGwgeW91IGhvdyBJJ20gZmVlbGluZwpHb3R0YSBtYWtlIHlvdSB1bmRlcnN0YW5kCk5ldmVyIGdvbm5hIGdpdmUgeW91IHVwCk5ldmVyIGdvbm5hIGxldCB5b3UgZG93bgpOZXZlciBnb25uYSBydW4gYXJvdW5kIGFuZCBkZXNlcnQgeW91Ck5ldmVyIGdvbm5hIG1ha2UgeW91IGNyeQpOZXZlciBnb25uYSBzYXkgZ29vZGJ5ZQpOZXZlciBnb25uYSB0ZWxsIGEgbGllIGFuZCBodXJ0IHlvdQo=
 ```
 
-{% images "w-85" %}
+{% images "w-90" %}
 {% image "assets/b64-plain-1gram.jpg", "dcode.fr frequency analysis for normal Base64." %}
 {% image "assets/b64-crypt-1gram.jpg", "dcode.fr frequency analysis for encrypted Base64." %}
 {% endimages %}
@@ -127,7 +127,7 @@ From this, we can deduce that 'w' was mapped from 'G' in the original encoding (
 
 One useful option is the **bigrams/n-grams** option. We can tell dcode to analyse frequencies of *groups of characters* with a sliding window. This is useful to identify words and sequences.
 
-{% images "w-85" %}
+{% images "w-90" %}
 {% image "assets/b64-plain-4gram.jpg", "dcode.fr 4-gram for normal Base64." %}
 {% image "assets/b64-crypt-4gram.jpg", "dcode.fr 4-gram for encrypted Base64." %}
 {% endimages %}
