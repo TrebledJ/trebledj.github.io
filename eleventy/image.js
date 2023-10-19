@@ -55,6 +55,7 @@ module.exports = function (eleventyConfig) {
             'floatr1': ['m-1', 'float-right', 'rw'],
             'floatl1-md': ['m-1', 'float-left-md', 'rw-md'],
             'floatr1-md': ['m-1', 'float-right-md', 'rw-md'],
+            'thumbnail': [/* avoid post1 default by catching thumbnails */],
         };
 
         // By default, add post1 classes. If the image is part of `images`, the classes will be removed there.
@@ -72,8 +73,11 @@ module.exports = function (eleventyConfig) {
             classes.splice(idx, 1);
         }
 
-        if (classes.every(c => !c.startsWith('w-')))
-            classes.push('w-100'); // Default to full-width;
+        if (!['thumbnail'].includes(foundKey)) {
+            if (classes.every(c => !c.startsWith('w-')))
+                classes.push('w-100'); // Default to full-width;
+        }
+
 
         // Push rest of classes.
         classes.push(...substitutions[foundKey]);
@@ -141,7 +145,7 @@ module.exports = function (eleventyConfig) {
 
         const { ext, file, options } = getOptions(src);
         eleventyImage(file, options);
-        classes = amendClasses(classes);
+        classes = amendClasses(classes + ' thumbnail');
         const metadata = eleventyImage.statsSync(file, options);
 
         return makeImageFromMetadata(metadata, ext, classes, altText, true, {loading: 'lazy'});
