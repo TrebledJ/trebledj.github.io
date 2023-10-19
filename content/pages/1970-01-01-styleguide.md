@@ -221,13 +221,13 @@ Check line breaks here:
 
 We can splay multiple images in a row too!
 
-{% images "h-auto" %}
+{% images "h-auto rw" %}
 {% image "~/assets/img/memes/404-1.jpg", "first" %}
 {% image "~/assets/img/memes/404-2.jpg", "second" %}
 {% image "~/assets/img/memes/404-3.jpg", "third" %}
 {% endimages %}
 
-<sup>Although this isn't the multiverse, multi-images are great fun too! (`images "h-auto"`)</sup>
+<sup>Although this isn't the multiverse, multi-images are great fun too! (`images "h-auto rw"`)</sup>
 {.caption}
 
 Did I mention that equal-height layouts are a thing!? This is made possible with `h-auto`. 

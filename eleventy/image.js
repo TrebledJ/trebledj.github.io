@@ -211,7 +211,7 @@ module.exports = function (eleventyConfig) {
             3: 'w-30',
         };
 
-        containerClasses ||= '';
+        containerClasses = (containerClasses || '').split(' ');
         
         const $ = cheerio.load(images, null, false); // Load images (in fragment mode).
         const imgNodes = $("img");
@@ -227,7 +227,7 @@ module.exports = function (eleventyConfig) {
 
         imgNodes.removeClass('center').removeClass('rw').removeClass('mb-2').removeClass('w-100');
 
-        if (containerClasses.split(' ').includes('h-auto')) {
+        if (containerClasses.includes('h-auto')) {
             // h-auto: Make images have equal height so it appears as one seamless block.
             
             // Make equal height.
@@ -264,7 +264,14 @@ module.exports = function (eleventyConfig) {
         // Add `multi` class.
         imgNodes.addClass('multi');
 
+        if (containerClasses.includes('rw')) {
+            // Push `rw` down to individual images.
+            containerClasses.splice(containerClasses.indexOf('rw'), 1);
+            imgNodes.addClass('rw');
+        }
+
         images = $.html();
+        containerClasses = containerClasses.join(' ');
 
         return `<div class="center rw mb-2 ${containerClasses}">${images}</div>`;
     });
