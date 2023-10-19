@@ -67,7 +67,10 @@ module.exports = function (eleventyConfig) {
         }
 
         // Remove class.
-        classes.splice(classes.indexOf(foundKey), 1);
+        const idx = classes.indexOf(foundKey);
+        if (idx >= 0) {
+            classes.splice(idx, 1);
+        }
 
         if (classes.every(c => !c.startsWith('w-')))
             classes.push('w-100'); // Default to full-width;
