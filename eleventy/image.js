@@ -57,18 +57,23 @@ module.exports = function (eleventyConfig) {
             'floatr1-md': ['m-1', 'float-right-md', 'rw-md'],
         };
 
+        // By default, add post1 classes. If the image is part of `images`, the classes will be removed there.
+        let foundKey = 'post1';
         for (const key of Object.keys(substitutions)) {
             if (classes.includes(key)) {
-                // Remove class.
-                classes.splice(classes.indexOf(key), 1);
-
-                if (classes.every(c => !c.startsWith('w-')))
-                    classes.push('w-100'); // Default to full-width;
-        
-                // Push rest of classes.
-                classes.push(...substitutions[key]);
+                foundKey = key;
+                break;
             }
         }
+
+        // Remove class.
+        classes.splice(classes.indexOf(foundKey), 1);
+
+        if (classes.every(c => !c.startsWith('w-')))
+            classes.push('w-100'); // Default to full-width;
+
+        // Push rest of classes.
+        classes.push(...substitutions[foundKey]);
         
         classes.reverse();
         return classes;
@@ -201,20 +206,26 @@ module.exports = function (eleventyConfig) {
         // Multiplier to shrink the effective width so that images fit within the container.
         const CONTAINER_EFFECTIVE_WIDTH = 0.95;
 
-        containerClasses ||= '';
-
         const defaultWidths = {
             2: 'w-45',
             3: 'w-30',
         };
+
+        containerClasses ||= '';
         
         const $ = cheerio.load(images, null, false); // Load images (in fragment mode).
         const imgNodes = $("img");
         const numImages = imgNodes.length;
 
+        if (!defaultWidths[numImages]) {
+            throw new Error(`Default {% images %} is only implemented for ${Object.keys(defaultWidths).join(',')} images`);
+        }
+
         const wh = [...imgNodes].map(e => e.attribs.style.match(/(\d+) \/ (\d+)/).slice(1).map(n => +n));
         const widths = wh.map(x => x[0]);
         const heights = wh.map(x => x[1]);
+
+        imgNodes.removeClass('center').removeClass('rw').removeClass('mb-2').removeClass('w-100');
 
         if (containerClasses.split(' ').includes('h-auto')) {
             // h-auto: Make images have equal height so it appears as one seamless block.
@@ -247,27 +258,15 @@ module.exports = function (eleventyConfig) {
 
         } else {
             // Default: assign equal-width.
-    
-            if (!defaultWidths[numImages]) {
-                throw new Error(`Default {% images %} is only implemented for ${Object.keys(defaultWidths).join(',')} images`);
-            }
-
-            // Don't add width if already added.
-            for (let i = 0; i < numImages; i++) {
-                if (!imgNodes[i].attribs.class.split(' ').some(e => e.startsWith('w-'))) {
-                    imgNodes.slice(i, i+1).addClass(defaultWidths[numImages]);
-                }
-            }
+            imgNodes.addClass(defaultWidths[numImages]);
         }
 
         // Add `multi` class.
-        for (let i = 0; i < numImages; i++) {
-            imgNodes.slice(i, i+1).addClass('multi');
-        }
+        imgNodes.addClass('multi');
 
         images = $.html();
 
-        return `<div class="center rw ${containerClasses}">${images}</div>`;
+        return `<div class="center rw mb-2 ${containerClasses}">${images}</div>`;
     });
 
 };
