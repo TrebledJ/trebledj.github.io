@@ -219,23 +219,34 @@ Check line breaks here:
 <sup>Have you heard of Darth Plagueis the Wise?^[No? Then allow me to entertain you...]</sup>
 {.caption}
 
+We can splay multiple images in a row too!
+
 {% images "h-auto" %}
 {% image "~/assets/img/memes/404-1.jpg", "first" %}
 {% image "~/assets/img/memes/404-2.jpg", "second" %}
 {% image "~/assets/img/memes/404-3.jpg", "third" %}
 {% endimages %}
 
-<sup>Although this isn't the multiverse, multi-images are great fun too!</sup>
+<sup>Although this isn't the multiverse, multi-images are great fun too! (`images "h-auto"`)</sup>
 {.caption}
+
+Did I mention that equal-height layouts are a thing!? This is made possible with `h-auto`. 
 
 {% images "h-auto w-80" %}
 {% image "~/assets/img/memes/404-4.jpg", "first" %}
 {% image "~/assets/img/memes/interesting.jpg", "second" %}
 {% endimages %}
 
-<sup>...even if it's just two...</sup>
+<sup>Two images are better than one, for if either of them ~~falls~~ sucks, one can help the other up. (`images "h-auto w-80"`)</sup>
 {.caption}
 
+{% images %}
+{% image "~/assets/img/memes/404-4.jpg", "first" %}
+{% image "~/assets/img/memes/interesting.jpg", "second" %}
+{% endimages %}
+
+<sup>No `h-auto` here. (`images ""`)</sup>
+{.caption}
 
 ### Tables
 

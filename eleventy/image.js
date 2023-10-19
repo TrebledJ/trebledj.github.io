@@ -1,5 +1,6 @@
 const path = require("path");
 const cheerio = require('cheerio');
+const chalk = require('chalk');
 const eleventyImage = require("@11ty/eleventy-img");
 
 
@@ -193,27 +194,21 @@ module.exports = function (eleventyConfig) {
         return `<div class="${classes.join(' ')}"><video autoplay loop muted class="w-100"><source src="/img/${src}" type="video/${ext}"></video></div>`;
     });
 
-    // TODO: auto-height option that adjusts widths to make images aligned vertically.
     eleventyConfig.addPairedShortcode("images", function (images, containerClasses) {
+        const H_AUTO_WIDTH_RATIO_THRESHOLD = 0.2;
+
         containerClasses ||= '';
 
         const defaultWidths = {
             2: 'w-45',
             3: 'w-30',
         };
-        const numImages = [...images.matchAll(/<img.*?>/g)].length;
-
+        
         const $ = cheerio.load(images, null, false); // Load images (in fragment mode).
         const imgNodes = $("img");
-        // console.log(images);
-        // console.log(imgNodes);
-        // console.log(imgNodes.attr("class"));
-
-        const imgClasses = [...imgNodes.map(i => imgNodes[i].attribs.class)];
-        // console.log(imgClasses);
+        const numImages = imgNodes.length;
 
         const wh = [...imgNodes].map(e => e.attribs.style.match(/(\d+) \/ (\d+)/).slice(1).map(n => +n));
-
         const widths = wh.map(x => x[0]);
         const heights = wh.map(x => x[1]);
 
@@ -221,7 +216,7 @@ module.exports = function (eleventyConfig) {
             // h-auto: Make images have equal height so it appears as one seamless block.
             
             // Make equal height.
-            for (let i = 1; i < widths.length; i++) {
+            for (let i = 1; i < numImages; i++) {
                 scale = heights[0] / heights[i];
                 widths[i] *= scale;
                 heights[i] *= scale;
@@ -229,31 +224,45 @@ module.exports = function (eleventyConfig) {
             
             // Calculate width ratios.
             const totalWidth = widths.reduce((a, b) => a + b, 0);
-            const ratios = widths.map(w => w / totalWidth);
-            const fitWidth = 0.92; // Shrink the ratio so that it fits within the screen.
+            const fitWidth = 0.92; // Multiplier to shrink the effective width so that images fit within the container.
+            const ratios = widths.map(w => w / totalWidth * fitWidth);
 
-            for (let i = 0; i < widths.length; i++) {
-                imgNodes.slice(i, 1).addClass('multi');
+            for (let i = 0; i < numImages; i++) {
+                if (ratios[i] < H_AUTO_WIDTH_RATIO_THRESHOLD) {
+                    console.warn(chalk.yellow(`[images][h-auto]: width for image[${i}] is less than ${Math.ceil(H_AUTO_WIDTH_RATIO_THRESHOLD * 100)}%.`));
+                    console.warn(chalk.yellow(`\tUsers may need to squint hard to see the image.`));
+                    console.warn(chalk.yellow(`\tConsider reorganising your images.`));
+                    console.warn(chalk.yellow(`\tsource: ${imgNodes[i].attribs.src}`));
+                }
+            }
 
+            for (let i = 0; i < numImages; i++) {
                 // Express ratio as percentage, rounded to two dp.
-                perc = Math.round((ratios[i] * fitWidth * 100 + Number.EPSILON) * 100) / 100;
+                perc = Math.round((ratios[i] * 100 + Number.EPSILON) * 100) / 100;
                 imgNodes[i].attribs.style = `width:${perc}%;` + imgNodes[i].attribs.style;
             }
 
-            images = $.html();
         } else {
-            // Fixed-equal-width.
+            // Default: assign equal-width.
     
             if (!defaultWidths[numImages]) {
-                throw new Error(`{% images %} is only implemented for ${Object.keys(defaultWidths).join(',')} images`);
+                throw new Error(`Default {% images %} is only implemented for ${Object.keys(defaultWidths).join(',')} images`);
             }
 
             // Don't add width if already added.
-            images = images.replaceAll(/class="(?![A-Za-z0-9_\- ]*\bw-(\d)+)/g, `class="${defaultWidths[numImages]} `);
+            for (let i = 0; i < numImages; i++) {
+                if (!imgNodes[i].attribs.class.split(' ').some(e => e.startsWith('w-'))) {
+                    imgNodes.slice(i, i+1).addClass(defaultWidths[numImages]);
+                }
+            }
         }
 
-        // Always add multi.
-        // images = images.replaceAll(/class="/g, `class="multi `);
+        // Add `multi` class.
+        for (let i = 0; i < numImages; i++) {
+            imgNodes.slice(i, i+1).addClass('multi');
+        }
+
+        images = $.html();
 
         return `<div class="center rw ${containerClasses}">${images}</div>`;
     });
