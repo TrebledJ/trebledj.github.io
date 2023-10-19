@@ -136,7 +136,7 @@ part3(flag, interesting_data_a7516852)
 
 ### 1. Reversing the Permutation
 
-{% image "https://media0.giphy.com/media/NusOH30J7QiJy/giphy.gif", "Even cats can catch sneaky permutations!", "post1 w-80" %}
+{% image "https://media0.giphy.com/media/NusOH30J7QiJy/giphy.gif", "Even cats can catch sneaky permutations!", "w-80" %}
 
 Address: `112d10` – `113017`.
 
@@ -387,7 +387,7 @@ A **bijection** is a function where...
 
 This characteristic is crucial as it *guarantees* an **invertible operation**.
 
-{% image "https://d138zd1ktt9iqe.cloudfront.net/media/seo_landing_files/bijective-function-1629606712.png", "Bijection example.", "post1 w-60 alpha-img" %}
+{% image "https://d138zd1ktt9iqe.cloudfront.net/media/seo_landing_files/bijective-function-1629606712.png", "Bijection example.", "w-60 alpha-img" %}
 
 <sup>([Image Source](https://www.cuemath.com/algebra/bijective-function/))</sup>
 {.caption}

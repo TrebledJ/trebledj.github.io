@@ -15,7 +15,7 @@ Haskell, despite its relatively low popularity, is quite up to speed on language
 
 In Advent of Code (AOC) 2021, I found it useful to separate common functions into a [Utils.hs][aoc-utils] file. After all, to make our environments cleaner we should reduce, reuse, and recycle.
 
-{% image "assets/recycle-hs-utils.jpg", "", "post1 w-65" %}
+{% image "assets/recycle-hs-utils.jpg", "", "w-65" %}
 
 I'll introduce some basic utilities first before moving on to advanced ones. However, I won't make too many attempts to teach the basics. For that you may refer yourself to [Learn You a Haskell][lyah] (LYAH), which provides a very nice tutorial into Haskell.
 
@@ -183,7 +183,7 @@ counter = foldr (\x -> M.insertWith (+) x 1) M.empty
 
 This helper function takes a list and counts the number of occurrences, packing it into a hashmap for efficient lookup.
 
-{% image "assets/hashmapuh.jpg", "", "post1 w-65" %}
+{% image "assets/hashmapuh.jpg", "", "w-65" %}
 
 After all, if Python has such a convenience (`collections.Counter`), why shouldn't Haskell have something similar?
 
@@ -274,7 +274,7 @@ instance ParseLike Parser where
     Left  err -> T.trace (errorBundlePretty err) undefined
 ```
 
-{% image "assets/parselike.jpg", "", "post1 w-45" %}
+{% image "assets/parselike.jpg", "", "w-45" %}
 
 Here's an example usage from [Day 1](https://github.com/TrebledJ/aoc/blob/master/2021/haskell/src/Days/D01.hs):
 

@@ -99,7 +99,7 @@ Break
         ```
        1. Isn't 
             
-            {% image "~/assets/img/memes/nou.jpg", "Full width!", "post1" %}
+            {% image "~/assets/img/memes/nou.jpg", "Full width!" %}
 
             <sup>(caption)</sup>
             {.caption}
@@ -158,7 +158,7 @@ Let's try that again.
 
 4. ~~Extract~~ Untame the stuck honey, and crumbulate it in the Rockwell *dual-gyzmo combobulator*.
 
-    {% image "~/assets/img/memes/nou.jpg", "Full width!", "post1" %}
+    {% image "~/assets/img/memes/nou.jpg", "Full width!" %}
     
 ### Math
 
@@ -206,15 +206,15 @@ Check line breaks here:
 >
 > $$a ^ a = <3$$
 >
-> {% image "~/assets/img/memes/nou.jpg", "Full width!", "post1" %}
+> {% image "~/assets/img/memes/nou.jpg", "Full width!" %}
 > 
 
 
 ### Images
 
-{% image "https://imgs.xkcd.com/comics/purity.png", "Full-width image.", "post1" %}
+{% image "https://imgs.xkcd.com/comics/purity.png", "Full-width image." %}
 
-{% image "~/assets/img/memes/unlimited-power.jpg", "Muahahahaha! Fear the power of alt text.", "post1 w-85" %}
+{% image "~/assets/img/memes/unlimited-power.jpg", "Muahahahaha! Fear the power of alt text.", "w-85" %}
 
 <sup>Have you heard of Darth Plagueis the Wise?^[No? Then allow me to entertain you...]</sup>
 {.caption}
@@ -354,7 +354,7 @@ Its wings are too small to get its fat little body off the ground. The bee, of c
 {% endalert %}
 
 {% alert "success" %}
-{% image "~/assets/img/memes/nou.jpg", "", "post1" %}
+{% image "~/assets/img/memes/nou.jpg", "" %}
 
 > Trust in the Lord with all your heart, and lean not on your own understanding.
 > In all your ways, submit to Him, and He will make your paths straight.

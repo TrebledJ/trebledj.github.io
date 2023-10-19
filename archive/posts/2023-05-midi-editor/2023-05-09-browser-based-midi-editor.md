@@ -21,7 +21,7 @@ If you’re a composer, transcriber, or musician, you may find the audio import 
 
 [^backend]: The audio file is sent to a Python backend to be converted to MIDI, then sent back to the frontend for display and editing.
 
-{% image "assets/midi-editor.jpg", "", "post1" %}
+{% image "assets/midi-editor.jpg", "" %}
 
 <sup>Screenshot of the MIDI editor.</sup>
 {.caption}
