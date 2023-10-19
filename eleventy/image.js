@@ -195,7 +195,11 @@ module.exports = function (eleventyConfig) {
     });
 
     eleventyConfig.addPairedShortcode("images", function (images, containerClasses) {
+        // Width ratio threshold. Images with a width ratio lower than this may be hard to see.
         const H_AUTO_WIDTH_RATIO_THRESHOLD = 0.2;
+
+        // Multiplier to shrink the effective width so that images fit within the container.
+        const CONTAINER_EFFECTIVE_WIDTH = 0.92;
 
         containerClasses ||= '';
 
@@ -224,8 +228,7 @@ module.exports = function (eleventyConfig) {
             
             // Calculate width ratios.
             const totalWidth = widths.reduce((a, b) => a + b, 0);
-            const fitWidth = 0.92; // Multiplier to shrink the effective width so that images fit within the container.
-            const ratios = widths.map(w => w / totalWidth * fitWidth);
+            const ratios = widths.map(w => w / totalWidth * CONTAINER_EFFECTIVE_WIDTH);
 
             for (let i = 0; i < numImages; i++) {
                 if (ratios[i] < H_AUTO_WIDTH_RATIO_THRESHOLD) {
