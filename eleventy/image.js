@@ -78,7 +78,6 @@ module.exports = function (eleventyConfig) {
                 classes.push('w-100'); // Default to full-width;
         }
 
-
         // Push rest of classes.
         classes.push(...substitutions[foundKey]);
         
