@@ -21,4 +21,4 @@ For my capstone project, I served as an embedded software developer at [WeShare 
 
 My role pertains to developing and improving the embedded software infrastructure. In the process, I enhanced the tray with an RTOS, a unit testing framework, and numerous software improvements.
 
-I'm grateful for this opportunity to bring life into wet labs, while learning more about embedded systems.
+I'm grateful for this opportunity to revitalise wet labs with technology, all the while learning more about embedded systems.
