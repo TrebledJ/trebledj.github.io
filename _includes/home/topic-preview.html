@@ -16,8 +16,7 @@
     {# Get a few posts with the relevant tag. #}
     <div class="row collection-list">
         {% for post in uniquePosts %}
-            <div class="col-md-6">
-                {# {{ render_post_compressed_preview(post, excludeTags=excludeTags) }} #}
+            <div>
                 {{ render_post_preview(post, excludeTags=excludeTags) }}
             </div>
         {% endfor %}

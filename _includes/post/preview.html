@@ -29,12 +29,15 @@
                 <div>
                     {{ render_title(post) }}
                 </div>
-                {% include "post/metadata-preview.html" %}
+                <div>
+                    {% include "post/metadata-preview.html" %}
+                </div>
             </div>
         </div>
     </article>
 {% endmacro %}
 
+{# OBSOLE3T #}
 {% macro render_post_compressed_preview(post, taglimit = 3, excludeTags = []) %}
     <article class="post-compressed-preview">
         <a href="{{post.url}}" tabindex="-1"></a>
