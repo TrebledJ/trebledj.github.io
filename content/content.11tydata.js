@@ -3,8 +3,13 @@ module.exports = {
 	eleventyComputed: {
 		permalink: data => {
 			let permalink = data.permalink;
-			if (!permalink && data.page.filePathStem.startsWith('/posts') && data.page.outputFileExtension === 'html') {
-				permalink = `/posts/${data.page.fileSlug}/index.html`;
+			if (!permalink) {
+				if (data.page.filePathStem.startsWith('/posts') && data.page.outputFileExtension === 'html') {
+					// HTML Blog post.
+					permalink = `/posts/${data.page.fileSlug}/index.html`;
+				} else if (data.page.inputPath.endsWith('.js.njk')) {
+					permalink = data.page.filePathStem;
+				}
 			}
 
 			if (data.draft) {
