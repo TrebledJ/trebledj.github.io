@@ -37,6 +37,7 @@
 		"@11ty/eleventy-plugin-rss": "^1.2.0",
 		"@11ty/eleventy-plugin-syntaxhighlight": "^5.0.0",
 		"@traptitech/markdown-it-spoiler": "^1.1.6",
+		"@typescript-eslint/eslint-plugin": "^6.8.0",
 		"chalk": "4.1.2",
 		"cheerio": "^1.0.0-rc.12",
 		"clean-css-cli": "^5.6.2",
