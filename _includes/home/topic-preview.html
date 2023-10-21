@@ -14,11 +14,9 @@
     {% set excludeTags = excludeTags | push(tag) %}
 
     {# Get a few posts with the relevant tag. #}
-    <div class="row collection-list">
+    <div class="collection-list">
         {% for post in uniquePosts %}
-            <div>
-                {{ render_post_preview(post, excludeTags=excludeTags) }}
-            </div>
+            {{ render_post_preview(post, excludeTags=excludeTags) }}
         {% endfor %}
     </div>
 
