@@ -3,7 +3,18 @@ env:
   commonjs: true
   es2021: true
   node: true
+  jquery: true
 extends: airbnb-base
 parserOptions:
   ecmaVersion: latest
-rules: {}
+rules:
+  max-len:
+    - error
+    - code: 120
+  no-plusplus: off
+  nonblock-statement-body-position: [warn, below]
+  curly: [warn, multi-or-nest, consistent]
+  no-use-before-define: [error, nofunc]
+  no-mixed-operators:
+    - error
+    - allowSamePrecedence: true

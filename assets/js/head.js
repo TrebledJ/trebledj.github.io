@@ -2,7 +2,8 @@ $(() => {
   /* Scroll Progress */
   let debounce = false;
   $(document).on('scroll', () => {
-    if (debounce) return;
+    if (debounce)
+      return;
     debounce = true;
 
     const docElem = document.documentElement;
@@ -10,14 +11,13 @@ $(() => {
     const scrollTop = (docBody.scrollTop || docElem.scrollTop);
     const height = docElem.scrollHeight - docElem.clientHeight;
 
-    progress = scrollTop / height * 100;
+    const progressBar = document.querySelector('#scroll-progress-bar');
+    const progress = scrollTop / height * 100;
 
-    if (progress > 0) {
-      progressBar = document.querySelector('#scroll-progress-bar');
+    if (progress > 0)
       progressBar.style.setProperty('--progress', `${progress}%`);
-    } else {
+    else
       progressBar.style.setProperty('--progress', '0%');
-    }
 
     debounce = false;
   });
@@ -25,11 +25,10 @@ $(() => {
   /* Scroll to Top */
   const btnBackToTop = $('#btn-back-to-top');
   function check() {
-    if ($(this).scrollTop() > 250) {
+    if ($(this).scrollTop() > 250)
       btnBackToTop.fadeIn();
-    } else {
+    else
       btnBackToTop.fadeOut();
-    }
   }
 
   $(window).on('scroll', () => {
@@ -49,12 +48,12 @@ $(() => {
   // Compress SoundCloud embed for small screens.
   if ($(window).width() < 600) {
     const s = $('.soundcloud-track iframe');
-    s.each(function () {
+    s.each(() => {
       $(this).attr('src', `${$(this).attr('src')}&visual=true`);
     });
   }
 
-  $('.carousel').each(function () {
+  $('.carousel').each(() => {
     // Update labels on slide.
     const id = $(this).attr('id');
     $(this).on('slide.bs.carousel', (event) => {
@@ -80,7 +79,7 @@ $(() => {
     ...lightboxCommonOptions,
   });
 
-  $('.lightbox-gallery').each(function () {
+  $('.lightbox-gallery').each(() => {
     $(this).find('a').magnificPopup({
       gallery: {
         enabled: true,

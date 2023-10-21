@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 $(() => {
   // --- Author Socials Button --- //
   const authorSocialButton = $('#post-author-container').find('button');
@@ -9,7 +10,7 @@ $(() => {
   // --- Copy URL --- //
   $('#copy-link-button').on('click', async () => {
     try {
-      await navigator.clipboard.writeText(location.href);
+      await navigator.clipboard.writeText(window.location.href);
     } catch (err) {
       console.error('Failed to copy: ', err);
       return;
@@ -27,33 +28,35 @@ $(() => {
   // --- TOC Current Section Highlight --- //
   const headerOffset = 150;
   const sections = document.querySelectorAll('.post-article h2,.post-article h3');
-  const menu = document.querySelectorAll('#toc-sidebar nav.toc a');
-  const menuMobile = document.querySelectorAll('#btn-mobile-toc nav.toc a');
+  const mainNavLinks = document.querySelectorAll('#toc-sidebar nav.toc a');
+  const mobileNavLinks = document.querySelectorAll('#btn-mobile-toc nav.toc a');
 
-  if (menu.length !== menuMobile.length) console.warn("Welp. Lengths aren't the same here. But they should be. This probably shouldn't cause too much of a problem tho. (Hopefully.)");
+  if (mainNavLinks.length !== mobileNavLinks.length)
+    console.warn("TOCs have different lengths?!? This shouldn't be much of an issue tho. (Hopefully.)");
 
   const { hash } = window.location;
   const articleEnd = document.querySelector('#end-of-article').offsetTop;
 
-  const makeActive = (link) => {
-    if (menu[link]) {
-      menu[link].classList.add('active');
-      menuMobile[link].classList.add('active');
+  const highlightLink = (idx) => {
+    if (mainNavLinks[idx]) {
+      mainNavLinks[idx].classList.add('active');
+      mobileNavLinks[idx].classList.add('active');
     }
   };
-  const removeActive = (link) => {
-    if (menu[link]) {
-      menu[link].classList.remove('active');
-      menuMobile[link].classList.remove('active');
+  const lowlightLink = (idx) => {
+    if (mainNavLinks[idx]) {
+      mainNavLinks[idx].classList.remove('active');
+      mobileNavLinks[idx].classList.remove('active');
     }
   };
-  const removeAllActive = () => [...Array(sections.length).keys()].forEach((link) => removeActive(link));
+  const removeAllActive = () => sections.forEach((_, i) => lowlightLink(i));
 
   let currentActive = 0;
 
   let debounce = false;
   const updateTOCHighlight = () => {
-    if (debounce) return;
+    if (debounce)
+      return;
     debounce = true;
 
     const docElem = document.documentElement;
@@ -69,24 +72,25 @@ $(() => {
       return;
     }
 
-    const currentHeading = sections.length
-            - [...sections].reverse().findIndex((section) => section.offsetTop - headerOffset <= scrollTop) - 1;
+    const idx = [...sections]
+      .reverse()
+      .findIndex((sec) => sec.offsetTop - headerOffset <= scrollTop);
+    const currentHeading = sections.length - idx - 1;
 
     if (currentHeading !== currentActive) {
       removeAllActive();
       currentActive = currentHeading;
-      makeActive(currentHeading);
+      highlightLink(currentHeading);
     }
 
     debounce = false;
   };
 
-  if (hash) {
-    // Set pre-selected item.
-    for (let i = 0; i < menu.length; i++) {
-      if (menu[i].href.endsWith(hash)) {
-        menu[i].classList.add('active');
-        menuMobile[i].classList.add('active');
+  if (hash) { // Set pre-selected item.
+    for (let i = 0; i < mainNavLinks.length; i++) {
+      if (mainNavLinks[i].href.endsWith(hash)) {
+        mainNavLinks[i].classList.add('active');
+        mobileNavLinks[i].classList.add('active');
         break;
       }
     }
@@ -99,15 +103,14 @@ $(() => {
   // updateTOCHighlight();
 
   // --- Details Collapsible --- //
-  $('.details-collapse-bottom a').on('click', function () {
+  $('.details-collapse-bottom a').on('click', () => {
     const p = this.closest('details');
     const sp = $(p);
     sp.removeAttr('open');
 
     const elementTop = sp.offset().top;
     const viewportTop = $(window).scrollTop();
-    if (elementTop < viewportTop) {
+    if (elementTop < viewportTop)
       p.scrollIntoView();
-    }
   });
 });
