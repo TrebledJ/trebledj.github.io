@@ -11,7 +11,8 @@
 
     {# Recent Music Section #}
     {% if featuredTracks %}
-        <h2 id="recent-music" class="mb-0">Recent Music <i class="fas fa-music ms-1"></i></h2>
+        <h2 id="recent-music" class="mb-0">Recent Music <i class="fas fa-music ms-1"></i>
+        </h2>
         <br/>
 
         <div class="row">
@@ -53,17 +54,27 @@
         // CRITICAL: Set carousel height based on tallest child item.
         // Objective is to avoid subsequent CLS while minimising white-space.
         // CLS: Content Layout Shift. Everytime the carousel changes, the
-        // height also changes, and items below will shift up/down like 
+        // height also changes, and items below will shift up/down like
         // a rollercoaster. This is sure to make UI designers puke.
-        [...document.querySelectorAll(".carousel")].map(e => {
-            const maxItemHeight = Math.max(...[...e.querySelectorAll(".carousel-item")].map(i => {
-                const tmp = i.style.display;
-                i.style.display = 'block'; // hack: https://stackoverflow.com/q/1473584/10239789
-                const h = i.offsetHeight;
-                i.style.display = tmp;
-                return h;
-            }));
-            e.style.height = (maxItemHeight + 5) + 'px';
+        function updateCarouselHeight() {
+            [...document.querySelectorAll(".carousel")].forEach(e => {
+                const maxItemHeight = Math.max(...[...e.querySelectorAll(".carousel-item")].map(i => {
+                    const tmp = i.style.display;
+                    i.style.display = 'block'; // hack: https://stackoverflow.com/q/1473584/10239789
+                    const h = i.offsetHeight;
+                    i.style.display = tmp;
+                    return h;
+                }));
+                e.style.height = (maxItemHeight + 5) + 'px';
+            });
+        };
+        updateCarouselHeight();
+
+        const width = window.innerWidth;
+        window.addEventListener("resize", () => {
+            if (window.innerWidth != width) {
+                updateCarouselHeight();
+            }
         });
     </script>
 </div>
