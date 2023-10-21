@@ -164,7 +164,7 @@ class Reverse(Challenge): ...
 
 Here, `Reverse` is a subclass of `Challenge`, and `Challenge` is a superclass of `Reverse`.
 
-* Semantically, a `Reverse` is also a `Challenge`, but the inverse does not always apply.^[Aha! But what about recursive subtypes and their ilk? These are addressed in a later section.]
+* Semantically, a `Reverse` is also a `Challenge`, but the inverse does not always apply.
     ```python
     assert isinstance(Reverse(), Reverse) == True    # A Reverse is a Reverse. (Duh.)
     assert isinstance(Reverse(), Challenge) == True  # A Reverse is also a Challenge.
