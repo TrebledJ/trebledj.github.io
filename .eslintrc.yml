@@ -7,7 +7,6 @@ env:
 extends: airbnb-base
 parserOptions:
   ecmaVersion: latest
-root: true
 rules:
   max-len:
     - error
