@@ -25,7 +25,7 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy({
     './assets/js/**/*.js': '/js/',
   }, {
-    transform(src, dest, _stats) {
+    transform(src, dest, stats) {
       if (process.env.ENVIRONMENT !== 'production')
         return null;
 
