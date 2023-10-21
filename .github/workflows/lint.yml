@@ -32,3 +32,4 @@ jobs:
           eslint: true
           eslint_args: "assets/js/ eleventy/ eleventy.config.js --ignore-pattern='**/third-party/**/*.js' --ignore-pattern='**/rake-js/**'"
           auto_fix: true
+          github_token: ${{secrets.GITHUB_TOKEN}}
