@@ -27,6 +27,7 @@ html[data-theme="light"] .hero-section {
 #typewrite-text {
     font-size: 1.5rem;
     font-weight: 500;
+    min-height: 30px; // Avoid CLS.
 }
 
 .about-me {
