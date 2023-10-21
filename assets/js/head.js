@@ -18,7 +18,7 @@ $(function () {
         } else {
             progressBar.style.setProperty('--progress', '0%');
         }
-        
+
         debounce = false;
     });
 
@@ -59,6 +59,21 @@ $(function () {
         $(this).on('slide.bs.carousel', event => {
             $(`#${id}-tab${event.from + 1}-label`).removeClass('bg-primary text-white');
             $(`#${id}-tab${event.to + 1}-label`).addClass('bg-primary text-white');
+        });
+    });
+
+    $('.lightbox-single').magnificPopup({
+        type: 'image',
+        fixedContentPos: false,
+    });
+
+    $('.lightbox-gallery').each(function () {
+        $(this).find('a').magnificPopup({
+            type: 'image',
+            fixedContentPos: false,
+            gallery: {
+                enabled: true
+            },
         });
     });
 });

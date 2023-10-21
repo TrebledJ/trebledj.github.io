@@ -48,6 +48,9 @@ module.exports = function () {
 			],
 			resultDefaultIcon: "book",
 		},
+		lightbox: {
+			enabled: process.env.ENABLE_LIGHTBOX,
+		},
 		typewrite: {
 			strings:
 				[

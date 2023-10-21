@@ -89,6 +89,7 @@ module.exports = function (eleventyConfig) {
 
     function makeImageFromMetadata(metadata, ext, classes, alt, thumbnail = false, attrs = {}) {
         const fmt = metadata[ext];
+
         // Get default ("auto" width) image.
         let defsrc = fmt.filter(e => !breakpoints.includes(e.width))[0];
         if (thumbnail) {
@@ -123,13 +124,24 @@ module.exports = function (eleventyConfig) {
         return `<img class="${classes.join(' ')}" alt="${alt}" title="${alt}" src="${defsrc.url}" ${attr_str} />`.replaceAll(/\s{2,}/g, ' ');
     }
 
+    function wrapLightbox(img, altText, metadata, ext) {
+        const popup = metadata[ext][metadata[ext].length - 1].url;
+        return `<a class="lightbox-single" title="${altText}" href="${popup}">${img}</a>`;
+    }
+
     async function imageShortcode(src, altText, classes, loading) {
         altText ||= '';
         classes ||= '';
         const { ext, file, options } = getOptions(src);
         const metadata = await eleventyImage(file, options);
         classes = amendClasses(classes);
-        return makeImageFromMetadata(metadata, ext, classes, altText, false, {loading});
+
+        const img = makeImageFromMetadata(metadata, ext, classes, altText, false, {loading});
+        if (process.env.ENABLE_LIGHTBOX) {
+            return wrapLightbox(img, altText, metadata, ext);
+        } else {
+            return img;
+        }
     }
 
     async function heroImageShortcode(src, altText, classes) {
@@ -278,6 +290,11 @@ module.exports = function (eleventyConfig) {
             // Push `rw` down to individual images.
             containerClasses.splice(containerClasses.indexOf('rw'), 1);
             imgNodes.addClass('rw');
+        }
+
+        if (process.env.ENABLE_LIGHTBOX) {
+            $(".lightbox-single").removeClass("lightbox-single");
+            containerClasses.push('lightbox-gallery');
         }
 
         images = $.html();

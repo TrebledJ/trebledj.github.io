@@ -31,6 +31,12 @@ module.exports = function (eleventyConfig) {
 		return path.resolve(split.join(path.sep), relativeFilePath);
 	}
 
+	eleventyConfig.addPlugin(function enableLightbox(eleventyConfig) {
+		eleventyConfig.on("eleventy.before", () => {
+			process.env.ENABLE_LIGHTBOX = true;
+		});
+	});
+
 	// Drafts implementation, see `content/content.11tydata.js` for additional code.
 	// This section *could* be simplified to an environment variable in an npm script,
 	// but this way an ENV is not required and this code works cross-platform.
