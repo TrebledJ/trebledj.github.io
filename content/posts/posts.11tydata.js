@@ -25,9 +25,10 @@ function getGitCommitDateFast(filePath) {
 
     // Paths not commited to Git returns empty timestamps, resulting in NaN.
     // So, convert only valid timestamps.
-    if (!isNaN(ts))
+    if (!Number.isNaN(ts))
       return new Date(ts);
   }
+  return new Date();
 }
 
 function getGitCommitDateFiltered(filePath, options) {
@@ -68,10 +69,12 @@ function getGitCommitDateFiltered(filePath, options) {
 
       // Paths not commited to Git returns empty timestamps, resulting in NaN.
       // So, convert only valid timestamps.
-      if (!isNaN(ts))
+      if (!Number.isNaN(ts))
         return new Date(ts);
     }
   }
+
+  return new Date();
 }
 
 module.exports = {
@@ -80,9 +83,11 @@ module.exports = {
   ],
   layout: 'layouts/post-default',
   eleventyComputed: {
-    // If ever the updated date is wrong in production, just increase checkout fetch-depth in deploy.yml.
-    // This is because git log couldn't find the old commits.
-    lastContentCommit: data => (process.env.ENVIRONMENT === 'development' ? undefined : getGitCommitDate(data.page.inputPath, { keep: /^content/ })),
+    lastContentCommit: data => {
+      if (process.env.ENVIRONMENT === 'development')
+        return undefined;
+      return getGitCommitDate(data.page.inputPath, { keep: /^content/ });
+    },
   },
   author: 'trebledj',
   thumbnail_src: '~/assets/img/posts/thumbnail/default.png',

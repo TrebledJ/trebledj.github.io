@@ -1,5 +1,3 @@
-const path = require('path');
-
 function toTitleCase(str) {
   return str.replace(
     /\w\S*/g,

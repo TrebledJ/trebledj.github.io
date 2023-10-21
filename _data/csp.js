@@ -16,11 +16,11 @@ class Tag {
 
 function tag(src) { return new Tag(src); }
 
-function compile_csp(...tags) {
+function compileCsp(...tags) {
   return tags.map(t => t.compile()).join('\n');
 }
 
-module.exports = compile_csp(
+module.exports = compileCsp(
   tag('default'),
   tag('script')
   // .add(`'unsafe-inline'`)
