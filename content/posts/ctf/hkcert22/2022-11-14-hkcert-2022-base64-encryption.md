@@ -102,7 +102,7 @@ subchars_not_in_ascii = [get_inverted_chars_with_mask(m) for m in in_ascii] # ch
 
 Another idea comes to mind. Remember the plaintext is in English? Well, with English text, some letters appear more frequently than others. The same applies to words and sequences. 
 
-{% image "assets/letter-frequencies.jpg", "Frequency of English letters. But we need to be careful with letter cases.", "w-65" %}
+{% image "assets/base64-letter-frequencies.jpg", "Frequency of English letters. But we need to be careful with letter cases.", "w-65" %}
 
 <sup>Frequency of the English alphabet. (Source: Wikipedia.)</sup>
 {.caption}
@@ -160,7 +160,7 @@ Frequency analysis is useful to group letters into buckets. But using frequency 
             whitelist[c] = g # Throw away all other values.
         ```
 
-        {% image "assets/progress-1.jpg", "Results!" %}
+        {% image "assets/base64-progress-1.jpg", "Results!" %}
 
         <sup>Random decoding after frequency analysis.</sup>
         {.caption}
@@ -171,7 +171,7 @@ Frequency analysis is useful to group letters into buckets. But using frequency 
     - e.g. "Eog:ish" → "English", "qepqesents" → "represents", "pqese&ved" → "preserved"
     - Once we patched a word, other words became easier to patch.
 
-        {% image "assets/progress-2.jpg", "Moar results!!!" %}
+        {% image "assets/base64-progress-2.jpg", "Moar results!!!" %}
 
         <sup>Random decoding after guessing.</sup>
         {.caption}
@@ -183,7 +183,7 @@ Frequency analysis is useful to group letters into buckets. But using frequency 
 - Google: after decoding a sizeable portion, let's pray and hope the plaintext is open-source. Then use the plaintext to derive the rest of the mapping.
     - It turns out the plaintext is—quite aptly—the [Wikipedia summary of frequency analysis](https://en.wikipedia.org/wiki/Frequency_analysis).
     
-        {% image "assets/wikipedia-frequency-analysis.jpg", "Rrrreeeeeeeeeeeee.", "w-85" %}
+        {% image "assets/base64-wikipedia-frequency-analysis.jpg", "Rrrreeeeeeeeeeeee.", "w-85" %}
     
 Finding the rest of the mappings was quite easy. After a bit more tuning, we get the flag.
 
