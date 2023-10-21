@@ -104,7 +104,7 @@ html[data-theme="light"] .hero-section {
             }
 
             @include media-breakpoint-down(md) {
-                & > div:nth-child(n+2) {
+                & .post-preview:nth-child(n+2) {
                     display: none;
                 }
             }
