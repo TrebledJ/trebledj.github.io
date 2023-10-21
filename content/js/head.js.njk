@@ -62,7 +62,7 @@ $(() => {
     });
   });
 
-  {% if site.lightbox.enabled %}
+{% if site.lightbox.enabled %}
   const lightboxCommonOptions = {
     type: 'image',
     fixedContentPos: false,
@@ -88,5 +88,5 @@ $(() => {
       ...lightboxCommonOptions,
     });
   });
-  {% endif %}
+{% endif %}
 });
