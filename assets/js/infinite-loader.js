@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 // eslint-disable-next-line no-unused-vars
 async function InfiniteLoader(params) {
   const dataFile = params.data; // The JSON data file to load data from.

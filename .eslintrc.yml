@@ -37,3 +37,4 @@ rules:
   arrow-parens: [warn, as-needed]
   no-continue: off
   no-restricted-syntax: [off, ForOfStatement]
+  func-names: off

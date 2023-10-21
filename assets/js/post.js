@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 $(() => {
   // --- Author Socials Button --- //
   const authorSocialButton = $('#post-author-container').find('button');

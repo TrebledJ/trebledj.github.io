@@ -33,7 +33,7 @@ module.exports = function (eleventyConfig) {
 
         // Only log once.
         if (!logged)
-          console.log('[11ty] including `draft: true` posts');
+          console.log('[11ty] including `draft: true` posts'); // eslint-disable-line no-console
 
         logged = true;
       }

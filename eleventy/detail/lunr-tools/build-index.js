@@ -1,19 +1,20 @@
 // node build-index.js <../../../_site/search.json >index.json
 
-var lunr = require('lunr'),
-    stdin = process.stdin,
-    stdout = process.stdout,
-    buffer = []
+const lunr = require('lunr');
 
-stdin.resume()
-stdin.setEncoding('utf8')
+const { stdin } = process;
+const { stdout } = process;
+const buffer = [];
 
-stdin.on('data', function (data) {
-  buffer.push(data)
-})
+stdin.resume();
+stdin.setEncoding('utf8');
 
-stdin.on('end', function () {
-  var store = JSON.parse(buffer.join(''))
+stdin.on('data', data => {
+  buffer.push(data);
+});
+
+stdin.on('end', () => {
+  const store = JSON.parse(buffer.join(''));
 
   const idx = lunr(function () {
     this.ref('id');
@@ -22,14 +23,14 @@ stdin.on('end', function () {
     this.field('tags', { boost: 30 });
     this.pipeline.remove(lunr.trimmer);
     this.pipeline.remove(lunr.stopWordFilter);
-    for (const i in store) {
+    store.forEach((item, i) => {
       this.add({
         id: i,
-        title: store[i].title,
-        keywords: store[i].keywords,
-        tags: store[i].tags,
+        title: item.title,
+        keywords: item.keywords,
+        tags: item.tags,
       });
-    }
+    });
   });
-  stdout.write(JSON.stringify(idx))
-})
+  stdout.write(JSON.stringify(idx));
+});
