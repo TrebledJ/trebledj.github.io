@@ -102,7 +102,7 @@ $(() => {
   // updateTOCHighlight();
 
   // --- Details Collapsible --- //
-  $('.details-collapse-bottom a').on('click', () => {
+  $('.details-collapse-bottom a').on('click', function () {
     const p = this.closest('details');
     const sp = $(p);
     sp.removeAttr('open');

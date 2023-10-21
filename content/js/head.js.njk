@@ -53,7 +53,7 @@ $(() => {
     });
   }
 
-  $('.carousel').each(() => {
+  $('.carousel').each(function () {
     // Update labels on slide.
     const id = $(this).attr('id');
     $(this).on('slide.bs.carousel', (event) => {
