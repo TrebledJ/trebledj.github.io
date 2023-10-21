@@ -37,7 +37,7 @@ rules:
   arrow-parens: [warn, as-needed]
   no-continue: off
   no-restricted-syntax: [off, ForOfStatement]
-  func-names: off
+  func-names: off # Dangerous! Don't turn on! Breaks behaviour of `this`.
   quotes:
     - warn
     - single
