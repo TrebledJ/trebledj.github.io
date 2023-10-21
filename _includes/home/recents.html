@@ -1,4 +1,4 @@
-{% from "post/carousel.html" import render_carousel %}
+{% from "post/carousel.html" import render_posts_carousel %}
 {% from "tag.html" import render_tag_list %}
 
 <div class="mt-4">
@@ -7,7 +7,7 @@
     {% set uniquePosts = collections.postsr | selectHomePosts(tags, npostsPerTab) %}
 
     {# Recent Posts Section #}
-    {{render_carousel(uniquePosts, "Recent Posts", "pencil", postCategories, carouselAutoInterval)}}
+    {{render_posts_carousel(uniquePosts, "Recent Posts", "pencil", postCategories, carouselAutoInterval)}}
 
     {# Recent Music Section #}
     {% if featuredTracks %}
@@ -47,7 +47,7 @@
     {% endif %}
 
     {# Recent Projects and Experiences Section #}
-    {{render_carousel(uniquePosts, "Projects and Experiences", "star", projectCategories, carouselAutoInterval)}}
+    {{render_posts_carousel(uniquePosts, "Projects and Experiences", "star", projectCategories, carouselAutoInterval)}}
 
     <script>
         // CRITICAL: Set carousel height based on tallest child item.
