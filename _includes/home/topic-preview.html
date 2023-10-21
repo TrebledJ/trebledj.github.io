@@ -1,4 +1,4 @@
-{% from "post/preview.html" import render_post_compressed_preview %}
+{% from "post/preview.html" import render_post_preview %}
 {% from "tag.html" import render_tag %}
 
 {% macro render_topic_preview(name, tag, about, excludeTags, uniquePosts) %}
@@ -17,7 +17,8 @@
     <div class="row collection-list">
         {% for post in uniquePosts %}
             <div class="col-md-6">
-                {{ render_post_compressed_preview(post, excludeTags=excludeTags) }}
+                {# {{ render_post_compressed_preview(post, excludeTags=excludeTags) }} #}
+                {{ render_post_preview(post, excludeTags=excludeTags) }}
             </div>
         {% endfor %}
     </div>

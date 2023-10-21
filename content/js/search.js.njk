@@ -1,4 +1,9 @@
+---
+---
 $(async function () {
+  const searchResultIcons = {{site.search.resultIcons | dump | safe}};
+  const searchResultDefaultIcon = '{{site.search.resultDefaultIcon}}';
+
   const store = await (await fetch('/search.json')).json();
   const idx = lunr(function () {
     this.ref('id');

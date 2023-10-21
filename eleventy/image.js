@@ -40,17 +40,19 @@ module.exports = function (eleventyConfig) {
         return { ext, file, options };
     }
 
+    const DEFAULT_IMG_CLASSES = [
+        'center',
+        'rw',       // Responsive-width for small screens.
+        'mb-2',     // Extra spacing in the bottom.
+    ];
+
     // Modify classes with custom processing, returns an array of classes.
     function amendClasses(classes) {
         classes = (typeof classes === 'string' ? classes.split(' ') : typeof classes === 'undefined' ? [] : classes);
         classes.reverse(); // Add classes to the front.
 
         const substitutions = {
-            'post1': [
-                'center',
-                'rw',       // Responsive-width for small screens.
-                'mb-2',     // Extra spacing in the bottom.
-            ],
+            'post1': DEFAULT_IMG_CLASSES,
             'floatl1': ['m-1', 'float-left', 'rw'],
             'floatr1': ['m-1', 'float-right', 'rw'],
             'floatl1-md': ['m-1', 'float-left-md', 'rw-md'],
@@ -231,7 +233,9 @@ module.exports = function (eleventyConfig) {
         const widths = wh.map(x => x[0]);
         const heights = wh.map(x => x[1]);
 
-        imgNodes.removeClass('center').removeClass('rw').removeClass('mb-2').removeClass('w-100');
+        for (const c of DEFAULT_IMG_CLASSES)
+            imgNodes.removeClass(c);
+        imgNodes.removeClass('w-100');
 
         if (containerClasses.includes('h-auto')) {
             // h-auto: Make images have equal height so it appears as one seamless block.

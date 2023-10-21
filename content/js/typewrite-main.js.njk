@@ -1,0 +1,20 @@
+---
+---
+$(function () {
+    var typewriter = new Typewriter('#typewrite-text', {
+        loop: true
+    });
+
+    const strings = {{site.typewrite.strings | dump | safe}}
+        .map(value => ({ value, sort: Math.random() }))
+        .sort((a, b) => a.sort - b.sort)
+        .map(({ value }) => value);
+
+    typewriter.typeString('');
+
+    for (const s of strings) {
+        typewriter.typeString(s).pauseFor({{site.typewrite.pauseDuration}}).deleteAll();
+    }
+
+    typewriter.start();
+});

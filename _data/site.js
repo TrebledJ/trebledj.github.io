@@ -48,6 +48,22 @@ module.exports = function () {
 			],
 			resultDefaultIcon: "book",
 		},
+		typewrite: {
+			strings:
+				[
+					[...'Coding ', '💻'],
+					[...'Playing with embedded systems ', '⚡️'],
+					[...'Composing (￣▽￣)/♫•*¨*•.¸¸♪'],
+					[...'Studying ', '📖'],
+					[...'Capturing flags ', '🚩'],
+					[...'Writing articles on this site ', '📄'],
+					[...'Tinkering with this site ', '🌐'],
+					[...'Napping (＿ ＿*) Z z z'],
+					[...'Noodling with music ♪♪♪ ヽ(ˇ∀ˇ )ゞ'],
+					[...'Making koalaty memes (－‸ლ)'],
+				],
+			pauseDuration: 2500,
+		},
 		analytics: {
 			// Pick your poison.
 			// google: "G-7TQ4WV0LMK",
