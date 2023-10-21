@@ -3,7 +3,7 @@ async function InfiniteLoader(params) {
   const dataFile = params.data; // The JSON data file to load data from.
   const initialLoad = params.items.num || 10; // Number of items to load initially.
   const subsequentLoad = params.items.after || initialLoad; // Number of items to load subsequently on scroll.
-  const html = params.html || ((item) => item); // The HTML data to load.
+  const html = params.html || (item => item); // The HTML data to load.
   const appendElement = params.append || '.post-list'; // Where to insert the items.
   const scrollPercentageTrigger = 90; // Scroll percentage when we should trigger a subsequent load (0-100).
 

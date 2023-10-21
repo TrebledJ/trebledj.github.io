@@ -36,13 +36,13 @@ $(() => {
   const { hash } = window.location;
   const articleEnd = document.querySelector('#end-of-article').offsetTop;
 
-  const highlightLink = (idx) => {
+  const highlightLink = idx => {
     if (mainNavLinks[idx]) {
       mainNavLinks[idx].classList.add('active');
       mobileNavLinks[idx].classList.add('active');
     }
   };
-  const lowlightLink = (idx) => {
+  const lowlightLink = idx => {
     if (mainNavLinks[idx]) {
       mainNavLinks[idx].classList.remove('active');
       mobileNavLinks[idx].classList.remove('active');
@@ -73,7 +73,7 @@ $(() => {
 
     const idx = [...sections]
       .reverse()
-      .findIndex((sec) => sec.offsetTop - headerOffset <= scrollTop);
+      .findIndex(sec => sec.offsetTop - headerOffset <= scrollTop);
     const currentHeading = sections.length - idx - 1;
 
     if (currentHeading !== currentActive) {

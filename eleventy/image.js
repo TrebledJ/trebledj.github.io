@@ -193,7 +193,7 @@ module.exports = function (eleventyConfig) {
 
   // Eleventy Image shortcode
   // https://www.11ty.dev/docs/plugins/image/
-  eleventyConfig.addAsyncShortcode('image', async function(src, altText, classes) {
+  eleventyConfig.addAsyncShortcode('image', async function (src, altText, classes) {
     const file = resolveResourcePath(this.page, src);
     return imageShortcode(file, altText, classes, 'lazy');
   });
