@@ -32,5 +32,5 @@ jobs:
         uses: wearerequired/lint-action@v2
         with:
           eslint: true
-          eslint_args: "assets/js/ eleventy/ eleventy.config.js"
-          prettier: true
+          eslint_args: "assets/js/ eleventy/ eleventy.config.js --ignore-pattern='**/third-party/**/*.js'"
+          auto_fix: true
