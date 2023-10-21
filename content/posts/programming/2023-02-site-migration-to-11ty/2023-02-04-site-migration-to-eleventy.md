@@ -3,8 +3,8 @@ title: Site Migration to Eleventy
 description: JavaScript go brrrrrrrrr.
 updated: '2023-03-09'
 tags:
- - meta
- - js
+  - meta
+  - js
 thumbnail_src: assets/ogle-ogle-eleventy.jpg
 related:
     disable: true

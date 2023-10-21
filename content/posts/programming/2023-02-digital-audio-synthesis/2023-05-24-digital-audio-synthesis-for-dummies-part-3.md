@@ -2,13 +2,13 @@
 title: "Digital Audio Synthesis for Dummies: Part 3"
 description: Efficiently streaming audio to speakers on embedded systems (with examples in STM32).
 tags:
- - tutorial
- - dsp
- - embedded
- - c
- - cpp
- - stm32
- - music
+  - tutorial
+  - dsp
+  - embedded
+  - c
+  - cpp
+  - stm32
+  - music
 thumbnail_src: assets/synthwave-a-major-space-3.jpg
 thumbnail_banner: true
 usemathjax: true
@@ -326,8 +326,8 @@ DMA introduces syncing issues. After preparing a second round of buffers, how do
 
 As with all processes which depend on a separate event, there are two approaches: **polling** and **interrupts**. In this context:
 
- - **Polling**: Block and wait until the first round is finished, then send.
- - **Interrupts**: Trigger an interrupt signal when transfer finishes, and start the next round inside the interrupt handler. 
+- **Polling**: Block and wait until the first round is finished, then send.
+- **Interrupts**: Trigger an interrupt signal when transfer finishes, and start the next round inside the interrupt handler. 
 
 Which approach to choose depends on your application.
 

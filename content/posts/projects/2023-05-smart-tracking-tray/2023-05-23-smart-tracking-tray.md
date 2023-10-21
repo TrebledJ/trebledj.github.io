@@ -2,13 +2,13 @@
 title: Smart-Tracking Tray
 description: Enhancing wet labs with IoT.
 tags:
- - iot
- - embedded
- - cpp
- - esp32
- - software-engineering
- - experience
- - hkust
+  - iot
+  - embedded
+  - cpp
+  - esp32
+  - software-engineering
+  - experience
+  - hkust
 thumbnail_src: assets/smart-tray.jpg
 thumbnail_banner: true
 pitch: Programmed an embedded device for efficient smart-tracking of lab chemicals.

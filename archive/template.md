@@ -6,9 +6,9 @@ description: "short summary of post"
 author: trebledj
 date: '2021-02-28 1:35:23 +0530' # not really needed
 tags:
- - list
- - of
- - tags
+  - list
+  - of
+  - tags
 thumbnail_src: ~/assets/img/to/thumbnail.jpg  # Start with ./... for images relative to your directory.
 thumbnail_banner: true # or false depending if you want the thumbnail to show on the post's page.
 keywords: key words  # Not really important.

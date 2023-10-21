@@ -3,7 +3,7 @@ title:  "Morning Ecstasy"
 description: "When you get the entire floor of a student dorm to yourself."
 updated: "2022-08-23"
 tags:
- - band
+  - band
 keywords: [guitars, drums, upbeat, glockenspiel]
 thumbnail_src: assets/candy-swirls.jpg
 track_id: 1329504610

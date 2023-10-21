@@ -3,7 +3,7 @@ title:  "Morning Rush"
 description: "\"Quickly! School starts in 15 minutes and you still haven't changed out of your pajamas!\""
 updated: "2022-07-28"
 tags:
- - band
+  - band
 keywords: [guitars, drums, upbeat]
 thumbnail_src: assets/neo-bus.jpg
 track_id: 1199278129

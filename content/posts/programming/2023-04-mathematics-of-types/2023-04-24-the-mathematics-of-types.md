@@ -2,11 +2,11 @@
 title: "The Mathematics of Types"
 description: "Programming isn't about mindlessly typing away on a keyboard. There is an aesthetic quality that comes with approaching a problem."
 tags:
- - mathematics
- - haskell
- - types
- - software-engineering
- - programming-languages
+  - mathematics
+  - haskell
+  - types
+  - software-engineering
+  - programming-languages
 thumbnail_src: assets/abstract.jpg
 # thumbnail_banner: true
 usemathjax: true

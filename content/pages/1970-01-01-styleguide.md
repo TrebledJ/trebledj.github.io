@@ -2,18 +2,18 @@
 title:  "Styleguide. This is a super long title post. Longer than the distance between my pinky and my elbow. Maybe."
 description: "This is a supperrrrrrrr longggggg description... designed to test the limits of the measly little box that contains it. Who knows if it'll hold?"
 tags:
- - qt
- - qml
- - python
- - software-engineering
- - programming
- - cpp
- - song
- - stm32
- - electronic
- - music
- - composition
- - learning
+  - qt
+  - qml
+  - python
+  - software-engineering
+  - programming
+  - cpp
+  - song
+  - stm32
+  - electronic
+  - music
+  - composition
+  - learning
 thumbnail_banner: true
 keywords: test key words
 usemathjax: true
@@ -109,16 +109,16 @@ Break
        2. that
     
     2. just
-       - awesome?
-       - awesome?
-       - awesome?
+        - awesome?
+        - awesome?
+        - awesome?
     3. I
        
-       - know
+        - know
 
-       - it 
+        - it 
 
-       - right?
+        - right?
 
 Text.
 

@@ -3,12 +3,12 @@ title:  MuseScore Navigation Plugins
 description: Developing plugins to enhance the music editors' quality of life.
 updated: "2022-09-11"
 tags:
- - project
- - qml
- - js
- - apps
- - qt
- - music
+  - project
+  - qml
+  - js
+  - apps
+  - qt
+  - music
 thumbnail_src: assets/piano-keys.jpg
 pitch: Developed MuseScore quality-of-life plugins for navigation and score editing using QML/JS.
 related: false

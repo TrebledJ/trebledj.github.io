@@ -3,8 +3,8 @@ title:  "Buoyant Ecstasy"
 description: "Pointillism is pretty interesting with a string ensemble!"
 updated: "2022-08-23"
 tags:
- - strings
- - hkust
+  - strings
+  - hkust
 keywords: [oboe, major, minor, covid19]
 thumbnail_src: assets/swirling-wisps-2.jpg
 track_id: 1329509965

@@ -2,12 +2,12 @@
 title: <sub><sup>N[</sup></sub>Subtype Metaprogramming<sub><sup>]</sup></sub> is <sub><sup>N[</sup></sub>Mostly Harmless<sub><sup>]</sup></sub>
 description: Inheritance go brrrrrrrr... (ab)using types to write programs.
 tags:
- - types
- - python
- - tutorial
- - reverse
- - programming
- - programming-languages
+  - types
+  - python
+  - tutorial
+  - reverse
+  - programming
+  - programming-languages
 usemathjax: true
 thumbnail_src: assets/thumbnail.jpg
 thumbnail_banner: true

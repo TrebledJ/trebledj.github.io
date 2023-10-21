@@ -3,10 +3,10 @@ title:  "Reticence"
 description: "Alternate title: sad.mp3."
 updated: "2022-07-26"
 tags:
- - piano
- - strings
- - counterpoint
- - hkust
+  - piano
+  - strings
+  - counterpoint
+  - hkust
 keywords: [duet, piano, cello, emotional]
 thumbnail_src: assets/reticence.jpg
 track_id: 1146309253

@@ -3,11 +3,11 @@ title: "Digital Audio Synthesis for Dummies: Part 2"
 description: Generating audio signals for great good through additive synthesis and wavetable synthesis.
 updated: '2023-03-09'
 tags:
- - tutorial
- - dsp
- - c
- - cpp
- - music
+  - tutorial
+  - dsp
+  - c
+  - cpp
+  - music
 thumbnail_src: assets/synthwave-a-major-space-2.jpg
 thumbnail_banner: true
 usemathjax: true

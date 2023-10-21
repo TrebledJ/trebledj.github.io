@@ -2,10 +2,10 @@
 title: The HKUST Robotics Team
 description: Experiences and reflections journeying with the HKUST Robotics Team.
 tags:
- - robotics
- - software-engineering
- - hkust
- - reflection
+  - robotics
+  - software-engineering
+  - hkust
+  - reflection
 thumbnail_src: ~/assets/img/posts/thumbnail/robotics-team-wallpaper-2.jpg
 pitch: Senior software engineer in the HKUST Robotics Team. Trained and mentored junior team members. Transformed and modularised project architecture and pipeline with Git submodules. Orchestrated software R&D projects.
 related:

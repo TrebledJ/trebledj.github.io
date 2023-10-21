@@ -3,8 +3,8 @@ title: "Digital Audio Synthesis for Dummies: Part 1"
 description: An introductory discourse on audio processing. What makes audio tick?
 updated: '2023-03-09'
 tags:
- - tutorial
- - dsp
+  - tutorial
+  - dsp
 thumbnail_src: assets/synthwave-a-major-space-1.jpg
 thumbnail_banner: true
 usemathjax: true

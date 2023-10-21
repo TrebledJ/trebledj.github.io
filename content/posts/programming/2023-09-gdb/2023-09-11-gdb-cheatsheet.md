@@ -2,10 +2,10 @@
 title: GDB/GEF Cheatsheet
 description: Quick command reference on one of the most powerful tools for dynamic analysis.
 tags:
- - ctf
- - pwn
- - reverse
- - learning
+  - ctf
+  - pwn
+  - reverse
+  - learning
 thumbnail_src: assets/gef.png
 related:
     tags: [ctf]
@@ -332,9 +332,9 @@ enable once <breakpoint-id>
 {% abbr "Breaks", "Pauses the program" %} when data changes. More specifically, whenever the *value of an expression* changes, a break occurs.
 
 This includes:
- - when an address is **written** to. (`watch`, `awatch`)
- - when an address is **read** from. (`rwatch`, `awatch`)
- - when an expression evaluates to a given value. (`watch`)
+- when an address is **written** to. (`watch`, `awatch`)
+- when an address is **read** from. (`rwatch`, `awatch`)
+- when an expression evaluates to a given value. (`watch`)
 
 ```sh
 watch <expression>
@@ -475,8 +475,8 @@ bash.sendline(b"echo '\x01\x02\x03\x04'")
 
 Further Reading:
 
- - [SO: `gdb.attach` Example](https://stackoverflow.com/a/62014210/10239789)
- - [`gdb.attach` Documentation](https://docs.pwntools.com/en/stable/gdb.html#pwnlib.gdb.attach)
+- [SO: `gdb.attach` Example](https://stackoverflow.com/a/62014210/10239789)
+- [`gdb.attach` Documentation](https://docs.pwntools.com/en/stable/gdb.html#pwnlib.gdb.attach)
 
 ### Enable ASLR
 

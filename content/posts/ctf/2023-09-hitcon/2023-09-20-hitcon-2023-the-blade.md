@@ -2,10 +2,10 @@
 title: HITCON 2023 – The Blade
 description: Beginner-friendly writeup for a nifty Rust reversing challenge.
 tags:
- - reverse
- - rust
- - python
- - programming
+  - reverse
+  - rust
+  - python
+  - programming
 thumbnail_src: assets/hitcon-thumbnail.jpg
 ---
 

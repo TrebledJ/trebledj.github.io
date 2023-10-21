@@ -2,11 +2,11 @@
 title: Implicit Parameters in Scala and Haskell
 description: ...and also C++ (kinda).
 tags:
- - tutorial
- - programming-languages
- - scala
- - haskell
- - cpp
+  - tutorial
+  - programming-languages
+  - scala
+  - haskell
+  - cpp
 thumbnail_src: assets/implicits-thumbnail.jpg
 related:
   tags: [programming]

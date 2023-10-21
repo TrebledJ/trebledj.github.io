@@ -2,11 +2,11 @@
 title: Browser-Based MIDI Editor
 description: MIDI transcription and editing localised in your browser.
 tags:
- - apps
- - js
- - python
- - music
- - hkust
+  - apps
+  - js
+  - python
+  - music
+  - hkust
 thumbnail_src: assets/midi-reimagined.jpg
 thumbnail_banner: true
 pitch: Developed a browser-based MIDI editor enabled with audio-to-MIDI conversion features.
