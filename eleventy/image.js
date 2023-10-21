@@ -48,7 +48,7 @@ module.exports = function (eleventyConfig) {
   // Modify classes with custom processing, returns an array of classes.
   function amendClasses(classes) {
     classes ||= [];
-    if (classes === 'string')
+    if (typeof classes === 'string')
       classes = classes.split(' ');
 
     classes.reverse(); // Add classes to the front.
@@ -193,7 +193,7 @@ module.exports = function (eleventyConfig) {
 
   // Eleventy Image shortcode
   // https://www.11ty.dev/docs/plugins/image/
-  eleventyConfig.addAsyncShortcode('image', async (src, altText, classes) => {
+  eleventyConfig.addAsyncShortcode('image', async function(src, altText, classes) {
     const file = resolveResourcePath(this.page, src);
     return imageShortcode(file, altText, classes, 'lazy');
   });
