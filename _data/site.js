@@ -49,6 +49,7 @@ module.exports = function () {
 			resultDefaultIcon: "book",
 		},
 		lightbox: {
+			// To disable lightbox, comment the plugin in plugins.js.
 			enabled: process.env.ENABLE_LIGHTBOX,
 		},
 		typewrite: {
