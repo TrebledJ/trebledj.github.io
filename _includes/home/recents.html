@@ -23,7 +23,9 @@
                     {# Find post and extract summary. #}
                     {% for post in collections.composition %}
                         {% if track_id == post.data.track_id %}
-                            <p class="recent-music-subheading"><a href="{{post.url}}">{{post.data.title | mdInline | safe}}</a></p>
+                            <p class="recent-music-subheading">
+                                <a href="{{post.url}}">{{post.data.title | mdInline | safe}}</a>
+                            </p>
                             <div class="d-flex flex-row flex-wrap align-items-center">
                                 <span>
                                     <i class="fa fa-tag post-meta-icon me-2"></i>
@@ -46,4 +48,22 @@
 
     {# Recent Projects and Experiences Section #}
     {{render_carousel(uniquePosts, "Projects and Experiences", "star", projectCategories, carouselAutoInterval)}}
+
+    <script>
+        // CRITICAL: Set carousel height based on tallest child item.
+        // Objective is to avoid subsequent CLS while minimising white-space.
+        // CLS: Content Layout Shift. Everytime the carousel changes, the
+        // height also changes, and items below will shift up/down like 
+        // a rollercoaster. This is sure to make UI designers puke.
+        [...document.querySelectorAll(".carousel")].map(e => {
+            const maxItemHeight = Math.max(...[...e.querySelectorAll(".carousel-item")].map(i => {
+                const tmp = i.style.display;
+                i.style.display = 'block'; // hack: https://stackoverflow.com/q/1473584/10239789
+                const h = i.offsetHeight;
+                i.style.display = tmp;
+                return h;
+            }));
+            e.style.height = (maxItemHeight + 5) + 'px';
+        });
+    </script>
 </div>

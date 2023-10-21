@@ -42,13 +42,7 @@ html[data-theme="light"] .hero-section {
 
 #home {
     .carousel {
-        height: 500px;
-        @include media-breakpoint-only(sm) {
-            height: 350px;
-        }
-        @include media-breakpoint-down(sm) {
-            height: 550px;
-        }
+        height: auto;
 
         .post-preview {
             @include media-breakpoint-down(lg) {
