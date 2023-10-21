@@ -25,14 +25,11 @@ jobs:
       - name: Install Node.js dependencies
         run: npm ci
 
-      - name: Install additional Node.js dependencies
-        run: npm i @typescript-eslint/eslint-plugin eslint-plugin-jsdoc eslint-plugin-prefer-arrow
-
       - name: Run linters
         uses: wearerequired/lint-action@v2
         with:
           eslint: true
-          eslint_args: "--config .eslintrc.yml --resolve-plugins-relative-to . assets/js/ eleventy/ eleventy.config.js --ignore-pattern='**/third-party/**/*.js' --ignore-pattern='**/rake-js/**'"
+          eslint_args: "--config .eslintrc.yml --ignore-path .eslintignore assets/js/ eleventy/ eleventy.config.js --ignore-pattern='**/third-party/**/*.js' --ignore-pattern='**/rake-js/**'"
           auto_fix: true
           commit_message: |
             chore(lint): fix issues with ${linter}
