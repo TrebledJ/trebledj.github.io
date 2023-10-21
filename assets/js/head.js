@@ -62,18 +62,29 @@ $(function () {
         });
     });
 
-    $('.lightbox-single').magnificPopup({
+    const lightboxCommonOptions = {
         type: 'image',
         fixedContentPos: false,
+        callbacks: {
+            open: function () {
+                $('body').addClass('noscroll');
+            },
+            close: function () {
+                $('body').removeClass('noscroll');
+            }
+        }
+    };
+
+    $('.lightbox-single').magnificPopup({
+        ...lightboxCommonOptions
     });
 
     $('.lightbox-gallery').each(function () {
         $(this).find('a').magnificPopup({
-            type: 'image',
-            fixedContentPos: false,
             gallery: {
                 enabled: true
             },
+            ...lightboxCommonOptions
         });
     });
 });
