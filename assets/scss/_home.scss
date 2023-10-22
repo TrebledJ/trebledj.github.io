@@ -45,6 +45,13 @@ html[data-theme="light"] .hero-section {
         height: auto;
 
         .post-preview {
+            @include media-breakpoint-up(lg) {
+                &:hover {
+                    transform: translate(-3px, -5px);
+                    box-shadow: 5px 15px 20px -5px rgba(5, 8, 17, 0.2);
+                }
+            }
+            
             @include media-breakpoint-down(lg) {
                 .post-preview-container {
                     min-height: 194px; // 2 rows of title.
@@ -94,7 +101,7 @@ html[data-theme="light"] .hero-section {
         // Small view, display only one post.
         .collection-list {
             @include media-breakpoint-up(md) {
-                padding: 0 0.5rem;
+                padding: 0 1rem;
             }
 
             @include media-breakpoint-down(md) {
