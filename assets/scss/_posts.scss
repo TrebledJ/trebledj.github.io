@@ -180,6 +180,26 @@ img.center {
     font-family: "Open Sans", arial, sans-serif;
 }
 
+h1, h2, h3, h4, h5, h6 {
+    &:not(:hover) {
+        .md-anchor {
+            display: none;
+        }
+    }
+}
+
+.md-anchor {
+    float: left;
+    width: 50px;
+    margin-left: -50px;
+    padding-right: 5px;
+    text-align: right;
+
+    &, &:hover {
+        color: var(--main-text-color);
+    }
+}
+
 .footnotes-sep,
 .section-sep {
     margin: $space-double 0;

@@ -1,18 +1,23 @@
 const markdownItAnchor = require('markdown-it-anchor');
-const markdownItSpoiler = require('@traptitech/markdown-it-spoiler');
 const markdownItAttrs = require('markdown-it-attrs');
 const markdownItFootnote = require('markdown-it-footnote');
+const markdownItSpoiler = require('@traptitech/markdown-it-spoiler');
 const pluginTOC = require('eleventy-plugin-toc');
 
 module.exports = function (eleventyConfig) {
   eleventyConfig.amendLibrary('md', mdLib => {
+    mdLib.use(markdownItAttrs, {
+      leftDelimiter: '{',
+      rightDelimiter: '}',
+      allowedAttributes: [], // empty array = all attributes are allowed
+    });
     mdLib.use(markdownItAnchor, {
-      // permalink: markdownItAnchor.permalink.ariaHidden({
-      //  placement: "after",
-      //  class: "md-anchor",
-      //  symbol: "§",
-      // }),
-      level: [2, 3, 4],
+      permalink: markdownItAnchor.permalink.ariaHidden({
+        placement: "before",
+        class: "md-anchor",
+        symbol: `<i class="fa-solid fa-link"></i>`,
+      }),
+      level: [2, 3, 4, 5, 6],
       slugify: eleventyConfig.getFilter('slugify'),
     });
     mdLib.use(markdownItSpoiler);
@@ -26,12 +31,6 @@ module.exports = function (eleventyConfig) {
       // }
       return n;
     };
-
-    mdLib.use(markdownItAttrs, {
-      leftDelimiter: '{',
-      rightDelimiter: '}',
-      allowedAttributes: [], // empty array = all attributes are allowed
-    });
   });
 
   eleventyConfig.addPlugin(pluginTOC, {

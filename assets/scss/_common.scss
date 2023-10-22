@@ -11,18 +11,18 @@ html {
 }
 
 a {
-    color: var(--link-color) !important;
+    color: var(--link-color);
 }
 
 a,
 a:visited {
-    text-decoration: none !important;
+    text-decoration: none;
 }
 
 // Color-shift links on hover.
 a:hover,
 a:active {
-    color: var(--link-hover-color) !important;
+    color: var(--link-hover-color);
 }
 
 abbr,
