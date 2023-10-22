@@ -13,9 +13,9 @@ module.exports = function (eleventyConfig) {
     });
     mdLib.use(markdownItAnchor, {
       permalink: markdownItAnchor.permalink.ariaHidden({
-        placement: "before",
-        class: "md-anchor",
-        symbol: `<i class="fa-solid fa-link"></i>`,
+        placement: 'before',
+        class: 'md-anchor',
+        symbol: '<i class="fa-solid fa-link"></i>',
       }),
       level: [2, 3, 4, 5, 6],
       slugify: eleventyConfig.getFilter('slugify'),
