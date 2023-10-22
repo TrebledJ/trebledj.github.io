@@ -139,3 +139,14 @@ $carousel-transition: transform 2s ease, opacity 1.5s ease-out .5s;
 .track-desc {
     line-height: $line-height-compact;
 }
+
+@include media-breakpoint-up(lg) {
+    blockquote, .sticky-right, .post-preview, .post-minified-preview {
+        opacity: $opacity-lower;
+        transition: opacity $transition-duration linear;
+
+        &:hover {
+            opacity: $opacity-full;
+        }
+    }
+}
