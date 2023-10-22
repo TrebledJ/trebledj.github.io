@@ -90,6 +90,23 @@
         }
     }
 
+    &:nth-child(2n+2) {
+        // Image on right.
+        .post-preview-container {
+            flex-direction: row-reverse;
+        }
+
+        // Align content right.
+        // .post-content {
+        //     align-items: end;
+        //     text-align: right;
+        // }
+
+        // .metadata-tag-container {
+        //     justify-content: end;
+        // }
+    }
+
     .post-thumbnail {
         @include media-breakpoint-up(sm) {
             width: 35%;

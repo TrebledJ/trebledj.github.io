@@ -123,6 +123,10 @@ html[data-theme="light"] .hero-section {
 
     .carousel-content-container {
         flex: 0 0 auto;
+        max-width: 1000px;
+        margin-left: auto;
+        margin-right: auto;
+        
         @include media-breakpoint-up(sm) {
             width: 90%;
         }
