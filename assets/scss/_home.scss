@@ -91,12 +91,6 @@ html[data-theme="light"] .hero-section {
             }
         }
 
-        @include media-breakpoint-down(lg) {
-            .tag-list span:nth-child(3) {
-                display: none;
-            }
-        }
-
         // Small view, display only one post.
         .collection-list {
             @include media-breakpoint-up(md) {
