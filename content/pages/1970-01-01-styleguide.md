@@ -39,6 +39,8 @@ Cat ipsum dolor sit amet, always hungry. **Poop** on *grasses* ~~i show my fluff
 ##### H5
 ###### H6
 
+### Custom Header ID { #example}
+
 ## Elements
 
 ### Text
