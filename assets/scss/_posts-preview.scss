@@ -66,10 +66,7 @@
         opacity: $opacity-lower; // Probably mouse-capable.
 
         &:hover {
-            -webkit-transform: translate(-3px, -5px);
-            -ms-transform: translate(-3px, -5px);
             transform: translate(-3px, -5px);
-            -webkit-box-shadow: 0 15px 45px -10px rgba(5, 8, 17, 0.2);
             box-shadow: 0 15px 45px -10px rgba(5, 8, 17, 0.2);
 
             opacity: $opacity-full;
