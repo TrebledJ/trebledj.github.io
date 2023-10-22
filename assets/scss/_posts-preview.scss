@@ -1,5 +1,4 @@
 .post-preview,
-/* .post-compressed-preview, */
 .post-minified-preview {
     width: 100%;
     max-width: 100%;
@@ -70,8 +69,7 @@
     }
 }
 
-.post-preview/* ,
-.post-compressed-preview  */{
+.post-preview {
     .post-title {
         margin-bottom: $space-half;
         font-size: 24px;
@@ -119,57 +117,13 @@
     }
 }
 
-/* .post-compressed-preview, */ .post-minified-preview {
+.post-minified-preview {
     // Vertical layout.
     .post-thumbnail {
         width: 100%;
         height: 200px;
     }
 }
-
-// .post-compressed-preview {
-//     .post-img-container {
-//         align-items: inherit;
-//     }
-
-//     .post-content {
-//         width: 100%;
-//     }
-
-//     .post-compressed-preview-container {
-//         @include media-breakpoint-up(md) {
-//             height: 435px;
-//         }
-//         @include media-breakpoint-down(md) {
-//             height: 410px;
-//         }
-//     }
-
-//     .post-title,
-//     .post-summary p {
-//         display: -webkit-box;
-//         -webkit-box-orient: vertical;
-//         text-overflow: ellipsis;
-//         overflow: hidden;
-//     }
-//     .post-title {
-//         -webkit-line-clamp: 3;
-//         min-height: 57.59px; // 2 rows of title. Avoid giant awkward chunk of space for sparse titles/desc.
-//     }
-//     .post-summary p {
-//         -webkit-line-clamp: 2;
-//     }
-
-//     @include media-breakpoint-down(sm) {
-//         .post-summary p {
-//             margin-bottom: 0;
-//         }
-
-//         .metadata-container {
-//             display: none !important;
-//         }
-//     }
-// }
 
 .post-minified-preview {
     .post-content {
