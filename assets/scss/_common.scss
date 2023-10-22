@@ -1,3 +1,19 @@
+/**
+ * Note [!important]
+ * ---
+ * Some props are marked !important.
+ *
+ * This is meant to be used sparingly. However, after much testing with
+ * Bootstrap components, I find myself with no other choice but to use this
+ * monstrous annotation.
+ *
+ * For instance, with links (<a>), Bootstrap classes tend to have higher
+ * priority (due to the amount of detail in their selector, which influences the
+ * rule ordering).
+ *
+ * Think twice before removing !important.
+ */
+
 :root {
     --default-font: var(--bs-font-sans-serif);
 }
@@ -14,19 +30,23 @@ html {
     scroll-behavior: smooth;
 }
 
+ 
 a {
-    color: var(--link-color);
+    // See Note [!important].
+    color: var(--link-color) !important;
 }
 
 a,
 a:visited {
-    text-decoration: none;
+    // See Note [!important].
+    text-decoration: none !important;
 }
 
 // Color-shift links on hover.
 a:hover,
 a:active {
-    color: var(--link-hover-color);
+    // See Note [!important].
+    color: var(--link-hover-color) !important;
 }
 
 abbr,
