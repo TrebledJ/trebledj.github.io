@@ -44,7 +44,8 @@ module.exports = function (eleventyConfig) {
 
   // Paired shortcode workaround: see Note [endalert Workaround].
   eleventyConfig.addShortcode('enddetails', () => (
-    '<div class="details-collapse-bottom"><sub><a>(collapse)</a></sub></div></div></details>'
+    // eslint-disable-next-line max-len
+    '<div class="details-collapse-bottom"><sub><a class="details-collapse-button">(collapse)</a></sub></div></div></details>'
   ));
 
   eleventyConfig.addShortcode('table', () => '<div class="table-container">');
