@@ -22,11 +22,6 @@
 .comments-sidebar-container {
     a {
         color: var(--main-text-color) !important;
-        &:hover {
-            color: #fff !important;
-            background-color: var(--bs-primary) !important;
-        }
-        cursor: pointer;
     }
 
     a.active {
@@ -59,6 +54,14 @@
 #btn-mobile-toc {
     @include media-breakpoint-down(lg) {
         display: block;
+    }
+
+    a {
+        &:hover {
+            color: #fff !important;
+            background-color: var(--bs-primary) !important;
+        }
+        cursor: pointer;
     }
 
     /* No padding on outer-most list. */
