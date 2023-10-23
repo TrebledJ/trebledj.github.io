@@ -8,6 +8,7 @@ tags:
   - reverse
   - programming
   - programming-languages
+  - oop
 usemathjax: true
 thumbnail_src: assets/thumbnail.jpg
 thumbnail_banner: true

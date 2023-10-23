@@ -5,6 +5,7 @@ updated: '2023-03-09'
 tags:
   - tutorial
   - dsp
+  - audio-synthesis-4-dummies
 thumbnail_src: assets/synthwave-a-major-space-1.jpg
 thumbnail_banner: true
 usemathjax: true

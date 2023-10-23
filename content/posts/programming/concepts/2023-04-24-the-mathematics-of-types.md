@@ -5,6 +5,7 @@ tags:
   - mathematics
   - haskell
   - types
+  - fp
   - software-engineering
   - programming-languages
 thumbnail_src: assets/abstract.jpg

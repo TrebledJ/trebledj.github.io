@@ -8,6 +8,7 @@ tags:
   - c
   - cpp
   - music
+  - audio-synthesis-4-dummies
 thumbnail_src: assets/synthwave-a-major-space-2.jpg
 thumbnail_banner: true
 usemathjax: true
