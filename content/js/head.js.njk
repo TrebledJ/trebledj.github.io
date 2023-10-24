@@ -48,7 +48,7 @@ $(() => {
   // Compress SoundCloud embed for small screens.
   if ($(window).width() < 600) {
     const s = $('.soundcloud-track iframe');
-    s.each(() => {
+    s.each(function () {
       $(this).attr('src', `${$(this).attr('src')}&visual=true`);
     });
   }
