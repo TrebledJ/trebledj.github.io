@@ -13,16 +13,6 @@ LMK if you know a better (less hacky) way of doing this.
 #}
 
 <article class="w-100 post-article" itemscope itemtype="http://schema.org/BlogPosting">
-    <div class="article-header">
-        <h1 class="post-title" id="top" itemprop="name headline">{{ title | mdInline | safe }}</h1>
-        {% if description %}
-            <p class="post-desc" itemprop="alternativeHeadline">{{ description | mdInline | safe }}</p>
-        {% endif %}
-        {% set post = collections.posts | getCollectionItem %}
-        {% include "post/metadata.html" %}
-    </div>
-    <br/>
-
     <div class="row d-flex flex-row-reverse gx-6">
         <div class="col-lg-4">
             {% include "sidebars/toc-sidebar.html" %}
