@@ -87,7 +87,9 @@
     // *:not(ul, ol, li, hr, svg, p>a, .gist *) 
     p,
     blockquote,
-    img,
+    // img,
+    .lightbox-single,
+    .lightbox-gallery,
     table:not(.gist *),
     .gist,
     .video,
