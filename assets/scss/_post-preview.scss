@@ -91,9 +91,13 @@
     }
 
     &:nth-child(2n+2) {
-        // Image on right.
         .post-preview-container {
+            // Image on right.
             flex-direction: row-reverse;
+
+            @include media-breakpoint-down(sm) {
+                flex-direction: column;
+            }
         }
 
         // Align content right.
