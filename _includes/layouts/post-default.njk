@@ -12,13 +12,30 @@ would lead to the right sidebar being loaded after a noticeable delay.
 LMK if you know a better (less hacky) way of doing this.
 #}
 
-<article class="w-100 post-article" itemscope itemtype="http://schema.org/BlogPosting">
-    <div class="row d-flex flex-row-reverse gx-6">
-        <div class="col-lg-4">
-            {% include "sidebars/toc-sidebar.html" %}
-        </div>
+{% set hastoc = (content | tocFast) and (not notoc) %}
 
-        <div class="col-lg-8">
+<article class="w-100 post-article" itemscope itemtype="http://schema.org/BlogPosting">
+    <div class="article-header">
+        <h1 class="post-title" id="top" itemprop="name headline">{{ title | mdInline | safe }}</h1>
+        {% if description %}
+            <p class="post-desc" itemprop="alternativeHeadline">{{ description | mdInline | safe }}</p>
+        {% endif %}
+        {% set post = collections.posts | getCollectionItem %}
+        {% include "post/metadata.html" %}
+    </div>
+    <hr/>
+    <div class="row d-flex flex-row-reverse gx-6">
+        {% if hastoc %}
+            <div class="col-lg-4">
+                {% include "sidebars/toc-sidebar.html" %}
+            </div>
+
+            {% set centering = "" %}
+        {% else %}
+            {% set centering = "ms-auto me-auto" %}
+        {% endif %}
+
+        <div class="col-lg-8 {{centering}}">
             {% include "post/article.html" %}
             <a id="end-of-article"></a>
             <br/>

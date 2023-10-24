@@ -4,6 +4,8 @@ const markdownItFootnote = require('markdown-it-footnote');
 const markdownItSpoiler = require('@traptitech/markdown-it-spoiler');
 const pluginTOC = require('eleventy-plugin-toc');
 
+const { createHash } = require('crypto');
+
 module.exports = function (eleventyConfig) {
   eleventyConfig.amendLibrary('md', mdLib => {
     mdLib.use(markdownItAttrs, {
@@ -37,5 +39,16 @@ module.exports = function (eleventyConfig) {
     tags: ['h2', 'h3'],
     ul: false,
     // wrapper: 'div'
+  });
+
+  const tocMemo = {};
+  eleventyConfig.addFilter('tocFast', content => {
+    const hash = createHash('md5').update(content.slice(0, 200)).digest('base64');
+    if (typeof tocMemo[hash] !== 'undefined')
+      return tocMemo[hash];
+
+    const toc = eleventyConfig.getFilter('toc')(content);
+    tocMemo[hash] = toc;
+    return toc;
   });
 };
