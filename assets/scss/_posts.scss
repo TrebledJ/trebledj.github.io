@@ -37,25 +37,29 @@
     }
 
     .metadata-container {
-        @include media-breakpoint-up(md) {
+        @include media-breakpoint-between(md, lg) {
             flex-direction: row;
             align-items: center;
+
+            .post-updated-date-icon {
+                display: none;
+            }
+        
+            .post-posted-date::after,
+            .post-updated-date::after {
+                content: "|";
+                margin-right: 0.3rem;
+                font-size: 1rem;
+            }
+        }
+
+        @include media-breakpoint-up(lg) {
+            flex-direction: column;
+            margin-top: 0.5rem;
         }
         @include media-breakpoint-down(md) {
             flex-direction: column;
-        }
-    }
-
-    @include media-breakpoint-up(md) {
-        .post-updated-date-icon {
-            display: none;
-        }
-
-        .post-posted-date::after,
-        .post-updated-date::after {
-            content: "|";
-            margin: 0 0.5rem;
-            font-size: 1rem;
+            margin-top: 0.5rem;
         }
     }
 }

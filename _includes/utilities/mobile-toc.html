@@ -1,6 +1,7 @@
 <!-- Mobile ToC -->
 {% set toc = content | tocFast %}
-{% if toc and title != '404' %}
+{% set hastoc = (not notoc) and toc %}
+{% if hastoc and title != '404' %}
     <div id="btn-mobile-toc" class="dropup">
         <button type="button" class="btn btn-floating btn-lg" data-bs-toggle="dropdown" aria-label="Content">
             <i class="fa fa-list-ul"></i>
