@@ -1,0 +1,5 @@
+_site/
+assets/js/third-party/
+archive/
+scripts/
+eleventy/detail/rake-js/

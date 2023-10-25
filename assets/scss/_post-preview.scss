@@ -1,0 +1,179 @@
+.post-preview,
+.post-minified-preview {
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: $space-threehalves;
+
+    // Nested anchors: https://stackoverflow.com/a/52076345/10239789.
+    position: relative;
+
+    & > a {
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+    }
+
+    // ---
+
+    overflow: hidden;
+
+    border-radius: $border-radius;
+    border: $border-width-block solid var(--light-border-color);
+    box-shadow: 0 1px 1px 0 rgba(31, 35, 46, 0.15);
+
+    transition: all $transition-duration ease !important;
+
+    .post-thumbnail {
+        position: relative;
+        overflow: hidden;
+
+        .post-img-contain {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            z-index: 2;
+        }
+
+        .post-img-blurred-bg {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: blur(12px);
+            z-index: 1;
+        }
+    }
+
+    .post-content {
+        padding: $space-container-base;
+
+        p {
+            margin-top: 0;
+        }
+    }
+
+    .post-posted-date::after {
+        content: "|";
+        margin: 0 0.5rem 0 0.3rem;
+        font-size: 1rem;
+    }
+
+    @include media-breakpoint-up(lg) {
+        &:hover {
+            transform: translate(-3px, -5px);
+            box-shadow: 0 15px 45px -10px rgba(5, 8, 17, 0.2);
+        }
+    }
+}
+
+.post-preview {
+    .post-title {
+        margin-bottom: $space-half;
+        font-size: 24px;
+        font-weight: 400;
+    }
+
+    .post-summary {
+        line-height: $line-height-compact;
+        font-size: 14px;
+    }
+}
+
+.post-preview {
+    .post-preview-container {
+        flex-direction: row;
+        @include media-breakpoint-down(sm) {
+            flex-direction: column;
+        }
+    }
+
+    &:nth-child(2n+2) {
+        .post-preview-container {
+            // Image on right.
+            flex-direction: row-reverse;
+
+            @include media-breakpoint-down(sm) {
+                flex-direction: column;
+            }
+        }
+
+        // Align content right.
+        // .post-content {
+        //     align-items: end;
+        //     text-align: right;
+        // }
+
+        // .metadata-tag-container {
+        //     justify-content: end;
+        // }
+    }
+
+    .post-thumbnail {
+        @include media-breakpoint-up(sm) {
+            width: 35%;
+            height: inherit; // height isn't defined, so we'll auto-fit to parent height.
+        }
+        @include media-breakpoint-down(sm) {
+            width: 100%;
+            min-height: 200px;
+        }
+    }
+
+    .post-content {
+        @include media-breakpoint-up(sm) {
+            width: 65%;
+        }
+        @include media-breakpoint-down(sm) {
+            width: 100%;
+        }
+    }
+
+    .post-img-container {
+        @include media-breakpoint-up(sm) {
+            align-items: center;
+        }
+    }
+}
+
+.post-minified-preview {
+    // Vertical layout.
+    .post-thumbnail {
+        width: 100%;
+        height: 200px;
+    }
+}
+
+.post-minified-preview {
+    .post-content {
+        width: 100%;
+    }
+
+    // Smaller title.
+    .post-title {
+        margin-bottom: $space-half;
+        font-size: 18px;
+        font-weight: 700;
+        line-height: $line-height-cozy;
+    }
+
+    .post-summary {
+        line-height: $line-height-cozy;
+    }
+}
+
+.post-preview-list {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+// Nested anchors: https://stackoverflow.com/a/52076345/10239789.
+.tag-list {
+    pointer-events: none;
+
+    .tag {
+        pointer-events: all;
+    }
+}

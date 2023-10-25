@@ -1,10 +1,11 @@
+// eslint-disable-next-line no-unused-vars
 async function InfiniteLoader(params) {
-  const dataFile = params.data;                             // The JSON data file to load data from.
-  const initialLoad = params.items.num || 10;               // Number of items to load initially.
+  const dataFile = params.data; // The JSON data file to load data from.
+  const initialLoad = params.items.num || 10; // Number of items to load initially.
   const subsequentLoad = params.items.after || initialLoad; // Number of items to load subsequently on scroll.
-  const html = params.html || (item => item);               // The HTML data to load.
-  const appendElement = params.append || '.post-list';      // Where to insert the items.
-  const scrollPercentageTrigger = 90;                       // Scroll percentage when we should trigger a subsequent load (0-100).
+  const html = params.html || (item => item); // The HTML data to load.
+  const appendElement = params.append || '.post-list'; // Where to insert the items.
+  const scrollPercentageTrigger = 90; // Scroll percentage when we should trigger a subsequent load (0-100).
 
   if (!dataFile)
     return console.error('no data file specified');
@@ -26,19 +27,18 @@ async function InfiniteLoader(params) {
   fetchPosts(initialLoad);
 
   // If there's no spinner, it's not a page where items should be fetched.
-  if ($(".infinite-spinner").length < 1)
+  if ($('.infinite-spinner').length < 1)
     shouldFetchPosts = false;
 
-  $(window).on('scroll', e => {
+  $(window).on('scroll', () => {
     if (!shouldFetchPosts || isFetchingPosts || !items || loadedItems >= items.length)
       return;
 
     // Are we close to the end of the page? If we are, load more items.
     const scrollPercentage = 100 * $(window).scrollTop() / ($(document).height() - $(window).height());
 
-    if (scrollPercentage > scrollPercentageTrigger) {
+    if (scrollPercentage > scrollPercentageTrigger)
       fetchPosts(subsequentLoad);
-    }
   });
 
   // Fetch a chunk of items.
@@ -63,7 +63,6 @@ async function InfiniteLoader(params) {
     isFetchingPosts = false;
   }
 
-
   // Fetches a post associated with the given index.
   function fetchPostWithIndex(index) {
     const item = items[index];
@@ -74,9 +73,8 @@ async function InfiniteLoader(params) {
     } else if (typeof html === 'string') {
       // Use the string directly.
       // x = html;
-    } else {
-      console.error("unrecognised html generator type:", typeof html);
-    }
+    } else { console.error('unrecognised html generator type:', typeof html); }
+
     $(x).appendTo(appendElement);
   }
 
@@ -84,6 +82,6 @@ async function InfiniteLoader(params) {
     // No more posts should be fetched after calling this function...
     shouldFetchPosts = false;
     isFetchingPosts = false;
-    $(".infinite-spinner").fadeOut();
+    $('.infinite-spinner').fadeOut();
   }
 }

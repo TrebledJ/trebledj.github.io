@@ -1,3 +1,23 @@
+/**
+ * Note [!important]
+ * ---
+ * Some props are marked !important.
+ *
+ * This is meant to be used sparingly. However, after much testing with
+ * Bootstrap components, I find myself with no other choice but to use this
+ * monstrous annotation.
+ *
+ * For instance, with links (<a>), Bootstrap classes tend to have higher
+ * priority (due to the amount of detail in their selector, which influences the
+ * rule ordering).
+ *
+ * Think twice before removing !important.
+ */
+
+:root {
+    --default-font: var(--bs-font-sans-serif);
+}
+
 * {
     transition: background-color $transition-duration ease-in, border-color $transition-duration ease-in;
 }
@@ -10,18 +30,22 @@ html {
     scroll-behavior: smooth;
 }
 
+ 
 a {
+    // See Note [!important].
     color: var(--link-color) !important;
 }
 
 a,
 a:visited {
+    // See Note [!important].
     text-decoration: none !important;
 }
 
 // Color-shift links on hover.
 a:hover,
 a:active {
+    // See Note [!important].
     color: var(--link-hover-color) !important;
 }
 
@@ -33,10 +57,12 @@ abbr:active {
 }
 
 body {
+    --bs-body-font-family: 'Lucida Grande', sans-serif;
+    
     background-color: var(--main-background-color) !important;
     color: var(--main-text-color) !important;
     font-feature-settings: "kern" on;
-    font-size: 1rem;
+    font-size: 16px;
     font-variant-numeric: oldstyle-nums;
     hanging-punctuation: first last;
     height: 100%;
@@ -51,13 +77,10 @@ body {
 blockquote {
     padding: $space-base $space-base $space-base $space-base * 1.5;
     overflow: auto;
-    opacity: $opacity-lower;
 
     background: var(--main-background-color);
     border: none;
     border-left: $border-width-thick solid #3642df;
-
-    // border-radius: $border-radius;
 
     &>*:last-child {
         margin-bottom: 0;
@@ -82,6 +105,7 @@ h4,
 h5,
 h6 {
     color: var(--bold-color);
+    font-family: var(--default-font); // Default.
 }
 
 hr {

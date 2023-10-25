@@ -1,5 +1,5 @@
 #toc-sidebar {
-    line-height: $line-height-compact;
+    line-height: $line-height-cozy;
 
     @include media-breakpoint-down(lg) {
         // Small screen: bye bye sidebar.
@@ -22,11 +22,6 @@
 .comments-sidebar-container {
     a {
         color: var(--main-text-color) !important;
-        &:hover {
-            color: #fff !important;
-            background-color: var(--bs-primary) !important;
-        }
-        cursor: pointer;
     }
 
     a.active {
@@ -61,6 +56,14 @@
         display: block;
     }
 
+    a {
+        &:hover {
+            color: #fff !important;
+            background-color: var(--bs-primary) !important;
+        }
+        cursor: pointer;
+    }
+
     /* No padding on outer-most list. */
     nav.toc > ol {
         padding-left: 0rem;
@@ -73,6 +76,6 @@
     .toc {
         margin-left: 0;
         overflow-y: auto;
-        max-height: calc(100vh - ($header-height + 100px));
+        max-height: calc(90vh - ($header-height + 100px));
     }
 }

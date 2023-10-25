@@ -1,8 +1,8 @@
 ---
 layout: layouts/page-default
 assets:
-    js:
-     - /js/post.js
+  js:
+    - /js/post.js
 ---
 
 {# This is a hack to get the right sidebar to be parsed and loaded first. We
@@ -11,29 +11,55 @@ would lead to the right sidebar being loaded after a noticeable delay.
 
 LMK if you know a better (less hacky) way of doing this.
 #}
-<div class="row d-flex flex-row-reverse gx-6">
-    <div class="col-lg-4">
-        {% include "sidebars/toc-sidebar.html" %}
-    </div>
 
-    <div class="col-lg-8">
-        {% include "post/article.html" %}
-        <a id="end-of-article"></a>
-        <br/>
-        {% if sharable %}
-            {% include "post/share.html" %}
-        {% endif %}
-        <hr/>
-        {% include "author/social.html" %}
-        {% if related %}
-            {% include "post/related.html" %}
-        {% endif %}
-        {% if comments %}
-            <hr class="section-sep"/>
-            <div class="container mt-4 p-4">
-                {% include "post/comments.html" %}
+{% set hastoc = (not notoc) and (content | tocFast) %}
+
+<article class="w-100 post-article" itemscope itemtype="http://schema.org/BlogPosting">
+    <div class="row d-flex gx-6">
+        <div class="col-lg-8">
+            <div class="article-header">
+                <h1 class="post-title" itemprop="name headline">{{ title | mdInline | safe }}</h1>
+                {% if description %}
+                    <p class="post-desc" itemprop="alternativeHeadline">{{ description | mdInline | safe }}</p>
+                {% endif %}
             </div>
-        {% endif %}
-        <br/>
+        </div>
+        <div class="col-lg-4">
+            {% set post = collections.posts | getCollectionItem %}
+            {% include "post/metadata.html" %}
+        </div>
     </div>
-</div>
+    <hr/>
+    <div class="row d-flex flex-row-reverse gx-6">
+        {% if hastoc %}
+            <div class="col-lg-4">
+                {% include "sidebars/toc-sidebar.html" %}
+            </div>
+
+            {% set centering = "" %}
+        {% else %}
+            {% set centering = "ms-auto me-auto" %}
+        {% endif %}
+
+        <div class="col-lg-8 {{centering}}">
+            {% include "post/article.html" %}
+            <a id="end-of-article"></a>
+            <br/>
+            {% if sharable %}
+                {% include "post/share.html" %}
+            {% endif %}
+            <hr/>
+            {% include "author/social.html" %}
+            {% if related %}
+                {% include "post/related.html" %}
+            {% endif %}
+            {% if comments %}
+                <hr class="section-sep"/>
+                <div class="container mt-4 p-4">
+                    {% include "post/comments.html" %}
+                </div>
+            {% endif %}
+            <br/>
+        </div>
+    </div>
+</article>

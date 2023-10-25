@@ -1,6 +1,6 @@
 module.exports = {
-    ogsection: "programming",
-    tags: [
-        "programming",
-    ],
-}
+  ogsection: 'programming',
+  tags: [
+    'programming',
+  ],
+};

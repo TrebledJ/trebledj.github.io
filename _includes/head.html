@@ -10,6 +10,9 @@
         {% endfor %}
     {% endif %}
 
+    {% if site.lightbox.enabled %}
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/magnific-popup@1.1.0/dist/magnific-popup.min.css" media="print"/>
+    {% endif %}
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.min.css" media="print"/>
     <link rel="stylesheet" href="/css/third-party/prism-diff.css" media="print"/>
 
@@ -18,19 +21,17 @@
             <link rel="stylesheet" href="{{asset}}" media="print"/>
         {% endfor %}
     {% endif %}
-    
-    {% include "utilities/async-css.html" %}
 
-    <script>
-        var searchResultIcons = {{site.search.resultIcons | dump | safe}};
-        var searchResultDefaultIcon = '{{site.search.resultDefaultIcon}}';
-    </script>
+    {% include "utilities/async-css.html" %}
     {% include "utilities/theme-switch.html" %}
 
     <link rel="icon" href="/img/favicon.ico" type="image/png" sizes="16x16"/>
 
     {# Critical scripts here. Other scripts should go at end of body to avoid blocking DOM load. #}
     <script defer src="https://cdn.jsdelivr.net/npm/jquery@3.7.0/dist/jquery.min.js"></script>
+    {% if site.lightbox.enabled %}
+        <script defer src="https://cdn.jsdelivr.net/npm/magnific-popup@1.1.0/dist/jquery.magnific-popup.min.js"></script>
+    {% endif %}
 
     {% if assets and assets.critical_js %}
         {% for asset in assets.critical_js %}

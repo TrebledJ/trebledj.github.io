@@ -1,3 +1,5 @@
+{% from "post/preview.html" import render_post_minified_preview %}
+
 {% set this = collections.posts | getCollectionItem %}
 {% if this %}
     {% set relatedPosts = collections.postsr | getRelatedPosts(this, related) %}
@@ -11,7 +13,7 @@
             <div class="row gx-3 mt-4">
                 {% for post in relatedPosts %}
                     <div class="related-col-flex-auto-4">
-                        {% include "post/preview-compressed.html" %}
+                        {{ render_post_minified_preview(post) }}
                     </div>
                 {% endfor %}
             </div>

@@ -1,28 +1,74 @@
-{% macro render_preview(post, taglimit=3, excludeTags=[]) %}
-<article class="post-preview">
-    <a href="{{post.url}}" tabindex="-1"></a>
-    <div class="post-preview-container d-flex">
-        <a class="post-thumbnail" href="{{post.url}}">
-            {% thumbnail post, "post-img-blurred-bg" %}
-            <div class="post-img-container d-flex w-100 h-100">
-                {% thumbnail post, "post-img-contain" %}
-            </div>
-        </a>
-    
-        <div class="post-content d-flex flex-column justify-content-between">
-            <a href="{{post.url}}" tabindex="-1"></a>
-            <div>
-                <h2 class="post-title mb-3">
-                    {{ post.data.title | mdInline | safe }}
-                </h2>
-                {% if post.data.description %}
-                <div class="post-summary">
-                    <p>{{ post.data.description | mdInline | safe }}</p>
-                </div>
-                {% endif %}
-            </div>
-            {% include "post/metadata-preview.html" %}
+{% macro render_thumbnail(post) %}
+    <a class="post-thumbnail" href="{{post.url}}">
+        {% thumbnail post, "post-img-blurred-bg" %}
+        <div class="post-img-container d-flex w-100 h-100">
+            {% thumbnail post, "post-img-contain" %}
         </div>
-    </div>
-</article>
+    </a>
+{% endmacro %}
+
+{% macro render_title(post) %}
+    <h2 class="post-title">
+        {{ post.data.title | mdInline | safe }}
+    </h2>
+    {% if post.data.description %}
+        <div class="post-summary">
+            <p>{{ post.data.description | mdInline | safe }}</p>
+        </div>
+    {% endif %}
+{% endmacro %}
+
+{% macro render_post_preview(post, taglimit = 3, excludeTags = []) %}
+    <article class="post-preview">
+        <a href="{{post.url}}" tabindex="-1"></a>
+        <div class="post-preview-container d-flex">
+            {{ render_thumbnail(post) }}
+
+            {# <a href="{{post.url}}" tabindex="-1"></a> #}
+            <div class="post-content d-flex flex-column justify-content-between">
+                <div>
+                    {{ render_title(post) }}
+                </div>
+                <div>
+                    {% include "post/metadata-preview.html" %}
+                </div>
+            </div>
+        </div>
+    </article>
+{% endmacro %}
+
+{# OBSOLE3T #}
+{% macro render_post_compressed_preview(post, taglimit = 3, excludeTags = []) %}
+    <article class="post-compressed-preview">
+        <a href="{{post.url}}" tabindex="-1"></a>
+        <div class="post-compressed-preview-container d-flex flex-column">
+            {{ render_thumbnail(post) }}
+
+            {# <a href="{{post.url}}" tabindex="-1"></a> #}
+            <div class="post-content d-flex flex-column justify-content-between flex-grow-1">
+                <div>
+                    {{ render_title(post) }}
+                </div>
+                <div>
+                    {% include "post/metadata-preview.html" %}
+                </div>
+            </div>
+        </div>
+    </article>
+{% endmacro %}
+
+{% macro render_post_minified_preview(post) %}
+    <article class="post-minified-preview">
+        <a href="{{post.url}}"></a>
+        <div class="d-flex flex-column">
+            {{ render_thumbnail(post) }}
+
+            {# <a href="{{post.url}}"></a> #}
+            <div class="post-content d-flex flex-column justify-content-between">
+                <div>
+                    {{ render_title(post) }}
+                </div>
+            </div>
+        </div>
+    </article>
 {% endmacro %}

@@ -2,18 +2,18 @@
 title:  "Styleguide. This is a super long title post. Longer than the distance between my pinky and my elbow. Maybe."
 description: "This is a supperrrrrrrr longggggg description... designed to test the limits of the measly little box that contains it. Who knows if it'll hold?"
 tags:
- - qt
- - qml
- - python
- - software-engineering
- - programming
- - cpp
- - song
- - stm32
- - electronic
- - music
- - composition
- - learning
+  - qt
+  - qml
+  - python
+  - software-engineering
+  - programming
+  - cpp
+  - song
+  - stm32
+  - electronic
+  - music
+  - composition
+  - learning
 thumbnail_banner: true
 keywords: test key words
 usemathjax: true
@@ -38,6 +38,8 @@ Cat ipsum dolor sit amet, always hungry. **Poop** on *grasses* ~~i show my fluff
 #### H4
 ##### H5
 ###### H6
+
+### Custom Header ID { #example}
 
 ## Elements
 
@@ -99,7 +101,7 @@ Break
         ```
        1. Isn't 
             
-            {% image "~/assets/img/memes/nou.jpg", "Full width!", "post1" %}
+            {% image "~/assets/img/memes/nou.jpg", "Full width!" %}
 
             <sup>(caption)</sup>
             {.caption}
@@ -109,16 +111,16 @@ Break
        2. that
     
     2. just
-       - awesome?
-       - awesome?
-       - awesome?
+        - awesome?
+        - awesome?
+        - awesome?
     3. I
        
-       - know
+        - know
 
-       - it 
+        - it 
 
-       - right?
+        - right?
 
 Text.
 
@@ -158,7 +160,7 @@ Let's try that again.
 
 4. ~~Extract~~ Untame the stuck honey, and crumbulate it in the Rockwell *dual-gyzmo combobulator*.
 
-    {% image "~/assets/img/memes/nou.jpg", "Full width!", "post1" %}
+    {% image "~/assets/img/memes/nou.jpg", "Full width!" %}
     
 ### Math
 
@@ -206,26 +208,38 @@ Check line breaks here:
 >
 > $$a ^ a = <3$$
 >
-> {% image "~/assets/img/memes/nou.jpg", "Full width!", "post1" %}
+> {% image "~/assets/img/memes/nou.jpg", "Full width!" %}
 > 
 
 
 ### Images
 
-{% image "https://imgs.xkcd.com/comics/purity.png", "Full-width image.", "post1" %}
+{% image "https://imgs.xkcd.com/comics/purity.png", "Full-width image." %}
 
-{% image "~/assets/img/memes/unlimited-power.jpg", "Muahahahaha! Fear the power of alt text.", "post1 w-85" %}
+{% image "~/assets/img/memes/unlimited-power.jpg", "Muahahahaha! Fear the power of alt text.", "w-85" %}
 
 <sup>Have you heard of Darth Plagueis the Wise?^[No? Then allow me to entertain you...]</sup>
 {.caption}
 
-{% images %}
+We can splay multiple images in a row too!
+
+{% images "h-auto rw" %}
 {% image "~/assets/img/memes/404-1.jpg", "first" %}
 {% image "~/assets/img/memes/404-2.jpg", "second" %}
 {% image "~/assets/img/memes/404-3.jpg", "third" %}
 {% endimages %}
 
-<sup>Although this isn't the multiverse, multi-images are great fun too!</sup>
+<sup>Although this isn't the multiverse, multi-images are great fun too! (`images "h-auto rw"`)</sup>
+{.caption}
+
+Did I mention that equal-height layouts are a thing!? This is made possible with `h-auto`. 
+
+{% images "h-auto w-80" %}
+{% image "~/assets/img/memes/404-4.jpg", "first" %}
+{% image "~/assets/img/memes/interesting.jpg", "second" %}
+{% endimages %}
+
+<sup>Two images are better than one, for if either of them ~~falls~~ sucks, one can help the other up. (`images "h-auto w-80"`)</sup>
 {.caption}
 
 {% images %}
@@ -233,9 +247,8 @@ Check line breaks here:
 {% image "~/assets/img/memes/interesting.jpg", "second" %}
 {% endimages %}
 
-<sup>...even if it's just two...</sup>
+<sup>Equal-width. No `h-auto` here. (`images ""`)</sup>
 {.caption}
-
 
 ### Tables
 
@@ -343,7 +356,7 @@ Its wings are too small to get its fat little body off the ground. The bee, of c
 {% endalert %}
 
 {% alert "success" %}
-{% image "~/assets/img/memes/nou.jpg", "", "post1" %}
+{% image "~/assets/img/memes/nou.jpg", "" %}
 
 > Trust in the Lord with all your heart, and lean not on your own understanding.
 > In all your ways, submit to Him, and He will make your paths straight.

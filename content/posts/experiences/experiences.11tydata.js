@@ -1,6 +1,6 @@
 module.exports = {
-	ogsection: "experience",
-	tags: [
-		"experience"
-	],
+  ogsection: 'experience',
+  tags: [
+    'experience',
+  ],
 };

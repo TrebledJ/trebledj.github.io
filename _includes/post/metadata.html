@@ -12,7 +12,7 @@
         </span>
         <span class="post-date post-posted-date">
             {% block post_metadata_date %}
-        Posted on {{ page.date | date | safe }}
+                Posted on <span itemprop="dateCreated">{{ page.date | date | safe }}</span>
             {% endblock %}
         </span>
     </div>
@@ -26,7 +26,7 @@
                     <i class="fa fa-calendar post-meta-icon me-1"></i>
                 </span>
                 <span class="post-date post-updated-date">
-                Updated on {{ updatedDate | date | safe }}
+                    Updated on <span itemprop="dateModified">{{ updatedDate | date | safe }}</span>
                 </span>
             {% endif %}
         {% endblock %}

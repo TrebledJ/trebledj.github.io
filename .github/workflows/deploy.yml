@@ -10,9 +10,14 @@ on:
       - '!.gitignore'
       - '!*.md'
       - '!LICENSE'
+      - '!.eslintignore'
+      - '!.eslintrc.yml'
       - '!.github/**'
+      - '!.lycheeignore'
       - '!.vscode/**'
       - '!archive/**'
+      - '!scripts/**'
+      - '!ust/**'
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -57,7 +62,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v3
         with:
-          node-version: "16"
+          node-version: 16
           cache: ${{ steps.detect-package-manager.outputs.manager }}
 
       - name: Setup Pages

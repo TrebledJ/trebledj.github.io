@@ -62,12 +62,13 @@ $carousel-transition: transform 2s ease, opacity 1.5s ease-out .5s;
 // @import "timeline2";
 
 @import "posts";
+@import "post-preview";
+@import "post-author";
 @import "spinner";
 @import "home";
 @import "navbar";
 @import "search";
 @import "profile";
-@import "post-author";
 @import "toc-sidebar";
 
 
@@ -131,6 +132,22 @@ $carousel-transition: transform 2s ease, opacity 1.5s ease-out .5s;
     opacity: $opacity-lowest;
 }
 
+.noscroll {
+    overflow-y: hidden !important;
+}
+
 .track-desc {
     line-height: $line-height-compact;
+}
+
+// Interactive opaque on hover (only for large screens).
+@include media-breakpoint-up(lg) {
+    blockquote, .sticky-right, .post-preview, .post-minified-preview {
+        opacity: $opacity-lower;
+        transition: opacity $transition-duration linear;
+
+        &:hover {
+            opacity: $opacity-full;
+        }
+    }
 }

@@ -1,0 +1,103 @@
+$(async function () {
+  const searchResultIcons = {{site.search.resultIcons | dump | safe}};
+  const searchResultDefaultIcon = '{{site.search.resultDefaultIcon}}';
+
+  const store = await (await fetch('/search.json')).json();
+  const idx = lunr(function () {
+    this.ref('id');
+    this.field('title', { boost: 50 });
+    this.field('keywords');
+    this.field('tags', { boost: 30 });
+    this.pipeline.remove(lunr.trimmer);
+    this.pipeline.remove(lunr.stopWordFilter);
+    for (const i in store) {
+      this.add({
+        id: i,
+        title: store[i].title,
+        keywords: store[i].keywords,
+        tags: store[i].tags,
+      });
+    }
+  });
+
+  const resultdiv = $('#search-results-list');
+  const searchBox = $('input#search-box');
+
+  function getItemParams(idx) {
+    const item = store[idx];
+    switch (item.type) {
+      case "tag":
+        return {
+          icon: "tag",
+          head: `<a class="tag" href="${item.url}">${item.title}</a>`,
+          desc: item.description,
+        };
+      case "post":
+        const tags = item.tags;
+        const head = `<a href="${item.url}">${item.title}</a>
+                  <a class="tag ms-2" href="/tags/${tags[0]}">${tags[0]}</a>`;
+        const desc = item.description;
+
+        for (const {tag, icon} of searchResultIcons) {
+          if (tags.includes(tag))
+            return {icon, head, desc};
+        }
+
+        return { icon: searchResultDefaultIcon, head, desc };
+    }
+  }
+
+  function addResults(result) {
+    resultdiv.empty();
+    resultdiv.prepend(`<p class="search-results-list__count ps-1">${result.length} result(s) found</p>`);
+
+    for (const item in result) {
+      const idx = result[item].ref;
+      const { icon, head, desc } = getItemParams(idx);
+
+      const child = $(`
+      <div class="d-flex flex-row align-items-center p-2 border-bottom search-results-list__item">
+          <i class="fa fa-${icon} fs-5"></i>
+          <div class="d-flex flex-column ms-3">
+              <h6 class="d-flex align-items-center mb-0">${head}</h6>
+              <span>${desc}</span>
+          </div>
+      </div>
+      `);
+      child.appendTo(resultdiv);
+    }
+  }
+
+  searchBox.on('keyup', function () {
+    const query = $(this).val().toLowerCase();
+
+    // if (!query.trim())
+    //   return; // Ignore empty input.
+
+    const result =
+      idx.query(function (q) {
+        query.split(lunr.tokenizer.separator).forEach(term => {
+          if (!term.trim())
+            return;
+
+          q.term(term, { boost: 1 }); // With stemmer, resolve to similar word.
+
+          if (query[query.length - 1] != ' ') {
+            // Handle continuing words.
+            q.term(term, { usePipeline: false, wildcard: lunr.Query.wildcard.TRAILING, boost: 10 });
+          }
+
+          // Handle possible typos or near words.
+          let d = (term.length >= 8 ? 2 : term.length >= 5 ? 1 : 0);
+          q.term(term, { usePipeline: false, editDistance: d, boost: 1 });
+        })
+      });
+
+    addResults(result);
+  });
+
+  $('.modal').on('shown.bs.modal', function () {
+    $(this).find('[autofocus]').trigger("focus");
+    searchBox.trigger("keyup");
+  });
+});

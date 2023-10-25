@@ -1,0 +1,23 @@
+<article class="post-minified-preview">
+    <a href="{{post.url}}"></a>
+    <div class="d-flex flex-column">
+        <a class="post-thumbnail flex-column" href="{{post.url}}">
+            {% thumbnail post, "post-img-blurred-bg" %}
+            <div class="post-img-container d-flex w-100 h-100">
+                {% thumbnail post, "post-img-contain" %}
+            </div>
+        </a>
+
+        <div class="post-content d-flex flex-column justify-content-between">
+            <a href="{{post.url}}"></a>
+            <div>
+                <b class="post-title">{{ post.data.title | mdInline | safe }}</b>
+                {% if post.data.description %}
+                    <div class="post-summary">
+                        <p>{{ post.data.description | mdInline | safe }}</p>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</article>
