@@ -55,7 +55,7 @@ module.exports = function () {
       enabled: process.env.ENABLE_LIGHTBOX,
     },
     banner: {
-      enabled: true,
+      enabled: false,
       sticky: true,
       icon: 'rocket',
       content: 'Hello world!',
