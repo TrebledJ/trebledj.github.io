@@ -56,6 +56,7 @@ module.exports = function () {
     },
     banner: {
       enabled: true,
+      sticky: true,
       icon: 'rocket',
       content: 'Hello world!',
     },

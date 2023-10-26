@@ -1,5 +1,5 @@
 {% if site.banner.enabled %}
-    <div id="banner-container">
+    <div id="banner-container" class="{{ 'sticky-banner' if site.banner.sticky }}">
         <div id="banner" class="bg-primary collapsed">
             <div id="banner-content" class="text-white">
                 <i class="fas fa-{{site.banner.icon}} fs-4 me-2"></i>
