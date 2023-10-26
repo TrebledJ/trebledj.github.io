@@ -97,8 +97,9 @@ $(() => {
 {% endif %}
 
 {% if site.banner.enabled %}
-  $('#banner .btn-close').on('click', function () {
+  $('#banner .btn-close').on('click', () => {
     $('#banner').addClass('collapsed');
+    sessionStorage.setItem('bannerClosed', true);
   });
 {% endif %}
 });
