@@ -1,0 +1,11 @@
+{% if site.banner.enabled %}
+    <div id="banner-container">
+        <div id="banner" class="bg-primary">
+            <div id="banner-content" class="text-white">
+                <i class="fas fa-{{site.banner.icon}} fs-4 me-2"></i>
+                {{site.banner.content | mdInline | safe}}
+            </div>
+            <button aria-label="Close" class="btn-close" type="button"></button>
+        </div>
+    </div>
+{% endif %}

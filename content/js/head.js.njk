@@ -95,4 +95,10 @@ $(() => {
     });
   });
 {% endif %}
+
+{% if site.banner.enabled %}
+  $('#banner .btn-close').on('click', function () {
+    $('#banner').addClass('collapsed');
+  });
+{% endif %}
 });

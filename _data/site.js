@@ -51,8 +51,13 @@ module.exports = function () {
       resultDefaultIcon: 'book',
     },
     lightbox: {
-      // To disable lightbox, comment the plugin in plugins.js.
+      // To disable lightbox, comment out the corresponding plugin in plugins.js.
       enabled: process.env.ENABLE_LIGHTBOX,
+    },
+    banner: {
+      enabled: true,
+      icon: 'rocket',
+      content: 'Hello world!',
     },
     typewrite: {
       strings:
