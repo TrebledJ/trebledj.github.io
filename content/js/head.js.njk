@@ -66,6 +66,7 @@ $(() => {
   const lightboxCommonOptions = {
     type: 'image',
     fixedContentPos: false,
+    mainClass: 'mfp-with-zoom',
     callbacks: {
       open() {
         $('body').addClass('noscroll');
@@ -73,6 +74,11 @@ $(() => {
       close() {
         $('body').removeClass('noscroll');
       },
+    },
+    zoom: {
+      enabled: true,
+      duration: 300, // Duration of the effect, in milliseconds.
+      easing: 'ease-in-out', // CSS transition easing function.
     },
   };
 
