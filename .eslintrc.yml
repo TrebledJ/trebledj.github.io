@@ -13,7 +13,8 @@ rules:
     - code: 120
   no-plusplus: off
   nonblock-statement-body-position: [warn, below]
-  curly: [warn, multi-or-nest, consistent]
+  # curly: [warn, multi-or-nest, consistent]
+  curly: [off]
   no-use-before-define: [error, nofunc]
   no-mixed-operators:
     - error
