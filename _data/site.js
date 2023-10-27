@@ -56,7 +56,11 @@ module.exports = function () {
     },
     banner: {
       enabled: false,
-      sticky: true,
+      sticky: false,
+      closeButton: false,
+      scope: 'session', // Possible values: 'session', 'local', ''.
+      bgColor: 'warning', // Any Bootstrap `bg-` values.
+      fgColor: 'black', // Any Bootstrap `text-` values.
       icon: 'rocket',
       content: 'Hello world!',
     },

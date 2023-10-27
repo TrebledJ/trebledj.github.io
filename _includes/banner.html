@@ -1,20 +1,30 @@
 {% if site.banner.enabled %}
-    <div id="banner-container" class="{{ 'sticky-banner' if site.banner.sticky }}">
-        <div id="banner" class="bg-primary collapsed">
-            <div id="banner-content" class="text-white">
+    <div id="banner-container" class="{{ 'sticky-banner' if site.banner.sticky else 'mt-2' }}">
+        <div id="banner" class="bg-{{ site.banner.bgColor | default('primary') }} collapsed">
+            <div id="banner-content" class="text-{{ site.banner.fgColor | default('text-white') }}">
                 <i class="fas fa-{{site.banner.icon}} fs-4 me-2"></i>
-                {{site.banner.content | mdInline | safe}}
+                <span>{{site.banner.content | mdInline | safe}}</span>
             </div>
-            <button aria-label="Close" class="btn-close" type="button"></button>
+            {% if site.banner.closeButton %}
+                <button aria-label="Close" class="btn-close" type="button"></button>
+            {% endif %}
         </div>
     </div>
 
     {# Critical: check if banner was already closed. #}
     <script>
-        if (!sessionStorage.getItem('bannerClosed')) 
-            document
-                .getElementById('banner')
+        {% if site.banner.scope %}
+            if (!{{site.banner.scope + 'Storage' | safe}}.getItem('bannerClosed'))
+        {% endif %}
+        {
+            const banner = document.getElementById('banner');
+            banner
+                .parentElement
+                .classList
+                .remove('d-none');
+            banner
                 .classList
                 .remove('collapsed');
+        }
     </script>
 {% endif %}

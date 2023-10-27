@@ -98,8 +98,16 @@ $(() => {
 
 {% if site.banner.enabled %}
   $('#banner .btn-close').on('click', () => {
-    $('#banner').addClass('collapsed');
-    sessionStorage.setItem('bannerClosed', true);
+    {% if site.banner.scope %}
+      {{site.banner.scope + 'Storage' | safe}}.setItem('bannerClosed', true);
+    {% endif %}
+
+    const b = $('#banner');
+    b.css('max-height', b.outerHeight());
+    window.requestAnimationFrame(() => b.addClass('collapsed'));
+    setTimeout(() => {
+      b.parent().addClass('d-none');
+    }, 600);
   });
 {% endif %}
 });
