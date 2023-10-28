@@ -1,7 +1,5 @@
 <!-- Mobile ToC -->
-<span>hi</span>
 {% if showToc %}
-    <span>showing toc...</span>
     {% set toc = content | tocFast %}
     {% if toc and title != '404' %}
         <div id="btn-mobile-toc" class="dropup">
