@@ -89,7 +89,6 @@ module.exports = {
       return getGitCommitDate(data.page.inputPath, { keep: /^content/ });
     },
   },
-  author: 'trebledj',
   thumbnail_src: '~/assets/img/posts/thumbnail/default.png',
   thumbnail_banner: false,
   sharable: true,
