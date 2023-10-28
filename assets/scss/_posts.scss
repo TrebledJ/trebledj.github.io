@@ -98,10 +98,7 @@
     .gist,
     .video,
     .alert,
-    details,
-    pre[class*=language-],
-    // Keep to override prism.
-    pre {
+    details {
         & {
             margin-top: $space-base;
             margin-bottom: 0;
