@@ -1,6 +1,10 @@
 module.exports = {
+  showToc: false,
+
   // Draft posts:
   eleventyComputed: {
+    // Handle all permalink manipulation in one place.
+    // Dev note: Drafts won't work if permalink is set in other `.11tydata.js` config files.
     permalink: data => {
       let { permalink } = data;
       if (!permalink) {

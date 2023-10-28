@@ -12,7 +12,7 @@ would lead to the right sidebar being loaded after a noticeable delay.
 LMK if you know a better (less hacky) way of doing this.
 #}
 
-{% set hastoc = (not notoc) and (content | tocFast) %}
+{% set hasToc = showToc and (content | tocFast) %}
 
 <article class="w-100 post-article" itemscope itemtype="http://schema.org/BlogPosting">
     <div class="row d-flex gx-6">
@@ -31,7 +31,7 @@ LMK if you know a better (less hacky) way of doing this.
     </div>
     <hr/>
     <div class="row d-flex flex-row-reverse gx-6">
-        {% if hastoc %}
+        {% if hasToc %}
             <div class="col-lg-4">
                 {% include "sidebars/toc-sidebar.html" %}
             </div>

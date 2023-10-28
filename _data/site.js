@@ -133,7 +133,7 @@ module.exports = function () {
       { name: 'Mail', icon: 'fas fa-envelope', link: `mailto:${email}` },
       { name: 'Feeds', icon: 'fas fa-rss', link: '/feeds' },
     ],
-    environment: process.env.ENVIRONMENT || 'development',
+    environment: process.env.ENVIRONMENT,
     content_security_policy: csp,
     contact_placeholder: {
       name: 'Humpty Dumpty',

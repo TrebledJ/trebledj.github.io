@@ -52,6 +52,11 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.watchIgnores.add('{package,package-lock}.json');
   eleventyConfig.watchIgnores.add('.gitignore');
 
+  if (process.env.ENVIRONMENT === 'fast') {
+    // Fast: Don't generate feeds.
+    eleventyConfig.ignores.add('content/feeds/**');
+  }
+
   // Wait for other files, in case of batch changes.
   eleventyConfig.setWatchThrottleWaitTime(10);
 
@@ -61,6 +66,12 @@ module.exports = function (eleventyConfig) {
       './_site/**/*.css',
       './_site/**/*.html',
     ],
+    // Silence dev-server spammy output.
+    logger: {
+      log() { },
+      info() { },
+      error(x) { console.error(`[11ty] error: ${x}`); },
+    },
   });
 
   plugins(eleventyConfig);
@@ -93,7 +104,9 @@ module.exports = function (eleventyConfig) {
     });
   }
 
-  eleventyConfig.addTransform('htmlcsp', htmlcsp);
+  if (process.env.ENVIRONMENT !== 'fast') {
+    eleventyConfig.addTransform('htmlcsp', htmlcsp);
+  }
 
   // Customize Markdown library settings:
   markdown(eleventyConfig);

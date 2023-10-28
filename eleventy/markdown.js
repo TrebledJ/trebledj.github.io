@@ -11,15 +11,26 @@ module.exports = function (eleventyConfig) {
       rightDelimiter: '}',
       allowedAttributes: [], // empty array = all attributes are allowed
     });
-    mdLib.use(markdownItAnchor, {
-      permalink: markdownItAnchor.permalink.ariaHidden({
-        placement: 'before',
-        class: 'md-anchor',
-        symbol: '<i class="fa-solid fa-link"></i>',
-      }),
-      level: [2, 3, 4, 5, 6],
-      slugify: eleventyConfig.getFilter('slugify'),
-    });
+
+    if (process.env.ENVIRONMENT === 'fast') {
+      // Fast: Just slugify main headers.
+      mdLib.use(markdownItAnchor, {
+        level: [2, 3],
+        slugify: eleventyConfig.getFilter('slugify'),
+      });
+    } else {
+      // Default: Anchor and slugify everything.
+      mdLib.use(markdownItAnchor, {
+        permalink: markdownItAnchor.permalink.ariaHidden({
+          placement: 'before',
+          class: 'md-anchor',
+          symbol: '<i class="fa-solid fa-link"></i>',
+        }),
+        level: [2, 3, 4, 5, 6],
+        slugify: eleventyConfig.getFilter('slugify'),
+      });
+    }
+
     mdLib.use(markdownItSpoiler);
     mdLib.use(markdownItFootnote);
     mdLib.renderer.rules.footnote_caption = (tokens, idx/* , options, env, slf */) => {
@@ -39,14 +50,21 @@ module.exports = function (eleventyConfig) {
     // wrapper: 'div'
   });
 
-  const tocMemo = {};
+  const tocMemo = {}; // Cache for table-of-contents.
+
+  eleventyConfig.on('eleventy.before', () => {
+    // Clear cache on every build.
+    for (const mem in tocMemo)
+      delete tocMemo[mem];
+  });
+
   eleventyConfig.addFilter('tocFast', function (content) {
-    const hash = this.page.outputPath;
-    if (typeof tocMemo[hash] !== 'undefined')
-      return tocMemo[hash];
+    const key = this.page.outputPath;
+    if (tocMemo[key] !== undefined)
+      return tocMemo[key];
 
     const toc = eleventyConfig.getFilter('toc')(content);
-    tocMemo[hash] = toc;
+    tocMemo[key] = toc || '';
     return toc;
   });
 };

@@ -43,3 +43,4 @@ rules:
     - warn
     - single
     - avoidEscape: true
+  guard-for-in: off

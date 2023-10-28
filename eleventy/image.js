@@ -5,7 +5,10 @@ const eleventyImage = require('@11ty/eleventy-img');
 
 module.exports = function (eleventyConfig) {
   const thumbWidth = 512; // Thumbnail default max width.
-  const breakpoints = (process.env.ENVIRONMENT === 'production' ? [256, thumbWidth, 1024] : [thumbWidth]);
+  const breakpoints = {
+    production: [256, thumbWidth, 1024],
+    fast: [],
+  }[process.env.ENVIRONMENT] || [thumbWidth];
   const imageWidths = [...breakpoints, 'auto'];
 
   // Returns a path relative to a file.
@@ -147,13 +150,24 @@ module.exports = function (eleventyConfig) {
   }
 
   function thumbnailShortcode(post, classes) {
+    classes = amendClasses(`${classes} thumbnail`);
+
+    if (process.env.ENVIRONMENT === 'fast') {
+      // {% thumbnail %} is a major bottleneck, because:
+      //  1) it's used in Nunjucks macros. This limits filters to only SYNCHRONOUS filters.
+      //  2) it's used a lot, because we show a lot of previews to posts.
+      // Hence, it's a main target for optimisations.
+
+      // Return a default dummy without any processing.
+      return `<img src="/img/posts/thumbnail/default.png" class="${classes}" />`;
+    }
+
     const { page } = post;
     const src = resolveResourcePath(page, post.data.thumbnail_src);
     const altText = post.data.title;
 
     const { ext, options } = getOptions(src);
     eleventyImage(src, options);
-    classes = amendClasses(`${classes} thumbnail`);
     const metadata = eleventyImage.statsSync(src, options);
 
     return makeImageFromMetadata(metadata, ext, classes, altText, true, { loading: 'lazy' });
