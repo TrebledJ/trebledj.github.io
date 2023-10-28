@@ -9,7 +9,7 @@ tags:
   - cpp
   - stm32
   - music
-  - audio-synthesis-4-dummies
+  - audio-synthesis-for-dummies
 thumbnail_src: assets/synthwave-a-major-space-3.jpg
 thumbnail_banner: true
 usemathjax: true
