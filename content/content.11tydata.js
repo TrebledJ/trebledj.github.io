@@ -1,5 +1,3 @@
-const site = require("../_data/site");
-
 module.exports = {
   showToc: false,
 
@@ -10,7 +8,7 @@ module.exports = {
     permalink: data => {
       let { permalink } = data;
       if (!permalink) {
-        if (data.page.filePathStem.startsWith(site.) && data.page.outputFileExtension === 'html') {
+        if (data.page.filePathStem.startsWith('/posts') && data.page.outputFileExtension === 'html') {
           // HTML Blog post.
           permalink = `/posts/${data.page.fileSlug}/index.html`;
         } else if (data.page.inputPath.endsWith('.js.njk')) {
