@@ -31,17 +31,13 @@ LMK if you know a better (less hacky) way of doing this.
     </div>
     <hr/>
     <div class="row d-flex flex-row-reverse gx-6">
-        {% if hasToc %}
-            <div class="col-lg-4">
+        <div class="col-lg-4">
+            {% if hasToc %}
                 {% include "sidebars/toc-sidebar.html" %}
-            </div>
+            {% endif %}
+        </div>
 
-            {% set centering = "" %}
-        {% else %}
-            {% set centering = "ms-auto me-auto" %}
-        {% endif %}
-
-        <div class="col-lg-8 {{centering}}">
+        <div class="col-lg-8">
             {% include "post/article.html" %}
             <a id="end-of-article"></a>
             <br/>
