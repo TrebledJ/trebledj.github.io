@@ -2,6 +2,7 @@
 
 [![Build](https://github.com/TrebledJ/trebledj.github.io/actions/workflows/deploy.yml/badge.svg)](https://github.com/TrebledJ/trebledj.github.io/actions/workflows/deploy.yml)
 [![Check Links](https://github.com/TrebledJ/trebledj.github.io/actions/workflows/links.yml/badge.svg)](https://github.com/TrebledJ/trebledj.github.io/actions/workflows/links.yml)
+[![Lint](https://github.com/TrebledJ/trebledj.github.io/actions/workflows/lint.yml/badge.svg)](https://github.com/TrebledJ/trebledj.github.io/actions/workflows/lint.yml)
 
 My personal website. Visit it here: [trebledj.github.io](https://trebledj.github.io).
 
