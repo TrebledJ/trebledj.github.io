@@ -44,3 +44,5 @@ rules:
     - single
     - avoidEscape: true
   guard-for-in: off
+  no-multi-assign: off
+  no-new: off

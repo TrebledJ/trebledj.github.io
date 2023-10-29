@@ -175,7 +175,7 @@ $(() => {
       // When the animation is complete, call onAnimationFinish()
       this.animation.onfinish = () => this.onAnimationFinish(false);
       // If the animation is cancelled, isClosing variable is set to false
-      this.animation.oncancel = () => this.isClosing = false;
+      this.animation.oncancel = () => { this.isClosing = false; };
     }
 
     open() {
@@ -212,7 +212,7 @@ $(() => {
       // When the animation is complete, call onAnimationFinish()
       this.animation.onfinish = () => this.onAnimationFinish(true);
       // If the animation is cancelled, isExpanding variable is set to false
-      this.animation.oncancel = () => this.isExpanding = false;
+      this.animation.oncancel = () => { this.isExpanding = false; };
     }
 
     onAnimationFinish(open) {
