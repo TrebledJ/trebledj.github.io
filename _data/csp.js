@@ -23,7 +23,7 @@ function compileCsp(...tags) {
 module.exports = compileCsp(
   tag('default'),
   tag('script')
-    .add(...(process.env.ENVIRONMENT === 'fast' ? [`'unsafe-inline'`] : []))
+    .add(...(process.env.ENVIRONMENT === 'fast' ? ['\'unsafe-inline\''] : []))
     .add('*.disqus.com', '*.disquscdn.com')
     .add('code.jquery.com', 'cdn.jsdelivr.net')
     .add('gist.github.com')
