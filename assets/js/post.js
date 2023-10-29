@@ -131,7 +131,7 @@ $(() => {
       // Store if the element is expanding
       this.isExpanding = false;
       // Detect user clicks on the summary element
-      this.summary.addEventListener('click', (e) => this.onClick(e));
+      this.summary.addEventListener('click', e => this.onClick(e));
     }
 
     onClick(e) {
@@ -166,10 +166,10 @@ $(() => {
       // Start a WAAPI animation
       this.animation = this.el.animate({
         // Set the keyframes from the startHeight to endHeight
-        height: [startHeight, endHeight]
+        height: [startHeight, endHeight],
       }, {
         duration: 400,
-        easing: 'ease-out'
+        easing: 'ease-out',
       });
 
       // When the animation is complete, call onAnimationFinish()
@@ -204,10 +204,10 @@ $(() => {
       // Start a WAAPI animation
       this.animation = this.el.animate({
         // Set the keyframes from the startHeight to endHeight
-        height: [startHeight, endHeight]
+        height: [startHeight, endHeight],
       }, {
         duration: 400,
-        easing: 'ease-out'
+        easing: 'ease-out',
       });
       // When the animation is complete, call onAnimationFinish()
       this.animation.onfinish = () => this.onAnimationFinish(true);
@@ -228,7 +228,7 @@ $(() => {
     }
   }
 
-  document.querySelectorAll('details').forEach((el) => {
+  document.querySelectorAll('details').forEach(el => {
     new Accordion(el);
   });
 });
