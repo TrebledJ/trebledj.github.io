@@ -2,16 +2,20 @@
 title: <sub><sup>N[</sup></sub>Subtype Metaprogramming<sub><sup>]</sup></sub> is <sub><sup>N[</sup></sub>Mostly Harmless<sub><sup>]</sup></sub>
 description: Inheritance go brrrrrrrr... (ab)using types to write programs.
 tags:
+  - ctf
   - types
   - python
   - tutorial
   - reverse
-  - programming
   - programming-languages
+  - metaprogramming
   - oop
+  - writeup
 usemathjax: true
 thumbnail_src: assets/thumbnail.jpg
 thumbnail_banner: true
+redirect_from:
+  - /posts/maplectf-2023-mostly-harmless
 ---
 
 Types are cool! But y'know what's even cooler? A CTF challenge on types!
