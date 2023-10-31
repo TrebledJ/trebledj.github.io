@@ -1,5 +1,5 @@
 module.exports = {
-    eleventyComputed: {
-        permalink: data => data.page.filePathStem,
-    },
+  eleventyComputed: {
+    permalink: data => data.page.filePathStem,
+  },
 };
