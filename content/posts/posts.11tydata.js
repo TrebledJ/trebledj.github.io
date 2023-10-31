@@ -79,7 +79,7 @@ function getGitCommitDateFiltered(filePath, options) {
 
 module.exports = {
   tags: [
-    'posts',
+    'posts', // Don't change this tag. This tag is used to recognise blog posts.
   ],
   layout: 'layouts/post-default',
   showToc: true,
@@ -89,6 +89,13 @@ module.exports = {
         return getGitCommitDate(data.page.inputPath, { keep: /^content/ });
       return undefined;
     },
+    permalink: data => {
+      if (data.draft && !process.env.BUILD_DRAFTS)
+        return false;
+      return `/posts/${data.page.fileSlug}/index.html`;
+    },
+
+    eleventyExcludeFromCollections: data => (data.draft && !process.env.BUILD_DRAFTS),
   },
   thumbnail_src: '~/assets/img/posts/thumbnail/default.png',
   thumbnail_banner: false,
@@ -99,5 +106,4 @@ module.exports = {
     num: 6,
     disable: false,
   },
-  eleventyExcludeFromCollections: false,
 };
