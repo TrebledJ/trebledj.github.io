@@ -1,74 +1,12 @@
 ---
 layout: layouts/default-full
-
-featuredTracks: [1331667688, 1488692758]
-carouselAutoInterval: 10000
-npostsPerTab: 2
-
-postCategories:
-  - 
-    name: Programming
-    tag: programming
-    icon: code
-    about: Prose and poetry expressed logically.
-    excludeTags: []
-  #- 
-  #   name: Faith
-  #   tag: faith
-  #   about: Musings of and for the soul.
-  #   excludeTags: []
-  - 
-    name: Music
-    tag: composition
-    icon: music
-    about: Compositions by yours truly.
-    excludeTags: [music]
-  - 
-    name: Embedded
-    tag: embedded
-    icon: bolt
-    about: Fiddling with microcontrollers and bare-metal systems.
-    excludeTags: []
-  #- 
-  #  name: Essays
-  #  tag: essay
-  #  about: Rants on various issues I'm concerned with.
-  #  excludeTags: []
-  -
-    name: CTFs
-    tag: ctf
-    icon: flag
-    about: Let's learn cybersecurity through a gamified experience!
-    excludeTags: [writeup]
-
-projectCategories:
-  -
-    name: Projects
-    tag: project
-    icon: star
-    about: Adventurous undertakings!
-    excludeTags: [experience]
-  -
-    name: Experiences
-    tag: experience
-    icon: rocket
-    about: Journeys I've gone through.
-    excludeTags: [project]
-
-assets:
-  css:
-    - /css/shooting-stars.css
-  js:
-    - /js/my-typewrite.js
- 
-redirect_from: [/profile, /cv]
 ---
 <div id="home">
-{% include "home/hero.html" %}
+   {% include "home/hero.html" %}
 
    <div class="container">
-   {% include "home/about-me.html" %}
-   {% include "home/recents.html" %}
-   {% include "home/contact.html" %}
+      {% include "home/about-me.html" %}
+      {% include "home/recents.html" %}
+      {% include "home/contact.html" %}
    </div>
 </div>

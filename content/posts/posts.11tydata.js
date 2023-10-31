@@ -82,14 +82,14 @@ module.exports = {
     'posts',
   ],
   layout: 'layouts/post-default',
+  showToc: true,
   eleventyComputed: {
     lastContentCommit: data => {
-      if (process.env.ENVIRONMENT === 'development')
-        return undefined;
-      return getGitCommitDate(data.page.inputPath, { keep: /^content/ });
+      if (process.env.ENVIRONMENT === 'production')
+        return getGitCommitDate(data.page.inputPath, { keep: /^content/ });
+      return undefined;
     },
   },
-  author: 'trebledj',
   thumbnail_src: '~/assets/img/posts/thumbnail/default.png',
   thumbnail_banner: false,
   sharable: true,

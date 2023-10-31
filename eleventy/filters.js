@@ -138,7 +138,12 @@ module.exports = function (eleventyConfig) {
 
   eleventyConfig.addFilter('jsonify', object => JSON.stringify(object));
 
-  eleventyConfig.addFilter('keywords', findKeywords);
+  if (process.env.ENVIRONMENT === 'fast') {
+    // Keep things fast.
+    eleventyConfig.addFilter('keywords', content => content);
+  } else {
+    eleventyConfig.addFilter('keywords', findKeywords);
+  }
 
   eleventyConfig.addFilter('maxDate', (a, b) => {
     if (!b)

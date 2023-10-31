@@ -18,12 +18,14 @@ Types are cool! But y'know what's even cooler? A CTF challenge on types!
 
 This year's MapleCTF graced us with a challenge involving much class, much inheritance, much confuzzlement, and much eyesore.
 
-{% images "h-auto" %}
+{% images "h-auto rw" %}
 {% image "assets/output.jpg", "Screenshot of output.py." %}
 {% image "assets/doge-much-class.jpg", "Much harm." %}
 {% endimages %}
 
 ## Description
+
+**Mostly Harmless**
 
 > Some people consider type annotations to be useless. I consider everything _but_ type annotations redundant.
 

@@ -51,8 +51,18 @@ module.exports = function () {
       resultDefaultIcon: 'book',
     },
     lightbox: {
-      // To disable lightbox, comment the plugin in plugins.js.
+      // To disable lightbox, comment out the corresponding plugin in plugins.js.
       enabled: process.env.ENABLE_LIGHTBOX,
+    },
+    banner: {
+      enabled: false,
+      sticky: false,
+      closeButton: false,
+      scope: 'session', // Possible values: 'session', 'local', ''.
+      bgColor: 'warning', // Any Bootstrap `bg-` values.
+      fgColor: 'black', // Any Bootstrap `text-` values.
+      icon: 'rocket',
+      content: 'Hello world!',
     },
     typewrite: {
       strings:
@@ -123,7 +133,7 @@ module.exports = function () {
       { name: 'Mail', icon: 'fas fa-envelope', link: `mailto:${email}` },
       { name: 'Feeds', icon: 'fas fa-rss', link: '/feeds' },
     ],
-    environment: process.env.ENVIRONMENT || 'development',
+    environment: process.env.ENVIRONMENT,
     content_security_policy: csp,
     contact_placeholder: {
       name: 'Humpty Dumpty',

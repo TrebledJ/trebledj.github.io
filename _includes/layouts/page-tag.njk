@@ -35,7 +35,7 @@ logo: tag
 
         {# Preview List #}
         <div class="post-preview-list">
-            {% set slug = tag | default(title) | slugify %}
+            {% set slug = tag %}
             {% for post in collections[slug] | reverse %}
                 {{ render_post_preview(post, excludeTags=[slug]) }}
             {% endfor %}
