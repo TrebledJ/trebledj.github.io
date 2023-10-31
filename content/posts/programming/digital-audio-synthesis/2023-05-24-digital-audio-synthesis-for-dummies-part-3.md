@@ -10,6 +10,7 @@ tags:
   - stm32
   - music
   - audio-synthesis-for-dummies
+  - synths
 thumbnail_src: assets/synthwave-a-major-space-3.jpg
 thumbnail_banner: true
 usemathjax: true

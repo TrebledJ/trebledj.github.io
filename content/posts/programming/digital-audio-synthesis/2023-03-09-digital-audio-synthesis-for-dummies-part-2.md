@@ -9,6 +9,7 @@ tags:
   - cpp
   - music
   - audio-synthesis-for-dummies
+  - synths
 thumbnail_src: assets/synthwave-a-major-space-2.jpg
 thumbnail_banner: true
 usemathjax: true

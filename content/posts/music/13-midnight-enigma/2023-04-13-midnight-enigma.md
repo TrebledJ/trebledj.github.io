@@ -3,8 +3,10 @@ title: Midnight Enigma
 description: A mysterious mix of minimalism and modal musings.
 tags:
   - minimalism
-  - electronic
   - fusion
+  - synths
+  - modal
+  - microtonal
   - band
 thumbnail_src: assets/midnight-enigma.jpg
 track_id: 1490881297

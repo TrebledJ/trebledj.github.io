@@ -6,6 +6,7 @@ tags:
   - tutorial
   - dsp
   - audio-synthesis-for-dummies
+  - synths
 thumbnail_src: assets/synthwave-a-major-space-1.jpg
 thumbnail_banner: true
 usemathjax: true

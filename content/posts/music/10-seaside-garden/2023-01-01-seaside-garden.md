@@ -4,6 +4,7 @@ description: A first attempt at songwriting.
 tags:
   - song
   - piano
+  - chamber
   - hkust
 keywords: [hkust, anthem]
 thumbnail_src: assets/seaside-garden.jpg
