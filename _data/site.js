@@ -125,7 +125,7 @@ module.exports = function () {
         link: 'https://discordapp.com/users/220427982798454794',
       },
       { name: 'Mail', icon: 'fas fa-envelope', link: `mailto:${email}` },
-      { name: 'Feeds', icon: 'fas fa-rss', link: '/feeds' },
+      { name: 'Feeds', icon: 'fas fa-square-rss', link: '/feeds' },
     ],
     environment: process.env.ENVIRONMENT,
     content_security_policy: csp,
