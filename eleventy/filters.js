@@ -53,9 +53,11 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addFilter('startsWith', (str, ...args) => str.startsWith(...args));
 
   // Smarter truncate filter.
-  function appendAfterTruncate(truncated, append = '...', keepIf = '.?!', deleteIf = ',') {
-    if (keepIf.includes(truncated[truncated.length - 1]))
-      return truncated; // No need to append a (...).
+  function appendAfterTruncate(truncated, append = '...', keepIf = '?!', deleteIf = ',.') {
+    if (keepIf.includes(truncated[truncated.length - 1])) {
+      // Insert append before punctuation.
+      return truncated.slice(0, truncated.length - 1) + append + truncated[truncated.length - 1];
+    }
 
     if (deleteIf.includes(truncated[truncated.length - 1])) {
       // Delete and append.

@@ -28,11 +28,15 @@ layout: layouts/page-default
 
         <template id="template-track">
             <div>
-                {# ${brk} #}
+                <br/>
+                <p class="subheading">
+                    <a href="/">Example Title</a>
+                </p>
+                <p class="track-desc fs-7"></p>
                 <iframe title="SoundCloud Track ${item.track_id}" allow="autoplay" frameborder="no" height="166" scrolling="no"
                     {# src="link..." #}
                     width="100%" loading="lazy"></iframe>
-                <div class="d-flex flex-row align-items-center mt-1">
+                <div class="d-flex flex-row align-items-center">
                     <span>
                         <i class="fa fa-tag post-meta-icon me-1"></i>
                     </span>
@@ -40,12 +44,10 @@ layout: layouts/page-default
                         {# ${tags} #}
                     </div>
                 </div>
-                <div class="post-meta mt-1">
-                    <p class="track-desc mb-0">
-                        {# ${item.description} #}
-                        <a class="track-link" {# href="link..." #}>(continue reading)</a>
-                    </p>
-                </div>
+                <p class="track-content fs-7 mt-1 mb-0">
+                    {# ${item.description} #}
+                    <a class="track-link" href="/">(continue reading)</a>
+                </p>
             </div>
         </template>
 
@@ -65,6 +67,13 @@ layout: layouts/page-default
                         append: '#track-list',
                         html: (item, index) => {
                             const el = template.clone();
+                            const url = `{{ site.baseurl }}${item.url}`;
+
+                            const title = el.find(".subheading a");
+                            title.attr("href", url);
+                            title.html(item.title);
+
+                            el.find(".track-desc").html(item.description);
 
                             const track = el.find("iframe");
                             track.attr("title", `Track: ${item.title}`);
@@ -73,25 +82,16 @@ layout: layouts/page-default
                             const toHTMLTag = t => `<span><a class="tag" href="{{ site.baseurl }}/tags/${t}">${t}</a></span>`;
 
                             /* Exclude common tags and convert into html code. */
-                            const tags = item
-                                .tags
-                                .map(toHTMLTag)
-                                .join("");
-                            el
-                                .find(".track-tags")
-                                .html(tags);
+                            const tags = item.tags.map(toHTMLTag).join("");
+                            el.find(".track-tags").html(tags);
 
                             /* Fill description and link. */
-                            el
-                                .find(".track-desc")
-                                .prepend(item.description);
-                            el
-                                .find(".track-link")
-                                .attr("href", `{{ site.baseurl }}${item.url}`);
+                            el.find(".track-content").prepend(item.content);
+                            el.find(".track-link").attr("href", url);
 
                             /* No spacing before first item. */
-                            if (index > 0) {
-                                el.prepend("<br/>");
+                            if (index == 0) {
+                                el.children("br").remove();
                             }
 
                             return el;

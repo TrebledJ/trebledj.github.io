@@ -10,7 +10,7 @@
         <span>
             <i class="fa fa-calendar post-meta-icon me-1"></i>
         </span>
-        <span class="post-date post-posted-date">
+        <span class="fs-7 post-posted-date">
             {% block post_metadata_date %}
                 Posted on <span itemprop="dateCreated">{{ page.date | date | safe }}</span>
             {% endblock %}
@@ -25,7 +25,7 @@
                 <span class="post-updated-date-icon">
                     <i class="fa fa-calendar post-meta-icon me-1"></i>
                 </span>
-                <span class="post-date post-updated-date">
+                <span class="fs-7 post-updated-date">
                     Updated on <span itemprop="dateModified">{{ updatedDate | date | safe }}</span>
                 </span>
             {% endif %}
@@ -37,7 +37,7 @@
         <span>
             <i class="far fa-clock post-meta-icon me-1"></i>
         </span>
-        <span class="post-words">
+        <span class="fs-7">
             {% set words = post.content | striptags | wordcount %}
             {% set minutes = ((words + 220) / 220) | int %}
             {{ minutes + " minute read" }}

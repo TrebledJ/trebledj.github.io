@@ -13,8 +13,9 @@ permalink: /tracks.json
       "tags": ["{{post.data.tags | exclude(["posts", "composition", "music"]) | join('", "') | safe}}"],
       "date": "{{post.page.date | date | safe}}",
       "title": "{{post.data.title}}",
+      "description": "{{post.data.description | mdInline}}",
       {# Remove footnote markings (sup) and headers. #}
-      "description": "{{post.content | annihilateTags(['sup', 'h1', 'h2', 'h3']) | striptags | truncate(150, false, "...") | safe}}",
+      "content": "{{post.content | annihilateTags(['sup', 'h1', 'h2', 'h3']) | striptags | truncateWords(30) | safe}}",
       "url": "{{post.url}}"
     }
     {% endif %}
