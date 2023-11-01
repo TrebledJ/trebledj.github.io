@@ -10,10 +10,8 @@
         font-size: 12px;
     }
 
-    .related-sidebar-container,
-    .comments-sidebar-container {
-        font-size: 12px;
-        padding-left: $space-container-base;
+    .toc-link-container {
+        margin-bottom: $space-half;
     }
 }
 
@@ -22,8 +20,7 @@
 }
 
 .toc-container,
-.related-sidebar-container,
-.comments-sidebar-container {
+.toc-link-container {
     a {
         color: var(--main-text-color) !important;
     }
@@ -32,7 +29,9 @@
         color: var(--bold-color) !important;
         font-weight: 600;
     }
+}
 
+.toc-container {
     ol {
         list-style-type: none;
         margin-left: 0;
@@ -42,10 +41,6 @@
         li {
             margin-top: $space-container-quarter;
         }
-    }
-
-    hr {
-        margin-left: 10px;
     }
 
     br {

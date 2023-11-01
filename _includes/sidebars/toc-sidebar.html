@@ -7,7 +7,7 @@
         {% set relatedPosts = collections.postsr | getRelatedPosts(this, related) %}
 
         {% if related and (not related.disable) and relatedPosts | length > 0 %}
-            <div class="related-sidebar-container mb-2">
+            <div class="toc-link-container">
                 <span>
                     <a href="#related">Related</a>
                 </span>
@@ -17,7 +17,7 @@
 
     {# Comments #}
     {% if comments %}
-        <div class="comments-sidebar-container">
+        <div class="toc-link-container">
             <span>
                 <a href="#comments">Comments</a>
             </span>

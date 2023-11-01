@@ -143,15 +143,35 @@ $carousel-transition: transform 2s ease, opacity 1.5s ease-out .5s;
 // Interactive opaque on hover (only for large screens).
 @include media-breakpoint-up(lg) {
     blockquote,
-    .sticky-right,
-    .post-preview,
-    .post-minified-preview {
+    .dim-light {
         opacity: $opacity-lower;
         transition: opacity $transition-duration linear;
 
         &:hover {
             opacity: $opacity-full;
         }
+    }
+
+    #toc-sidebar a,
+    .dim-deep {
+        opacity: 0.7;
+        transition: opacity $transition-duration linear;
+
+        &:hover {
+            opacity: $opacity-full;
+        }
+    }
+}
+
+@include media-breakpoint-down(lg) {
+    blockquote,
+    .dim-light {
+        opacity: $opacity-low;
+    }
+
+    #toc-sidebar a,
+    .dim-deep {
+        opacity: $opacity-lower;
     }
 }
 

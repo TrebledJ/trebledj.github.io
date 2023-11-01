@@ -19,7 +19,7 @@
 {% endmacro %}
 
 {% macro render_post_preview(post, taglimit = 3, excludeTags = []) %}
-    <article class="post-preview">
+    <article class="post-preview dim-light">
         <a href="{{post.url}}" tabindex="-1"></a>
         <div class="post-preview-container d-flex">
             {{ render_thumbnail(post) }}
@@ -39,7 +39,7 @@
 
 {# OBSOLE3T #}
 {% macro render_post_compressed_preview(post, taglimit = 3, excludeTags = []) %}
-    <article class="post-compressed-preview">
+    <article class="post-compressed-preview dim-light">
         <a href="{{post.url}}" tabindex="-1"></a>
         <div class="post-compressed-preview-container d-flex flex-column">
             {{ render_thumbnail(post) }}
