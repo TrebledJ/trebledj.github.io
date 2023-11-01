@@ -38,11 +38,13 @@ Author: [apropos](https://apropos.codes/)
 
 The {% abbr "chal", "challenge" %} is also humorously tagged "cursed" and "misc". Well, that's reassuring...
 
-Anyways, we're presented with two files:
+Anyway, we're presented with two files:
 * `app.py`: Driver code to convert the flag (input) to a mysterious line of output, then opens a subprocess and runs
+  
     ```shell
     mypy output.py
     ```
+
 * `output.py`: A template file full of class declarations and inheritance. Utter gibberish on first sight.
 
 You can follow along by getting these files [*here*](https://github.com/TrebledJ/ctf-binaries/tree/main/maplectf-2023/mostly-harmless).
@@ -123,7 +125,7 @@ So let's go deeper! The rest of this post attempts to dissect the type theory be
 ## Back to the Basics
 
 {% alert "warning" %}
-This section attempts to bolster the reader's understanding of programming and type theory in order to understand the nitty gritty of the challenge. If you're comfortable with types and variance, feel free to [skip to the next section](#metaprogramming-with-type-hints). If you have any questions, do [let me](#comments) [know](/#contact).
+This section attempts to bolster the reader's understanding of programming and type theory in order to understand the nitty-gritty of the challenge. If you're comfortable with types and variance, feel free to [skip to the next section](#metaprogramming-with-type-hints). If you have any questions, do [let me](#comments) [know](/#contact).
 {% endalert %}
 
 ### Classes
@@ -381,13 +383,13 @@ A good heuristic is to choose a supertype that cancels out the outer type on the
 For example:
 ```python
 class C(Generic[T], A["C[T]"], B["A[T]"]): ...
-_: B[C[C[T]]] = C[C[T]]
+_: B[C[Z]] = C[C[Z]]
 ```
 Here, choosing $BAT$ allows us to cancel $B$ in the next step.
 
-1. $CCZ <:^? BCCZ$
-2. $\rightsquigarrow BACZ <:^? BCCZ$ (**Super**)
-2. $\rightsquigarrow ACZ :>^? CCZ$ (**Cancel**)
+1. $CCZ <:^? BCZ$
+2. $\rightsquigarrow BACZ <:^? BCZ$ (**Super**)
+2. $\rightsquigarrow ACZ :>^? CZ$ (**Cancel**)
 {% endalert %}
 
 
