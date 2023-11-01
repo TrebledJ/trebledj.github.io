@@ -44,7 +44,7 @@ I was lucky to work with [another member](https://github.com/TangYanYee) of the 
 
 Although the course provided us with a multi-functional board (STM32F103VET6), we ended up using with a different board (STM32F405). The F4 series comes with more processing power, flash memory, and RAM. These are important considerations when it comes to a real-time music system. Audio buffering needs to be fast and steady, and sufficient memory is required for storage and buffering.
 
-We used C++20 for the project[^1]. Although most objects and peripherals were singletons, classes (and templates!) proved useful, especially for containers (such as a [fixed-size vector][fsvector]). C++ also allowed us to have static reflection for enums, thanks to [magic_enum][menum]. The alternative would've been X-macros or hard-coding, both less maintainable options. 
+We used C++20 for the project.[^1] Although most objects and peripherals were singletons, classes (and templates!) proved useful, especially for containers (such as a [fixed-size vector][fsvector]). C++ also allowed us to have static reflection for enums, thanks to [magic_enum][menum]. The alternative would've been X-macros or hard-coding, both less maintainable options. 
 
 [^1]: I was excited to try C++20 modules—which gcc-arm v11 supports!—but CMake doesn't support modules yet. The [issue][cmake-modules] is still ongoing as I write. I think they're trying, but I guess nobody likes dealing with compilation order? C'mon CMake! It's been three years already!
 
