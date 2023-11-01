@@ -61,7 +61,7 @@ module.exports = function (eleventyConfig) {
   );
 
   eleventyConfig.addShortcode('abbr', (term, expansion) => (
-    `<abbr data-placement="top" data-toggle="tooltip" title="${escapeHtml(expansion)}">${term}</abbr>`
+    `<abbr data-bs-placement="top" data-bs-toggle="tooltip" title="${escapeHtml(expansion)}">${term}</abbr>`
   ));
 
   eleventyConfig.addShortcode('tag', (text, tag) => {
