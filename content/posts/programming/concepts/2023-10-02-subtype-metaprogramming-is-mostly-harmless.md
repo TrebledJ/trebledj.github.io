@@ -393,7 +393,7 @@ Here, choosing $BAT$ allows us to cancel $B$ in the next step.
 
 ### Subtype-Checking Example
 
-Let’s walk through an example of an infinite subtyping query.^[Blatantly taken from Roth's paper.[^roth2023]] Here's the code:
+Let’s walk through an example of an infinite subtyping query.^[Blatantly taken from Roth's paper.] Here's the code:
 
 ```python
 from typing import TypeVar, Generic, Any
