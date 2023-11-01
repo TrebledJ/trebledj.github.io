@@ -16,14 +16,17 @@
         <br/>
 
         <div class="row">
-            {% for track_id in featuredTracks %}
+            {% for slug in featuredTracks %}
                 <div class="col-md-6">
-                    {# Track #}
-                    {% include "track.html" %}
-
                     {# Find post and extract summary. #}
+                    {% set found = false %}
                     {% for post in collections.composition %}
-                        {% if track_id == post.data.track_id %}
+                        {% if slug == post.page.fileSlug %}
+                            {% set found = true %}
+
+                            {% set track_id = post.data.track_id %}
+                            {% include "track.html" %}
+
                             <p class="subheading">
                                 <a href="{{post.url}}">{{post.data.title | mdInline | safe}}</a>
                             </p>
@@ -40,6 +43,9 @@
                         {% endif %}
                     {% endfor %}
 
+                    {% if not found %}
+                        {{ throw("can't find featured track post '" + slug + "'") }}
+                    {% endif %}
                 </div>
 
             {% endfor %}

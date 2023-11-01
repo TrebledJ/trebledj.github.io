@@ -1,6 +1,7 @@
 const htmlmin = require('html-minifier');
 const { minify } = require('terser');
 const { Transform } = require('stream');
+const chalk = require('chalk');
 const htmlcsp = require('./eleventy/detail/html-csp-transform');
 
 const plugins = require('./eleventy/plugins');
@@ -110,6 +111,11 @@ module.exports = function (eleventyConfig) {
 
   // Customize Markdown library settings:
   markdown(eleventyConfig);
+
+  eleventyConfig.addNunjucksGlobal('throw', function (msg) {
+    console.error(chalk.red(`[error] in ${this.page.inputPath}:`));
+    console.error(chalk.red(msg));
+  });
 
   // Features to make your build faster (when you need them)
 
