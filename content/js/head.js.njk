@@ -43,7 +43,6 @@ $(() => {
   });
 
   /* Load Tooltips */
-  // $('body').tooltip({ selector: '[data-toggle=tooltip]' });
   const tooltips = document.querySelectorAll('[data-bs-toggle="tooltip"]');
   [...tooltips].forEach(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl));
 

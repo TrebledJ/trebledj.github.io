@@ -78,13 +78,8 @@ blockquote {
     padding: $space-base $space-base $space-base $space-base * 1.5;
     overflow: auto;
 
-    background: var(--main-background-color);
     border: none;
     border-left: $border-width-thick solid #3642df;
-
-    &>*:last-child {
-        margin-bottom: 0;
-    }
 }
 
 footer {

@@ -9,7 +9,7 @@ layout: layouts/page-default
         {{title}}
     </h3>
     {% if feedtags | contains(page.fileSlug) %}
-        <abbr data-placement="left" data-toggle="tooltip" title="An RSS feed is available for this tag!">
+        <abbr data-bs-placement="left" data-bs-toggle="tooltip" title="An RSS feed is available for this tag!">
             <a href="{{site.baseurl}}/feeds/{{page.fileSlug}}.xml">
                 <i class="fa fa-rss fs-4"></i>
             </a>
