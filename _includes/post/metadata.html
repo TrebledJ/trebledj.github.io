@@ -42,7 +42,7 @@ render_tag_list %}
         </span>
         <span class="fs-7">
             {% set words = post.content | striptags | wordcount %}
-            {% set minutes = ((words + 220) / 220) | int %}
+            {% set minutes = ((words + 240) / 240) | int %}
             {{ minutes + " minute read" }}
         </span>
     </div>
