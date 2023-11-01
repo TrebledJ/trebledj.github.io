@@ -1,5 +1,5 @@
 ---
-title:  "Styleguide. This is a super long title post. Longer than the distance between my pinky and my elbow. Maybe."
+title: Styleguide
 description: "This is a supperrrrrrrr longggggg description... designed to test the limits of the measly little box that contains it. Who knows if it'll hold?"
 tags:
   - qt
@@ -15,20 +15,20 @@ tags:
   - composition
   - learning
 thumbnail_banner: true
-keywords: test key words
 usemathjax: true
 pitch: This is a dummy page designed to test all aspects of style.
 track_id: 1433470732
 score_id: 9645115
+sharable: true
+comments: true
 related:
-    # disable: true # Whether to disable related posts section.
+    disable: false # Whether to disable related posts section.
     # posts: [/posts/post1, /posts/post2] # Related will only contain these posts. "none" to hide related section.
     tags: [cpp]  # Any post containing all these tags is marked as related.
     auto: true # Use an auto algorithm to determine whether a post is related.
-    excludeOthers: true
+    excludeOthers: true # Don't show this post in other posts.
     # See more params in related.js.
 noindex: true
-# draft: true
 showToc: true
 ---
 

@@ -1,4 +1,5 @@
-{% from "tag.html" import render_tag, render_tag_list %}
+{% from "tag.html" import render_tag,
+render_tag_list %}
 
 {# Parameters:
 * post (default: page): a post/page object containing _.tags _.content _.title etc.
@@ -7,14 +8,16 @@
 <div class="metadata-container d-flex">
     {# Posted Date #}
     <div class="d-flex flex-row align-items-center">
-        <span>
-            <i class="fa fa-calendar post-meta-icon me-1"></i>
-        </span>
-        <span class="fs-7 post-posted-date">
-            {% block post_metadata_date %}
+        {% if hasDate %}
+            <span>
+                <i class="fa fa-calendar post-meta-icon me-1"></i>
+            </span>
+            <span class="fs-7 post-posted-date">
+                {% block post_metadata_date %}
                 Posted on <span itemprop="dateCreated">{{ page.date | date | safe }}</span>
-            {% endblock %}
-        </span>
+                {% endblock %}
+            </span>
+        {% endif %}
     </div>
 
     {# Updated Date #}
@@ -46,13 +49,15 @@
 </div>
 
 {# Tags #}
-<div class="metadata-tag-container d-flex flex-row align-items-top">
-    <span>
-        <i class="fa fa-tag post-meta-icon me-1 mt-2"></i>
-    </span>
-    <div class="tag-list d-flex flex-row flex-wrap align-items-center">
-        {% block post_metadata_tags %}
-            {{ render_tag_list(tags, 20) }}
-        {% endblock %}
+{% if tags | length > 0 %}
+    <div class="metadata-tag-container d-flex flex-row align-items-top">
+        <span>
+            <i class="fa fa-tag post-meta-icon me-1 mt-2"></i>
+        </span>
+        <div class="tag-list d-flex flex-row flex-wrap align-items-center">
+            {% block post_metadata_tags %}
+                {{ render_tag_list(tags, 20) }}
+            {% endblock %}
+        </div>
     </div>
-</div>
+{% endif %}

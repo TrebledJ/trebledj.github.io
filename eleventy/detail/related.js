@@ -54,6 +54,9 @@ function makeRelatedPostRegex(slug) {
  * @returns An array of related posts.
  */
 function getRelatedPosts(posts, thisPost, related) {
+  if (typeof related === 'string' && related === 'none')
+    return [];
+
   const n = related.num || 0; // Number of related elements to find.
 
   // In auto checking, if a post has at least this many percentage of common tags, then it is considered related.

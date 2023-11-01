@@ -1,5 +1,7 @@
 ---
-layout: layouts/home.njk
+layout: layouts/default-full
+permalink: /index.html
+
 eleventyNavigation:
   key: Home
   order: 1
@@ -67,3 +69,13 @@ assets:
  
 redirect_from: [/profile, /cv]
 ---
+
+<div id="home">
+   {% include "home/hero.html" %}
+
+   <div class="container">
+      {% include "home/about-me.html" %}
+      {% include "home/recents.html" %}
+      {% include "home/contact.html" %}
+   </div>
+</div>

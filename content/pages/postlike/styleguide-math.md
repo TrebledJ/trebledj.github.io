@@ -1,13 +1,15 @@
 ---
-title: "Styleguide. But math!"
+title: "Styleguide – Math"
 description: "Minimal style tests for math."
 tags:
   - mathematics
 usemathjax: true
 related:
+    disable: false
+    tags: [mathematics]
+    auto: true
     excludeOthers: true
 noindex: true
-# draft: true
 ---
 
 Inline math is useful: $A + B + \underbrace{C + D}_{\small\text{Floppy disk!}}$.

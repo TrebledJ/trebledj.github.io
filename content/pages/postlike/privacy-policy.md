@@ -1,10 +1,9 @@
 ---
-title:  "Privacy Policy"
+title: "Privacy Policy"
 description: ""
 thumbnail_src: ~/assets/img/privacy-policy.jpg
 related:
     disable: true
-# noindex: true
 ---
 
 {% alert "warning" %}
