@@ -42,3 +42,4 @@
 {"rule":"ENGLISH_WORD_REPEAT_BEGINNING_RULE","sentence":"^\\QWe declare three classes: \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q, \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q, \\E(?:Dummy|Ina|Jimmy-)[0-9]+$"}
 {"rule":"NON_STANDARD_WORD","sentence":"^\\Q:D {% endalert %}\\E$"}
 {"rule":"INTERJECTIONS_PUNCTUATION","sentence":"^\\QOh look!\\E$"}
+{"rule":"ENGLISH_WORD_REPEAT_RULE","sentence":"^\\QSo just be aware that \"Christianity\" is an umbrella term for many many beliefs.^by-name-christian\\E$"}

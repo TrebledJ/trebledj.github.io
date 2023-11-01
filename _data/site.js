@@ -19,16 +19,9 @@ module.exports = function () {
       /* eslint-disable max-len */
       bio: `
       Hi! (｡＾ ᴗ＾)ﾉ
-      I'm a recent graduate of the [Hong Kong University of Science and Technology (HKUST)](http://hkust.edu.hk/).
-      I'm passionate in a wide range of fields, from [software engineering](/tags/software-engineering) to [music](/tags/music).
-      Software engineering is such a vast field.
-      There's almost an endless thrill in building robust [apps](/tags/apps), exploring the deep field of [cybersecurity](/tags/ctf), and toying with [robots](/tags/robotics) and circuitry.
-      And let's not forget the gritty (yet beautiful) art of [programming](/tags/programming)—simply enjoying [languages](/tags/programming-languages) for their succinctness or ability to express complex thoughts.
-      
-      More about me? I like to solve problems, learn new things, and pass it on through teaching.
-      In my spare time, I enjoy taking walks, [composing music](/tags/composition), [playing the occasional CTF](/tags/ctf), [reflecting on life](/tags/faith), and putting my thoughts down to ~~paper~~ text.
-      
-      Feel free to [reach out](#contact) for whatever reason. ヽ(・∀・)ﾉ
+      I'm passionate in many things, from [software engineering](/tags/software-engineering) to [music](/tags/music).
+      I like to solve problems, learn new things, and pass it on through teaching.
+      In my spare time, I enjoy taking walks, [composing music](/tags/composition), [playing the occasional CTF](/tags/ctf), and [reflecting on life](/tags/faith).
       `.trim().replace(/^[ \t]+/gm, ''),
       /* eslint-enable max-len */
     },
@@ -37,6 +30,7 @@ module.exports = function () {
       { text: 'Posts', url: '/posts' },
       { text: 'Projects', url: '/tags/project' },
       { text: 'Music', url: '/music' },
+      { text: 'About', url: '/about' },
     ],
     search: {
       // https://fontawesome.com/icons/
