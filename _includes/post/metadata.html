@@ -1,7 +1,3 @@
-{# Pre-Condition Parameters:
-    * post: an 11ty post object.
-#}
-
 {% from "tag.html" import render_tag, render_tag_list %}
 
 <div class="metadata-container dim-deep d-flex">
@@ -40,7 +36,7 @@
             <i class="far fa-clock post-meta-icon me-1"></i>
         </span>
         <span class="fs-7">
-            {% set words = post.content | striptags | wordcount %}
+            {% set words = post.content | default(content) | striptags | wordcount %}
             {% set minutes = ((words + 240) / 240) | int %}
             {{ minutes + " minute read" }}
         </span>
