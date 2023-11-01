@@ -15,8 +15,6 @@ details {
 .details-collapse-bottom {
     display: flex;
     justify-content: end;
-    margin-top: $space-base;
-    margin-bottom: $space-half;
 
     & a {
         cursor: pointer;

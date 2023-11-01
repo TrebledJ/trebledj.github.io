@@ -1,3 +1,13 @@
+// 
+// Note [margin-top]
+// ---
+// We use margin-top for vertically structuring elements within the article.
+// It's debatable: https://css-tricks.com/margin-bottom-margin-top/.
+// 
+// But I prefer margin-top here as it's easier to control spacing with the 
+// current element. E.g. captions can be closer to the previous element.
+// 
+
 .post-meta-icon {
     font-size: 14px;
 }
@@ -37,7 +47,7 @@
             .post-updated-date-icon {
                 display: none;
             }
-        
+
             .post-posted-date::after,
             .post-updated-date::after {
                 content: "|";
@@ -72,7 +82,7 @@
     .caption {
         text-align: center;
         line-height: $line-height-compact;
-        // margin-top: 0.5rem;
+        margin-top: $space-half;
     }
 
     .no-center {
@@ -88,14 +98,13 @@
     .lightbox-single,
     .lightbox-gallery,
     table:not(.gist *),
+    pre[class*=language-],
     .gist,
     .video,
     .alert,
     details {
-        & {
-            margin-top: $space-base;
-            margin-bottom: 0;
-        }
+        margin-top: $space-base;
+        margin-bottom: 0;
     }
 
     &,
@@ -177,7 +186,12 @@ img.center {
     font-family: "Open Sans", arial, sans-serif;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
     &:not(:hover) {
         .md-anchor {
             display: none;
@@ -277,14 +291,14 @@ $breakpoints: sm, md, lg;
 // Magnific Popup with Zoom.
 .mfp-with-zoom .mfp-container,
 .mfp-with-zoom.mfp-bg {
-  opacity: 0;
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
-  /* ideally, transition speed should match zoom duration */
-  -webkit-transition: all 0.3s ease-out;
-  -moz-transition: all 0.3s ease-out;
-  -o-transition: all 0.3s ease-out;
-  transition: all 0.3s ease-out;
+    opacity: 0;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    /* ideally, transition speed should match zoom duration */
+    -webkit-transition: all 0.3s ease-out;
+    -moz-transition: all 0.3s ease-out;
+    -o-transition: all 0.3s ease-out;
+    transition: all 0.3s ease-out;
 }
 
 .mfp-with-zoom.mfp-ready .mfp-container {
@@ -296,5 +310,5 @@ $breakpoints: sm, md, lg;
 
 .mfp-with-zoom.mfp-removing .mfp-container,
 .mfp-with-zoom.mfp-removing.mfp-bg {
-  opacity: 0;
+    opacity: 0;
 }

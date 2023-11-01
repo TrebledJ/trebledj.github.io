@@ -402,11 +402,11 @@ Some other superheroes that may take issue with you:
 
 ### Details
 
-{% details "Details **details** *details* ~~details~~<sup>Smoll details.</sup>" %}
+{% details "Details **details** *details* ~~details~~<sup>Smoll details.</sup>", "open" %}
 Something small enough to escape casual notice.
 {% enddetails %}
 
-{% details "According to all known laws of aviation, there is no way a bee should be able to fly." %}
+{% details "According to all known laws of aviation, there is no way a bee should be able to fly.", "open" %}
 
 {% alert "danger" %}
 Don't do drugs, kids!^[Hear hear!]
@@ -421,12 +421,19 @@ Don't do drugs, kids!^[Hear hear!]
     4. air
 {% enddetails %}
 
-{% details "Elements" %}
+{% details "Elements", "open" %}
 > *The only thing we have to fear is fear itself.*
 > \- Franklin D. Roosevelt
 
 {% details "Oh, looky, more good stuff!", "open" %}
-$$1 + 2 = 3$$
+* Math
+    $$1 + 2 = 3$$
+* More math
+    $$\begin{align}
+        x + y + z &= 1 \\\\
+        2x + 2y + 2z &= 2 \\\\
+        3x + 3y + 3z &= 3
+    \end{align}$$
 {% enddetails %}
 
 {% abbr "Hi", "Hello world!" %}, with {% abbr "**bold**", "BOLD!" %}, with {% abbr "*emphasis*", "EMPHASIS!" %}, with {% abbr "~~strikethrough~~", "such ninja!" %}, with {% abbr "`code`", "</>" %}.
