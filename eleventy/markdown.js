@@ -24,7 +24,7 @@ module.exports = function (eleventyConfig) {
         permalink: markdownItAnchor.permalink.ariaHidden({
           placement: 'before',
           class: 'md-anchor',
-          symbol: '<i class="fa-solid fa-link"></i>',
+          symbol: '',
         }),
         level: [2, 3, 4, 5, 6],
         slugify: eleventyConfig.getFilter('slugify'),
