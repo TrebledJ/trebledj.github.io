@@ -100,8 +100,6 @@ I have several project ideas, the scope of which is beyond my capacity given my 
 - Music-Based, Cross-Platform 2D/2.5D Game with Dynamic and Adaptive Music
 	- (No, I’m not thinking of rhythm games, but I’m open to other ideas.)
 	- Looking to work with... game designers/programmers who are also music enthusiasts.
-- Progressive Web Application for finding interpersonal games, team building activities, Sunday School/fellowship activities
-	- Looking to work with... web frontend/backend/full-stack programmers and UI/UX designers enthusiastic about interpersonal activities.
 
 If you’re interested in collaborating, hit me up.
 
