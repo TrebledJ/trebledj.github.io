@@ -1,6 +1,6 @@
 ---
 title: TAMUctf 2022 – Labyrinth
-description: Using CFGs to solve a control-flow maze.
+excerpt: Using CFGs to solve a control-flow maze.
 tags:
   - reverse
   - python

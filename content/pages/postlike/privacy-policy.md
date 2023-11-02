@@ -1,6 +1,6 @@
 ---
 title: "Privacy Policy"
-description: ""
+excerpt: ""
 thumbnail_src: ~/assets/img/privacy-policy.jpg
 related:
     disable: true

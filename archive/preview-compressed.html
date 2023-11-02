@@ -12,9 +12,9 @@
             <a href="{{post.url}}"></a>
             <div>
                 <b class="post-title">{{ post.data.title | mdInline | safe }}</b>
-                {% if post.data.description %}
+                {% if post.data.excerpt %}
                     <div class="post-summary">
-                        <p>{{ post.data.description | mdInline | safe }}</p>
+                        <p>{{ post.data.excerpt | mdInline | safe }}</p>
                     </div>
                 {% endif %}
             </div>

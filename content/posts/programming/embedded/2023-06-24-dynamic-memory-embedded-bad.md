@@ -1,6 +1,6 @@
 ---
 title: "Why Dynamic Memory Allocation Bad (for Embedded)"
-description: "If you need flexibility and can afford it, use dynamic memory. If you can’t afford it, use static."
+excerpt: "If you need flexibility and can afford it, use dynamic memory. If you can’t afford it, use static."
 tags:
   - embedded
   - c

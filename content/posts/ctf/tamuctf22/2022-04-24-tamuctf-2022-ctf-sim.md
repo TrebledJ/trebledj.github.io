@@ -1,6 +1,6 @@
 ---
 title: TAMUctf 2022 – CTF Sim
-description: Oops, your vpointer was redirected.
+excerpt: Oops, your vpointer was redirected.
 tags: 
   - pwn
   - python

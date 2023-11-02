@@ -1,6 +1,6 @@
 ---
 title:  "Joyride in D"
-description: "Jetpack Joyride but without a jetpack, and in D."
+excerpt: "Jetpack Joyride but without a jetpack, and in D."
 updated: "2022-07-28"
 tags:
   - band

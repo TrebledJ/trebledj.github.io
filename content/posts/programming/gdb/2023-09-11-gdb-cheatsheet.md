@@ -1,6 +1,6 @@
 ---
 title: GDB/GEF Cheatsheet
-description: Quick command reference on one of the most powerful tools for dynamic analysis.
+excerpt: Quick command reference on one of the most powerful tools for dynamic analysis.
 tags:
   - ctf
   - pwn

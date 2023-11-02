@@ -1,6 +1,6 @@
 ---
 title: TAMUctf 2022 – Quick Mafs
-description: ROP chaining on steroids.
+excerpt: ROP chaining on steroids.
 tags:
   - reverse
   - pwn

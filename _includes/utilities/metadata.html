@@ -13,10 +13,10 @@
     {% endif %}
 </title>
 
-{% if description %}
-    <meta name="description" content="{{ description | mdInline | safe | striptags }}">
+{% if excerpt %}
+    <meta name="description" content="{{ excerpt | mdInline | safe | striptags }}">
 {% else %}
-    <meta name="description" content="{{ site.description }}">
+    <meta name="description" content="{{ site.excerpt }}">
 {% endif %}
 
 {# Compatibility #}
@@ -30,8 +30,8 @@
 {% if title %}
     {% set page_keywords = page_keywords | push(title | annihilateTags(['sup', 'sub']) | striptags | lower | e) %}
 {% endif %}
-{% if description %}
-    {% set page_keywords = page_keywords | push(description | lower | e) %}
+{% if excerpt %}
+    {% set page_keywords = page_keywords | push(excerpt | lower | e) %}
 {% endif %}
 {% if tags %}
     {% set page_keywords = page_keywords | extend(tags | exclude('posts')) %}
@@ -70,10 +70,10 @@
     <meta content="{{ site.title }}" property="og:title"/>
     <meta content="website" property="og:type"/>
 {% endif %}
-{% if description %}
-    <meta content="{{ description | mdInline | striptags }}" property="og:description"/>
+{% if excerpt %}
+    <meta content="{{ excerpt | mdInline | striptags }}" property="og:excerpt"/>
 {% else %}
-    <meta content="{{ site.description }}" property="og:description"/>
+    <meta content="{{ site.description }}" property="og:excerpt"/>
 {% endif %}
 {% if page.url %}
     <meta content="{{ site.url }}{{ page.url }}" property="og:url"/>

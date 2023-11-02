@@ -10,8 +10,8 @@ permalink: /search.json
 {
 "type": "post",
 "title": "{{post.data.title | annihilateTags(['sup', 'sub']) | striptags}}",
-"description": "{{post.data.description}}",
-"keywords": {{((post.data.description | mdInline) + post.content) | striptags | keywords | jsonify | safe}},
+"excerpt": "{{post.data.excerpt}}",
+"keywords": {{((post.data.excerpt | mdInline) + post.content) | striptags | keywords | jsonify | safe}},
 "tags": {{post.data.tags | exclude("posts") | jsonify | safe}},
 "url": "{{post.url}}"
 }
@@ -24,7 +24,7 @@ permalink: /search.json
 {
 "type": "tag",
 "title": "{{page.data.title}}",
-"description": {{clean | truncateWords(20) | jsonify | safe}},
+"excerpt": {{clean | truncateWords(20) | jsonify | safe}},
 "keywords": {{clean | keywords | jsonify | safe}},
 "tags": [],
 "url": "{{page.url}}"

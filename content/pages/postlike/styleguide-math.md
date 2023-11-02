@@ -1,6 +1,6 @@
 ---
 title: "Styleguide – Math"
-description: "Minimal style tests for math."
+excerpt: "Minimal style tests for math."
 tags:
   - mathematics
 usemathjax: true

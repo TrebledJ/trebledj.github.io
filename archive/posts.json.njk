@@ -9,7 +9,7 @@ permalink: /posts/demo.json
     {{ comma() }}
     {# {
       "title": {{post.data.title | annihilateTags(['sup', 'sub']) | striptags | jsonify | safe}},
-      "description": {{post.data.description | jsonify | safe}},
+      "excerpt": {{post.data.excerpt | jsonify | safe}},
       "excerpt": {{post.content | striptags | truncate(120, false, "...") | jsonify | safe}},
       "tags": {{post.data.tags | exclude("posts") | jsonify | safe}},
       "date": {{post.page.date | date | safe | jsonify | safe}},

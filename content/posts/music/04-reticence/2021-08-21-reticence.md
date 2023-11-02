@@ -1,6 +1,6 @@
 ---
 title:  "Reticence"
-description: "Alternate title: sad.mp3."
+excerpt: "Alternate title: sad.mp3."
 updated: "2022-07-26"
 tags:
   - piano

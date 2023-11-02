@@ -1,6 +1,6 @@
 ---
 title: AOC 2021 Haskell Utils
-description: An introduction and walkthrough of my haskell utilities.
+excerpt: An introduction and walkthrough of my haskell utilities.
 updated: "2022-08-09"
 tags:
   - aoc

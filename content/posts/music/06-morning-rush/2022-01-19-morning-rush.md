@@ -1,6 +1,6 @@
 ---
 title:  "Morning Rush"
-description: "\"Quickly! School starts in 15 minutes and you still haven't changed out of your pajamas!\""
+excerpt: "\"Quickly! School starts in 15 minutes and you still haven't changed out of your pajamas!\""
 updated: "2022-07-28"
 tags:
   - band

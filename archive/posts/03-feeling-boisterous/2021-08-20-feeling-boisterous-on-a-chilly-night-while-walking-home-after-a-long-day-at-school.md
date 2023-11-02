@@ -1,6 +1,6 @@
 ---
 title:  "Feeling Boisterous On A Chilly Night While Walking Home After A Long Day At School"
-description: "...during winter ...in a silent neighbourhood ...with the entire road to yourself."
+excerpt: "...during winter ...in a silent neighbourhood ...with the entire road to yourself."
 updated: "2022-07-26"
 tags:
   - electronic

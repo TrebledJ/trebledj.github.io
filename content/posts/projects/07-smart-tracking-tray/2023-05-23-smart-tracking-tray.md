@@ -1,6 +1,6 @@
 ---
 title: Smart-Tracking Tray
-description: Enhancing wet labs with IoT.
+excerpt: Enhancing wet labs with IoT.
 tags:
   - iot
   - embedded

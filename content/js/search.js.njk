@@ -30,13 +30,13 @@ $(async function () {
         return {
           icon: "tag",
           head: `<a class="tag" href="${item.url}">${item.title}</a>`,
-          desc: item.description,
+          desc: item.excerpt,
         };
       case "post":
         const tags = item.tags;
         const head = `<a href="${item.url}">${item.title}</a>
                   <a class="tag ms-2" href="/tags/${tags[0]}">${tags[0]}</a>`;
-        const desc = item.description;
+        const desc = item.excerpt;
 
         for (const {tag, icon} of searchResultIcons) {
           if (tags.includes(tag))

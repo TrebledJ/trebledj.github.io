@@ -29,8 +29,8 @@ LMK if you know a better (less hacky) way of doing this.
         <div class="col-lg-8">
             <div class="article-header">
                 <h1 class="post-title" itemprop="name headline">{{ title | mdInline | safe }}</h1>
-                {% if description %}
-                    <p class="post-desc" itemprop="alternativeHeadline">{{ description | mdInline | safe }}</p>
+                {% if excerpt %}
+                    <p class="post-desc" itemprop="alternativeHeadline">{{ excerpt | mdInline | safe }}</p>
                 {% endif %}
 
                 <div class="d-lg-none">

@@ -1,6 +1,6 @@
 ---
 title: Site Migration to Eleventy
-description: JavaScript go brrrrrrrrr.
+excerpt: JavaScript go brrrrrrrrr.
 updated: '2023-03-09'
 tags:
   - meta

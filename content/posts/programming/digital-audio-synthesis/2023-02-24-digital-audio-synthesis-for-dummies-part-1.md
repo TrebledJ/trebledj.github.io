@@ -1,6 +1,6 @@
 ---
 title: "Digital Audio Synthesis for Dummies: Part 1"
-description: An introductory discourse on audio processing. What makes audio tick?
+excerpt: An introductory discourse on audio processing. What makes audio tick?
 updated: '2023-03-09'
 tags:
   - tutorial

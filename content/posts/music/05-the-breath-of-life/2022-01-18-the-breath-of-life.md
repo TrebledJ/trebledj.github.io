@@ -1,6 +1,6 @@
 ---
 title:  "The Breath of Life"
-description: "Humans are complicated individuals even though we all start from two cells."
+excerpt: "Humans are complicated individuals even though we all start from two cells."
 updated: "2022-07-28"
 tags:
   - minimalism

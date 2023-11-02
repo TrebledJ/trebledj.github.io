@@ -9,7 +9,7 @@ permalink: feeds/recent.xml
             {% if post.feed != false %}
                 <item>
                     <title>{{ post.data.title | annihilateTags(['sup', 'sub']) | striptags }}</title>
-                    <description>{{ post.data.description }}</description>
+                    <description>{{ post.data.excerpt }}</description>
                     <pubDate>{{ post.date | dateToRfc3339 }}</pubDate>
                     <link>{{ post.url | absoluteUrl(site.url) }}</link>
                     {% for tag in post.data.tags | exclude("posts") %}

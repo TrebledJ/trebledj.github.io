@@ -1,6 +1,6 @@
 ---
 title: Browser-Based MIDI Editor
-description: MIDI transcription and editing localised in your browser.
+excerpt: MIDI transcription and editing localised in your browser.
 tags:
   - apps
   - js

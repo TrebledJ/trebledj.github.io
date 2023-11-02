@@ -1,6 +1,6 @@
 ---
 title:  "Buoyant Ecstasy"
-description: "Pointillism is pretty interesting with a string ensemble!"
+excerpt: "Pointillism is pretty interesting with a string ensemble!"
 updated: "2022-08-23"
 tags:
   - strings

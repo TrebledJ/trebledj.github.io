@@ -1,6 +1,6 @@
 ---
 title: Seaside Garden
-description: A first attempt at songwriting.
+excerpt: A first attempt at songwriting.
 tags:
   - song
   - piano

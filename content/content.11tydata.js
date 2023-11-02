@@ -1,6 +1,6 @@
 module.exports = {
   // Defaults.
-  description: '',
+  excerpt: '',
   tags: [],
   showToc: false,
 

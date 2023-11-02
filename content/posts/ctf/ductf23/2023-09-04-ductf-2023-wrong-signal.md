@@ -1,6 +1,6 @@
 ---
 title: DUCTF 2023 – Wrong Signal
-description: You straight to `oops()`. Right away.
+excerpt: You straight to `oops()`. Right away.
 tags:
   - reverse
   - python

@@ -1,6 +1,6 @@
 ---
 title: Styleguide
-description: "This is a supperrrrrrrr longggggg description... designed to test the limits of the measly little box that contains it. Who knows if it'll hold?"
+excerpt: "This is a supperrrrrrrr longggggg description... designed to test the limits of the measly little box that contains it. Who knows if it'll hold?"
 tags:
   - qt
   - qml

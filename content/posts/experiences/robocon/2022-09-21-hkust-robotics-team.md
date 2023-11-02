@@ -1,6 +1,6 @@
 ---
 title: The HKUST Robotics Team
-description: Experiences and reflections journeying with the HKUST Robotics Team.
+excerpt: Experiences and reflections journeying with the HKUST Robotics Team.
 tags:
   - robotics
   - software-engineering

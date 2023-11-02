@@ -1,6 +1,6 @@
 ---
 title: "Space Penguin"
-description: "And yet another school year begins."
+excerpt: "And yet another school year begins."
 tags:
   - electronic
   - synths

@@ -46,7 +46,7 @@ layout: layouts/page-default
                     </div>
                 </div>
                 <p class="track-content fs-7 mt-1 mb-0">
-                    {# ${item.description} #}
+                    {# ${item.excerpt} #}
                     <a class="track-link" href="/">(continue reading)</a>
                 </p>
             </div>
@@ -74,7 +74,7 @@ layout: layouts/page-default
                             title.attr("href", url);
                             title.html(item.title);
 
-                            el.find(".track-desc").html(item.description);
+                            el.find(".track-desc").html(item.excerpt);
 
                             const track = el.find("iframe");
                             track.attr("title", `Track: ${item.title}`);

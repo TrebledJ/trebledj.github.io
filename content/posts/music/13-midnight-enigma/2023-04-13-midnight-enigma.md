@@ -1,6 +1,6 @@
 ---
 title: Midnight Enigma
-description: A mysterious mix of minimalism and modal musings.
+excerpt: A mysterious mix of minimalism and modal musings.
 tags:
   - minimalism
   - fusion

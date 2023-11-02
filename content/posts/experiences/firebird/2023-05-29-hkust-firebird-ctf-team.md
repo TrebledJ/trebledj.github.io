@@ -1,6 +1,6 @@
 ---
 title: The HKUST Firebird CTF Team
-description: Experiences and reflections journeying with the HKUST Firebird CTF Team.
+excerpt: Experiences and reflections journeying with the HKUST Firebird CTF Team.
 tags:
   - ctf
   - hkust

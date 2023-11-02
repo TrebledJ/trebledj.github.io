@@ -1,6 +1,6 @@
 ---
 title: Déjà Vu – Cycle of Power
-description: The first variation in a series exploring repetition and meaning in life.
+excerpt: The first variation in a series exploring repetition and meaning in life.
 tags:
   - faith
   - orchestral

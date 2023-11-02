@@ -1,6 +1,6 @@
 ---
 title: Robot Design Contest Simulator
-description: Here you can drive robots without having to worry about damaging physical property or being impaled.
+excerpt: Here you can drive robots without having to worry about damaging physical property or being impaled.
 updated: "2022-08-05"
 tags:
   - qt
