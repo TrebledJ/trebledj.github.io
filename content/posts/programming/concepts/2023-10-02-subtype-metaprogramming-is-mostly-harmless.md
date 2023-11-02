@@ -362,7 +362,7 @@ How does the search go? Meet the two **subtyping rules** used by the type-checke
 
 1. **Super**. Substitute a type with its supertype.
     $$
-    (C : D) \land (CA <: EB) \rightsquigarrow DA <: EB
+    (C : D) \land (CA <: EB) {} \goodbreak \rightsquigarrow DA <: EB
     $$
     In English, if $C$ has a supertype $D$, we can "go up a level" to *search* for a match.
 2. **Cancel**.^[In the paper, they use **Var** instead of **Cancel**, but I think the latter conveys the operation better.] Remove the outermost type from both sides of the query. (And flip, since all type parameters are assumed to be contravariant!)
