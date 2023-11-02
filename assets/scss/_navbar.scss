@@ -1,3 +1,10 @@
+header {
+    position: sticky;
+    top: 0;
+    z-index: $zindex-fixed;
+    overflow-anchor: none;
+}
+
 /* Navigation Bar */
 .navbar {
     padding-left: 2vw;
@@ -11,10 +18,6 @@
         padding-left: 0;
         padding-right: 0;
     }
-
-    position: fixed;
-    top: 0;
-    z-index: $zindex-fixed;
 }
 
 .navbar-brand {

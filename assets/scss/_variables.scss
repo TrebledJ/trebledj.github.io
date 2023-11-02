@@ -39,6 +39,10 @@ $line-height-compact: 1.25rem;
 $transition-duration: 0.3s;
 
 
+:root {
+    --header-extra: 0px; // Extra header spacing due to banner. Computed dynamically.
+}
+
 html {
     --navbar-accent-color: var(--link-color);
 }

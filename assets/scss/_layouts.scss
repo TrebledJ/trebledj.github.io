@@ -58,10 +58,10 @@
 // --- Sticky Components --- //
 .sticky-right {
     @include media-breakpoint-up(lg) {
-        top: 5rem;
+        top: calc(var(--header-extra) + ($header-height + 1rem));
         right: 0;
         z-index: 2;
-        height: calc(100vh - 11rem);
+        height: fit-content;
         overflow-y: auto;
         position: sticky;
     }

@@ -175,23 +175,9 @@ $carousel-transition: transform 2s ease, opacity 1.5s ease-out .5s;
     }
 }
 
-#banner-container {
-    opacity: $opacity-low;
-    margin: 0 1rem 0.5rem 1rem;
-    z-index: 1000;
-}
-
-.sticky-banner {
-    top: $header-height + 8px;
-    left: 0;
-    right: 0;
-    position: sticky;
-}
-
 #banner {
     width: 100%;
     padding: 0.5rem;
-    border-radius: $border-radius;
 
     display: flex;
     flex-direction: row;

@@ -119,6 +119,9 @@ $(() => {
   {% endif %}
 
   {% if site.banner.enabled %}
+  var r = document.querySelector(':root');
+  r.style.setProperty('--header-extra', $('#banner').outerHeight() + 'px');
+  
   $('#banner .btn-close').on('click', () => {
     {% if site.banner.scope %}
     { { site.banner.scope + 'Storage' | safe } }.setItem('bannerClosed', true);
@@ -128,7 +131,7 @@ $(() => {
     b.css('max-height', b.outerHeight());
     window.requestAnimationFrame(() => b.addClass('collapsed'));
     setTimeout(() => {
-      b.parent().addClass('d-none');
+      b.addClass('d-none');
     }, 600);
   });
   {% endif %}

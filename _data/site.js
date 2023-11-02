@@ -50,11 +50,11 @@ module.exports = function () {
     },
     banner: {
       enabled: false,
-      sticky: false,
-      closeButton: false,
-      scope: 'session', // Possible values: 'session', 'local', ''.
-      bgColor: 'warning', // Any Bootstrap `bg-` values.
-      fgColor: 'black', // Any Bootstrap `text-` values.
+      sticky: true,
+      closeButton: true,
+      // scope: 'session', // Possible values: 'session', 'local', ''.
+      // bgColor: 'primary', // Any Bootstrap `bg-` values.
+      // fgColor: 'black', // Any Bootstrap `text-` values.
       icon: 'rocket',
       content: 'Hello world!',
     },
