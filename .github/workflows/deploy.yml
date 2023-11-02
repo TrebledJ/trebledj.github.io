@@ -83,7 +83,7 @@ jobs:
         run: ${{ steps.detect-package-manager.outputs.manager }} ${{ steps.detect-package-manager.outputs.command }}
 
       - name: Build
-        run: ${{ steps.detect-package-manager.outputs.manager }} run build-ghpages 
+        run: ${{ steps.detect-package-manager.outputs.manager }} run prod
 
       - name: Commit & Push Site Build
         uses: stefanzweifel/git-auto-commit-action@v5
