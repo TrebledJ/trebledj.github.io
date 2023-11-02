@@ -1,7 +1,7 @@
 const collectHashes = require('./html-csp-collect-hashes');
 
 module.exports = function (content) {
-  if (this.page.outputPath && this.page.outputPath.endsWith('.html')) {
+  if (this.page.outputPath?.endsWith?.('.html')) {
     const hashes = collectHashes('sha256', content);
 
     return content

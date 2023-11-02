@@ -94,10 +94,8 @@ module.exports = function (eleventyConfig) {
       // For thumbnails, use the prescribed-width image.
       defsrc = fmt.filter(e => e.width === thumbWidth)[0] ?? defsrc;
     }
-    if (!defsrc) {
-      // Use largest res item as default.
-      defsrc = fmt[fmt.length - 1];
-    }
+    // Use largest res item as default.
+    defsrc ??= fmt[fmt.length - 1];
 
     // Use a smaller max width for thumbnails.
     const maxWidth = thumbnail ? thumbWidth : fmt[fmt.length - 1].width;

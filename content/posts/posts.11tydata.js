@@ -20,7 +20,7 @@ function getGitCommitDateFast(filePath) {
     throw new Error("Fail to run 'git log'");
   }
 
-  if (output && output.stdout) {
+  if (output?.stdout) {
     const ts = parseInt(output.stdout.toString('utf-8'), 10) * 1000;
 
     // Paths not commited to Git returns empty timestamps, resulting in NaN.
@@ -53,7 +53,7 @@ function getGitCommitDateFiltered(filePath, options) {
     throw new Error("Fail to run 'git log'");
   }
 
-  if (output && output.stdout) {
+  if (output?.stdout) {
     const commits = output.stdout.toString('utf-8').split('\n');
 
     // Filter commits which match filter options.
@@ -62,7 +62,7 @@ function getGitCommitDateFiltered(filePath, options) {
       return matchesWhitelist(subject) && matchesBlacklist(subject);
     });
 
-    if (filtered && filtered[0]) {
+    if (filtered?.[0]) {
       // Grab latest commit timestamp.
       const s = filtered[0];
       const ts = parseInt(s.substring(0, s.indexOf(' ')), 10) * 1000;

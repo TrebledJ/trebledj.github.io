@@ -21,12 +21,9 @@ module.exports = function (eleventyConfig) {
       throw new Error(`Expected a valid alert role (${accepted.join(', ')}), but got ${role}.`);
 
     const [state, defaultEmoji] = alert[role];
-    if (!icon)
-      icon = defaultEmoji;
+    icon ??= defaultEmoji;
 
-    let iconHtml = '';
-    if (icon)
-      iconHtml = `<i class="fa fa-${icon} ms-1 me-3 mt-1 fs-4" role="img"></i>`;
+    const iconHtml = icon ? `<i class="fa fa-${icon} ms-1 me-3 mt-1 fs-4" role="img"></i>` : '';
 
     return `<div class="alert alert-${state} d-flex align-items-start">
               ${iconHtml}
