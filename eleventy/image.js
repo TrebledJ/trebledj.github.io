@@ -8,7 +8,7 @@ module.exports = function (eleventyConfig) {
   const breakpoints = {
     production: [256, thumbWidth, 1024],
     fast: [],
-  }[process.env.ENVIRONMENT] || [thumbWidth];
+  }[process.env.ENVIRONMENT] ?? [thumbWidth];
   const imageWidths = [...breakpoints, 'auto'];
 
   // Returns a path relative to a file.
@@ -21,7 +21,7 @@ module.exports = function (eleventyConfig) {
   // Get settings and options.
   function getOptions(file) {
     const extDefault = ['gif'].find(ext => file.endsWith(ext)); // Use the extension special? Then use it.
-    const ext = extDefault || 'webp';
+    const ext = extDefault ?? 'webp';
     const animated = file.endsWith('gif');
 
     // Full list of formats here: https://www.11ty.dev/docs/plugins/image/#output-formats
@@ -50,7 +50,7 @@ module.exports = function (eleventyConfig) {
 
   // Modify classes with custom processing, returns an array of classes.
   function amendClasses(classes) {
-    classes ||= [];
+    classes ??= [];
     if (typeof classes === 'string')
       classes = classes.split(' ');
 
@@ -66,7 +66,7 @@ module.exports = function (eleventyConfig) {
     };
 
     // By default, add post1 classes. If the image is part of `images`, the classes will be removed there.
-    const foundKey = Object.keys(substitutions).find(key => classes.includes(key)) || 'post1';
+    const foundKey = Object.keys(substitutions).find(key => classes.includes(key)) ?? 'post1';
 
     // Remove class.
     const idx = classes.indexOf(foundKey);
@@ -92,7 +92,7 @@ module.exports = function (eleventyConfig) {
     let defsrc = fmt.filter(e => !breakpoints.includes(e.width))[0];
     if (thumbnail) {
       // For thumbnails, use the prescribed-width image.
-      defsrc = fmt.filter(e => e.width === thumbWidth)[0] || defsrc;
+      defsrc = fmt.filter(e => e.width === thumbWidth)[0] ?? defsrc;
     }
     if (!defsrc) {
       // Use largest res item as default.
@@ -130,8 +130,8 @@ module.exports = function (eleventyConfig) {
   }
 
   async function imageShortcode(src, altText, classes, loading) {
-    altText ||= '';
-    classes ||= '';
+    altText ??= '';
+    classes ??= '';
     const { ext, options } = getOptions(src);
     const metadata = await eleventyImage(src, options);
     classes = amendClasses(classes);
@@ -241,7 +241,7 @@ module.exports = function (eleventyConfig) {
       3: 'w-30',
     };
 
-    containerClasses = (containerClasses || '').split(' ');
+    containerClasses = (containerClasses ?? '').split(' ');
 
     const $ = cheerio.load(images, null, false); // Load images (in fragment mode).
     const imgNodes = $('img');

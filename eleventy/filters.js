@@ -8,10 +8,10 @@ const findKeywords = require('./detail/keywords');
 module.exports = function (eleventyConfig) {
   // Formatting tokens for Luxon: https://moment.github.io/luxon/#/formatting?id=table-of-tokens
   eleventyConfig.addFilter('date', (dateObj, format, zone) => (
-    DateTime.fromJSDate(dateObj, { zone: zone || 'utc' }).toFormat(format || 'yyyy-LL-dd').replace(/-/g, '&#8209;')
+    DateTime.fromJSDate(dateObj, { zone: zone ?? 'utc' }).toFormat(format ?? 'yyyy-LL-dd').replace(/-/g, '&#8209;')
   ));
 
-  eleventyConfig.addFilter('dateISO', (dateObj, zone) => DateTime.fromJSDate(dateObj, { zone: zone || 'utc' }).toISO());
+  eleventyConfig.addFilter('dateISO', (dateObj, zone) => DateTime.fromJSDate(dateObj, { zone: zone ?? 'utc' }).toISO());
 
   eleventyConfig.addFilter('contains', (array, e) => array.includes(e));
 
@@ -46,7 +46,7 @@ module.exports = function (eleventyConfig) {
     return array2;
   });
 
-  eleventyConfig.addFilter('split', (str, delimiter) => (str ? str.split(delimiter || ' ') : []));
+  eleventyConfig.addFilter('split', (str, delimiter) => (str ? str.split(delimiter ?? ' ') : []));
 
   eleventyConfig.addFilter('endsWith', (str, ...args) => str.endsWith(...args));
 
@@ -102,14 +102,14 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addFilter('getAllTags', collection => {
     const tagSet = new Set();
     collection.forEach(item => (
-      (item.data.tags || []).forEach(tag => tagSet.add(tag))
+      (item.data.tags ?? []).forEach(tag => tagSet.add(tag))
     ));
 
     return Array.from(tagSet);
   });
 
   eleventyConfig.addFilter('filterTagList', tags => (
-    (tags || []).filter(tag => ['all', 'nav', 'post', 'posts'].indexOf(tag) === -1)
+    (tags ?? []).filter(tag => ['all', 'nav', 'post', 'posts'].indexOf(tag) === -1)
   ));
 
   eleventyConfig.addFilter('getRelatedPosts', getRelatedPosts);

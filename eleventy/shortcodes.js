@@ -37,7 +37,7 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addShortcode('endalert', () => '</div></div>');
 
   eleventyConfig.addShortcode('details', (summary, state) => {
-    state ||= '';
+    state ??= '';
     const md = eleventyConfig.getFilter('mdInline');
     return `<details ${state}><summary>${md(summary)}</summary><div class="details-content">\n`;
   });
@@ -65,7 +65,7 @@ module.exports = function (eleventyConfig) {
   ));
 
   eleventyConfig.addShortcode('tag', (text, tag) => {
-    tag ||= text;
+    tag ??= text;
     return `<a class="tag" href="/tags/${tag}/">${text}</a>`;
   });
 };

@@ -32,7 +32,7 @@ function getGitCommitDateFast(filePath) {
 }
 
 function getGitCommitDateFiltered(filePath, options) {
-  const { keep, ignore } = options || {};
+  const { keep, ignore } = options ?? {};
 
   function matchesWhitelist(subject) {
     return keep ? subject.match(keep) : true;

@@ -64,7 +64,7 @@ module.exports = function (eleventyConfig) {
       return tocMemo[key];
 
     const toc = eleventyConfig.getFilter('toc')(content);
-    tocMemo[key] = toc || '';
+    tocMemo[key] = toc ?? '';
     return toc;
   });
 };

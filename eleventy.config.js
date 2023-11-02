@@ -11,7 +11,7 @@ const markdown = require('./eleventy/markdown');
 const collections = require('./eleventy/collections');
 
 module.exports = function (eleventyConfig) {
-  process.env.ENVIRONMENT = process.env.ENVIRONMENT || 'development';
+  process.env.ENVIRONMENT ??= 'development';
   // console.log(`environment: ${process.env.ENVIRONMENT}`);
 
   // Copy the contents of the `public` folder to the output folder
@@ -30,7 +30,7 @@ module.exports = function (eleventyConfig) {
       if (process.env.ENVIRONMENT !== 'production')
         return null;
 
-      if (!src.endsWith('.js') || src.includes('third-party'))
+      if (!src.endsWith('.js') ?? src.includes('third-party'))
         return null;
 
       return new Transform({

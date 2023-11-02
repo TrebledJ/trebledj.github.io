@@ -57,10 +57,10 @@ function getRelatedPosts(posts, thisPost, related) {
   if (typeof related === 'string' && related === 'none')
     return [];
 
-  const n = related.num || 0; // Number of related elements to find.
+  const n = related.num ?? 0; // Number of related elements to find.
 
   // In auto checking, if a post has at least this many percentage of common tags, then it is considered related.
-  const autoCommonTagsThreshold = related.autoCommonTagsThreshold || 0.4;
+  const autoCommonTagsThreshold = related.autoCommonTagsThreshold ?? 0.4;
 
   const finalRelated = new Set(); // Final array of related posts.
 
@@ -174,7 +174,7 @@ function getRelatedTags(tags, tagPages, tagCount) {
     ret.push(groups[g]);
   });
 
-  const depth = obj => (obj.group.match(/\./g) || []).length;
+  const depth = obj => (obj.group.match(/\./g) ?? []).length;
 
   // Sort by "depth" (most number of '.'s appear first).
   ret.sort((a, b) => depth(b) - depth(a));
@@ -211,7 +211,7 @@ function getTagsByPrefix(prefix, tagPages) {
     ret.push(groups[g]);
   });
 
-  const depth = obj => (obj.group.match(/\./g) || []).length;
+  const depth = obj => (obj.group.match(/\./g) ?? []).length;
 
   // Sort by "depth" (least number of '.'s appear first).
   ret.sort((a, b) => depth(a) - depth(b));
