@@ -2,6 +2,7 @@ const { DateTime } = require('luxon');
 const MarkdownIt = require('markdown-it');
 
 const { getRelatedPosts, getRelatedTags, getTagsByPrefix } = require('./detail/related');
+const { nonEmptyContainerSentinel } = require('./detail/utils');
 const selectHomePosts = require('./detail/select-home-posts');
 const findKeywords = require('./detail/keywords');
 
@@ -112,9 +113,9 @@ module.exports = function (eleventyConfig) {
     (tags ?? []).filter(tag => ['all', 'nav', 'post', 'posts'].indexOf(tag) === -1)
   ));
 
-  eleventyConfig.addFilter('getRelatedPosts', getRelatedPosts);
-  eleventyConfig.addFilter('getRelatedTags', getRelatedTags);
-  eleventyConfig.addFilter('getTagsByPrefix', getTagsByPrefix);
+  eleventyConfig.addFilter('getRelatedPosts', nonEmptyContainerSentinel('related posts', getRelatedPosts));
+  eleventyConfig.addFilter('getRelatedTags', nonEmptyContainerSentinel('related tags', getRelatedTags));
+  eleventyConfig.addFilter('getTagsByPrefix', nonEmptyContainerSentinel('related tags by prefix', getTagsByPrefix));
   eleventyConfig.addFilter('selectHomePosts', selectHomePosts);
 
   /**

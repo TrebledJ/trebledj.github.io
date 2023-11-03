@@ -7,5 +7,6 @@ module.exports = {
   comments: false,
   related: {
     disable: true,
+    num: 6,
   },
 };

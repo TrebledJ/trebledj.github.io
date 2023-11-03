@@ -1,10 +1,9 @@
-{% from "post/preview.html" import render_post_minified_preview %}
+{# WARNING: don't format. #}
+{% if related and (not related.disable) %}
+    {% from "post/preview.html" import render_post_minified_preview %}
 
-{% set this = collections.posts | getCollectionItem %}
-{% if this %}
-    {% set relatedPosts = collections.postsr | getRelatedPosts(this, related) %}
-
-    {% if (not related.disable) and (relatedPosts | length) > 0 %}
+    {% set relatedPosts = collections.postsr | getRelatedPosts(tags, related) %}
+    {% if (relatedPosts | length) > 0 %}
         <hr class="section-sep"/>
         <div id="related" class="w-100">
             <h3>

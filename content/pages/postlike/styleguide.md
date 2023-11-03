@@ -22,12 +22,15 @@ score_id: 9645115
 sharable: true
 comments: true
 related:
-    disable: false # Whether to disable related posts section.
-    # posts: [/posts/post1, /posts/post2] # Related will only contain these posts. "none" to hide related section.
-    tags: [cpp]  # Any post containing all these tags is marked as related.
-    auto: true # Use an auto algorithm to determine whether a post is related.
-    excludeOthers: true # Don't show this post in other posts.
-    # See more params in related.js.
+  disable: false # Whether to disable the related posts section. (`related: false`` also works.)
+  posts: # Related will only contain these posts.
+    - /posts/remorse
+    - r/robocon-*/r
+  tags: # Any post containing all these tags is marked as related.
+    - cpp
+  auto: true # Use an auto algorithm to determine whether a post is related.
+  excludeOthers: true # Don't show this post in other posts.
+  # See more params in related.js.
 noindex: true
 showToc: true
 ---

@@ -47,3 +47,5 @@ rules:
   guard-for-in: off
   no-multi-assign: off
   no-new: off
+  no-lonely-if: off
+  prefer-destructuring: off

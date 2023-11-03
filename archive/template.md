@@ -18,7 +18,7 @@ usemathjax: false
 pitch: A description displayed in the profile.
 track_id: 00000011 # soundcloud track id
 score_id: 00000012 # musescore track id
-# related: none
+# related: false
 related:
     disable: true # Whether to disable related posts section.
     posts: [/posts/post1, /posts/post2] # Related will only contain these posts. "none" to hide related section.
