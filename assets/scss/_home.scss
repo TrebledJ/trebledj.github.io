@@ -139,7 +139,7 @@ html[data-theme="light"] .hero-section {
 
     .carousel-tab-group {
         .btn {
-            border: var(--light-border-color) solid $border-width !important;
+            border: var(--border-color) solid $border-width !important;
             color: var(--main-text-color);
 
             &:hover {
@@ -180,7 +180,7 @@ html[data-theme="light"] .hero-section {
 
 .carousel-title .btn,
 .recent-posts .btn {
-    border: $border-width solid var(--light-border-color);
+    border: $border-width solid var(--border-color);
     background-color: var(--background-color);
     color: var(--bold-color) !important;
 }

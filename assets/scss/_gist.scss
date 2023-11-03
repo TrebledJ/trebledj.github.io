@@ -171,11 +171,11 @@ html[data-theme="dark"] {
     }
 
     body .gist .gist-file {
-        border: 1px solid var(--light-border-color);
+        border: 1px solid var(--border-color);
     }
 
     body .gist .gist-data {
         background: #272822;
-        border-bottom: 1px solid var(--light-border-color);
+        border-bottom: 1px solid var(--border-color);
     }
 }

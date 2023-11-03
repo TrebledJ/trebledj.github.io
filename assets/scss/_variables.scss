@@ -43,36 +43,36 @@ $transition-duration: 0.3s;
     --header-extra: 0px; // Extra header spacing due to banner. Computed dynamically.
 }
 
-html {
-    --navbar-accent-color: var(--link-color);
-}
-
 html[data-theme="dark"] {
-    --bold-color: rgb(188, 188, 188);
-    --highlight-color: rgb(75, 75, 75);
-    --light-border-color: rgb(58, 57, 60);
-    --light-text-color: rgb(199, 199, 204);
     --link-color: rgb(255, 138, 15);
     --link-hover-color: rgb(197, 100, 17);
-    --accent-color: rgb(155, 97, 226);
+    --accent-color: var(--link-color);
+
     --main-background-color: rgb(20, 20, 24);
     --medium-background-color: rgb(35, 35, 35);
     --light-background-color: rgb(42, 42, 42);
+
+    --bold-color: rgb(188, 188, 188);
+    --highlight-color: rgb(75, 75, 75);
+    --border-color: rgb(58, 57, 60);
+
     --main-text-color: rgb(165, 165, 165);
-    --medium-text-color: rgb(179, 179, 179);
+    --light-text-color: rgb(179, 179, 179);
 }
 
 html[data-theme="light"] {
-    --bold-color: rgb(0, 0, 0);
-    --highlight-color: rgb(190, 190, 190);
-    --light-border-color: rgb(230, 230, 230);
-    --light-text-color: rgb(72, 72, 74);
     --link-color: rgb(218, 100, 4);
     --link-hover-color: rgb(200, 90, 0);
-    --accent-color: rgb(127, 20, 255);
+    --accent-color: var(--link-color);
+    
     --main-background-color: rgb(255, 255, 255);
     --medium-background-color: rgb(240, 240, 240);
     --light-background-color: rgb(210, 210, 210);
+
+    --bold-color: rgb(0, 0, 0);
+    --highlight-color: rgb(190, 190, 190);
+    --border-color: rgb(230, 230, 230);
+
     --main-text-color: rgb(10, 10, 10);
-    --medium-text-color: rgb(51, 51, 51);
+    --light-text-color: rgb(51, 51, 51);
 }

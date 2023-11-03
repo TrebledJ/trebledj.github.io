@@ -11,7 +11,7 @@ ul.timeline {
  /* Timeline vertical line */
 ul.timeline:before {
     content: ' ';
-    background: var(--medium-text-color);
+    background: var(--light-text-color);
     display: inline-block;
     position: absolute;
     left: 16px;
@@ -43,7 +43,7 @@ li.timeline-item::before {
     display: inline-block;
     position: absolute;
     border-radius: 50%;
-    border: $border-width-thick solid var(--medium-text-color);
+    border: $border-width-thick solid var(--light-text-color);
     left: 11px;
     width: 14px;
     height: 14px;

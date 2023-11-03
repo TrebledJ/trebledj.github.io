@@ -10,7 +10,7 @@ header {
     padding-left: 2vw;
     padding-right: 2vw;
     background-color: var(--main-background-color);
-    border-bottom: 1px solid var(--light-border-color);
+    border-bottom: 1px solid var(--border-color);
     box-shadow: 0 8px 20px rgba(0, 0, 0, .05);
     width: 100vw;
 
@@ -32,7 +32,7 @@ header {
 }
 
 .navbar-brand {
-    color: var(--navbar-accent-color) !important;
+    color: var(--accent-color) !important;
     font-weight: 600;
 }
 
@@ -54,7 +54,7 @@ header {
 
 .nav-icon {
     font-size: 25px;
-    color: var(--navbar-accent-color);
+    color: var(--accent-color);
 }
 
 #mode-switch {
@@ -69,14 +69,9 @@ header {
     transform: rotate(180deg);
 }
 
-/* On-Load Progress Bar */
-#load-progress-bar .bar {
-    background: var(--link-color);
-}
-
 /* On-Scroll Progress Bar */
 #scroll-progress-bar {
-    background: linear-gradient(to right, var(--link-color) var(--progress), transparent 0);
+    background: linear-gradient(to right, var(--accent-color) var(--progress), transparent 0);
     height: 2px;
     width: 100%;
     z-index: 1000;

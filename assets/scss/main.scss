@@ -102,8 +102,8 @@ $carousel-transition: transform 2s ease, opacity 1.5s ease-out .5s;
 .pagination {
     .page-link {
         background-color: var(--main-background-color) !important;
-        color: var(--medium-text-color) !important;
-        border: $border-width solid var(--light-border-color);
+        color: var(--light-text-color) !important;
+        border: $border-width solid var(--border-color);
     }
 
     .active .page-link {

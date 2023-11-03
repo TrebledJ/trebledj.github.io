@@ -1,0 +1,17 @@
+// github-dark
+html[data-theme="dark"] {
+    --link-color: rgb(83, 155, 245);
+    --link-hover-color: var(--link-color);
+    --accent-color: var(--bold-color);
+
+    --main-background-color: rgb(34, 39, 46);
+    --medium-background-color: rgb(45, 51, 59);
+    --light-background-color: rgb(55, 62, 71);
+    
+    --bold-color: rgb(173, 186, 199);
+    --highlight-color: rgb(190, 190, 190);
+    --border-color: rgb(68, 76, 86);
+    
+    --main-text-color: rgb(118, 131, 144);
+    --light-text-color: var(--main-text-color);
+}

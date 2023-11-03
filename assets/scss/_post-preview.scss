@@ -20,7 +20,7 @@
     overflow: hidden;
 
     border-radius: $border-radius;
-    border: $border-width-block solid var(--light-border-color);
+    border: $border-width-block solid var(--border-color);
     box-shadow: 0 1px 1px 0 rgba(31, 35, 46, 0.15);
 
     transition: all $transition-duration ease !important;

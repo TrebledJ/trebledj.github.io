@@ -103,7 +103,7 @@ h6 {
 }
 
 hr {
-    background-color: var(--medium-text-color);
+    background-color: var(--light-text-color);
 }
 
 pre, .alert {
@@ -127,12 +127,12 @@ table:not(.gist *) {
     th,
     td {
         padding: 6px 13px;
-        border: $border-width-table solid var(--light-border-color);
+        border: $border-width-table solid var(--border-color);
     }
 
     tr {
         background-color: var(--main-background-color);
-        border-top: 1px solid var(--light-border-color);
+        border-top: 1px solid var(--border-color);
     }
 
     tr:nth-child(2n) {

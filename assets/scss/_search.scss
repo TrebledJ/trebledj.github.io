@@ -8,12 +8,12 @@
         right: 20px;
         top: 10px;
         font-size: 20px;
-        color: var(--light-border-color);
+        color: var(--border-color);
     }
 
     #search-box {
         height: 40px;
-        border: $border-width-thick solid var(--light-border-color);
+        border: $border-width-thick solid var(--border-color);
         border-radius: $border-radius-small;
         background-color: var(--main-background-color);
         color: var(--main-text-color);
@@ -29,11 +29,11 @@
     }
 
     .modal-body {
-        border-top: 2px solid var(--light-border-color);
+        border-top: 2px solid var(--border-color);
     }
 
     .border-bottom {
-        border-bottom: $border-width solid var(--light-border-color) !important;
+        border-bottom: $border-width solid var(--border-color) !important;
     }
 
     .modal-content {
