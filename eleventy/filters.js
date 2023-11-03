@@ -113,9 +113,9 @@ module.exports = function (eleventyConfig) {
     (tags ?? []).filter(tag => ['all', 'nav', 'post', 'posts'].indexOf(tag) === -1)
   ));
 
-  eleventyConfig.addFilter('getRelatedPosts', nonEmptyContainerSentinel('related posts', getRelatedPosts));
-  eleventyConfig.addFilter('getRelatedTags', nonEmptyContainerSentinel('related tags', getRelatedTags));
-  eleventyConfig.addFilter('getTagsByPrefix', nonEmptyContainerSentinel('related tags by prefix', getTagsByPrefix));
+  eleventyConfig.addFilter('getRelatedPosts', nonEmptyContainerSentinel('related posts')(getRelatedPosts));
+  eleventyConfig.addFilter('getRelatedTags', nonEmptyContainerSentinel('related tags')(getRelatedTags));
+  eleventyConfig.addFilter('getTagsByPrefix', nonEmptyContainerSentinel('related tags by prefix')(getTagsByPrefix));
   eleventyConfig.addFilter('selectHomePosts', selectHomePosts);
 
   /**
