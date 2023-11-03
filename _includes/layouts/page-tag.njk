@@ -31,10 +31,8 @@ logo: tag
 
         {{ content | safe }}
 
-        <br/>
-
         {# Preview List #}
-        <div class="post-preview-list">
+        <div class="post-preview-list mt-4">
             {% set slug = tag %}
             {% for post in collections[slug] | reverse %}
                 {{ render_post_preview(post, excludeTags=[slug]) }}
