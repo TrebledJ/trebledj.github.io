@@ -44,7 +44,7 @@ $transition-duration: 0.3s;
 }
 
 html[data-theme="dark"] {
-    --link-color: rgb(255, 138, 15);
+    --link-color: rgb(243, 128, 32);
     --link-hover-color: rgb(197, 100, 17);
     --accent-color: var(--link-color);
 
@@ -52,12 +52,12 @@ html[data-theme="dark"] {
     --medium-background-color: rgb(35, 35, 35);
     --light-background-color: rgb(42, 42, 42);
 
-    --bold-color: rgb(188, 188, 188);
+    --bold-color: rgb(175, 175, 175);
     --highlight-color: rgb(75, 75, 75);
     --border-color: rgb(58, 57, 60);
 
-    --main-text-color: rgb(165, 165, 165);
-    --light-text-color: rgb(179, 179, 179);
+    --main-text-color: rgb(145, 145, 145);
+    --light-text-color: rgb(118, 120, 120);
 }
 
 html[data-theme="light"] {

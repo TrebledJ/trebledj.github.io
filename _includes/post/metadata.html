@@ -1,6 +1,6 @@
 {% from "tag.html" import render_tag, render_tag_list %}
 
-<div class="metadata-container dim-deep d-flex">
+<div class="metadata-container d-flex">
     {# Posted Date #}
     <div class="d-flex flex-row align-items-center">
         {% block post_metadata_date %}
@@ -44,7 +44,7 @@
 </div>
 
 {# Tags #}
-<div class="metadata-tag-container dim-deep d-flex flex-row align-items-top">
+<div class="metadata-tag-container d-flex flex-row align-items-top">
     {% block post_metadata_tags %}
         {% if tags.length > 0 %}
             <span>
