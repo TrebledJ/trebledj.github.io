@@ -10,7 +10,7 @@ module.exports = {
   layout: 'layouts/page-tag',
   eleventyComputed: {
     permalink: data => `/tags/${data.page.fileSlug}/index.html`,
-    title: data => data.title ?? toTitleCase(data.page.fileSlug),
+    title: data => data.title || toTitleCase(data.page.fileSlug),
     tag: data => data.page.fileSlug,
     group: data => data.page.filePathStem.replace(/^\/tags\//, '').replace(/\/[\w-]+$/, '').replace('/', '.'),
   },
