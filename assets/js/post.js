@@ -60,7 +60,7 @@ $(() => {
 
     const docElem = document.documentElement;
     const docBody = document.body;
-    const scrollTop = (docBody.scrollTop ?? docElem.scrollTop);
+    const scrollTop = (docBody.scrollTop || docElem.scrollTop);
 
     /* After scrolling past the article end (plus some offset), mark nothing as selected. */
     if (scrollTop > articleEnd - headerOffset) {
@@ -140,10 +140,10 @@ $(() => {
       // Add an overflow on the <details> to avoid content overflowing
       this.el.style.overflow = 'hidden';
       // Check if the element is being closed or is already closed
-      if (this.isClosing ?? !this.el.open) {
+      if (this.isClosing || !this.el.open) {
         this.open();
         // Check if the element is being openned or is already open
-      } else if (this.isExpanding ?? this.el.open) {
+      } else if (this.isExpanding || this.el.open) {
         this.shrink();
       }
     }

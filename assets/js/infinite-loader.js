@@ -1,10 +1,10 @@
 // eslint-disable-next-line no-unused-vars
 async function InfiniteLoader(params) {
   const dataFile = params.data; // The JSON data file to load data from.
-  const initialLoad = params.items.num ?? 10; // Number of items to load initially.
-  const subsequentLoad = params.items.after ?? initialLoad; // Number of items to load subsequently on scroll.
-  const html = params.html ?? (item => item); // The HTML data to load.
-  const appendElement = params.append ?? '.post-list'; // Where to insert the items.
+  const initialLoad = params.items.num || 10; // Number of items to load initially.
+  const subsequentLoad = params.items.after || initialLoad; // Number of items to load subsequently on scroll.
+  const html = params.html || (item => item); // The HTML data to load.
+  const appendElement = params.append || '.post-list'; // Where to insert the items.
   const scrollPercentageTrigger = 90; // Scroll percentage when we should trigger a subsequent load (0-100).
 
   if (!dataFile)
@@ -22,7 +22,7 @@ async function InfiniteLoader(params) {
 
   const p = await fetch(dataFile);
   const items = await p.json();
-  const maxItemsToLoad = Math.min(params.items.max ?? Number.MAX_SAFE_INTEGER, items.length);
+  const maxItemsToLoad = Math.min(params.items.max || Number.MAX_SAFE_INTEGER, items.length);
 
   fetchPosts(initialLoad);
 
@@ -31,7 +31,7 @@ async function InfiniteLoader(params) {
     shouldFetchPosts = false;
 
   $(window).on('scroll', () => {
-    if (!shouldFetchPosts ?? isFetchingPosts ?? !items ?? loadedItems >= items.length)
+    if (!shouldFetchPosts || isFetchingPosts || !items || loadedItems >= items.length)
       return;
 
     // Are we close to the end of the page? If we are, load more items.

@@ -23,13 +23,13 @@
 
 		init = function()
 		{
-			if( !$instance.length ?? $instance.data( 'disqusLoaderStatus' ) == 'loaded' )
+			if( !$instance.length || $instance.data( 'disqusLoaderStatus' ) == 'loaded' )
 				return true;
 
 			var winST = $win.scrollTop();
 
-			// if the element is too far below ?? too far above
-			if( $instance.offset().top - winST > $win.height() * laziness ?? winST - $instance.offset().top - $instance.outerHeight() - ( $win.height() * laziness ) > 0 )
+			// if the element is too far below || too far above
+			if( $instance.offset().top - winST > $win.height() * laziness || winST - $instance.offset().top - $instance.outerHeight() - ( $win.height() * laziness ) > 0 )
 				return true;
 
 			$( '#disqus_thread' ).removeAttr( 'id' );
