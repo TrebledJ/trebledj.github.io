@@ -4,10 +4,12 @@ logo: tag
 ---
 
 {% from "post/preview.html" import render_post_preview %}
+{% from "sidebars/sidebar-utils.html" import tags_sidebar %}
 
 <div class="page-content-container d-flex row gx-6">
     <div class="col-lg-4">
-        {% include "sidebars/related-tags-sidebar.html" %}
+        {% set groups = [tag] | getRelatedTags(collections.tags, collections.tagcount) %}
+        {{ tags_sidebar("Related Tags", groups) }}
     </div>
 
     <div class="col-lg-8">

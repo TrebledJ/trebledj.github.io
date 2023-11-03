@@ -1,0 +1,17 @@
+{% macro tags_sidebar(heading, groups) %}
+    <div class="sticky-right dim-light">
+        <h3>
+            <i class="fa fa-tags me-2"></i>{{heading}}
+        </h3>
+        {% for data in groups %}
+            <div class="mt-2 mb-1">
+                <b>{{data.group}}</b>
+            </div>
+            <span class="d-flex flex-wrap">
+                {% for t in data.related %}
+                    <span>{% tag t.tag %}</span>
+                {% endfor %}
+            </span>
+        {% endfor %}
+    </div>
+{% endmacro %}

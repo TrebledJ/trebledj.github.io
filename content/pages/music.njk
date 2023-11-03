@@ -4,24 +4,12 @@ title: Music
 layout: layouts/page-default
 ---
 
+{% from "sidebars/sidebar-utils.html" import tags_sidebar %}
+
 <div class="page-content-container d-flex row gx-6">
     <div class="col-lg-4">
         {% set groups = "music." | getTagsByPrefix(collections.tags) %}
-        <div class="sticky-right dim-light">
-            <h3>
-                <i class="fa fa-tags me-2"></i>Tags
-            </h3>
-            {% for data in groups %}
-                <div class="mt-2 mb-1">
-                    <b>{{data.group}}</b>
-                </div>
-                <span class="d-flex flex-wrap">
-                    {% for t in data.related %}
-                        <span>{% tag t.tag %}</span>
-                    {% endfor %}
-                </span>
-            {% endfor %}
-        </div>
+        {{ tags_sidebar("Tags", groups) }}
     </div>
 
     <div class="col-lg-8 mb-4">
@@ -75,7 +63,9 @@ layout: layouts/page-default
                             title.attr("href", url);
                             title.html(item.title);
 
-                            el.find(".track-desc").html(item.excerpt);
+                            el
+                                .find(".track-desc")
+                                .html(item.excerpt);
 
                             const track = el.find("iframe");
                             track.attr("title", `Track: ${item.title}`);
@@ -84,16 +74,27 @@ layout: layouts/page-default
                             const toHTMLTag = t => `<span><a class="tag" href="{{ site.baseurl }}/tags/${t}">${t}</a></span>`;
 
                             /* Exclude common tags and convert into html code. */
-                            const tags = item.tags.map(toHTMLTag).join("");
-                            el.find(".track-tags").html(tags);
+                            const tags = item
+                                .tags
+                                .map(toHTMLTag)
+                                .join("");
+                            el
+                                .find(".track-tags")
+                                .html(tags);
 
                             /* Fill description and link. */
-                            el.find(".track-content").prepend(item.content);
-                            el.find(".track-link").attr("href", url);
+                            el
+                                .find(".track-content")
+                                .prepend(item.content);
+                            el
+                                .find(".track-link")
+                                .attr("href", url);
 
                             /* No spacing before first item. */
                             if (index == 0) {
-                                el.children("br").remove();
+                                el
+                                    .children("br")
+                                    .remove();
                             }
 
                             return el;
