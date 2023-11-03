@@ -145,7 +145,17 @@ module.exports = function (eleventyConfig) {
     // Keep things fast.
     eleventyConfig.addFilter('keywords', content => content);
   } else {
-    eleventyConfig.addFilter('keywords', findKeywords);
+    // Extract a set of keywords and run-length-encode them to optimise size.
+    eleventyConfig.addFilter('keywords', function (...args) {
+      const res = findKeywords.call(this, ...args);
+      const counter = {};
+      for (const w of res) {
+        counter[w] = (counter[w] ?? 0) + 1;
+      }
+      const uniq = new Set(res);
+      const lengthEncoded = [...uniq].map(w => Math.min(counter[w], 99).toString().padStart(2, '0') + w);
+      return lengthEncoded.join(' ');
+    });
   }
 
   eleventyConfig.addFilter('maxDate', (a, b) => {
