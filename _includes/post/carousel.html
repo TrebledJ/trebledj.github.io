@@ -10,7 +10,7 @@
     {% set carouselId = 'carousel-' + (name | slugify) %}
 
     {# Carousel Tabs #}
-    <div class="d-flex justify-content-center mb-2">
+    <div class="d-flex justify-content-center mb-3">
         <div class="btn-group carousel-tab-group" role="group" aria-label="Carousel radio button group">
             {% for cat in categories %}
                 <input type="radio" class="btn-check" name="{{carouselId}}-tab" id="{{carouselId}}-tab{{loop.index}}" autocomplete="off"
