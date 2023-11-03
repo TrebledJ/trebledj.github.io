@@ -60,7 +60,7 @@ function getRelatedPosts(posts, tags, related) {
   const numTargetPosts = related.num ?? 0; // Number of related elements to find.
 
   // In auto checking, if a post has at least this many percentage of common tags, then it is considered related.
-  const minCommonTags = related.minCommonTags ?? 3;
+  const minCommonTags = related.minCommonTags ?? 2;
 
   const finalRelated = new Set(); // Final array of related posts.
 
