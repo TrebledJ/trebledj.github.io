@@ -34,7 +34,12 @@ logo: tag
         {# Preview List #}
         <div class="post-preview-list mt-4">
             {% set slug = tag %}
-            {% for post in collections[slug] | reverse %}
+            {% if sortByLatest %}
+                {% set seq = collections[slug] | reverse %}
+            {% else %}
+                {% set seq = collections[slug] %}
+            {% endif %}
+            {% for post in seq %}
                 {{ render_post_preview(post, excludeTags=[slug]) }}
             {% endfor %}
         </div>

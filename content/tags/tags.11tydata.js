@@ -8,6 +8,7 @@ function toTitleCase(str) {
 module.exports = {
   eleventyExcludeFromCollections: false,
   layout: 'layouts/page-tag',
+  sortByLatest: true,
   eleventyComputed: {
     permalink: data => `/tags/${data.page.fileSlug}/index.html`,
     title: data => data.title || toTitleCase(data.page.fileSlug),
