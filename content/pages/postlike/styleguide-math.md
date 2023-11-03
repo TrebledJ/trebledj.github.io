@@ -28,49 +28,38 @@ $$
 e^{i\pi} + 1 = 0
 \qquad
 \begin{align}
-x + y + z &= 1 \\\\
-2x - y + 3z &= 2 \\\\
-4x - 5y + 10z &= 3 \\\\
+x + y + z &= 1 \\
+2x - y + 3z &= 2 \\
+4x - 5y + 10z &= 3 \\
 \end{align}
 $$ -->
 
 $$
-\begin{align}
-x + y + z &= 1 \\\\
-2x - y + 3z &= 2 \\\\
-4x - 5y + 10z &= 3 \\\\
-\end{align}
+\begin{align*}
+x + y + z &= 1 \\
+2x - y + 3z &= 2 \\
+4x - 5y + 10z &= 3
+\end{align*}
 $$
 
 $$
 \begin{bmatrix}
-1 & 0 & 0 \\\\
-0 & 1 & 0 \\\\
-0 & 0 & 1 \\\\
+1 & 0 & 0 \\
+0 & 1 & 0 \\
+0 & 0 & 1
 \end{bmatrix}
 $$
 
 Check line breaks here:
 
-- `\text` and friends: $\texttt{The quick brown } \text{fox jumps } \textsf{over the lazy dog}\dots\ \texttt{And } \texttt{over } \texttt{the } \texttt{rainbow } \texttt{dost } \texttt{thy } \texttt{chicken } \texttt{poop } \texttt{fly}\dots$
-
-- `\text` + `\break`: $\texttt{The quick brown } \text{fox jumps } \textsf{over the lazy dog}\dots\ \break \texttt{And } \texttt{over } \texttt{the } \break\texttt{rainbow } \texttt{dost } \break \texttt{thy } \texttt{chicken } \texttt{poop } \texttt{fly}\dots$
-
-- `\text` + `\break` + `\equiv`: $\texttt{Maybe (Either (a, a) (Bool, a))} {} \break \equiv \texttt{(Maybe a, Maybe a)}$
-- `\text` + `\break` + `=`: $\texttt{Maybe (Either (a, a) (Bool, a))} \break ={} \texttt{(Maybe a, Maybe a)}$
-- `\break`: $F \break 1$
-
-- `\text` + `\goodbreak`: $\texttt{The quick brown } \text{fox jumps } \textsf{over the lazy dog}\dots\ {} \goodbreak \texttt{And } \texttt{over } \texttt{the } \goodbreak\texttt{rainbow } \texttt{dost } \goodbreak \texttt{thy } \texttt{chicken } \texttt{poop } \texttt{fly}\dots$
-  
-- `\break`: $1 + 2 + 3 + 4 + 5 \break + \cdots + 15 + 20 + 25 \break + \cdots + 100 + 200 + 300 \break + \cdots + 500 + 100 + 1500 \break + \cdots + \cdots + \cdots + 0 \break = -1$
-
+- `\text` + `\allowbreak` and friends: $\texttt{The quick brown } \allowbreak \text{fox jumps } \allowbreak \textsf{over the lazy dog}\dots\ \allowbreak \texttt{And } \allowbreak \texttt{over } \allowbreak \texttt{the } \allowbreak \texttt{rainbow } \allowbreak \texttt{dost } \allowbreak \texttt{thy } \allowbreak \texttt{chicken } \allowbreak \texttt{poop } \allowbreak \texttt{fly}\dots$
 
 <!-- $$
 \texttt{The quick brown } \text{fox jumps } \textsf{over the lazy dog}.\ \+ \text{Cat ipsum dolor sit amet, always hungry.}\ \text{Poop on grasses i show my fluffy belly but it's a trap! if you pet it i will tear up your hand and sniff sniff sniff sniff but step on your keyboard while you're gaming and then turn in a circle but human is washing you why halp oh the horror flee scratch hiss bite hell is other people.}
 $$ -->
 
 $$
-{}\texttt{Maybe (Either (a, a) (Bool, a))} \equiv \texttt{(Maybe a, Maybe a)}
+\texttt{Maybe } \allowbreak \texttt{(Either (a, a)} \allowbreak \texttt{ (Bool, a))} \equiv \allowbreak \texttt{(Maybe a, Maybe a)}
 $$
 
 $$

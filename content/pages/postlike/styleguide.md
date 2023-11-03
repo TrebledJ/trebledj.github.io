@@ -176,18 +176,17 @@ Monospaced math: $\texttt{char} \subset \texttt{int} \subset \texttt{long}$.
 But centred equations are also fun!
 
 $$
-\begin{align}
-x + y + z &= \frac{1}{4} \\\\
-2x - y + 3z &= 2 \\\\
-4x - 5y + 10z &= 3 \\\\
-\end{align}
+\begin{align*}
+x + y + z &= \frac{1}{4} \\
+2x - y + 3z &= 2 \\
+4x - 5y + 10z &= 3
+\end{align*}
 $$
 
 Check line breaks here:
 
-- $\texttt{Maybe} {} \goodbreak \texttt{(Either (a, a) (Bool, a))} {} \goodbreak \equiv \texttt{(Maybe a, Maybe a)}$
-- $Maybe (Either (a, a) (Bool, a)) {} \goodbreak \equiv (Maybe a, Maybe a)$
-- $1 + 2 + 3 + 4 + 5 \break + \cdots + 15 + 20 + 25 \break + \cdots + 100 + 200 + 300 \break + \cdots + 500 + 100 + 1500 \break + \cdots + \cdots + \cdots + 0 \break = -1$
+- $\texttt{Maybe } \texttt{(Either }(\texttt{a}, \texttt{ a}) \allowbreak \texttt{ (Bool, a))} \equiv \texttt{(Maybe a, Maybe a)}$
+- $1 + 2 + 3 + 4 + 5 + \cdots + 15 + 20 + 25 + \cdots + 100 + 200 + 300 + \cdots + 500 + 100 + 1500 + \cdots + \cdots + \cdots + 0 = -1$
 
 ### Blockquotes
 
@@ -433,8 +432,8 @@ Don't do drugs, kids!^[Hear hear!]
     $$1 + 2 = 3$$
 * More math
     $$\begin{align}
-        x + y + z &= 1 \\\\
-        2x + 2y + 2z &= 2 \\\\
+        x + y + z &= 1 \\
+        2x + 2y + 2z &= 2 \\
         3x + 3y + 3z &= 3
     \end{align}$$
 {% enddetails %}
