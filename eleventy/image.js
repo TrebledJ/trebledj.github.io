@@ -221,7 +221,7 @@ module.exports = function (eleventyConfig) {
     const file = resolveResourcePath(page, src);
     const { ext, options } = getOptions(file);
     const metadata = eleventyImage.statsSync(file, options);
-    return metadata[ext][0].url;
+    return metadata[ext][metadata[ext].length - 1].url;
   });
 
   // Eleventy Image shortcode
