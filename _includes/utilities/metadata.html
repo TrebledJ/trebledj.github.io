@@ -16,7 +16,7 @@
 {% if excerpt %}
     <meta name="description" content="{{ excerpt | mdInline | safe | striptags }}">
 {% else %}
-    <meta name="description" content="{{ site.excerpt }}">
+    <meta name="description" content="{{ site.description }}">
 {% endif %}
 
 {# Compatibility #}
@@ -71,15 +71,15 @@
     <meta content="website" property="og:type"/>
 {% endif %}
 {% if excerpt %}
-    <meta content="{{ excerpt | mdInline | striptags }}" property="og:excerpt"/>
+    <meta content="{{ excerpt | mdInline | striptags }}" property="og:description"/>
 {% else %}
-    <meta content="{{ site.description }}" property="og:excerpt"/>
+    <meta content="{{ site.description }}" property="og:description"/>
 {% endif %}
 {% if page.url %}
     <meta content="{{ site.url }}{{ page.url }}" property="og:url"/>
 {% endif %}
-{% if thumbnail %}
-    <meta content="{{ site.url }}{{ thumbnail | resolveImageOutputPath(page) }}" property="og:image"/>
+{% if thumbnail_src %}
+    <meta content="{{ site.url }}{{ thumbnail_src | resolveImageOutputPath(page) }}" property="og:image"/>
 {% endif %}
 {% if page.date %}
     <meta content="{{ page.date | dateISO }}" property="article:published_time"/>
