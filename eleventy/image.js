@@ -24,11 +24,30 @@ module.exports = function (eleventyConfig) {
     const ext = extDefault ?? 'webp';
     const animated = file.endsWith('gif');
 
+    // Construct a unique path so that images with the same fileslug don't clash.
+    let paths = file.split(path.sep);
+    paths.pop(); // Discard
+    if (file.endsWith('.mp4')) {
+      // Skip mp4s, as they're copied directly via passthrough copy.
+      paths = [];
+    } else if (file.startsWith('http')) {
+      // Also skip web imgs.
+      paths = [];
+    } else if (paths.includes('content')) {
+      paths = paths.slice(paths.indexOf('content') + 1); // Use inputPath after `content` and onwards.
+      // console.log('appending unique', paths, 'to image output dir');
+    } else if (file.includes('assets/img/')) {
+      paths = []; // Added through passthrough copy.
+    }
+
+    // console.log('outputting to', path.join(eleventyConfig.dir.output, 'img', ...paths));
+
     // Full list of formats here: https://www.11ty.dev/docs/plugins/image/#output-formats
     const options = {
       widths: imageWidths,
       formats: [ext],
-      outputDir: path.join(eleventyConfig.dir.output, 'img'),
+      outputDir: path.join(eleventyConfig.dir.output, 'img', ...paths),
+      urlPath: `/${path.join('img', ...paths)}`,
       sharpOptions: {
         animated,
       },
@@ -162,7 +181,9 @@ module.exports = function (eleventyConfig) {
 
     const { page } = post;
     const src = resolveResourcePath(page, post.data.thumbnail_src);
-    const altText = post.data.title;
+
+    const removeTagsRegex = /(<\w+>)|(<\/\w+>)/g;
+    const altText = post.data.title.replace(removeTagsRegex, '');
 
     const { ext, options } = getOptions(src);
     eleventyImage(src, options);
