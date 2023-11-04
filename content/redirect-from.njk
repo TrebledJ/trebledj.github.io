@@ -8,10 +8,10 @@
       return data.reduce((redirects, page) => {
         if (Array.isArray(page.data.redirect_from)) {
           for (let url of page.data.redirect_from) {
-            redirects.push({ to: page.url, from: url });
+            redirects.push({ to: page.url, from: url, page });
           }
         } else if (typeof page.data.redirect_from === 'string') {
-          redirects.push({ to: page.url, from: page.data.redirect_from });
+          redirects.push({ to: page.url, from: page.data.redirect_from, page });
         }
         return redirects;
       }, []);
@@ -24,14 +24,34 @@
 ---
 <!DOCTYPE html>
 <html lang="en-US">
-    <meta charset="utf-8">
-    <title>Redirecting&hellip;</title>
-    <link rel="canonical" href="{{ redirect.to | url }}">
-    <script>
-        location = "{{ redirect.to | url }}"
-    </script>
-    <meta http-equiv="refresh" content="0; url={{ redirect.to | url }}">
-    <meta name="robots" content="noindex">
-    <h1>Redirecting&hellip;</h1>
-    <a href="{{ redirect.to | url }}">Click here if you are not redirected.</a>
+  <meta charset="utf-8">
+  <title>Redirecting&hellip;</title>
+  <link rel="canonical" href="{{ redirect.to | url }}">
+  <script>
+    location = "{{ redirect.to | url }}"
+  </script>
+  <meta http-equiv="refresh" content="0; url={{ redirect.to | url }}">
+  <meta name="robots" content="noindex">
+  <h1>Redirecting&hellip;</h1>
+  <a href="{{ redirect.to | url }}">Click here if you are not redirected.</a>
+
+  {# Simple OG metadata to make social media embeds work. #}
+  {% if redirect.page.data.title %}
+    <meta content="{{ redirect.page.data.title | annihilateTags(['sup', 'sub']) | striptags }}" property="og:title"/>
+    <meta content="article" property="og:type"/>
+  {% else %}
+    <meta content="{{ site.title }}" property="og:title"/>
+    <meta content="website" property="og:type"/>
+  {% endif %}
+  {% if redirect.page.data.excerpt %}
+    <meta content="{{ redirect.page.data.excerpt | mdInline | striptags }}" property="og:description"/>
+  {% else %}
+    <meta content="{{ site.description }}" property="og:description"/>
+  {% endif %}
+  {% if redirect.page.url %}
+    <meta content="{{ site.url }}{{ redirect.page.url }}" property="og:url"/>
+  {% endif %}
+  {% if redirect.page.data.thumbnail_src %}
+    <meta content="{{ site.url }}{{ redirect.page.data.thumbnail_src | resolveImageOutputPath(redirect.page) }}" property="og:image"/>
+  {% endif %}
 </html>
