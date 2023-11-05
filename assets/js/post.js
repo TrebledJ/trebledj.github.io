@@ -26,7 +26,7 @@ $(() => {
 
   // --- TOC Current Section Highlight --- //
   const headerOffset = 150;
-  const sections = document.querySelectorAll('.post-article h2,.post-article h3');
+  const sections = document.querySelectorAll('.post-body h2,.post-body h3');
   const mainNavLinks = document.querySelectorAll('#toc-sidebar nav.toc a');
   const mobileNavLinks = document.querySelectorAll('#btn-mobile-toc nav.toc a');
 
