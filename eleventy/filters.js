@@ -5,6 +5,7 @@ const { getRelatedPosts, getRelatedTags, getTagsByPrefix } = require('./detail/r
 const { nonEmptyContainerSentinel } = require('./detail/utils');
 const selectHomePosts = require('./detail/select-home-posts');
 const findKeywords = require('./detail/keywords');
+const cheerio = require('cheerio');
 
 module.exports = function (eleventyConfig) {
   // Formatting tokens for Luxon: https://moment.github.io/luxon/#/formatting?id=table-of-tokens
@@ -83,6 +84,11 @@ module.exports = function (eleventyConfig) {
     if (typeof tags === 'string')
       return html.replace(dumbHTMLRegex(tags), '');
     return tags.reduce((acc, x) => acc.replace(dumbHTMLRegex(x), ''), html);
+  });
+  eleventyConfig.addFilter('annihilate', (html, selector) => {
+    const $ = cheerio.load(html);
+    $(selector).remove();
+    return $.html();
   });
 
   // Get the first `n` elements of a collection.

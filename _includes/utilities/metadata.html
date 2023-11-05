@@ -64,22 +64,30 @@
 {# See https://ogp.me/. #}
 <meta content="{{ site.title }}" property="og:site_name"/>
 {% if title %}
-    <meta content="{{ title | annihilateTags(['sup', 'sub']) | striptags }}" property="og:title"/>
+    {% set meta_title = title | annihilateTags(['sup', 'sub']) | striptags %}
     <meta content="article" property="og:type"/>
 {% else %}
-    <meta content="{{ site.title }}" property="og:title"/>
+    {% set meta_title = site.title %}
     <meta content="website" property="og:type"/>
 {% endif %}
+<meta content="{{ meta_title }}" property="og:title"/>
+<meta content="{{ meta_title }}" property="twitter:title"/>
+
 {% if excerpt %}
-    <meta content="{{ excerpt | mdInline | striptags }}" property="og:description"/>
+    {% set meta_desc = (excerpt | mdInline | striptags) + " " + (content | annihilate('.article-header, .metadata-container, .metadata-tag-container, #toc-sidebar') | striptags | truncateWords(30)) %}
 {% else %}
-    <meta content="{{ site.description }}" property="og:description"/>
+    {% set meta_desc = site.description %}
 {% endif %}
+<meta content="{{meta_desc}}" property="og:description"/>
+<meta content="{{meta_desc}}" property="twitter:description"/>
+
 {% if page.url %}
     <meta content="{{ site.url }}{{ page.url }}" property="og:url"/>
 {% endif %}
 {% if thumbnail_src %}
+    <meta name="twitter:card" content="summary_large_image">
     <meta content="{{ site.url }}{{ thumbnail_src | resolveImageOutputPath(page) }}" property="og:image"/>
+    <meta content="{{ site.url }}{{ thumbnail_src | resolveImageOutputPath(page) }}" property="twitter:image"/>
 {% endif %}
 {% if page.date %}
     <meta content="{{ page.date | dateISO }}" property="article:published_time"/>
