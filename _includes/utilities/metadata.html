@@ -74,7 +74,7 @@
 <meta content="{{ meta_title }}" property="twitter:title"/>
 
 {% if excerpt %}
-    {% set meta_desc = (excerpt | mdInline | striptags) + "<br/>" + (content | annihilate('.article-header, .metadata-container, .metadata-tag-container, #toc-sidebar') | striptags | truncateWords(30)) %}
+    {% set meta_desc = (excerpt | mdInline | striptags) + "\n" + (content | annihilate('.article-header, .metadata-container, .metadata-tag-container, #toc-sidebar') | striptags | truncateWords(30)) %}
 {% else %}
     {% set meta_desc = site.description %}
 {% endif %}
