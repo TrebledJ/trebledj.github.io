@@ -112,6 +112,12 @@
         }
     }
 
+    // Lazy-render elements.
+    pre[class*=language-],
+    details {
+        content-visibility: auto;
+    }
+
     &,
     .alert-content,
     blockquote,
