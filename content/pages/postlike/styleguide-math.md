@@ -12,6 +12,12 @@ related:
 noindex: true
 ---
 
+{% alert "danger" %}
+This styleguide hasn't been updated after the switch to KaTeX.
+{% endalert %}
+
+<!-- TODO: update styleguide for katex. -->
+
 Inline math is useful: $A + B + \underbrace{C + D}_{\small\text{Floppy disk!}}$.
 
 Monospaced math: $\texttt{char} \subset \texttt{int} \subset \texttt{long}$.
@@ -70,20 +76,20 @@ $$
 
 ```latex
 \texttt{make this line longerrrrrrrrrrrrrrrrrrrr} {} \equiv \texttt{Maybe (Either (a, a) (Bool, a))} {} \equiv \texttt{(Maybe a, Maybe a)}
-\texttt{make this line longerrrrrrrrrrrrrrrrrrrr} {} \goodbreak \equiv \texttt{Maybe (Either (a, a) (Bool, a))} {} \goodbreak \equiv \texttt{(Maybe a, Maybe a)}
+\texttt{make this line longerrrrrrrrrrrrrrrrrrrr} {} \equiv \texttt{Maybe (Either (a, a) (Bool, a))} {} \equiv \texttt{(Maybe a, Maybe a)}
 ```
 
 **inline (with `$`):**
 
 - `\text` + `\equiv`: $\texttt{make this line longerrrrrrrrrrrrrrrrrrrr} {} \equiv \texttt{Maybe (Either (a, a) (Bool, a))} {} \equiv \texttt{(Maybe a, Maybe a)}$
-- `\text` + `\equiv` + `\goodbreak`: $\texttt{make this line longerrrrrrrrrrrrrrrrrrrr} {} \goodbreak \equiv \texttt{Maybe (Either (a, a) (Bool, a))} {} \goodbreak \equiv \texttt{(Maybe a, Maybe a)}$
+- `\text` + `\equiv` + `\goodbreak`: $\texttt{make this line longerrrrrrrrrrrrrrrrrrrr} {} \equiv \texttt{Maybe (Either (a, a) (Bool, a))} {} \equiv \texttt{(Maybe a, Maybe a)}$
 
 
 **block (with `$$`):**
 
 ```latex
 \texttt{make this line longerrrrrrrrrrrrrrrrrrrr} {} \equiv \texttt{Maybe (Either (a, a) (Bool, a))} {} \equiv \texttt{(Maybe a, Maybe a)}
-\texttt{make this line longerrrrrrrrrrrrrrrrrrrr} {} \goodbreak \equiv \texttt{Maybe (Either (a, a) (Bool, a))} {} \goodbreak \equiv \texttt{(Maybe a, Maybe a)}
+\texttt{make this line longerrrrrrrrrrrrrrrrrrrr} {} \equiv \texttt{Maybe (Either (a, a) (Bool, a))} {} \equiv \texttt{(Maybe a, Maybe a)}
 ```
 
 - `\text` + `\equiv`
@@ -93,5 +99,5 @@ $$
 
 - `\text` + `\equiv` + `\goodbreak`
     $$
-    \texttt{make this line longerrrrrrrrrrrrrrrrrrrr} {} \goodbreak \equiv \texttt{Maybe (Either (a, a) (Bool, a))} {} \goodbreak \equiv \texttt{(Maybe a, Maybe a)}
+    \texttt{make this line longerrrrrrrrrrrrrrrrrrrr} {} \equiv \texttt{Maybe (Either (a, a) (Bool, a))} {} \equiv \texttt{(Maybe a, Maybe a)}
     $$

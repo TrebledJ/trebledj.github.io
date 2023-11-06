@@ -102,6 +102,16 @@
         margin-bottom: 0;
     }
 
+    table:not(.gist *),
+    pre[class*=language-],
+    .alert,
+    details {
+        // Don't make the previous block look like it sticks to the following ul/ol.
+        & + ul, & + ol {
+            margin-top: $space-base;
+        }
+    }
+
     &,
     .alert-content,
     blockquote,

@@ -208,6 +208,7 @@ p.subheading {
     font-weight: 700;
 }
 
-.katex-block {
-    overflow-x: scr;
+.katex {
+    overflow-x: auto;
+    overflow-y: hidden;
 }

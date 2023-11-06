@@ -64,6 +64,7 @@ Still, let's look at some key insights:
     ```
   * Thus, **characters are encoded by the `L_*` classes**.
   * The chain also begins (or ends?) with `QRW_s29`.
+
 * There are a bunch of `Q*_s*` classes, numbered from 1 to 71. Indices, perhaps? Or just references?
 * Any clue to the relationship between these symbols? Yes! We see interesting stuff from lines 320 to 459.
     ```python
@@ -310,7 +311,7 @@ display(MyList[Reverse]())
 
 (N.B. For the sake of this section, I've used a custom `MyList` type instead of `typing.List`.)
 
-But why did this error? Although `mypy` deduced that $\texttt{Reverse} <: \texttt{Challenge}$, it couldn't deduce that our subtype query $\texttt{MyList[Reverse]} {} \goodbreak <:^? \texttt{MyList[Challenge]}$ holds.
+But why did this error? Although `mypy` deduced that $\texttt{Reverse} <: \texttt{Challenge}$, it couldn't deduce that our subtype query $\texttt{MyList[Reverse]} {} <:^? \texttt{MyList[Challenge]}$ holds.
 
 This is where covariance and contravariance come into play. With these two bad bois, we can derive further relationships on generic types. The two are similar, with a minor difference.
 
@@ -327,7 +328,7 @@ Hence, in the previous code example, we can fix the code by adding `covariant=Tr
 T = TypeVar('T', covariant=True)
 ```
 
-Now $\texttt{MyList[Reverse]} {} \goodbreak <: \texttt{MyList[Challenge]}$, and the program compiles.
+Now $\texttt{MyList[Reverse]} {} <: \texttt{MyList[Challenge]}$, and the program compiles.
 
 At this point, you should be able to appreciate the double entendre in the title: *N[Subtype Metaprogramming] is N[Mostly Harmless]*.
 
@@ -362,7 +363,7 @@ How does the search go? Meet the two **subtyping rules** used by the type-checke
 
 1. **Super**. Substitute a type with its supertype.
     $$
-    (C : D) \land (CA <: EB) {} \goodbreak \rightsquigarrow DA <: EB
+    (C : D) \land (CA <: EB) {} \rightsquigarrow DA <: EB
     $$
     In English, if $C$ has a supertype $D$, we can "go up a level" to *search* for a match.
 2. **Cancel**.^[In the paper, they use **Var** instead of **Cancel**, but I think the latter conveys the operation better.] Remove the outermost type from both sides of the query. (And flip, since all type parameters are assumed to be contravariant!)
@@ -484,7 +485,11 @@ d: E[E[Z]] = QRW_s30[L___TAPE_END__[N[L_s[N[L_d[N[L_n[N[MR[N[L___TAPE_END__[N[E[
 
 We just started with the base case (empty suffix of flag), and worked backwards.
 
-Let's look closer at the base case: $\texttt{QRW_s71[...]} <:^? \texttt{E[E[Z]]}$. It turns out this is a special case, since the declaration of `QRW_s71` inherits from `E["E[Z]"]`. So with just one **Super** expansion step, we conclude that the base case checks out. Wow, life seems easy as a subtype-checker.
+Let's look closer at the base case:
+
+$$\texttt{QRW\\_s71[...]} <:^? \texttt{E[E[Z]]}.$$
+
+It turns out this is a special case, since the declaration of `QRW_s71` inherits from `E["E[Z]"]`. So with just one **Super** expansion step, we conclude that the base case checks out. Wow, life seems easy as a subtype-checker.
 
 Let's try the next query.
 

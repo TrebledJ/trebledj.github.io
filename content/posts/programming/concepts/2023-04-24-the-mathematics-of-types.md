@@ -286,12 +286,20 @@ toLHS (True, x) = Left x
 toLHS (False, x) = Right x
 ```
 
-Notice how information is preserved, i.e. $\texttt{toLHS }(\texttt{toRHS } x) = x,\ \goodbreak \forall x \badbreak \in \texttt{Either a a}$ and $\texttt{toRHS } (\texttt{toLHS }y) = y, \ \goodbreak \forall y \badbreak \in \texttt{(Bool, a)}$.
+Notice how information is preserved, i.e. $\texttt{toLHS }(\texttt{toRHS } x) = x,\ \forall x \in \texttt{Either a a}$ and $\texttt{toRHS } (\texttt{toLHS }y) = y, \ \forall y \in \texttt{(Bool, a)}$.
 
 In the same vein, the following types are also equivalent:
 
-- $\texttt{Maybe (Maybe a)} {} \goodbreak \equiv \texttt{Either Bool a}$
-- $\texttt{Maybe} {} \goodbreak \texttt{(Either (a, a) (Bool, a))} {} \goodbreak \equiv \texttt{(Maybe a, Maybe a)}$
+$$\texttt{Maybe (Maybe a)} \equiv \texttt{Either Bool a}$$
+
+$$\texttt{Maybe} \texttt{(Either (a, a) (Bool, a))} \equiv \texttt{(Maybe a, Maybe a)}$$
+
+<!-- 
+$$\begin{align*}
+\texttt{Maybe (Maybe a)} &\equiv \texttt{Either Bool a} \\\\
+\texttt{Maybe} \texttt{(Either (a, a) (Bool, a))} &\equiv \texttt{(Maybe a, Maybe a)}
+\end{align*}
+$$ -->
 
 ### Unit Values in the Algebra of Types
 

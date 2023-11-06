@@ -97,7 +97,7 @@ Let $c$ be the init constant, moved to `rax` in the first gadget. Let $r$ be the
 Further, let $m_i$, $n_i$, and $p_i$ be the number of the $i$-th add, subtract, and xor gadget to apply; and constrain $m_i, n_i, p_i \in \mathbb{Z}^+ \cup \{0\}$. These are unknown variables. We want to solve for these sets of variables such that
 
 $$
-c + \sum a_im_i - \sum s_in_i \goodbreak = \left(\bigwedge x_ip_i\right) \wedge r.
+c + \sum a_im_i - \sum s_in_i = \left(\bigwedge x_ip_i\right) \wedge r.
 $$
 {% endalert %}
 
