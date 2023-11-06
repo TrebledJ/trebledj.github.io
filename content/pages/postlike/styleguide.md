@@ -177,8 +177,8 @@ But centred equations are also fun!
 
 $$
 \begin{align*}
-x + y + z &= \frac{1}{4} \\
-2x - y + 3z &= 2 \\
+x + y + z &= \frac{1}{4} \\\\
+2x - y + 3z &= 2 \\\\
 4x - 5y + 10z &= 3
 \end{align*}
 $$
@@ -431,11 +431,11 @@ Don't do drugs, kids!^[Hear hear!]
 * Math
     $$1 + 2 = 3$$
 * More math
-    $$\begin{align}
-        x + y + z &= 1 \\
-        2x + 2y + 2z &= 2 \\
+    $$\begin{align*}
+        x + y + z &= 1 \\\\
+        2x + 2y + 2z &= 2 \\\\
         3x + 3y + 3z &= 3
-    \end{align}$$
+    \end{align*}$$
 {% enddetails %}
 
 {% abbr "Hi", "Hello world!" %}, with {% abbr "**bold**", "BOLD!" %}, with {% abbr "*emphasis*", "EMPHASIS!" %}, with {% abbr "~~strikethrough~~", "such ninja!" %}, with {% abbr "`code`", "</>" %}.

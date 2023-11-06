@@ -28,24 +28,24 @@ $$
 e^{i\pi} + 1 = 0
 \qquad
 \begin{align}
-x + y + z &= 1 \\
-2x - y + 3z &= 2 \\
-4x - 5y + 10z &= 3 \\
+x + y + z &= 1 \\\\
+2x - y + 3z &= 2 \\\\
+4x - 5y + 10z &= 3 \\\\
 \end{align}
 $$ -->
 
 $$
 \begin{align*}
-x + y + z &= 1 \\
-2x - y + 3z &= 2 \\
+x + y + z &= 1 \\\\
+2x - y + 3z &= 2 \\\\
 4x - 5y + 10z &= 3
 \end{align*}
 $$
 
 $$
 \begin{bmatrix}
-1 & 0 & 0 \\
-0 & 1 & 0 \\
+1 & 0 & 0 \\\\
+0 & 1 & 0 \\\\
 0 & 0 & 1
 \end{bmatrix}
 $$

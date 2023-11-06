@@ -26,7 +26,8 @@
         {% endif %}
 
         {% if usemathjax %}
-            {% include "utilities/mathjax.html" %}
+            {# {% include "utilities/mathjax.html" %} #}
+            {% include "utilities/katex.html" %}
         {% endif %}
         {% if site.analytics %}
             {% include "utilities/analytics.html" %}
