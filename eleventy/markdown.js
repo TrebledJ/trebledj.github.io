@@ -2,7 +2,6 @@ const markdownItAnchor = require('markdown-it-anchor');
 const markdownItAttrs = require('markdown-it-attrs');
 const markdownItFootnote = require('markdown-it-footnote');
 const markdownItSpoiler = require('@traptitech/markdown-it-spoiler');
-// const markdownItKatex = require('@traptitech/markdown-it-katex');
 const pluginTOC = require('eleventy-plugin-toc');
 
 module.exports = function (eleventyConfig) {
@@ -34,7 +33,6 @@ module.exports = function (eleventyConfig) {
 
     mdLib.use(markdownItSpoiler);
     mdLib.use(markdownItFootnote);
-    // mdLib.use(markdownItKatex);
 
     mdLib.renderer.rules.footnote_caption = (tokens, idx/* , options, env, slf */) => {
       const n = Number(tokens[idx].meta.id + 1).toString();
