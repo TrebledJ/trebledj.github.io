@@ -9,7 +9,7 @@ tags:
   - synths
 thumbnail_src: assets/synthwave-a-major-space-1.jpg
 thumbnail_banner: true
-usemathjax: true
+useMath: true
 related:
     posts: [r/digital-audio-synthesis-for-dummies-part-.*/r, stm32-midi-keyboard]
     auto: false

@@ -15,7 +15,7 @@ tags:
   - composition
   - learning
 thumbnail_banner: true
-usemathjax: true
+useMath: true
 pitch: This is a dummy page designed to test all aspects of style.
 track_id: 1433470732
 score_id: 9645115

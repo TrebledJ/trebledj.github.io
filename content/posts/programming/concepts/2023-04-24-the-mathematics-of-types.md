@@ -10,7 +10,7 @@ tags:
   - programming-languages
 thumbnail_src: assets/abstract.jpg
 # thumbnail_banner: true
-usemathjax: true
+useMath: true
 related:
     auto: true
 ---

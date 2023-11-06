@@ -5,7 +5,7 @@ tags:
   - cryptography
   - python
 thumbnail_src: ~/assets/img/posts/thumbnail/hkcert22-thumbnail.jpg
-usemathjax: true
+useMath: true
 ---
 
 The challenge looks deceptively simple. Chinese has over 50,000 characters. Base64 just has 64. So it should be easy right?

@@ -7,7 +7,7 @@ tags:
   - python
   - programming
 thumbnail_src: assets/inspector-gadget.png
-usemathjax: true
+useMath: true
 ---
 
 ### Challenge Description

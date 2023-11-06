@@ -7,7 +7,7 @@ tags:
   - haskell
   - fp
 thumbnail_src: assets/recycle-hs-utils.jpg
-usemathjax: true
+useMath: true
 related:
   tags: [aoc, haskell]
 ---

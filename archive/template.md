@@ -14,7 +14,7 @@ thumbnail_banner: true # or false depending if you want the thumbnail to show on
 keywords: key words  # Not really important.
 comments: true      # Enable comments.
 sharable: false     # Enable share buttons.
-usemathjax: false
+useMath: false
 pitch: A description displayed in the profile.
 track_id: 00000011 # soundcloud track id
 score_id: 00000012 # musescore track id
