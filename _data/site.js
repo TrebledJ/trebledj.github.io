@@ -3,6 +3,23 @@ const csp = require('./csp');
 module.exports = function () {
   const email = 'trebledjjj@gmail.com';
 
+  const banner = process.env.TARGET_HOST === 'github' ? {
+    enabled: true,
+    sticky: true,
+    closeButton: true,
+    scope: 'session', // Possible values: 'session', 'local', ''.
+    // bgColor: 'primary', // Any Bootstrap `bg-` values.
+    // fgColor: 'black', // Any Bootstrap `text-` values.
+    icon: 'rocket',
+    content: `
+      This site has buffed up and moved to 
+      <span class="banner-link"><a href="https://trebledj.xyz">***trebledj.xyz***</a></span>!
+      The .github.io version will stay around though... for now...
+      `.trim().replace(/^[ \t]+/gm, ''),
+  } : {
+    enabled: false,
+  };
+
   return {
     title: "TrebledJ's Pages",
     subtitle: 'Dabbling in code, music, math, and memes since conception.',
@@ -48,16 +65,17 @@ module.exports = function () {
       // To disable lightbox, comment out the corresponding plugin in plugins.js.
       enabled: process.env.ENABLE_LIGHTBOX,
     },
-    banner: {
-      enabled: false,
-      sticky: true,
-      closeButton: true,
-      // scope: 'session', // Possible values: 'session', 'local', ''.
-      // bgColor: 'primary', // Any Bootstrap `bg-` values.
-      // fgColor: 'black', // Any Bootstrap `text-` values.
-      icon: 'rocket',
-      content: 'Hello world!',
-    },
+    banner,
+    // banner: {
+    //   enabled: false,
+    //   sticky: true,
+    //   closeButton: true,
+    //   // scope: 'session', // Possible values: 'session', 'local', ''.
+    //   // bgColor: 'primary', // Any Bootstrap `bg-` values.
+    //   // fgColor: 'black', // Any Bootstrap `text-` values.
+    //   icon: 'rocket',
+    //   content: 'Hello world!',
+    // },
     typewrite: {
       strings:
         [

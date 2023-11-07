@@ -203,6 +203,19 @@ $carousel-transition: transform 2s ease, opacity 1.5s ease-out .5s;
     margin: auto;
 }
 
+.banner-link {
+    a {
+        color: #fff !important;
+        // background-color: color-mix(in srgb, var(--link-color) 40%, #fff 30%);
+    }
+    opacity: $opacity-low;
+    text-decoration: underline;
+    &:hover {
+        // background-color: color-mix(in srgb, var(--link-color) 15%, #fff 30%);
+        opacity: $opacity-full;
+    }
+}
+
 p.subheading {
     margin-bottom: 0.5rem;
     font-weight: 700;
