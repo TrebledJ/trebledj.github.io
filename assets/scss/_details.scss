@@ -45,7 +45,7 @@ summary:before {
     transition: .25s transform ease;
 }
 
-details[open]>summary {
+details[open] > summary {
     &:before {
         transform: rotate(90deg);
     }
@@ -55,6 +55,10 @@ details[open]>summary {
     border-bottom-color: var(--highlight-color);
 }
 
+details > summary {
+    list-style: none;
+}
+details summary::marker,
 details summary::-webkit-details-marker {
     display: none;
 }
