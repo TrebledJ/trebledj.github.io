@@ -26,7 +26,7 @@ module.exports = function () {
   return {
     title: "TrebledJ's Pages",
     subtitle: 'Dabbling in code, music, math, and memes since conception.',
-    url: 'https://trebledj.github.io',
+    url: process.env.TARGET_HOST === 'github' ? 'https://trebledj.github.io' : 'https://trebledj.xyz',
     baseurl: '',
     language: 'en',
     description: "TrebledJ's personal blog on programming, music, and memes.",
