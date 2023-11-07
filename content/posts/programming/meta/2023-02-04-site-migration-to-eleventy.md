@@ -4,6 +4,8 @@ excerpt: JavaScript go brrrrrrrrr.
 updated: '2023-03-09'
 tags:
   - meta
+  - writeup
+  - web
   - js
 thumbnail_src: assets/ogle-ogle-eleventy.jpg
 related:
