@@ -1,11 +1,6 @@
 $(() => {
   /* Scroll Progress */
-  let debounce = false;
   $(document).on('scroll', () => {
-    if (debounce)
-      return;
-    debounce = true;
-
     const docElem = document.documentElement;
     const docBody = document.body;
     const scrollTop = (docBody.scrollTop || docElem.scrollTop);
@@ -13,13 +8,7 @@ $(() => {
 
     const progressBar = document.querySelector('#scroll-progress-bar');
     const progress = scrollTop / height * 100;
-
-    if (progress > 0)
-      progressBar.style.setProperty('--progress', `${progress}%`);
-    else
-      progressBar.style.setProperty('--progress', '0%');
-
-    debounce = false;
+    progressBar.style.setProperty('--progress', `${Math.max(progress, 0)}%`);
   });
 
   /* Scroll to Top */
