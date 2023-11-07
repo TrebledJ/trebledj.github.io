@@ -73,11 +73,11 @@
 .related-col-flex-auto-4 {
     @include media-breakpoint-up(xl) {
         flex: 0 0 auto;
-        width: 33.333333333%;
+        width: 33.333333333% !important;
     }
     @include media-breakpoint-between(sm, xl) {
         flex: 0 0 auto;
-        width: 50%;
+        width: 50% !important;
 
         // Limit number of rows.
         &:nth-child(n+5) {
@@ -85,7 +85,7 @@
         }
     }
     @include media-breakpoint-down(sm) {
-        width: 100%;
+        width: 100% !important;
 
         // Limit number of rows.
         &:nth-child(n+4) {
