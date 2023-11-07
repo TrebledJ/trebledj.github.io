@@ -124,7 +124,7 @@ $(() => {
   
   $('#banner .btn-close').on('click', () => {
     {% if site.banner.scope %}
-    { { site.banner.scope + 'Storage' | safe } }.setItem('bannerClosed', true);
+    {{ site.banner.scope + 'Storage' | safe }}.setItem('bannerClosed', true);
     {% endif %}
 
     const b = $('#banner');
