@@ -33,6 +33,10 @@ concurrency:
   group: "pages"
   cancel-in-progress: true
 
+# Environment variables
+env:
+  TARGET_HOST: github
+
 jobs:
   # Build job
   build:
