@@ -97,7 +97,7 @@ module.exports = function () {
     analytics: {
       // Pick your poison.
       // google: "G-7TQ4WV0LMK",
-      cloudflare: '0c1f01f6fd2340a9a7c7abb8072e3857',
+      cloudflare: process.env.TARGET_HOST === 'github' ? '0c1f01f6fd2340a9a7c7abb8072e3857' : '4491652eec8c41b69bcbf42ccb3f08f6',
     },
     id: {
       // Unique identifiers and instances.
