@@ -41,10 +41,11 @@ $transition-duration: 0.3s;
 
 :root {
     --header-extra: 0px; // Extra header spacing due to banner. Computed dynamically.
+    --link-color: rgb(var(--link-color-rgb));
 }
 
 html[data-theme="dark"] {
-    --link-color: rgb(243, 128, 32);
+    --link-color-rgb: 243, 128, 32;
     --link-hover-color: rgb(197, 100, 17);
     --accent-color: var(--link-color);
 
@@ -61,7 +62,7 @@ html[data-theme="dark"] {
 }
 
 html[data-theme="light"] {
-    --link-color: rgb(218, 100, 4);
+    --link-color-rgb: 218, 100, 4;
     --link-hover-color: rgb(200, 90, 0);
     --accent-color: var(--link-color);
     

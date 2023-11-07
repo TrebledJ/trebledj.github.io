@@ -145,7 +145,8 @@ $carousel-transition: transform 2s ease, opacity 1.5s ease-out .5s;
     blockquote,
     .dim-light {
         opacity: $opacity-lower;
-        transition: opacity $transition-duration linear;
+        // Note: use transition `all`, so that other transitions are also kept (just modified to use transition-duration and linear).
+        transition: all $transition-duration linear;
 
         &:hover {
             opacity: $opacity-full;
@@ -155,7 +156,7 @@ $carousel-transition: transform 2s ease, opacity 1.5s ease-out .5s;
     #toc-sidebar a:not(.active),
     .dim-deep {
         opacity: 0.7;
-        transition: opacity $transition-duration linear;
+        transition: all $transition-duration linear;
 
         &:hover {
             opacity: $opacity-full;
@@ -201,19 +202,6 @@ $carousel-transition: transform 2s ease, opacity 1.5s ease-out .5s;
     flex-direction: row;
     align-items: center;
     margin: auto;
-}
-
-.banner-link {
-    a {
-        color: #fff !important;
-        // background-color: color-mix(in srgb, var(--link-color) 40%, #fff 30%);
-    }
-    opacity: $opacity-low;
-    text-decoration: underline;
-    &:hover {
-        // background-color: color-mix(in srgb, var(--link-color) 15%, #fff 30%);
-        opacity: $opacity-full;
-    }
 }
 
 p.subheading {

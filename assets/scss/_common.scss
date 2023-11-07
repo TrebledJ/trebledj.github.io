@@ -30,23 +30,32 @@ html {
     scroll-behavior: smooth;
 }
 
- 
+
 a {
     // See Note [!important].
-    color: var(--link-color) !important;
+    --bs-link-color-rgb: var(--link-color-rgb);
+    --bs-link-hover-color-rgb: var(--link-color-rgb);
+    // color: var(--link-color) !important;
 }
 
+// Animated underline.
+// https://www.dannyguo.com/blog/animated-multiline-link-underlines-with-css
 a,
 a:visited {
     // See Note [!important].
     text-decoration: none !important;
+
+    background-image: linear-gradient(to right, currentColor, currentColor);
+    background-size: 0 0.1em;
+    background-position: 0 100%;
+    background-repeat: no-repeat;
+    transition: background-size $transition-duration;
 }
 
-// Color-shift links on hover.
 a:hover,
+a:focus,
 a:active {
-    // See Note [!important].
-    color: var(--link-hover-color) !important;
+    background-size: 100% 0.1em;
 }
 
 abbr,
@@ -58,17 +67,18 @@ abbr:active {
 
 body {
     --bs-body-font-family: 'Lucida Grande', Arial, sans-serif;
-    
-    background-color: var(--main-background-color) !important;
-    color: var(--main-text-color) !important;
+    --bs-body-font-size: 16px;
+    --bs-body-line-height: #{$line-height-cozy};
+    --bs-body-color: var(--main-text-color);
+    --bs-body-bg: var(--main-background-color);
+
+    // background-color: var(--main-background-color) !important;
     font-feature-settings: "kern" on;
-    font-size: 16px;
     font-variant-numeric: oldstyle-nums;
     hanging-punctuation: first last;
     height: auto;
-    margin: 0;
+    // margin: 0;
     text-rendering: optimizeLegibility;
-    line-height: $line-height-cozy;
     overflow-x: hidden;
     overflow-y: scroll;
 }
@@ -102,7 +112,8 @@ h6 {
     font-family: var(--default-font); // Default.
 }
 
-pre, .alert {
+pre,
+.alert {
     border-radius: $border-radius-block !important;
 }
 

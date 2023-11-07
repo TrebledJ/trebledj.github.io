@@ -13,7 +13,7 @@ module.exports = function () {
     icon: 'rocket',
     content: `
       This site has buffed up and moved to 
-      <span class="banner-link"><a href="https://trebledj.xyz">***trebledj.xyz***</a></span>!
+      <a href="https://trebledj.xyz" class="text-white">***trebledj.xyz***</a>!
       The .github.io version will stay around though... for now...
       `.trim().replace(/^[ \t]+/gm, ''),
   } : {
