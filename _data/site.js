@@ -13,8 +13,11 @@ module.exports = function () {
     icon: 'rocket',
     content: `
       This site has buffed up and moved to 
-      <a href="https://trebledj.xyz" class="text-white">***trebledj.xyz***</a>!
+      <a id="trebledjxyz" class="text-white" style="cursor:pointer;">***trebledj.xyz***</a>!!!
       The .github.io version will stay around though... for now...
+      <script>
+      document.getElementById('trebledjxyz').addEventListener('click', function () { document.location.host='trebledj.xyz'; });
+      </script>
       `.trim().replace(/^[ \t]+/gm, ''),
   } : {
     enabled: false,
