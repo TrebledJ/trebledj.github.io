@@ -70,9 +70,9 @@ body {
     --bs-body-font-size: 16px;
     --bs-body-line-height: #{$line-height-cozy};
     --bs-body-color: var(--main-text-color);
-    --bs-body-bg: var(--main-background-color);
+    // --bs-body-bg: var(--main-background-color);
 
-    // background-color: var(--main-background-color) !important;
+    background-color: var(--main-background-color) !important;
     font-feature-settings: "kern" on;
     font-variant-numeric: oldstyle-nums;
     hanging-punctuation: first last;
