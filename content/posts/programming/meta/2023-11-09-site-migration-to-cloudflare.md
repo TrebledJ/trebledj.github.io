@@ -178,7 +178,7 @@ Overall, I decided to migrate to Cloudflare Pages to improve the site's performa
 
 Some more work still needs to be done, though.
 
-- Setting up 301 redirects from the old site, for convenient redirect and migration of site traffic.
+- Setting up 301 redirects from the old site, for convenient redirect and migration of site traffic. ([guide](https://finisky.github.io/en/migrate-github-pages-by-301-redirects/); done!)
 - Implement longer browser cache TTL + cache busting.
 
 But other than that I'm quite happy with Cloudflare's ease-of-use, despite its day-long downtime (which coincidentally occurred when I was setting up Cloudflare Pages).
