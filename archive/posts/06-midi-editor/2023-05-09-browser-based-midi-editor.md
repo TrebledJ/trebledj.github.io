@@ -30,4 +30,4 @@ Although it’s meant to be browser-based, I have yet to deploy the site. You ca
 
 This project isn’t the best, certainly there are better options out there. Future work is needed to improve the audio-to-MIDI conversion, set up an actual backend, and construct a better UI. We used vanilla JS, since the course primarily focuses on multimedia computing and not web development.
 
-If you’d like to work together on this (or another) project, or have any queries/suggestions, do [leave a comment](#comment) below or [reach out](https://trebledj.github.io/#contact)!
+If you’d like to work together on this (or another) project, or have any queries/suggestions, do [leave a comment](#comment) below or [reach out](/#contact)!
