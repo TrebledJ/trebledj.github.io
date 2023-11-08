@@ -86,11 +86,6 @@ jobs:
       - name: Install Dependencies
         run: ${{ steps.detect-package-manager.outputs.manager }} ${{ steps.detect-package-manager.outputs.command }}
 
-      - name: Sanity Check
-        run: |
-          echo Host
-          echo "${{ env.TARGET_HOST }}"
-
       - name: Build
         run: TARGET_HOST="${{ env.TARGET_HOST }}" ${{ steps.detect-package-manager.outputs.manager }} run prod
 

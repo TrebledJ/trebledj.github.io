@@ -13,24 +13,17 @@ module.exports = function () {
     icon: 'rocket fa-bounce',
     icon_style: '--fa-animation-delay: 5s; --fa-animation-duration: 3s',
     /* eslint-disable max-len */
-    content: (process.env.TARGET_HOST === 'github' ? `
-      This site has buffed up and moved to 
-      <a id="trebledjxyz" class="text-white" style="cursor:pointer;">***trebledj.xyz***</a>!!!
-      Check out what else is new: <a class="text-white" href="https://trebledj.xyz/posts/site-migration-to-cloudflare">***Site Updates and Migration***</a>.
-      <script>
-      document.getElementById('trebledjxyz').addEventListener('click', function () { document.location.host='trebledj.xyz'; });
-      </script>
-      ` : `
-      Welcome to the new site!
+    content: `
+      Welcome to the new trebledj.xyz site!
       Check out what else is new: <a class="text-white" href="/posts/site-migration-to-cloudflare">***Site Updates and Migration***</a>.
-      `).trim().replace(/^[ \t]+/gm, ''),
+      `.trim().replace(/^[ \t]+/gm, ''),
     /* eslint-enable max-len */
   };
 
   return {
     title: "TrebledJ's Pages",
     subtitle: 'Dabbling in code, music, math, and memes since conception.',
-    url: process.env.TARGET_HOST === 'github' ? 'https://trebledj.github.io' : 'https://trebledj.xyz',
+    url: 'https://trebledj.xyz',
     baseurl: '',
     language: 'en',
     description: "TrebledJ's personal blog on programming, music, and memes.",
@@ -104,7 +97,7 @@ module.exports = function () {
     analytics: {
       // Pick your poison.
       // google: "G-7TQ4WV0LMK",
-      cloudflare: process.env.TARGET_HOST === 'github' ? '0c1f01f6fd2340a9a7c7abb8072e3857' : '4491652eec8c41b69bcbf42ccb3f08f6',
+      cloudflare: '4491652eec8c41b69bcbf42ccb3f08f6',
     },
     id: {
       // Unique identifiers and instances.
