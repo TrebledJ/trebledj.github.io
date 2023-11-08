@@ -43,11 +43,14 @@
     <meta content="{{ site.title }}" property="og:title"/>
     <meta content="website" property="og:type"/>
   {% endif %}
+
   {% if redirect.page.data.excerpt %}
-    <meta content="{{ redirect.page.data.excerpt | mdInline | striptags }}" property="og:description"/>
+      {% set meta_desc = (redirect.page.data.excerpt | mdInline | striptags) + "\n\n" + (redirect.page.data.content | annihilate('.article-header, .metadata-container, .metadata-tag-container, #toc-sidebar') | striptags | truncateWords(30)) %}
   {% else %}
-    <meta content="{{ site.description }}" property="og:description"/>
+      {% set meta_desc = site.description %}
   {% endif %}
+  <meta content="{{meta_desc}}" property="og:description"/>
+
   {% if redirect.page.url %}
     <meta content="{{ site.url }}{{ redirect.page.url }}" property="og:url"/>
   {% endif %}
