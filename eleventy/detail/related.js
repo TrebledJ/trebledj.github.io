@@ -104,6 +104,9 @@ function getRelatedPosts(posts, tags, related) {
 
   // Find relevant posts with same tags as `related.tags`.
   if (related.tags) {
+    if (!Array.isArray(related.tags))
+      throw new Error("getRelatedPosts: expected array");
+
     for (const post of posts) {
       if (finalRelated.size >= numTargetPosts)
         break;

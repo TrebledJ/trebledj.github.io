@@ -85,14 +85,19 @@ module.exports = function (eleventyConfig) {
       return html.replace(dumbHTMLRegex(tags), '');
     return tags.reduce((acc, x) => acc.replace(dumbHTMLRegex(x), ''), html);
   });
-  eleventyConfig.addFilter('annihilate', (html, selector) => {
-    if (typeof html !== 'string') {
-      throw new Error(`[11ty] annihilate: expected HTML string, got ${typeof html}`);
-    }
-    const $ = cheerio.load(html);
-    $(selector).remove();
-    return $.html();
-  });
+  if (process.env.ENVIRONMENT === 'fast') {
+    // Fast: Do nothing.
+    eleventyConfig.addFilter('annihilate', (html, _selector) => html);
+  } else {
+    eleventyConfig.addFilter('annihilate', (html, selector) => {
+      if (typeof html !== 'string') {
+        throw new Error(`[11ty] annihilate: expected HTML string, got ${typeof html}`);
+      }
+      const $ = cheerio.load(html);
+      $(selector).remove();
+      return $.html();
+    });
+  }
 
   // Get the first `n` elements of a collection.
   eleventyConfig.addFilter('head', (array, n) => {

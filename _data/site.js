@@ -3,24 +3,28 @@ const csp = require('./csp');
 module.exports = function () {
   const email = 'trebledjjj@gmail.com';
 
-  const banner = process.env.TARGET_HOST === 'github' ? {
+  const banner = {
     enabled: true,
     sticky: true,
     closeButton: true,
     scope: 'session', // Possible values: 'session', 'local', ''.
     // bgColor: 'primary', // Any Bootstrap `bg-` values.
     // fgColor: 'black', // Any Bootstrap `text-` values.
-    icon: 'rocket',
-    content: `
+    icon: 'rocket fa-bounce',
+    icon_style: '--fa-animation-delay: 5s; --fa-animation-duration: 3s',
+    /* eslint-disable max-len */
+    content: (process.env.TARGET_HOST === 'github' ? `
       This site has buffed up and moved to 
       <a id="trebledjxyz" class="text-white" style="cursor:pointer;">***trebledj.xyz***</a>!!!
-      The .github.io version will stay around though... for now...
+      Check out what else is new: <a class="text-white" href="https://trebledj.xyz/posts/site-migration-to-cloudflare">***Site Updates and Migration***</a>.
       <script>
       document.getElementById('trebledjxyz').addEventListener('click', function () { document.location.host='trebledj.xyz'; });
       </script>
-      `.trim().replace(/^[ \t]+/gm, ''),
-  } : {
-    enabled: false,
+      ` : `
+      Welcome to the new site!
+      Check out what else is new: <a class="text-white" href="/posts/site-migration-to-cloudflare">***Site Updates and Migration***</a>.
+      `).trim().replace(/^[ \t]+/gm, ''),
+    /* eslint-enable max-len */
   };
 
   return {

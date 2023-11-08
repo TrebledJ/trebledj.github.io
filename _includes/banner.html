@@ -1,7 +1,7 @@
 {% if site.banner.enabled %}
     <div id="banner" class="bg-{{ site.banner.bgColor | default('primary') }} collapsed">
         <div id="banner-content" class="text-{{ site.banner.fgColor | default('white') }}">
-            <i class="fas fa-{{site.banner.icon}} fs-4 me-2"></i>
+            <i class="fas fa-{{site.banner.icon}} fs-4 me-2" style="{{ site.banner.icon_style }}"></i>
             <span>{{site.banner.content | mdInline | safe}}</span>
         </div>
         {% if site.banner.closeButton %}
