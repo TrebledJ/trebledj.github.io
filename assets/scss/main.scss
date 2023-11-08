@@ -110,11 +110,19 @@ $carousel-transition: transform 2s ease, opacity 1.5s ease-out .5s;
     .page-link {
         background-color: var(--main-background-color) !important;
         color: var(--main-text-color) !important;
-        border: $border-width solid var(--border-color);
+        border: $border-width solid var(--border-color) !important;
+        background-image: none;
+    }
+
+    .page-item:not(.faded) .page-link {
+        &:focus,
+        &:hover {
+            border-color: var(--bold-color) !important;
+        }
     }
 
     .active .page-link {
-        border: $border-width solid var(--bold-color);
+        border: $border-width solid var(--bold-color) !important;
     }
 
     @include media-breakpoint-down(sm) {
