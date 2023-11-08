@@ -14,7 +14,7 @@ module.exports = function () {
     icon_style: '--fa-animation-delay: 5s; --fa-animation-duration: 3s',
     /* eslint-disable max-len */
     content: `
-      Welcome to the new trebledj.xyz site!
+      Welcome to the new *trebledj.xyz* site!
       Check out what else is new: <a class="text-white" href="/posts/site-migration-to-cloudflare">***Site Updates and Migration***</a>.
       `.trim().replace(/^[ \t]+/gm, ''),
     /* eslint-enable max-len */
