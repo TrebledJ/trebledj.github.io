@@ -86,6 +86,9 @@ module.exports = function (eleventyConfig) {
     return tags.reduce((acc, x) => acc.replace(dumbHTMLRegex(x), ''), html);
   });
   eleventyConfig.addFilter('annihilate', (html, selector) => {
+    if (typeof html !== 'string') {
+      throw new Error(`[11ty] annihilate: expected HTML string, got ${typeof html}`);
+    }
     const $ = cheerio.load(html);
     $(selector).remove();
     return $.html();
