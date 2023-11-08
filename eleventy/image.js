@@ -220,6 +220,7 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addFilter('resolveImageOutputPath', (src, page) => {
     const file = resolveResourcePath(page, src);
     const { ext, options } = getOptions(file);
+    eleventyImage(file, options);
     const metadata = eleventyImage.statsSync(file, options);
     return metadata[ext][metadata[ext].length - 1].url;
   });

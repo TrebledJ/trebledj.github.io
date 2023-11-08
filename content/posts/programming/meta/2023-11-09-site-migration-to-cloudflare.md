@@ -32,7 +32,7 @@ The [previous meta update](/posts/site-migration-to-eleventy) was dated February
 - Content
 	- [Home Page](/) (uses carousels to cycle through content) - May
 	- [Privacy Policy](/privacy-policy) - September
-	- Assorted Blog Posts (including a [series on digital audio synthesis](audio-synthesis-for-dummies), [CTF writeups](/tags/ctf), and [4 new compositions](/tags/composition))  - Continuous
+	- Assorted Blog Posts (including a [series on digital audio synthesis](/tags/audio-synthesis-for-dummies), [CTF writeups](/tags/ctf), and [4 new compositions](/tags/composition))  - Continuous
 - Optimisations
 	- Lazy Loading (iframes, images, disqus) - May
 	- Images (responsiveness, etc.) - May
@@ -167,7 +167,7 @@ A few tips here.
 3. **Avoid less reputable domains and [TLDs associated with cybercrime](https://circleid.com/posts/20230117-the-highest-threat-tlds-part-2).**[^xyz] (.date, .quest, .bid are among TLDs with the highest rate of malicious activity.)
 4. **Choose a domain name provider/registrar.** GoDaddy, Domain.com, Namecheap are some well-known ones. They offer discounts, but security features may come with a premium. Cloudflare has security batteries included, and afaik they don't charge a premium? (They don't have first-year discounts though.)
  
-[^xyz]: .xyz appears in the [list of most malicious/phishing TLDs](https://www.cybercrimeinfocenter.org/phishing-activity-in-tlds-november-january-2023). Does that mean I shouldn't have used it? The problem with that metric is that .com, .org, and .net are also in those lists. And depending on how you sort the lists, some may appear on top. For example, .com has the most number of phishing domains: does that mean we shouldn't use domains from .com? Nah. Even .xyz is used by reputable companies such as abc.xyz (Google's Alphabet Inc.) or starship.xyz (made by the founders of Skype). More examples can be found in [gen.xyz](gen.xyz), a site for registering and viewing examples of .xyz domains.
+[^xyz]: .xyz appears in the [list of most malicious/phishing TLDs](https://www.cybercrimeinfocenter.org/phishing-activity-in-tlds-november-january-2023). Does that mean I shouldn't have used it? The problem with that metric is that .com, .org, and .net are also in those lists. And depending on how you sort the lists, some may appear on top. For example, .com has the most number of phishing domains: does that mean we shouldn't use domains from .com? Nah. Even .xyz is used by reputable companies such as abc.xyz (Google's Alphabet Inc.) or starship.xyz (made by the founders of Skype). More examples can be found in [gen.xyz](https://gen.xyz), a site for registering and viewing examples of .xyz domains.
 
 Further Reading:
 - [Palo Alto: TLD Cybercrime](https://unit42.paloaltonetworks.com/top-level-domains-cybercrime/) - Comprehensive analysis of malicious sites, if you're into security and statistics.
