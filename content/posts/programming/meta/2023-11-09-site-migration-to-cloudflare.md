@@ -162,12 +162,28 @@ A few tips here.
 	- `.com` for commercial use.
 	- `.org` for organisations.
 	- `.dev`, `.codes` for programmers/software-likes.
-	- There are thousands of TLDs to choose from, but I decided to choose `.xyz` because I like to do different things (not just spitting code), and I'm not a corporate entity. TBH, `.io` would've been my second choice.
+	- There are thousands of TLDs to choose from, but I decided to choose `.me` because I'm not a corporate entity.
 2. **Check [domain name history](https://www.nameboy.com/how-to-check-domain-history/) for bad/good reputation.** It's possible the domain you're after was once a phishing site, but taken down. In any case, it's a good idea to check if the site garnered bad rep in the past.
-3. **Avoid less reputable domains and [TLDs associated with cybercrime](https://circleid.com/posts/20230117-the-highest-threat-tlds-part-2).**[^xyz] (.date, .quest, .bid are among TLDs with the highest rate of malicious activity.)
-4. **Choose a domain name provider/registrar.** GoDaddy, Domain.com, Namecheap are some well-known ones. They offer discounts, but security features may come with a premium. Cloudflare has security batteries included, and afaik they don't charge a premium? (They don't have first-year discounts though.)
- 
-[^xyz]: .xyz appears in the [list of most malicious/phishing TLDs](https://www.cybercrimeinfocenter.org/phishing-activity-in-tlds-november-january-2023). Does that mean I shouldn't have used it? The problem with that metric is that .com, .org, and .net are also in those lists. And depending on how you sort the lists, some may appear on top. For example, .com has the most number of phishing domains: does that mean we shouldn't use domains from .com? Nah. Even .xyz is used by reputable companies such as abc.xyz (Google's Alphabet Inc.) or starship.xyz (made by the founders of Skype). More examples can be found in [gen.xyz](https://gen.xyz), a site for registering and viewing examples of .xyz domains.
+3. **Avoid less reputable domains and [TLDs associated with cybercrime](https://circleid.com/posts/20230117-the-highest-threat-tlds-part-2).**
+	- .date, .quest, .bid are among TLDs with the highest rate of malicious activity.
+	- Even TLDs like .xyz—although used by companies like Alphabet Inc. (abc.xyz)—has garnered enough bad reputation.
+	
+	{% details "xyz: an unwise choice" %}
+	Originally, I wanted to use `trebledj.xyz`. I liked .xyz because it represents who I am—I like to do different things.
+
+	Turns out many firewalls block .xyz, rendering the site inaccessible to many. Not only that, but [emails or links may be silently dropped](https://www.spotvirtual.com/blog/the-perils-of-an-xyz-domain). The .xyz domain is just too far gone... firewalls and the general public have lost faith in .xyz. And for this reason, I switched out of .xyz.
+
+	{% images %}
+	{% image "https://spot.ghost.io/content/images/2021/09/voice-xyz-issue.png", "Two messages are sent over SMS: one with a .xyz link and the other with .com. Only the message with .com was received." %}
+	{% image "~/assets/img/memes/immeasurable-disappointment.jpg", "My disappointment is immeasurable and my day is ruined." %}
+	{% endimages %}
+
+	Sadly, I wasted 3 bubble teas worth of domain name to learn this valuable lesson. It's a shame that .xyz turned out this way. All those cool xyz websites and domain names out there... blocked by firewalls.
+
+	So I've opted for `trebledj.me`. I would've gone for .io, but it's thrice the price. At least the folks at domain.me seem [committed to security and combatting evil domains](https://domain.me/security/). Kudos to them.
+	{% enddetails %}
+
+4. **Choose a domain name provider/registrar.** GoDaddy, Domain.com, Namecheap are some well-known ones. They offer discounts, but security features may come with a premium. Cloudflare has security batteries included, but don't come with first-year discounts.
 
 Further Reading:
 - [Palo Alto: TLD Cybercrime](https://unit42.paloaltonetworks.com/top-level-domains-cybercrime/) - Comprehensive analysis of malicious sites, if you're into security and statistics.
