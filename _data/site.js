@@ -15,7 +15,7 @@ module.exports = function () {
     /* eslint-disable max-len */
     content: `
       Welcome to the new *trebledj.xyz* site!
-      Check out what else is new: <a class="text-white" href="/posts/site-migration-to-cloudflare">***Site Updates and Migration***</a>.
+      Check out what's new: <a class="text-white" href="/posts/site-migration-to-cloudflare">***Site Updates and Migration***</a>.
       `.trim().replace(/^[ \t]+/gm, ''),
     /* eslint-enable max-len */
   };
