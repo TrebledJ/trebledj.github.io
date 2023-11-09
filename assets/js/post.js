@@ -25,7 +25,7 @@ $(() => {
   });
 
   // --- TOC Current Section Highlight --- //
-  const headerOffset = 150;
+  const headerOffset = document.querySelector('header').offsetHeight + 20;
   const sections = document.querySelectorAll('.post-body h2,.post-body h3');
   const mainNavLinks = document.querySelectorAll('#toc-sidebar nav.toc a');
   const mobileNavLinks = document.querySelectorAll('#btn-mobile-toc nav.toc a');
@@ -52,12 +52,18 @@ $(() => {
 
   let currentActive = 0;
 
-  let debounce = false;
-  const updateTOCHighlight = () => {
-    if (debounce)
-      return;
-    debounce = true;
+  const debounce = f => {
+    let flag = false;
+    return (...args) => {
+      if (flag)
+        return;
+      flag = true;
+      f(...args);
+      flag = false;
+    };
+  };
 
+  const updateTOCHighlight = () => {
     const docElem = document.documentElement;
     const docBody = document.body;
     const scrollTop = (docBody.scrollTop || docElem.scrollTop);
@@ -81,8 +87,6 @@ $(() => {
       currentActive = currentHeading;
       highlightLink(currentHeading);
     }
-
-    debounce = false;
   };
 
   if (hash) { // Set pre-selected item.
@@ -98,7 +102,7 @@ $(() => {
   // Add a special class for dropdown items.
   $('#btn-mobile-toc nav.toc a').addClass('dropdown-item');
 
-  $(window).on('scroll', updateTOCHighlight);
+  $(window).on('scroll', debounce(updateTOCHighlight));
   // updateTOCHighlight();
 
   // --- Details Collapsible --- //
