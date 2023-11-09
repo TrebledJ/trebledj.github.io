@@ -61,9 +61,10 @@
         top: calc(var(--header-extra) + ($header-height + 1rem));
         right: 0;
         z-index: 2;
-        height: fit-content;
+        // height: fit-content;
         overflow-y: auto;
         position: sticky;
+        max-height: calc(100vh - ($header-height + 2rem) - var(--header-extra))
     }
 }
 
