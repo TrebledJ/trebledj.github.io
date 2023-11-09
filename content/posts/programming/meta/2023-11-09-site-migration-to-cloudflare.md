@@ -48,7 +48,7 @@ The [previous meta update](/posts/site-migration-to-eleventy) was dated February
 
 While the previous migration dealt with site generation, today's migration is twofold:
 1. Migrating the hosting service from GitHub Pages to Cloudflare Pages
-2. Migrating the domain name from `trebledj.github.io` to `trebledj.xyz`
+2. Migrating the domain name from `trebledj.github.io` to `trebledj.me`
 
 To the point: why the switch? Plenty of users are content with GitHub Pages. Why am I not? Although perfectly suited for simple static sites, GitHub Pages lacks server-side flexibility and customisations.
 
@@ -103,7 +103,7 @@ curl -I https://trebledj.github.io/css/main.css | grep cache-control
 cache-control: max-age=600
 
 # Cloudflare Pages
-curl -I https://trebledj.xyz/css/main.css | grep cache-control
+curl -I https://trebledj.me/css/main.css | grep cache-control
 cache-control: public, max-age=14400, must-revalidate
 ```
 
@@ -148,9 +148,9 @@ One reason for moving off GitHub Pages is to prepare for backend needs. I don't 
 
 ### Domain Stuff
 
-Several reasons why I switched from `trebledj.github.io` to `trebledj.xyz`:
+Several reasons why I switched from `trebledj.github.io` to `trebledj.me`:
 
-- **Decoupling**. I'd rather maintain my own {% abbr "apex domain", "domain name without any subdomains, generally the last two terms of the domain (e.g. github.io, microsoft.com, trebledj.xyz)" %} rather than rely on `github.io`.
+- **Decoupling**. I'd rather maintain my own {% abbr "apex domain", "domain name without any subdomains, generally the last two terms of the domain (e.g. github.io, microsoft.com, trebledj.me)" %} rather than rely on `github.io`.
 - **Learning**. In the process, I get to touch DNS/networking settings, which are important from a developer and security perspective.
 - **Personal Reasons**. Hosting this website on a custom domain name has been a mini-dream. Migrating to Cloudflare definitely eased the integration process between domain name and site.
 
