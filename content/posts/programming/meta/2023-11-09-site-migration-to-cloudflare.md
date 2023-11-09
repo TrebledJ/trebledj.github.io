@@ -10,7 +10,7 @@ related:
     tags: [meta]
 ---
 
-This is my second meta post on site development. I'll walk through some changes on the site, along with my assessment and decision-making process on migrating to Cloudflare.
+This is my second meta post on site development... and a lot has changed! In this post, I'll walk through some changes on the site, along with my assessment and decision-making process on migrating to Cloudflare.
 
 But first things first. Meme.
 
@@ -181,4 +181,4 @@ Some more work still needs to be done, though.
 - Setting up 301 redirects from the old site, for convenient redirect and migration of site traffic. ([guide](https://finisky.github.io/en/migrate-github-pages-by-301-redirects/); done!)
 - Implement longer browser cache TTL + cache busting.
 
-But other than that I'm quite happy with Cloudflare's ease-of-use, despite its day-long downtime (which coincidentally occurred when I was setting up Cloudflare Pages).
+But other than that I'm quite happy with Cloudflare's ease-of-use, despite its day-long downtime (which coincidentally occurred when I was setting up Cloudflare Pages). Setting up the hook to GitHub repos and deploy pipelines were pretty straightforward.
