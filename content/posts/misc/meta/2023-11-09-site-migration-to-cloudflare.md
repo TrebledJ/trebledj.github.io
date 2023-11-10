@@ -13,8 +13,8 @@ This is my second meta post on site development... and a lot has changed! In thi
 But first things first. Meme.
 
 {% images "h-auto" %}
-{% image "assets/ogle-ogle-cloudflare-pages.jpg", "Ooh, Cloudflare pages looks pretty hot." %}
-{% image "assets/yas-cache-policy.jpg", "One more item off the Lighthouse checklist!" %}
+{% image "assets/ogle-ogle-cloudflare-pages.jpg", "", "Cloudflare Pages looks pretty hot." %}
+{% image "assets/yas-cache-policy.jpg", "", "One more item off the Lighthouse checklist!" %}
 {% endimages %}
 
 
@@ -172,8 +172,8 @@ A few tips here.
 	Turns out many firewalls block .xyz, rendering the site inaccessible to many. Not only that, but [emails or links may be silently dropped](https://www.spotvirtual.com/blog/the-perils-of-an-xyz-domain). The .xyz domain is just too far gone... firewalls and the general public have lost faith in .xyz. And for this reason, I switched out of .xyz.
 
 	{% images %}
-	{% image "https://spot.ghost.io/content/images/2021/09/voice-xyz-issue.png", "Two messages are sent over SMS: one with a .xyz link and the other with .com. Only the message with .com was received." %}
-	{% image "~/assets/img/memes/immeasurable-disappointment.jpg", "My disappointment is immeasurable and my day is ruined." %}
+	{% image "https://spot.ghost.io/content/images/2021/09/voice-xyz-issue.png", "", "Two messages are sent over SMS: one with a .xyz link and the other with .com. Only the message with .com was received." %}
+	{% image "~/assets/img/memes/immeasurable-disappointment.jpg", "", "My disappointment is immeasurable and my day is ruined." %}
 	{% endimages %}
 
 	Sadly, I wasted 3 bubble teas worth of domain name to learn this valuable lesson. It's a shame that .xyz turned out this way. All those cool xyz websites and domain names out there... blocked by firewalls.

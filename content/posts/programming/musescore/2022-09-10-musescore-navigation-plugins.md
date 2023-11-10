@@ -42,7 +42,7 @@ Here are some examples of to-dos I might encounter while composing:
 - TODO: Revise counterpoint.
 - TODO: Add bowing articulation to strings.
 
-{% image "assets/plugin-todo-list.jpg", "" %}
+{% image "assets/plugin-todo-list.jpg", "", "Image showing the TODO-list plugin in action." %}
 
 To allow for different to-do styles and text, I provided several settings for the user to modify. These are listed in on the [GitHub readme](https://github.com/TrebledJ/musescore-todo-list).
 
@@ -53,8 +53,8 @@ This plugin is inspired by the todo-tree plugin in VSCode, which searches files 
 When starting, I took reference of [jeetee’s annotation plugin](https://musescore.org/en/project/annotations). I noticed jeetee used Qt Quick Controls 1.0 instead of 2.0 used in some other plugins. Apparently, QML had made some drastic changes to the styling of controls (buttons, checkboxes, etc.). In 1.0, controls used the native style (e.g. Apple’s aqua style for macs). On the other hand, 2.0 controls require developers to customise styling; this may sound great for design flexibility, but in my experience it’s annoying to get it working with both light and dark themes.
 
 {% images "h-auto" %}
-{% image "assets/plugin-qtquick1.jpg", "Qt-Quick examples." %}
-{% image "assets/plugin-qtquick2.jpg", "Qt-Quick examples." %}
+{% image "assets/plugin-qtquick1.jpg", "", "Qt-Quick examples." %}
+{% image "assets/plugin-qtquick2.jpg", "", "Qt-Quick examples." %}
 {% endimages %}
 
 <sup>Qt Quick Controls 1.0 vs 2.0. The latter comes with barely any default and takes more effort to properly set up.</sup>

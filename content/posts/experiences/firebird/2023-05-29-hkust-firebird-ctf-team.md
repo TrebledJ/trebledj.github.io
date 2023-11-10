@@ -11,14 +11,13 @@ related:
     tags: [experiences, hkust]
 ---
 
-{% image "assets/ctf-dunning-kruger-2.jpg", "CTFs explained through the Dunning-Kruger effect. I'm sure there are a lot more trenches.", "w-65" %}
-
+{% image "assets/ctf-dunning-kruger-2.jpg", "w-65", "CTFs explained through the Dunning-Kruger effect. I'm sure there are a lot more trenches." %}
 
 As an avid programmer with a passion for technology and programming, I was always intrigued by the world of cybersecurity. In my last two years of university, I was thrilled to explore this field further by joining the HKUST Firebird CTF Team. As someone with a programming background but no cybersecurity knowledge (besides rudimentary SQL injection), I was excited to develop my skills in this field.
 
 Note that my experiences don’t speak for everyone and may not reflect the current situation of the team. With that said, let me introduce the process a bit more. The training is structured as three stages/courses, each taking place over a semester.
 
-{% image "assets/firebird-stages.jpg", "Evolution stages of a firebird trainee.", "w-65" %}
+{% image "assets/firebird-stages.jpg", "w-65", "Evolution stages of a firebird trainee." %}
 
 ## Torchic, the Hatchling
 
@@ -30,7 +29,7 @@ Two topics are presented each week, and include in-class exercises and homework 
 
 Some challenges are easier to solve. But don't be fooled! There's more where they came from!
 
-{% image "assets/hacker.jpg", "You know, I'm something of an idiot myself.", "w-55" %}
+{% image "assets/hacker.jpg", "w-55", "You know, I'm something of an idiot myself." %}
 
 We participated in two (plus one extra) CTF competitions this term. In November, we participated in the [HKCERT CTF competition](https://www.hkcert.org/event/capture-the-flag-challenge-2021), a regional event where secondary and tertiary schools from all over HK (and invited teams outside) compete to hunt for flags.
 

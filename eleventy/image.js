@@ -104,7 +104,7 @@ module.exports = function (eleventyConfig) {
     return classes;
   }
 
-  function makeImageFromMetadata(metadata, ext, classes, alt, thumbnail = false, attrs = {}) {
+  function makeImageFromMetadata(metadata, ext, classes, thumbnail = false, attrs = {}) {
     const fmt = metadata[ext];
 
     // Get default ("auto" width) image.
@@ -126,8 +126,10 @@ module.exports = function (eleventyConfig) {
 
     // Overwrite params.
     attrs = {
+      loading: 'eager',
       decoding: 'async',
       style: '',
+      alt: '',
       ...attrs,
       srcset,
       sizes,
@@ -136,34 +138,25 @@ module.exports = function (eleventyConfig) {
     attrs.style += `aspect-ratio: auto ${defsrc.width} / ${defsrc.height}`;
 
     const attrStr = Object.entries(attrs).map(e => `${e[0]}="${e[1]}"`).join(' ');
-    return `<img class="${classes.join(' ')}" alt="${alt}" title="${alt}"
+    return `<img class="${classes.join(' ')}"
             src="${defsrc.url}" ${attrStr} />`
       .replaceAll(/\s{2,}/g, ' ');
   }
 
-  function wrapLightbox(img, altText, metadata, ext) {
+  function wrapLightbox(img, title, metadata, ext) {
     const popup = metadata[ext][metadata[ext].length - 1].url;
-    return `<a class="lightbox-single" title="${altText}" href="${popup}">${img}</a>`;
+    return `<a class="lightbox-single" title="${title}" href="${popup}">${img}</a>`;
   }
 
-  async function imageShortcode(src, altText, classes, loading) {
-    altText ??= '';
-    classes ??= '';
+  async function imageShortcode(src, classes, attrs) {
     const { ext, options } = getOptions(src);
     const metadata = await eleventyImage(src, options);
-    classes = amendClasses(classes);
+    classes = amendClasses(classes ?? '');
 
-    const img = makeImageFromMetadata(metadata, ext, classes, altText, false, { loading });
+    const img = makeImageFromMetadata(metadata, ext, classes, false, attrs);
     if (process.env.ENABLE_LIGHTBOX)
-      return wrapLightbox(img, altText, metadata, ext);
+      return wrapLightbox(img, attrs.title ?? '', metadata, ext);
     return img;
-  }
-
-  async function heroImageShortcode(src, altText, classes) {
-    // Image gets displayed near the top, so it'll almost always be displayed.
-    // Load eagerly, to push first contentful paint.
-    src = resolveResourcePath(this.page, src);
-    return imageShortcode(src, altText, classes, 'eager');
   }
 
   function thumbnailShortcode(post, classes) {
@@ -183,13 +176,13 @@ module.exports = function (eleventyConfig) {
     const src = resolveResourcePath(page, post.data.thumbnail_src);
 
     const removeTagsRegex = /(<\w+>)|(<\/\w+>)/g;
-    const altText = post.data.title.replace(removeTagsRegex, '');
+    const alt = `Thumbnail for ${post.data.title.replace(removeTagsRegex, '')}`;
 
     const { ext, options } = getOptions(src);
     eleventyImage(src, options);
     const metadata = eleventyImage.statsSync(src, options);
 
-    return makeImageFromMetadata(metadata, ext, classes, altText, true, { loading: 'lazy' });
+    return makeImageFromMetadata(metadata, ext, classes, true, { alt, loading: 'lazy' });
   }
 
   /**
@@ -227,12 +220,18 @@ module.exports = function (eleventyConfig) {
 
   // Eleventy Image shortcode
   // https://www.11ty.dev/docs/plugins/image/
-  eleventyConfig.addAsyncShortcode('image', async function (src, altText, classes) {
+  eleventyConfig.addAsyncShortcode('image', async function (src, classes, title, alt) {
     const file = resolveResourcePath(this.page, src);
-    return imageShortcode(file, altText, classes, 'lazy');
+    return imageShortcode(file, classes, { title, alt: alt ?? title, loading: 'lazy' });
   });
 
-  eleventyConfig.addAsyncShortcode('hero', heroImageShortcode);
+  eleventyConfig.addAsyncShortcode('hero', async function (src, classes, title, alt) {
+    // Image gets displayed near the top, so it'll almost always be displayed.
+    // Load eagerly, to push first contentful paint.
+    alt ??= title;
+    const file = resolveResourcePath(this.page, src);
+    return imageShortcode(file, classes, { title, alt: alt ?? title, loading: 'eager' });
+  });
 
   // Synchronous shortcode. Useful for Nunjucks macro.
   // Doesn't work with remote URLs.

@@ -94,7 +94,7 @@ f(x) = a_0\sin(f_0x + b_0) + a_1\sin(f_1x + b_1) + \cdots + a_n\sin(f_nx + b_n)
 $$
 where $a_i$, $f_i$, and $b_i$ are the amplitude, frequency, and phase of each constituent sine wave.
 
-{% image "assets/fourier-analysis.jpg", "Skipper's partial to Fourier. They're the best of chums.", "w-55" %}
+{% image "assets/fourier-analysis.jpg", "w-55", "Skipper's partial to Fourier. They're the best of chums." %}
 
 {% alert "fact" %}
 The Fourier Theorem and Fourier Transform are ubiquitous in modern day technology. It is the basis for many audio processing techniques such as filtering, equalisation, and noise cancellation. By manipulating the individual sine waves that make up a sound, we can alter its characteristics and create new sounds. The Fourier Transform is also a key component in compression, such as the JPG image format.
@@ -107,7 +107,7 @@ What’s cool about this theorem is that we can apply it the other way: any peri
 
 The principle of **additive synthesis** is pretty straightforward: signals can be combined by adding samples along time.
 
-{% image "assets/additive-synthesis.jpg", "Example of additive synthesis, localised on this very webpage.", "w-65" %}
+{% image "assets/additive-synthesis.jpg", "w-65", "Example of additive synthesis, localised on this very webpage." %}
 
 <sup>Example of additive synthesis. The first and second signal show pure sine tones at 440Hz ($s_1$) and 660Hz ($s_2$). The third signal adds the two signals ($s_1 + s_2$). The fourth signal scales the third signal down to fit within $[-1, 1]$ ($(s_1 + s_2) / 2$). ([Source Code][addsynthgist])</sup>
 {.caption}
@@ -147,7 +147,7 @@ We can see additive synthesis in action with some help from [Audacity](https://w
     - Generate an 880Hz tone in the new track. Same method as above.
     - Play it to hear a beautiful sounding octave.
 
-{% image "assets/audacity.jpg", "The audacity of it all!" %}
+{% image "assets/audacity.jpg", "", "The audacity of it all!", "Screenshot of Audacity with the 440 Hertz and 880 Hertz sine tone." %}
 
 During playback, Audacity will combine the samples from both tracks by summing them and play the summed signal.
 

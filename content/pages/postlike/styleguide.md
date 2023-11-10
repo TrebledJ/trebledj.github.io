@@ -105,7 +105,7 @@ Break
         ```
        1. Isn't 
             
-            {% image "~/assets/img/memes/nou.jpg", "Full width!" %}
+            {% image "~/assets/img/memes/nou.jpg", "", "Full width!", "No u: dipper bouncing off a rainbow." %}
 
             <sup>(caption)</sup>
             {.caption}
@@ -164,7 +164,7 @@ Let's try that again.
 
 4. ~~Extract~~ Untame the stuck honey, and crumbulate it in the Rockwell *dual-gyzmo combobulator*.
 
-    {% image "~/assets/img/memes/nou.jpg", "Full width!" %}
+    {% image "~/assets/img/memes/nou.jpg", "", "Full width!", "No u: dipper bouncing off a rainbow." %}
     
 ### Math
 
@@ -211,15 +211,15 @@ Check line breaks here:
 >
 > $$a ^ a = <3$$
 >
-> {% image "~/assets/img/memes/nou.jpg", "Full width!" %}
+> {% image "~/assets/img/memes/nou.jpg", "", "Full width!", "No u: dipper bouncing off a rainbow." %}
 > 
 
 
 ### Images
 
-{% image "https://imgs.xkcd.com/comics/purity.png", "Full-width image." %}
+{% image "https://imgs.xkcd.com/comics/purity.png", "", "Full-width image.", "xkcd on purity of subjects" %}
 
-{% image "~/assets/img/memes/unlimited-power.jpg", "Muahahahaha! Fear the power of alt text.", "w-85" %}
+{% image "~/assets/img/memes/unlimited-power.jpg", "w-85", "Muahahahaha! Fear the power of title text.", "Palpatine shooting out bolts of alt text." %}
 
 <sup>Have you heard of Darth Plagueis the Wise?^[No? Then allow me to entertain you...]</sup>
 {.caption}
@@ -227,9 +227,9 @@ Check line breaks here:
 We can splay multiple images in a row too!
 
 {% images "h-auto rw" %}
-{% image "~/assets/img/memes/404-1.jpg", "first" %}
-{% image "~/assets/img/memes/404-2.jpg", "second" %}
-{% image "~/assets/img/memes/404-3.jpg", "third" %}
+{% image "~/assets/img/memes/404-1.jpg", "", "first" %}
+{% image "~/assets/img/memes/404-2.jpg", "", "second" %}
+{% image "~/assets/img/memes/404-3.jpg", "", "third" %}
 {% endimages %}
 
 <sup>Although this isn't the multiverse, multi-images are great fun too! (`images "h-auto rw"`)</sup>
@@ -238,16 +238,16 @@ We can splay multiple images in a row too!
 Did I mention that equal-height layouts are a thing!? This is made possible with `h-auto`. 
 
 {% images "h-auto w-80" %}
-{% image "~/assets/img/memes/404-4.jpg", "first" %}
-{% image "~/assets/img/memes/interesting.jpg", "second" %}
+{% image "~/assets/img/memes/404-4.jpg", "", "first" %}
+{% image "~/assets/img/memes/interesting.jpg", "", "second" %}
 {% endimages %}
 
 <sup>Two images are better than one, for if either of them ~~falls~~ sucks, one can help the other up. (`images "h-auto w-80"`)</sup>
 {.caption}
 
 {% images %}
-{% image "~/assets/img/memes/404-4.jpg", "first" %}
-{% image "~/assets/img/memes/interesting.jpg", "second" %}
+{% image "~/assets/img/memes/404-4.jpg", "", "first" %}
+{% image "~/assets/img/memes/interesting.jpg", "", "second" %}
 {% endimages %}
 
 <sup>Equal-width. No `h-auto` here. (`images ""`)</sup>

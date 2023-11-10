@@ -169,7 +169,7 @@ This example irks me since it uses macros, so it's a bit hacky... too hacky for 
 
 Although implicit params remove the need to explicitly state params, there is also the danger of hiding too much. This may lead to code being harder to trace and debug, and hence may cause confusion among team members.
 
-{% image "assets/implicits.jpg", "Elmo abusing implicits. Don't be Elmo!", "w-45" %}
+{% image "assets/implicits.jpg", "w-45", "Elmo abusing implicits. Don't be Elmo!" %}
 
 The similarity with natural languages is striking. Sometimes ambiguity may arise when people conversing don’t have sufficient context. Or misunderstanding may arise when people come from different cultures.
 

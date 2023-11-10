@@ -54,12 +54,12 @@ Sadly, not the scrumptious dessert. Position-independent executable is a securit
 
 Next, we decompile our elves using Ghidra and make some observations.
 
-{% image "assets/labyrinth-1.jpg", "Labyrinth decompiled 1." %}
+{% image "assets/labyrinth-1.jpg", "", "Labyrinth decompiled 1." %}
 
 <sup>Only one function contains `exit(0)`.</sup>
 {.caption}
 
-{% image "assets/labyrinth-2.jpg", "Labyrinth decompiled 2." %}
+{% image "assets/labyrinth-2.jpg", "", "Labyrinth decompiled 2." %}
 
 <sup>Other functions seem to perform some sort of check and lead to more functions.</sup>
 {.caption}
@@ -116,13 +116,13 @@ simgr.explore(find=tar_addr)  # GOGOGO!!!
 #### Path Explosion
 Unfortunately, this takes forever to run due to *path explosion*. Notice how the control flow makes the paths diverge in one of the binaries:
 
-{% image "assets/labyrinth-path-explosion-graph.jpg", "Paths go boom.", "w-80" %}
+{% image "assets/labyrinth-path-explosion-graph.jpg", "w-80", "Paths go boom.", "Example diagram of path explosion." %}
 
 Now angr is pretty smart, but not too smart. angr will simulate all paths and if it encounters a branch, it will simulate both branches together. However, it will treat the `function_133` branches as separate states...
 
 To get a more concrete view of paths exploding, Gru tried calling `simgr.run(n=50)`—which simulates 50 steps...
 
-{% image "assets/labyrinth-path-explosion-gru.jpg", "Good going, Gru!", "w-80" %}
+{% image "assets/labyrinth-path-explosion-gru.jpg", "w-80", "Good going, Gru!", "Gru explains his plan to avoid path explosion. (not)" %}
 
 90 active states is quite a lot! Usually we'd want to limit ourselves to around 10 active states to ensure good simulation speed.
 
@@ -132,9 +132,9 @@ With 50 steps and already 90 active states, the situation is pretty dismal. We'l
 **Control flow graphs** (CFGs) are directed graphs where nodes are blocks of code and edges indicate the direction the code can take. By translating the program into a graph, we can utilise the many graph algorithms at our disposal. In particular, we're interested in the *shortest path between a start node and target node*.
 
 {% images %}
-{% image "assets/labyrinth-path-explosion-1.jpg", "Path explosion 1." %}
-{% image "assets/labyrinth-path-explosion-2.jpg", "Path explosion 2." %}
-{% image "assets/labyrinth-path-explosion-3.jpg", "Path explosion 3." %}
+{% image "assets/labyrinth-path-explosion-1.jpg", "", "Path explosion 1." %}
+{% image "assets/labyrinth-path-explosion-2.jpg", "", "Path explosion 2." %}
+{% image "assets/labyrinth-path-explosion-3.jpg", "", "Path explosion 3." %}
 {% endimages %}
 
 angr comes with a bundle of analysis modules; these include two CFG analysis strategies: `CFGFast` and `CFGEmulated`. The former analyses the program statically (without actually simulating the code!), whereas the latter analyses the program dynamically (i.e. by simulating the code).

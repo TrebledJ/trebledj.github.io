@@ -39,7 +39,7 @@ This post is much longer than I expected. My suggested approach of reading is to
 
 It turns out kitchens and embedded systems aren’t that different after all! Both perform input and output, and both have timers! Who knew? Tick-Tock Croc, perhaps.^[I think it's safe to say that Tick-Tock Croc also performs input-output and has a timer between his eyes. So Tick-Tock isn't too different from a kitchen! Or an embedded controller, for that matter.]
 
-{% image "assets/tick-tock.jpg", "Tick tock likey embedded timers?", "w-55" %}
+{% image "assets/tick-tock.jpg", "w-55", "Tick tock likey embedded timers?", "Meme with tick tock croc from Peter Pan preferring embedded timers over kitchen timers." %}
 
 <br/>  
 
@@ -60,7 +60,7 @@ By dividing against it, we can achieve lower frequencies.
 
 The following diagram illustrates how the clock signal is divided on an STM. There are two divisors: the prescaler and auto-reload (aka counter period).
 
-{% image "assets/timing-diagram.jpg", "Timing diagram of timer signal derived from a clock signal.", "w-85" %}
+{% image "assets/timing-diagram.jpg", "w-85", "Timing diagram of timer signal derived from a clock signal. We begin with the clock signal, which is divided at multiple points: first divided by the prescaler, then by the auto-reload." %}
 
 <sup>How a timer frequency is derived from the clock signal. (Diagram adapted from uPesy.^[[How do microcontroller timers work?](https://www.upesy.com/blogs/tutorials/how-works-timers-in-micro-controllers) – A decent article on timers. Diagrams are in French though.])</sup>
 {.caption}
@@ -111,14 +111,14 @@ Exercises for the reader:
 
 We can use STM32 CubeMX, a GUI for configuring hardware, to initialise timer parameters. CubeMX allows us to generate code from these options, handling the conundrum of modifying the appropriate registers.
 
-{% image "assets/stm32-cubemx-timer-1.jpg", "Timer settings from CubeMX.", "w-85" %}
+{% image "assets/stm32-cubemx-timer-1.jpg", "w-85", "Timer settings from CubeMX." %}
 
 <sup>In CubeMX, we first select a timer on the left. We then enable a channel (here Channel 4) to generate PWM.[^chtim] We also set the prescaler and auto-reload so that our timer frequency is 42,000Hz.</sup>
 {.caption}
 
 [^chtim]: We chose Timer 8 (with Channel 4) because it's an advanced control timer (a beefy boi!), capable of a lot, though probably overkill for our simple examples. The timer and channel you use depends on your STM board and model. If you’re following along with this post, make sure to choose a timer which has DMA generation. When in doubt, refer to the reference manual.[^rm0090]
 
-{% image "assets/stm32-cubemx-timer-2-raw.jpg", "More timer settings from CubeMX.", "w-65" %}
+{% image "assets/stm32-cubemx-timer-2-raw.jpg", "w-65", "More timer settings from CubeMX." %}
 
 <sup>Some other settings in CubeMX to check.</sup>
 {.caption}
@@ -184,7 +184,7 @@ Let's delve into our second topic today: digital-to-analogue converters (DACs).
 
 Audio comes in several forms: sound waves, electrical voltages, and binary data.
 
-{% image "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c7/CPT-Sound-ADC-DAC.svg/1200px-CPT-Sound-ADC-DAC.svg.png", "Tolkien's world looks nothing like the three realms here.", "w-85" %}
+{% image "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c7/CPT-Sound-ADC-DAC.svg/1200px-CPT-Sound-ADC-DAC.svg.png", "w-85", "Tolkien's world looks nothing like the three realms here.", "Image showing how audio is represented in the analogue, electronic, and digital worlds." %}
 
 <sup>Audio manifests in various forms. DACs transform our signal from the digital realm to the analogue world. (Source: Wikimedia Commons.)</sup>
 {.caption}
@@ -196,11 +196,11 @@ Since representations vastly differ, hence the need for interfaces to bridge the
 
 Remember [sampling](/posts/digital-audio-synthesis-for-dummies-part-1#sampling)? We took a continuous analogue signal and selected discrete points at regular intervals. An ADC is like a glorified sampler.
 
-{% image "assets/sampling.jpg", "Free samples have returned!", "w-85" %}
+{% image "assets/sampling.jpg", "w-85", "Free samples have returned!", "Diagram sampling a sine wave at different frequencies (50 Hertz, 30 Hertz, 10 Hertz). There are more dots at higher frequencies." %}
 
 While ADCs take us from continuous to discrete, DACs (try to) take us from discrete to continuous. (Well, it tries anyway.) The shape of the resulting analogue waveform depends on the DAC implementation. Simple DACs will stagger the output at discrete levels. More complex DACs may interpolate between two discrete samples to “guess” the intermediate values. Some of these guesses will be off, but at least the signal is smoother.
 
-{% image "assets/reconstruction.jpg", "Free samples have returned!", "w-85" %}
+{% image "assets/reconstruction.jpg", "w-85", "Free samples have returned!", "Another sampling diagram, but lines are drawn between dots, like staircases. This emulates how analogue signals are reconstructed from digital representations." %}
 
 <sup>On our STM board, signal reconstruction is staggered, like old platformer games—not that I've played any. At higher sampling rates, the staggered-ness is less apparent and the resulting curve is smoother.</sup>
 {.caption}
@@ -209,17 +209,17 @@ While ADCs take us from continuous to discrete, DACs (try to) take us from discr
 
 Let’s return to CubeMX to set up our DAC.
 
-{% image "assets/stm32-cubemx-dac-1.jpg", "DAC settings from CubeMX.", "w-85" %}
+{% image "assets/stm32-cubemx-dac-1.jpg", "w-85", "DAC settings from CubeMX." %}
 
 <sup>Enable DAC, and connect it to Timer 8 using the trigger setting. Our STM32F405 board supports two DAC output channels. This is useful if we want stereo audio output.</sup>
 {.caption}
 
-{% image "assets/stm32-cubemx-dac-2.jpg", "DAC DMA settings from CubeMX.", "w-65" %}
+{% image "assets/stm32-cubemx-dac-2.jpg", "w-65", "DAC DMA settings from CubeMX." %}
 
 <sup>Configure DMA settings for the DAC. We’ll cover DMA later.</sup>
 {.caption}
 
-{% image "assets/stm32-cubemx-dac-3.jpg", "Enable DAC DMA interrupts.", "w-65" %}
+{% image "assets/stm32-cubemx-dac-3.jpg", "w-65", "Enable DAC DMA interrupts." %}
 
 <sup>Enable interrupts for the DMA. These are needed to trigger DAC sends.</sup>
 {.caption}
@@ -230,7 +230,7 @@ Again, remember to generate code when finished.[^codegen] The `MX_DAC_Init()` fu
 
 On our STM32, DAC accepts samples [quantised](/posts/digital-audio-synthesis-for-dummies-part-1#quantisation) to 8 bits or 12 bits.[^dacalignment] We’ll go with superior resolution: 12 bits!
 
-{% image "assets/stm32-dac-alignment.jpg", "Three options for DAC alignment are offered.", "w-65" %}
+{% image "assets/stm32-dac-alignment.jpg", "w-65", "Three options for DAC alignment are offered." %}
 
 <sup>STM32 offers three different options to quantise and align DAC samples. We’ll only focus on the last option: 12-bit right aligned samples. (Source: RM0090 Reference Manual.[^rm0090])</sup>
 {.caption}
@@ -284,7 +284,7 @@ while (1) {
 
 This generates a square wave with a period of 10ms, for a frequency of 100Hz.
 
-{% image "assets/osc-square-wave.jpg", "A square wave at 100Hz.", "w-65" %}
+{% image "assets/osc-square-wave.jpg", "w-65", "A square wave at 100Hz." %}
 
 <sup>Oscilloscope view of the signal. This is very useful for debugging signals, especially periodic ones.</sup>
 {.caption}
@@ -294,7 +294,7 @@ But there are two issues with this looping method:
 1. Using a while loop blocks the thread, meaning we block the processor from doing other things while outputting the sine wave.
 2. Since `HAL_Delay()` delays in milliseconds, it becomes impossible to generate complex waveforms at high frequencies, since that requires us to send samples at **microsecond** intervals.
 
-{% image "assets/y-u-no-faster.jpg", "HAL Delay, y u no faster?", "w-45" %}
+{% image "assets/y-u-no-faster.jpg", "w-45", "HAL Delay, y u no faster?" %}
 
 In the next section, we’ll address these issues by combining DAC with timers and DMA.
 
@@ -321,7 +321,7 @@ Further Reading:
 We'll now try using DMA with a single buffer, see why this is problematic, and motivate the need for double buffering.
 If you’ve read this far, I presume you’ve followed the [previous section](#example-initialising-the-dac) by initialising DMA and generating code with CubeMX.
 
-{% image "assets/single-buffer.jpg", "Single buffers... forever alone.", "w-45" %}
+{% image "assets/single-buffer.jpg", "w-45", "Single buffers... forever alone." %}
 
 {% alert "warning" %}
 DMA introduces syncing issues. After preparing a second round of buffers, how do we know if the first round has already finished?
@@ -382,7 +382,7 @@ while (1) {
 
 The results? As expected, artefacts (nefarious little glitches) invade our signal, since our buffer is updated during DMA transfer. This may result in [unpleasant clicks from our speaker](/posts/digital-audio-synthesis-for-dummies-part-1#clicks).
 
-{% image "assets/osc-sine-440-glitch.jpg", "Artefacts distort the signal, resulting in occasionally clips and sound defects.", "w-65" %}
+{% image "assets/osc-sine-440-glitch.jpg", "w-65", "Artefacts distort the signal, resulting in occasionally clips and sound defects." %}
 
 <sup>Prep, wait, start, repeat. Artefacts distort the signal from time to time.</sup>
 {.caption}
@@ -390,7 +390,7 @@ The results? As expected, artefacts (nefarious little glitches) invade our signa
 But what if we prep, then start, then wait? This way, the buffer won't be overwritten; but this causes the signal to stall while prepping.^[Not sure if *stall* is the right word. Let me know if there's a better one.]
 
 <a id="stall-img"></a>
-{% image "assets/osc-sine-440-stall.jpg", "Oscilloscope of sine wave with stalls (horizontal breaks with no change).", "w-65" %}
+{% image "assets/osc-sine-440-stall.jpg", "w-65", "Oscilloscope of sine wave with stalls (horizontal breaks with no change)." %}
 
 <sup>Prep, start, wait, repeat. The signal stalls (shown by horizontal lines) because the DAC isn’t updated while buffering.</sup>
 {.caption}
@@ -431,7 +431,7 @@ while (1) {
 
 Now our 440Hz sine wave is unblemished!
 
-{% image "assets/osc-sine-440-2.jpg", "Pure sine goodness. A proper 440Hz sine displaying properly.", "w-65" %}
+{% image "assets/osc-sine-440-2.jpg", "w-65", "Pure sine goodness. A proper 440Hz sine displaying properly." %}
 
 <sup>Waveform of a pure 440Hz sine tone.</sup>
 {.caption}
@@ -511,7 +511,7 @@ TIM8->ARR = 7999;
 
 After all this hassle, we get a beautiful chord.
 
-{% image "assets/osc-a-major.jpg", "The curves are mesmerising.", "w-65" %}
+{% image "assets/osc-a-major.jpg", "w-65", "The curves are mesmerising.", "Picture of oscilloscope showing A major." %}
 
 <sup>A nifty waveform of an A major chord (440Hz + 554.37Hz + 659.25Hz).</sup>
 {.caption}

@@ -24,7 +24,7 @@ To give a bit more background, our school cafeteria has five to six different lo
 
 Also, some background about the card: it's a [radio frequency ID (RFID)][rfid] card. I won't go into the technical details of it, but basically you scan the card on a dedicated reader, and it can read a unique ID.
 
-{% image "assets/rfid.jpg", "Exhibit A: an RFID", "w-45" %}
+{% image "assets/rfid.jpg", "w-45", "Exhibit A: an RFID" %}
 
 ### Development
 #### A Painful Start
@@ -39,7 +39,7 @@ Initially I started developing the application using SFML, since it was the only
 * There are UI classes for widgets (e.g. pushbuttons, checkboxes, listviews), so I didn't have to reinvent the wheel.
 * It was cross-platform, which was convenient in case the school's computer operating system is different.
 
-{% image "assets/sfml-is-not-cute.jpg", "SFML is not cute.", "w-45" %}
+{% image "assets/sfml-is-not-cute.jpg", "w-45", "SFML is not cute." %}
 
 {% alert "success" %}
 If there was one thing I learned, it was to understand the problem first, research the appropriate tools, and *then* start developing the solution. I wasted maybe two to four weeks coding a good GUI with SFML and scratching my head.
@@ -66,7 +66,7 @@ A better alternative was to use MySQL or Microsoft SQL Server, which is designed
 
 How does MySQL and SQL Server connect with multiple clients across the network? This is something you'll have to ask the experts. :D
 
-{% image "assets/netwhat.jpg", "Net-what?", "w-45" %}
+{% image "assets/netwhat.jpg", "w-45", "Net-what?" %}
 
 #### Sidenote on Version Control
 When undertaking *any* project, it is crucial to have flexibility. A version control system offers this.
@@ -90,7 +90,7 @@ As mentioned before, there are three groups of users: vendors, students, and adm
 
 This is what the design for the vendor interface looks like:
 
-{% image "assets/vendor-order.jpg", "Vendor ordering UI.", "w-85" %}
+{% image "assets/vendor-order.jpg", "w-85", "Vendor ordering UI." %}
 
 Giant buttons on the left to select their customers' orders. A list of selected items on the right. And some buttons down below.
 
@@ -115,13 +115,13 @@ But these are not very interesting.
 
 Admins, of course, have a more powerful role. These peeps can view *and* **update** student's balances (but the actual flows are pretty boring TBH). (Unfortunately I did not save any screenshots of the GUI, and I'm not bothered to redownload Qt just to build the app once. >.>)
 
-{% image "~/assets/img/memes/unlimited-power.jpg", "Unnnnnlliiiimmiiitted pooower!.", "w-55" %}
+{% image "~/assets/img/memes/unlimited-power.jpg", "w-55", "Unnnnnlliiiimmiiitted pooower!." %}
 
 Students have the most ***exciting*** user flow of all.
 
 {% images %}
-{% image "assets/standby.jpg", "Standby UI, before scanning." %}
-{% image "assets/standby-scanned.jpg", "Standby UI, after scanning." %}
+{% image "assets/standby.jpg", "", "Standby UI, before scanning." %}
+{% image "assets/standby-scanned.jpg", "", "Standby UI, after scanning." %}
 {% endimages %}
 
 And since they have an exciting flow, I'll describe it for fun:
