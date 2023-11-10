@@ -97,7 +97,7 @@ module.exports = function () {
     analytics: {
       // Pick your poison.
       // google: "G-7TQ4WV0LMK",
-      cloudflare: '4491652eec8c41b69bcbf42ccb3f08f6',
+      cloudflare: '52d99b3d385b4c9a98ac8ad109a95a2a',
     },
     id: {
       // Unique identifiers and instances.
