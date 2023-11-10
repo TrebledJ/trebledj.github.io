@@ -1,6 +1,7 @@
 ---
 title: Software Engineering
 tag: software-engineering
+redirect_from: [/tags/se]
 ---
 
 The process of designing and constructing software. Sounds simple? It's not.

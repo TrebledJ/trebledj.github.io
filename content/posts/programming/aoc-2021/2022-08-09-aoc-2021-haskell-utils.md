@@ -5,7 +5,7 @@ updated: "2022-08-09"
 tags:
   - aoc
   - haskell
-  - fp
+  - functional
 thumbnail_src: assets/recycle-hs-utils.jpg
 useMath: true
 related:
