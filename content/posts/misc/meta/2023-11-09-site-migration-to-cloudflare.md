@@ -35,7 +35,7 @@ The [previous meta update](/posts/site-migration-to-eleventy) was dated February
 	- Lazy Loading (iframes, images, disqus) - May
 	- Images (responsiveness, etc.) - May
 	- JS/CSS Minification - September
-	- Migrate from MathJax to KaTeX - November (earlier this week!)
+	- Migrate from MathJax to KaTeX - November
 	- Better Browser Caching for Assets - Now!
 - Under the Hood
 	- Link Checking (with [Lychee](https://github.com/lycheeverse/lychee); so that you won't encounter broken links 😉) - June
