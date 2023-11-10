@@ -1,24 +1,9 @@
 const csp = require('./csp');
 
+const multiline = text => text.trim().replace(/^[ \t]+/gm, '');
+
 module.exports = function () {
   const email = 'trebledjjj@gmail.com';
-
-  const banner = {
-    enabled: true,
-    sticky: true,
-    closeButton: true,
-    scope: 'session', // Possible values: 'session', 'local', ''.
-    // bgColor: 'primary', // Any Bootstrap `bg-` values.
-    // fgColor: 'black', // Any Bootstrap `text-` values.
-    icon: 'rocket fa-bounce',
-    icon_style: '--fa-animation-delay: 5s; --fa-animation-duration: 3s',
-    /* eslint-disable max-len */
-    content: `
-      Welcome to the new *trebledj\\.me* site!
-      Check out what's new: <a class="text-white" href="/posts/site-migration-to-cloudflare">***Site Updates and Migration***</a>.
-      `.trim().replace(/^[ \t]+/gm, ''),
-    /* eslint-enable max-len */
-  };
 
   return {
     title: "TrebledJ's Pages",
@@ -34,12 +19,19 @@ module.exports = function () {
       email,
       logo: 'profile-icon.jpg',
       /* eslint-disable max-len */
-      bio: `
+      bio: multiline(`
       Hi! (｡＾ ᴗ＾)ﾉ
-      I'm passionate in many things, from [software engineering](/tags/software-engineering) to [music](/tags/music).
-      I like to solve problems, learn new things, and pass it on through teaching.
-      In my spare time, I enjoy taking walks, [composing music](/tags/composition), [playing the occasional CTF](/tags/ctf), and [reflecting on life](/tags/faith).
-      `.trim().replace(/^[ \t]+/gm, ''),
+      I'm Johnathan, a passionate problem-solver, amateur [music composer](https://trebledj.me/tags/composition),
+      and [software engineer](https://trebledj.me/tags/software-engineering).
+      I enjoy teaching others and thrive on learning new things.
+      When not immersed in [programming](https://trebledj.me/tags/programming), I can be found taking walks, [reflecting on life](https://trebledj.me/tags/faith), 
+      and occasionally indulging in [CTF challenges](https://trebledj.me/tags/ctf).
+
+      Lately, I've been diving deeper into penetration testing and working on a [variations on a theme](https://en.wikipedia.org/wiki/Variation_(music)).
+
+      When it comes to personal preferences, I have an affinity for the sleek allure of dark mode.
+      And yes, I must confess, I'm a fan of the ~~controversial~~ delightful combination of pineapple on pizza.
+      `),
       /* eslint-enable max-len */
     },
     navpages: [
@@ -65,17 +57,22 @@ module.exports = function () {
       // To disable lightbox, comment out the corresponding plugin in plugins.js.
       enabled: process.env.ENABLE_LIGHTBOX,
     },
-    banner,
-    // banner: {
-    //   enabled: false,
-    //   sticky: true,
-    //   closeButton: true,
-    //   // scope: 'session', // Possible values: 'session', 'local', ''.
-    //   // bgColor: 'primary', // Any Bootstrap `bg-` values.
-    //   // fgColor: 'black', // Any Bootstrap `text-` values.
-    //   icon: 'rocket',
-    //   content: 'Hello world!',
-    // },
+    banner: {
+      enabled: true,
+      sticky: true,
+      closeButton: true,
+      scope: 'session', // Possible values: 'session', 'local', ''.
+      // bgColor: 'primary', // Any Bootstrap `bg-` values.
+      // fgColor: 'black', // Any Bootstrap `text-` values.
+      icon: 'rocket fa-bounce',
+      icon_style: '--fa-animation-delay: 5s; --fa-animation-duration: 3s',
+      /* eslint-disable max-len */
+      content: multiline(`
+        Welcome to the new *trebledj\\.me* site!
+        Check out what's new: <a class="text-white" href="/posts/site-migration-to-cloudflare">***Site Updates and Migration***</a>.
+        `),
+      /* eslint-enable max-len */
+    },
     typewrite: {
       strings:
         [
