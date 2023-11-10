@@ -5,6 +5,9 @@
     size: 1,
     alias: "redirect",
     before: function (data) {
+      if (process.env.ENVIRONMENT === 'fast')
+        return [];
+
       return data.reduce((redirects, page) => {
         if (Array.isArray(page.data.redirect_from)) {
           for (let url of page.data.redirect_from) {
