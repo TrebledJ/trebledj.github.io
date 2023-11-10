@@ -6,8 +6,6 @@ tags:
   - writeup
   - web
 thumbnail_src: assets/ogle-ogle-cloudflare-pages.jpg
-related:
-    tags: [meta]
 ---
 
 This is my second meta post on site development... and a lot has changed! In this post, I'll walk through some changes on the site, along with my assessment and decision-making process on migrating to Cloudflare.

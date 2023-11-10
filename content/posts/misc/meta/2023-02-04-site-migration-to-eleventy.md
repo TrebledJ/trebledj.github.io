@@ -5,11 +5,10 @@ updated: '2023-03-09'
 tags:
   - meta
   - writeup
+  - programming
   - web
   - js
 thumbnail_src: assets/ogle-ogle-eleventy.jpg
-related:
-    tags: [meta]
 ---
 
 This post contains a brief explanation of this site’s migration and improvement over the last week.
