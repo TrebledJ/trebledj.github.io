@@ -120,11 +120,11 @@ One way around this is to use **cache busting**. The idea is to use a different 
 
 By caching static assets for a longer duration, we speed up subsequent page loads. And as a result, our Lighthouse Performance metric improves! (ceteris paribus)
 
-### Sweet Server-Side Spectacles
+## Sweet Server-Side Spectacles
 
 As you may notice, GitHub Pages sorely lacks server-side customisations, focusing solely on the front-end experience. Let's talk about analytics.
 
-#### Analytics
+### Analytics
 
 {% alert "warning" %}
 Although Cloudflare Pages provides integrated server-side analytics, they are underwhelmingly rudimentary. Detailed analytics (e.g. who visit what page when) are [stashed behind a paywall](https://developers.cloudflare.com/analytics/faq/web-analytics/#can-i-see-server-side-analytics-by-url). So in theory, server-side analytics are great! In practice? 🤑🤑🤑.
@@ -136,7 +136,7 @@ However, with client-side, the browser needs to load a separate script, adding t
 
 GitHub Pages currently doesn't plan to support server-side analytics ([discussion](https://github.com/orgs/community/discussions/31474)). Cloudflare Pages does, but 💩🤑. It has a privacy-focused client-side solution though.
 
-#### Serverless
+### Serverless
 
 Serverless is—lightly put—the hip and modern version of backends.^[Yes, "serverless" is a misnomer; ultimately, there are servers in the background. But the idea is that servers are abstracted away from the programmer.] Instead of having to deal with servers, load balancing, etc., we can focus on the functionality. Serverless lends itself well to the [JAMstack](https://jamstack.org/what-is-jamstack/) (JavaScript + APIs + Markup) approach to writing web apps.
 
@@ -144,7 +144,7 @@ Use cases include: dynamic websites, backend APIs, web apps, scheduled tasks, bu
 
 One reason for moving off GitHub Pages is to prepare for backend needs. I don't have an immediate use for serverless features yet; but if I do write web apps in the future, I wouldn't mind having a platform at the ready.
 
-### Domain Stuff
+## Domain Stuff
 
 Several reasons why I switched from `trebledj.github.io` to `trebledj.me`:
 
