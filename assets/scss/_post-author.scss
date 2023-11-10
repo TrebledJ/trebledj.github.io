@@ -2,8 +2,11 @@
     position: relative;
 }
 
-i.social-icon,
-i.social-icon-img {
+a:has(> i.social-icon) {
+    background-image: none;
+}
+
+i.social-icon {
     color: var(--main-text-color) !important;
     font-size: 18px;
     width: 30px;
