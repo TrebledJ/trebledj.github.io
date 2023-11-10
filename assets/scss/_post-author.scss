@@ -2,14 +2,11 @@
     position: relative;
 }
 
-.social-icon-container {
-}
-
 i.social-icon,
 i.social-icon-img {
     color: var(--main-text-color) !important;
     font-size: 18px;
-    width: 25px;
+    width: 30px;
     padding: 2px;
     margin: 2px;
 
@@ -23,11 +20,6 @@ i.social-icon-img {
     color: var(--main-text-color) !important;
     font-size: 12px;
     line-height: $line-height-compact;
-
-    &:hover,
-    &:active {
-        color: var(--link-hover-color) !important;
-    }
 }
 
 .social-item-list {

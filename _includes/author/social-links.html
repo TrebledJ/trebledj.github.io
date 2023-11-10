@@ -1,16 +1,20 @@
 <ul class="social-item-list hidden">
     {% for item in site.social %}
         <li>
-            <a href="{{item.link}}" class="d-flex align-items-center">
-                <div class="d-flex align-items-center">
+            <div class="d-flex align-items-center">
+                <a href="{{item.link}}">
                     {% if item.icon %}
                         <i class="social-icon {{item.icon}}" {% if item.color %}style="color:{{item.color}} !important;"{% endif %}></i>
                     {% else %}
                         <i class="social-icon-img d-flex align-items-center"><img src="{{item.img}}" alt="" loading="lazy" decoding="async"/></i>
                     {% endif %}
-                </div>
-                <span class="social-link ms-1">{{item.name}}</span>
-            </a>
+                </a>
+                <a href="{{item.link}}">
+                    <span class="social-link">
+                        {{item.name}}
+                    </span>
+                </a>
+            </div>
         </li>
     {% endfor %}
 </ul>
