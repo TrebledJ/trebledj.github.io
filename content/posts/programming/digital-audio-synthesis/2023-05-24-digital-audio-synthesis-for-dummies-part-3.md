@@ -382,7 +382,7 @@ while (1) {
 
 The results? As expected, artefacts (nefarious little glitches) invade our signal, since our buffer is updated during DMA transfer. This may result in [unpleasant clicks from our speaker](/posts/digital-audio-synthesis-for-dummies-part-1#clicks).
 
-{% image "assets/osc-sine-440-glitch.jpg", "w-65", "Artefacts distort the signal, resulting in occasionally clips and sound defects." %}
+{% image "assets/osc-sine-440-glitch.jpg", "w-65", "Artefacts distort the signal, resulting in occasional clips and sound defects." %}
 
 <sup>Prep, wait, start, repeat. Artefacts distort the signal from time to time.</sup>
 {.caption}
