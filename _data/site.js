@@ -61,7 +61,7 @@ module.exports = function () {
       enabled: true,
       sticky: true,
       closeButton: true,
-      scope: 'session', // Possible values: 'session', 'local', ''.
+      scope: 'local', // Possible values: 'session', 'local', ''.
       // bgColor: 'primary', // Any Bootstrap `bg-` values.
       // fgColor: 'black', // Any Bootstrap `text-` values.
       icon: 'rocket fa-bounce',
