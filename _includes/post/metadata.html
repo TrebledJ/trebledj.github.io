@@ -19,7 +19,7 @@
     <div class="d-flex flex-row align-items-center">
         {% block post_metadata_updated %}
             {% set updatedDate = lastContentCommit | maxDate(updated) %}
-            {% if updatedDate and updatedDate != page.date %}
+            {% if updatedDate and (updatedDate | date) != (page.date | date) %}
                 <span class="post-updated-date-icon">
                     <i class="fa fa-calendar post-meta-icon me-1"></i>
                 </span>
