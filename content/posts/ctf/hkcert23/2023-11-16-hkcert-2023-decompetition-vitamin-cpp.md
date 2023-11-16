@@ -1,6 +1,6 @@
 ---
 title: "HKCERT CTF 2023 – Decompetition: Vitamin C++"
-excerpt: A beginner-friendly writeup to reverse-engineering C++. Years of shenanigans condensed!
+excerpt: A beginner-friendly writeup to reverse-engineering C++. Years of complex shenanigans condensed!
 tags:
   - reverse
   - cpp
@@ -202,7 +202,7 @@ I'll leave the first two functions as an exercise for the reader. :)
 `mix()` seems to be a total oddball, as tries don't usually have such a function.
 
 {% image "assets/trienode-mix.png", "", "Ghidra decompilation of the TrieNode::mix function." %}
-
+<sup>Ghidra decompilation of `TrieNode::mix()`.</sup>{.caption}
 
 {% details "`TrieNode::mix`: Possible Solution" %}
 ```cpp
@@ -461,9 +461,11 @@ We're still short of our target though. Some diff lines stand out:
 -  call    _ZSt3getILm0EKcP8TrieNodeERNSt13tuple_elementIXT_ESt4pairIT0_T1_EE4typeERS7_
 +  call    _ZSt3getILm0EKcP8TrieNodeERKNSt13tuple_elementIXT_ESt4pairIT0_T1_EE4typeERKS7_
 ```
-<sup>Extracted diff lines. Red (-) indicates lines which are in our compiled program, but not in the target program. Vice versa for green (+) lines.</sup>{.caption}
+<sup>Extracted diff lines. Red (-) indicates extra lines in our program. Green (+) indicates missing lines.</sup>{.caption}
 
 1. Looks like we declared 16-bytes of extra stack variables.
+	- Local variables are stored on the stack, which allocates memory by a simple `sub` instruction.
+	- Larger subtraction = more stack memory allocated.
 2. It also looks like we called the wrong overload. The mangled names roughly translate to:
 	```diff-cpp
 	// simplified for readability
