@@ -201,6 +201,9 @@ I'll leave the first two functions as an exercise for the reader. :)
 
 `mix()` seems to be a total oddball, as tries don't usually have such a function.
 
+{% image "assets/trienode-mix.png", "", "Ghidra decompilation of the TrieNode::mix function." %}
+
+
 {% details "`TrieNode::mix`: Possible Solution" %}
 ```cpp
 void mix(char cmix)
@@ -209,8 +212,9 @@ void mix(char cmix)
 
 	// For each edge...
 	for (auto it = this->next_node.begin(); it != this->next_node.end(); ++it) {
-		char ch = std::get<0>(*it);
-		TrieNode* node = std::get<1>(*it);
+		auto pair = *it;
+		char ch = std::get<0>(pair);
+		TrieNode* node = std::get<1>(pair);
 		// ...update the character.
 		new_map[ch ^ cmix] = node;
 	}
@@ -221,8 +225,9 @@ void mix(char cmix)
 
 	// Recurse into child nodes with the same xor key.
 	for (auto it = this->next_node.begin(); it != this->next_node.end(); ++it) {
-		char ch = std::get<0>(*it);
-		TrieNode* node = std::get<1>(*it);
+		auto pair = *it;
+		char ch = std::get<0>(pair);
+		TrieNode* node = std::get<1>(pair);
 		node->mix(cmix);
 	}
 }
@@ -230,8 +235,8 @@ void mix(char cmix)
 
 Now if you run this through the compiler diff, it should respond with some lines:
 
-```diff
--  call    _ZSt3getILm0EKcP8TrieNodeEONSt13tuple_elementIXT_ESt4pairIT0_T1_EE4typeEOS7_
+```diff-cpp
+-  call    _ZSt3getILm0EKcP8TrieNodeERNSt13tuple_elementIXT_ESt4pairIT0_T1_EE4typeERS7_
 +  call    _ZSt3getILm0EKcP8TrieNodeERKNSt13tuple_elementIXT_ESt4pairIT0_T1_EE4typeERKS7_
 ```
 
@@ -408,21 +413,14 @@ Our code is compiled with C++17—what an oddly specific standard!
 
 One cool feature introduced by this standard is **structured bindings**, which is as close as we can get to Python iterable unpacking.
 
-Before (in `mix`):
-```cpp
-for (auto it = next.begin(); it != next.end(); ++it) {
-	char ch = std::get<0>(*it);
-	TrieNode* node = std::get<1>(*it);
-	new_map[ch ^ cmix] = node;
-}
-```
-
-After:
-```cpp
-for (auto it = next.begin(); it != next.end(); ++it) {
-	auto [ch, node] = *it;
-	new_map[ch ^ cmix] = node;
-}
+```diff-cpp
+  for (auto it = next_node.begin(); it != next_node.end(); ++it) {
+-     auto pair = *it;
+-     char ch = std::get<0>(pair);
+-     TrieNode* node = std::get<1>(pair);
++     auto [ch, node] = *it;
+      new_map[ch ^ cmix] = node;
+  }
 ```
 
 By dereferencing `it`, we get key-value pairs which are then bound (unpacked) to `ch` and `node`.
@@ -451,35 +449,42 @@ N.B. With optimisations, these indicators would be less obvious. Thankfully the 
 
 ### On Const Ref
 
-We're still short of our target though. These two diff lines stand out:
+We're still short of our target though. Some diff lines stand out:
 
 ```diff-cpp
--  call    _ZSt3getILm0EKcP8TrieNodeEONSt13tuple_elementIXT_ESt4pairIT0_T1_EE4typeEOS7_
+   // Extra stack variables!
+-  sub     rsp, 0xc8
+-  mov     [rbp-0xc8], rdi
++  sub     rsp, 0xb8
++  mov     [rbp-0xb8], rdi
+   // Calling the wrong overload!
+-  call    _ZSt3getILm0EKcP8TrieNodeERNSt13tuple_elementIXT_ESt4pairIT0_T1_EE4typeERS7_
 +  call    _ZSt3getILm0EKcP8TrieNodeERKNSt13tuple_elementIXT_ESt4pairIT0_T1_EE4typeERKS7_
 ```
+<sup>Extracted diff lines. Red (-) indicates lines which are in our compiled program, but not in the target program. Vice versa for green (+) lines.</sup>{.caption}
 
-This translates roughly to:
+1. Looks like we declared 16-bytes of extra stack variables.
+2. It also looks like we called the wrong overload. The mangled names roughly translate to:
+	```diff-cpp
+	// simplified for readability
+	- std::get<0>(std::pair<char, TrieNode*>&)
+    + std::get<0>(std::pair<char, TrieNode*> const&)
+	```
 
-<!-- 
-_ZSt3getILm0EKcP8TrieNodeERNSt13tuple_elementIXT_ESt4pairIT0_T1_EE4typeERS7_
-_ZSt3getILm0EKcP8TrieNodeERKNSt13tuple_elementIXT_ESt4pairIT0_T1_EE4typeERKS7_
-_ZSt3getILm0EKcP8TrieNodeEONSt13tuple_elementIXT_ESt4pairIT0_T1_EE4typeEOS7_
-_ZSt3getILm0EKcP8TrieNodeEOKNSt13tuple_elementIXT_ESt4pairIT0_T1_EE4typeEOKS7_
- -->
+We can fix both these issues by qualifying our binding as `const&`.
 
 ```diff-cpp
-// simplified for readability
-- std::get<0>(std::pair<char const, TrieNode*>&&)
-+ std::get<0>(std::pair<char const, TrieNode*> const&)
+  for (auto it = next_node.begin(); it != next_node.end(); ++it) {
+-     auto [ch, node] = *it;
++     const auto& [ch, node] = *it;
+      new_map[ch ^ cmix] = node;
+  }
 ```
 
-The difference is a mere `const&`, which we can fix by qualifying our binding appropriately.
+With `auto`, our binding was creating new `char` and `TrieNode*` copies. (Hence, the extra 16 bytes.) With `const auto&`, we take a constant reference.
 
-```cpp
-const auto& [ch, node] = *it;
-```
-
-When declaring variables or bindings, the difference between `auto` and `const auto&` is the former creates a *copy*, the latter takes a *constant reference*. Constant: meaning we're only reading the value and not modifying the original. Reference: meaning we *refer* to the original objects instead of copying them.
+- Constant: meaning we only *read* the value. No modifications.
+- Reference: meaning we *refer* (point) to the original objects instead of copying them.
 
 This is good practice for readability and performance (imagine copying a 64-byte struct each iteration 🤮).
 
@@ -488,20 +493,14 @@ This is good practice for readability and performance (imagine copying a 64-byte
 The astute may notice the above can be refactored slightly with the help of range-based `for`-loops. These were introduced in C++11, and are like Python `for`-`in` loops, but less powerful.
 
 {% details "Example" %}
-Before (in `mix`):
-```cpp
-for (auto it = next.begin(); it != next.end(); ++it) {
-	const auto& [ch, node] = *it;
-	new_map[ch ^ cmix] = node;
-}
+```diff-cpp
+- for (auto it = next_node.begin(); it != next_node.end(); ++it) {
+-     const auto& [ch, node] = *it;
++ for (const auto& [ch, node] : next_node) {
+      new_map[ch ^ cmix] = node;
+  }
 ```
 
-After:
-```cpp
-for (const auto& [ch, node] : next) {
-	new_map[ch ^ cmix] = node;
-}
-```
 {% enddetails %}
 
 In fact, range-based `for`-loops are syntactic sugar for the plain loops we all know and love.
