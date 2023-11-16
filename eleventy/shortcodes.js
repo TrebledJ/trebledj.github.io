@@ -52,14 +52,16 @@ module.exports = function (eleventyConfig) {
 
   const escapeHtml = unsafe => (
     unsafe
-      .replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;')
+      .replaceAll('&', '&amp;')
+      // .replaceAll('<', '&lt;').replaceAll('>', '&gt;')
       .replaceAll('"', '&quot;')
       .replaceAll("'", '&#039;')
   );
 
-  eleventyConfig.addShortcode('abbr', (term, expansion) => (
-    `<abbr data-bs-placement="top" data-bs-toggle="tooltip" title="${escapeHtml(expansion)}">${term}</abbr>`
-  ));
+  eleventyConfig.addShortcode('abbr', (term, expansion) => {
+    const md = eleventyConfig.getFilter('mdInline');
+    return `<abbr data-bs-placement="top" data-bs-toggle="tooltip" title="${escapeHtml(md(expansion))}">${term}</abbr>`;
+  });
 
   eleventyConfig.addShortcode('tag', (text, tag) => {
     tag ??= text;

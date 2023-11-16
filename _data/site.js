@@ -4,11 +4,15 @@ const multiline = text => text.trim().replace(/^[ \t]+/gm, '');
 
 module.exports = function () {
   const email = 'trebledjjj@gmail.com';
+  const domain = {
+    production: 'trebledj.me',
+    preview: 'preview.trebledj.pages.dev',
+  }[process.env.DOMAIN_ENVIRONMENT || 'production'];
 
   return {
     title: "TrebledJ's Pages",
     subtitle: 'Dabbling in code, music, math, and memes since conception.',
-    url: 'https://trebledj.me',
+    url: `https://${domain}`,
     baseurl: '',
     language: 'en',
     description: "TrebledJ's personal blog on programming, music, and memes.",
@@ -36,10 +40,10 @@ module.exports = function () {
     },
     navpages: [
       { text: 'Home', url: '/' },
+      { text: 'About', url: '/about' },
       { text: 'Posts', url: '/posts' },
       { text: 'Projects', url: '/tags/project' },
       { text: 'Music', url: '/music' },
-      { text: 'About', url: '/about' },
     ],
     search: {
       // https://fontawesome.com/icons/
@@ -61,6 +65,7 @@ module.exports = function () {
       enabled: true,
       sticky: true,
       closeButton: true,
+      disableInPosts: true, // Don't detract from content.
       scope: 'local', // Possible values: 'session', 'local', ''.
       // bgColor: 'primary', // Any Bootstrap `bg-` values.
       // fgColor: 'black', // Any Bootstrap `text-` values.

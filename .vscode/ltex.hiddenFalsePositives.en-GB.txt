@@ -44,3 +44,9 @@
 {"rule":"INTERJECTIONS_PUNCTUATION","sentence":"^\\QOh look!\\E$"}
 {"rule":"ENGLISH_WORD_REPEAT_RULE","sentence":"^\\QSo just be aware that \"Christianity\" is an umbrella term for many many beliefs.^by-name-christian\\E$"}
 {"rule":"A_INFINITIVE","sentence":"^\\QThe solve is rather simple and fits within 25 lines (including comments!).\\E$"}
+{"rule":"EN_GB_SIMPLE_REPLACE","sentence":"^\\QNotice:\nIn \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q, a bunch of garbage strings are inserted into the trie.\\E$"}
+{"rule":"MORFOLOGIK_RULE_EN_GB","sentence":"^\\QUse Godbolt's Compiler Explorer to play around with disassembly output.\\E$"}
+{"rule":"EN_A_VS_AN","sentence":"^\\Qinstead of an \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q in a certain place?\\E$"}
+{"rule":"ATD_VERBS_TO_COLLOCATION","sentence":"^\\QThis seems to be a total oddball, as tries don't usually have such a function.\\E$"}
+{"rule":"MORFOLOGIK_RULE_EN_GB","sentence":"^\\Q{% details \"TrieNode Constructor: Possible Solution\" %}\\E$"}
+{"rule":"DT_JJ_NO_NOUN","sentence":"^\\QProbably a boolean.\\E$"}

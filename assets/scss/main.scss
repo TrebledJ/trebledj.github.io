@@ -87,8 +87,10 @@ $carousel-transition: transform 2s ease, opacity 1.5s ease-out .5s;
     pointer-events: all;
     font-size: 12px;
 
-    background-image: linear-gradient(to right, color-mix(in srgb, rgba(var(--link-color-rgb), 1) 60%, var(--main-background-color) 30%), transparent) !important;
-    background-size: 0 auto;
+    &, &:focus {
+        background-image: linear-gradient(to right, color-mix(in srgb, rgba(var(--link-color-rgb), 1) 60%, var(--main-background-color) 30%), transparent) !important;
+        background-size: 0 auto;
+    }
     background-position: 0 100%;
     background-repeat: no-repeat;
     transform: all $transition-duration linear;

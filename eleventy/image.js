@@ -222,6 +222,7 @@ module.exports = function (eleventyConfig) {
   // https://www.11ty.dev/docs/plugins/image/
   eleventyConfig.addAsyncShortcode('image', async function (src, classes, title, alt) {
     const file = resolveResourcePath(this.page, src);
+    // title = title ? eleventyConfig.getFilter('mdInline')(title) : title;
     return imageShortcode(file, classes, { title, alt: alt ?? title, loading: 'lazy' });
   });
 

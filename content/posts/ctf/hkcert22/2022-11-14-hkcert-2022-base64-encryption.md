@@ -4,7 +4,8 @@ excerpt: Frequency analysis with a touch of heuristics.
 tags:
   - cryptography
   - python
-thumbnail_src: ~/assets/img/posts/thumbnail/hkcert22-thumbnail.jpg
+  - hkcert-ctf
+thumbnail_src: assets/hkcert22-thumbnail.jpg
 useMath: true
 ---
 

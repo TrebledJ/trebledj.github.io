@@ -8,7 +8,7 @@ tags:
 thumbnail_src: assets/ogle-ogle-cloudflare-pages.jpg
 ---
 
-This is my second meta post on site development... and a lot has changed! In this post, I'll walk through some changes on the site, along with my assessment and decision-making process on migrating to Cloudflare.
+This is my second meta post on site development... and a lot has changed! In this post, I'll walk through some changes on the site, along with my decision-making process on migrating to Cloudflare, and some general tips in case you're going through something similar.
 
 But first things first. Meme.
 
@@ -26,7 +26,7 @@ The [previous meta update](/posts/site-migration-to-eleventy) was dated February
 	- Cooler UI(?) - Continuous
 	- Modern Web Elements ⚡️: Alerts, Details, Spoiler - May-September
 	- Image Lightbox (you can now click on images to *expand* them) - October
-	- Link Anchors 🔗 (hover the mouse to the left of headings) - October
+	- Link Anchors 🔗 (try hovering your mouse to the left of headings) - October
 - Content
 	- [Home Page](/) (uses carousels to cycle through content) - May
 	- [Privacy Policy](/privacy-policy) - September
@@ -72,7 +72,7 @@ See a more thorough comparison on [Bejamas](https://bejamas.io/compare/github-pa
 
 [1]: https://docs.github.com/en/billing/managing-billing-for-github-actions/about-billing-for-github-actions
 
-[^reg]: Note: Domain registration is done through a *DNS registrar* and usually requires money (~10USD/year). (You might be able to get cheap deals on NameCheap, sans security features.) Cloudflare and Netlify are DNS registrars. GitHub isn't. This isn't really a big deal. But it's more seamless to deploy your site and set a custom domain on the same service where you register your domain.
+[^reg]: Note: Domain registration is done through a *DNS registrar* and usually requires money. (You might be able to get cheap/free deals on NameCheap, sans security features.) Cloudflare and Netlify are DNS registrars. GitHub isn't. This isn't really a big deal. But it's more seamless to deploy your site and set a custom domain on the same service where you register your domain.
 [^notadealbreaker]: This isn't really a deal breaker, but included for posterity.
 
 Although Netlify and Cloudflare Pages are both strong contenders, I eventually chose Cloudflare Pages for its decent domain name price, analytics, its security-centric view, and a whole swath of other features.
@@ -134,7 +134,7 @@ Although Cloudflare Pages provides integrated server-side analytics, they are un
 
 However, with client-side, the browser needs to load a separate script, adding to the network bandwidth. Some scripts are lightweight and simple. Some scripts may load a bunch of other scripts which hinder performance, whilst causing a privacy/compliance nightmare (looking at you Google Analytics).
 
-GitHub Pages currently doesn't plan to support server-side analytics ([discussion](https://github.com/orgs/community/discussions/31474)). Cloudflare Pages does, but 💩🤑. It has a privacy-focused client-side solution though.
+GitHub Pages currently doesn't plan to support server-side analytics ([discussion](https://github.com/orgs/community/discussions/31474)). Cloudflare Pages does, but 💩🤑. Guess I'll just stick with the privacy-focused client-side solution.
 
 ### Serverless
 
@@ -161,13 +161,13 @@ A few tips here.
 	- `.org` for organisations.
 	- `.dev`, `.codes` for programmers/software-likes.
 	- There are thousands of TLDs to choose from, but I decided to choose `.me` because I'm not a corporate entity.
-2. **Check [domain name history](https://www.nameboy.com/how-to-check-domain-history/) for bad/good reputation.** It's possible the domain you're after was once a phishing site, but taken down. In any case, it's a good idea to check if the site garnered bad rep in the past.
+2. **Check [domain name history](https://www.nameboy.com/how-to-check-domain-history/) for bad/good reputation.** It's possible the domain you're after was once a phishing site, but taken down. In any case, it's a good idea to check if the site garnered bad rep in the past as it may impact SEO.
 3. **Avoid less reputable domains and [TLDs associated with cybercrime](https://circleid.com/posts/20230117-the-highest-threat-tlds-part-2).**
 	- .date, .quest, .bid are among TLDs with the highest rate of malicious activity.
 	- Even TLDs like .xyz—although used by companies like Alphabet Inc. (abc.xyz)—has garnered enough bad reputation.
 	
 	{% details "xyz: an unwise choice" %}
-	Originally, I wanted to use `trebledj.xyz`. I liked .xyz because it represents who I am—I like to do different things.
+	Originally, I wanted to use `trebledj.xyz`. I really liked .xyz.
 
 	Turns out many firewalls block .xyz, rendering the site inaccessible to many. Not only that, but [emails or links may be silently dropped](https://www.spotvirtual.com/blog/the-perils-of-an-xyz-domain). The .xyz domain is just too far gone... firewalls and the general public have lost faith in .xyz. And for this reason, I switched out of .xyz.
 
@@ -195,4 +195,4 @@ Some more work still needs to be done, though.
 - Setting up 301 redirects from the old site, for convenient redirect and migration of site traffic. ([guide](https://finisky.github.io/en/migrate-github-pages-by-301-redirects/); done!)
 - Implement longer browser cache TTL + cache busting.
 
-But other than that I'm quite happy with Cloudflare's ease-of-use, despite its day-long downtime (which coincidentally occurred when I was setting up Cloudflare Pages). Setting up the hook to GitHub repos and deploy pipelines were pretty straightforward.
+But other than that I'm quite happy with Cloudflare's ease-of-use, despite its [day-long downtime](https://blog.cloudflare.com/post-mortem-on-cloudflare-control-plane-and-analytics-outage/) (which coincidentally occurred when I was setting up Cloudflare Pages). Setting up the hook to GitHub repos and deploy pipelines were pretty straightforward.

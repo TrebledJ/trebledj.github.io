@@ -1,31 +1,33 @@
 {% if site.banner.enabled %}
-    <div id="banner" class="bg-{{ site.banner.bgColor | default('primary') }} collapsed">
-        <div id="banner-content" class="text-{{ site.banner.fgColor | default('white') }}">
-            <i class="fas fa-{{site.banner.icon}} fs-4 me-2" style="{{ site.banner.icon_style }}"></i>
-            <span>{{site.banner.content | mdInline | safe}}</span>
+    {% set isPost = (r/posts\/.+/g).test(page.url) %}
+    {% if site.banner.disableInPosts and not isPost %}
+        <div id="banner" class="bg-{{ site.banner.bgColor | default('primary') }} collapsed">
+            <div id="banner-content" class="text-{{ site.banner.fgColor | default('white') }}">
+                <i class="fas fa-{{site.banner.icon}} fs-4 me-2" style="{{ site.banner.icon_style }}"></i>
+                <span>{{site.banner.content | mdInline | safe}}</span>
+            </div>
+            {% if site.banner.closeButton %}
+                <button aria-label="Close" class="btn-close" type="button"></button>
+            {% endif %}
         </div>
-        {% if site.banner.closeButton %}
-            <button aria-label="Close" class="btn-close" type="button"></button>
-        {% endif %}
-    </div>
 
-    {# Critical: check if banner was already closed. #}
-    <script>
-        {% if site.banner.scope %}
-        const open = !{{site.banner.scope + 'Storage' | safe}}.getItem('bannerClosed');
-        {% else %}
-        const open = true;
-        {% endif %}
-        if (open)
-        {
-            const banner = document.getElementById('banner');
-            banner
-                .parentElement
-                .classList
-                .remove('d-none');
-            banner
-                .classList
-                .remove('collapsed');
-        }
-    </script>
+        {# Critical: check if banner was already closed. #}
+        <script>
+            {% if site.banner.scope %}
+                const open = !{{site.banner.scope + 'Storage' | safe}}.getItem('bannerClosed');
+            {% else %}
+                const open = true;
+            {% endif %}
+            if (open) {
+                const banner = document.getElementById('banner');
+                banner
+                    .parentElement
+                    .classList
+                    .remove('d-none');
+                banner
+                    .classList
+                    .remove('collapsed');
+            }
+        </script>
+    {% endif %}
 {% endif %}

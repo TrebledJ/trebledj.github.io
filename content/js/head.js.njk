@@ -108,8 +108,10 @@ $(() => {
   {% endif %}
 
   {% if site.banner.enabled %}
-  var r = document.querySelector(':root');
-  r.style.setProperty('--header-extra', $('#banner').outerHeight() + 'px');
+  const r = document.querySelector(':root');
+  const bannerHeight = $('#banner').outerHeight();
+  if (bannerHeight)
+    r.style.setProperty('--header-extra', bannerHeight + 'px');
   
   $('#banner .btn-close').on('click', () => {
     {% if site.banner.scope %}

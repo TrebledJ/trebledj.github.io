@@ -6,6 +6,7 @@ tags:
   - pwn
   - reverse
   - learning
+  - cheatsheet
 thumbnail_src: assets/gef.png
 related:
     tags: [ctf]

@@ -9,4 +9,4 @@ Education. A necessary foundation and institution for learning in today's age bu
 
 Posts mainly involve tools for learners or for learning.
 
-See also: {% tag "tutorial" %}.
+See also: {% tag "tutorial" %}, {% tag "cheatsheet" %}.

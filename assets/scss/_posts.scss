@@ -29,7 +29,7 @@
 
 .post-desc {
     font-family: var(--default-font);
-    font-size: 1rem;
+    font-size: 1.2rem;
     font-weight: 600;
     margin-bottom: 0.5rem;
 }
@@ -110,12 +110,6 @@
         & + ul, & + ol {
             margin-top: $space-base;
         }
-    }
-
-    // Lazy-render elements.
-    pre[class*=language-],
-    details {
-        content-visibility: auto;
     }
 
     &,
