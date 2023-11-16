@@ -58,10 +58,9 @@ module.exports = function (eleventyConfig) {
       .replaceAll("'", '&#039;')
   );
 
-  eleventyConfig.addShortcode('abbr', (term, expansion) => {
-    const md = eleventyConfig.getFilter('mdInline');
-    return `<abbr data-bs-placement="top" data-bs-toggle="tooltip" title="${escapeHtml(md(expansion))}">${term}</abbr>`;
-  });
+  eleventyConfig.addShortcode('abbr', (term, expansion) => (
+    `<abbr data-bs-placement="top" data-bs-toggle="tooltip" title="${escapeHtml(expansion)}">${term}</abbr>`
+  ));
 
   eleventyConfig.addShortcode('tag', (text, tag) => {
     tag ??= text;

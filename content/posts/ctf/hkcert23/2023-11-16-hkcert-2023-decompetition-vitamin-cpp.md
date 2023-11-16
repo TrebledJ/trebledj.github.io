@@ -131,7 +131,7 @@ There are two parts to reversing a class:
 		- Is it set to only 0 or 1? And used in conditions? Probably a boolean.
 		- Is it compared to other numbers a lot and used near loops? Probably an integer representing size.
 	- By peeking at the `TrieNode` constructor, we figure out that `TrieNode` has three members.
-		1. An {% abbr "unordered map (aka hashmap) from chars to nodes", "`std::unordered_map<char, TrieNode*>`" %}. Size: 0x38 bytes. As this resembles the edges of the node, we'll call variable this `next_node`.
+		1. An {% abbr "unordered map (aka hashmap) from chars to nodes", "std::unordered_map<char, TrieNode*>" %}. Size: 0x38 bytes. As this resembles the edges of the node, we'll call variable this `next_node`.
 		2. A bool. Size: 1 byte.
 		3. Another bool. Size: 1 byte.
 
