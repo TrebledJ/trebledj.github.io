@@ -55,7 +55,7 @@ Thus, to get the flag, we need to:
 
 The first step is the most challenging. Even if we have a decent understanding of the program, we still need the source code to continue.
 
-Let’s start by analysing what we’re given and how we can approach the problem.
+Let’s start by analysing what we’re given and how we can approach the problem. We'll aim for 100% similarity, but go step by step.
 
 ## Analysis
 
@@ -584,7 +584,7 @@ Also, who doesn't like a good hidden pun?
 
 (Files not embedded, as they're a bit big.)
 
-- [rev.cpp: Fully reversed source.](https://gist.github.com/TrebledJ/43792e01ceed0c94f35717c453d2e4da#file-rev-cpp)
+- [rev.cpp: Fully reversed (100% similarity) source.](https://gist.github.com/TrebledJ/43792e01ceed0c94f35717c453d2e4da#file-rev-cpp)
 - [solve.py: For cracking the internal flag.](https://gist.github.com/TrebledJ/43792e01ceed0c94f35717c453d2e4da#file-solve-py)
 - [send.py: Driver program to test rev.cpp.](https://gist.github.com/TrebledJ/43792e01ceed0c94f35717c453d2e4da#file-send-py)
 
