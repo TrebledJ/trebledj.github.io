@@ -200,7 +200,7 @@ I'll leave the first two functions as an exercise for the reader. :)
 
 `mix()` seems to be a total oddball, as tries don't usually have such a function.
 
-{% image "assets/trienode-mix.png", "", "Ghidra decompilation of the TrieNode::mix function." %}
+{% image "assets/trienode-mix.jpg", "", "Ghidra decompilation of the TrieNode::mix function." %}
 <sup>Ghidra decompilation of `TrieNode::mix()`.</sup>{.caption}
 
 {% details "`TrieNode::mix`: Possible Solution" %}
@@ -429,7 +429,7 @@ By dereferencing `it`, we get key-value pairs which are then bound (unpacked) to
 {% alert "success" %}
 One telltale sign of structured bindings is in the second loop of `TrieNode::mix()`. Notice how the first item of the pair (`ch = std::get<0>(pair);`) is read but never used.
 
-{% image "assets/char-not-used.png", "", "The first pair element (a character) is not used." %}
+{% image "assets/char-not-used.jpg", "", "The first pair element (a character) is not used." %}
 
 <sup>Ghidra decompilation of the second loop of `mix()`. Notice how `ch` is never used. (You can also verify this by inspecting the disassembly!)</sup>{.caption}
 
@@ -577,7 +577,7 @@ There was lots of tuning was involved; but the various tricks employed above net
 
 Also, who doesn't like a good hidden pun?
 
-{% image "assets/nice-trie-graph.png", "w-60", "An error message saying 'nice trie(graph)' embedded in the sanity checker." %}
+{% image "assets/nice-trie-graph.jpg", "w-60", "An error message saying 'nice trie(graph)' embedded in the sanity checker." %}
 
 
 ## Solve Sauce
