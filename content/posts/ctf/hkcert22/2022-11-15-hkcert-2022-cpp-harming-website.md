@@ -4,7 +4,6 @@ excerpt: A harming website? Hope it doesn't harm my sleep!
 tags:
   - reverse
   - cpp
-  - hkcert-ctf
 thumbnail_src: assets/hkcert22-thumbnail.jpg
 ---
 

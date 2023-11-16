@@ -6,7 +6,6 @@ tags:
   - cpp
   - tutorial
   - programming
-  - hkcert-ctf
 thumbnail_src: assets/vitamin-cpp.webp
 thumbnail_banner: true
 ---
