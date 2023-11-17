@@ -164,7 +164,7 @@ int main() {}
 {% details "On Struct vs. Class" %}
 Structs are public by default. Classes are private by default.
 
-Public/private are concepts which fall under {% abbr "OOP", "object-oriented programming" %} [enapsulation](https://www.sumologic.com/glossary/encapsulation). With encapsulation, we bundle data and only expose certain API methods for public users, whilst hiding implementation. With a cyber analogy, this is not unlike exposing certain ports (HTTP/HTTPS) on a machine, and protecting other ports with a firewall.
+Public/private are concepts which fall under {% abbr "OOP", "object-oriented programming" %} ***encapsulation***. With encapsulation, we bundle data and only expose certain API methods for public users, whilst hiding implementation. With a cyber analogy, this is not unlike exposing certain ports (HTTP/HTTPS) on a machine, and protecting other ports with a firewall.
 
 I chose to use `struct` here because I'm lazy and want to make members public.^[In proper engineering, we would hide implementation behind `private`, so `next_node` should be a private variable.] Some of them are accessed directly in `main` anyway.
 
