@@ -244,9 +244,19 @@ We'll look at this in more detail later.
 {% enddetails %}
 {% endalert %}
 
+### On Various Features
+
+Common, but worth mentioning.
+
+{% details "On `auto`" %}
+`auto` is a special keyword introduced in C++11 typically used to tell the compiler: "figure out this type for me". Except in the case of structured bindings, it's often multiple types.
+
+It has seen wide adoption and growing support in the standard (more features for `auto` are added each standard). Now (C++20) it's used widely in template parameters and lambda parameters.
+{% enddetails %}
+
 {% details "On Iterators" %}
 
-The previous code examples made use of *iterators*. These are commonly used by the {% abbr "STL", "Standard Template Library" %}, providing a generic interface for iterating over containers.
+The previous solution for `mix()` made use of *iterators*. These are commonly used by the {% abbr "STL", "Standard Template Library" %}, providing a generic interface for iterating over containers.
 
 ```cpp
 for (auto it = container.begin(); it != container.end(); ++it) {
@@ -265,12 +275,16 @@ The reason is time complexity.
 - `std::map` is a binary search tree, giving `O(log n)` search time on average (where `n` is the number of entries).
 - `std::unordered_map` is a hashmap, giving `O(1)` search time on average. Takes more space though.
 
+As the value of n increases, the number of operations required for `std::map` will increase at a faster rate compared to `std::unordered_map`. This is because `std::unordered_map` is not affected by the number of entries in the map (except in the case of rehashing); hence, the constant time complexity, `O(1)`.
+
 In the interest of performance, it's typical to opt for `unordered_map`.
+
+But in our case, since a node only has 256 possible edges (`char`), the potential speed boost is limited, and the choice between `map` and `unordered_map` is debatable. ¯\\\_(ツ)\_/¯
 {% enddetails %}
 
 ### On Scoping
 
-An object in C++ has a **constructor** and **destructor**, functions that run at the beginning and end of its lifetime. The object's ***scope*** affects the placement of its constructor and destructor.^[This also depends on optimisations, and whether the object contains any other classes. In some cases, constructors or destructors may be inlined or(optimised) vanquished completely.]
+An object in C++ has a **constructor** and **destructor**, functions that run at the beginning and end of its lifetime. The object's ***scope*** affects the placement of its constructor and destructor.^[This also depends on optimisations, and whether the object contains any other classes. In some cases, constructors or destructors may be inlined or optimised away.]
 
 Let’s look at some examples:
 
@@ -298,7 +312,7 @@ int main()
 
 Do you C the difference?
 
-Things become complicated when we further consider [lvalues and rvalues](https://www.internalpointers.com/post/understanding-meaning-lvalues-and-rvalues-c) (think: variables and temporaries). But that's out of scope for this post.
+Things become complicated when we further consider [lvalues and rvalues](https://www.internalpointers.com/post/understanding-meaning-lvalues-and-rvalues-c) (think: variables and temporaries).
 
 {% details "Complicated Examples" %}
 
@@ -312,9 +326,11 @@ int main()
 	std::string s; // <- string constructor called
 	if (1) {
 		// do stuff
+		// ---
 		// <- string copy constructor called (copies s to a temporary)
 		print(s);
 		// <- string destructor (of temporary string) called
+		// ---
 		// do more stuff
 	}
 }   // <- string destructor called
@@ -344,14 +360,17 @@ int main()
 
 I don't intend to cover every single possible case. But yes, C++ is *extremely* nuanced in this regard. (See also: [classes](https://cplusplus.com/doc/tutorial/classes/), [special member functions](https://cplusplus.com/doc/tutorial/classes2/), [move semantics](https://stackoverflow.com/q/3106110/10239789).)
 
-The point is **this is all reflected at assembly level**. We can get a good understanding where the object is declared by *paying attention to their constructors and destructors*.
+{% alert "success" %}
+The point is: **object scoping is all reflected at assembly level**. We can get a good understanding where an object is declared by *paying attention to its constructors and destructors*.
 
-This applies to classes, such as STL containers. Primitives (int, char, pointers) don't have constructors/destructors, so it’s trickier to tell where they're instantiated. With heavy optimisations, it’s even trickier.
+This applies to classes, such as STL containers. Primitives (int, char, pointers) don't have constructors/destructors, so it’s trickier to tell where they're instantiated. It's even trickier with heavy optimisations.
+{% endalert %}
+
 
 {% alert "info" %}
 **Exercise**: Reverse the `main` function.
 
-- Use the position constructors and destructors to determine the scope of various strings.
+- Use the position of constructors and destructors to determine the scope of various strings.
 - Beware backslashes in the inserted strings.
 
 {% details "Possible Solution" %}
@@ -422,16 +441,14 @@ One cool feature introduced by this standard is **structured bindings**, which i
   }
 ```
 
-By dereferencing `it`, we get key-value pairs which are then bound (unpacked) to `ch` and `node`.
-
-`auto`? It's a special keyword usually used to tell the compiler: "figure out this type for me". Except in the case of structured bindings, it's multiple types.
+Since `it` is an iterator over key-value pairs, we can dereference, then bind (unpack) the pair to `ch` and `node`.
 
 {% alert "success" %}
-One telltale sign of structured bindings is in the second loop of `TrieNode::mix()`. Notice how the first item of the pair (`ch = std::get<0>(pair);`) is read but never used.
+One telltale sign of structured bindings is in the second loop of `TrieNode::mix()`. Notice how the first item of the pair (`ch2 = std::get<0>(pair);`) is read but never used.
 
 {% image "assets/char-not-used.jpg", "", "The first pair element (a character) is not used." %}
 
-<sup>Ghidra decompilation of the second loop of `mix()`. Notice how `ch` is never used. (You can also verify this by inspecting the disassembly!)</sup>{.caption}
+<sup>Ghidra decompilation of the second loop of `mix()`. Notice how `ch2` is never used. (You can also verify this by inspecting the disassembly!)</sup>{.caption}
 
 Another giveaway is that `std::get` is rarely used to access map pairs, unless in generic code. The idiomatic ways are:
 - `std::pair` members (through iterator): `it->first`, `it->second` 
@@ -460,7 +477,7 @@ We're still short of our target though. Some diff lines stand out:
 -  call    _ZSt3getILm0EKcP8TrieNodeERNSt13tuple_elementIXT_ESt4pairIT0_T1_EE4typeERS7_
 +  call    _ZSt3getILm0EKcP8TrieNodeERKNSt13tuple_elementIXT_ESt4pairIT0_T1_EE4typeERKS7_
 ```
-<sup>Extracted diff lines. Red (-) indicates extra lines in our program. Green (+) indicates missing lines.</sup>{.caption}
+<sup>Extracted diff lines from compiler.py output. Red (-) indicates extra lines in our program. Green (+) indicates missing lines.</sup>{.caption}
 
 1. Looks like we declared 16-bytes of extra stack variables.
 	- Local variables are stored on the stack, which allocates memory by a simple `sub` instruction.
@@ -484,10 +501,10 @@ We can fix both these issues by qualifying our binding as `const&`.
 
 With `auto`, our binding was creating new `char` and `TrieNode*` copies. (Hence, the extra 16 bytes.) With `const auto&`, we take a constant reference.
 
-- Constant: meaning we only *read* the value. No modifications.
-- Reference: meaning we *refer* (point) to the original objects instead of copying them.
+- Constant: meaning we only *read* the value. No modifications. This fixes the second issue.
+- Reference: meaning we *refer* (point) to the original objects instead of copying them. This fixes the first issue.
 
-This is good practice for readability and performance (imagine copying a 64-byte struct each iteration 🤮).
+Using const-refs is good practice for maintainability and performance (imagine copying a 64-byte struct each iteration 🤮).
 
 ### On For-Range Loops
 
@@ -530,7 +547,12 @@ translates to...
 
 ### On Control Flow
 
-Decompiler output may not accurately present the control flow of the original program. Changing (1) the order of control flow, and (2) which statement is used may lead us closer to 100%.
+Decompiler output may not accurately present the control flow of the original program. Changing: 
+
+1. the order of control flow, and
+2. which statement is used
+
+may lead us closer to 100%.
 
 Would it make more sense to use a !!`switch`!! instead of an `if` in a certain place?
 
@@ -538,8 +560,8 @@ Would it make more sense to use a !!`switch`!! instead of an `if` in a certain p
 
 - Use Godbolt’s **Compiler Explorer** to play around with disassembly output. It helps with analysing small details such as variable declaration.
   - Remember to set x86-64 gcc 12.2 and `-std=c++17`.
-- Two good sources for standard library documentation are *cppreference* (high quality) and *cplusplus.com* (beginner-friendly).
-- Version control is a godsend.
+- Two good sources for standard library documentation are [*cppreference*](https://en.cppreference.com/w/) (high quality) and [*cplusplus.com*](https://cplusplus.com/reference/) (beginner-friendly).
+- Version control is incredibly useful for tracking incremental changes.
 
 ## The Infernal Flag
 
@@ -562,20 +584,20 @@ After getting ≥ 97.5% similarity and finding the internal flag, submit both to
 
 ## Final Remarks
 
-I'm sure the chal is called Vitamin C++ because it's designed to make us (mentally) stronger. Every time you trie harder, you strengthen a neuron. Indeed, we covered quite a lot of concepts today:
+I'm sure the chal is called Vitamin C++ because it's designed to make us (mentally) stronger. Every time you trie harder, you lose a brain cell but strengthen a neuron. Indeed, we covered quite a lot of concepts today:
 
-- Language Features: structured bindings, for-range loops, const-ref.
+- Language Features: `auto`, structured bindings, for-range loops, const-ref.
 - Library Features: iterators, unordered map.
 - Unordered map is preferred for performance in lookup.
-- Scoping affects position of constructors/destructors. (Very good takeaway for C++ reversing.)
+- Scoping (and lvalue-rvalueness) affects position of constructors/destructors. (Very good takeaway for C++ reversing.)
 - Ghidra is pretty powerful.
 - C++ is fun.
 
-There was lots of tuning was involved; but the various tricks employed above netted us a first blood, so I can't complain. Despite a couple lines of janky const-uncorrect code, it was a nice challenge.
+Lots of tuning was involved; but the various tricks employed above netted us a first blood, so I can't complain. Despite a couple lines of janky const-uncorrect code, it was a nice challenge.
 
 {% image "assets/where-mah-const-correctness.jpg", "w-60", "Hello?! Const-correctness? Ever heard of it?" %}
 
-Also, who doesn't like a good hidden pun?
+Also, who doesn't like a good pun hidden in a challenge?
 
 {% image "assets/nice-trie-graph.jpg", "w-60", "An error message saying 'nice trie(graph)' embedded in the sanity checker." %}
 
