@@ -19,13 +19,13 @@ related:
 We collect the following personal data:
 
 * **Technical Data**: IP address, Browser type, Device type, Referrer data.
-	* This is collected by GitHub Pages, Cloudflare Web Analytics, Disqus, and jsDelivr.
+	* This is collected by Cloudflare Pages, Cloudflare Web Analytics, Disqus, and jsDelivr.
 	* {{ site.title }} will only access such data in aggregate forms, and thus won't (be able to) link this data back to you.
 	* This data is provided automatically by your browser when you load a web page. A VPN may be used to suppress or hide such data.
 * **Cookies**
 	* This is data associated with you and may be used by third-party services to track you.
-	* Used by Disqus and SoundCloud embeds.
-	* Cloudflare and jsDelivr claim they don't use cookies. ([Cloudflare](https://www.cloudflare.com/web-analytics/#:~:text=Cloudflare%20Web%20Analytics%20does%20not,the%20purpose%20of%20displaying%20analytics.); [jsDelivr](https://www.jsdelivr.com/terms/privacy-policy-jsdelivr-net#:~:text=We%20do%20not%20use%20cookies))
+	* Used by Cloudflare Pages^[Cloudflare Pages may use cookies to combat spam and malicious activity. See their [cookie policy](https://www.cloudflare.com/cookie-policy/).], Disqus, and SoundCloud embeds.
+	* Cloudflare *Analytics* and jsDelivr claim they don't use cookies. ([Cloudflare](https://www.cloudflare.com/web-analytics/#:~:text=Cloudflare%20Web%20Analytics%20does%20not,the%20purpose%20of%20displaying%20analytics.); [jsDelivr](https://www.jsdelivr.com/terms/privacy-policy-jsdelivr-net#:~:text=We%20do%20not%20use%20cookies))
 * **Identity Data**: Name, Email address.
 	* In the [Contact Form][contact-form], these are **optional** fields. You have the discretion to *not* fill in those fields.
 	* In Disqus guest commenting, these are **mandatory** fields.
@@ -62,19 +62,19 @@ For your reference, here is a collection of third-party services we use and thei
 
 {% table %}
 
-| Service         | Purpose      | Technical Data[^u] | Identity Data[^u] | Cookies[^u] | Privacy Policy                     |
-|-----------------|--------------|:------------------:|:-----------------:|:-----------:|------------------------------------|
-| GitHub Pages    | Hosting      |         ✓          |                   |             | [Link][pghp]                       |
-| jsDelivr        | CDN          |         ✓          |                   |             | [Link][pjsd]                       |
-| Cloudflare      | Analytics    |         ✓          |                   |             | [Link][pclf] (*End Users*)         |
-| Disqus[^disqus] | Comments     |         ✓          |      ✓[^dq1]      |      ✓      | [Link][pdqs]                       |
-| SoundCloud      | Music Embeds |         ✓          |      ✓[^sc1]      |      ✓      | [Link][pscl] (*SoundCloud Widget*) |
-| Getform         | Forms        |         ✓          |      ✓[^gf1]      |   ✓[^gf2]   | [Link][pgfm] (*Respondents*)       |
+| Service         | Purpose                 | Technical Data[^u] | Identity Data[^u] |     Cookies[^u]     | Privacy Policy                     |
+|-----------------|-------------------------|:------------------:|:-----------------:|:-------------------:|------------------------------------|
+| Cloudflare      | Hosting, CDN, Analytics |         ✓          |                   | √ (See [CP][cclf].) | [Link][pclf] (*End Users*)         |
+| jsDelivr        | CDN                     |         ✓          |                   |                     | [Link][pjsd]                       |
+| Disqus[^disqus] | Comments                |         ✓          |      ✓[^dq1]      |          ✓          | [Link][pdqs]                       |
+| SoundCloud      | Music Embeds            |         ✓          |      ✓[^sc1]      |          ✓          | [Link][pscl] (*SoundCloud Widget*) |
+| Getform         | Forms                   |         ✓          |      ✓[^gf1]      |       ✓[^gf2]       | [Link][pgfm] (*Respondents*)       |
 
 {% endtable %}
 
 [pghp]: https://docs.github.com/en/pages/getting-started-with-github-pages/about-github-pages#data-collection
 [pjsd]: https://www.jsdelivr.com/terms/privacy-policy-jsdelivr-net
+[cclf]: https://www.cloudflare.com/cookie-policy/
 [pclf]: https://www.cloudflare.com/privacypolicy
 [pdqs]: https://help.disqus.com/en/articles/1717103-disqus-privacy-policy
 [pscl]: https://soundcloud.com/pages/privacy
@@ -86,7 +86,7 @@ For your reference, here is a collection of third-party services we use and thei
 [^gf1]: Applicable if filled in.
 [^gf2]: Applicable when redirected to getform.io.
 
-- GitHub Pages, jsDelivr, and Cloudflare are present on all HTML pages of our site.
+- Cloudflare and jsDelivr are present on all HTML pages of our site.
 - Disqus will only be loaded on posts which allow comments, and when the page is scrolled down far enough.
 - SoundCloud embeds are only loaded on relevant pages (music pages, home page, etc.).
 - Getform only applies to pages containing forms (e.g. the contact form).
