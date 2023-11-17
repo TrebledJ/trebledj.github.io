@@ -173,10 +173,10 @@ module.exports = function (eleventyConfig) {
   }
 
   eleventyConfig.addFilter('maxDate', (a, b) => {
-    if (!b)
-      return a;
-    const da = new Date(a); const
-      db = new Date(b);
+    if (!a || !b)
+      return a ?? b;
+    const da = new Date(a);
+    const db = new Date(b);
     return da > db ? da : db;
   });
 };

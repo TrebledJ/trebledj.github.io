@@ -6,9 +6,10 @@ module.exports = {
 
   eleventyComputed: {
     permalink: data => (data.draft && !process.env.BUILD_DRAFTS ? false : data.permalink),
-    hasDate: data => {
+    hasPostedDate: data => {
       const file = data.page.inputPath.split('/').pop();
-      return file.match(/^\d+-\d+-\d.*/) || data.date;
+      return !!(file.match(/^\d+-\d+-\d+/) || data.date);
     },
+    hasUpdatedDate: _ => true,
   },
 };

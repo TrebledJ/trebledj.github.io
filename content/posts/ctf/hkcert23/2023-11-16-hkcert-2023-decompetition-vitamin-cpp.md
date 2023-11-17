@@ -261,7 +261,7 @@ We'll look at this in more detail later.
 Common, but worth mentioning.
 
 {% details "On `auto`" %}
-`auto` is a special keyword introduced in C++11 typically used to tell the compiler: "figure out this type for me". Except in the case of structured bindings, it's often multiple types.
+`auto` is a special keyword introduced in C++11 typically used to tell the compiler: "figure out this type for me".
 
 It has seen wide adoption and growing support in the standard (more features for `auto` are added each standard). Now (C++20) it's used widely in template parameters and lambda parameters.
 {% enddetails %}
@@ -602,6 +602,7 @@ I'm sure the chal is called Vitamin C++ because it's designed to make us (mental
 - Library Features: iterators, unordered map.
 - Unordered map is preferred for performance in lookup.
 - Scoping (and lvalue-rvalueness) affects position of constructors/destructors. (Very good takeaway for C++ reversing.)
+- Pay attention to groups of `sub` and `mov` instructions to check if we declared too little/many stack variables.
 - Ghidra is pretty powerful.
 - C++ is fun.
 
