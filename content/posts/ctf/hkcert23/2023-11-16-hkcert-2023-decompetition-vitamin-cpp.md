@@ -142,12 +142,12 @@ using namespace std; // FYI, this is discouraged in actual software engineering:
 
 void wordhash(string s) {} // return type: ???
 
-class TrieNode {
+struct TrieNode {
+	// Members.
 	unordered_map<char, TrieNode*> next_node;
 	bool bool1;
 	bool bool2;
 
-public:
 	// Constructor.
 	// Initialise variables. `next_node`'s constructor is called automatically.
 	TrieNode() : bool1{false}, bool2{false} {}   // Member Initialiser List: https://cplusplus.com/articles/1vbCpfjN/
@@ -160,6 +160,18 @@ public:
 int main() {}
 ```
 <sup>Return types are unknown, because most compilers don't mangle them with the name. For now, they've been substituted with `void` and left as an exercise for the reader.</sup>{.caption}
+
+{% details "On Struct vs. Class" %}
+Structs are public by default. Classes are private by default.
+
+Public/private are concepts which fall under {% abbr "OOP", "object-oriented programming" %} [enapsulation](https://www.sumologic.com/glossary/encapsulation). With encapsulation, we bundle data and only expose certain API methods for public users, whilst hiding implementation. With a cyber analogy, this is not unlike exposing certain ports (HTTP/HTTPS) on a machine, and protecting other ports with a firewall.
+
+I chose to use `struct` here because I'm lazy and want to make members public.^[In proper engineering, we would hide implementation behind `private`, so `next_node` should be a private variable.] Some of them are accessed directly in `main` anyway.
+
+Read more:
+- [StackOverflow: Struct vs. Class](https://stackoverflow.com/a/36917400/10239789).
+- [Encapsulation](https://www.softwaretestinghelp.com/encapsulation-in-cpp/)
+{% enddetails %}
 
 
 ## Reversing
