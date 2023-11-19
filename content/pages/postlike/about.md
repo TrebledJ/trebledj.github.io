@@ -4,11 +4,11 @@ title: "About"
 
 ## About Me
 
-I'm passionate in many things, from [software engineering](/tags/software-engineering) to [music](/tags/music). I like to solve problems, learn new things, and pass it on through teaching. In my spare time, I enjoy taking walks, [composing music](/tags/composition), [playing the occasional CTF](/tags/ctf), and [reflecting on life](/tags/faith).
+{{site.author.bio}}
 
 <!-- TODO: images? -->
 
-In case pronouns matter to you (they don't to me), I identify as ~~an attack helicopter~~ he/him.
+In case pronouns matter to you, I identify as ~~an attack helicopter~~ he/him.
 
 ### Hobbies and Interests
 
@@ -91,6 +91,14 @@ Things I'm interested in exploring:
 - {% tag "Reverse", "reverse" %} Engineering
 - Hack the Box (online CTFs + community)
 
+#### Board Games
+
+I'm a big fan of board games. You may sometimes find me on Board Game Arena playing some of my favourite games:
+
+- Race for the Galaxy
+- Hanabi
+- And more!
+
 ### Collaborating
 
 I have several project ideas, the scope of which is beyond my capacity given my full-time work. (In other words, I can’t complete them alone within a year.) I’ve kept the description generic for certain reasons.
@@ -106,7 +114,7 @@ If you’re interested in collaborating, hit me up.
 
 ## About This Website
 
-This website breathed its first breath in summer of 2022. I had a bit of free time and I wanted to a place to share thoughts, music, etc. I also wanted it to be customisable; most {% abbr "CMSs", "content management systems (e.g. Weebly, Wix, Medium)" %} are limited and force my hands to be tied.
+This website breathed its first breath in summer of 2022. I had a bit of free time and wanted a place to share thoughts, music, etc. I also wanted it to be customisable; most {% abbr "CMSs", "content management systems (e.g. Weebly, Wix, Medium)" %} are limited and force my hands to be tied.
 
 You may see some posts "published" prior to 2022. Those are usually older projects or experiences which I've included for posterity. The dates there typically indicate the date the experience ended.
 
@@ -117,7 +125,7 @@ You may see some posts "published" prior to 2022. Those are usually older projec
 
 #### Why did you choose to study mathematics in uni?
 
-I didn't know what I wanted to do career-wise. So I looked for a subject I liked which also provided broad career options. With mathematics, one can go into actuary, statistics, finance, physics, machine learning, data science, software engineering, research, and more.
+I didn't know what I wanted to do career-wise. So I looked for a subject I liked which also provided broad career options. With mathematics, one can go into actuary, statistics, finance, physics, machine learning, data science, software engineering, research, teaching, and more.
 
 #### Why is your LinkedIn so... professionally unprofessional?
 
@@ -155,7 +163,7 @@ If we look at the hard evidence, it becomes clear the Bible isn't merely a story
 
 Ultimately, my faith is both personal and communal. It forms a part of my identity, whilst being shared with others. And this communal, spiritual component bridges people together, even if we're from completely different backgrounds or hate each other's guts.
 
-This isn't much of an apologia and perhaps I've left you with more questions than answers. But hopefully this rationale is sufficient for now.
+This isn't much of an apologia, and perhaps I've left you with more questions than answers. But hopefully this rationale is sufficient for now. I'm open to (reasonable) questions.
 
 ### This Website
 

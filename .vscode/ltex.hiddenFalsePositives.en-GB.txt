@@ -51,3 +51,4 @@
 {"rule":"MORFOLOGIK_RULE_EN_GB","sentence":"^\\Q{% details \"TrieNode Constructor: Possible Solution\" %}\\E$"}
 {"rule":"DT_JJ_NO_NOUN","sentence":"^\\QProbably a boolean.\\E$"}
 {"rule":"ATD_VERBS_TO_COLLOCATION","sentence":"^\\Q\\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q seems to be a total oddball, as tries don't usually have such a function.\\E$"}
+{"rule":"MORFOLOGIK_RULE_EN_GB","sentence":"^\\QRace for the Galaxy\nHanabi\nAnd more!\\E$"}
