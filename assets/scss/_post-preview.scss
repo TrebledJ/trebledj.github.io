@@ -61,7 +61,7 @@
 
     .post-posted-date::after {
         content: "|";
-        margin: 0 0.5rem 0 0.3rem;
+        margin: 0 0.5rem;
         font-size: 1rem;
     }
 
@@ -75,6 +75,7 @@
 
 .post-preview {
     .post-title {
+        margin-top: 0; // In case previews are included in post-body (articles).
         margin-bottom: $space-half;
         font-size: 24px;
         font-weight: 400;
@@ -83,6 +84,10 @@
     .post-summary {
         line-height: $line-height-compact;
         font-size: 14px;
+    }
+
+    .metadata-container {
+        flex-direction: row;
     }
 }
 

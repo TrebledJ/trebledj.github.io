@@ -1,3 +1,4 @@
+{# DON'T FORMAT THIS FILE!!! #}
 {% extends "post/metadata.html" %}
 
 {# Show simplified date. #}
@@ -5,9 +6,8 @@
     <span>
         <i class="fa fa-calendar post-meta-icon me-1"></i>
     </span>
-    <span class="fs-7 post-posted-date">
-        {{ post.page.date | date | safe }}
-    </span>
+    {# DON'T FORMAT!!! #}
+    <span class="fs-7 post-posted-date">{{ post.page.date | date | safe }}</span>
 {% endblock %}
 
 {# Don't show updated date. #}
