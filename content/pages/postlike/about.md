@@ -1,12 +1,12 @@
 ---
-title: "About"
+title: About
 ---
+
+{% from "post/preview.html" import render_post_preview %}
 
 ## About Me
 
 {{site.author.bio}}
-
-<!-- TODO: images? -->
 
 In case pronouns matter to you, I identify as ~~an attack helicopter~~ he/him.
 
@@ -65,6 +65,11 @@ Things I'm interested in exploring:
 
 Huh, that's a lot of M's.
 
+If you ask me, these are some of my favourite self-compositions:
+
+{% set favMusicPosts = collections.postsr | getPostsBySlug(['space-penguin', 'remorse', 'the-breath-of-life']) %}
+<div class="post-preview-list mt-1">{% for post in favMusicPosts %}{{ render_post_preview(post) | nl2br | brSafe | safe }}{% endfor %}</div>
+
 #### Recreational Mathematics/Programming
 
 I enjoy the occasional mathematical/coding challenge. My ears perk up at the mention of:
@@ -93,7 +98,7 @@ Things I'm interested in exploring:
 
 #### Board Games
 
-I'm a big fan of board games. You may sometimes find me on Board Game Arena playing some of my favourite games:
+Ah, board games... one of my favourite pastimes. When I'm bored, you may find me playing the occasional game on Board Game Arena. Some of my favourite games are:
 
 - Race for the Galaxy
 - Hanabi
@@ -118,6 +123,10 @@ This website breathed its first breath in summer of 2022. I had a bit of free ti
 
 You may see some posts "published" prior to 2022. Those are usually older projects or experiences which I've included for posterity. The dates there typically indicate the date the experience ended.
 
+Recent {% tag "site", "meta" %} news:
+
+{% set siteNews = collections.meta | head(3) | reverse %}
+<div class="post-preview-list mt-2">{% for post in siteNews %}{{ render_post_preview(post) | nl2br | brSafe | safe }}{% endfor %}</div>
 
 ## FAQ
 

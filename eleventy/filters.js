@@ -80,7 +80,7 @@ module.exports = function (eleventyConfig) {
 
   // A filter to murder tags and their children brutally with regex. Please don't take this comment seriously.
   eleventyConfig.addFilter('annihilateTags', (html, tags) => {
-    const dumbHTMLRegex = tag => new RegExp(`<${tag}(\\s+\\w+\\s*=\\s*("[^"]*"|'[^']*'))*>.*?</${tag}>`, 'ig');
+    const dumbHTMLRegex = tag => new RegExp(`<${tag}(\\s+\\w+\\s*=\\s*("[^"]*"|'[^']*'))*/?>.*?(</${tag}>)?`, 'ig');
     if (typeof tags === 'string')
       return html.replace(dumbHTMLRegex(tags), '');
     return tags.reduce((acc, x) => acc.replace(dumbHTMLRegex(x), ''), html);
@@ -98,6 +98,8 @@ module.exports = function (eleventyConfig) {
       return $.html();
     });
   }
+
+  eleventyConfig.addFilter('brSafe', content => content.replace(/<br\s*\/?\s*>\s*/gi, ''));
 
   // Get the first `n` elements of a collection.
   eleventyConfig.addFilter('head', (array, n) => {
@@ -127,6 +129,21 @@ module.exports = function (eleventyConfig) {
     (tags ?? []).filter(tag => ['all', 'nav', 'post', 'posts'].indexOf(tag) === -1)
   ));
 
+  eleventyConfig.addFilter('getPostsBySlug', (collection, slugStrOrArray = '') => {
+    let filterPost;
+    if (typeof slugStrOrArray === 'string') {
+      filterPost = (item => slugStrOrArray === item.fileSlug);
+    } else if (Array.isArray(slugStrOrArray)) {
+      filterPost = (item => slugStrOrArray.includes(item.fileSlug));
+    } else {
+      throw new Error(`[getPostsBySlug]: expected string or array, got ${typeof slugStrOrArray}`);
+    }
+    return collection.filter(filterPost);
+  });
+
+  // Data wrapper useful for 11ty render plugin.
+  eleventyConfig.addFilter('wrapData', data => ({ data }));
+
   eleventyConfig.addFilter('getRelatedPosts', nonEmptyContainerSentinel('related posts')(getRelatedPosts));
   eleventyConfig.addFilter('getRelatedTags', nonEmptyContainerSentinel('related tags')(getRelatedTags));
   eleventyConfig.addFilter('getTagsByPrefix', nonEmptyContainerSentinel('related tags by prefix')(getTagsByPrefix));
@@ -148,10 +165,10 @@ module.exports = function (eleventyConfig) {
   });
 
   eleventyConfig.addFilter('markdownify', markdownString => md.render(markdownString));
-  eleventyConfig.addFilter('mdInline', markdownString => md.renderInline(markdownString));
+  eleventyConfig.addFilter('markdownifyInline', markdownString => md.renderInline(markdownString));
 
   eleventyConfig.addFilter('md', eleventyConfig.getFilter('markdownify'));
-  eleventyConfig.addFilter('mdInline', eleventyConfig.getFilter('mdInline'));
+  eleventyConfig.addFilter('mdInline', eleventyConfig.getFilter('markdownifyInline'));
 
   eleventyConfig.addFilter('jsonify', object => JSON.stringify(object));
 
