@@ -1,24 +1,23 @@
-# Sample workflow for building and deploying an Eleventy site to GitHub Pages
+# Sample workflow for building and deploying an Eleventy site to a local site branch (for further workflow automation)
 name: Deploy Eleventy Site to Pages
 
 on:
   # Runs on pushes targeting the default branch
-  # push:
-  #   branches: master
-  #   paths:
-  #     - '**'
-  #     - '!.gitignore'
-  #     - '!*.md'
-  #     - '!LICENSE'
-  #     - '!.eslintignore'
-  #     - '!.eslintrc.yml'
-  #     - '!.github/**'
-  #     - '!.lycheeignore'
-  #     - '!.vscode/**'
-  #     - '!archive/**'
-  #     - '!scripts/**'
-  #     - '!ust/**'
-  workflow_dispatch:
+  push:
+    branches: master
+    paths:
+      - '**'
+      - '!.gitignore'
+      - '!*.md'
+      - '!LICENSE'
+      - '!.eslintignore'
+      - '!.eslintrc.yml'
+      - '!.github/**'
+      - '!.lycheeignore'
+      - '!.vscode/**'
+      - '!archive/**'
+      - '!scripts/**'
+      - '!ust/**'
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -36,7 +35,7 @@ concurrency:
 
 # Environment variables
 env:
-  TARGET_HOST: github
+  
 
 jobs:
   # Build job
@@ -88,7 +87,7 @@ jobs:
         run: ${{ steps.detect-package-manager.outputs.manager }} ${{ steps.detect-package-manager.outputs.command }}
 
       - name: Build
-        run: TARGET_HOST="${{ env.TARGET_HOST }}" ${{ steps.detect-package-manager.outputs.manager }} run prod
+        run: ${{ steps.detect-package-manager.outputs.manager }} run prod
 
       - name: Commit & Push Site Build
         uses: stefanzweifel/git-auto-commit-action@v5
@@ -107,20 +106,20 @@ jobs:
           skip_dirty_check: true
           skip_fetch: true
 
-      - name: Upload Artifact
-        uses: actions/upload-pages-artifact@v2
-        with:
-          path: ./_site
+  #     - name: Upload Artifact
+  #       uses: actions/upload-pages-artifact@v2
+  #       with:
+  #         path: ./_site
 
-  # Deployment job
-  deploy:
-    environment:
-      name: github-pages
-      # url: ${{ steps.deployment.outputs.page_url }}
-      # url: trebledj.github.io
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v2
+  # # Deployment job
+  # deploy:
+  #   environment:
+  #     name: github-pages
+  #     # url: ${{ steps.deployment.outputs.page_url }}
+  #     # url: trebledj.github.io
+  #   runs-on: ubuntu-latest
+  #   needs: build
+  #   steps:
+  #     - name: Deploy to GitHub Pages
+  #       id: deployment
+  #       uses: actions/deploy-pages@v2
