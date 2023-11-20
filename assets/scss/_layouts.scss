@@ -65,7 +65,7 @@
         overflow-y: auto;
         position: sticky;
         max-height: calc(100vh - ($header-height + 2rem) - var(--header-extra));
-        transition: $transition-duration linear;
+        transition: $transition-duration-slow linear;
         transition-property: top, max-height;
     }
 }

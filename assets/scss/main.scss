@@ -202,7 +202,7 @@ $carousel-transition: transform 2s ease, opacity 1.5s ease-out .5s;
     align-items: center;
     overflow: hidden;
 
-    transition: all linear 0.5s;
+    transition: all linear $transition-duration-slow;
 
     .btn-close {
         flex-shrink: 1;
