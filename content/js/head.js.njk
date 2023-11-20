@@ -108,10 +108,10 @@ $(() => {
   {% endif %}
 
   {% if site.banner.enabled %}
-  const r = document.querySelector(':root');
+  const root = document.querySelector(':root');
   const bannerHeight = $('#banner').outerHeight();
   if (bannerHeight)
-    r.style.setProperty('--header-extra', bannerHeight + 'px');
+    root.style.setProperty('--header-extra', bannerHeight + 'px');
   
   $('#banner .btn-close').on('click', () => {
     {% if site.banner.scope %}
@@ -123,6 +123,7 @@ $(() => {
     window.requestAnimationFrame(() => b.addClass('collapsed'));
     setTimeout(() => {
       b.addClass('d-none');
+      root.style.setProperty('--header-extra', '0px');
     }, 600);
   });
   {% endif %}
