@@ -27,6 +27,7 @@ jobs:
         uses: lycheeverse/lychee-action@v1
         with:
           args: --base https://trebledj.me --timeout 60 --no-progress --accept '200,201,202,203,204,403,429' --include-verbatim --exclude-mail --exclude-path _site/404.html --cache --max-cache-age 3d _site
+          format: json
 
       - name: Sanity Check
         if: env.lychee_exit_code != 0
@@ -34,6 +35,12 @@ jobs:
           echo "Lychee Output"
           echo "-------------"
           cat ./lychee/out.md
+        
+      - name: Filter Lychee Output
+        if: env.lychee_exit_code != 0
+        run: |
+          python3 --version
+          # python3 scripts/check_lychee.py ./lychee/out.md
 
       - name: Create Issue From File
         if: env.lychee_exit_code != 0
