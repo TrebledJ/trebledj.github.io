@@ -28,19 +28,20 @@ jobs:
         with:
           args: --base https://trebledj.me --timeout 60 --no-progress --accept '200,201,202,203,204,403,429' --include-verbatim --exclude-mail --exclude-path _site/404.html --cache --max-cache-age 3d _site
           format: json
+          output: ./lychee/results.json
 
       - name: Sanity Check
         if: env.lychee_exit_code != 0
         run: |
           echo "Lychee Output"
           echo "-------------"
-          cat ./lychee/out.md
+          cat ./lychee/results.json
         
       - name: Filter Lychee Output
         if: env.lychee_exit_code != 0
         run: |
           python3 --version
-          # python3 scripts/check_lychee.py ./lychee/out.md
+          # python3 scripts/check_lychee.py ./lychee/results.json ./lychee/report.md
 
       - name: Create Issue From File
         if: env.lychee_exit_code != 0

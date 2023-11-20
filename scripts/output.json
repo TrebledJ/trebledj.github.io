@@ -1,0 +1,204 @@
+{
+  "total": 11583,
+  "successful": 11449,
+  "unknown": 0,
+  "unsupported": 0,
+  "timeouts": 1,
+  "redirects": 0,
+  "excludes": 101,
+  "errors": 32,
+  "cached": 9500,
+  "success_map": {},
+  "fail_map": {
+    "_site/tags/reverse/index.html": [
+      {
+        "url": "https://trebledj.me/img/hkcert22-thumbnail-500w.webp",
+        "status": {
+          "text": "Cached: Error (cached)",
+          "code": 404
+        }
+      },
+      {
+        "url": "https://trebledj.me/img/hkcert22-thumbnail-256w.webp",
+        "status": {
+          "text": "Cached: Error (cached)",
+          "code": 404
+        }
+      }
+    ],
+    "_site/posts/hitcon-2023-the-blade/index.html": [
+      {
+        "url": "https://trebledj.me/img/hkcert22-thumbnail-500w.webp",
+        "status": {
+          "text": "Cached: Error (cached)",
+          "code": 404
+        }
+      },
+      {
+        "url": "https://trebledj.me/img/hkcert22-thumbnail-256w.webp",
+        "status": {
+          "text": "Cached: Error (cached)",
+          "code": 404
+        }
+      }
+    ],
+    "_site/posts/hkcert-2022-base64-encryption/index.html": [
+      {
+        "url": "https://trebledj.me/img/hkcert22-thumbnail-500w.webp",
+        "status": {
+          "text": "Cached: Error (cached)",
+          "code": 404
+        }
+      }
+    ],
+    "_site/tags/ctf/index.html": [
+      {
+        "url": "https://trebledj.me/img/hkcert22-thumbnail-256w.webp",
+        "status": {
+          "text": "Cached: Error (cached)",
+          "code": 404
+        }
+      },
+      {
+        "url": "https://trebledj.me/img/hkcert22-thumbnail-500w.webp",
+        "status": {
+          "text": "Cached: Error (cached)",
+          "code": 404
+        }
+      }
+    ],
+    "_site/tags/python/index.html": [
+      {
+        "url": "https://trebledj.me/img/hkcert22-thumbnail-256w.webp",
+        "status": {
+          "text": "Cached: Error (cached)",
+          "code": 404
+        }
+      },
+      {
+        "url": "https://trebledj.me/img/hkcert22-thumbnail-500w.webp",
+        "status": {
+          "text": "Failed: Network error",
+          "code": 404
+        }
+      }
+    ],
+    "_site/posts/3/index.html": [
+      {
+        "url": "https://trebledj.me/img/hkcert22-thumbnail-500w.webp",
+        "status": {
+          "text": "Cached: Error (cached)",
+          "code": 404
+        }
+      },
+      {
+        "url": "https://trebledj.me/img/hkcert22-thumbnail-256w.webp",
+        "status": {
+          "text": "Cached: Error (cached)",
+          "code": 404
+        }
+      }
+    ],
+    "_site/tags/writeup/index.html": [
+      {
+        "url": "https://trebledj.me/img/hkcert22-thumbnail-256w.webp",
+        "status": {
+          "text": "Cached: Error (cached)",
+          "code": 404
+        }
+      },
+      {
+        "url": "https://trebledj.me/img/hkcert22-thumbnail-500w.webp",
+        "status": {
+          "text": "Cached: Error (cached)",
+          "code": 404
+        }
+      }
+    ],
+    "_site/posts/gdb-cheatsheet/index.html": [
+      {
+        "url": "https://trebledj.me/img/hkcert22-thumbnail-500w.webp",
+        "status": {
+          "text": "Cached: Error (cached)",
+          "code": 404
+        }
+      },
+      {
+        "url": "https://trebledj.me/img/hkcert22-thumbnail-256w.webp",
+        "status": {
+          "text": "Cached: Error (cached)",
+          "code": 404
+        }
+      }
+    ],
+    "_site/tags/cpp/index.html": [
+      {
+        "url": "https://trebledj.me/img/hkcert22-thumbnail-500w.webp",
+        "status": {
+          "text": "Cached: Error (cached)",
+          "code": 404
+        }
+      },
+      {
+        "url": "https://trebledj.me/img/hkcert22-thumbnail-256w.webp",
+        "status": {
+          "text": "Cached: Error (cached)",
+          "code": 404
+        }
+      }
+    ],
+    "_site/tags/cryptography/index.html": [
+      {
+        "url": "https://trebledj.me/img/hkcert22-thumbnail-256w.webp",
+        "status": {
+          "text": "Failed: Network error",
+          "code": 404
+        }
+      },
+      {
+        "url": "https://trebledj.me/img/hkcert22-thumbnail-500w.webp",
+        "status": {
+          "text": "Failed: Network error",
+          "code": 404
+        }
+      }
+    ],
+    "_site/posts/ductf-2023-wrong-signal/index.html": [
+      {
+        "url": "https://trebledj.me/img/hkcert22-thumbnail-256w.webp",
+        "status": {
+          "text": "Cached: Error (cached)",
+          "code": 404
+        }
+      },
+      {
+        "url": "https://trebledj.me/img/hkcert22-thumbnail-500w.webp",
+        "status": {
+          "text": "Cached: Error (cached)",
+          "code": 404
+        }
+      }
+    ],
+    "_site/posts/hkcert-2022-cpp-harming-website/index.html": [
+      {
+        "url": "https://trebledj.me/img/hkcert22-thumbnail-500w.webp",
+        "status": {
+          "text": "Cached: Error (cached)",
+          "code": 404
+        }
+      }
+    ],
+    "_site/posts/digital-audio-synthesis-for-dummies-part-2/index.html": [
+      {
+        "url": "https://www.electronics-tutorials.ws/waveforms/waveforms.html",
+        "status": {
+          "text": "Timeout"
+        }
+      }
+    ]
+  },
+  "suggestion_map": {},
+  "excluded_map": {},
+  "duration_secs": 249,
+  "detailed_stats": false
+}
