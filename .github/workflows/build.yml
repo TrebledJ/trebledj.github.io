@@ -1,7 +1,7 @@
 
-# Build (without deploying) an Eleventy site to a local site branch (for further workflow automation)
+# Build (without deploying) an Eleventy site for CI testing.
 # See deploy.yml for a build + deploy to GitHub Pages workflow.
-name: Build Eleventy Site
+name: Dry Run Build
 
 on:
   # Runs on pushes targeting the default branch

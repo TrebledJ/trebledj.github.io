@@ -3,6 +3,13 @@
 name: Dependabot Reviewer
 
 on: pull_request_target
+# on:
+#   workflow_run:
+#     workflows: [Dry Run Build]
+#     branches:
+#       - 'dependabot/**'
+#     types:
+#       - completed
 
 permissions:
   pull-requests: write
@@ -11,9 +18,11 @@ permissions:
 jobs:
   review-dependabot-pr:
     runs-on: ubuntu-latest
-    if: ${{ github.event.pull_request.user.login == 'dependabot' }}
+    # if: ${{ github.event.pull_request.user.login == 'dependabot[bot]' }}
     steps:
-      - name: Dependabot metadata
+      - name: Sanity Check
+        run: echo ${{ github.event.pull_request.user.login == 'dependabot[bot]' }}
+      - name: Get Dependabot Metadata
         id: dependabot-metadata
         uses: dependabot/fetch-metadata@v1.3.1
       - name: Enable auto-merge for Dependabot PRs

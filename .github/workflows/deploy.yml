@@ -1,26 +1,30 @@
-# Sample workflow for building and deploying an Eleventy site to a local site branch (for further workflow automation)
-name: Deploy Eleventy Site to Pages
+# Workflow for building and deploying an Eleventy site to a local site branch (for further workflow automation)
+name: Deploy Site
 
 on:
   # Runs on pushes targeting the default branch
-  # push:
-  #   branches: master
-  #   paths:
-  #     - '**'
-  #     - '!.gitignore'
-  #     - '!*.md'
-  #     - '!LICENSE'
-  #     - '!.eslintignore'
-  #     - '!.eslintrc.yml'
-  #     - '!.github/**'
-  #     - '!.lycheeignore'
-  #     - '!.vscode/**'
-  #     - '!archive/**'
-  #     - '!scripts/**'
-  #     - '!ust/**'
+  push:
+    branches: master
+    paths:
+      - '**'
+      - '!.gitignore'
+      - '!*.md'
+      - '!LICENSE'
+      - '!.eslintignore'
+      - '!.eslintrc.yml'
+      - '!.github/**'
+      - '!.lycheeignore'
+      - '!.vscode/**'
+      - '!archive/**'
+      - '!scripts/**'
+      - '!ust/**'
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
+
+# Environment variables
+env:
+  deploy-to-ghpages: false       # Set `true` to deploy to GitHub Pages.
 
 # Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
@@ -103,12 +107,14 @@ jobs:
           skip_fetch: true
 
       - name: Upload Artifact
+        if: ${{ env.deploy-to-ghpages }}
         uses: actions/upload-pages-artifact@v2
         with:
           path: ./_site
 
   # Deployment job
   deploy:
+    if: ${{ env.deploy-to-ghpages }}
     environment:
       name: github-pages
       # url: ${{ steps.deployment.outputs.page_url }}
