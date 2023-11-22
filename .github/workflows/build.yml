@@ -1,23 +1,25 @@
-# Sample workflow for building and deploying an Eleventy site to a local site branch (for further workflow automation)
-name: Deploy Eleventy Site to Pages
+
+# Build (without deploying) an Eleventy site to a local site branch (for further workflow automation)
+# See deploy.yml for a build + deploy to GitHub Pages workflow.
+name: Build Eleventy Site
 
 on:
   # Runs on pushes targeting the default branch
-  # push:
-  #   branches: master
-  #   paths:
-  #     - '**'
-  #     - '!.gitignore'
-  #     - '!*.md'
-  #     - '!LICENSE'
-  #     - '!.eslintignore'
-  #     - '!.eslintrc.yml'
-  #     - '!.github/**'
-  #     - '!.lycheeignore'
-  #     - '!.vscode/**'
-  #     - '!archive/**'
-  #     - '!scripts/**'
-  #     - '!ust/**'
+  push:
+    # branches: master
+    paths:
+      - '**'
+      - '!.gitignore'
+      - '!*.md'
+      - '!LICENSE'
+      - '!.eslintignore'
+      - '!.eslintrc.yml'
+      - '!.github/**'
+      - '!.lycheeignore'
+      - '!.vscode/**'
+      - '!archive/**'
+      - '!scripts/**'
+      - '!ust/**'
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -101,21 +103,3 @@ jobs:
           skip_checkout: true
           skip_dirty_check: true
           skip_fetch: true
-
-      - name: Upload Artifact
-        uses: actions/upload-pages-artifact@v2
-        with:
-          path: ./_site
-
-  # Deployment job
-  deploy:
-    environment:
-      name: github-pages
-      # url: ${{ steps.deployment.outputs.page_url }}
-      # url: trebledj.github.io
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v2
