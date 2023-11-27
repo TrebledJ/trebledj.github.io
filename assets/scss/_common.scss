@@ -62,6 +62,10 @@ a[type="button"], a:has(> button) {
     background-image: none;
 }
 
+.no-decoration {
+    background-image: none;
+}
+
 abbr,
 abbr:visited,
 abbr:hover,
