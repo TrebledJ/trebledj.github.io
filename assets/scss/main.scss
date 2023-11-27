@@ -88,7 +88,7 @@ $carousel-transition: transform 2s ease, opacity 1.5s ease-out .5s;
     font-size: 12px;
 
     &, &:focus {
-        background-image: linear-gradient(to right, color-mix(in srgb, rgba(var(--link-color-rgb), 1) 60%, var(--main-background-color) 30%), transparent) !important;
+        background-image: linear-gradient(to right, rgb(var(--link-color-rgb)), transparent) !important;
         background-size: 0 auto;
     }
     background-position: 0 100%;
@@ -112,19 +112,22 @@ $carousel-transition: transform 2s ease, opacity 1.5s ease-out .5s;
     .page-link {
         background-color: var(--main-background-color) !important;
         color: var(--main-text-color) !important;
-        border: $border-width solid var(--border-color) !important;
+        border: $border-width solid;
+        border-color: var(--border-color) !important;
         background-image: none;
     }
 
     .page-item:not(.faded) .page-link {
         &:focus,
         &:hover {
-            border-color: var(--bold-color) !important;
+            border-width: 2px;
+            margin-top: -1px;
         }
     }
 
     .active .page-link {
-        border: $border-width solid var(--bold-color) !important;
+        border-width: 4px !important;
+        margin-top: -2px !important;
     }
 
     @include media-breakpoint-down(sm) {
