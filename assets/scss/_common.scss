@@ -117,6 +117,7 @@ h4,
 h5,
 h6 {
     color: var(--bold-color);
+    --bs-heading-color: var(--bold-color);
     font-family: var(--default-font); // Default.
 }
 

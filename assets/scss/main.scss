@@ -66,6 +66,7 @@ $carousel-transition: transform 2s ease, opacity 1.5s ease-out .5s;
 @import "post-author";
 @import "spinner";
 @import "home";
+@import "music";
 @import "navbar";
 @import "search";
 @import "profile";
@@ -96,7 +97,7 @@ $carousel-transition: transform 2s ease, opacity 1.5s ease-out .5s;
     transform: all $transition-duration linear;
 
     &:hover {
-        color: var(--bold-color) !important;
+        color: var(--contrast-color) !important;
         background-size: 100% auto;
     }
 }

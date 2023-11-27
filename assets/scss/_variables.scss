@@ -54,7 +54,8 @@ html[data-theme="dark"] {
     --medium-background-color: rgb(35, 35, 35);
     --light-background-color: rgb(42, 42, 42);
 
-    --bold-color: rgb(240, 240, 240);
+    --bold-color: rgb(175, 175, 175);
+    --contrast-color: rgb(255, 255, 255);
     --highlight-color: rgb(75, 75, 75);
     --border-color: rgb(58, 57, 60);
 
@@ -72,6 +73,7 @@ html[data-theme="light"] {
     --light-background-color: rgb(210, 210, 210);
 
     --bold-color: rgb(0, 0, 0);
+    --contrast-color: var(--bold-color);
     --highlight-color: rgb(190, 190, 190);
     --border-color: rgb(230, 230, 230);
 
