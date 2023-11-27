@@ -12,7 +12,6 @@ function count(str, needle) {
 }
 
 module.exports = function (eleventyConfig) {
-
   // Formatting tokens for Luxon: https://moment.github.io/luxon/#/formatting?id=table-of-tokens
   eleventyConfig.addFilter('date', (dateObj, format, zone) => (
     DateTime.fromJSDate(dateObj, { zone: zone ?? 'utc' }).toFormat(format ?? 'yyyy-LL-dd').replace(/-/g, '&#8209;')
@@ -92,7 +91,7 @@ module.exports = function (eleventyConfig) {
         count($(e).prop('innerText') ?? '', /[A-Za-z_][A-Za-z0-9_-]*/g)
       )).reduce((a, b) => a + b, 0);
 
-      // Ignore certain blocks to 
+      // Ignore certain blocks to
       $('code').remove();
       $('details:not([open])').remove();
       $('img').remove();
