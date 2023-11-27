@@ -7,7 +7,12 @@ const { nonEmptyContainerSentinel } = require('./detail/utils');
 const selectHomePosts = require('./detail/select-home-posts');
 const findKeywords = require('./detail/keywords');
 
+function count(str, needle) {
+  return (str.match(needle) || []).length;
+}
+
 module.exports = function (eleventyConfig) {
+
   // Formatting tokens for Luxon: https://moment.github.io/luxon/#/formatting?id=table-of-tokens
   eleventyConfig.addFilter('date', (dateObj, format, zone) => (
     DateTime.fromJSDate(dateObj, { zone: zone ?? 'utc' }).toFormat(format ?? 'yyyy-LL-dd').replace(/-/g, '&#8209;')
@@ -77,6 +82,26 @@ module.exports = function (eleventyConfig) {
     const truncated = str.split(' ').slice(0, nwords).join(' ');
     return appendAfterTruncate(truncated, append);
   });
+
+  if (process.env.ENVIRONMENT === 'fast') {
+    eleventyConfig.addFilter('wordcountFocused', content => count(content, /\s+/g));
+  } else {
+    eleventyConfig.addFilter('wordcountFocused', function (content) {
+      const $ = cheerio.load(content);
+      const codeWords = $('code').toArray().map(e => (
+        count($(e).prop('innerText') ?? '', /[A-Za-z_][A-Za-z0-9_-]*/g)
+      )).reduce((a, b) => a + b, 0);
+
+      // Ignore certain blocks to 
+      $('code').remove();
+      $('details:not([open])').remove();
+      $('img').remove();
+      $('.footnotes').remove();
+      const article = $('.post-body').prop('innerText') ?? $('*').prop('innerText');
+      const words = count(article, /\s+/g);
+      return words + codeWords;
+    });
+  }
 
   // A filter to murder tags and their children brutally with regex. Please don't take this comment seriously.
   eleventyConfig.addFilter('annihilateTags', (html, tags) => {

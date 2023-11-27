@@ -49,3 +49,4 @@ rules:
   no-new: off
   no-lonely-if: off
   prefer-destructuring: off
+  prefer-arrow-callback: off
