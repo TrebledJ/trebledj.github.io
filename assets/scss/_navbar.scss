@@ -7,16 +7,14 @@ header {
 
 /* Navigation Bar */
 .navbar {
-    padding-left: 2vw;
-    padding-right: 2vw;
+    --bs-navbar-padding-x: 2vw !important;
     background-color: var(--main-background-color);
     border-bottom: 1px solid var(--border-color);
     box-shadow: 0 8px 20px rgba(0, 0, 0, .05);
     width: 100vw;
 
     @include media-breakpoint-down(md) {
-        padding-left: 0;
-        padding-right: 0;
+        --bs-navbar-padding-x: 0 !important;
     }
 }
 
@@ -55,6 +53,7 @@ header {
 .nav-icon {
     font-size: 25px;
     color: var(--accent-color);
+    vertical-align: sub;
 }
 
 #mode-switch {

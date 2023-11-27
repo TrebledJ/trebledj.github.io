@@ -60,6 +60,7 @@ module.exports = function (eleventyConfig) {
   });
 
   eleventyConfig.addFilter('tocFast', function (content) {
+    // TODO: refactor as cacheByOutputPath decorator
     const key = this.page.outputPath;
     if (tocMemo[key] !== undefined)
       return tocMemo[key];
