@@ -24,7 +24,7 @@ on:
 
 # Environment variables
 env:
-  deploy-to-ghpages: false       # Set `true` to deploy to GitHub Pages.
+  DEPLOY_TO_GHPAGES: false       # Set `true` to deploy to GitHub Pages.
 
 # Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
@@ -107,14 +107,14 @@ jobs:
           skip_fetch: true
 
       - name: Upload Artifact
-        if: ${{ env.deploy-to-ghpages }}
+        if: ${{ env.DEPLOY_TO_GHPAGES }}
         uses: actions/upload-pages-artifact@v2
         with:
           path: ./_site
 
   # Deployment job
   deploy:
-    if: ${{ env.deploy-to-ghpages }}
+    if: ${{ env.DEPLOY_TO_GHPAGES }}
     environment:
       name: github-pages
       # url: ${{ steps.deployment.outputs.page_url }}

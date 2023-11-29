@@ -1,5 +1,6 @@
 
 # Build (without deploying) an Eleventy site for CI testing.
+# Useful for testing PRs and branches.
 # See deploy.yml for a build + deploy to GitHub Pages workflow.
 name: Dry Run Build
 
@@ -86,20 +87,3 @@ jobs:
 
       - name: Build
         run: ${{ steps.detect-package-manager.outputs.manager }} run prod
-
-      - name: Commit & Push Site Build
-        uses: stefanzweifel/git-auto-commit-action@v5
-        with:
-          commit_message: Build site from GitHub Actions
-          branch: site
-          create_branch: true
-
-          file_pattern: '_site/** .lycheeignore'
-
-          commit_options: '--no-verify --signoff'
-          add_options: '-f'
-          push_options: '--force'
-
-          skip_checkout: true
-          skip_dirty_check: true
-          skip_fetch: true
