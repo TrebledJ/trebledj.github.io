@@ -28,7 +28,7 @@ The [previous meta update](/posts/site-migration-to-eleventy) was dated February
 	- Image Lightbox (you can now click on images to *expand* them) - October
 	- Link Anchors 🔗 (try hovering your mouse to the left of headings) - October
 - Content
-	- [Home Page](/) (uses carousels to cycle through content) - May
+	- [Home Page](/) (uses carousels to cycle through content, so that the page isn't as visually bloated) - May
 	- [Privacy Policy](/privacy-policy) - September
 	- Assorted Blog Posts (including a [series on digital audio synthesis](/tags/audio-synthesis-for-dummies), [CTF writeups](/tags/ctf), and [4 new compositions](/tags/composition))  - Continuous
 - Optimisations
@@ -43,6 +43,8 @@ The [previous meta update](/posts/site-migration-to-eleventy) was dated February
 	- Change in Domain Name - Now!
 
 ## Migrating Hosting to Cloudflare Pages
+
+The rest of this post deals with more technical aspects. Why did I make these decisions? What low-level improvements are there? What do I look forward to in the future?
 
 While the previous migration dealt with site generation, today's migration is twofold:
 1. Migrating the hosting service from GitHub Pages to Cloudflare Pages
@@ -115,7 +117,7 @@ With Cloudflare Pages, our cache duration is longer (4 hours by default). Thanks
 
 Having a high cache duration may sound good, but there's one problem. Newer pages/content may not update immediately. The browser will need to wait for the cache to expire before fetching the content.
 
-One way around this is to use **cache busting**. The idea is to use a different asset file name every time the contents are modified. This way, we can ensure a high cache duration (for assets) with zero "cache lag".
+One way around this is to use **cache busting**. The idea is to use a different asset filename every time the contents are modified. When the browser sees the new filename, it'll request the file instead of loading it from cache (since it's not in the cache). This way, we can ensure a high cache duration (for assets) with zero "cache lag".
 {% endalert %}
 
 By caching static assets for a longer duration, we speed up subsequent page loads. And as a result, our Lighthouse Performance metric improves! (ceteris paribus)
