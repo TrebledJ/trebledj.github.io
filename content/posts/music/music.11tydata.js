@@ -8,6 +8,6 @@ module.exports = {
   // thumbnail_banner: false,
   related: {
     tags: ['composition'],
-    sort: 'relevant',
+    // sort: 'relevant',
   },
 };
