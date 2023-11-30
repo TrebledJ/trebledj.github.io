@@ -57,6 +57,8 @@ To be fair, I've debated long and hard between GitHub Pages, Cloudflare Pages, a
 
 Anyhow, time for a quick comparison:
 
+{% table %}
+
 |                                         | GitHub Pages                                                        | Cloudflare Pages                 | Netlify                 |
 | --------------------------------------- | ------------------------------------------------------------------- | -------------------------------- | ----------------------- |
 | Deploy from GitHub Repo                 | Yes                                                                 | Yes                              | Yes                     |
@@ -68,6 +70,8 @@ Anyhow, time for a quick comparison:
 | Server-side Redirects[^notadealbreaker] | No                                                                  | Yes                              | Yes                     |
 | Serverless                              | No                                                                  | Yes                              | Yes                     |
 | Plugins                                 | No                                                                  | No                               | Yes                        |
+
+{% endtable %}
 
 See a more thorough comparison on [Bejamas](https://bejamas.io/compare/github-pages-vs-cloudflare-pages-vs-netlify/).
 
