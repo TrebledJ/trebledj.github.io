@@ -3,7 +3,6 @@ title: Site Migration to Eleventy
 excerpt: JavaScript go brrrrrrrrr.
 updated: '2023-03-09'
 tags:
-  - meta
   - writeup
   - programming
   - web
