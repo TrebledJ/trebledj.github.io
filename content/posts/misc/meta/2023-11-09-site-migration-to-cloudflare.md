@@ -2,7 +2,6 @@
 title: Site Updates and Migration to Cloudflare Pages
 excerpt: Improvements, Optimisations, and a Better Stack with Cloudflare Hosting
 tags:
-  - meta
   - writeup
   - web
 thumbnail_src: assets/ogle-ogle-cloudflare-pages.jpg
@@ -132,11 +131,11 @@ As you may notice, GitHub Pages sorely lacks server-side customisations, focusin
 Although Cloudflare Pages provides integrated server-side analytics, they are underwhelmingly rudimentary. Detailed analytics (e.g. who visit what page when) are [stashed behind a paywall](https://developers.cloudflare.com/analytics/faq/web-analytics/#can-i-see-server-side-analytics-by-url). So in theory, server-side analytics are great! In practice? 🤑🤑🤑.
 {% endalert %}
 
-**Server-side analytics** differ from client-side analytics, where the former relies on initial HTTP(S) requests to the server, and the latter relies on a JS beacon script. The two approaches differ drastically when we consider the performance impact. With server-side, the server does a (tiny) bit of additional processing. Usually, the IP address (`Host`), browser type (`User-Agent`), and referrer (`Referrer`) are already provided by the browser.^[Of course, this HTTP headers may be modified, e.g. by using a VPN.]
+**Server-side analytics** differ from client-side analytics, where the former relies on initial HTTP(S) requests to the server, and the latter relies on a JS beacon script. The two approaches differ drastically when we consider the performance impact. With server-side, analytics data is mostly derived from headers in the incoming web request. Usually, the browser type (`User-Agent`) and referrer (`Referrer`) are provided by the browser.^[Of course, these HTTP headers may be modified, e.g. by using a VPN or a proxy; so these analytics aren't always reliable.] Not as flexible as client-side, but definitely more performant (for the client) and offers more privacy.
 
-However, with client-side, the browser needs to load a separate script, adding to the network bandwidth. Some scripts are lightweight and simple. Some scripts may load a bunch of other scripts which hinder performance, whilst causing a privacy/compliance nightmare (looking at you Google Analytics).
+With client-side, the browser needs to run a separate script, adding to the network bandwidth. Some scripts are lightweight and simple. Some scripts may fire a bunch of network requests which hinder performance, whilst causing a privacy/compliance nightmare (looking at you Google Analytics).
 
-GitHub Pages currently doesn't plan to support server-side analytics ([discussion](https://github.com/orgs/community/discussions/31474)). Cloudflare Pages does, but 💩🤑. Guess I'll just stick with the privacy-focused client-side solution.
+GitHub Pages currently doesn't plan to support server-side analytics ([discussion](https://github.com/orgs/community/discussions/31474)). Cloudflare Pages does, but the free version doesn't offer much 💩🤑. Guess I'll just stick with Cloudflare's privacy-focused client-side solution.
 
 ### Serverless
 
