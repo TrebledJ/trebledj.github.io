@@ -24,7 +24,7 @@ jobs:
         run: echo ${{ github.event.pull_request.user.login == 'dependabot[bot]' }}
       - name: Get Dependabot Metadata
         id: dependabot-metadata
-        uses: dependabot/fetch-metadata@v1.3.1
+        uses: dependabot/fetch-metadata@v1.6.0
       - name: Enable auto-merge for Dependabot PRs
         run: gh pr merge --auto --merge "$PR_URL"
         env:
