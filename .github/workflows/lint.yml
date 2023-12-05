@@ -9,7 +9,7 @@ on:
     #   - master
     # paths:      
     #   - '**.js'
-  pull_request:
+  # pull_request:
     # branches:
     #   - master
     # paths:

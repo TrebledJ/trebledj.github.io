@@ -2,7 +2,7 @@
 
 name: Dependabot Reviewer
 
-on: pull_request_target
+on: # pull_request_target
 # on:
 #   workflow_run:
 #     workflows: [Dry Run Build]
@@ -42,11 +42,11 @@ jobs:
         env:
           PR_URL: ${{github.event.pull_request.html_url}}
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
-      - name: Comment on major updates of non-development dependencies
-        if: ${{steps.dependabot-metadata.outputs.update-type == 'version-update:semver-major' && steps.dependabot-metadata.outputs.dependency-type == 'direct:production'}}
-        run: |
-          gh pr comment $PR_URL --body "This pull request is ***not* automatically approved** because it includes a **major update of a dependency used in production**."
-          gh pr edit $PR_URL --add-label "requires-manual-qa"
-        env:
-          PR_URL: ${{github.event.pull_request.html_url}}
-          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+      # - name: Comment on major updates of non-development dependencies
+      #   if: ${{steps.dependabot-metadata.outputs.update-type == 'version-update:semver-major' && steps.dependabot-metadata.outputs.dependency-type == 'direct:production'}}
+      #   run: |
+      #     gh pr comment $PR_URL --body "This pull request is ***not* automatically approved** because it includes a **major update of a dependency used in production**."
+      #     gh pr edit $PR_URL --add-label "requires-manual-qa"
+      #   env:
+      #     PR_URL: ${{github.event.pull_request.html_url}}
+      #     GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
