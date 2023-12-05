@@ -377,7 +377,7 @@ awatch *0x7fffffffd000
 
 Further Reading:
 
-- [GDB: Setting Watchpoints](https://sourceware.org/gdb/download/onlinedocs/gdb/Set-Watchpoints.html)
+- [GDB: Setting Watchpoints](https://sourceware.org/gdb/current/onlinedocs/gdb.html/Set-Watchpoints.html)
 
 ## Miscellaneous
 

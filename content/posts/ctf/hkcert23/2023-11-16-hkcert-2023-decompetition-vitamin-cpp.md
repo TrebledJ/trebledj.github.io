@@ -16,7 +16,7 @@ Oh boy, another C++ reverse challenge. :rubs_hands_in_delight:
 
 So whether you’re a first-timer or a veteran at reversing C++, this is a fun(?) way to dive deep into or review neat aspects of the language.
 
-If you want to follow along, you can grab the challenge here: [GitHub](https://github.com/TrebledJ/ctf-binaries/tree/main/hkcert-2023/decompetition-vitamin-cpp) (or if you joined the CTF: [platform.ctf.hkcert.org](https://platform.ctf.hkcert.org/challenges/57)). I’ll also be relying on [Ghidra](https://ghidra-sre.org/) as my decompiler, because I ~~am poor~~ want to support open-source.
+If you want to follow along, you can grab the challenge here: [GitHub](https://github.com/TrebledJ/ctf-binaries/tree/main/hkcert-2023/decompetition-vitamin-cpp). I’ll also be relying on [Ghidra](https://ghidra-sre.org/) as my decompiler, because I ~~am poor~~ want to support open-source.
 
 ## Description
 
