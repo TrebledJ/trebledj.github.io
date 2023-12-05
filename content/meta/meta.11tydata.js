@@ -4,7 +4,4 @@ module.exports = {
   sitemap: {
     ignore: true,
   },
-  eleventyComputed: {
-    permalink: data => data.page.filePathStem,
-  },
 };

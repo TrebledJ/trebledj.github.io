@@ -3,6 +3,8 @@ const pluginSyntaxHighlight = require('@11ty/eleventy-plugin-syntaxhighlight');
 const pluginNavigation = require('@11ty/eleventy-navigation');
 const { EleventyHtmlBasePlugin, EleventyRenderPlugin } = require('@11ty/eleventy');
 const eleventySass = require('eleventy-sass');
+// eslint-disable-next-line import/no-extraneous-dependencies
+const sitemap = require('@quasibit/eleventy-plugin-sitemap');
 
 module.exports = function (eleventyConfig) {
   eleventyConfig.addPlugin(pluginRss);
@@ -12,6 +14,14 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPlugin(pluginNavigation);
   eleventyConfig.addPlugin(EleventyHtmlBasePlugin);
   eleventyConfig.addPlugin(EleventyRenderPlugin);
+
+  // https://www.npmjs.com/package/@quasibit/eleventy-plugin-sitemap
+  eleventyConfig.addPlugin(sitemap, {
+    lastModifiedProperty: 'modified',
+    sitemap: {
+      hostname: 'https://trebledj.me',
+    },
+  });
 
   eleventyConfig.addPlugin(eleventySass);
 

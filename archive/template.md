@@ -30,7 +30,9 @@ feed: false  # Don't show in feed.
 noindex: true # Set true to add a noindex metadata, to indicate SE robots to not index this page.
 permalink: /posts/permalink/to/post/
 redirect_from: [/link-to-post, /link-to-other-post] # Endpoints to redirect from.
-sitemap: false # don't put in sitemap
+sitemap:
+  ignore: true # don't put in sitemap
+  # more options: https://www.npmjs.com/package/@quasibit/eleventy-plugin-sitemap
 ---
 
 markdown/html/liquid content here
