@@ -114,7 +114,6 @@ jobs:
 
   # Deployment job
   deploy:
-    if: env.DEPLOY_TO_GHPAGES
     environment:
       name: github-pages
       # url: ${{ steps.deployment.outputs.page_url }}
@@ -123,5 +122,6 @@ jobs:
     needs: build
     steps:
       - name: Deploy to GitHub Pages
+        if: ${{ env.DEPLOY_TO_GHPAGES }}
         id: deployment
         uses: actions/deploy-pages@v2
