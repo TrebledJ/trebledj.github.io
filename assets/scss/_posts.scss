@@ -187,6 +187,15 @@ img.center {
     opacity: 0;
 }
 
+.footnotes {
+    // Set a larger height for more spaced-out paragraphs.
+    br {
+        display: block;
+        content: "";
+        margin-top: 1rem;
+    }
+}
+
 .footnote-backref {
     font-family: "Open Sans", arial, sans-serif;
 }
