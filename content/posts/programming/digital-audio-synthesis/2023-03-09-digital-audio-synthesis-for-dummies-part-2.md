@@ -1,7 +1,6 @@
 ---
 title: "Digital Audio Synthesis for Dummies: Part 2"
 excerpt: Generating audio signals for great good through additive synthesis and wavetable synthesis.
-updated: '2023-03-09'
 tags:
   - tutorial
   - dsp
