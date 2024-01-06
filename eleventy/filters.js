@@ -91,11 +91,12 @@ module.exports = function (eleventyConfig) {
         count($(e).prop('innerText') ?? '', /[A-Za-z_][A-Za-z0-9_-]*/g)
       )).reduce((a, b) => a + b, 0);
 
-      // Ignore certain blocks to
+      // Ignore auxiliary, non-textual elements.
       $('code').remove();
       $('details:not([open])').remove();
       $('img').remove();
       $('.footnotes').remove();
+      $('.caption').remove();
       const article = $('.post-body').prop('innerText') ?? $('*').prop('innerText');
       const words = count(article, /\s+/g);
       return words + codeWords;
