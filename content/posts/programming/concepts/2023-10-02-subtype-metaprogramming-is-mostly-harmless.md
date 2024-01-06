@@ -11,7 +11,7 @@ tags:
   - metaprogramming
   - oop
   - writeup
-useMath: true
+use_math: true
 thumbnail_src: assets/thumbnail.jpg
 thumbnail_banner: true
 redirect_from:

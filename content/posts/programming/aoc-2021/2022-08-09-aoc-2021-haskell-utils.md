@@ -7,7 +7,7 @@ tags:
   - haskell
   - functional
 thumbnail_src: assets/recycle-hs-utils.jpg
-useMath: true
+use_math: true
 related:
   tags: [aoc, haskell]
 ---

@@ -3,7 +3,7 @@ title: "Styleguide – Math"
 excerpt: "Minimal style tests for math."
 tags:
   - mathematics
-useMath: true
+use_math: true
 related:
     disable: false
     tags: [mathematics]
