@@ -106,8 +106,8 @@ $carousel-transition: transform 2s ease, opacity 1.5s ease-out .5s;
 
     &:hover {
         color: var(--contrast-color) !important;
+        filter: drop-shadow(0 0 1px var(--link-color));
         animation: box 3s infinite;
-        box-shadow: 0 0 5px var(--link-color);
     }
 }
 
@@ -116,7 +116,7 @@ $carousel-transition: transform 2s ease, opacity 1.5s ease-out .5s;
         box-shadow: var(--main-background-color);
     }
     50% {
-        box-shadow: 0 0 25px var(--link-color);
+        box-shadow: 0 0 20px var(--link-color);
     }
     100% {
         box-shadow: var(--main-background-color);
