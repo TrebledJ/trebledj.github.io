@@ -88,17 +88,37 @@ $carousel-transition: transform 2s ease, opacity 1.5s ease-out .5s;
     pointer-events: all;
     font-size: 12px;
 
-    &, &:focus {
-        background-image: linear-gradient(to right, rgb(var(--link-color-rgb)), transparent) !important;
-        background-size: 0 auto;
-    }
+    transition: color 0.2s;
+    text-decoration: none;
+    background-image: none;
+
+    // &,
+    // &:focus {
+    //     background-image: linear-gradient(to right, rgb(var(--link-color-rgb)), transparent) !important;
+    //     background-size: 0 auto;
+    // }
+    // &:hover {
+    //     background-size: 100% auto;
+    // }
     background-position: 0 100%;
     background-repeat: no-repeat;
     transform: all $transition-duration linear;
 
     &:hover {
         color: var(--contrast-color) !important;
-        background-size: 100% auto;
+        animation: box 3s infinite;
+    }
+}
+
+@keyframes box {
+    0% {
+        box-shadow: var(--main-background-color);
+    }
+    50% {
+        box-shadow: 0 0 25px var(--link-color);
+    }
+    100% {
+        box-shadow: var(--main-background-color);
     }
 }
 
