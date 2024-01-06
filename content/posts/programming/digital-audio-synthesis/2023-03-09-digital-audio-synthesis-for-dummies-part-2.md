@@ -198,7 +198,7 @@ Wavetable synthesis can be implemented in C++ like so:
 
 ```cpp
 #define SINE_WAVETABLE_SIZE 256
-#define SAMPLE_RATE 44100       // Number of samples per second (of the target waveform).
+#define SAMPLE_RATE 44100  // Number of samples per second (of the target waveform).
 #define BUFFER_SIZE 1024
 
 // The pre-generated wavetable. It should capture one cycle of the desired waveform (in this case, a sine).
