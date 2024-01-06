@@ -173,6 +173,9 @@
 
     .post-summary {
         line-height: $line-height-cozy;
+        p {
+            margin-bottom: 0;
+        }
     }
 }
 

@@ -1,3 +1,6 @@
+{% from "tag.html" import render_tag,
+render_tag_list %}
+
 {% macro render_thumbnail(post) %}
     <a class="post-thumbnail" href="{{post.url}}">
         {% thumbnail post, "post-img-blurred-bg" %}
@@ -68,6 +71,14 @@
                 <div>
                     {{ render_title(post) }}
                 </div>
+
+                {% if post.data.tags.length > 0 %}
+                    <div class="metadata-tag-container d-flex flex-row align-items-top">
+                        <div class="tag-list d-flex flex-row flex-wrap align-items-center">
+                            {{ render_tag_list(post.data.tags, 3) }}
+                        </div>
+                    </div>
+                {% endif %}
             </div>
         </div>
     </article>
