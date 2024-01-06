@@ -62,7 +62,7 @@ module.exports = function () {
       enabled: process.env.ENABLE_LIGHTBOX,
     },
     banner: {
-      enabled: true,
+      enabled: false,
       sticky: true,
       closeButton: true,
       disableInPosts: true, // Don't detract from content.
