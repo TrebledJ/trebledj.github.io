@@ -107,6 +107,7 @@ $carousel-transition: transform 2s ease, opacity 1.5s ease-out .5s;
     &:hover {
         color: var(--contrast-color) !important;
         animation: box 3s infinite;
+        box-shadow: 0 0 5px var(--link-color);
     }
 }
 

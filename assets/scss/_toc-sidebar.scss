@@ -1,5 +1,6 @@
 #toc-sidebar {
     line-height: $line-height-cozy;
+    overflow-y: auto;
 
     @include media-breakpoint-down(lg) {
         // Small screen: bye bye sidebar.
