@@ -60,6 +60,7 @@ module.exports = function () {
     lightbox: {
       // To disable lightbox, comment out the corresponding plugin in plugins.js.
       enabled: process.env.ENABLE_LIGHTBOX,
+      combined: true, // Combines all lightbox images in a post into a single gallery.
     },
     banner: {
       enabled: false,
