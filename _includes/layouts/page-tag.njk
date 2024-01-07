@@ -31,7 +31,9 @@ logo: tag
             {% endif %}
         </div>
 
-        {{ content | safe }}
+        <div class="post-body">
+            {{ content | safe }}
+        </div>
 
         {# Preview List #}
         <div class="post-preview-list mt-4">
