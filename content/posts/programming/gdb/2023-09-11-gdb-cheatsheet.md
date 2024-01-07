@@ -7,6 +7,7 @@ tags:
   - reverse
   - learning
   - cheatsheet
+  - notes
 thumbnail_src: assets/gef.png
 related:
     tags: [ctf]
