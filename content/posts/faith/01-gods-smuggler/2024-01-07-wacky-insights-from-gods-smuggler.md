@@ -186,9 +186,9 @@ While in Romania...
 {% enddetails %}
 
 
-> *We urged our listeners to reconsider the role of a Christian when his country is in trouble. Is it to run, or is it to stand?
+> *We urged our listeners to reconsider the role of a Christian when his country is in trouble. Is it to run, or is it to stand?*
 > 
-> Life in Cuba in 1965 was not easy. But perhaps God had had His reasons for putting them in this place at this time. Perhaps they were to be His arms and legs and His healing hands in this situation, without whom He would have no representative in this land.*
+> *Life in Cuba in 1965 was not easy. But perhaps God had had His reasons for putting them in this place at this time. Perhaps they were to be His arms and legs and His healing hands in this situation, without whom He would have no representative in this land.*
 > 
 >  – Brother Andrew, Twelve Apostles of Hope, Page 261.
 
