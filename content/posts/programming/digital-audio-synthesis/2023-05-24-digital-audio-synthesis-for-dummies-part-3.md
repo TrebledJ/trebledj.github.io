@@ -11,6 +11,7 @@ tags:
   - music
   - audio-synthesis-for-dummies
   - synths
+  - notes
 thumbnail_src: assets/synthwave-a-major-space-3.jpg
 thumbnail_banner: true
 use_math: true

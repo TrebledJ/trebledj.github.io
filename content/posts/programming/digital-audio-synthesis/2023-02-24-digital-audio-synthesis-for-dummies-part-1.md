@@ -7,6 +7,7 @@ tags:
   - dsp
   - audio-synthesis-for-dummies
   - synths
+  - notes
 thumbnail_src: assets/synthwave-a-major-space-1.jpg
 thumbnail_banner: true
 use_math: true
