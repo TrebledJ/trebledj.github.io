@@ -131,9 +131,10 @@ If anything, the casual tone of the prayer goes to show how close Andrew regards
 
 What's that? Missionaries discovered distributed computing and load balancing?
 
-As absurd as it sounds, this principle is still carried on today. As Andrew's team and work grew, so did their modus operandi.
+As Andrew's team and work grew, so did their modus operandi. And as absurd as it sounds, this principle is still carried on today.
 
-It's interesting to muse on this 'technique'. Clearly there will be situations where both members are occupied and unable to pray. So what's the dealio? The point, I think, is to cease control, i.e. to acknowledge God's hand on the matter. [Again](#cease-control), by praying, we rely not only on ourselves but also on the one with the high ground.
+It's interesting to muse on this 'technique'. Clearly there will be situations where both members are occupied and unable to pray. So what's the dealio? The point, I think, is to (again) [cease control](#cease-control), i.e. to acknowledge God's hand on the matter. By praying, we rely not only on ourselves but also on the one with the high ground.
+
 
 {% details "Context" %}
 
