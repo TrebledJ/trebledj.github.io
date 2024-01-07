@@ -52,3 +52,14 @@
 {"rule":"DT_JJ_NO_NOUN","sentence":"^\\QProbably a boolean.\\E$"}
 {"rule":"ATD_VERBS_TO_COLLOCATION","sentence":"^\\Q\\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q seems to be a total oddball, as tries don't usually have such a function.\\E$"}
 {"rule":"MORFOLOGIK_RULE_EN_GB","sentence":"^\\QRace for the Galaxy\nHanabi\nAnd more!\\E$"}
+{"rule":"EN_GB_SIMPLE_REPLACE","sentence":"^\\QFifty shy of the amount I needed to pay the bill and to buy gasoline on the way home.\\E$"}
+{"rule":"MISSING_COMMA_AFTER_INTRODUCTORY_PHRASE","sentence":"^\\QWithout hesitation I said, 'Go ahead.\\E$"}
+{"rule":"INTERJECTIONS_PUNCTUATION","sentence":"^\\QOh joy.\\E$"}
+{"rule":"NON_ACTION_CONTINUOUS","sentence":"^\\QWhat is belonging?\\E$"}
+{"rule":"SOME_OF_THE","sentence":"^\\QLet me take some of the Bibles out and leave them in the open where they will be seen.\\E$"}
+{"rule":"IN_ON_THE_RIGHT_HAND_SIDE","sentence":"^\\QI put the little VW in low gear, inched up to the officer standing at the left side of the road, handed him my papers, and started to get out.\\E$"}
+{"rule":"MISSING_COMMA_AFTER_INTRODUCTORY_PHRASE","sentence":"^\\QIn Transylvania we visited such a family.\\E$"}
+{"rule":"EN_GB_SIMPLE_REPLACE","sentence":"^\\QIt was on board the streetcar going to the station that I counted my money and realised that all I had with me would not make five hundred marks.\\E$"}
+{"rule":"DRIVERS_LICENSE","sentence":"^\\QA few page flips later, Andrew found a use for his driver's licence...\\E$"}
+{"rule":"DRIVERS_LICENSE","sentence":"^\\QI still could see no reason why I—who didn't even own a bicycle any more—should be carrying an automobile driver's licence around in my pocket.\\E$"}
+{"rule":"EN_GB_SIMPLE_REPLACE","sentence":"^\\Q'Well,' I said to myself, 'something will happen on the streetcar going back.'\\E$"}
