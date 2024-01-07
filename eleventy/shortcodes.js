@@ -66,6 +66,12 @@ module.exports = function (eleventyConfig) {
     tag ??= text;
     return `<a class="tag" href="/tags/${tag}/">${text}</a>`;
   });
+
+  eleventyConfig.addShortcode('stag', (text, tag) => {
+    // Special tag. Use this for unique collections of posts.
+    tag ??= text;
+    return `<a class="tag special" href="/tags/${tag}/">${text}</a>`;
+  });
 };
 
 /**
