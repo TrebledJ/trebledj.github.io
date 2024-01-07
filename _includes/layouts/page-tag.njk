@@ -3,8 +3,9 @@ layout: layouts/page-default
 logo: tag
 ---
 
-{% from "post/preview.html" import render_post_preview %}
-{% from "sidebars/sidebar-utils.html" import tags_sidebar %}
+{# See Note [with context]. #}
+{% from "post/preview.html" import render_post_preview with context %}
+{% from "sidebars/sidebar-utils.html" import tags_sidebar with context %}
 
 <div class="page-content-container d-flex row gx-6">
     <div class="col-lg-4">

@@ -1,5 +1,5 @@
-{% from "tag.html" import render_tag,
-render_tag_list %}
+{# See Note [with context]. #}
+{% from "tag.html" import render_tag_list with context %}
 
 {% macro render_thumbnail(post) %}
     <a class="post-thumbnail" href="{{post.url}}">

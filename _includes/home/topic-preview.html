@@ -1,5 +1,6 @@
-{% from "post/preview.html" import render_post_preview %}
-{% from "tag.html" import render_tag %}
+{# See Note [with context]. #}
+{% from "post/preview.html" import render_post_preview with context %}
+{% from "tag.html" import render_tag with context %}
 
 {% macro render_topic_preview(name, tag, about, excludeTags, uniquePosts) %}
     {# Description #}

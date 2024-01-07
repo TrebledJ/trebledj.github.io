@@ -1,5 +1,6 @@
-{% from "post/carousel.html" import render_posts_carousel %}
-{% from "tag.html" import render_tag_list %}
+{# See Note [with context]. #}
+{% from "post/carousel.html" import render_posts_carousel with context %}
+{% from "tag.html" import render_tag_list with context %}
 
 <div class="mt-4">
     {# Seperate posts into unique lists. #}

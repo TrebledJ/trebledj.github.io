@@ -1,6 +1,6 @@
 {# WARNING: don't format. #}
 {% if related and (not related.disable) %}
-    {% from "post/preview.html" import render_post_minified_preview %}
+    {% from "post/preview.html" import render_post_minified_preview with context %}
 
     {% set relatedPosts = collections.postsr | getRelatedPosts(tags, related) %}
     {% if (relatedPosts | length) > 0 %}

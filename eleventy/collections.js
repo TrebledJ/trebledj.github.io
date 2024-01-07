@@ -13,6 +13,13 @@ module.exports = function (eleventyConfig) {
     collectionApi.getAll().filter(p => p.page.filePathStem.match(/tags\/.+/))
   ));
 
+  eleventyConfig.addCollection('specialTags', collectionApi => (
+    collectionApi.getAll()
+      .filter(p => p.page.filePathStem.match(/tags\/.+/))
+      .filter(p => p.data.special)
+      .map(p => p.data.tag)
+  ));
+
   eleventyConfig.addCollection('postsr', collectionApi => (
     // Reversed collection.
     collectionApi.getFilteredByTag('posts').slice().reverse()

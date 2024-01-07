@@ -1,5 +1,45 @@
+{#
+    Note [with context]
+    ---
+
+    IMPORTANT: when importing macros from this file, use `with context` in the
+    Nunjucks import statement.
+
+    For example: {% from "tag.html" import render_tag with context %}
+
+    This feeds global scope into macros here, and allows `collections` to work
+    within.
+    
+    If a macro requiring `with context` is used inside _another_ macro
+    (and that other macro is then imported elsewhere), then `with context` is
+    also needed for that other macro.
+
+    For example:
+
+    ```
+    # _includes/a.html
+    {% macro foo(x) %}
+        # Uses global scope stuff (e.g. collections).
+    {% endmacro %}
+
+    # _includes/b.html
+    {% from "a.html" import foo with context %}
+    {% macro bar(x) %}
+        # Uses foo.
+        foo(x + x)
+    {% endmacro %}
+
+    # content/c.njk
+    # Uses bar. Notice `with context` is required here too.
+    {% from "b.html" import bar with context %}
+    {{ bar(0) }}
+    ```
+
+    See https://github.com/11ty/eleventy/issues/434.
+#}
+
 {% macro render_tag(name) %}
-    <a class="tag" href="/tags/{{name}}" itemprop="keywords">{{name}}</a>
+    <a class="tag {{ "special" if collections.specialTags | contains(name) }}" href="/tags/{{name}}" itemprop="keywords">{{name}}</a>
 {% endmacro %}
 
 {% macro render_tag_list(tags, limit = 3) %}

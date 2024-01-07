@@ -2,7 +2,7 @@
 title: About
 ---
 
-{% from "post/preview.html" import render_post_preview %}
+{% from "post/preview.html" import render_post_preview with context %}
 
 ## About Me
 

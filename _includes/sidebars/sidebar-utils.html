@@ -1,3 +1,6 @@
+{# See Note [with context]. #}
+{% from "tag.html" import render_tag with context %}
+
 {% macro tags_sidebar(heading, groups) %}
     <div class="sticky-right dim-light">
         <h3>
@@ -9,7 +12,7 @@
             </div>
             <span class="d-flex flex-wrap">
                 {% for t in data.related %}
-                    <span>{% tag t.tag %}</span>
+                    <span>{{ render_tag(t.tag) }}</span>
                 {% endfor %}
             </span>
         {% endfor %}
