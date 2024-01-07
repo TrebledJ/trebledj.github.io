@@ -107,25 +107,25 @@ $carousel-transition: transform 2s ease, opacity 1.5s ease-out .5s;
     &:not(.special):hover {
         color: var(--contrast-color) !important;
         --clr: var(--link-color);
-        animation: box 3s infinite;
+        animation: tag-box 3s infinite;
     
     }
     &.special:hover {
         color: var(--contrast-color) !important;
         --clr: var(--special-color);
-        animation: box 3s infinite;
+        animation: tag-box 3s infinite;
     }
     html[data-theme="dark"] &:hover {
         filter: drop-shadow(0 0 1px var(--clr));
     }
 }
 
-@keyframes box {
+@keyframes tag-box {
     0% {
         box-shadow: var(--main-background-color);
     }
     50% {
-        box-shadow: 0 0 20px var(--clr);
+        box-shadow: 0 0 16px var(--clr);
     }
     100% {
         box-shadow: var(--main-background-color);
