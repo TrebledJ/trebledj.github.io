@@ -9,7 +9,6 @@ tags:
   - synths
   - notes
 thumbnail_src: assets/synthwave-a-major-space-1.jpg
-thumbnail_banner: true
 use_math: true
 related:
     posts: [r/digital-audio-synthesis-for-dummies-part-.*/r, stm32-midi-keyboard]
@@ -20,8 +19,7 @@ A while back I worked on a lil’ [MIDI keyboard](/posts/stm32-midi-keyboard) pr
 
 ## Dealing with Data 📈
 
-{% image "assets/data.jpg", "w-55", "Get ready for some Data!", "Lieutenant Data from Star Trek. Get it?" %}
-
+{% image "assets/data.jpg", "w-40 floatr1", "Get ready for some Data!", "Lieutenant Data from Star Trek. Get it?" %}
 
 When processing data of any form, we are concerned with the data’s quality. Higher quality data may lead to a more thorough analysis and better user experience, but also demand higher memory and computing requirements.
 

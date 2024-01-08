@@ -11,7 +11,6 @@ tags:
   - synths
   - notes
 thumbnail_src: assets/synthwave-a-major-space-2.jpg
-thumbnail_banner: true
 use_math: true
 related:
     posts: [r/digital-audio-synthesis-for-dummies-part-.*/r, stm32-midi-keyboard]
@@ -25,9 +24,9 @@ This is the second post in a series of posts on Digital Audio Processing. Simila
 
 Where do audio signals come from? Our signal might be…
 
-- recorded. Sound waves are picked up by special hardware (e.g. a microphone) and translated to a digital signal through an {% abbr "ADC", "Analog-to-Digital Converter" %}.
-- loaded from a file. There are many audio formats out there, but the most common ones are .wav and .mp3. The .wav format is simple: just store the samples as-is. Other formats compress audio to achieve smaller file sizes (which in turn, means faster upload/download speeds).
-- synthesised. We generate audio out of thin air (or rather, code and electronics).
+- **recorded**. Sound waves are picked up by special hardware (e.g. a microphone) and translated to a digital signal through an {% abbr "ADC", "Analog-to-Digital Converter" %}.
+- **loaded** from a file. There are many audio formats out there, but the most common ones are .wav and .mp3. The .wav format is simple: just store the samples as-is. Other formats compress audio to achieve smaller file sizes (which in turn, means faster upload/download speeds).
+- **synthesised**. We generate audio out of thin air (or rather, code and electronics).
 
 I’ll mainly focus on **synthesis**. We’ll start by finding out how to generate a single tone, then learn how to generate multiple tones simultaneously.
 
