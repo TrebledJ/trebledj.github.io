@@ -68,7 +68,7 @@ The clock runs at a fixed frequency (168MHz on our board).
 By dividing against it, we can achieve lower frequencies.
 
 {% image "https://1.bp.blogspot.com/-VS5AN7VS4BI/XF6Z2Zm7UpI/AAAAAAAAC-Y/z3rkz9xGSsoycbS3_QB4OW6033YkvVu2gCLcBGAs/s640/prescaler.png", "" %}
-<sup>Different prescalers are available. By choosing different prescalers, we can divide the clock frequency and obtain other frequencies. (Source: EmbeddedTutor[^embeddedtutor])</sup>{.caption}
+<sup>By using different prescalers, we can achieve lower frequencies. (Source: EmbeddedTutor[^embeddedtutor])</sup>{.caption}
 
 {% endalert %}
 
