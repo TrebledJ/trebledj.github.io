@@ -1,17 +1,14 @@
 <meta charset="utf-8"/>
 
 {# Title / Description #}
-<title>
-    {% if title %}
-        {{ title | annihilateTags(['sup', 'sub']) | striptags }}
-            -
-            {{ site.title }}
-    {% else %}
-        {{ site.title }}
-            -
-            {{ site.description }}
-    {% endif %}
-</title>
+{% set titleText %}
+{% if title %}
+    {{ title | annihilateTags(['sup', 'sub']) | striptags }} - {{ site.title }}
+{% else %}
+    {{ site.title }} - {{ site.description }}
+{% endif %}
+{% endset %}
+<title>{{titleText | trim | safe}}</title>
 
 {% if excerpt %}
     <meta name="description" content="{{ excerpt | mdInline | safe | striptags }}">
