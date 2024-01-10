@@ -312,6 +312,18 @@ object HelloWorld {
 echo "Hello world!"
 ```
 
+```sh {.command-line data-a=abc}
+# Multiline.
+mkdir build
+cd build
+cmake ..
+make
+```
+
+```  {.command-line data-a=abc}
+Just plain text.
+```
+
 ```txt
 Supercalifragilisticespieladocious! Supercalifragilisticespieladocious! Supercalifragilisticespieladocious! Supercalifragilisticespieladocious! Supercalifragilisticespieladocious! Supercalifragilisticespieladocious! 
 ```
