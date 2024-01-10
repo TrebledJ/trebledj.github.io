@@ -57,7 +57,7 @@ a:active {
     background-size: 100% 0.1em;
 }
 
-a[type="button"], a:has(> button) {
+a[type="button"], a:has(> button), a:has(> i:only-child) {
     background-image: none;
 }
 
