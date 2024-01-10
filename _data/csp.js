@@ -23,14 +23,14 @@ function compileCsp(...tags) {
 module.exports = compileCsp(
   tag('default'),
   tag('script')
-    .add(...(process.env.ENVIRONMENT === 'fast' ? ['\'unsafe-inline\''] : []))
+    .add(...(process.env.ENVIRONMENT === 'fast' ? ["'unsafe-inline'"] : []))
     .add('*.disqus.com', '*.disquscdn.com')
     .add('code.jquery.com', 'cdn.jsdelivr.net')
     .add('gist.github.com')
     .add('static.cloudflareinsights.com'),
   tag('style')
     .add("'unsafe-inline'")
-  // .add(`'unsafe-hashes'`)
+    // .add(`'unsafe-hashes'`)
     .add('*.disquscdn.com')
     .add('cdn.jsdelivr.net')
     .add('cdnjs.cloudflare.com')
