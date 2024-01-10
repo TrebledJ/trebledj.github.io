@@ -17,8 +17,8 @@
 {% endif %}
 
 {# Compatibility #}
-<meta content="IE=edge" http-equip="X-UA-Compatible"/>
-<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
 
 {# Meta: Keywords #}
 {# List a bunch of keywords which make sense for this page. #}
@@ -59,45 +59,45 @@
 
 {# OpenGraph Metadata #}
 {# See https://ogp.me/. #}
-<meta content="{{ site.title }}" property="og:site_name"/>
+<meta property="og:site_name" content="{{ site.title }}"/>
 {% if title %}
     {% set meta_title = title | annihilateTags(['sup', 'sub']) | striptags %}
-    <meta content="article" property="og:type"/>
+    <meta property="og:type" content="article"/>
 {% else %}
     {% set meta_title = site.title %}
-    <meta content="website" property="og:type"/>
+    <meta property="og:type" content="website"/>
 {% endif %}
-<meta content="{{ meta_title }}" property="og:title"/>
-<meta content="{{ meta_title }}" property="twitter:title"/>
+<meta property="og:title" content="{{ meta_title }}"/>
+<meta property="twitter:title" content="{{ meta_title }}"/>
 
 {% if excerpt %}
     {% set meta_desc = (excerpt | mdInline | striptags) + "\n\n" + (content | annihilate('.article-header, .metadata-container, .metadata-tag-container, #toc-sidebar') | striptags | truncateWords(30)) %}
 {% else %}
     {% set meta_desc = site.description %}
 {% endif %}
-<meta content="{{meta_desc}}" property="og:description"/>
-<meta content="{{meta_desc}}" property="twitter:description"/>
+<meta property="og:description" content="{{meta_desc}}"/>
+<meta property="twitter:description" content="{{meta_desc}}"/>
 
 {% if page.url %}
-    <meta content="{{ site.url }}{{ page.url }}" property="og:url"/>
+    <meta property="og:url" content="{{ site.url }}{{ page.url }}"/>
 {% endif %}
 {% if thumbnail_src %}
     <meta name="twitter:card" content="summary_large_image">
-    <meta content="{{ site.url }}{{ thumbnail_src | resolveImageOutputPath(page) }}" property="og:image"/>
-    <meta content="{{ site.url }}{{ thumbnail_src | resolveImageOutputPath(page) }}" property="twitter:image"/>
+    <meta property="og:image" content="{{ site.url }}{{ thumbnail_src | resolveImageOutputPath(page) }}"/>
+    <meta property="twitter:image" content="{{ site.url }}{{ thumbnail_src | resolveImageOutputPath(page) }}"/>
 {% endif %}
 {% if page.date %}
-    <meta content="{{ page.date | dateISO }}" property="article:published_time"/>
+    <meta property="article:published_time" content="{{ page.date | dateISO }}"/>
 {% endif %}
 {% if updated %}
-    <meta content="{{ updated | dateISO }}" property="article:modified_time"/>
+    <meta property="article:modified_time" content="{{ updated | dateISO }}"/>
 {% endif %}
-<meta content="{{ site.author.alias }}" property="article:author"/>
+<meta property="article:author" content="{{ site.author.alias }}"/>
 {% if ogsection %}
-    <meta content="{{ ogsection }}" property="article:section"/>
+    <meta property="article:section" content="{{ ogsection }}"/>
 {% endif %}
 {% if tags %}
     {% for t in tags | exclude('posts') %}
-        <meta content="{{t}}" property="article:tag"/>
+        <meta property="article:tag" content="{{t}}"/>
     {% endfor %}
 {% endif %}
