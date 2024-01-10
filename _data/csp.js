@@ -23,6 +23,9 @@ function compileCsp(...tags) {
 module.exports = compileCsp(
   tag('default'),
   tag('script')
+    // In dev/prod builds, we would include CSP hashes in script-src. But this
+    // step is skipped to optimise for speed, so for fast builds, we just use
+    // unsafe-inline.
     .add(...(process.env.ENVIRONMENT === 'fast' ? ["'unsafe-inline'"] : []))
     .add('*.disqus.com', '*.disquscdn.com')
     .add('code.jquery.com', 'cdn.jsdelivr.net')
