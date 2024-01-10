@@ -10,6 +10,8 @@ related:
     tags: [faith]
 ---
 
+{% image "assets/thumbnail.jpg", "w-45 p-2 floatr1", "Cover image of God's Smuggler." %}
+
 Last year, a friend lent me his copy of <ins>God’s Smuggler</ins>, an autobiography of Brother Andrew’s adventures behind the Iron Curtain (into Communist countries).
 
 Over the first few chapters we're introduced to Brother Andrew, an adventurous fellow who served alongside his Dutch comrades in World War II. He is portrayed with a rebellious spirit and strong desire to make a difference to the world.
