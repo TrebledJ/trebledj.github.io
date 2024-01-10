@@ -43,7 +43,7 @@ This site was inspired and built from many different libraries. Mentioning all o
     * SCSS: Enables rapid CSS development. Less headaches.
     * Scroll progress.
     * Navbar.
-* GitHub Pages – Hosting.
+* Cloudflare Pages – Hosting.
 * imgflip – Quintessential Meme Generator.
 * Cloudflare Analytics.
 
