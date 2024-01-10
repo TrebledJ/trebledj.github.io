@@ -86,7 +86,10 @@ module.exports = function (eleventyConfig) {
     eleventyConfig.addFilter('wordcountFocused', content => count(content, /\s+/g));
   } else {
     eleventyConfig.addFilter('wordcountFocused', function (content) {
+      // Load it with DOM wrapping. The extra HTML wrappers don't really matter,
+      // since we'll just call .innerText in the end.
       const $ = cheerio.load(content);
+
       const codeWords = $('code').toArray().map(e => (
         count($(e).prop('innerText') ?? '', /[A-Za-z_][A-Za-z0-9_-]*/g)
       )).reduce((a, b) => a + b, 0);
@@ -118,7 +121,7 @@ module.exports = function (eleventyConfig) {
       if (typeof html !== 'string') {
         throw new Error(`[11ty] annihilate: expected HTML string, got ${typeof html}`);
       }
-      const $ = cheerio.load(html);
+      const $ = cheerio.load(html, null, false);
       $(selector).remove();
       return $.html();
     });
