@@ -17,14 +17,22 @@ permissions:
   contents: write
 
 jobs:
-  review-dependabot-pr:
+  debug:
     runs-on: ubuntu-latest
-    if: github.event.pull_request.user.login == 'dependabot[bot]' && github.event.pull_request.mergeable == true
     steps:
       - name: Sanity Check
         run: |
           echo ${{ github.event.pull_request.user.login }}
           echo ${{ github.event.pull_request.mergeable }}
+
+  review-dependabot-pr:
+    runs-on: ubuntu-latest
+    if: github.event.pull_request.user.login == 'dependabot[bot]' && github.event.pull_request.mergeable == true
+    steps:
+      # - name: Sanity Check
+      #   run: |
+      #     echo ${{ github.event.pull_request.user.login }}
+      #     echo ${{ github.event.pull_request.mergeable }}
       - name: Get Dependabot Metadata
         id: dependabot-metadata
         uses: dependabot/fetch-metadata@v1.6.0
