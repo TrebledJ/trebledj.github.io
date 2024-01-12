@@ -181,7 +181,7 @@ Further Reading:
 
 - [Tour of Book: Implicit Parameters](https://docs.scala-lang.org/tour/implicit-parameters.html)
 - [Where does Scala look for implicits?][scala-implicits-where]
-- [GHC Language Extensions: Implicit Parameters](https://ghc.gitlab.haskell.org/ghc/doc/users_guide/exts/implicit_parameters.html)
+- [GHC Language Extensions: Implicit Parameters](https://downloads.haskell.org/ghc/9.8.1-alpha4/docs/users_guide/exts/implicit_parameters.html)
 - [Implicit Parameters: Dynamic Scoping with Static Types](https://galois.com/wp-content/uploads/2014/08/pub_JL_ImplicitParameters.pdf): Basis for implicit params in Haskell. Good academic foundation and examples.
 
 [scala-implicits-where]: https://stackoverflow.com/questions/5598085/where-does-scala-look-for-implicits/5598107#5598107
