@@ -82,7 +82,7 @@ jobs:
 
       - name: Build
         run: |
-          echo "## Build Output"
-          echo "```" >>$GITHUB_STEP_SUMMARY
-          ${{ steps.detect-package-manager.outputs.manager }} run prod >>$GITHUB_STEP_SUMMARY
-          echo "```" >>$GITHUB_STEP_SUMMARY
+          echo "## Build Output" >> $GITHUB_STEP_SUMMARY
+          echo "```" >> $GITHUB_STEP_SUMMARY
+          ${{ steps.detect-package-manager.outputs.manager }} run prod >> $GITHUB_STEP_SUMMARY
+          echo "```" >> $GITHUB_STEP_SUMMARY
