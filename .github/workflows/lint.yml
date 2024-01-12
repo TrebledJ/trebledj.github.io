@@ -23,7 +23,7 @@ on:
 
 jobs:
   run-linters:
-    name: Run linters
+    name: Run Linters
     runs-on: ubuntu-latest
 
     steps:
@@ -38,7 +38,7 @@ jobs:
       - name: Install Node.js dependencies
         run: npm ci
 
-      - name: Run linters
+      - name: Run linter action
         uses: wearerequired/lint-action@v2
         with:
           eslint: true
