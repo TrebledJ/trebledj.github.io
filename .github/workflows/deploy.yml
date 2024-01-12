@@ -108,7 +108,7 @@ jobs:
 
       - name: Upload Artifact
         if: ${{ env.DEPLOY_TO_GHPAGES }}
-        uses: actions/upload-pages-artifact@v2
+        uses: actions/upload-pages-artifact@v3
         with:
           path: ./_site
 
