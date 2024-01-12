@@ -81,7 +81,7 @@ jobs:
         run: ${{ steps.detect-package-manager.outputs.manager }} ${{ steps.detect-package-manager.outputs.command }}
 
       - name: Build
-        run:
+        run: |
           echo "## Build Output"
           echo "```" >>$GITHUB_STEP_SUMMARY
           ${{ steps.detect-package-manager.outputs.manager }} run prod >>$GITHUB_STEP_SUMMARY
