@@ -22,17 +22,25 @@ jobs:
     steps:
       - name: Sanity Check
         run: |
-          echo ${{ github.event.pull_request.user.login }}
-          echo ${{ github.event.pull_request.mergeable }}
+          echo "## Debug" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "- user.login: ${{ github.event.pull_request.user.login }}" >> $GITHUB_STEP_SUMMARY
+          echo "- merged: ${{ github.event.pull_request.merged }}" >> $GITHUB_STEP_SUMMARY
+          echo "- merged_at: ${{ github.event.pull_request.merged_at }}" >> $GITHUB_STEP_SUMMARY
+          echo "- mergeable: ${{ github.event.pull_request.mergeable }}" >> $GITHUB_STEP_SUMMARY
+          echo "- mergeable_state: ${{ github.event.pull_request.mergeable_state }}" >> $GITHUB_STEP_SUMMARY
+
+  dry-run-build:
+    uses: ./.github/workflows/build.yml
+
+  lint:
+    uses: ./.github/workflows/lint.yml
 
   review-dependabot-pr:
     runs-on: ubuntu-latest
-    if: github.event.pull_request.user.login == 'dependabot[bot]' && github.event.pull_request.mergeable == true
+    needs: [dry-run-build, lint]
+    # if: github.event.pull_request.user.login == 'dependabot[bot]' && github.event.pull_request.mergeable == true
     steps:
-      # - name: Sanity Check
-      #   run: |
-      #     echo ${{ github.event.pull_request.user.login }}
-      #     echo ${{ github.event.pull_request.mergeable }}
       - name: Get Dependabot Metadata
         id: dependabot-metadata
         uses: dependabot/fetch-metadata@v1.6.0
