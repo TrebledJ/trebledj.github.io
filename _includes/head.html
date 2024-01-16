@@ -25,8 +25,6 @@
     {% include "utilities/async-css.html" %}
     {% include "utilities/theme-switch.html" %}
 
-    <link rel="icon" href="/img/favicon.ico" type="image/png" sizes="16x16"/>
-
     {# Critical scripts here. Other scripts should go at end of body to avoid blocking DOM load. #}
     <script defer src="https://cdn.jsdelivr.net/npm/jquery@3.7.0/dist/jquery.min.js"></script>
     {% if site.lightbox.enabled %}
@@ -38,6 +36,8 @@
             <script defer src="{{asset}}"></script>
         {% endfor %}
     {% endif %}
+
+    <link rel="icon" href="favicon.ico" type="image/x-icon" />
 
     <html class="no-js"></html>
 </head>
