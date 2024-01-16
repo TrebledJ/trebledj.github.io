@@ -3,21 +3,17 @@ name: Deploy Site
 
 on:
   # Runs on pushes targeting the default branch
-  # push:
-  #   branches: master
-  #   paths:
-  #     - '**'
-  #     - '!.gitignore'
-  #     - '!*.md'
-  #     - '!LICENSE'
-  #     - '!.eslintignore'
-  #     - '!.eslintrc.yml'
-  #     - '!.github/**'
-  #     - '!.lycheeignore'
-  #     - '!.vscode/**'
-  #     - '!archive/**'
-  #     - '!scripts/**'
-  #     - '!ust/**'
+  push:
+    branches: master
+    paths:
+      - 'deploy.yml'
+      - '*.json'
+      - '_data/**'
+      - '_includes/**'
+      - 'assets/**'
+      - 'content/**'
+      - 'eleventy/**'
+      - 'pages/**'
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
