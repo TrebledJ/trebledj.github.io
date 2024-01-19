@@ -10,7 +10,7 @@ tags:
   - cpp
   - song
   - stm32
-  - electronic
+  - electronica
   - music
   - composition
   - learning
@@ -452,7 +452,7 @@ Don't do drugs, kids!^[Hear hear!]
 
 {% abbr "Hi", "Hello world!" %}, with {% abbr "**bold**", "BOLD!" %}, with {% abbr "*emphasis*", "EMPHASIS!" %}, with {% abbr "~~strikethrough~~", "such ninja!" %}, with {% abbr "`code`", "</>" %}.
 
-Tags: {% tag "ctf" %} {% tag "programming" %} {% tag "music" %} {% tag "electronic" %}
+Tags: {% tag "ctf" %} {% tag "programming" %} {% tag "music" %} {% tag "electronica" %}
 
 {% enddetails %}
 

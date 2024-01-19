@@ -5,7 +5,7 @@ module.exports = [
   'programming',
   'music',
   'composition',
-  'electronic',
+  'electronica',
   'ctf',
   'project',
   'mathematics',

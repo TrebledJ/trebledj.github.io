@@ -2,8 +2,9 @@
 title: "Space Penguin"
 excerpt: "And yet another school year begins."
 tags:
-  - electronic
+  - electronica
   - synths
+  - dubsy-wubsy
   - tech-house
 keywords: [sidechain compression, synth, surge, penguins, space, learn-to-fly]
 thumbnail_src: assets/space-penguin.jpg
