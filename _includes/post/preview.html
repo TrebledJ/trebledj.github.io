@@ -11,9 +11,7 @@
 {% endmacro %}
 
 {% macro render_title(post) %}
-    <h2 class="post-title">
-        {{ post.data.title | mdInline | safe }}
-    </h2>
+    <h2 class="post-title">{{ post.data.title | mdInline | safe }}</h2>
     {% if post.data.excerpt %}
         <div class="post-summary">
             <p>{{ post.data.excerpt | mdInline | safe }}</p>
