@@ -28,7 +28,7 @@
     {% set page_keywords = page_keywords | push(title | annihilateTags(['sup', 'sub']) | striptags | lower | e) %}
 {% endif %}
 {% if excerpt %}
-    {% set page_keywords = page_keywords | push(excerpt | lower | e) %}
+    {% set page_keywords = page_keywords | push(excerpt | mdInline | striptags | lower | e) %}
 {% endif %}
 {% if tags %}
     {% set page_keywords = page_keywords | extend(tags | exclude('posts')) %}
