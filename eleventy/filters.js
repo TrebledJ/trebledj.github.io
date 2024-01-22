@@ -108,7 +108,7 @@ module.exports = function (eleventyConfig) {
 
   // A filter to murder tags and their children brutally with regex. Please don't take this comment seriously.
   eleventyConfig.addFilter('annihilateTags', (html, tags) => {
-    const dumbHTMLRegex = tag => new RegExp(`<${tag}(\\s+\\w+\\s*=\\s*("[^"]*"|'[^']*'))*/?>.*?(</${tag}>)?`, 'ig');
+    const dumbHTMLRegex = tag => new RegExp(`<${tag}(\\s+\\w+\\s*=\\s*("[^"]*"|'[^']*'))*/?>(.*)?(</${tag}>)?`, 'ig');
     if (typeof tags === 'string')
       return html.replace(dumbHTMLRegex(tags), '');
     return tags.reduce((acc, x) => acc.replace(dumbHTMLRegex(x), ''), html);
