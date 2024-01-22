@@ -1,17 +1,26 @@
 <meta charset="utf-8"/>
 
-{# Title / Description #}
-{% set titleText %}
 {% if title %}
-    {{ title | annihilateTags(['sup', 'sub']) | striptags }} - {{ site.title }}
+<meta name="__debug" content="{{title}}">
+{% set safeTitle = title | annihilateTags(['sup', 'sub']) | striptags %}
+{% endif %}
+{% if excerpt %}
+<meta name="__debug" content="{{excerpt}}">
+{% set safeExcerpt = excerpt | mdInline | safe | striptags %}
+{% endif %}
+
+{# Title / Description #}
+{% set titleTagText %}
+{% if title %}
+    {{ safeTitle }} - {{ site.title }}
 {% else %}
     {{ site.title }} - {{ site.description }}
 {% endif %}
 {% endset %}
-<title>{{titleText | trim | safe}}</title>
+<title>{{titleTagText | trim | safe}}</title>
 
 {% if excerpt %}
-    <meta name="description" content="{{ excerpt | mdInline | safe | striptags }}">
+    <meta name="description" content="{{ safeExcerpt }}">
 {% else %}
     <meta name="description" content="{{ site.description }}">
 {% endif %}
@@ -25,10 +34,10 @@
 {% set page_keywords = [] %}
 {% set page_keywords = page_keywords | push(site.author.alias | lower) %}
 {% if title %}
-    {% set page_keywords = page_keywords | push(title | annihilateTags(['sup', 'sub']) | striptags | lower | e) %}
+    {% set page_keywords = page_keywords | push(safeTitle | lower | e) %}
 {% endif %}
 {% if excerpt %}
-    {% set page_keywords = page_keywords | push(excerpt | mdInline | striptags | lower | e) %}
+    {% set page_keywords = page_keywords | push(safeExcerpt | lower | e) %}
 {% endif %}
 {% if tags %}
     {% set page_keywords = page_keywords | extend(tags | exclude('posts')) %}
@@ -61,7 +70,7 @@
 {# See https://ogp.me/. #}
 <meta property="og:site_name" content="{{ site.title }}"/>
 {% if title %}
-    {% set meta_title = title | annihilateTags(['sup', 'sub']) | striptags %}
+    {% set meta_title = safeTitle %}
     <meta property="og:type" content="article"/>
 {% else %}
     {% set meta_title = site.title %}
@@ -71,7 +80,7 @@
 <meta property="twitter:title" content="{{ meta_title }}"/>
 
 {% if excerpt %}
-    {% set meta_desc = (excerpt | mdInline | striptags) + "\n\n" + (content | annihilate('.article-header, .metadata-container, .metadata-tag-container, #toc-sidebar') | striptags | truncateWords(30)) %}
+    {% set meta_desc = safeExcerpt + "\n\n" + (content | annihilate('.article-header, .metadata-container, .metadata-tag-container, #toc-sidebar') | striptags | truncateWords(30)) %}
 {% else %}
     {% set meta_desc = site.description %}
 {% endif %}

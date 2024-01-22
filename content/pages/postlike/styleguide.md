@@ -1,6 +1,6 @@
 ---
-title: Styleguide
-excerpt: "This is a supperrrrrrrr longggggg description... designed to test the limits of the measly little box that contains it. Who knows if it'll hold?"
+title: Styleguide <sub>test</sub> "quotes"
+excerpt: "This is a \"supperrrrrrrr\" **longggggg** *description*... <sup>designed</sup> <sub>to test</sub> the limits of the measly little box that contains it. Who knows if it'll hold?"
 tags:
   - qt
   - qml
