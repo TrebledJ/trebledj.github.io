@@ -1,6 +1,6 @@
 <div class="post-body" itemprop="articleBody text">
     {% if thumbnail_banner and thumbnail_src %}
-        {% hero thumbnail_src, "", title | annihilateTags(['sup', 'sub']) | striptags %}
+        {% hero thumbnail_src, "", title | stripBetweenTags(['sup', 'sub']) | striptags %}
     {% endif %}
     {{ content | safe }}
 </div>

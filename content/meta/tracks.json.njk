@@ -15,7 +15,7 @@ permalink: /tracks.json
       "title": "{{post.data.title}}",
       "excerpt": "{{post.data.excerpt | mdInline}}",
       {# Remove footnote markings (sup) and headers. #}
-      "content": "{{post.content | annihilateTags(['sup', 'h1', 'h2', 'h3']) | striptags | truncateWords(30) | safe}}",
+      "content": "{{post.content | stripBetweenTags(['sup', 'h1', 'h2', 'h3']) | striptags | truncateWords(30) | safe}}",
       "url": "{{post.url}}"
     }
     {% endif %}

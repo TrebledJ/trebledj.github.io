@@ -39,7 +39,7 @@
                             </div>
 
                             <div class="my-2 mb-4">
-                                {{post.content | annihilateTags(['sup', 'h1', 'h2', 'h3']) | truncate(300, false, "...") | safe}}
+                                {{post.content | stripBetweenTags(['sup', 'h1', 'h2', 'h3']) | truncate(300, false, "...") | safe}}
                             </div>
                         {% endif %}
                     {% endfor %}

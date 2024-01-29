@@ -8,7 +8,7 @@ permalink: /posts/demo.json
   {% if not post.data.noindex %}
     {{ comma() }}
     {# {
-      "title": {{post.data.title | annihilateTags(['sup', 'sub']) | striptags | jsonify | safe}},
+      "title": {{post.data.title | stripBetweenTags(['sup', 'sub']) | striptags | jsonify | safe}},
       "excerpt": {{post.data.excerpt | jsonify | safe}},
       "excerpt": {{post.content | striptags | truncate(120, false, "...") | jsonify | safe}},
       "tags": {{post.data.tags | exclude("posts") | jsonify | safe}},
@@ -16,7 +16,7 @@ permalink: /posts/demo.json
       "url": {{post.url | jsonify | safe}}
     } #}
 
-    {{post.data.title | annihilateTags(['sup', 'sub']) | striptags | jsonify | safe}}
+    {{post.data.title | stripBetweenTags(['sup', 'sub']) | striptags | jsonify | safe}}
   {% endif %}
 {% endfor %}
 ]

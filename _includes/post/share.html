@@ -4,7 +4,7 @@
     </span>
 {% endmacro %}
 {% macro sharer(brand) %}
-    <a data-sharer="{{brand}}" data-title="{{title | annihilateTags(['sup', 'sub']) | striptags}}" data-url="{{page.url | absoluteUrl}}">
+    <a data-sharer="{{brand}}" data-title="{{title | stripBetweenTags(['sup', 'sub']) | striptags}}" data-url="{{page.url | absoluteUrl}}">
         {{icon('fab fa-' + brand)}}
     </a>
 {% endmacro %}

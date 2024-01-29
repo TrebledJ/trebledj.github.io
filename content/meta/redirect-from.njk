@@ -40,7 +40,7 @@
 
   {# Simple OG metadata to make social media embeds work. #}
   {% if redirect.page.data.title %}
-    <meta content="{{ redirect.page.data.title | annihilateTags(['sup', 'sub']) | striptags }}" property="og:title"/>
+    <meta content="{{ redirect.page.data.title | stripBetweenTags(['sup', 'sub']) | striptags }}" property="og:title"/>
     <meta content="article" property="og:type"/>
   {% else %}
     <meta content="{{ site.title }}" property="og:title"/>

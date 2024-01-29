@@ -2,7 +2,8 @@
 
 {% if title %}
 <meta name="__debug" content="{{title}}">
-{% set safeTitle = title | annihilateTags(['sup', 'sub']) | striptags %}
+{% set safeTitle = title | stripBetweenTags(['sup', 'sub']) | striptags %}
+<meta name="__debug" content="{{safeTitle}}">
 {% endif %}
 {% if excerpt %}
 <meta name="__debug" content="{{excerpt}}">

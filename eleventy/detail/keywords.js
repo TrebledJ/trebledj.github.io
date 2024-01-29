@@ -2,20 +2,25 @@
 
 // const process = require('./rake-js/dist/index').default;
 
+const { tokenize } = require('prismjs');
 const stem = require('./stem');
 const { tokenise, stopwords } = require('./tokenise');
 
 // const chalk = require('chalk');
 
-function extract(content) {
-  function keep(s) {
-    if (!s)
-      return false;
-    const trimmed = s.trim();
-    return trimmed.length >= 2 && !stopwords.includes(trimmed);// && trimmed.length < 6;
-  }
+function exclude_stopwords(s) {
+  if (!s)
+    return false;
+  const trimmed = s.trim();
+  return trimmed.length >= 2 && !stopwords.includes(trimmed);// && trimmed.length < 6;
+}
 
-  return tokenise(content).map(stem).filter(keep);
+function extract(content, useStemming) {
+  const tokenised = tokenise(content);
+  if (useStemming) {
+    return tokenised.map(stem).filter(exclude_stopwords);
+  }
+  return tokenised.filter(exclude_stopwords);
 }
 
 /**
@@ -23,6 +28,7 @@ function extract(content) {
  * @param {*} content The text to extract keywords from.
  * @returns An array of key terms.
  */
-module.exports = function (content) {
-  return extract(content);
+module.exports = function (content, useStemming) {
+  useStemming ??= true;
+  return extract(content, useStemming);
 };

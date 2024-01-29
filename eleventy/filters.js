@@ -6,6 +6,7 @@ const { getRelatedPosts, getRelatedTags, getTagsByPrefix } = require('./detail/r
 const { nonEmptyContainerSentinel } = require('./detail/utils');
 const selectHomePosts = require('./detail/select-home-posts');
 const findKeywords = require('./detail/keywords');
+const { stripBetweenTags } = require('./detail/filters');
 
 function count(str, needle) {
   return (str.match(needle) || []).length;
@@ -107,11 +108,8 @@ module.exports = function (eleventyConfig) {
   }
 
   // A filter to murder tags and their children brutally with regex. Please don't take this comment seriously.
-  eleventyConfig.addFilter('annihilateTags', (html, tags) => {
-    const dumbHTMLRegex = tag => new RegExp(`<${tag}(\\s+\\w+\\s*=\\s*("[^"]*"|'[^']*'))*/?>(.*)?(</${tag}>)?`, 'ig');
-    if (typeof tags === 'string')
-      return html.replace(dumbHTMLRegex(tags), '');
-    return tags.reduce((acc, x) => acc.replace(dumbHTMLRegex(x), ''), html);
+  eleventyConfig.addFilter('stripBetweenTags', (html, tags) => {
+    return stripBetweenTags(html, tags);
   });
   if (process.env.ENVIRONMENT === 'fast') {
     // Fast: Do nothing.
