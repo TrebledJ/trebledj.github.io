@@ -63,3 +63,18 @@
 {"rule":"DRIVERS_LICENSE","sentence":"^\\QA few page flips later, Andrew found a use for his driver's licence...\\E$"}
 {"rule":"DRIVERS_LICENSE","sentence":"^\\QI still could see no reason why I—who didn't even own a bicycle any more—should be carrying an automobile driver's licence around in my pocket.\\E$"}
 {"rule":"EN_GB_SIMPLE_REPLACE","sentence":"^\\Q'Well,' I said to myself, 'something will happen on the streetcar going back.'\\E$"}
+{"rule":"MORFOLOGIK_RULE_EN_GB","sentence":"^\\QArbitrary Write with Dir Symlinks\\E$"}
+{"rule":"MISSING_TO_BEFORE_A_VERB","sentence":"^\\QTo create a symlink, we need execute permissions in\\E$"}
+{"rule":"MISSING_TO_BEFORE_A_VERB","sentence":"^\\QThe user needs write permissions on the target folder.\\E$"}
+{"rule":"MISSING_TO_BEFORE_A_VERB","sentence":"^\\QTo create a symlink, we need execute permissions in the source directory and read/execute permissions in the target directory.\\E$"}
+{"rule":"MISSING_TO_BEFORE_A_VERB","sentence":"^\\QTo create a symlink, we need execute permissions in the source directory (where the linked file is located) and read/execute permissions in the target directory (where the symlink is created).\\E$"}
+{"rule":"A_INFINITIVE","sentence":"^\\QThis ultimately depends on the unzip application/library.\\E$"}
+{"rule":"MISSING_TO_BEFORE_A_VERB","sentence":"^\\QThe app needs execute permissions on intermediate folders (to traverse across) and write permissions on the target folder (to modify the directory listing).\\E$"}
+{"rule":"MISSING_TO_BEFORE_A_VERB","sentence":"^\\QThe app needs execute permissions on intermediate folders (to traverse across) and write permissions on the target folder.\\E$"}
+{"rule":"UNIT_SPACE","sentence":"^\\QThe well-known 42.zip bomb is only 42KB, but contains 5 layers of zips upon zips.\\E$"}
+{"rule":"UNIT_SPACE","sentence":"^\\QUnzipping the first layer yields a harmless 0.6MB.\\E$"}
+{"rule":"UNIT_SPACE","sentence":"^\\QBut recursively uncompressed, it yields an astronomical payload of {% abbr \"4.5PB (petabytes, 15 zeros)\", \"4,503,599,626,321,920 bytes, to be exact\" %}!\\E$"}
+{"rule":"UNIT_SPACE","sentence":"^\\QIn 2019, David Fifield introduced a better zip bomb, which abuses the structure of a .zip, toying with metadata to trick decompressors into puking ungodly amounts of data.^fifield A compressed Fifield zip bomb of 42KB yields 5.4GB of uncompressed bytes.\\E$"}
+{"rule":"UNIT_SPACE","sentence":"^\\QFrom 5GB, we've gone down to ~4.9MB!\\E$"}
+{"rule":"MORFOLOGIK_RULE_EN_GB","sentence":"^\\QMultiple Zip Vulnerabilities across Flutter and Swift Packages (2023)\nZip Slip (2018) and Metadata Spoofing (2019) in Rubyzip\\E$"}
+{"rule":"ITS_JJ_NNSNN","sentence":"^\\QWhether it's Java apps or Microsoft Office documents, zip files have become an indispensable tool.\\E$"}
