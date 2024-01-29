@@ -15,6 +15,8 @@ Zip files are *everywhere* in our daily lives, seamlessly integrated into our pe
 
 But as we know from [*Silicon Valley*](https://www.youtube.com/watch?v=jnDk8BcqoR), zip files have the potential to be dangerous.
 
+<!-- TODO: extract short clip from SV -->
+
 In this post, we'll delve into the intriguing world of zip upload attacks, exploring various methods that allow attackers to gain unauthorized read and write privileges.
 
 {% alert "danger" %}
@@ -23,6 +25,8 @@ Disclaimer: The content provided in this blog post is intended purely for educat
 
 
 ## Play Along 🐳
+
+TODO: link to github
 
 I've created a Docker playground for trying out zip payloads. Feel free to build it locally and follow along.
 
@@ -69,7 +73,9 @@ To bring everyone on the same page, here's what the application does:
 
 #### Overview of Zip Slip
 
-This is a fancy name for directory traversal but applied to zip uploads. **Directory traversal** is a [common weakness](https://cwe.mitre.org/data/definitions/22.html) which allows unauthorised access to files and directories by exploiting the lack of *proper input validation* in file path parameters.
+{% image "assets/anya-point.jpg", "w-50 floatr1-md", "Directory traversal for ../../app/flag.txt, as demonstrated by Anya." %}
+
+**Zip Slip** is a fancy name for directory traversal but applied to zip uploads. **Directory traversal** is a [common weakness](https://cwe.mitre.org/data/definitions/22.html) which allows unauthorised access to files and directories by exploiting the lack of *proper input validation* in file path parameters.
 
 Suppose we have a zip payload like so:
 ```text
@@ -269,7 +275,7 @@ Note that this approach will leave leftover files to be cleaned up (or reused).
 [^ref-linuxlinkperm]: Reference: [SO: Minimum Permissions Required to Create a Link to a File](https://stackoverflow.com/questions/40667014/linux-what-are-the-minimum-permissions-required-to-create-a-link-to-a-file)
 
 
-### Zip Bomb 💣
+### Zip Bombs 💣
 
 Since we're talking about attacks, let's also cover zip bombs for completeness.
 
