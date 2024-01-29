@@ -59,13 +59,14 @@ module.exports = function (eleventyConfig) {
       delete tocMemo[mem];
   });
 
-  eleventyConfig.addFilter('tocFast', function (content) {
+  eleventyConfig.addFilter('tocFast', function (content, localOpts) {
+    // localOpts: see https://github.com/jdsteinbach/eleventy-plugin-toc?tab=readme-ov-file#5-override-default-options-if-necessary,
     // TODO: refactor as cacheByOutputPath decorator
     const key = this.page.outputPath;
     if (tocMemo[key] !== undefined)
       return tocMemo[key];
 
-    const toc = eleventyConfig.getFilter('toc')(content);
+    const toc = eleventyConfig.getFilter('toc')(content, localOpts);
     tocMemo[key] = toc ?? '';
     return toc;
   });

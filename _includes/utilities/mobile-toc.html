@@ -1,6 +1,6 @@
 <!-- Mobile ToC -->
 {% if showToc %}
-    {% set toc = content | tocFast %}
+    {% set toc = content | tocFast(tocOptions) %}
     {% if toc and title != '404' %}
         <div id="btn-mobile-toc" class="dropup">
             <button type="button" class="btn btn-lg" data-bs-toggle="dropdown" aria-label="Content">

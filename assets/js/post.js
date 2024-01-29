@@ -26,12 +26,10 @@ $(() => {
 
   // --- TOC Current Section Highlight --- //
   const headerOffset = document.querySelector('header').offsetHeight + 20;
+  // TODO: Make this work with toc/tocFast localOptions, which may construct toc links for h4/h5.
   const sections = document.querySelectorAll('.post-body h2,.post-body h3');
   const mainNavLinks = document.querySelectorAll('#toc-sidebar nav.toc a');
   const mobileNavLinks = document.querySelectorAll('#btn-mobile-toc nav.toc a');
-
-  if (mainNavLinks.length !== mobileNavLinks.length)
-    console.warn("TOCs have different lengths?!? This shouldn't be much of an issue tho. (Hopefully.)");
 
   const { hash } = window.location;
   const articleEnd = document.querySelector('#end-of-article').offsetTop;
