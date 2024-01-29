@@ -9,6 +9,7 @@ tags:
   - programming
   - notes
 thumbnail_src: assets/attack-of-the-zip.jpg
+draft: true
 # tocOptions: '{"tags":["h2","h3","h4"]}'
 ---
 <!-- TODO: revise thumbnail -->
