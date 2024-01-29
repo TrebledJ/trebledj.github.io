@@ -1,6 +1,6 @@
 ---
 title: Attack of the Zip
-excerpt: Zip file upload attacks with examples.
+excerpt: Diving into zip file upload attacks with examples.
 tags: 
   - tutorial
   - web
@@ -15,7 +15,7 @@ Zip files are *everywhere* in our daily lives, seamlessly integrated into our pe
 
 But as we know from [*Silicon Valley*](https://www.youtube.com/watch?v=jnDk8BcqoR), zip files have the potential to be dangerous.
 
-In this post, we'll delve into the intriguing world of zip file upload attacks, exploring various methods that allow attackers to gain unauthorized read and write privileges.
+In this post, we'll delve into the intriguing world of zip upload attacks, exploring various methods that allow attackers to gain unauthorized read and write privileges.
 
 {% alert "danger" %}
 Disclaimer: The content provided in this blog post is intended purely for educational purposes. The author does not assume any responsibility for the potential misuse of the information presented herein. Readers are advised to exercise caution and utilize the knowledge gained responsibly and within legal boundaries.
@@ -69,7 +69,7 @@ To bring everyone on the same page, here's what the application does:
 
 #### Overview of Zip Slip
 
-This is a fancy name for directory traversal but applied to zip file uploads. **Directory traversal** is a [common weakness](https://cwe.mitre.org/data/definitions/22.html) which allows unauthorised access to files and directories by exploiting the lack of *proper input validation* in file path parameters.
+This is a fancy name for directory traversal but applied to zip uploads. **Directory traversal** is a [common weakness](https://cwe.mitre.org/data/definitions/22.html) which allows unauthorised access to files and directories by exploiting the lack of *proper input validation* in file path parameters.
 
 Suppose we have a zip payload like so:
 ```text
@@ -163,7 +163,7 @@ app/
 
 If we can read files in `/app/uploads/`, then we can read `passwd.txt` and by extension, `/etc/passwd`. Then GG! We can use this method to read any file on the system (subject to certain constraints to be discussed later).
 
-But... what if we *don't* have read access to `/app/uploads/`? What if say... we had read access to `/app/static/`, where static files (.html, .css, .js) are served from? We would need to write our symlink to *that* folder first before reading it. One way is to use Zip Slip. But is there an alternative way?
+But... what if we *don't* have read access to `/app/uploads/`? What if say... we had read access to `/app/static/`, where static files (.html, .css, .js) are served from? We would need to write our symlink to *that* folder first before reading it. One way is to use Zip Slip. But what if the application blocks requests with `../`? is there an alternative way?
 
 
 #### Arbitrary Write with Dir Symlinks
