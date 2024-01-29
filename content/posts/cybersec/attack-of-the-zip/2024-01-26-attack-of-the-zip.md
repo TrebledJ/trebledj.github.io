@@ -1,6 +1,6 @@
 ---
 title: Attack of the Zip
-excerpt: Deep dive into zip file upload attacks and mitigations with examples.
+excerpt: Deep dive into zip file attacks and mitigations with examples.
 tags: 
   - tutorial
   - web
@@ -9,15 +9,16 @@ tags:
   - programming
   - notes
 thumbnail_src: assets/attack-of-the-zip.jpg
+# tocOptions: '{"tags":["h2","h3","h4"]}'
 ---
 
 Zip files are *everywhere* in our daily lives, seamlessly integrated into our personal, academic, and professional environments. From Java apps to Microsoft Office documents, zip files have become an indispensable tool.
 
-But as we know from *Silicon Valley*, zip files have the potential to be dangerous.
+But as we know from *Silicon Valley*, zip files have the potential to be dangerous.^[Relevant YouTube: [SILICON VALLEY - THE ULTIMATE HACK](https://www.youtube.com/watch?v=jnDk8BcqoR0)]
 
-{% image "assets/its-a-zip-bomb.gif", "", "Filmmakers' impression of a zip bomb." %}
+{% image "assets/its-a-zip-bomb.gif", "w-80", "Filmmakers' impression of a zip bomb." %}
 
-In this post, we'll delve into the intriguing world of zip upload attacks, exploring various methods that allow attackers to gain unauthorized read and write privileges.
+In this post, we'll delve into the intriguing world of zip file attacks, exploring various methods that allow attackers to gain unauthorized read and write privileges.
 
 {% alert "danger" %}
 Disclaimer: The content provided in this blog post is intended purely for educational purposes. The author does not assume any responsibility for the potential misuse of the information presented herein. Readers are advised to exercise caution and utilize the knowledge gained responsibly and within legal boundaries.
@@ -73,29 +74,39 @@ To bring everyone on the same page, here's what the application does:
 
 #### Overview of Zip Slip
 
-{% image "assets/anya-point.jpg", "w-50 floatr1-md", "Directory traversal for ../../app/flag.txt, as demonstrated by Anya." %}
+{# {% image "assets/anya-point.jpg", "w-50 floatr1-md", "Directory traversal for ../../app/flag.txt, as demonstrated by Anya." %} #}
 
-**Zip Slip** is a fancy name for directory traversal but applied to zip uploads. **Directory traversal** is a [common weakness](https://cwe.mitre.org/data/definitions/22.html) which allows unauthorised access to files and directories by exploiting the lack of *proper input validation* in file path parameters.
+**Zip Slip** is a fancy name for [directory traversal](https://cwe.mitre.org/data/definitions/22.html) but applied to zip uploads. The idea is to *escape* a directory by visiting parent directories using `../` (or `..\\` on Windows). This allows unauthorised access to files and directories by exploiting the lack of *proper input validation* in file path parameters.
 
-Suppose we have a zip payload like so:
+A typical zip file may look like this:
+
+```text
+foo.zip
+└── data1.csv
+└── data2.txt
+└── ...
+```
+
+But in a Zip Slip payload, files are prefixed with nasty double-dots (`../`).
+
 ```text
 evil-slip.zip
 └── ../../root/.ssh/authorized_keys
 ```
 
-When unzipped by a vulnerable application, the filename will typically be appended to the unzip directory. The program would then traverse up and out. For instance, if the unzip directory was `/app/uploads/`, then our unzipped file would end up in `/app/uploads/../../root/.ssh/authorized_keys`, i.e. `/root/.ssh/authorized_keys`.
+If a vulnerable application unzips `evil-slip.zip` to `/app/uploads/`, then our unzipped file would end up in `/app/uploads/../../root/.ssh/authorized_keys`, i.e. `/root/.ssh/authorized_keys`.
 
-{% alert "success" %}
-`~/.ssh/authorized_keys` is a generic attack vector which can be applied in other file upload scenarios too! The flow goes like so:
+{% alert "fact" %}
+Overwriting `~/.ssh/authorized_keys` is a common attack vector which can be applied in other file upload scenarios too! The flow goes like so:
 
-1. Generate a public/private SSH key.
-2. Write our public key to `~/.ssh/authorized_keys` (on the victim).
-3. SSH to the victim.
+1. Generate a public/private SSH key (`ssh-keygen`).
+2. Exploit any file write trickery to write our public key to `~/.ssh/authorized_keys` (on the victim).
+3. SSH to the victim.[^ssh]
 4. Profit! Run arbitrary commands.
 
-But for this to work, the container needs to be running `sshd` (or some program which handles SSH connections) and port 22 needs to be exposed.
+[^ssh]: But for this to work, the container needs to be running `sshd` (or some program which handles SSH connections) and port 22 needs to be exposed.
 
-There are other ways to escalate ourselves to remote code execution (RCE). If the web server processes templates, then we can write a template which abuses template functions to run system commands. For example, if the web server was in PHP, we could upload a zip containing a webshell such as `<?php system($_GET["cmd"]); ?>`.
+But this isn't the only way to gain arbitrary code execution! There are other potential targets for an arbitrary file write (server credentials, config files, etc.).
 {% endalert %}
 
 #### DIY: Build your own Zip Slip payload!
@@ -162,14 +173,14 @@ There are several ways to build a malicious zip containing symlinks. But before 
 In this subsection, "Arbitrary Read" assumes the user has some way of accessing files on the system. For instance, perhaps the system hosts a web server which serves files from a particular directory.
 {% endalert %}
 
-Let's start with a simple example of a **zip symlink payload**. Here's a zip which contains a symlink to `/etc/passwd`.
+Let's start with a simple example of a zip symlink payload. Here's a zip which contains a symlink to `/etc/passwd`.
 
 ```text
 evil-link-file.zip
 └── passwd.txt         -> /etc/passwd
 ```
 
-Upload the zip to the playground and let the app unzip it. Our filesystem now resembles:
+After uploading the zip and letting the app unzip it, the filesystem now resembles:
 
 ```text
 app/
@@ -183,9 +194,9 @@ If we can read files in `/app/uploads/`, then we can read `passwd.txt` and by ex
 
 But... what if we *don't* have read access to `/app/uploads/`?
 
-This is the case in our Docker playground. `/app/uploads/` is walled off... But! We can access files in `/app/static/`. This is the folder where static files (.html, .css, .js) are served from.
+This is the case in our Docker playground. We can't access `/app/uploads/` from the browser... But! We can access files in `/app/static/`. This is the folder where static files (.html, .css, .js) are served from.
 
-We would need to write our symlink to *that* folder first before reading it. One way is to use Zip Slip. But what if the application blocks requests with `../`? Is there an alternative way?
+We would need to write our symlink to *that* folder first before reading it. One way is to use Zip Slip. But what if the application blocks zip files containing `../`? Is there an alternative way?
 
 
 #### Arbitrary Write with Dir Symlinks
@@ -200,7 +211,7 @@ evil-link-dir-file.zip
 
 Now our zip contains a symlink directory! When unzipped, the vulnerable application will first create a symlink to `/app/static/`. Then inside that symlink, it creates *another* symlink, this time to `/etc/passwd`.
 
-Let's see what our filesystem now looks like.
+Let's see what the filesystem looks like now.
 
 ```text
 app/
@@ -210,9 +221,9 @@ app/
     └── passwd.txt     -> /etc/passwd
 ```
 
-Now browse to `https://localhost:8080/passwd.txt` to leak the contents of `/etc/passwd`.
+Now we can browse `https://localhost:8080/passwd.txt` to leak the contents of `/etc/passwd`.
 
-This method can also be used to write to `~/.ssh/authorized_keys` and apply the same attack technique we tried in the Zip Slip section.
+This method can also be used to apply the same attack technique we tried in the Zip Slip section.
 
 
 #### DIY: Build your own Zip Symlink Payload!
@@ -270,7 +281,7 @@ Note that this approach will leave leftover files to be cleaned up (or reused).
 - Permissions on Linux.
   - To create a symlink, we need execute permissions in the source directory (where the linked file is located) and write/execute permissions in the target directory (where the symlink is created).[^ref-linuxlinkperm]
   - Reading a symlink requires execute permissions in the source directory, and read permissions on the source file.
-- Permissions on [Windows](https://learn.microsoft.com/en-us/windows/security/threat-protection/security-policy-settings/create-symbolic-links). By default, only Administrators have the privilege to create symbolic links. This setting can be changed by [editing the local group policy](https://superuser.com/a/105381) (typically for users) or by directly enabling `SeCreateSymbolicLinkPrivilege` (typically for processes).
+- Permissions on Windows. By default, only Administrators have the privilege to [create symbolic links](https://learn.microsoft.com/en-us/windows/security/threat-protection/security-policy-settings/create-symbolic-links). This setting can be changed by [editing the local group policy](https://superuser.com/a/105381) or by directly enabling `SeCreateSymbolicLinkPrivilege`.
 
 [^ref-linuxlinkperm]: Reference: [SO: Minimum Permissions Required to Create a Link to a File](https://stackoverflow.com/questions/40667014/linux-what-are-the-minimum-permissions-required-to-create-a-link-to-a-file)
 
@@ -295,7 +306,7 @@ Zip bombs are designed to cripple computers, systems, and virus scanners (rather
 {% image "assets/unzip42.jpg" %}
 {% endimages %}
 
-<sup>Some fork bomb memes. And zip bomb memes adapted from fork bomb memes. Zip bomb memes where?^[Probably not as many memes on zip bombs as they tend to be a software bug which can be easily patched.]</sup>
+<sup>Some fork bomb memes. And zip bomb memes adapted from fork bomb memes. Zip bomb memes where?^[There probably aren't as many memes on zip bombs as they tend to be a software bug which can be swiftly patched.]</sup>
 {.caption}
 
 The basic principle abuses the ***deflate***[^deflate] compression format to achieve compression ratios of up to [1032:1](https://stackoverflow.com/a/16794960/10239789). This means after compression, every byte of compressed data can represent *up to* 1032 bytes of uncompressed data.
@@ -320,7 +331,7 @@ In 2019, David Fifield introduced *a better zip bomb*, which abuses the structur
 
 Here's a small demo:
 ```sh
-# Create a blank file full of nulls.
+# Create a blank file with 5GB of null bytes.
 $ dd if=/dev/zero bs=20000 count=250000 >zero.txt
 
 # Zip it.
@@ -333,7 +344,7 @@ $ wc -c zero.txt zero.zip
  5004852639 total
 ```
 
-From 5GB, we've gone down to ~4.9MB! Upload a bunch of these to a vulnerable site, and boom—helicopter.
+From 5GB, we've gone down to ~4.9MB! Upload a bunch of these to a vulnerable site, and boom—CPU helicopter.
 
 
 ## Other Zip Vulnerabilities in the Wild
@@ -364,36 +375,43 @@ In America, "all men are created equal". Not so in filesystems.
 Reading, writing, and linking files depends on permissions. Setting appropriate permissions for the process and limiting the scope of an application can go a long way in preventing attackers from snooping your secrets.
 
 {% alert "success" %}
-1. Avoid running the application as `root`. Instead, run it with a minimum privilege user. (Minimum meaning: enough permissions to get the job done, and only enabling risky permissions when needed.)
+1. Avoid running the application as `root`. Instead, run it with a minimum privilege user. (Minimum meaning: enough permissions to get the job done, and only enabling risky permissions when needed.)^[In Docker, we can configure permissions with `chown` and [`USER`](https://docs.docker.com/engine/reference/builder/#user). (I intentionally left these out in the demo.)]
   
-    In Docker, we can configure this with `chown` and [`USER`](https://docs.docker.com/engine/reference/builder/#user). (I intentionally left these out in the demo.)
-  
-2. Lock down sensitive/system files, only allowing access to privileged users.
-
-    Not always possible. The app still needs to—say—write logs, meaning log poisoning may still be possible.
+2. Lock down sensitive files, only allowing access to privileged users. For example, most server applications don't require write privileges to credential/config files.
 {% endalert %}
 
-See [Limitations of Zip Slip](#limitations-of-zip-slip) and [Limitations of Zip Symlink Attacks](#limitations-of-zip-symlink-attacks) for the permissions to manage.
+Sometimes it's not entirely feasible to restrict all write permissions. For example, web servers may still need to write access logs.
+
+See [Limitations of Zip Slip](#limitations-of-zip-slip) and [Limitations of Zip Symlink Attacks](#limitations-of-zip-symlink-attacks) for details on relevant permissions.
 
 ### Checks
-On the development side: research and verify your edge cases! Some libraries ignore simple edge cases and fall prey to Zip Slip. Or they disregard symlinks, and fall prey to symlink attacks. Extra time may be needed to research edge cases and consider different scenarios, but hey, it makes for good Shift Left practice.
+On the software development side: research and verify your edge cases! Some libraries ignore simple edge cases and fall prey to Zip Slip. Or they disregard symlinks, and fall prey to symlink attacks. Extra time may be needed to research these edge cases and consider different scenarios, but hey, it makes for good Shift Left practice.
 
 Here are a couple more recommendations:
 
 {% alert "success" %}
-3. Proactively consider and research edge cases (OS? roles? users? filenames? encodings?) and add appropriate {% abbr "branches", "if-statements, guards, exception-handling, etc." %}.
+3. Proactively consider and research edge cases and add appropriate {% abbr "branches", "if-statements, guards, exception-handling, etc." %}. Edge cases come in different forms: OS? roles? users? filenames? encodings?
 
-    Here's a [*fix that came with Juce v6.1.5*](https://github.com/juce-framework/JUCE/commit/2e874e80cba0152201aff6a4d0dc407997d10a7f#diff-16f78a017ef48e7154eac2ea6b3ee3d211fa508f5465db0c7f2667741ca00265R438-R440) to prevent arbitrary write attacks:
+4. Adopt unit testing to verify your code works as intended. Add test cases against unintended situations.
 
-    ```cpp
-    if (!fileToUnzip.isAChildOf(directoryToUnzipTo))
-      // Attack attempt detected: attempted write outside of unzip directory.
-      return Result::fail("...");
-    ```
+    Test cases prevent [software regression](https://en.wikipedia.org/wiki/Software_regression) and automate the menial task of manual input.
 
-4. Adopt unit/integration testing to verify your code works as intended. Add test cases against unintended situations. (For example, Juce v6.1.5 also added a [test case against Zip Slip](https://github.com/juce-framework/JUCE/commit/2e874e80cba0152201aff6a4d0dc407997d10a7f#diff-16f78a017ef48e7154eac2ea6b3ee3d211fa508f5465db0c7f2667741ca00265R700).)
- 
 {% endalert %}
+
+For example, Juce v6.1.5 introduced several fixes:
+
+- They [added a check](https://github.com/juce-framework/JUCE/commit/2e874e80cba0152201aff6a4d0dc407997d10a7f#diff-16f78a017ef48e7154eac2ea6b3ee3d211fa508f5465db0c7f2667741ca00265R438-R440) to prevent arbitrary write attacks:
+
+  ```cpp
+  if (!fileToUnzip.isAChildOf(directoryToUnzipTo))
+    // Attack attempt detected: attempted write outside of unzip directory.
+    return Result::fail("...");
+  ```
+
+- They also added a [test case against Zip Slip](https://github.com/juce-framework/JUCE/commit/2e874e80cba0152201aff6a4d0dc407997d10a7f#diff-16f78a017ef48e7154eac2ea6b3ee3d211fa508f5465db0c7f2667741ca00265R700).
+
+If you're writing an unzipping library, you should ensure your code handles `..` and symlinks to prevent Zip Slip and zip symlink attacks.^[Further, if the filename gets fed to other servers, you should also handle URL encodings of `.` (`%2f`) and `/` (`%2f`), which are a common bypass against straightforward checks.] If you're building an application meant for end-users, you should also consider the potential file size.
+
 
 ### Defaults
 
@@ -402,7 +420,7 @@ While we're on the topic of software development, having sensible defaults in li
 {% alert "success" %}
 5. Use defaults such as:
 
-   - Don't follow symlink directories.
+   - Don't follow symlink directories.^[There are other solutions as well. The `zip` binary found on Unix systems handles this by deferring linkage until *all* files have been uncompressed.]
    - Don't overwrite files. You don't want your files wiped out, right?
 
     It's a good idea to keep these defaults, unless you really need these features, and you're confident with the level of risk you're dealing with.
@@ -415,7 +433,7 @@ While we're on the topic of software development, having sensible defaults in li
 Although zip bombs have targeted antivirus (AV) systems in the past, most [modern AV programs can detect zip bombs](https://www.microsoft.com/en-us/windows/learning-center/what-is-a-zip-bomb) by recognising patterns and signatures. This brings us to our last suggestion:
 
 {% alert "success" %}
-6. Upgrade your (antivirus) software. Daily updates to malware signatures ensure that your antivirus program stays equipped to detect and thwart emerging threats.
+6. Upgrade your (antivirus) software. Daily updates to malware signatures ensure your antivirus program stays equipped to detect and thwart emerging threats.
 {% endalert %}
 
 <!-- TODO: hackers will keep finding loopholes and ways to bypass antivirus, so it's important to stay up-to-date? -->
