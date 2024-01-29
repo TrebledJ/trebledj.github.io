@@ -201,14 +201,15 @@ module.exports = function (eleventyConfig) {
     eleventyConfig.addFilter('keywords', content => content);
   } else {
     // Extract a set of keywords and run-length-encode them to optimise size.
-    eleventyConfig.addFilter('keywords', function (...args) {
-      const res = findKeywords.call(this, ...args);
-      const counter = {};
+    eleventyConfig.addFilter('keywords', function (content) {
+      const res = findKeywords(content);
+      const counter = new Map();
       for (const w of res) {
-        counter[w] = (counter[w] ?? 0) + 1;
+        counter.set(w, (counter.get(w) ?? 0) + 1);
       }
-      const uniq = new Set(res);
-      const lengthEncoded = [...uniq].map(w => Math.min(counter[w], 99).toString().padStart(2, '0') + w);
+      const lengthEncoded = [...counter.entries()].map(
+        ([w, n]) => Math.min(n ?? 0, 99).toString().padStart(2, '0') + w,
+      );
       return lengthEncoded.join(' ');
     });
   }
