@@ -388,9 +388,9 @@ Its wings are too small to get its fat little body off the ground. The bee, of c
 {% endalert %}
 
 {% alert "warning" %}
-If you *drink*, `don't` **drive**.
+- Big-margin list: If you *drink*, `don't` **drive**.
 
-And an additional note from {% tag "programming" %}:
+- And an additional note from {% tag "programming" %}:
 ```sh
 echo "Conversely, if you drive, don't drink."
 echo "test"
@@ -398,7 +398,7 @@ echo "test"
 {% endalert %}
 
 {% alert "danger" %}
-Don't press the giant red button. **DON'T DO IT!** Metroman has lost enough sweat for the day![^mega]
+- Small margin list: Don't press the giant red button. **DON'T DO IT!** Metroman has lost enough sweat for the day![^mega]
 
 [^mega]: Ahem. Megamind would like a word with you.
 
