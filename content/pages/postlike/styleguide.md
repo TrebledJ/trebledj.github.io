@@ -1,5 +1,5 @@
 ---
-title: Styleguide <sub>test</sub> "quotes"
+title: Styleguide <sub>test</sub>
 excerpt: "This is a \"supperrrrrrrr\" **longggggg** *description*... <sup>designed</sup> <sub>to test</sub> the limits of the measly little box that contains it. Who knows if it'll hold?"
 tags:
   - qt

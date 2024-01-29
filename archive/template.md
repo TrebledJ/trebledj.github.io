@@ -1,7 +1,7 @@
 ---
 # layout to use from _layout folder
 layout: post-default 
-title:  "title of post"           # Allowed tags: sup, sub. Quotes.
+title:  "title of post"           # Allowed tags: sup, sub.
 excerpt: "short summary of post"  # Allowed tags: inline markdown, sup, sub. Quotes.
 author: trebledj
 date: '2021-02-28 1:35:23 +0530' # not really needed
