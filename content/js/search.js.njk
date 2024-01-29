@@ -97,7 +97,7 @@ $(async function () {
       case "post":
         const tags = item.tags;
         const head = `<a href="${item.url}">${item.title}</a>
-                  <a class="tag ms-2" href="/tags/${tags[0]}">${tags[0]}</a>`;
+                  <a class="tag ms-2" href="/tags/${tags[0]}/">${tags[0]}</a>`;
         const desc = item.excerpt;
 
         for (const { tag, icon } of searchResultIcons) {
