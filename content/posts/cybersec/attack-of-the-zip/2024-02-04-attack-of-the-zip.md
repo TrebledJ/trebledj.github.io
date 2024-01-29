@@ -1,6 +1,6 @@
 ---
 title: Attack of the Zip
-excerpt: Deep dive into zip file attacks and mitigations with examples.
+excerpt: Deep dive into zip file attacks and mitigations (with examples!).
 tags: 
   - tutorial
   - web
@@ -11,6 +11,7 @@ tags:
 thumbnail_src: assets/attack-of-the-zip.jpg
 # tocOptions: '{"tags":["h2","h3","h4"]}'
 ---
+<!-- TODO: revise thumbnail -->
 
 Zip files are *everywhere* in our daily lives, seamlessly integrated into our personal, academic, and professional environments. From Java apps to Microsoft Office documents, zip files have become an indispensable tool.
 
@@ -384,15 +385,23 @@ Sometimes it's not entirely feasible to restrict all write permissions. For exam
 
 See [Limitations of Zip Slip](#limitations-of-zip-slip) and [Limitations of Zip Symlink Attacks](#limitations-of-zip-symlink-attacks) for details on relevant permissions.
 
+### Modern Antivirus
+
+Although zip bombs have targeted antivirus (AV) systems in the past, most [modern AV programs can detect zip bombs](https://www.microsoft.com/en-us/windows/learning-center/what-is-a-zip-bomb) by recognising patterns and signatures. This brings us to our last suggestion:
+
+{% alert "success" %}
+3. Upgrade your (antivirus) software. Daily updates to malware signatures ensure your antivirus program stays equipped to detect and thwart emerging threats.
+{% endalert %}
+
 ### Checks
-On the software development side: research and verify your edge cases! Some libraries ignore simple edge cases and fall prey to Zip Slip. Or they disregard symlinks, and fall prey to symlink attacks. Extra time may be needed to research these edge cases and consider different scenarios, but hey, it makes for good Shift Left practice.
+A bonus for software developers! Research and verify your edge cases!
 
 Here are a couple more recommendations:
 
 {% alert "success" %}
-3. Proactively consider and research edge cases and add appropriate {% abbr "branches", "if-statements, guards, exception-handling, etc." %}. Edge cases come in different forms: OS? roles? users? filenames? encodings?
+4. Proactively consider and research edge cases and add appropriate {% abbr "branches", "if-statements, guards, exception-handling, etc." %}. Edge cases come in different forms: OS? roles? users? filenames? encodings?
 
-4. Adopt unit testing to verify your code works as intended. Add test cases against unintended situations.
+5. Adopt unit testing to verify your code works as intended. Add test cases against unintended situations.
 
     Test cases prevent [software regression](https://en.wikipedia.org/wiki/Software_regression) and automate the menial task of manual input.
 
@@ -410,7 +419,7 @@ For example, Juce v6.1.5 introduced several fixes:
 
 - They also added a [test case against Zip Slip](https://github.com/juce-framework/JUCE/commit/2e874e80cba0152201aff6a4d0dc407997d10a7f#diff-16f78a017ef48e7154eac2ea6b3ee3d211fa508f5465db0c7f2667741ca00265R700).
 
-If you're writing an unzipping library, you should ensure your code handles `..` and symlinks to prevent Zip Slip and zip symlink attacks.^[Further, if the filename gets fed to other servers, you should also handle URL encodings of `.` (`%2f`) and `/` (`%2f`), which are a common bypass against straightforward checks.] If you're building an application meant for end-users, you should also consider the potential file size.
+If you're writing an unzipping library, you should ensure your code handles `..` and symlinks to prevent Zip Slip and zip symlink attacks.^[Further, if the filename gets fed to other servers, you should also handle URL encodings of `.` (`%2e`) and `/` (`%2f`), which are a common bypass against straightforward checks.] If you're building an application targetting for end-users, you should also consider the potential uncompressed file size.
 
 
 ### Defaults
@@ -418,7 +427,7 @@ If you're writing an unzipping library, you should ensure your code handles `..`
 While we're on the topic of software development, having sensible defaults in libraries and application goes a long way.
 
 {% alert "success" %}
-5. Use defaults such as:
+6. Use defaults such as:
 
    - Don't follow symlink directories.^[There are other solutions as well. The `zip` binary found on Unix systems handles this by deferring linkage until *all* files have been uncompressed.]
    - Don't overwrite files. You don't want your files wiped out, right?
@@ -427,16 +436,6 @@ While we're on the topic of software development, having sensible defaults in li
 
 {% endalert %}
 
-
-### Modern Antivirus
-
-Although zip bombs have targeted antivirus (AV) systems in the past, most [modern AV programs can detect zip bombs](https://www.microsoft.com/en-us/windows/learning-center/what-is-a-zip-bomb) by recognising patterns and signatures. This brings us to our last suggestion:
-
-{% alert "success" %}
-6. Upgrade your (antivirus) software. Daily updates to malware signatures ensure your antivirus program stays equipped to detect and thwart emerging threats.
-{% endalert %}
-
-<!-- TODO: hackers will keep finding loopholes and ways to bypass antivirus, so it's important to stay up-to-date? -->
 
 ## Further Reading / References
 
