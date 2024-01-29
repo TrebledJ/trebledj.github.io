@@ -20,8 +20,12 @@ module.exports = function (eleventyConfig) {
 
   // Get settings and options.
   function getOptions(file) {
-    const extDefault = ['gif'].find(ext => file.endsWith(ext)); // Use the extension special? Then use it.
-    const ext = extDefault ?? 'webp';
+    // Is the extension special? (e.g. gif) Then use it.
+    // const extDefault = ['gif'].find(ext => file.endsWith(ext));
+    // Otherwise, use the default: webp.
+    // const ext = extDefault ?? 'webp';
+    // const ext = file.endsWith('webp') ? 'auto' : 'webp';
+    const ext = 'webp';
     const animated = file.endsWith('gif');
 
     // Construct a unique path so that images with the same fileslug don't clash.

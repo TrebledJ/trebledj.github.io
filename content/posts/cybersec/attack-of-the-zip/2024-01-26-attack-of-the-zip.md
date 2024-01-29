@@ -11,11 +11,11 @@ tags:
 thumbnail_src: assets/attack-of-the-zip.jpg
 ---
 
-Zip files are *everywhere* in our daily lives, seamlessly integrated into our personal, academic, and professional environments. Whether it's Java apps or Microsoft Office documents, zip files have become an indispensable tool. Their simple structure allow individual files to be singled out for reading or writing, making them great for bundling content with metadata.
+Zip files are *everywhere* in our daily lives, seamlessly integrated into our personal, academic, and professional environments. From Java apps to Microsoft Office documents, zip files have become an indispensable tool.
 
-But as we know from [*Silicon Valley*](https://www.youtube.com/watch?v=jnDk8BcqoR), zip files have the potential to be dangerous.
+But as we know from *Silicon Valley*, zip files have the potential to be dangerous.
 
-<!-- TODO: extract short clip from SV -->
+{% image "assets/its-a-zip-bomb.gif", "", "Filmmakers' impression of a zip bomb." %}
 
 In this post, we'll delve into the intriguing world of zip upload attacks, exploring various methods that allow attackers to gain unauthorized read and write privileges.
 
@@ -418,6 +418,7 @@ Although zip bombs have targeted antivirus (AV) systems in the past, most [moder
 6. Upgrade your (antivirus) software. Daily updates to malware signatures ensure that your antivirus program stays equipped to detect and thwart emerging threats.
 {% endalert %}
 
+<!-- TODO: hackers will keep finding loopholes and ways to bypass antivirus, so it's important to stay up-to-date? -->
 
 ## Further Reading / References
 
