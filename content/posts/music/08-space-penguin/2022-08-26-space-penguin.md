@@ -5,7 +5,6 @@ tags:
   - electronica
   - synths
   - dubsy-wubsy
-  - tech-house
 keywords: [sidechain compression, synth, surge, penguins, space, learn-to-fly]
 thumbnail_src: assets/space-penguin.jpg
 track_id: 1331667688
