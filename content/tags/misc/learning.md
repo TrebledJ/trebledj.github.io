@@ -1,5 +1,5 @@
 ---
-redirect_from: [/tags/education]
+redirect_from: [/tags/education/]
 ---
 
 Education. A necessary foundation and institution for learning in today's age but sadly one that is sometimes exploited and mishandled.

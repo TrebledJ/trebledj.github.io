@@ -37,7 +37,7 @@ In December, some of us were selected to participate in the PwC Hackaday CTF. Th
 
 Finally, in January, we participated in an internal Firebird CTF held to assess our capabilities and select candidates to proceed to the next stage of training. These challenges were designed by Firebird seniors.
 
-These competitions allowed us to apply our newfound skills in a competitive setting, learn from mistakes, and exchange ideas afterwards through a tradition of [write-ups](/tags/writeup).
+These competitions allowed us to apply our newfound skills in a competitive setting, learn from mistakes, and exchange ideas afterwards through a tradition of [write-ups](/tags/writeup/).
 
 ## Combusken, the Fledgling
 

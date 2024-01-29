@@ -29,7 +29,7 @@ The [previous meta update](/posts/site-migration-to-eleventy) was dated February
 - Content
 	- [Home Page](/) (uses carousels to cycle through content, so that the page isn't as visually bloated) - May
 	- [Privacy Policy](/privacy-policy) - September
-	- Assorted Blog Posts (including a [series on digital audio synthesis](/tags/audio-synthesis-for-dummies), [CTF writeups](/tags/ctf), and [4 new compositions](/tags/composition))  - Continuous
+	- Assorted Blog Posts (including a [series on digital audio synthesis](/tags/audio-synthesis-for-dummies/), [CTF writeups](/tags/ctf/), and [4 new compositions](/tags/composition/))  - Continuous
 - Optimisations
 	- Lazy Loading (iframes, images, disqus) - May
 	- Images (responsiveness, etc.) - May

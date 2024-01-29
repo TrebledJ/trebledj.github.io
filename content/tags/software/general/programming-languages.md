@@ -1,7 +1,7 @@
 ---
 title: Programming Languages
 tag: programming-languages
-redirect_from: [/tags/pl]
+redirect_from: [/tags/pl/]
 ---
 
 Sometimes shortened as PL.

@@ -18,7 +18,7 @@ In case pronouns matter to you, I identify as ~~an attack helicopter~~ he/him.
 
 {% details "It was a wild (but fun) journey. I started programming in Grade 9 (~中三) with Khan Academy's Intro to JS modules..." %}
 Then I got stuck with prototypes.  
-Moved to [C++](/tags/cpp).  
+Moved to [C++](/tags/cpp/).  
 Got stuck with pointers.  
 Cried internally for a week.  
 Got stuck with linked lists.  
@@ -26,17 +26,17 @@ Made a [{% abbr "POS", "point-of-sale" %} desktop application with Qt](/posts/e-
 Learnt template metaprogramming.  
 Procrastinated a lot by playing Codingame.  
 Answered a bunch of StackOverflow questions.[^stack-overflow]  
-Learnt [Python](/tags/python).  
+Learnt [Python](/tags/python/).  
 Learnt LaTeX.  
 Wrote a 4000-word mathematics essay on a programming challenge.  
-Played [Advent of Code](/tags/aoc).  
-Learnt [Haskell](/tags/haskell).  
+Played [Advent of Code](/tags/aoc/).  
+Learnt [Haskell](/tags/haskell/).  
 Got stuck with monads.  
 Got stuck with Cabal (no, not Cobol).  
 Got stuck with Haskell Stack (Haskell's build management system).  
 Got stuck figuring out mutable arrays.  
 Got stuck with higher-rank type polymorphism.  
-Learnt [Rust](/tags/rust).  
+Learnt [Rust](/tags/rust/).  
 Got stuck with the borrow checker.  
 Got stuck with linked lists (again).  
 Cried.  

@@ -22,7 +22,7 @@ This project was made for a course on embedded systems and is published [online]
 
 
 ## Synopsis
-The STM32 MIDI Keyboard was a project aimed to practice [embedded systems](/tags/embedded) design while also have fun developing a tactile music application. Here are some features found on the keyboard:
+The STM32 MIDI Keyboard was a project aimed to practice [embedded systems](/tags/embedded/) design while also have fun developing a tactile music application. Here are some features found on the keyboard:
 
 * 2+ octaves (29) piano keys to flexibly play various melodies
 * Supports multi-press, so that we aren't stuck with boring one-note tunes and can play chords
