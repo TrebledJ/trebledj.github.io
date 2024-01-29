@@ -5,6 +5,7 @@ const { EleventyHtmlBasePlugin, EleventyRenderPlugin } = require('@11ty/eleventy
 const eleventySass = require('eleventy-sass');
 // eslint-disable-next-line import/no-extraneous-dependencies
 const sitemap = require('@quasibit/eleventy-plugin-sitemap');
+const pluginExlinks = require('@sardine/eleventy-plugin-external-links');
 
 module.exports = function (eleventyConfig) {
   eleventyConfig.addPlugin(pluginRss);
@@ -30,6 +31,8 @@ module.exports = function (eleventyConfig) {
       process.env.ENABLE_LIGHTBOX = true;
     });
   });
+
+  eleventyConfig.addPlugin(pluginExlinks);
 
   // Drafts implementation, see `content/content.11tydata.js` for additional code.
   // This section *could* be simplified to an environment variable in an npm script,
