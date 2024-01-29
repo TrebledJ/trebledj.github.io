@@ -193,20 +193,25 @@ function getRelatedTags(tags, tagPages, tagCount) {
 /**
  * Get groups of tags by their directory prefix.
  * (Based on DIRECTORY, not title!)
+ * 
+ * @param {String} prefix Prefix of the directory (e.g. "music").
+ * @param {Object} tagPages collections.tags
+ * @param {Number} depth Number of directories to traverse down for grouping. Leave undefined to group by leaves.
  */
-function getTagsByPrefix(prefix, tagPages) {
+function getTagsByPrefix(prefix, tagPages, depth=undefined) {
   const groups = {};
 
   // Find the groups we're interested in, and create skeletons in the `tags` object.
   for (const p of tagPages) {
-    if (p.data.group.startsWith(prefix)) {
-      if (!groups[p.data.group]) {
-        groups[p.data.group] = {
+    const g = p.data.group.split('.', depth).join('.');
+    if (g.startsWith(prefix)) {
+      if (!groups[g]) {
+        groups[g] = {
           src: [],
           related: [p.data],
         };
       } else {
-        groups[p.data.group].related.push(p.data);
+        groups[g].related.push(p.data);
       }
     }
   }
@@ -217,10 +222,10 @@ function getTagsByPrefix(prefix, tagPages) {
     ret.push(groups[g]);
   });
 
-  const depth = obj => (obj.group.match(/\./g) ?? []).length;
+  const getDepth = obj => (obj.group.match(/\./g) ?? []).length;
 
   // Sort by "depth" (least number of '.'s appear first).
-  ret.sort((a, b) => depth(a) - depth(b));
+  ret.sort((a, b) => getDepth(a) - getDepth(b));
 
   return ret;
 }
