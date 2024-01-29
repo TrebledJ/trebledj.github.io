@@ -2,7 +2,6 @@
 
 // const process = require('./rake-js/dist/index').default;
 
-const { tokenize } = require('prismjs');
 const stem = require('./stem');
 const { tokenise, stopwords } = require('./tokenise');
 
