@@ -1,7 +1,6 @@
 /* eslint-disable max-len */
 const { stripBetweenTags } = require('../detail/filters');
 
-
 test('stripBetweenTags: simple', () => {
   expect(stripBetweenTags('1<sub>abc</sub>2', ['sub'])).toBe('12');
   expect(stripBetweenTags('1<sub>abc</sub> 2', ['sub'])).toBe('1 2');

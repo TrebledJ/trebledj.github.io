@@ -108,9 +108,7 @@ module.exports = function (eleventyConfig) {
   }
 
   // A filter to murder tags and their children brutally with regex. Please don't take this comment seriously.
-  eleventyConfig.addFilter('stripBetweenTags', (html, tags) => {
-    return stripBetweenTags(html, tags);
-  });
+  eleventyConfig.addFilter('stripBetweenTags', (html, tags) => stripBetweenTags(html, tags));
   if (process.env.ENVIRONMENT === 'fast') {
     // Fast: Do nothing.
     eleventyConfig.addFilter('annihilate', (html, _selector) => html);
