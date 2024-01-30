@@ -161,7 +161,7 @@ Archive:  evil-slip.zip
 
 ### Zip Symlink Attacks 🖇
 
-There are several ways to build a malicious zip containing symlinks. But before we continue, let's first clarify two types of symlinks in our arsenal:
+Zip symlink attacks are just that: zip file attacks containing symlinks. There are several ways to build such a malicious zip. But before we continue, let's first clarify two types of symlinks in our arsenal:
 
 1. Symlink Files. This allows us to potentially *read* arbitrary files.[^root]
 2. Symlink Directories. This allows us to potentially *write files* to arbitrary folders.[^root]
