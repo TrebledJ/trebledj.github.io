@@ -369,7 +369,9 @@ Any service processing such files has potential to be vulnerable.
 
 {% image "https://csis-website-prod.s3.amazonaws.com/s3fs-public/publication/171212_cyber_Defense.jpg", "w-40 floatr1", "Credit: Cybrain/Adobe Stock" %}
 
-So much for the offensive side. How about the defensive aspect? What approaches can we take to secure our systems? Let's explore ways to mitigate zip attacks.
+So much for the offensive side. How about the defensive aspect? What approaches can we take to secure our systems?
+
+Let's explore a few ways to mitigate zip attacks. (Some of these can also be applied to protect against other attacks, or may just be general improvements.)
 
 ### Permissions
 In America, "all men are created equal". Not so in filesystems.
@@ -394,13 +396,18 @@ Although zip bombs have targeted antivirus (AV) systems in the past, most [moder
 3. Upgrade your (antivirus) software. Daily updates to malware signatures ensure your antivirus program stays equipped to detect and thwart emerging threats.
 {% endalert %}
 
-### Checks
-A bonus for software developers! Research and verify your edge cases!
+### Edge Cases and Tests
+A bonus for software developers: edge cases! Considering edge cases may require domain knowledge and experience, and extra time may be needed to research different scenarios, but hey, it makes for good Shift Left practice.
 
 Here are a couple more recommendations:
 
 {% alert "success" %}
-4. Proactively consider and research edge cases and add appropriate {% abbr "branches", "if-statements, guards, exception-handling, etc." %}. Edge cases come in different forms: OS? roles? users? filenames? encodings?
+4. Handle edge cases and add appropriate {% abbr "branches", "if-statements, guards, exception-handling, etc." %}.
+
+    For a zip file application, you should ensure your code handles:
+    - `..` (Zip Slip),^[Further, if the filename is decoded or gets fed to other servers, you should also handle URL encodings of `.` (`%2e`) and `/` (`%2f`), which are a common bypass against straightforward checks.]
+    - symlinks (zip symlink attacks),
+    - potential uncompressed file size (esp. if your application targets end-users).
 
 5. Adopt unit testing to verify your code works as intended. Add test cases against unintended situations.
 
@@ -420,8 +427,6 @@ For example, Juce v6.1.5 introduced several fixes:
 
 - They also added a [test case against Zip Slip](https://github.com/juce-framework/JUCE/commit/2e874e80cba0152201aff6a4d0dc407997d10a7f#diff-16f78a017ef48e7154eac2ea6b3ee3d211fa508f5465db0c7f2667741ca00265R700).
 
-If you're writing an unzipping library, you should ensure your code handles `..` and symlinks to prevent Zip Slip and zip symlink attacks.^[Further, if the filename gets fed to other servers, you should also handle URL encodings of `.` (`%2e`) and `/` (`%2f`), which are a common bypass against straightforward checks.] If you're building an application targetting for end-users, you should also consider the potential uncompressed file size.
-
 
 ### Defaults
 
@@ -430,7 +435,7 @@ While we're on the topic of software development, having sensible defaults in li
 {% alert "success" %}
 6. Use defaults such as:
 
-   - Don't follow symlink directories.^[There are other solutions as well. The `zip` binary found on Unix systems handles this by deferring linkage until *all* files have been uncompressed.]
+   - Don't follow symlink directories.^[There are other solutions as well. The `unzip` binary found on Unix systems handles this by deferring linkage until *all* files have been uncompressed.]
    - Don't overwrite files. You don't want your files wiped out, right?
 
     It's a good idea to keep these defaults, unless you really need these features, and you're confident with the level of risk you're dealing with.
