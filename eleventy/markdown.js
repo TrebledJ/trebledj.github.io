@@ -60,7 +60,7 @@ module.exports = function (eleventyConfig) {
   });
 
   eleventyConfig.addFilter('tocFast', function (content, localOpts) {
-    // localOpts: see https://github.com/jdsteinbach/eleventy-plugin-toc?tab=readme-ov-file#5-override-default-options-if-necessary,
+    // localOpts: see https://github.com/jdsteinbach/eleventy-plugin-toc#5-override-default-options-if-necessary,
     // TODO: refactor as cacheByOutputPath decorator
     const key = this.page.outputPath;
     if (tocMemo[key] !== undefined)
