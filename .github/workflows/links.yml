@@ -1,3 +1,10 @@
+# Workflow to check broken links across the site.
+
+# If you're wondering why I use a workflow instead of integrating it in the 11ty build pipeline,
+# it's because I want the flexibility to check links regularly, without having to run build each time.
+# If you post and update your blog regularly, then fine by me. But I forsee myself taking a hiatus once
+# in a blue moon, and I rather the system alert me rather than me manually checking each week.
+
 name: Check Broken Links
 
 on:
