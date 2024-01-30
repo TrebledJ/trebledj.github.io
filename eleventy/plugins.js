@@ -5,7 +5,6 @@ const { EleventyHtmlBasePlugin, EleventyRenderPlugin } = require('@11ty/eleventy
 const eleventySass = require('eleventy-sass');
 // eslint-disable-next-line import/no-extraneous-dependencies
 const sitemap = require('@quasibit/eleventy-plugin-sitemap');
-const { addAttributesToExternalLinks } = require('./detail/helpers');
 
 module.exports = function (eleventyConfig) {
   eleventyConfig.addPlugin(pluginRss);
@@ -31,14 +30,6 @@ module.exports = function (eleventyConfig) {
       process.env.ENABLE_LIGHTBOX = true;
     });
   });
-
-  if (process.env.ENVIRONMENT !== 'fast') {
-    eleventyConfig.addTransform('external-links', function (content) {
-      if (this.page.outputPath?.endsWith('.html'))
-        content = addAttributesToExternalLinks(content, 'target="_blank" rel="noreferrer"');
-      return content;
-    });
-  }
 
   // Drafts implementation, see `content/content.11tydata.js` for additional code.
   // This section *could* be simplified to an environment variable in an npm script,
