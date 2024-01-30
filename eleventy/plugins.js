@@ -5,7 +5,6 @@ const { EleventyHtmlBasePlugin, EleventyRenderPlugin } = require('@11ty/eleventy
 const eleventySass = require('eleventy-sass');
 // eslint-disable-next-line import/no-extraneous-dependencies
 const sitemap = require('@quasibit/eleventy-plugin-sitemap');
-const pluginExlinks = require('@sardine/eleventy-plugin-external-links');
 
 module.exports = function (eleventyConfig) {
   eleventyConfig.addPlugin(pluginRss);
@@ -32,7 +31,15 @@ module.exports = function (eleventyConfig) {
     });
   });
 
-  eleventyConfig.addPlugin(pluginExlinks);
+  if (process.env.ENVIRONMENT !== 'fast') {
+    const updateLinks = html => html.replaceAll(/(<a\s+[^>]*href="https?:\/\/[^\"]*")(?=[^>]*>)/gi, '$1 target="_blank" rel="noreferrer"');
+
+    eleventyConfig.addTransform('external-links', function (content) {
+      if (this.page.outputPath?.endsWith('.html'))
+        content = updateLinks(content);
+      return content;
+    });
+  }
 
   // Drafts implementation, see `content/content.11tydata.js` for additional code.
   // This section *could* be simplified to an environment variable in an npm script,
