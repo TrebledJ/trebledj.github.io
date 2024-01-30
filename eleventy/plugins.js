@@ -5,6 +5,7 @@ const { EleventyHtmlBasePlugin, EleventyRenderPlugin } = require('@11ty/eleventy
 const eleventySass = require('eleventy-sass');
 // eslint-disable-next-line import/no-extraneous-dependencies
 const sitemap = require('@quasibit/eleventy-plugin-sitemap');
+const { addAttributesToExternalLinks } = require('./detail/helpers');
 
 module.exports = function (eleventyConfig) {
   eleventyConfig.addPlugin(pluginRss);
@@ -32,11 +33,9 @@ module.exports = function (eleventyConfig) {
   });
 
   if (process.env.ENVIRONMENT !== 'fast') {
-    const updateLinks = html => html.replaceAll(/(<a\s+[^>]*href="https?:\/\/[^\"]*")(?=[^>]*>)/gi, '$1 target="_blank" rel="noreferrer"');
-
     eleventyConfig.addTransform('external-links', function (content) {
       if (this.page.outputPath?.endsWith('.html'))
-        content = updateLinks(content);
+        content = addAttributesToExternalLinks(content, 'target="_blank" rel="noreferrer"');
       return content;
     });
   }

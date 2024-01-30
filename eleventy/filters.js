@@ -6,7 +6,7 @@ const { getRelatedPosts, getRelatedTags, getTagsByPrefix } = require('./detail/r
 const { nonEmptyContainerSentinel } = require('./detail/utils');
 const selectHomePosts = require('./detail/select-home-posts');
 const findKeywords = require('./detail/keywords');
-const { stripBetweenTags } = require('./detail/filters');
+const { stripBetweenTags } = require('./detail/helpers');
 
 function count(str, needle) {
   return (str.match(needle) || []).length;
