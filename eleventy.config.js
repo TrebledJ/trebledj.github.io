@@ -109,7 +109,7 @@ module.exports = function (eleventyConfig) {
 
   if (process.env.ENVIRONMENT !== 'fast') {
     eleventyConfig.addTransform('external-links', function (content) {
-      if (this.page.outputPath?.endsWith('.html'))
+      if (this.page.outputPath && this.page.outputPath.endsWith('.html'))
         content = addAttributesToExternalLinks(content, 'target="_blank" rel="noreferrer"');
       return content;
     });
