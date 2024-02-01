@@ -13,10 +13,11 @@ draft: true
 # tocOptions: '{"tags":["h2","h3","h4"]}'
 ---
 <!-- TODO: revise thumbnail -->
+<!-- TODO: revise title -->
 
 Zip files are *everywhere* in our daily lives, seamlessly integrated into our personal, academic, and professional environments. From Java apps to Microsoft Office documents, zip files have become an indispensable tool.
 
-But as we know from *Silicon Valley*, zip files have the potential to be dangerous.^[Relevant YouTube: [SILICON VALLEY - THE ULTIMATE HACK](https://www.youtube.com/watch?v=jnDk8BcqoR0)]
+But as we know from *Silicon Valley*, zip files have the potential to be dangerous.^[Relevant YouTube: [Silicon Valley - The Ultimate Hack](https://www.youtube.com/watch?v=jnDk8BcqoR0)]
 
 {% image "assets/its-a-zip-bomb.gif", "w-80", "Filmmakers' impression of a zip bomb." %}
 
@@ -29,6 +30,7 @@ Disclaimer: The content provided in this blog post is intended purely for educat
 
 ## Play Along 🐳
 
+<!-- TODO: move section down and turn into "Try it out!" (hands-on exercise) -->
 TODO: link to github
 
 I've created a Docker playground for trying out zip payloads. Feel free to build it locally and follow along.
@@ -325,9 +327,9 @@ The well-known [42.zip](https://www.unforgettable.dk/) bomb is only 42KB, but co
 
 Most decompression tools and virus scanners are wary of zip bombs, and only unzip the first (few) layers or stop after identifying a zip file.
  
-In 2019, David Fifield introduced *a better zip bomb*, which abuses the structure of a .zip, toying with metadata to trick decompressors into puking ungodly amounts of data.[^fifield] A compressed Fifield zip bomb of 42KB yields 5.4GB of uncompressed bytes. This metadata trickery is more generally known as **Metadata Spoofing**.
+In 2019, David Fifield introduced *a better zip bomb*, which abuses the structure of a .zip, toying with metadata to trick decompressors into puking ungodly amounts of data. A compressed Fifield zip bomb of 42KB yields 5.4GB of uncompressed bytes. This metadata trickery is more generally known as **Metadata Spoofing**.
 
-[^fifield]: The technical article by Fifield is here: *https://www.bamsoftware.com/hacks/zipbomb/*. But it may be blocked on your browser.
+Fifield has written an excellent article on various techniques here: *https://www.bamsoftware.com/hacks/zipbomb/*. (It may be blocked on some browsers.)
 
 #### DIY: Build your own Zip Bomb!
 
@@ -374,6 +376,8 @@ So much for the offensive side. How about the defensive aspect? What approaches 
 Let's explore a few ways to mitigate zip attacks. (Some of these can also be applied to protect against other attacks, or may just be general improvements.)
 
 ### Permissions
+*For sysadmins.*
+
 In America, "all men are created equal". Not so in filesystems.
 
 Reading, writing, and linking files depends on permissions. Setting appropriate permissions for the process and limiting the scope of an application can go a long way in preventing attackers from snooping your secrets.
@@ -389,6 +393,7 @@ Sometimes it's not entirely feasible to restrict all write permissions. For exam
 See [Limitations of Zip Slip](#limitations-of-zip-slip) and [Limitations of Zip Symlink Attacks](#limitations-of-zip-symlink-attacks) for details on relevant permissions.
 
 ### Modern Antivirus
+*For sysadmins.*
 
 Although zip bombs have targeted antivirus (AV) systems in the past, most [modern AV programs can detect zip bombs](https://www.microsoft.com/en-us/windows/learning-center/what-is-a-zip-bomb) by recognising patterns and signatures. This brings us to our last suggestion:
 
@@ -396,8 +401,17 @@ Although zip bombs have targeted antivirus (AV) systems in the past, most [moder
 3. Upgrade your (antivirus) software. Daily updates to malware signatures ensure your antivirus program stays equipped to detect and thwart emerging threats.
 {% endalert %}
 
-### Edge Cases and Tests
-A bonus for software developers: edge cases! Considering edge cases may require domain knowledge and experience, and extra time may be needed to research different scenarios, but hey, it makes for good Shift Left practice.
+
+<!-- ### Healthy Application Lifecycle
+*For DevSecOps engineers and software developers **using** zip libraries/applications.* -->
+
+<!-- TODO -->
+
+
+### Robust Code and Tests
+*For software developers **building/maintaining** zip libraries/applications.*
+
+Verify your edge cases! Considering edge cases may require domain knowledge and experience, and extra time may be needed to research different scenarios, but hey, it makes for good Shift Left practice.
 
 Here are a couple more recommendations:
 
@@ -428,14 +442,12 @@ For example, Juce v6.1.5 introduced several fixes:
 - They also added a [test case against Zip Slip](https://github.com/juce-framework/JUCE/commit/2e874e80cba0152201aff6a4d0dc407997d10a7f#diff-16f78a017ef48e7154eac2ea6b3ee3d211fa508f5465db0c7f2667741ca00265R700).
 
 
-### Defaults
-
-While we're on the topic of software development, having sensible defaults in libraries and application goes a long way.
+And while we're on the topic of software development, having sensible defaults in libraries and application goes a long way.
 
 {% alert "success" %}
 6. Use defaults such as:
 
-   - Don't follow symlink directories.^[There are other solutions as well. The `unzip` binary found on Unix systems handles this by deferring linkage until *all* files have been uncompressed.]
+   - Don't follow symlink directories.^[There are other solutions as well. The `unzip` binary found on Unix systems handles symlinks by deferring linkage until *all* files have been uncompressed.]
    - Don't overwrite files. You don't want your files wiped out, right?
 
     It's a good idea to keep these defaults, unless you really need these features, and you're confident with the level of risk you're dealing with.
