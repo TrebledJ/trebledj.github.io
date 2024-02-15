@@ -162,7 +162,7 @@ app/
 	└── passwd.txt     -> /etc/passwd
 ```
 
-If we can read files in `/app/uploads/`, then we can read `passwd.txt` and by extension, `/etc/passwd`.[^really-by-extension] Then GG! We can use this method to read any file on the system (subject to certain constraints to be discussed later).
+If we can read files in `/app/uploads/`, then we can read `passwd.txt` and by extension, `/etc/passwd`![^really-by-extension] We can use this method to read any file on the system (subject to certain constraints to be discussed later).
 
 [^really-by-extension]: Okay, some steps were skipped here for the sake of simplicity. The long answer is: reading a symlink also depends on permissions of the {% abbr "source file", "the file linked by the symlink" %} and the {% abbr "source directory", "the directory containing the source file" %}. ***If*** we can read files in our upload directory **and** if we have sufficient permissions, then we can (potentially) have arbitrary file read. See [Limitations](#limitations-of-zip-symlink-attacks).
 
