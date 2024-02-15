@@ -23,7 +23,7 @@ If you want to follow along, you can grab the challenge here: [GitHub](https://g
 Author: [harrier](https://twitter.com/harrier_lcc)  
 4/5 stars ⭐️. 5/311 solves.
 
-> So let's learn reverse with Decompetition!^[Decompetition is a reverse-engineering CTF held irregularly.] The goal is simple: try to recover the original source code as much as possible, while understand the code logic deeply to get the internal flag! Only with two of those together, you will win this flag.
+> So let's learn reverse with Decompetition!^[[Decompetition](https://ctftime.org/event/list/?year=2022#:~:text=Decompetition%20v2.0) is a reverse-engineering CTF held irregularly.] The goal is simple: try to recover the original source code as much as possible, while understand the code logic deeply to get the internal flag! Only with two of those together, you will win this flag.
 > 
 > [STL](https://en.cppreference.com/w/cpp) is used everywhere, so it would be nice to be able to reverse them!
 > 
@@ -166,7 +166,7 @@ Structs are public by default. Classes are private by default.
 
 Public/private are concepts which fall under {% abbr "OOP", "object-oriented programming" %} ***encapsulation***. With encapsulation, we bundle data and only expose certain API methods for public users, whilst hiding implementation. With a cyber analogy, this is not unlike exposing certain ports (HTTP/HTTPS) on a machine, and protecting other ports with a firewall.
 
-I chose to use `struct` here because I'm lazy and want to make members public.^[In proper engineering, we would hide implementation behind `private`, so `next_node` should be a private variable.] Some of them are accessed directly in `main` anyway.
+I chose to use `struct` here because I'm lazy and want to make members public.^[In proper engineering, we would hide the implementation behind `private`, so `next_node` should be a private variable. But since this is a CTF, proper engineering comes second. 😛] Some of them are accessed directly in `main` anyway.
 
 Read more:
 - [StackOverflow: Struct vs. Class](https://stackoverflow.com/a/36917400/10239789).
