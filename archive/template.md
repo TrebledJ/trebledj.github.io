@@ -33,6 +33,7 @@ redirect_from: [/link-to-post, /link-to-other-post] # Endpoints to redirect from
 sitemap:
   ignore: true # don't put in sitemap
   # more options: https://www.npmjs.com/package/@quasibit/eleventy-plugin-sitemap
+tocOptions: '{"tags":["h2","h3","h4"]}' # https://github.com/jdsteinbach/eleventy-plugin-toc?tab=readme-ov-file#options
 ---
 
 markdown/html/liquid content here
