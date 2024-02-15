@@ -14,7 +14,7 @@ thumbnail_src: assets/thumbnail.jpg
 tocOptions: '{"tags":["h2","h3","h4"]}'
 ---
 
-*Last month, I designed a CTF challenge involving zip file attacks. This post is a collection of the techniques, insights, and notes I’ve gathered. I’ve uploaded the challenge on [GitHub](https://github.com/TrebledJ/attack-of-the-zip) along with a simplified playground.*
+*Last month, I designed a CTF challenge involving zip file attacks. This post is a collection of the techniques, insights, and notes I've gathered. I've also uploaded the challenge on [GitHub](https://github.com/TrebledJ/attack-of-the-zip) along with a simplified playground.*
 
 ---
 
