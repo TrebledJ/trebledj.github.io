@@ -78,3 +78,7 @@
 {"rule":"UNIT_SPACE","sentence":"^\\QFrom 5GB, we've gone down to ~4.9MB!\\E$"}
 {"rule":"MORFOLOGIK_RULE_EN_GB","sentence":"^\\QMultiple Zip Vulnerabilities across Flutter and Swift Packages (2023)\nZip Slip (2018) and Metadata Spoofing (2019) in Rubyzip\\E$"}
 {"rule":"ITS_JJ_NNSNN","sentence":"^\\QWhether it's Java apps or Microsoft Office documents, zip files have become an indispensable tool.\\E$"}
+{"rule":"A_INFINITIVE","sentence":"^\\QAre you developing an unzip application (for end-users) or a high-level unzip library (to be conveniently imported and used by application developers)?\\E$"}
+{"rule":"MORFOLOGIK_RULE_EN_GB","sentence":"^\\QSpoofy-spoofy doo!\"\\E$"}
+{"rule":"MISSING_TO_BEFORE_A_VERB","sentence":"^\\QTo create a symlink, we need execute permissions in the source directory (where the linked file is located) and write/execute permissions in the target directory (where the symlink is created).^ref-linuxlinkperm\nReading a symlink requires execute permissions in the source directory, and read permissions on the source file.\\E$"}
+{"rule":"UNIT_SPACE","sentence":"^\\QIn 2019, David Fifield introduced a better zip bomb, which abuses the structure of a .zip, toying with metadata to trick decompressors into puking ungodly amounts of data.^fifield A 42KB, compressed Fifield zip bomb yields 5.4GB of uncompressed bytes.\\E$"}
