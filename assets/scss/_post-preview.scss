@@ -62,7 +62,7 @@
         }
     }
 
-    .post-posted-date::after {
+    div:has(> .post-posted-date)::after {
         content: "|";
         margin: 0 0.5rem;
         font-size: 1rem;
