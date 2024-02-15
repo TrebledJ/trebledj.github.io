@@ -11,7 +11,6 @@ tags:
   - linux
   - windows
 thumbnail_src: assets/thumbnail.jpg
-# draft: true
 tocOptions: '{"tags":["h2","h3","h4"]}'
 ---
 
