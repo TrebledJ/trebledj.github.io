@@ -8,7 +8,7 @@ tags:
   - programming
   - tutorial
   - ctf
-thumbnail_src: assets/attack-of-the-zip.jpg
+thumbnail_src: assets/thumbnail.png
 # draft: true
 # tocOptions: '{"tags":["h2","h3","h4"]}'
 ---
@@ -35,6 +35,8 @@ I've uploaded a modified Docker playground on [GitHub](TODO: link). Feel free to
 
 
 ## Zip Attacks
+
+{% image "assets/evil-zip-unveiled.jpg", "w-50", "" %}
 
 ### Zip Slip ⛸
 
@@ -78,18 +80,24 @@ But this isn't the only way to gain arbitrary code execution! There are other po
 #### DIY: Build your own Zip Slip payload!
 
 {% details "With Python", "open" %}
-The easiest way is to use Python's `zipfile` module:
+Python's built-in `zipfile` module provides a flexible way to create zip files.
 
 ```python
 import zipfile
 
 with zipfile.ZipFile("evil-slip.zip", "w") as zip:
     zip.write("my-key.pub", "../.ssh/authorized_keys")
+    #          │             └ filename to store on the archive
+    #          └ file to compress in our local file system
 ```
 
-This creates a new `evil-slip.zip` zip file, which contains the *contents* of our previously generated `my-key.pub`, and it's stored as `../.ssh/authorized_keys`.
+This creates a new `evil-slip.zip` zip file. We use write-mode (`"w"`) to *write* instead of read. (There is also `r` and `a` for reading/adding files.)
 
-`zipfile` constructs the file in memory without creating temporary files. This removes the need to clean up temporary files.
+We also use Python's `with`, so that when the zip file saves automatically when we leave the block. (Alternatively, we could manually call `zip.close()`.)
+
+Inside, we use `zip.write` to add files to the zip. We add a local file `my-key.pub` and provide store it with the filename `../.ssh/authorized_keys` in the archive.
+
+One nice thing about `zipfile` is it constructs the file in memory without creating temporary files, allowing us to craft complex zips without trashing our local filesystem or using a VM.
 
 {% enddetails %}
 
