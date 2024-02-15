@@ -11,7 +11,6 @@ module.exports = function () {
 
   return {
     title: "TrebledJ's Pages",
-    subtitle: 'Dabbling in code, music, math, and memes since conception.',
     url: `https://${domain}`,
     baseurl: '',
     language: 'en',
@@ -23,13 +22,22 @@ module.exports = function () {
       email,
       logo: 'profile-icon.jpg',
       /* eslint-disable max-len */
+      shortbio: multiline(`
+      Passionate problem-solver,
+      [software engineer](/tags/software-engineering/), [infosec enthusiast](/tags/cybersec/),
+      and amateur [music composer](/tags/composition/).
+      I enjoy teaching others and thrive on learning new things.
+      When not immersed in [programming](/tags/programming/), I can be found taking walks, [reflecting on life](/tags/faith/), 
+      and occasionally indulging in [CTF challenges](/tags/ctf/).
+      `),
       bio: multiline(`
       Hi! (｡＾ ᴗ＾)ﾉ
-      I'm Johnathan, a passionate problem-solver, amateur [music composer](https://trebledj.me/tags/composition/),
-      and [software engineer](https://trebledj.me/tags/software-engineering/).
+      I'm Johnathan, a passionate problem-solver,
+      [software engineer](/tags/software-engineering/), [infosec enthusiast](/tags/cybersec/),
+      and amateur [music composer](/tags/composition/).
       I enjoy teaching others and thrive on learning new things.
-      When not immersed in [programming](https://trebledj.me/tags/programming/), I can be found taking walks, [reflecting on life](https://trebledj.me/tags/faith/), 
-      and occasionally indulging in [CTF challenges](https://trebledj.me/tags/ctf/).
+      When not immersed in [programming](/tags/programming/), I can be found taking walks, [reflecting on life](/tags/faith/), 
+      and occasionally indulging in [CTF challenges](/tags/ctf/).
 
       Lately, I've been diving deeper into penetration testing and working on a [variations on a theme](https://en.wikipedia.org/wiki/Variation_(music)).
 
@@ -42,7 +50,7 @@ module.exports = function () {
       { text: 'Home', url: '/' },
       { text: 'About', url: '/about' },
       { text: 'Posts', url: '/posts' },
-      { text: 'Projects', url: '/tags/project/' },
+      // { text: 'Projects', url: '/tags/project/' },
       { text: 'Music', url: '/music' },
     ],
     search: {
@@ -115,6 +123,12 @@ module.exports = function () {
     social: [
       {
         name: 'GitHub', icon: 'fab fa-github', color: 'rgb(150, 60, 180)', link: 'https://github.com/TrebledJ',
+      },
+      {
+        name: 'Mastodon (infosec.exchange)',
+        icon: 'fab fa-mastodon',
+        color: 'rgb(99, 101, 255)',
+        link: 'https://infosec.exchange/@trebledj',
       },
       {
         name: 'StackOverflow',

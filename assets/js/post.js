@@ -1,3 +1,6 @@
+// eslint-disable-next-line no-var
+var tocOptions;
+
 $(() => {
   // --- Author Socials Button --- //
   const authorSocialButton = $('#post-author-container').find('button');
@@ -26,8 +29,26 @@ $(() => {
 
   // --- TOC Current Section Highlight --- //
   const headerOffset = document.querySelector('header').offsetHeight + 20;
-  // TODO: Make this work with toc/tocFast localOptions, which may construct toc links for h4/h5.
-  const sections = document.querySelectorAll('.post-body h2,.post-body h3');
+
+  let tags = ['h2', 'h3'];
+  if (tocOptions) {
+    tocOptions = JSON.parse(tocOptions);
+    if (tocOptions.tags && tocOptions.tags.length > 0) {
+      const newTags = [];
+      for (const t of tocOptions.tags) {
+        // Check if it matches hN header pattern.
+        if (t.startsWith('h') && !Number.isNaN(t[1]) && t[1] > 0 && t[1] <= 6) {
+          newTags.push(t);
+        }
+      }
+      if (newTags.length > 0) {
+        tags = newTags;
+      }
+    }
+  }
+
+  const headerSelectors = tags.map(t => `.post-body ${t}`).join(',');
+  const sections = document.querySelectorAll(headerSelectors);
   const mainNavLinks = document.querySelectorAll('#toc-sidebar nav.toc a');
   const mobileNavLinks = document.querySelectorAll('#btn-mobile-toc nav.toc a');
 

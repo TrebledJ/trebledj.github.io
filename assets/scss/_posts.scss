@@ -49,8 +49,8 @@
                 display: none;
             }
 
-            .post-posted-date::after,
-            .post-updated-date::after {
+            div:has(> .post-posted-date)::after,
+            div:has(> .post-updated-date)::after {
                 content: "|";
                 margin: 0 0.5rem;
                 font-size: 1rem;
@@ -77,16 +77,20 @@
     .center {
         text-align: center;
     }
+    
+    .no-center {
+        /* This class serves no purpose other than making markdown assign attribute lists correctly. (Needs some whitespace tuning.) */
+        margin: 0;
+    }
+}
+
+.text-content {
+    // A class for long-form textual content. Not necessarily content within a post.
 
     .caption {
         text-align: center;
         line-height: $line-height-compact;
         margin-top: $space-half;
-    }
-
-    .no-center {
-        /* This class serves no purpose other than making markdown assign attribute lists correctly. (Needs some whitespace tuning.) */
-        margin: 0;
     }
 
     // Default most elements to have top margin instead of bottom margin.

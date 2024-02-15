@@ -1,4 +1,4 @@
-## trebledj.me
+# trebledj.me
 
 [![Build](https://github.com/TrebledJ/trebledj.github.io/actions/workflows/deploy.yml/badge.svg)](https://github.com/TrebledJ/trebledj.github.io/actions/workflows/deploy.yml)
 [![Check Links](https://github.com/TrebledJ/trebledj.github.io/actions/workflows/links.yml/badge.svg)](https://github.com/TrebledJ/trebledj.github.io/actions/workflows/links.yml)
@@ -12,16 +12,26 @@ My personal website. Visit it here: [trebledj.me](https://trebledj.me).
 Feel free to refer to my code—sewn together from various sources—for your inspiration.
 
 Aside from that, please don't plagiarise any of my blog content.
-You may be a stackoverflow-code-copypasta guru, but don't be so low as to copypasta my writing.
+You may be a stackoverflow-code-copypasta guru, but don't be so low as to copypasta my writing without citing/linking back.
 
 Please respect the copyright. (c) TrebledJ. 
 
+
 ## Setup
 
-To run locally:
+To build:
 
 ```sh
-npm run start
+# Quick-n'-dirty site generation with live server. Mainly for previewing markdown content.
+# Target reload time < 10s.
+npm run fast
+
+# Fuller-featured site generation which includes more features than `fast`, but less than `prod`.
+# Target reload time < 30s.
+npm run dev
+
+# For deployment. No live server.
+npm run prod
 ```
 
 ## Credits / Appreciation
@@ -33,7 +43,6 @@ This site was inspired and built from many different libraries. Mentioning all o
   * [Git Commit Date Plugin](https://github.com/saneef/eleventy-plugin-git-commit-date)
   * And many more unmentioned plugins...
 * [Lychee](https://github.com/lycheeverse/lychee) – Fast link checker.
-* [CSP Hashes](https://github.com/localnerve/csp-hashes) – Extract CSP hashes from HTML. Reduces attack vector, because we would need to use `unsafe-inline` otherwise...
 * MDN – Excellent documentation and guides as always.
   * [Responsive Images](https://developer.mozilla.org/en-US/docs/Learn/HTML/Multimedia_and_embedding/Responsive_images)
 * [Devlopr – Jekyll](https://github.com/sujaykundu777/devlopr-jekyll)
@@ -53,11 +62,13 @@ This site was inspired and built from many different libraries. Mentioning all o
   * Examples, documentation, guides.
   * Core functionality, without which the site would be much weaker and take a *lot longer* to develop.
   * Alerts. Tooltips. Dropdowns. Modals. Buttons. Carousels.
-* [MathJax](https://github.com/mathjax/MathJax) – for Fuzzy Wuzzy Math
+* ~~[MathJax](https://github.com/mathjax/MathJax) – for Fuzzy Wuzzy Math~~ (sorry mathjax)
+* [KaTeX](https://github.com/KaTeX/KaTeX) – for performant math.
 * [sharer.js](https://github.com/ellisonleao/sharer.js) – Abstracts away social links. I just need to worry about the icons and UI.
 * [lunr.js](https://github.com/olivernn/lunr.js) – Site-wide Search Engine.
 * [Infinite Jekyll](https://github.com/tobiasahlin/infinite-jekyll) – Fit infinite lists on a page.
   * I attempted a [generalisation for SSGs: Infinite Loader](https://github.com/TrebledJ/infinite-loader).
+* [CSP Hashes](https://github.com/localnerve/csp-hashes) – Extract CSP hashes from HTML. Reduces attack vector, because we would need to use `unsafe-inline` otherwise...
 
 ### Inspirations
 Indirect credits that deserve mentioning.

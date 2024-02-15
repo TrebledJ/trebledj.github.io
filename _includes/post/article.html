@@ -1,6 +1,12 @@
-<div class="post-body" itemprop="articleBody text">
+<div class="post-body text-content" itemprop="articleBody text">
     {% if thumbnail_banner and thumbnail_src %}
         {% hero thumbnail_src, "", title | stripBetweenTags(['sup', 'sub']) | striptags %}
+    {% endif %}
+    {% if preamble %}
+        <div class="post-preamble">
+            {{ preamble | md | safe }}
+            <hr/>
+        </div>
     {% endif %}
     {{ content | safe }}
 </div>
