@@ -3,7 +3,7 @@
     <img src="/img/{{ site.author.logo }}" class="profile-img me-3" alt="" loading="lazy" decoding="async" itemprop="image" />
     <div class="author-info d-flex flex-column me-3">
         <p class="profile-name" itemprop="name">{{ site.author.alias | default(site.author.name) }}</p>
-        <p class="profile-bio" itemprop="description">{{ site.subtitle }}</p>
+        <p class="profile-bio" itemprop="description">{{ site.author.shortbio | mdInline | safe }}</p>
     </div>
     <div id="post-author-social-items-wrapper" class="ms-auto mt-1">
         <button class="btn btn-primary py-1">+&nbsp;Social</button>
