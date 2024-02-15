@@ -35,10 +35,10 @@ module.exports = function (eleventyConfig) {
     mdLib.use(markdownItFootnote);
 
     mdLib.renderer.rules.footnote_block_open = () => (
-      '<hr class="footnotes-sep"/>\n' +
-      '<b>Footnotes</b>\n' +
-      '<section class="footnotes">\n' +
-      '<ol class="footnotes-list">\n');
+      '<hr class="footnotes-sep"/>\n'
+      + '<b>Footnotes</b>\n'
+      + '<section class="footnotes">\n'
+      + '<ol class="footnotes-list">\n');
 
     mdLib.renderer.rules.footnote_caption = (tokens, idx/* , options, env, slf */) => {
       const n = Number(tokens[idx].meta.id + 1).toString();
