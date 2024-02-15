@@ -12,10 +12,8 @@ tags:
   - windows
 thumbnail_src: assets/thumbnail.jpg
 tocOptions: '{"tags":["h2","h3","h4"]}'
----
-
-*Last month, I designed a CTF challenge involving zip file attacks. This post is a collection of the techniques, insights, and notes I've gathered. I've also uploaded the challenge on [GitHub](https://github.com/TrebledJ/attack-of-the-zip) along with a simplified playground.*
-
+preamble: |
+  *Last month, I designed a CTF challenge involving zip file attacks. This post is a collection of the techniques, insights, and notes I've gathered. I've also uploaded the challenge on [GitHub](https://github.com/TrebledJ/attack-of-the-zip) along with a simplified playground.*
 ---
 
 Zip files are *everywhere* in our daily lives, seamlessly integrated into our personal, academic, and professional environments. From Java apps to Microsoft Office documents, zip files have become an indispensable tool.

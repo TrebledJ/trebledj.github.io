@@ -2,5 +2,11 @@
     {% if thumbnail_banner and thumbnail_src %}
         {% hero thumbnail_src, "", title | stripBetweenTags(['sup', 'sub']) | striptags %}
     {% endif %}
+    {% if preamble %}
+        <div class="post-preamble">
+            {{ preamble | md | safe }}
+            <hr/>
+        </div>
+    {% endif %}
     {{ content | safe }}
 </div>
