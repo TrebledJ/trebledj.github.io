@@ -479,7 +479,7 @@ While zip files offer convenience and efficiency in compressing and sharing data
 
 *Anecdotes? Stories? New zip developments? Let me know by leaving a comment.* 🙂
 
-## References
+## Other References
 
 - [PentesterAcademy: From Zip Slip to System Takeover](https://blog.pentesteracademy.com/from-zip-slip-to-system-takeover-8564433ea542)
 - [SecurityVault: Attacks with Zip Files and Mitigations](https://thesecurityvault.com/attacks-with-zip-files-and-mitigations/)
