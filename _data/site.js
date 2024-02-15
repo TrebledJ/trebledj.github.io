@@ -50,7 +50,7 @@ module.exports = function () {
       { text: 'Home', url: '/' },
       { text: 'About', url: '/about' },
       { text: 'Posts', url: '/posts' },
-      { text: 'Projects', url: '/tags/project/' },
+      // { text: 'Projects', url: '/tags/project/' },
       { text: 'Music', url: '/music' },
     ],
     search: {

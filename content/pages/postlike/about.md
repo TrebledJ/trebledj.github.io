@@ -58,6 +58,12 @@ In uni, I picked up electronic music composition (mixing/production) during a co
 
 I like listening to music without words (this rules out pretty much all songs), as words tend to constrain interpretation and imagination. Speeches can't function without words; it'd be ambiguous otherwise.
 
+Some of my favourite composers:
+- JS Bach
+- Shostakovich
+- John Adams
+- Steve Reich
+
 Things I'm interested in exploring:
 - Modes, {% tag "Modal", "modal" %} Harmony
 - Microtones, {% tag "Microtonal", "microtonal" %} Harmony
@@ -67,7 +73,7 @@ Huh, that's a lot of M's.
 
 If you ask me, these are some of my favourite self-compositions:
 
-{% set favMusicPosts = collections.postsr | getPostsBySlug(['space-penguin', 'remorse', 'the-breath-of-life']) %}
+{% set favMusicPosts = collections.postsr | getPostsBySlug(['relay', 'remorse', 'the-breath-of-life']) %}
 <div class="post-preview-list mt-1">{% for post in favMusicPosts %}{{ render_post_preview(post) | nl2br | brSafe | safe }}{% endfor %}</div>
 
 #### Recreational Mathematics/Programming
@@ -96,17 +102,24 @@ Things I'm interested in exploring:
 - {% tag "Reverse", "reverse" %} Engineering
 - Hack the Box (online CTFs + community)
 
+
 #### Board Games
 
-Ah, board games... one of my favourite pastimes. When I'm bored, you may find me playing the occasional game on Board Game Arena. Some of my favourite games are:
+Ah, board games... one of my favourite pastimes. When I'm bored ~~game~~, you may find me playing the occasional game on Board Game Arena. Some of my favourite games are:
 
 - Race for the Galaxy
 - Hanabi
 - And more!
 
+
+### Education
+
+I'm recently graduated from the [Hong Kong University of Science and Technology](https://hkust.edu.hk/), where I studied a combination of mathematics, computer science, and music. Fun times.
+
+
 ### Collaborating
 
-I have several project ideas, the scope of which is beyond my capacity given my full-time work. (In other words, I can’t complete them alone within a year.) I’ve kept the description generic for certain reasons.
+I have several project ideas, the scope of which is beyond my capacity given my full-time work. I’ve kept the description generic for certain reasons.
 
 - Novel Music Instrument on an Embedded Device
 	- Looking to work with... embedded/mechatronic engineers who are also music enthusiasts.
