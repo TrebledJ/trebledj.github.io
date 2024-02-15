@@ -25,11 +25,11 @@ module.exports = function () {
       /* eslint-disable max-len */
       bio: multiline(`
       Hi! (｡＾ ᴗ＾)ﾉ
-      I'm Johnathan, a passionate problem-solver, amateur [music composer](https://trebledj.me/tags/composition/),
-      and [software engineer](https://trebledj.me/tags/software-engineering/).
+      I'm Johnathan, a passionate problem-solver, amateur [music composer](/tags/composition/),
+      and [software engineer](/tags/software-engineering/).
       I enjoy teaching others and thrive on learning new things.
-      When not immersed in [programming](https://trebledj.me/tags/programming/), I can be found taking walks, [reflecting on life](https://trebledj.me/tags/faith/), 
-      and occasionally indulging in [CTF challenges](https://trebledj.me/tags/ctf/).
+      When not immersed in [programming](/tags/programming/), I can be found taking walks, [reflecting on life](/tags/faith/), 
+      and occasionally indulging in [CTF challenges](/tags/ctf/).
 
       Lately, I've been diving deeper into penetration testing and working on a [variations on a theme](https://en.wikipedia.org/wiki/Variation_(music)).
 
