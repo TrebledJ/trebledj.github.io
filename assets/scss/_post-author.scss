@@ -32,6 +32,12 @@ i.social-icon {
 }
 
 #post-author-container {
+    gap: 1rem;
+    
+    @include media-breakpoint-down(sm) {
+        flex-direction: column;
+    }
+
     .profile-name {
         margin-top: 0px;
         margin-bottom: 0.5rem;
