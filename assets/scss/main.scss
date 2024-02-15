@@ -262,3 +262,7 @@ p.subheading {
     overflow-x: auto;
     overflow-y: hidden;
 }
+
+a.lightbox-single, .lightbox-gallery > a {
+    background-image: none;
+}
