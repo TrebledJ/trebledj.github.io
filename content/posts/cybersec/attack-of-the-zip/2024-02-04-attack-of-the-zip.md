@@ -1,19 +1,18 @@
 ---
-title: Attack of the Zip
+title: "From Compression to Compromise: Unmasking Zip File Threats"
 excerpt: Deep dive into zip file attacks and mitigations (with examples!).
 tags: 
-  - tutorial
+  - notes
   - web
-  - ctf
   - python
   - programming
-  - notes
+  - tutorial
+  - ctf
 thumbnail_src: assets/attack-of-the-zip.jpg
-draft: true
+# draft: true
 # tocOptions: '{"tags":["h2","h3","h4"]}'
 ---
 <!-- TODO: revise thumbnail -->
-<!-- TODO: revise title -->
 
 Zip files are *everywhere* in our daily lives, seamlessly integrated into our personal, academic, and professional environments. From Java apps to Microsoft Office documents, zip files have become an indispensable tool.
 
@@ -21,56 +20,19 @@ But as we know from *Silicon Valley*, zip files have the potential to be dangero
 
 {% image "assets/its-a-zip-bomb.gif", "w-80", "Filmmakers' impression of a zip bomb." %}
 
-In this post, we'll delve into the intriguing world of zip file attacks, exploring various methods that allow attackers to gain unauthorized read and write privileges.
+In this post, we'll delve into the intriguing world of zip file attacks, exploring various attacks and mitigations involving zip files. Such [attacks](#zip-attacks) allow attackers to gain unauthorized read and write privileges—or even cause denial of service. With [mitigations](#mitigations-and-other-considerations), we can better protect our systems against zip threats through the cooperation of different teams.
 
 {% alert "danger" %}
 Disclaimer: The content provided in this blog post is intended purely for educational purposes. The author does not assume any responsibility for the potential misuse of the information presented herein. Readers are advised to exercise caution and utilize the knowledge gained responsibly and within legal boundaries.
 {% endalert %}
 
+{% details "Context on This Post", "open" %}
+<!-- TODO: consider where to put these statements. Rationale at end? Playground at front of attack? -->
+I decided to write this post since I recently designed a CTF challenge involving a zip file upload attack, and I wanted a place to concisely ~~jot~~ present my notes and research. Examples in this post will draw from this CTF challenge.
 
-## Play Along 🐳
+I've uploaded a modified Docker playground on [GitHub](TODO: link). Feel free to build it locally (Docker required) and play with various zip attacks to be discussed later.
+{% enddetails %}
 
-<!-- TODO: move section down and turn into "Try it out!" (hands-on exercise) -->
-TODO: link to github
-
-I've created a Docker playground for trying out zip payloads. Feel free to build it locally and follow along.
-
-The container hosts a C++ web application built with the Drogon web framework and the Juce audio processing library (v6.1.4) for unzipping files. This was adapted from a recent web challenge I designed for HKUST Firebird CTF 2024. In the original challenge, Juce was used for audio synthesis. But to keep things simple, I've minimised the code to only unzip files—a mere shell of its former glory.
-
-This playground was built for demonstration and education purposes. It's rare enough to find a C++ backend, even rarer to find a backend whose sole purpose is to run Juce.
-
-<!--
-To bring everyone on the same page, here's what the application does:
-
-1. Accepts (zip) file uploads to the `/upload` endpoint. The handler for this endpoint...
-   1. Generates a random key, so that upload files don't clash.
-   2. Responds to the browser with the key.
-   3. Processes the uploaded file.
-    ```cpp
-    // Generate a random key and return it.
-    auto key = randomKey();
-    // 200 Success. Send key back to browser for later reference.
-    callback(/* ... */);
-
-    // Now save the file...
-    auto score = fileUpload.getFiles()[0];
-    auto scorePath = "/app/uploads/" + key + "/score.mscz";
-    score.saveAs(scorePath);
-
-    // ...and process it.
-    processScore(scorePath);
-    ```
-2. Exposes an endpoint at `/info?id={key}` which grabs output stored in `/app/uploads/{key}/out.txt`.
-
-    ```cpp
-    auto file = "/app/uploads/" + key + "/out.txt";
-    if (checkFileExists(file.c_str())) {
-        // 200 Success. Return file contents.
-    } else {
-        // 404 Error. No such file.
-    }
-    ```
--->
 
 ## Zip Attacks
 
@@ -78,9 +40,9 @@ To bring everyone on the same page, here's what the application does:
 
 #### Overview of Zip Slip
 
-{# {% image "assets/anya-point.jpg", "w-50 floatr1-md", "Directory traversal for ../../app/flag.txt, as demonstrated by Anya." %} #}
+**Zip Slip** is a fancy name for [directory traversal](https://cwe.mitre.org/data/definitions/22.html) but applied to zip uploads. The idea is to *escape* a directory by visiting parent directories through `../` (or `..\\` on Windows). This allows unauthorised access to files and directories by exploiting the lack of *proper input validation* in file path parameters.
 
-**Zip Slip** is a fancy name for [directory traversal](https://cwe.mitre.org/data/definitions/22.html) but applied to zip uploads. The idea is to *escape* a directory by visiting parent directories using `../` (or `..\\` on Windows). This allows unauthorised access to files and directories by exploiting the lack of *proper input validation* in file path parameters.
+Let's look at an example.
 
 A typical zip file may look like this:
 
@@ -383,7 +345,7 @@ In America, "all men are created equal". Not so in filesystems.
 Reading, writing, and linking files depends on permissions. Setting appropriate permissions for the process and limiting the scope of an application can go a long way in preventing attackers from snooping your secrets.
 
 {% alert "success" %}
-1. Avoid running the application as `root`. Instead, run it with a minimum privilege user. (Minimum meaning: enough permissions to get the job done, and only enabling risky permissions when needed.)^[In Docker, we can configure permissions with `chown` and [`USER`](https://docs.docker.com/engine/reference/builder/#user). (I intentionally left these out in the demo.)]
+1. Avoid running the application as `root`. Instead, run it with a minimum privilege user. (Minimum meaning: enough permissions to get the job done, and only enabling higher permissions when needed.)^[In Docker, we can configure permissions with `chown` and [`USER`](https://docs.docker.com/engine/reference/builder/#user). (I intentionally left these out in the demo.)]
   
 2. Lock down sensitive files, only allowing access to privileged users. For example, most server applications don't require write privileges to credential/config files.
 {% endalert %}
@@ -393,19 +355,13 @@ Sometimes it's not entirely feasible to restrict all write permissions. For exam
 See [Limitations of Zip Slip](#limitations-of-zip-slip) and [Limitations of Zip Symlink Attacks](#limitations-of-zip-symlink-attacks) for details on relevant permissions.
 
 ### Modern Antivirus
-*For sysadmins.*
+*For sysadmins and normies.*
 
 Although zip bombs have targeted antivirus (AV) systems in the past, most [modern AV programs can detect zip bombs](https://www.microsoft.com/en-us/windows/learning-center/what-is-a-zip-bomb) by recognising patterns and signatures. This brings us to our last suggestion:
 
 {% alert "success" %}
 3. Upgrade your (antivirus) software. Daily updates to malware signatures ensure your antivirus program stays equipped to detect and thwart emerging threats.
 {% endalert %}
-
-
-<!-- ### Healthy Application Lifecycle
-*For DevSecOps engineers and software developers **using** zip libraries/applications.* -->
-
-<!-- TODO -->
 
 
 ### Robust Code and Tests
@@ -421,7 +377,7 @@ Here are a couple more recommendations:
     For a zip file application, you should ensure your code handles:
     - `..` (Zip Slip),^[Further, if the filename is decoded or gets fed to other servers, you should also handle URL encodings of `.` (`%2e`) and `/` (`%2f`), which are a common bypass against straightforward checks.]
     - symlinks (zip symlink attacks),
-    - potential uncompressed file size (esp. if your application targets end-users).
+    - potential uncompressed file size (especially if your application targets end-users).
 
 5. Adopt unit testing to verify your code works as intended. Add test cases against unintended situations.
 
@@ -454,8 +410,22 @@ And while we're on the topic of software development, having sensible defaults i
 
 {% endalert %}
 
+## Concluding Remarks
 
-## Further Reading / References
+To recap, here are some main points we've gathered:
+
+- There are generally three streams of zip attacks at large:
+  - Arbitrary Read/Write with Zip Slip
+  - Arbitrary Read/Write with Zip Symlink Attacks
+  - Denial of Service with Zip Bombs and Metadata Spoofing
+- Ways to counter zip attacks include:
+  - Run applications with a minimum privilege user.
+  - Regularly update your antivirus with new signatures.
+  - Adopt strong software development practices, including error handling, unit tests, and secure defaults.
+
+
+
+## Further Reading and References
 
 - [PentesterAcademy](https://blog.pentesteracademy.com/from-zip-slip-to-system-takeover-8564433ea542)
 - [SecurityVault](https://thesecurityvault.com/attacks-with-zip-files-and-mitigations/)
