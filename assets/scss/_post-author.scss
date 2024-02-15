@@ -32,8 +32,6 @@ i.social-icon {
 }
 
 #post-author-container {
-    gap: 1rem;
-    
     @include media-breakpoint-down(sm) {
         flex-direction: column;
     }

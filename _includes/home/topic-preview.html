@@ -4,8 +4,8 @@
 
 {% macro render_topic_preview(name, tag, about, excludeTags, uniquePosts) %}
     {# Description #}
-    <div class="recent-posts d-flex mb-3">
-        <span class="me-2 mb-1">{{about}}</span>
+    <div class="recent-posts d-flex mb-3 gap-2">
+        <span class="mb-1">{{about}}</span>
         <div>
             {{ render_tag(tag) }}
         </div>
