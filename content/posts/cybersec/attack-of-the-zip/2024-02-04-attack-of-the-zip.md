@@ -347,7 +347,7 @@ $ wc -c zero.txt zero.zip
 From 5GB, we've gone down to ~4.9MB! A few of these could exhaust most virtual machines.
 
 
-## Other Zip Vulnerabilities in the Wild
+## Zip Vulnerabilities in the Wild
 
 Here are some notable zip vulnerabilities in the past decade:
 
@@ -379,7 +379,9 @@ Let's explore a few ways to mitigate zip attacks. (Some of these can also be app
 {% image "assets/you-guys-apply-hardening-question-mark.jpg", "w-60", "Input sanitisation? Never heard of it!" %}
 
 {% alert "success" %}
-1. Avoid running applications as `root` or `Administrator`. Instead, run it with a minimum privilege user. (Minimum meaning: enough permissions to get the job done, and only enabling higher permissions when needed.)
+1. Avoid running applications as `root` or `Administrator`. Instead, run it with a minimum privilege user.
+
+  Minimum meaning: enough permissions to get the job done, and only enabling higher permissions when needed. Typically, only read/write are needed. Maybe write permissions for log/upload directories.
 {% endalert %}
 
 In America, "all men are created equal". Not so in filesystems.
@@ -462,7 +464,7 @@ It's a good idea to keep these defaults, unless you really need these features, 
 
 Test cases prevent [software regression](https://en.wikipedia.org/wiki/Software_regression) and automate the menial task of manual input. For example, Juce v6.1.5 also introduced a [test case against Zip Slip](https://github.com/juce-framework/JUCE/commit/2e874e80cba0152201aff6a4d0dc407997d10a7f#diff-16f78a017ef48e7154eac2ea6b3ee3d211fa508f5465db0c7f2667741ca00265R700).
 
-## Concluding Remarks
+## tl;dr
 
 A quick recap:
 
@@ -471,7 +473,7 @@ A quick recap:
   - Arbitrary File Read/Write with Zip Symlink Attacks
   - Denial of Service with Zip Bombs and Metadata Spoofing
 - Ways to counter zip attacks include:
-  - (Sysadmins) Run applications with a minimum-privilege user.
+  - (Sysadmins) Run applications with a *minimum-privilege* user.
   - (Regular Users, Sysadmins) Regularly update antiviruses with new signatures.
   - (Software Developers) Adopt strong software development practices, including error handling, secure defaults, and unit tests.
 
