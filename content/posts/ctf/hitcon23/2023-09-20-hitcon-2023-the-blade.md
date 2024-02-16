@@ -690,8 +690,6 @@ It's easy to miss things out. I know I did. Lots of hair was lost until I realis
 
 But overall, a sweet challenge. And one that left me with nice rave music to power me through Saturday.
 
-Was this writeup easy to follow? Hard to follow? Do [leave some feedback](#comment)!
-
 ## Solve Script
 
 <script src="https://gist.github.com/TrebledJ/bea5665f3cd340997ff60e069558e80d.js"></script>
