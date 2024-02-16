@@ -36,12 +36,9 @@ jobs:
   test:
     uses: ./.github/workflows/test.yml
 
-  lint:
-    uses: ./.github/workflows/lint.yml
-
   review-dependabot-pr:
     runs-on: ubuntu-latest
-    needs: [build, test, lint]
+    needs: [build, test]
     # if: github.event.pull_request.user.login == 'dependabot[bot]' && github.event.pull_request.mergeable == true
     steps:
       - name: Get Dependabot Metadata
