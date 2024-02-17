@@ -99,7 +99,25 @@ module.exports = function (eleventyConfig) {
       return content;
     });
 
-    eleventyConfig.addTransform('jsonmin', async function (content) {
+    eleventyConfig.addTransform('jsmin', async function (content) {
+      if (this.page.outputPath && this.page.outputPath.endsWith('.js')) {
+        try {
+          const minified = (await minify(content)).code;
+          return minified;
+        } catch (error) {
+          const {
+            message, filename, line, col, pos,
+          } = error;
+          console.error(chalk.red(
+            `[11ty] Error while minifying JS: ${message} in ${filename} L${line}:${col}:${pos}`,
+          ));
+        }
+      }
+
+      return content;
+    });
+
+    eleventyConfig.addTransform('jsonmin', function (content) {
       if (this.page.outputPath && this.page.outputPath.endsWith('.json'))
         return JSON.stringify(JSON.parse(content));
 
