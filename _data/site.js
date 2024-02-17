@@ -71,19 +71,18 @@ module.exports = function () {
       combined: true, // Combines all lightbox images in a post into a single gallery.
     },
     banner: {
-      enabled: false,
+      enabled: true,
       sticky: true,
       closeButton: true,
       disableInPosts: true, // Don't detract from content.
       scope: 'local', // Possible values: 'session', 'local', ''.
       // bgColor: 'primary', // Any Bootstrap `bg-` values.
       // fgColor: 'black', // Any Bootstrap `text-` values.
-      icon: 'rocket fa-bounce',
+      icon: 'music fa-bounce',
       icon_style: '--fa-animation-delay: 5s; --fa-animation-duration: 3s',
       /* eslint-disable max-len */
       content: multiline(`
-        Welcome to the new *trebledj\\.me* site!
-        Check out what's new: <a class="text-white" href="/posts/site-migration-to-cloudflare">***Site Updates and Migration***</a>.
+        New music dropped: [***Relay***](/posts/relay){.text-warning}. Check it out! 🙂
         `),
       /* eslint-enable max-len */
     },
