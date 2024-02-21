@@ -54,13 +54,15 @@ In C, dynamic allocation is largely optional; you, the programmer, have more con
 
 In C++, it's more of a hassle. Dynamic memory allocation is core to many standard library containers: strings, vectors, maps. The Arduino `String` also uses dynamic memory. No doubt, these libraries are immensely useful for organising and manipulating data, but they come with dynamic allocation.^[Sure, `std` containers allow custom allocators, and that can be a topic for an entire series of posts... but it also means additional indirection, whether at compile-time or runtime.]
 
-The alternative is to use **static allocation**, by providing a maximum bound to our allocations. Sometimes, it's as simple as changing your array declarations.
+The alternative is to use **static allocation**. Instead of allowing containers to grow unbounded, we limit their size with a *maximum bound*. Sometimes, it's as simple as changing array declarations.
 
 ```cpp
 // --- Dynamic ---
 
 size_t size = 10;
 int* array1 = new int[size];
+// `size` is dynamic. e.g. can change with input.
+// Note that we can also resize the array and reassign the pointer.
 
 // Use the array...
 for (int i = 0; i < size; i++)
@@ -87,6 +89,8 @@ With complex data structures, more work is needed to eliminate dynamic allocatio
 {% alert "success" %}
 The [ETL](https://github.com/ETLCPP/etl) (Embedded Template Library) is an alternative to the C++ standard library, and contains many standard features plus libraries useful for embedded systems programming (e.g. circular buffers).
 
+Here's a quick preview with vectors:
+
 ```cpp
 // STL
 // Allocate a dynamic vector (on the heap). Capacity grows on-demand.
@@ -98,13 +102,15 @@ etl::vector<int, 10> vec2 = {1,2,3};
 ```
 {% endalert %}
 
-One benefit of static allocation is *speed*. With dynamic, allocators need to figure out size constraints and reallocate. If the allocator is good, it may save time by reusing a previously freed bin; but this still consumes time. With *static*, memory is either pre-allocated (in the case of global variables) or allocated with a single instruction (subtracting the stack pointer).^[And if your function uses multiple statically-allocated variables, the allocation will be combined in one *giant* stack subtraction. You can thank your compiler for this static bonus.] Hence, better performance at the expense of flexibility.
+One benefit of static allocation is *speed*. With dynamic, allocators need to figure out size constraints and reallocate. If the allocator is good, it may perform better by using smart strategies (e.g. reusing a previously freed bin); but this still introduces overhead. With *static*, memory is either pre-allocated (in the case of global variables) or quickly allocated with a single instruction (subtracting the stack pointer).^[And if your function uses multiple statically-allocated variables, the allocation will be combined into one *giant* stack subtraction. You can thank your compiler for this.] Hence, better performance at the expense of flexibility.
 
 {% alert "fact" %}
-What about polymorphism? We can achieve static polymorphism via [CRTP](https://en.wikipedia.org/wiki/Curiously_recurring_template_pattern#Static_polymorphism); but we lose the ability for a polymorphic container (e.g. `vector<Animal*>`, `vector<Shape*>`). We could also use sum types (e.g. [`std::variant`](https://en.cppreference.com/w/cpp/utility/variant)); but this increases the memory footprint. Sometimes virtual classes are a necessary ~~evil~~ abstraction.
+What about polymorphism? Like dynamic memory allocation, dynamic polymorphism also introduces performance overhead via additional indirection (dynamic dispatch, vtable lookup).
+
+The good news is: static polymorphism exists! In C++, we can achieve static polymorphism via [CRTP](https://en.wikipedia.org/wiki/Curiously_recurring_template_pattern#Static_polymorphism); but we lose the ability to declare polymorphic containers, such as`vector<Animal*>`, `vector<Shape*>`. We could also use sum types (e.g. [`std::variant`](https://en.cppreference.com/w/cpp/utility/variant)); but this increases the memory footprint. Sometimes virtual classes are a necessary ~~evil~~ abstraction.
 {% endalert %}
 
-Thus, it’s crucial to consider the design requirements of the software being developed. How long do the strings need to be? Can they be limited by a maximum length? How many items will our vector hold at most? Is it more maintainable to use virtual classes here? 
+Thus, it’s crucial to consider the design requirements of the software being developed. How long do the strings need to be? Can they be limited by a maximum length? How many items will our vector hold at most? Is it more maintainable to use virtual classes here?^[What's the right balance of maintainability? Is it worth sacrificing maintainability for performance?]
 
 ## Is dynamic memory always bad?
 
@@ -125,4 +131,6 @@ In a recent discussion between Uncle Bob and Casey Muratori on clean code and pe
 
 <sup>([source](https://github.com/unclebob/cmuratori-discussion/blob/main/programmer-cycles-vs-machine-cycles.md); emphasis added)</sup>
 
-This applies to embedded system memory as well. It’s difficult to afford dynamic things with few resources. With more powerful MCUs, it’s easier to justify dynamic things, be it heap, polymorphism, and whatnot. In the end, we should take into account the available resources, design requirements, and use cases. Let me summarise again. *If you **need** flexibility and can afford it, use dynamic memory. If you can’t afford it (as is often the case), use static.*^[The distinction between *want* and *need* is small, but IMO important when programming for embedded systems. Sometimes, we may *want* to use the heap, but it's not needed. Very rarely, we may *need* the flexibility of the heap since the benefits outweigh the costs.]
+This applies to embedded system memory as well. It’s difficult to afford dynamic things with few resources. With more powerful MCUs, it’s easier to justify dynamic things, be it heap, polymorphism, and whatnot. In the end, we should take into account the available resources, design requirements, and use cases. Let me summarise again.
+
+*If you **need** flexibility and can afford it, use dynamic memory. If you can’t afford it (as is often the case), use static.*^[The distinction between *want* and *need* is small, but IMO important when programming for embedded systems. Sometimes, we may *want* to use the heap, but it's not needed. Very rarely, we may *need* the flexibility of the heap since the benefits outweigh the costs.]
