@@ -38,12 +38,11 @@ jobs:
         run: |
           pr_ref="${{ github.event.pull_request.head.ref }}"
           if [ -z "$pr_ref" ]; then
-            echo 'Using PR ref.'
-            echo "ref=$pr_ref" >> $GITHUB_OUTPUT
-          else
-            # Use default.
             echo 'Using default ref.'
             echo "ref=" >> $GITHUB_OUTPUT
+          else
+            echo 'Using PR ref.'
+            echo "ref=$pr_ref" >> $GITHUB_OUTPUT
           fi
 
       - name: Checkout
