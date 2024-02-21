@@ -38,6 +38,13 @@ jobs:
         with:
           fetch-depth: 0  # Fetch all commit history.
 
+      - name: Sanity Check
+        run: |
+          echo "## `git status`" >> $GITHUB_STEP_SUMMARY
+          echo '```' >> $GITHUB_STEP_SUMMARY
+          git status >> $GITHUB_STEP_SUMMARY
+          echo '```' >> $GITHUB_STEP_SUMMARY
+
       - name: Detect Package Manager
         id: detect-package-manager
         run: |
