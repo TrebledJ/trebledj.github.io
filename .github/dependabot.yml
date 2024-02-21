@@ -18,3 +18,7 @@ updates:
     directory: "/" # Location of package manifests
     schedule:
       interval: "weekly"
+    ignore:
+      - dependency-name: "chalk" # Don't upgrade to chalk 5. https://stackoverflow.com/questions/70309135/chalk-error-err-require-esm-require-of-es-module
+      - dependency-name: "*"     # Don't generate patch updates.
+        update-types: ["version-update:semver-patch"]

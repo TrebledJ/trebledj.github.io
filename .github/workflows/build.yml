@@ -33,10 +33,24 @@ jobs:
     name: Build
     runs-on: ubuntu-latest
     steps:
+      - name: Get Ref
+        id: get-ref
+        run: |
+          pr_ref="${{ github.event.pull_request.head.ref }}"
+          if [ -z "$pr_ref" ]; then
+            echo 'Using PR ref.'
+            echo "ref=$pr_ref" >> $GITHUB_OUTPUT
+          else
+            # Use default.
+            echo 'Using default ref.'
+            echo "ref=" >> $GITHUB_OUTPUT
+          fi
+
       - name: Checkout
         uses: actions/checkout@v4
         with:
           fetch-depth: 0  # Fetch all commit history.
+          ref: ${{ steps.get-ref.outputs.ref }}
 
       - name: Sanity Check
         run: |
