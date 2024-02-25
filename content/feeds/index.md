@@ -4,7 +4,7 @@ layout: layouts/page-default
 logo: rss
 ---
 
-## <i class="fa fa-square-rss me-1"></i> Feeds
+## <i class="fas fa-square-rss me-1"></i> Feeds
 
 Hangry for updates? Check out these feeds:
 

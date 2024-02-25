@@ -23,7 +23,7 @@ module.exports = function (eleventyConfig) {
     const [state, defaultEmoji] = alert[role];
     icon ??= defaultEmoji;
 
-    const iconHtml = icon ? `<i class="fa fa-${icon} ms-1 me-3 mt-1 fs-4" role="img"></i>` : '';
+    const iconHtml = icon ? `<i class="fas fa-${icon} ms-1 me-3 mt-1 fs-4" role="img"></i>` : '';
 
     return `<div class="alert alert-${state} d-flex align-items-start">
               ${iconHtml}

@@ -7,7 +7,7 @@
         {% block post_metadata_date %}
             {% if hasPostedDate %}
                 <span>
-                    <i class="fa fa-calendar post-meta-icon me-1"></i>
+                    <i class="fas fa-calendar post-meta-icon me-1"></i>
                 </span>
                 {# DON'T FORMAT!!! #}
                 <span class="fs-7 post-posted-date">Posted on <span itemprop="dateCreated">{{ page.date | date | safe }}</span></span>
@@ -22,7 +22,7 @@
             {# `not hasPostedDate` needed to check if `page.date` exists. #}
             {% if hasUpdatedDate and updatedDate and ((not hasPostedDate) or (updatedDate | date) > (page.date | date)) %}
                 <span class="post-updated-date-icon">
-                    <i class="fa fa-calendar post-meta-icon me-1"></i>
+                    <i class="fas fa-calendar post-meta-icon me-1"></i>
                 </span>
                 {# DON'T FORMAT!!! #}
                 <span class="fs-7 post-updated-date">Updated on <span itemprop="dateModified">{{ updatedDate | date | safe }}</span></span>
@@ -46,7 +46,7 @@
     {% block post_metadata_tags %}
         {% if tags.length > 0 %}
             <span>
-                <i class="fa fa-tag post-meta-icon me-1 mt-2"></i>
+                <i class="fas fa-tag post-meta-icon me-1 mt-2"></i>
             </span>
             <div class="tag-list d-flex flex-row flex-wrap align-items-center">
                 {{ render_tag_list(tags, 20) }}

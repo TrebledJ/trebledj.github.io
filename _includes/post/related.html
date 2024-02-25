@@ -7,7 +7,7 @@
         <hr class="section-sep"/>
         <div id="related" class="w-100">
             <h3>
-                <i class="fa fa-circle-nodes me-2"></i>Related Posts
+                <i class="fas fa-circle-nodes me-2"></i>Related Posts
             </h3>
             <div class="row gx-3 mt-4">
                 {% for post in relatedPosts %}
@@ -19,7 +19,7 @@
 
             <hr/>
             <h3>
-                <i class="fa fa-tags me-2"></i>Related Tags
+                <i class="fas fa-tags me-2"></i>Related Tags
             </h3>
             {% set relatedTagGroups = tags | getRelatedTags(collections.tags, collections.tagcount) %}
             {% for data in relatedTagGroups %}
