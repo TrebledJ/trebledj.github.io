@@ -53,7 +53,7 @@ jobs:
 
       - name: Sanity Check
         run: |
-          echo "## `git status`" >> $GITHUB_STEP_SUMMARY
+          echo '## `git status`' >> $GITHUB_STEP_SUMMARY
           echo '```' >> $GITHUB_STEP_SUMMARY
           git status >> $GITHUB_STEP_SUMMARY
           echo '```' >> $GITHUB_STEP_SUMMARY
