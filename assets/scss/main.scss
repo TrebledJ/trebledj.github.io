@@ -191,10 +191,17 @@ $carousel-transition: transform 2s ease, opacity 1.5s ease-out .5s;
     line-height: $line-height-compact;
 }
 
+.dim-if-dark {
+    // Force no dim in light mode.
+    html[data-theme="light"] & {
+        opacity: 1 !important;
+    }
+}
+
 // Interactive opaque on hover (only for large screens).
 @include media-breakpoint-up(lg) {
     blockquote,
-    .dim-light {
+    .dim-gentle {
         opacity: $opacity-lower;
         // Note: use transition `all`, so that other transitions are also kept (just modified to use transition-duration and linear).
         transition: all $transition-duration linear;
@@ -216,7 +223,7 @@ $carousel-transition: transform 2s ease, opacity 1.5s ease-out .5s;
 
 @include media-breakpoint-down(lg) {
     blockquote,
-    .dim-light {
+    .dim-gentle {
         opacity: $opacity-low;
     }
 
