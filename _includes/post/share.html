@@ -1,18 +1,18 @@
 {% macro icon(faicon) %}
-    <span class="fs-4 ms-3 me-n1">
+    <span class="fs-4">
         <i class="{{faicon}}"></i>
     </span>
 {% endmacro %}
 {% macro sharer(brand) %}
-    <a data-sharer="{{brand}}" data-title="{{title | stripBetweenTags(['sup', 'sub']) | striptags}}" data-url="{{page.url | absoluteUrl}}">
+    <a class="no-decoration" data-sharer="{{brand}}" data-title="{{title | stripBetweenTags(['sup', 'sub']) | striptags}}" data-url="{{page.url | absoluteUrl}}">
         {{icon('fab fa-' + brand)}}
     </a>
 {% endmacro %}
 
 <script defer src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script>
 <div class="post-share dim-gentle mb-3 d-flex flex-row align-items-center">
-    <span style="margin-right:-4px;">Share&nbsp;on</span>
-    <div class="d-flex flex-row flex-wrap align-items-center">
+    <div class="d-flex flex-row flex-wrap align-items-center gap-3">
+        <span>Share&nbsp;on</span>
         {{sharer('reddit')}}
         {{sharer('telegram')}}
         {{sharer('whatsapp')}}
@@ -20,7 +20,7 @@
         {# {{sharer('linkedin')}} #}
         {{sharer('facebook')}}
         {{sharer('twitter')}}
-        <a id="copy-link-button" data-bs-toggle="tooltip" data-bs-trigger="click" title="Link copied!">
+        <a cid="copy-link-button" class="no-decoration" data-bs-toggle="tooltip" data-bs-trigger="click" title="Link copied!">
             {{icon('fas fa-link')}}
         </a>
         {# <span class="copied ms-2">Link&nbsp;copied!</span> #}
