@@ -110,9 +110,12 @@ $(async function () {
   }
 
   function addResults(result) {
-    resultdiv.empty();
-    resultdiv.prepend(`<p class="search-results-list__count ps-1">${result.length} result(s) found</p>`);
+    const maxResults = {{ site.search.maxResults }};
 
+    resultdiv.empty();
+    resultdiv.prepend(`<p class="search-results-list__count ps-1">${result.length > maxResults ? maxResults + '<sup>+</sup>' : result.length} result(s) found</p>`);
+
+    let count = 0;
     for (const item in result) {
       const idx = result[item].ref;
       const { icon, head, desc } = getItemParams(idx);
@@ -127,6 +130,11 @@ $(async function () {
       </div>
       `);
       child.appendTo(resultdiv);
+
+      count++;
+      if (count > maxResults) {
+        break;
+      }
     }
   }
 

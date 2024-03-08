@@ -64,6 +64,7 @@ module.exports = function () {
         { tag: 'programming', icon: 'code' },
       ],
       resultDefaultIcon: 'book',
+      maxResults: 50,
     },
     lightbox: {
       // To disable lightbox, comment out the corresponding plugin in plugins.js.
