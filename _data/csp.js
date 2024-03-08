@@ -51,5 +51,6 @@ module.exports = compileCsp(
     .add('*.soundcloud.com'),
   tag('connect')
     .add('cloudflareinsights.com')
+    .add('formcarry.com') // contact form
   ,
 );

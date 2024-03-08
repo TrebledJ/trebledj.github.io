@@ -113,8 +113,8 @@ module.exports = function () {
       // Unique identifiers and instances.
       musescore: '20636901',
       disqus: 'trebledj',
-      getform: '3b2a26ea-31c4-49ef-a496-d4d765773e59',
-      hcaptcha: '85d67539-c1f8-4bed-b164-17c3b4528972',
+      formcarry: '17b5CJZ3OWy',
+      // hcaptcha: '85d67539-c1f8-4bed-b164-17c3b4528972',
     },
     color: {
       soundcloud: '2631c8',

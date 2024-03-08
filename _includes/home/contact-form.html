@@ -1,5 +1,5 @@
 <div class="col-md-6 d-flex justify-content-center align-items-center">
-    <form id="contact-form" class="w-100" action="https://getform.io/f/{{site.id.getform}}" method="POST">
+    <form id="contact-form" class="w-100" enctype="multipart/form-data" action="https://formcarry.com/s/17b5CJZ3OWy">
         <h2 id="contact">Contact <i class="fas fa-link ms-1"></i>
         </h2>
         <div class="row">
@@ -8,7 +8,7 @@
                 <input type="text" class="form-control" id="name" name="name" placeholder="{{site.contact_placeholder.name}}">
             </div>
             <div class="col-sm mb-3">
-                <label for="email" class="form-label">Email Address</label>
+                <label for="email" class="form-label">Email</label>
                 <input type="email" class="form-control" id="email" name="email" placeholder="{{site.contact_placeholder.email}}">
             </div>
         </div>
@@ -28,4 +28,70 @@
 
         <button type="submit" class="btn btn-primary btn-block mb-4">Send</button>
     </form>
+
+    {# Form Result Pop-up #}
+    <div id="form-result-modal" class="modal" aria-hidden="true" aria-labelledby="form-result-title" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 id="form-result-title" class="modal-title"></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p id="form-result-text"></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary">Okie dokie!</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {# Handle Form with Ajax #}
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            (function ($) {
+                function formOk(msg) {
+                    $("#form-result-title").text("Yippee ki yay!")
+                    $("#form-result-text").text(msg);
+                    $("#form-result-modal").modal('show');
+                }
+
+                function formError(msg) {
+                    $("#form-result-title").text("Oh noes!");
+                    $("#form-result-text").text(msg);
+                    $("#form-result-modal").modal('show');
+                }
+
+                $("#contact-form").submit(function (e) {
+                    e.preventDefault();
+                    var href = $(this).attr("action");
+
+                    $.ajax({
+                        type: "POST",
+                        url: href,
+                        data: new FormData(this),
+                        dataType: "json",
+                        processData: false,
+                        contentType: false,
+                        success: function (response) {
+                            if (response.status == "success") {
+                                formOk("Your message was successfully beamed over!");
+                            } else {
+                                formError("An error occurred: " + response.message);
+                            }
+                        },
+                        error: function (jqXHR, textStatus) {
+                            const errorObject = jqXHR.responseJSON
+                            formError("Request failed, " + errorObject.title + ": " + errorObject.message);
+                        },
+                        complete: function () {
+                            // This will be fired after request is complete whether it's successful or not.
+                            // Use this block to run some code after request is complete.
+                        }
+                    });
+                });
+            })(jQuery);
+        });
+    </script>
 </div>

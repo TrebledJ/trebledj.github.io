@@ -1,3 +1,37 @@
+.modal {
+    .modal-header {
+        --bs-modal-header-border-color: var(--border-color);
+    }
+    
+    .modal-footer {
+        --bs-modal-footer-border-color: var(--border-color);
+    }
+
+    .modal-hint {
+        font-size: 0.8rem;
+        opacity: $opacity-lowest;
+    }
+
+    .border-bottom {
+        border-bottom: $border-width solid var(--border-color) !important;
+    }
+
+    .modal-content {
+        background-color: var(--main-background-color);
+    }
+}
+
+.wide-modal {
+    .modal-dialog {
+        // Larger modal for large screens.
+        @include media-breakpoint-up(md) {
+            max-width: 80%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+    }
+}
+
 #search-modal {
     #search-box-container {
         position: relative;
@@ -17,36 +51,6 @@
         border-radius: $border-radius-small;
         background-color: var(--main-background-color);
         color: var(--main-text-color);
-    }
-
-    .modal-header {
-        border-bottom: none;
-    }
-
-    .modal-hint {
-        font-size: 0.8rem;
-        opacity: $opacity-lowest;
-    }
-
-    .modal-body {
-        border-top: 2px solid var(--border-color);
-    }
-
-    .border-bottom {
-        border-bottom: $border-width solid var(--border-color) !important;
-    }
-
-    .modal-content {
-        background-color: var(--main-background-color);
-    }
-
-    .modal-dialog {
-        // Larger modal for large screens.
-        @include media-breakpoint-up(md) {
-            max-width: 80%;
-            margin-left: auto;
-            margin-right: auto;
-        }
     }
 }
 
