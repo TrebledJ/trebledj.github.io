@@ -58,12 +58,13 @@ module.exports = function () {
       resultIcons: [
         { tag: 'project', icon: 'star' },
         { tag: 'experience', icon: 'rocket' },
+        { tag: 'cybersec', icon: 'user-secret' },
         { tag: 'ctf', icon: 'flag' },
         { tag: 'composition', icon: 'music' },
         { tag: 'embedded', icon: 'bolt' },
         { tag: 'programming', icon: 'code' },
       ],
-      resultDefaultIcon: 'book',
+      resultDefaultIcon: 'newspaper',
       maxResults: 50,
     },
     lightbox: {
