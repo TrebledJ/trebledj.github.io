@@ -1,5 +1,5 @@
 ---
-title: HITCON 2023 – The Blade
+title: HITCON 2023 – The Blade
 excerpt: Beginner-friendly writeup for a nifty Rust reversing challenge.
 tags:
   - reverse
