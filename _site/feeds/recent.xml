@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        
+            
+                <item>
+                    <title>From Compression to Compromise: Unmasking Zip File Threats</title>
+                    <description>Deep dive into zip file attacks and mitigations (with examples!).</description>
+                    <pubDate>2024-02-15T00:00:00Z</pubDate>
+                    <link>https://trebledj.me/posts/attack-of-the-zip/</link>
+                    
+                        <category>cybersec</category>
+                    
+                        <category>notes</category>
+                    
+                        <category>web</category>
+                    
+                        <category>python</category>
+                    
+                        <category>programming</category>
+                    
+                        <category>tutorial</category>
+                    
+                        <category>ctf</category>
+                    
+                        <category>linux</category>
+                    
+                        <category>windows</category>
+                    
+                </item>
+            
+        
+            
+                <item>
+                    <title>Relay</title>
+                    <description>Electronica on racing light. A variation on Remorse.</description>
+                    <pubDate>2024-01-20T00:00:00Z</pubDate>
+                    <link>https://trebledj.me/posts/relay/</link>
+                    
+                        <category>composition</category>
+                    
+                        <category>music</category>
+                    
+                        <category>electronica</category>
+                    
+                        <category>synths</category>
+                    
+                        <category>dubsy-wubsy</category>
+                    
+                        <category>modal</category>
+                    
+                        <category>faith</category>
+                    
+                </item>
+            
+        
+            
+                <item>
+                    <title>5 Wacky Insights from God&#39;s Smuggler</title>
+                    <description>Reflections on a story with an unconventional mission.</description>
+                    <pubDate>2024-01-07T00:00:00Z</pubDate>
+                    <link>https://trebledj.me/posts/wacky-insights-from-gods-smuggler/</link>
+                    
+                        <category>faith</category>
+                    
+                        <category>reading</category>
+                    
+                        <category>reflection</category>
+                    
+                        <category>notes</category>
+                    
+                </item>
+            
+        
+            
+                <item>
+                    <title>HKCERT CTF 2023 – Decompetition: Vitamin C++</title>
+                    <description>A beginner-friendly writeup to reverse-engineering C++. Years of complex shenanigans condensed!</description>
+                    <pubDate>2023-11-16T00:00:00Z</pubDate>
+                    <link>https://trebledj.me/posts/hkcert-2023-decompetition-vitamin-cpp/</link>
+                    
+                        <category>ctf</category>
+                    
+                        <category>writeup</category>
+                    
+                        <category>reverse</category>
+                    
+                        <category>cpp</category>
+                    
+                        <category>tutorial</category>
+                    
+                        <category>programming</category>
+                    
+                </item>
+            
+        
+            
+                <item>
+                    <title>Site Updates and Migration to Cloudflare Pages</title>
+                    <description>Improvements, Optimisations, and a Better Stack with Cloudflare Hosting</description>
+                    <pubDate>2023-11-09T00:00:00Z</pubDate>
+                    <link>https://trebledj.me/posts/site-migration-to-cloudflare/</link>
+                    
+                        <category>meta</category>
+                    
+                        <category>writeup</category>
+                    
+                        <category>web</category>
+                    
+                </item>
+            
+        
+            
+                <item>
+                    <title>Subtype Metaprogramming is Mostly Harmless</title>
+                    <description>Inheritance go brrrrrrrr... (ab)using types to write programs.</description>
+                    <pubDate>2023-10-02T00:00:00Z</pubDate>
+                    <link>https://trebledj.me/posts/subtype-metaprogramming-is-mostly-harmless/</link>
+                    
+                        <category>programming</category>
+                    
+                        <category>ctf</category>
+                    
+                        <category>types</category>
+                    
+                        <category>python</category>
+                    
+                        <category>tutorial</category>
+                    
+                        <category>reverse</category>
+                    
+                        <category>programming-languages</category>
+                    
+                        <category>metaprogramming</category>
+                    
+                        <category>oop</category>
+                    
+                        <category>writeup</category>
+                    
+                </item>
+            
+        
+            
+                <item>
+                    <title>HITCON 2023 – The Blade</title>
+                    <description>Beginner-friendly writeup for a nifty Rust reversing challenge.</description>
+                    <pubDate>2023-09-20T00:00:00Z</pubDate>
+                    <link>https://trebledj.me/posts/hitcon-2023-the-blade/</link>
+                    
+                        <category>ctf</category>
+                    
+                        <category>writeup</category>
+                    
+                        <category>reverse</category>
+                    
+                        <category>rust</category>
+                    
+                        <category>python</category>
+                    
+                        <category>programming</category>
+                    
+                </item>
+            
+        
+            
+                <item>
+                    <title>GDB/GEF Cheatsheet</title>
+                    <description>Quick command reference on one of the most powerful tools for dynamic analysis.</description>
+                    <pubDate>2023-09-11T00:00:00Z</pubDate>
+                    <link>https://trebledj.me/posts/gdb-cheatsheet/</link>
+                    
+                        <category>programming</category>
+                    
+                        <category>ctf</category>
+                    
+                        <category>pwn</category>
+                    
+                        <category>reverse</category>
+                    
+                        <category>learning</category>
+                    
+                        <category>cheatsheet</category>
+                    
+                        <category>notes</category>
+                    
+                </item>
+            
+        
+            
+                <item>
+                    <title>DUCTF 2023 – Wrong Signal</title>
+                    <description>You straight to `oops()`. Right away.</description>
+                    <pubDate>2023-09-04T00:00:00Z</pubDate>
+                    <link>https://trebledj.me/posts/ductf-2023-wrong-signal/</link>
+                    
+                        <category>ctf</category>
+                    
+                        <category>writeup</category>
+                    
+                        <category>reverse</category>
+                    
+                        <category>python</category>
+                    
+                        <category>programming</category>
+                    
+                </item>
+            
+        
+            
+                <item>
+                    <title>Overflow</title>
+                    <description>A children&#39;s worship song on overflowing with Fruits of the Spirit.</description>
+                    <pubDate>2023-08-27T00:00:00Z</pubDate>
+                    <link>https://trebledj.me/posts/overflow/</link>
+                    
+                        <category>composition</category>
+                    
+                        <category>music</category>
+                    
+                        <category>faith</category>
+                    
+                        <category>worship</category>
+                    
+                        <category>song</category>
+                    
+                        <category>band</category>
+                    
+                        <category>dubsy-wubsy</category>
+                    
+                        <category>synths</category>
+                    
+                        <category>essay</category>
+                    
+                </item>
+            
+        
+    </channel>
+</rss>

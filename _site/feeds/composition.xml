@@ -1,0 +1,785 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:base="https://trebledj.me">
+  <title>TrebledJ&#39;s Pages</title>
+  <subtitle>TrebledJ&#39;s personal blog on programming, music, and memes.</subtitle>
+  <link href="https://trebledj.me/feeds/composition.xml" rel="self"/>
+  <link href="https://trebledj.me"/>
+  <updated>2024-01-20T00:00:00Z</updated>
+  <id>https://trebledj.me</id>
+  <author>
+    <name>TrebledJ</name>
+    <email>trebledjjj@gmail.com</email>
+  </author>
+  
+    
+      
+      <entry>
+        <title>Relay</title>
+        <description>Electronica on racing light. A variation on Remorse.</description>
+        <link href="https://trebledj.me/posts/relay/"/>
+        <updated>2024-01-20T00:00:00Z</updated>
+        <id>https://trebledj.me/posts/relay/</id>
+        <content xml:lang="en" type="html">&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;The people walking in darkness&lt;/em&gt;&lt;br /&gt;
+&lt;em&gt;have seen a great light;&lt;/em&gt;&lt;br /&gt;
+&lt;em&gt;on those living in the land of deep darkness&lt;/em&gt;&lt;br /&gt;
+&lt;em&gt;a light has dawned.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;– Isaiah 9:2&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;a class=&quot;lightbox-single&quot; title=&quot;This took a long while to make.&quot; href=&quot;https://trebledj.me/img/posts/music/15-relay/assets/relay-4864w.webp&quot;&gt;&lt;img class=&quot;mb-2 rw center w-100 &quot; src=&quot;https://trebledj.me/img/posts/music/15-relay/assets/relay-4864w.webp&quot; loading=&quot;lazy&quot; decoding=&quot;async&quot; style=&quot;aspect-ratio: auto 4864 / 3328&quot; alt=&quot;Hand reaching out to a helping hand above.&quot; title=&quot;This took a long while to make.&quot; srcset=&quot;https://trebledj.me/img/posts/music/15-relay/assets/relay-256w.webp 256w, https://trebledj.me/img/posts/music/15-relay/assets/relay-512w.webp 512w, https://trebledj.me/img/posts/music/15-relay/assets/relay-1024w.webp 1024w, https://trebledj.me/img/posts/music/15-relay/assets/relay-4864w.webp 4864w&quot; sizes=&quot;(max-width: 256px) 256px, (max-width: 512px) 512px, (max-width: 1024px) 1024px, 4864px&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;What is a relay? A race—passing a baton from one to the next. The passing of packets by a router or a gateway server. Or used plainly as a verb without technicalities, a relay may simply mean to receive and pass on information.&lt;sup class=&quot;footnote-ref&quot;&gt;&lt;a href=&quot;https://trebledj.me/posts/relay/#fn1&quot; id=&quot;fnref1&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+&lt;p&gt;It&#39;s worth taking a moment to reflect: what are we relaying? As time passes, more responsibility falls on our shoulders—the responsibility to be helpful (or useful?) in society; the responsibility to mentor; the responsibility to work, to execute; the responsibility to lead.&lt;/p&gt;
+&lt;p&gt;What are we relaying? What torch are we passing on? What is our &lt;em&gt;light&lt;/em&gt;? And what keeps us moving?&lt;/p&gt;
+&lt;p&gt;The average human &lt;a href=&quot;https://www.gettysburg.edu/news/stories?id=79db7b34-630c-4f49-ad32-4ab9ea48e72b&quot;&gt;works 90,000 hours&lt;/a&gt;. There&#39;s only so much experience, wealth, and knowledge we can accrue.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;Light the torch and guide us through the dark.&lt;/em&gt;&lt;br /&gt;
+&lt;em&gt;Shadows, dispelled by balls of flame.&lt;/em&gt;&lt;br /&gt;
+&lt;em&gt;Relay to us this bright white shining spark.&lt;/em&gt;&lt;br /&gt;
+&lt;em&gt;Ready, for the race to carry on.&lt;/em&gt;&lt;br /&gt;
+&lt;sup&gt;&lt;em&gt;(Some words to go along with the climactic sections.)&lt;/em&gt;&lt;/sup&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr /&gt;
+&lt;p&gt;&lt;em&gt;Similar to &lt;a href=&quot;https://trebledj.me/posts/remorse&quot;&gt;Remorse&lt;/a&gt;, Relay was featured as part of a challenge in the HKUST Firebird CTF 2024 competition, a competition where teams hunt for hidden pieces of text.&lt;/em&gt;&lt;/p&gt;
+&lt;hr class=&quot;footnotes-sep&quot; /&gt;
+&lt;b&gt;Footnotes&lt;/b&gt;
+&lt;section class=&quot;footnotes&quot;&gt;
+&lt;ol class=&quot;footnotes-list&quot;&gt;
+&lt;li id=&quot;fn1&quot; class=&quot;footnote-item&quot;&gt;&lt;p&gt;It might also (in my mind) be a play-on of &amp;quot;&lt;strong&gt;r&lt;/strong&gt;hythmic d&lt;strong&gt;elay&lt;/strong&gt;&amp;quot;. &lt;a href=&quot;https://trebledj.me/posts/relay/#fnref1&quot; class=&quot;footnote-backref&quot;&gt;↩︎&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/section&gt;
+</content>
+        
+          <category>composition</category>
+        
+          <category>music</category>
+        
+          <category>electronica</category>
+        
+          <category>synths</category>
+        
+          <category>dubsy-wubsy</category>
+        
+          <category>modal</category>
+        
+          <category>faith</category>
+        
+      </entry>
+    
+  
+    
+      
+      <entry>
+        <title>Overflow</title>
+        <description>A children&#39;s worship song on overflowing with Fruits of the Spirit.</description>
+        <link href="https://trebledj.me/posts/overflow/"/>
+        <updated>2023-08-27T00:00:00Z</updated>
+        <id>https://trebledj.me/posts/overflow/</id>
+        <content xml:lang="en" type="html">&lt;p&gt;Greetings fellow hoomans. Writing a song is a tedious process—partly as I&#39;m relatively new to the domain. But thankfully, this song was made possible through God&#39;s grace.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Overflow&lt;/em&gt; was originally composed for a Summer Bible program, and has undergone multiple revisions since then. The resulting work is the product of prayer, meditation, and reflection.&lt;sup class=&quot;footnote-ref&quot;&gt;&lt;a href=&quot;https://trebledj.me/posts/overflow/#fn1&quot; id=&quot;fnref1&quot;&gt;1&lt;/a&gt;&lt;/sup&gt; Lyrics and chords are presented below, and my deeper thoughts are expounded further down.&lt;/p&gt;
+&lt;h2 id=&quot;lyrics&quot; tabindex=&quot;-1&quot;&gt;&lt;a class=&quot;md-anchor&quot; href=&quot;https://trebledj.me/posts/overflow/#lyrics&quot; aria-hidden=&quot;true&quot;&gt;&lt;/a&gt; Lyrics&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;Key&lt;/strong&gt;: B♭ Major&lt;br /&gt;
+&lt;strong&gt;Vocal Range&lt;/strong&gt;: D4 – D5 (singable by most children, I think)&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Verse 1&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;When I wake up&lt;br /&gt;
+I marvel at Your saving grace&lt;br /&gt;
+I’ll follow You&lt;br /&gt;
+No matter where You lead me to&lt;/p&gt;
+&lt;p&gt;When I feel down&lt;br /&gt;
+I thank You for Your kind embrace&lt;br /&gt;
+Lord fill me up&lt;br /&gt;
+With the Holy Spirit&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Chorus 1&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;God, Your love is stronger&lt;br /&gt;
+Your joy is deeper&lt;br /&gt;
+Your peace is greater than hate and lies&lt;/p&gt;
+&lt;p&gt;Your patience is higher&lt;br /&gt;
+Your kindness is wider&lt;br /&gt;
+Your goodness is greater than any sin&lt;/p&gt;
+&lt;p&gt;So let me overflow&lt;br /&gt;
+With the Holy Spirit&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Verse 2&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;When I give up&lt;br /&gt;
+You light in me another flame&lt;br /&gt;
+To follow You&lt;br /&gt;
+No matter where You lead me to&lt;/p&gt;
+&lt;p&gt;When I fall down&lt;br /&gt;
+You comfort me and bear my shame&lt;br /&gt;
+Lord fill me up&lt;br /&gt;
+With the Holy Spirit&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Chorus 2&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;God, Your love is stronger&lt;br /&gt;
+Your joy is deeper&lt;br /&gt;
+Your peace is greater than hate and lies&lt;/p&gt;
+&lt;p&gt;God, Your faithfulness is higher&lt;br /&gt;
+Your gentleness is wider&lt;br /&gt;
+Your self-control is greater than fear and rage&lt;/p&gt;
+&lt;p&gt;So let me overflow&lt;br /&gt;
+With the Holy Spirit&lt;/p&gt;
+&lt;p&gt;So let me overflow&lt;br /&gt;
+With the Holy Spirit&lt;/p&gt;
+&lt;h2 id=&quot;chords&quot; tabindex=&quot;-1&quot;&gt;&lt;a class=&quot;md-anchor&quot; href=&quot;https://trebledj.me/posts/overflow/#chords&quot; aria-hidden=&quot;true&quot;&gt;&lt;/a&gt; Chords&lt;/h2&gt;
+&lt;pre&gt;
+&lt;b&gt;Intro&lt;/b&gt;
+B♭    Gm     E♭     F
+
+
+&lt;b&gt;Verse 1&lt;/b&gt;
+
+B♭
+            Fsus4  
+&lt;i&gt;When I wake up&lt;/i&gt;
+
+  E♭             Dm  
+&lt;i&gt;I marvel at Your saving grace&lt;/i&gt;
+
+     E7         Gm
+&lt;i&gt;I’ll follow You&lt;/i&gt;
+
+   Cm7              F           B♭  
+&lt;i&gt;No matter where You lead me to&lt;/i&gt;
+
+            Fsus4   F  
+&lt;i&gt;When I feel down&lt;/i&gt;
+
+  E♭                 Dm  
+&lt;i&gt;I thank You for Your kind embrace&lt;/i&gt;
+
+     Cm7            E♭sus2  
+&lt;i&gt;Lord fill me up&lt;/i&gt;
+
+         E♭   Fsus4      F  
+&lt;i&gt;With the Holy Spirit&lt;/i&gt;
+
+
+&lt;b&gt;Chorus 1&lt;/b&gt;
+
+F
+          E♭      F  
+&lt;i&gt;God, Your love is stronger&lt;/i&gt;
+
+     E♭     F  
+&lt;i&gt;Your joy is deeper&lt;/i&gt;
+
+     E♭       F            Gm       F  
+&lt;i&gt;Your peace is greater than hate and lies&lt;/i&gt;
+
+     E♭          Dm  
+&lt;i&gt;Your patience is higher&lt;/i&gt;
+
+     E♭          Dm  
+&lt;i&gt;Your kindness is wider&lt;/i&gt;
+
+     E♭          Dm           E♭      F  
+&lt;i&gt;Your goodness is greater than any sin&lt;/i&gt;
+
+          Cm7       E♭sus2  
+&lt;i&gt;So let me overflow&lt;/i&gt;
+
+          E♭   F       B♭  
+&lt;i&gt;With Your Holy Spirit&lt;/i&gt;
+  
+
+(Interlude)
+
+B♭    Gm     E♭     F
+
+
+&lt;b&gt;Verse 2&lt;/b&gt;
+
+B♭
+            Fsus4  
+&lt;i&gt;When I give up&lt;/i&gt;
+
+    E♭           Dm  
+&lt;i&gt;You light in me another flame&lt;/i&gt;
+
+     E♭7           Gm  
+&lt;i&gt;I’ll follow You&lt;/i&gt;
+
+   Cm7              F           B♭  
+&lt;i&gt;No matter where You lead me to&lt;/i&gt;
+
+            Fsus4   F  
+&lt;i&gt;When I fall down&lt;/i&gt;
+
+    E♭             Dm  
+&lt;i&gt;You comfort me and bear my shame&lt;/i&gt;
+
+     Cm7           E♭sus2  
+&lt;i&gt;Lord fill me up&lt;/i&gt;
+
+         E♭   Fsus4     F  
+&lt;i&gt;With the Holy Spirit&lt;/i&gt;
+
+
+&lt;b&gt;Chorus 2&lt;/b&gt;
+
+F
+          E♭      F  
+&lt;i&gt;God, Your love is stronger&lt;/i&gt;
+
+     E♭     F  
+&lt;i&gt;Your joy is deeper&lt;/i&gt;
+
+     E♭       F            Gm       F  
+&lt;i&gt;Your peace is greater than hate and lies&lt;/i&gt;
+
+     E♭              Dm  
+&lt;i&gt;Your faithfulness is higher&lt;/i&gt;
+
+     E♭            Dm  
+&lt;i&gt;Your gentleness is wider&lt;/i&gt;
+
+     E♭              Dm           E♭       F  
+&lt;i&gt;Your self-control is greater than fear and rage&lt;/i&gt;
+
+          Cm7        E♭sus2  
+&lt;i&gt;So let me overflow&lt;/i&gt;
+
+          E♭   F       B♭  
+&lt;i&gt;With Your Holy Spirit&lt;/i&gt;
+
+
+Dm
+          A♭9        Ddim  
+&lt;i&gt;So let me overflow&lt;/i&gt;
+
+          Gm7  Ddim    C  
+&lt;i&gt;With Your Holy Spirit&lt;/i&gt;
+
+&lt;/pre&gt;
+&lt;p&gt;&lt;strong&gt;Notes&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;In the final repeat (the last two lines of &amp;quot;So let me overflow...&amp;quot;), feel free to reuse the usual chords + melody. That is, instead of A♭9 to C, feel free to opt for Cm7 to B♭.&lt;/li&gt;
+&lt;li&gt;In the final repeat, feel free to substitute A♭9 with E♭sus♭4 [E♭ A♭ B♭], which is probably easier to play.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;rationale&quot; tabindex=&quot;-1&quot;&gt;&lt;a class=&quot;md-anchor&quot; href=&quot;https://trebledj.me/posts/overflow/#rationale&quot; aria-hidden=&quot;true&quot;&gt;&lt;/a&gt; Rationale&lt;/h2&gt;
+&lt;p&gt;My thoughts are included below for the curious reader.&lt;sup class=&quot;footnote-ref&quot;&gt;&lt;a href=&quot;https://trebledj.me/posts/overflow/#fn2&quot; id=&quot;fnref2&quot;&gt;2&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a class=&quot;lightbox-single&quot; title=&quot;&quot; href=&quot;https://trebledj.me/img/posts/music/14-overflow/assets/i-dont-always-rational-500w.webp&quot;&gt;&lt;img class=&quot;mb-2 rw center w-45&quot; src=&quot;https://trebledj.me/img/posts/music/14-overflow/assets/i-dont-always-rational-500w.webp&quot; loading=&quot;lazy&quot; decoding=&quot;async&quot; style=&quot;aspect-ratio: auto 500 / 627&quot; alt=&quot;&quot; title=&quot;&quot; srcset=&quot;https://trebledj.me/img/posts/music/14-overflow/assets/i-dont-always-rational-256w.webp 256w, https://trebledj.me/img/posts/music/14-overflow/assets/i-dont-always-rational-500w.webp 500w&quot; sizes=&quot;(max-width: 256px) 256px, 500px&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;The theme of the Bible program—as you may have guessed—was &lt;em&gt;Overflow&lt;/em&gt;. Centred around the Fruits of the Spirit, we encouraged children to overflow with Godly fruits rather than spiteful ones.&lt;/p&gt;
+&lt;h3 id=&quot;god-s-grace&quot; tabindex=&quot;-1&quot;&gt;&lt;a class=&quot;md-anchor&quot; href=&quot;https://trebledj.me/posts/overflow/#god-s-grace&quot; aria-hidden=&quot;true&quot;&gt;&lt;/a&gt; God’s Grace&lt;/h3&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;When I wake up&lt;br /&gt;
+I marvel at Your saving grace&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;The Word of God tells us to rejoice always. (1 Thessalonians 5:16) What better way to start the day than by praising God? (Psalm 59:16)&lt;/p&gt;
+&lt;p&gt;Soldiers start off their day by &lt;a href=&quot;https://www.businessinsider.com/navy-seal-commander-explains-why-you-should-make-your-bed-2017-4&quot;&gt;making their bed&lt;/a&gt;. The effect is twofold: it instils discipline, and it starts them off on the right foot. The same applies to praise and attention towards God. And this discipline (or zeal) prepares us for the...&lt;/p&gt;
+&lt;h3 id=&quot;cost-of-discipleship&quot; tabindex=&quot;-1&quot;&gt;&lt;a class=&quot;md-anchor&quot; href=&quot;https://trebledj.me/posts/overflow/#cost-of-discipleship&quot; aria-hidden=&quot;true&quot;&gt;&lt;/a&gt; Cost of Discipleship&lt;/h3&gt;
+&lt;p&gt;&lt;a class=&quot;lightbox-single&quot; title=&quot;No, turn left! Turn left! Left- for goodness&#39; sake. 😕&quot; href=&quot;https://trebledj.me/img/posts/music/14-overflow/assets/offramp-following-god-524w.webp&quot;&gt;&lt;img class=&quot;rw float-right m-1 w-25&quot; src=&quot;https://trebledj.me/img/posts/music/14-overflow/assets/offramp-following-god-524w.webp&quot; loading=&quot;lazy&quot; decoding=&quot;async&quot; style=&quot;aspect-ratio: auto 524 / 499&quot; alt=&quot;No, turn left! Turn left! Left- for goodness&#39; sake. 😕&quot; title=&quot;No, turn left! Turn left! Left- for goodness&#39; sake. 😕&quot; srcset=&quot;https://trebledj.me/img/posts/music/14-overflow/assets/offramp-following-god-256w.webp 256w, https://trebledj.me/img/posts/music/14-overflow/assets/offramp-following-god-512w.webp 512w, https://trebledj.me/img/posts/music/14-overflow/assets/offramp-following-god-524w.webp 524w&quot; sizes=&quot;(max-width: 256px) 256px, (max-width: 512px) 512px, 524px&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;I’ll follow You&lt;br /&gt;
+No matter where You lead me to&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;We&#39;re familiar with the &amp;quot;benefits&amp;quot; of believing in God—love, mercy, eternal life. (Romans 6:23) But what about the costs? The gift of life comes with a heavy cost: to &lt;a href=&quot;https://www.gotquestions.org/take-up-your-cross.html&quot;&gt;take up our cross and follow Jesus&lt;/a&gt;. (Luke 14:27)&lt;/p&gt;
+&lt;h3 id=&quot;god-s-comfort-and-hope&quot; tabindex=&quot;-1&quot;&gt;&lt;a class=&quot;md-anchor&quot; href=&quot;https://trebledj.me/posts/overflow/#god-s-comfort-and-hope&quot; aria-hidden=&quot;true&quot;&gt;&lt;/a&gt; God’s Comfort and Hope&lt;/h3&gt;
+&lt;p&gt;&lt;a href=&quot;https://unsplash.com/photos/VTz5xU3zbeg&quot;&gt;&lt;a class=&quot;lightbox-single&quot; title=&quot;Photo by Alex Shute.&quot; href=&quot;https://trebledj.me/img/posts/music/14-overflow/assets/god-is-my-refuge-by-alex-shute-3205w.webp&quot;&gt;&lt;img class=&quot;rw float-right m-1 w-45&quot; src=&quot;https://trebledj.me/img/posts/music/14-overflow/assets/god-is-my-refuge-by-alex-shute-3205w.webp&quot; loading=&quot;lazy&quot; decoding=&quot;async&quot; style=&quot;aspect-ratio: auto 3205 / 2208&quot; alt=&quot;The letters spell out &#39;God is my refuge.&#39; in Scrabble.&quot; title=&quot;Photo by Alex Shute.&quot; srcset=&quot;https://trebledj.me/img/posts/music/14-overflow/assets/god-is-my-refuge-by-alex-shute-256w.webp 256w, https://trebledj.me/img/posts/music/14-overflow/assets/god-is-my-refuge-by-alex-shute-512w.webp 512w, https://trebledj.me/img/posts/music/14-overflow/assets/god-is-my-refuge-by-alex-shute-1024w.webp 1024w, https://trebledj.me/img/posts/music/14-overflow/assets/god-is-my-refuge-by-alex-shute-3205w.webp 3205w&quot; sizes=&quot;(max-width: 256px) 256px, (max-width: 512px) 512px, (max-width: 1024px) 1024px, 3205px&quot; /&gt;&lt;/a&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;When I feel down&lt;br /&gt;
+I thank You for Your kind embrace&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;[…]&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;When I give up&lt;br /&gt;
+You light in me another flame&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;[…]&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;When I fall down&lt;br /&gt;
+You comfort me and bear my shame&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Sadness, sorrow, and anger are common feelings we have. Perhaps we’ve encountered a bully at school or in the workplace. Perhaps a friend did/said something hurtful. Or perhaps we simply tripped over our own mistakes, faceplanting into hard concrete. These feelings are okay to have sometimes. (Ecclesiastes 3:1-8) But when left unchecked, they may lead to outbursts of violent rage, spiky barbs of malice, and destructive thoughts—outbursts which are undesirable. (Ephesians 3:5-8)&lt;/p&gt;
+&lt;p&gt;But there is hope: our God is a God of comfort.&lt;/p&gt;
+&lt;p&gt;In Moses’ time, prior to entering the promised land, God encouraged the Israelites and leaders to “&lt;em&gt;be strong and courageous&lt;/em&gt;” as they approached the HUMUNGOUS trials facing them. (Deuteronomy 31:6; Joshua 1:9) These fellows had to face literal giants and heavily fortified walls, unprecedented barriers in the people’s history.&lt;/p&gt;
+&lt;p&gt;After Jesus’ death, the apostles went to spread the Word of God. Two apostles, Paul and Silas, were severely persecuted for doing so: they were dragged, flogged, and chained (with little hope of escape). Funny thing is: despite all their hardships, Paul and Silas were “&lt;em&gt;praying and singing hymns to God&lt;/em&gt;” by midnight! (Acts 16:25) They knew God was with them. Despite their gruelling pain, God’s peace was with them.&lt;/p&gt;
+&lt;p&gt;But wait—there’s more!&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;But God demonstrates his own love for us in this: While we were still sinners, Christ died for us.&lt;/em&gt; (Romans 5:8)&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;The &lt;strong&gt;ultimate&lt;/strong&gt; comfort lies in Jesus’ sacrifice. In an honour-shame culture, sin is associated with shame, as we sinful mortals are separated from the almighty and Holy God. Jesus suffered a shameful death on the cross. There is relief (freedom from shame) in knowing our sins are crucified with Him on that cross, as believing in Him changes our shame into honour. (Zephaniah 3:19; Romans 10:11)&lt;/p&gt;
+&lt;p&gt;Our God is a God of comfort. It is in our darkest moments when Christ’s light shines the brightest.&lt;/p&gt;
+&lt;h3 id=&quot;be-filled-with-the-holy-spirit&quot; tabindex=&quot;-1&quot;&gt;&lt;a class=&quot;md-anchor&quot; href=&quot;https://trebledj.me/posts/overflow/#be-filled-with-the-holy-spirit&quot; aria-hidden=&quot;true&quot;&gt;&lt;/a&gt; Be Filled with the Holy Spirit&lt;/h3&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;Lord fill me up&lt;br /&gt;
+With the Holy Spirit&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;A transition to the chorus.&lt;/p&gt;
+&lt;p&gt;Paul encouraged the early church to be filled with Godly character—the fruits of the Spirit. (Galatians 5:22-23) Sure, these fruits might not be granted naturally or automatically, but we can ask God through prayer to fill us. (Matthew 7:7-8; Philippians 4:6-7)&lt;/p&gt;
+&lt;h3 id=&quot;fruits-of-the-spirit&quot; tabindex=&quot;-1&quot;&gt;&lt;a class=&quot;md-anchor&quot; href=&quot;https://trebledj.me/posts/overflow/#fruits-of-the-spirit&quot; aria-hidden=&quot;true&quot;&gt;&lt;/a&gt; Fruits of the Spirit&lt;/h3&gt;
+&lt;p&gt;&lt;a class=&quot;lightbox-single&quot; title=&quot;Fruits. Fruits everywhere.&quot; href=&quot;https://trebledj.me/img/posts/music/14-overflow/assets/overflow-1024w.webp&quot;&gt;&lt;img class=&quot;rw float-right m-1 w-30&quot; src=&quot;https://trebledj.me/img/posts/music/14-overflow/assets/overflow-1024w.webp&quot; loading=&quot;lazy&quot; decoding=&quot;async&quot; style=&quot;aspect-ratio: auto 1024 / 1024&quot; alt=&quot;Fruits. Fruits everywhere.&quot; title=&quot;Fruits. Fruits everywhere.&quot; srcset=&quot;https://trebledj.me/img/posts/music/14-overflow/assets/overflow-256w.webp 256w, https://trebledj.me/img/posts/music/14-overflow/assets/overflow-512w.webp 512w, https://trebledj.me/img/posts/music/14-overflow/assets/overflow-1024w.webp 1024w&quot; sizes=&quot;(max-width: 256px) 256px, (max-width: 512px) 512px, (max-width: 1024px) 1024px, 1024px&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;God, Your &lt;strong&gt;love&lt;/strong&gt; is stronger&lt;br /&gt;
+Your &lt;strong&gt;joy&lt;/strong&gt; is deeper&lt;br /&gt;
+Your &lt;strong&gt;peace&lt;/strong&gt; is greater than hate and lies&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Your &lt;strong&gt;patience&lt;/strong&gt; is higher&lt;br /&gt;
+Your &lt;strong&gt;kindness&lt;/strong&gt; is wider&lt;br /&gt;
+Your &lt;strong&gt;goodness&lt;/strong&gt; is greater than any sin&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;[…]&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;God, Your &lt;strong&gt;faithfulness&lt;/strong&gt; is higher&lt;br /&gt;
+Your &lt;strong&gt;gentleness&lt;/strong&gt; is wider&lt;br /&gt;
+Your &lt;strong&gt;self-control&lt;/strong&gt; is greater than fear and rage&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;The chorus. Highly recommended with actions. :)&lt;/p&gt;
+&lt;p&gt;Love, joy, peace, patience, kindness, goodness, faithfulness, gentleness, and self-control. These, known as the Fruits of the Spirit, are commendable qualities we should bear (Galatians 5:22-23) We can talk &lt;a href=&quot;https://www.christianity.com/wiki/holy-spirit/what-are-the-fruits-of-the-spirit.html&quot;&gt;a &lt;em&gt;lot&lt;/em&gt; more about each individual fruit&lt;/a&gt;, but that’s for a different time.&lt;/p&gt;
+&lt;p&gt;But that’s not all. God&#39;s demonstrations of these fruits are beyond the shallow things this world offers. To give a couple examples:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;God&#39;s unconditional love goes beyond infatuations and romance. His ultimate move? Jesus&#39; innocent death on the cross. (John 3:16; 1 Corinthians 13:4-13)&lt;/li&gt;
+&lt;li&gt;God&#39;s joy goes beyond materialistic joy. It&#39;s a lasting joy that persists through good or bad times. (James 1:2-4)&lt;/li&gt;
+&lt;/ol&gt;
+&lt;blockquote&gt;
+&lt;p&gt;[…] &lt;em&gt;greater than hate and lies&lt;/em&gt;&lt;br /&gt;
+[…] &lt;em&gt;greater than any sin&lt;/em&gt;&lt;br /&gt;
+[…] &lt;em&gt;greater than fear and rage&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Instead of holding grudges and slandering, we can choose to &lt;em&gt;love&lt;/em&gt; our neighbours and enemies, to &lt;em&gt;rejoice&lt;/em&gt; always, and to be vessels of Godly &lt;em&gt;peace&lt;/em&gt;. (Matthew 5:43-48; 1 Thessalonians 5:16; Proverbs 17:1) Instead of sinning, we can (re)turn to God, and through His &lt;em&gt;patience&lt;/em&gt; and &lt;em&gt;kindness&lt;/em&gt; reconsider our ways and repent. (Romans 2:4) He is &lt;em&gt;good&lt;/em&gt; and compassionate to all. (Psalm 145:8-9) Finally, instead of being afraid, we can &lt;em&gt;faithfully&lt;/em&gt; remain in God (John 15:4); instead of being rumbustious and angry, we can exercise &lt;em&gt;gentleness&lt;/em&gt; and &lt;em&gt;self-control&lt;/em&gt;, as Godly peacemakers.&lt;/p&gt;
+&lt;p&gt;All in all, the Fruits of the Spirit surpass the raw, unfiltered emotions we may be accustomed to.&lt;/p&gt;
+&lt;h3 id=&quot;overflow&quot; tabindex=&quot;-1&quot;&gt;&lt;a class=&quot;md-anchor&quot; href=&quot;https://trebledj.me/posts/overflow/#overflow&quot; aria-hidden=&quot;true&quot;&gt;&lt;/a&gt; Overflow&lt;/h3&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;So let me overflow&lt;br /&gt;
+With the Holy Spirit&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Our final supplication: let’s overflow&lt;sup class=&quot;footnote-ref&quot;&gt;&lt;a href=&quot;https://trebledj.me/posts/overflow/#fn3&quot; id=&quot;fnref3&quot;&gt;3&lt;/a&gt;&lt;/sup&gt; with the Holy Spirit and God&#39;s grace, just as a cup overflows, so that we may glorify God in unity. (Psalm 23:5; Romans 15:5-6; Ephesians 4:2-6)&lt;/p&gt;
+&lt;h2 id=&quot;closing-remarks&quot; tabindex=&quot;-1&quot;&gt;&lt;a class=&quot;md-anchor&quot; href=&quot;https://trebledj.me/posts/overflow/#closing-remarks&quot; aria-hidden=&quot;true&quot;&gt;&lt;/a&gt; Closing Remarks&lt;/h2&gt;
+&lt;p&gt;This is meant to be a children’s song, so words are intended to be simple and paired with actions. I hope this song may be an encouragement not only to children, but also to the reader, who has kindly spent their time reading this page. Writing this song was a spiritual journey for me too.&lt;/p&gt;
+&lt;p&gt;Shoot me an email or comment if you plan to sing this song for worship, use it for a children&#39;s event, or even if you just found it encouraging/inspiring. I&#39;d be happy to support in prayer.&lt;/p&gt;
+&lt;hr class=&quot;footnotes-sep&quot; /&gt;
+&lt;b&gt;Footnotes&lt;/b&gt;
+&lt;section class=&quot;footnotes&quot;&gt;
+&lt;ol class=&quot;footnotes-list&quot;&gt;
+&lt;li id=&quot;fn1&quot; class=&quot;footnote-item&quot;&gt;&lt;p&gt;Not to mention, the occasional loss of brain cells. &lt;a href=&quot;https://trebledj.me/posts/overflow/#fnref1&quot; class=&quot;footnote-backref&quot;&gt;↩︎&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&quot;fn2&quot; class=&quot;footnote-item&quot;&gt;&lt;p&gt;As understandably, worship lyrics can be contentious. &lt;a href=&quot;https://trebledj.me/posts/overflow/#fnref2&quot; class=&quot;footnote-backref&quot;&gt;↩︎&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&quot;fn3&quot; class=&quot;footnote-item&quot;&gt;&lt;p&gt;While we&#39;re on the topic of overflow, let&#39;s avoid overflowing stacks and buffers—well, unless you&#39;re a pentester. If you know, you know. :) &lt;a href=&quot;https://trebledj.me/posts/overflow/#fnref3&quot; class=&quot;footnote-backref&quot;&gt;↩︎&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/section&gt;
+</content>
+        
+          <category>composition</category>
+        
+          <category>music</category>
+        
+          <category>faith</category>
+        
+          <category>worship</category>
+        
+          <category>song</category>
+        
+          <category>band</category>
+        
+          <category>dubsy-wubsy</category>
+        
+          <category>synths</category>
+        
+          <category>essay</category>
+        
+      </entry>
+    
+  
+    
+      
+      <entry>
+        <title>Midnight Enigma</title>
+        <description>A mysterious mix of minimalism and modal musings.</description>
+        <link href="https://trebledj.me/posts/midnight-enigma/"/>
+        <updated>2023-04-13T00:00:00Z</updated>
+        <id>https://trebledj.me/posts/midnight-enigma/</id>
+        <content xml:lang="en" type="html">&lt;p&gt;&lt;em&gt;Midnight Enigma&lt;/em&gt; is composed for a &lt;a href=&quot;https://musescore.com/groups/fun-musical-challenges/discuss/5180866&quot;&gt;musical challenge&lt;/a&gt; constraining pitches within two octaves, with the bonus theme of game music.&lt;sup class=&quot;footnote-ref&quot;&gt;&lt;a href=&quot;https://trebledj.me/posts/midnight-enigma/#fn1&quot; id=&quot;fnref1&quot;&gt;1&lt;/a&gt;&lt;/sup&gt; Pitch and range constraints aren&#39;t that unusual. When writing for any instrument or voice, it&#39;s important to keep in mind its range and register. You probably don&#39;t want to see (let alone hear) a bass singer singing an A5 note.&lt;/p&gt;
+&lt;p&gt;Though being limited to two octaves bordered on draconian, I made do. I had to cut some corners melodically, since imitation was more difficult and flamboyant melodies couldn&#39;t be expressed. Nonetheless, I focused on exploring other aspects of music: the rhythm, extended chords, microtones, and whatnot. I also decided to have fun with the Phrygian mode a bit more.&lt;sup class=&quot;footnote-ref&quot;&gt;&lt;a href=&quot;https://trebledj.me/posts/midnight-enigma/#fn2&quot; id=&quot;fnref2&quot;&gt;2&lt;/a&gt;&lt;/sup&gt; I started playing with this mode in &lt;a href=&quot;https://trebledj.me/posts/remorse/&quot;&gt;Remorse&lt;/a&gt; (without knowing about it 🫢), and still find it very interesting to use. (Perhaps this will become the topic of a blog post?)&lt;/p&gt;
+&lt;p&gt;I decided to go with a band/minimalist/electronic fusion with a mix of drums, Reichian phasing, and electronic-inspired delay. I took (mental) inspiration from open world games such as Minecraft, where a huge number of possibilities lie at your fingertips and consequences aren&#39;t drastic.&lt;/p&gt;
+&lt;p&gt;A majority of the piece was composed during midnight hours in the days before the challenge deadline, hence the title. (Yes, I messed up my sleep schedule then.)&lt;/p&gt;
+&lt;p&gt;On another note, this was my first time using MIDI vocals. They sound better than I expected; might play with them in future pieces. :)&lt;/p&gt;
+&lt;p&gt;Enjoy~&lt;/p&gt;
+&lt;hr class=&quot;footnotes-sep&quot; /&gt;
+&lt;b&gt;Footnotes&lt;/b&gt;
+&lt;section class=&quot;footnotes&quot;&gt;
+&lt;ol class=&quot;footnotes-list&quot;&gt;
+&lt;li id=&quot;fn1&quot; class=&quot;footnote-item&quot;&gt;&lt;p&gt;The octaves I chose were G2-G3 + G4-G5. Pitches can be anywhere inside these ranges, but not between (G3-G4) or outside. &lt;a href=&quot;https://trebledj.me/posts/midnight-enigma/#fnref1&quot; class=&quot;footnote-backref&quot;&gt;↩︎&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&quot;fn2&quot; class=&quot;footnote-item&quot;&gt;&lt;p&gt;The Phrygian mode is characterised by the flat-2nd. As &lt;em&gt;Midnight Enigma&lt;/em&gt; is primarily in C minor, the flat-2nd would be the D-flat. &lt;a href=&quot;https://trebledj.me/posts/midnight-enigma/#fnref2&quot; class=&quot;footnote-backref&quot;&gt;↩︎&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/section&gt;
+</content>
+        
+          <category>composition</category>
+        
+          <category>music</category>
+        
+          <category>minimalism</category>
+        
+          <category>fusion</category>
+        
+          <category>synths</category>
+        
+          <category>modal</category>
+        
+          <category>microtonal</category>
+        
+          <category>band</category>
+        
+      </entry>
+    
+  
+    
+      
+      <entry>
+        <title>Déjà Vu – Cycle of Power</title>
+        <description>The first variation in a series exploring repetition and meaning in life.</description>
+        <link href="https://trebledj.me/posts/deja-vu-cycle-of-power/"/>
+        <updated>2023-04-09T00:00:00Z</updated>
+        <id>https://trebledj.me/posts/deja-vu-cycle-of-power/</id>
+        <content xml:lang="en" type="html">&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;And in the days of those kings the God of heaven will set up a kingdom that shall never be destroyed, nor shall the kingdom be left to another people. It shall break in pieces all these kingdoms and bring them to an end, and it shall stand forever…&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;— Daniel 2:44 (NIV)&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Organisations, institutions, nations, governments, civilisations. Whether big or small, strong or weak, aggressive or meek, each eventually fades and another rises to take its place. Though on the outside, they seem different; in the inside, they are underscored by a common denominator: the human nature of selfishness and stupidity (or put bluntly, sin).&lt;/p&gt;
+&lt;p&gt;Does this mean we should dissolve into anarchy? Well, no. Organisation, with enough trust, is better than disorganisation. Proper care should be taken to manage resources, especially on a nation-wide level.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;What has been is what will be, and what has been done is what will be done, and there is nothing new under the sun.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;— Ecclesiastes 1:9 (NIV)&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&amp;quot;Gibberish, ChatGPT is new under the sun!&amp;quot; But if we take into account all history and the timeline of events, there’s really not much new. Did you know before computers were invented, a &lt;em&gt;computer&lt;/em&gt; used to be a &lt;a href=&quot;https://en.wikipedia.org/wiki/Computer_(occupation)&quot;&gt;job title&lt;/a&gt;? It wouldn’t be surprising if, later on, an &lt;em&gt;engineer&lt;/em&gt; or &lt;em&gt;artist&lt;/em&gt; refers to a computer program.&lt;/p&gt;
+&lt;p&gt;My point lies in the cycle of power and time. Developments, alliances, wars, laws, technologies, and disasters become mere motifs in the grand scheme of things. Standards of living, science, technology, and health have all improved over the past millennia, but nations still rage like a ceaseless tempest. Conflicts arise, almost inevitably, as if they were meant to be. Such is human nature.&lt;/p&gt;
+&lt;hr /&gt;
+&lt;p&gt;&lt;em&gt;Déjà Vu – Cycle of Power&lt;/em&gt; is my impression of all the above. The musical ideas in this piece were not without inspiration. Some notable inspirations were Fauré&#39;s melodic tune in &lt;em&gt;Libera Me&lt;/em&gt;, Holst&#39;s militaristic rhythm in &lt;em&gt;Mars&lt;/em&gt;, and John Adams’ minimalist works.&lt;/p&gt;
+&lt;p&gt;This piece is scored for orchestra, with repeated sections to capture the essence of a cycle. Throughout this timeless journey, civilisations rise and fall. They come in different shapes and sizes, from the grand to the subdued, from the pacifists to the militarists. A fleeting escape is made into a lucid dreamlike passage where flourishing arpeggios elevate us from reality; yet order lurks in the background. The piece culminates in an oddly familiar setting as history seemingly repeats itself.&lt;/p&gt;
+&lt;p&gt;Each motif and section comes to an end, their place taken by a new motif—and ultimately silence. But there’s a motif which doesn’t end—which can’t be captured on sheets of music.&lt;sup class=&quot;footnote-ref&quot;&gt;&lt;a href=&quot;https://trebledj.me/posts/deja-vu-cycle-of-power/#fn1&quot; id=&quot;fnref1&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+&lt;p&gt;Although the world we live in may seem like an inescapable matrix&lt;sup class=&quot;footnote-ref&quot;&gt;&lt;a href=&quot;https://trebledj.me/posts/deja-vu-cycle-of-power/#fn2&quot; id=&quot;fnref2&quot;&gt;2&lt;/a&gt;&lt;/sup&gt;, each of us has the opportunity to learn, to teach, to experience different perspectives, and to share the hope of something unseen—something more.&lt;/p&gt;
+&lt;p&gt;On this Easter Sunday (and well… all Easter Sundays), we commemorate the resurrection of Jesus Christ, remembering the glorious occasion of His power—and victory—over death, sin, and evil.&lt;/p&gt;
+&lt;hr class=&quot;footnotes-sep&quot; /&gt;
+&lt;b&gt;Footnotes&lt;/b&gt;
+&lt;section class=&quot;footnotes&quot;&gt;
+&lt;ol class=&quot;footnotes-list&quot;&gt;
+&lt;li id=&quot;fn1&quot; class=&quot;footnote-item&quot;&gt;&lt;p&gt;How do you apply dimension reduction on the infinite without discarding an &lt;em&gt;ounce&lt;/em&gt; of its beauty? Good luck trying to use PCA or whatever dimensionality reduction algorithm is popular at the time of reading. I mean, I suppose it&#39;s still possible to focus on some aspects and reduce accordingly. Maybe for a later time. &lt;a href=&quot;https://trebledj.me/posts/deja-vu-cycle-of-power/#fnref1&quot; class=&quot;footnote-backref&quot;&gt;↩︎&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&quot;fn2&quot; class=&quot;footnote-item&quot;&gt;&lt;p&gt;Alluding to the &lt;a href=&quot;https://en.wikipedia.org/wiki/The_Matrix&quot;&gt;movie&lt;/a&gt;. Go watch it if you haven’t already. &lt;sub&gt;&lt;em&gt;cough&lt;/em&gt; - You know who you are.&lt;/sub&gt; &lt;a href=&quot;https://trebledj.me/posts/deja-vu-cycle-of-power/#fnref2&quot; class=&quot;footnote-backref&quot;&gt;↩︎&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/section&gt;
+</content>
+        
+          <category>composition</category>
+        
+          <category>music</category>
+        
+          <category>faith</category>
+        
+          <category>orchestral</category>
+        
+          <category>fusion</category>
+        
+          <category>deja-vu</category>
+        
+          <category>essay</category>
+        
+      </entry>
+    
+  
+    
+      
+      <entry>
+        <title>Amorama</title>
+        <description>A fun little dance slash love medley.</description>
+        <link href="https://trebledj.me/posts/amorama/"/>
+        <updated>2023-02-14T00:00:00Z</updated>
+        <id>https://trebledj.me/posts/amorama/</id>
+        <content xml:lang="en" type="html">&lt;p&gt;&lt;em&gt;Amorama&lt;/em&gt; was composed for a fun little musical challenge on the theme of love ❤️ with the constraint of using the rarely-sighted 13/16 metre. Often, music is made for more balanced, basic metres such as 4/4, 3/4, and 6/8. For some reason, we seem to prefer small subdivisions of 2 or 3. We can still apply this principle with 13/16 though, and it turns out that&#39;s what most contestants did. :)&lt;/p&gt;
+&lt;p&gt;I chose to blend Cuban rhythms, some sweet little tunes, and—since it&#39;s February—various love themes (see if you recognise any!). The piece is scored for violin, piano, double bass, castanets (the clacky things), and drums. The violin and piano are responsible for the melody, while the bass, castanets, and drums primarily generate rhythm and provide the swaying dance line.&lt;/p&gt;
+&lt;p&gt;As encouraged by Spotify advertisements, go and dance with abandon!&lt;/p&gt;
+&lt;p&gt;Happy Valentine&#39;s Day, God bless, and enjoy~ ❤️&lt;/p&gt;
+</content>
+        
+          <category>composition</category>
+        
+          <category>music</category>
+        
+          <category>fusion</category>
+        
+          <category>medley</category>
+        
+      </entry>
+    
+  
+    
+      
+      <entry>
+        <title>Remorse</title>
+        <description>Hiding messages with counterpoint.</description>
+        <link href="https://trebledj.me/posts/remorse/"/>
+        <updated>2023-01-27T00:00:00Z</updated>
+        <id>https://trebledj.me/posts/remorse/</id>
+        <content xml:lang="en" type="html">&lt;p&gt;A reflection of the past, composed and mixed during my 7-day covid quarantine.&lt;/p&gt;
+&lt;p&gt;Time ebbs past,&lt;br /&gt;
+As anguish holds fast.&lt;br /&gt;
+Without you I’m filled with remorse,&lt;br /&gt;
+For you are my one driving force.&lt;/p&gt;
+&lt;p&gt;As the season turns,&lt;br /&gt;
+My heart still churns.&lt;br /&gt;
+I’ll leave my sins and remorse,&lt;br /&gt;
+Heading on a different course.&lt;/p&gt;
+&lt;hr /&gt;
+&lt;p&gt;The purpose of composing this piece is threefold: it served as an expression of faith and emotions, a challenge for a &lt;a href=&quot;https://trebledj.me/tags/ctf/&quot;&gt;Capture-the-Flag (CTF)&lt;/a&gt; competition, and an enjoyable way to pass quarantine. There wasn&#39;t any priority to a particular purpose; all of them seemed to develop together.&lt;/p&gt;
+&lt;p&gt;This piece was composed for the HKUST Firebird 2023 Internal CTF. Such competitions are designed to challenge players with cybersecurity know-how. Once players identify and exploit a vulnerability, they are rewarded with a &lt;em&gt;flag&lt;/em&gt; (a piece of text), which awards points to the player when submitted. Occasionally, some challenges deviate from the norm and test players in other areas. In this case, my challenge tested players in analysing music and patterns.&lt;/p&gt;
+&lt;p&gt;When composing this piece, I aimed to compose something listenable and motivic. I decided to keep constraints flexible within limits. If a music is too constrained, it sounds choked, inevitable, or unimaginative. Some music ciphers out there encode letters into pitches and duration. This was a bit too far for my liking, as it becomes painstakingly difficult to find a pleasurable tune.&lt;/p&gt;
+&lt;p&gt;As hinted by the title, I first translated the flag into Morse using an &lt;a href=&quot;https://onlineasciitools.com/convert-ascii-to-morse&quot;&gt;online converter&lt;/a&gt; with the extended Morse character set. This allowed for some punctuation such as &lt;code&gt;(&lt;/code&gt;, &lt;code&gt;-&lt;/code&gt;, &lt;code&gt;_&lt;/code&gt;, and funky non-ASCII characters such as &lt;code&gt;é&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;With plaintext, we need to encode at least 50 distinct letters. With Morse, we just need to encode 3 instead: &lt;code&gt;.&lt;/code&gt;, &lt;code&gt;-&lt;/code&gt;, and space (as a word separator). So things are relatively simple.&lt;/p&gt;
+&lt;p&gt;I toyed around with a few ideas of encoding these three characters. Eventually I ended up with this mapping:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;.&lt;/code&gt; → &amp;quot;Note On&amp;quot; in upper stave (treble clef)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-&lt;/code&gt; → &amp;quot;Note On&amp;quot; in lower stave (bass clef)&lt;/li&gt;
+&lt;li&gt;space → &amp;quot;Note On&amp;quot; in both staves&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;This lent the music well to a contrapuntal form, with the occasional grace-note or glissando to pack characters in a way that preserves the melodic contour. After composing the sheet music, I ended up mixing it with Reaper for some extra flair and charged resonance, making the night seem younger.&lt;/p&gt;
+&lt;p&gt;Enjoy the result!&lt;/p&gt;
+</content>
+        
+          <category>composition</category>
+        
+          <category>music</category>
+        
+          <category>faith</category>
+        
+          <category>piano</category>
+        
+          <category>counterpoint</category>
+        
+          <category>modal</category>
+        
+          <category>electronica</category>
+        
+          <category>dubsy-wubsy</category>
+        
+          <category>synths</category>
+        
+          <category>ctf</category>
+        
+          <category>writeup</category>
+        
+          <category>stego</category>
+        
+      </entry>
+    
+  
+    
+      
+      <entry>
+        <title>Seaside Garden</title>
+        <description>A first attempt at songwriting.</description>
+        <link href="https://trebledj.me/posts/seaside-garden/"/>
+        <updated>2023-01-01T00:00:00Z</updated>
+        <id>https://trebledj.me/posts/seaside-garden/</id>
+        <content xml:lang="en" type="html">&lt;p&gt;&lt;em&gt;Seaside Garden&lt;/em&gt; is composed for HKUST&#39;s Call for Scores for the School Anthem.&lt;sup class=&quot;footnote-ref&quot;&gt;&lt;a href=&quot;https://trebledj.me/posts/seaside-garden/#fn1&quot; id=&quot;fnref1&quot;&gt;1&lt;/a&gt;&lt;/sup&gt; I present my rationale below, at the expense of being cheesy.&lt;/p&gt;
+&lt;h2 id=&quot;rationale&quot; tabindex=&quot;-1&quot;&gt;&lt;a class=&quot;md-anchor&quot; href=&quot;https://trebledj.me/posts/seaside-garden/#rationale&quot; aria-hidden=&quot;true&quot;&gt;&lt;/a&gt; Rationale&lt;/h2&gt;
+&lt;p&gt;My journey with HKUST started three and a half years ago. This was a period of becoming, exploration, and development. To me, the university is like a garden: cultivating and nurturing flora and fauna, a peaceful sanctuary, a place of life and beauty. Situated near the sea, HKUST stands firm as waves ceaselessly crash against its foundation.&lt;/p&gt;
+&lt;p&gt;But what&#39;s a garden without birds? A garden is a place where birds can flourish and grow before departing and exploring the outside world. There are countless kinds of birds: wisened owls, agile peregrines, shrewd crows, and hardworking weavers among others. The garden and birds live in symbiosis. The garden provides nutrition and shelter; in exchange, birds spread seeds and pollinate flowers. It is well-known that birds digest fruit from one end and discharge (plus fertilise!) seeds from the other end, planting these gifts to who-knows-where. Without birds, the world becomes a very dark and dismal place.&lt;/p&gt;
+&lt;p&gt;HKUST&#39;s iconic sundial goes by many names. In Cantonese, it&#39;s colloquially known as the turkey (literally, fire chicken). Some university groups such as the Red Bird and Firebird teams name themselves after the sculpture. Indeed, it is difficult not to feel a fiery sensation when looking at the sundial.&lt;sup class=&quot;footnote-ref&quot;&gt;&lt;a href=&quot;https://trebledj.me/posts/seaside-garden/#fn2&quot; id=&quot;fnref2&quot;&gt;2&lt;/a&gt;&lt;/sup&gt; The name it was officially given was &amp;quot;&lt;em&gt;Circle of Time&lt;/em&gt;&amp;quot;, a timeless tribute to humanity and a reflection of Earth&#39;s endless cycle. Although the two HKUST campuses are separated by a border, the two are united by such a monument.&lt;/p&gt;
+&lt;p&gt;Further references include the purple orchid, storms, and other subtle things. The purple orchid—aka the Bauhinia, Hong Kong&#39;s national flower—was included in view of HKUST&#39;s commitment towards the development of Hong Kong. Storms, on the other hand, are an inevitable part of life in Hong Kong and neighbouring ports.&lt;/p&gt;
+&lt;p&gt;Composed in the final week of the year 2022 and released on New Year&#39;s Day 2023, it is my wish that this song instils vision and harmony in learning and teaching throughout the HKUST community.&lt;/p&gt;
+&lt;h2 id=&quot;lyrics&quot; tabindex=&quot;-1&quot;&gt;&lt;a class=&quot;md-anchor&quot; href=&quot;https://trebledj.me/posts/seaside-garden/#lyrics&quot; aria-hidden=&quot;true&quot;&gt;&lt;/a&gt; Lyrics&lt;/h2&gt;
+&lt;p&gt;I&#39;m no lyricist, but for completeness and posterity here are my jank lyrics.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Verse 1&lt;/strong&gt;&lt;br /&gt;
+Seedlings sprout forth&lt;br /&gt;
+As purple orchids bloom.&lt;br /&gt;
+And birds start the morning&lt;br /&gt;
+As they sing a joyful tune.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Pre-Chorus 1&lt;/strong&gt;&lt;br /&gt;
+Oh the sun rises and falls,&lt;br /&gt;
+In an endless Circle of Time.&lt;br /&gt;
+And clouds can&#39;t hide the rays that shine from above.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Chorus 1&lt;/strong&gt;&lt;br /&gt;
+But though storms and strife may rage all night,&lt;br /&gt;
+Our journey carries on.&lt;br /&gt;
+Oh, the seaside garden,&lt;br /&gt;
+Our community.&lt;/p&gt;
+&lt;p&gt;Through storms and strife we&#39;ll find our way&lt;br /&gt;
+As one in unity.&lt;br /&gt;
+In the seaside garden,&lt;br /&gt;
+Our community.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Verse 2&lt;/strong&gt;&lt;br /&gt;
+Dandelions&lt;br /&gt;
+Blow far, far away.&lt;br /&gt;
+And birds leave the treetops&lt;br /&gt;
+As they fly off on their way.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Pre-Chorus 2&lt;/strong&gt;&lt;br /&gt;
+The stars rise and fall&lt;br /&gt;
+In an endless Circle of Time.&lt;br /&gt;
+And clouds can&#39;t hide our voice and fiery call&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Chorus 2&lt;/strong&gt;&lt;br /&gt;
+And through the books, the toil,&lt;br /&gt;
+The sleepless nights,&lt;br /&gt;
+Our journey carries on.&lt;br /&gt;
+Though storms and strife may rage all night,&lt;br /&gt;
+Our path is not forgone&lt;br /&gt;
+Let vision guide all our hearts&lt;br /&gt;
+Through vivid dreams and youthful hope.&lt;br /&gt;
+In the seaside garden,&lt;br /&gt;
+Our community.&lt;sup class=&quot;footnote-ref&quot;&gt;&lt;a href=&quot;https://trebledj.me/posts/seaside-garden/#fn3&quot; id=&quot;fnref3&quot;&gt;3&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Chorus 3&lt;/strong&gt;&lt;sup class=&quot;footnote-ref&quot;&gt;&lt;a href=&quot;https://trebledj.me/posts/seaside-garden/#fn4&quot; id=&quot;fnref4&quot;&gt;4&lt;/a&gt;&lt;/sup&gt;&lt;br /&gt;
+And through the times, the trials,&lt;br /&gt;
+The countless miles,&lt;br /&gt;
+Our venture knows no end.&lt;br /&gt;
+Wind and water carry far&lt;br /&gt;
+The gifts that we present.&lt;br /&gt;
+Let virtues latch on our wings&lt;br /&gt;
+With steadfast bonds and harmony.&lt;br /&gt;
+Oh seaside garden,&lt;br /&gt;
+Our family.&lt;sup class=&quot;footnote-ref&quot;&gt;&lt;a href=&quot;https://trebledj.me/posts/seaside-garden/#fn3&quot; id=&quot;fnref3:1&quot;&gt;3&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Outro&lt;/strong&gt;&lt;br /&gt;
+From the seaside garden,&lt;br /&gt;
+We fly!&lt;br /&gt;
+We fly!&lt;/p&gt;
+&lt;hr class=&quot;footnotes-sep&quot; /&gt;
+&lt;b&gt;Footnotes&lt;/b&gt;
+&lt;section class=&quot;footnotes&quot;&gt;
+&lt;ol class=&quot;footnotes-list&quot;&gt;
+&lt;li id=&quot;fn1&quot; class=&quot;footnote-item&quot;&gt;&lt;p&gt;It didn&#39;t get accepted, sadly. But that&#39;s okay. &lt;a href=&quot;https://trebledj.me/posts/seaside-garden/#fnref1&quot; class=&quot;footnote-backref&quot;&gt;↩︎&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&quot;fn2&quot; class=&quot;footnote-item&quot;&gt;&lt;p&gt;Up to interpretation, of course. Perhaps it&#39;s a fiery love. A fiery joy. A fiery excitement. It could just as well be a fiery hatred, anger, or diarrhoea. &lt;a href=&quot;https://trebledj.me/posts/seaside-garden/#fnref2&quot; class=&quot;footnote-backref&quot;&gt;↩︎&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&quot;fn3&quot; class=&quot;footnote-item&quot;&gt;&lt;p&gt;May interchange between &amp;quot;community&amp;quot; or &amp;quot;family&amp;quot;. &lt;a href=&quot;https://trebledj.me/posts/seaside-garden/#fnref3&quot; class=&quot;footnote-backref&quot;&gt;↩︎&lt;/a&gt; &lt;a href=&quot;https://trebledj.me/posts/seaside-garden/#fnref3:1&quot; class=&quot;footnote-backref&quot;&gt;↩︎&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&quot;fn4&quot; class=&quot;footnote-item&quot;&gt;&lt;p&gt;May repeat Chorus 2 instead, or sing Chorus 3 twice. Ad lib. &lt;a href=&quot;https://trebledj.me/posts/seaside-garden/#fnref4&quot; class=&quot;footnote-backref&quot;&gt;↩︎&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/section&gt;
+</content>
+        
+          <category>composition</category>
+        
+          <category>music</category>
+        
+          <category>song</category>
+        
+          <category>piano</category>
+        
+          <category>chamber</category>
+        
+          <category>hkust</category>
+        
+      </entry>
+    
+  
+    
+      
+      <entry>
+        <title>Space Penguin</title>
+        <description>And yet another school year begins.</description>
+        <link href="https://trebledj.me/posts/space-penguin/"/>
+        <updated>2022-08-26T00:00:00Z</updated>
+        <id>https://trebledj.me/posts/space-penguin/</id>
+        <content xml:lang="en" type="html">&lt;p&gt;Dedicated to everyone feeling stressed, down, lost, or under the weather.&lt;/p&gt;
+&lt;p&gt;As we all know, penguins are great swimmers. Sadly however they can&#39;t fly (or so we think!). But as the &lt;a href=&quot;https://learntofly.fandom.com/wiki/Learn_To_Fly_Wiki&quot;&gt;&amp;quot;Learn to Fly&amp;quot; game series&lt;/a&gt; teaches us, with enough dedication, penguins can indeed fly. And with each attempt they reach higher altitudes, even if simply done using a tiny booster rocket.&lt;/p&gt;
+&lt;p&gt;Hopefully this little piece may be a booster rocket for you.&lt;/p&gt;
+</content>
+        
+          <category>composition</category>
+        
+          <category>music</category>
+        
+          <category>electronica</category>
+        
+          <category>synths</category>
+        
+          <category>dubsy-wubsy</category>
+        
+      </entry>
+    
+  
+    
+      
+      <entry>
+        <title>Joyride in D</title>
+        <description>Jetpack Joyride but without a jetpack, and in D.</description>
+        <link href="https://trebledj.me/posts/joyride-in-d/"/>
+        <updated>2022-01-20T00:00:00Z</updated>
+        <id>https://trebledj.me/posts/joyride-in-d/</id>
+        <content xml:lang="en" type="html">&lt;p&gt;This upbeat track is an offshoot of &lt;a href=&quot;https://trebledj.me/posts/morning-rush/&quot;&gt;Morning Rush&lt;/a&gt;, spawned from a melody in the latter&#39;s interlude. Couldn&#39;t resist going ham on the drums.&lt;/p&gt;
+&lt;p&gt;Unlike &lt;a href=&quot;https://trebledj.me/posts/the-breath-of-life/&quot;&gt;Breath of Life&lt;/a&gt; and Morning Rush, this piece doesn&#39;t have any particular meaning imbued into it, just a fun little composition. I enjoyed writing the keyboard solo (although in its current state, it&#39;s not exactly playable), as well as the guitar countermelody at 2:50. Also writing for drums wasn&#39;t as boring as I thought.&lt;/p&gt;
+&lt;p&gt;This is the third of my three 2021 compositions, uploaded to mark the start of 2022. Enjoy.&lt;/p&gt;
+</content>
+        
+          <category>composition</category>
+        
+          <category>music</category>
+        
+          <category>band</category>
+        
+      </entry>
+    
+  
+    
+      
+      <entry>
+        <title>Morning Rush</title>
+        <description>&quot;Quickly! School starts in 15 minutes and you still haven&#39;t changed out of your pajamas!&quot;</description>
+        <link href="https://trebledj.me/posts/morning-rush/"/>
+        <updated>2022-01-19T00:00:00Z</updated>
+        <id>https://trebledj.me/posts/morning-rush/</id>
+        <content xml:lang="en" type="html">&lt;p&gt;Do you feel the exhilaration of the morning air? The excitement of stepping out of bed? Chomping down breakfast?&lt;/p&gt;
+&lt;p&gt;This upbeat track is an offshoot of &lt;a href=&quot;https://trebledj.me/posts/the-breath-of-life/&quot;&gt;The Breath of Life&lt;/a&gt;, rendering its minimalistic elements with a modern instrumentation and at a faster pace. In particular, it combines the 1564 chord progression with the 332 rhythmic pattern in the rhythm guitar.&lt;/p&gt;
+&lt;p&gt;This is the second of my three 2021 compositions, uploaded to mark the start of 2022. Enjoy.&lt;/p&gt;
+</content>
+        
+          <category>composition</category>
+        
+          <category>music</category>
+        
+          <category>band</category>
+        
+      </entry>
+    
+  
+    
+      
+      <entry>
+        <title>The Breath of Life</title>
+        <description>Humans are complicated individuals even though we all start from two cells.</description>
+        <link href="https://trebledj.me/posts/the-breath-of-life/"/>
+        <updated>2022-01-18T00:00:00Z</updated>
+        <id>https://trebledj.me/posts/the-breath-of-life/</id>
+        <content xml:lang="en" type="html">&lt;p&gt;Slow. Growing. Contemplating. Lush. Carefree. Hopeful. Yearning. This piece seeks to paint a diverse set of feelings. Listen for the string ensemble easing in and out of the void, the solemn moments of silence, the lightheartedness of the syncopated pizzicato, the relentless cycle of tension and relief.&lt;/p&gt;
+&lt;p&gt;In some sections, I aimed for a more contemplative and reflective atmosphere. One key inspirations was Steve Reich&#39;s &lt;a href=&quot;https://en.wikipedia.org/wiki/Music_for_18_Musicians&quot;&gt;Music for 18 Musicians&lt;/a&gt; (an hour-long piece!) where Reich demonstrates the idea of &amp;quot;pulsing&amp;quot;, where a note is repeated rapidly at regular intervals with an increase then decrease in dynamics. The overall effect is quite serene, making the soundscape ebb in and out.&lt;/p&gt;
+&lt;p&gt;To capture this atmosphere of serenity in The Breath of Life but maintain a slow and steady tempo, I decided for the lower strings (cello + double bass) to play long breves. At the same time, the music would &amp;quot;breathe in&amp;quot; and &amp;quot;breathe out&amp;quot; both dynamically and sometimes harmonically. As the lower strings play a third, the measure tenses up a bit. Examples of these are at 2:24 and 8:00.&lt;/p&gt;
+&lt;p&gt;This is the first of my three 2021 compositions, uploaded to mark the start of 2022. Enjoy.&lt;/p&gt;
+</content>
+        
+          <category>composition</category>
+        
+          <category>music</category>
+        
+          <category>minimalism</category>
+        
+          <category>strings</category>
+        
+      </entry>
+    
+  
+    
+      
+      <entry>
+        <title>Reticence</title>
+        <description>Alternate title: sad.mp3.</description>
+        <link href="https://trebledj.me/posts/reticence/"/>
+        <updated>2021-08-21T00:00:00Z</updated>
+        <id>https://trebledj.me/posts/reticence/</id>
+        <content xml:lang="en" type="html">&lt;p&gt;Something about the past few years has been very poignant—deep, memorable, touching yet almost hurting; somewhat close yet also far; cold and distant yet warm inside.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Reticence&lt;/em&gt; was composed as a final project for an introductory course to music composition. Originally, I wanted the piece to be faster and more brisk (akin to a stressed state of mind). But after some reflection (and on further advice by instructors), I settled with a slower tempo. Following further modifications, the final result attempts to capture a held back, cold yet comforting, and ultimately poignant mood.&lt;/p&gt;
+&lt;p&gt;The piece was performed by Galison Lau and Ka Lap Wong in the final concert of the course. The SoundCloud upload is a software rendition.&lt;/p&gt;
+</content>
+        
+          <category>composition</category>
+        
+          <category>music</category>
+        
+          <category>piano</category>
+        
+          <category>strings</category>
+        
+          <category>chamber</category>
+        
+          <category>counterpoint</category>
+        
+          <category>hkust</category>
+        
+      </entry>
+    
+  
+</feed>

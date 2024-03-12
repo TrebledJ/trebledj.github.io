@@ -1,0 +1,1 @@
+$((()=>{const m=Math.floor(4*Math.random())+1;$(".404-meme").html(`<img src="/img/memes/404-${m}.jpg" class="w-75 mt-3">`)}));
