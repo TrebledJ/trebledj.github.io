@@ -1,5 +1,6 @@
 ---
-title: Cybersecurity
+title: Information Security
+redirect_from: [/tags/cybersec/]
 ---
 
 Fast, good, cheap, secure. Choose three.

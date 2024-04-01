@@ -24,7 +24,7 @@ module.exports = function () {
       /* eslint-disable max-len */
       shortbio: multiline(`
       Passionate problem-solver,
-      [software engineer](/tags/software-engineering/), [infosec enthusiast](/tags/cybersec/),
+      [software engineer](/tags/software-engineering/), [infosec enthusiast](/tags/infosec/),
       and amateur [music composer](/tags/composition/).
       I enjoy teaching others and thrive on learning new things.
       When not immersed in [programming](/tags/programming/), I can be found taking walks, [reflecting on life](/tags/faith/), 
@@ -33,7 +33,7 @@ module.exports = function () {
       bio: multiline(`
       Hi! (｡＾ ᴗ＾)ﾉ
       I'm Johnathan, a passionate problem-solver,
-      [software engineer](/tags/software-engineering/), [infosec enthusiast](/tags/cybersec/),
+      [software engineer](/tags/software-engineering/), [infosec enthusiast](/tags/infosec/),
       and amateur [music composer](/tags/composition/).
       I enjoy teaching others and thrive on learning new things.
       When not immersed in [programming](/tags/programming/), I can be found taking walks, [reflecting on life](/tags/faith/), 
@@ -58,7 +58,7 @@ module.exports = function () {
       resultIcons: [
         { tag: 'project', icon: 'star' },
         { tag: 'experience', icon: 'rocket' },
-        { tag: 'cybersec', icon: 'user-secret' },
+        { tag: 'infosec', icon: 'user-secret' },
         { tag: 'ctf', icon: 'flag' },
         { tag: 'composition', icon: 'music' },
         { tag: 'embedded', icon: 'bolt' },
