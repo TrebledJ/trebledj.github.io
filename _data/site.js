@@ -77,14 +77,14 @@ module.exports = function () {
       sticky: true,
       closeButton: true,
       disableInPosts: true, // Don't detract from content.
-      scope: 'local', // Possible values: 'session', 'local', ''.
+      scope: 'session', // Possible values: 'session', 'local', ''.
       // bgColor: 'primary', // Any Bootstrap `bg-` values.
       // fgColor: 'black', // Any Bootstrap `text-` values.
-      icon: 'music fa-bounce',
+      icon: 'droplet',
       icon_style: '--fa-animation-delay: 5s; --fa-animation-duration: 3s',
       /* eslint-disable max-len */
       content: multiline(`
-        New music dropped: [***Relay***](/posts/relay){.text-warning}. Check it out! 🙂
+        [***I'm now a Certified Offensive Waterblower!***](/posts/im-a-certified-offensive-waterblower){.text-warning}
         `),
       /* eslint-enable max-len */
     },
