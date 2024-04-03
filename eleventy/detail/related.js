@@ -130,7 +130,7 @@ function getRelatedPosts(posts, tags, related) {
   if (related.auto) {
     // Find posts that have common tags with this post.
     const sorted = posts.slice()
-      .map(p => [p, countCommon(tags, p.data.tags) - 1])
+      .map(p => [p, countCommon(tags, p.data.tags) - 1]) // -1 because of the 'posts' tag.
       .filter(([_, n]) => n >= minCommonTags)
       .sort(([_a, na], [_b, nb]) => nb - na)
       .map(([post, _]) => post);
