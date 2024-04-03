@@ -4,15 +4,15 @@
 
 <div class="mt-4">
     {# Seperate posts into unique lists. #}
-    {% set tags = postCategories | extend(projectCategories) | mapattr('tag') %}
+    {% set tags = professionalCategories | extend(humanitiesCategories) | extend(projectCategories) | mapattr('tag') %}
     {% set uniquePosts = collections.postsr | selectHomePosts(tags, npostsPerTab) %}
 
     {# Recent Posts Section #}
-    {{render_posts_carousel(uniquePosts, "Recent Posts", "pencil", postCategories, carouselAutoInterval)}}
+    {{render_posts_carousel(uniquePosts, "Recent Posts", "pencil", professionalCategories, carouselAutoInterval)}}
 
     {# Recent Music Section #}
     {% if featuredTracks %}
-        <h2 id="recent-music" class="mb-0">Recent Music <i class="fas fa-music ms-1"></i>
+        <h2 id="recent-music" class="mb-0">Featured Music <i class="fas fa-music ms-1"></i>
         </h2>
         <br/>
 
@@ -53,6 +53,9 @@
         </div>
         <br/>
     {% endif %}
+
+    {# Recent Humanities Section #}
+    {{render_posts_carousel(uniquePosts, "Random Musings", "paintbrush", humanitiesCategories, carouselAutoInterval)}}
 
     {# Recent Projects and Experiences Section #}
     {{render_posts_carousel(uniquePosts, "Projects and Experiences", "star", projectCategories, carouselAutoInterval)}}
