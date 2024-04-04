@@ -12,7 +12,7 @@ related:
   minCommonTags: 1
 ---
 
-> *Waterblowing* is a Cantonese slang for bullshitting or small talk. But here it's mainly the former.
+> *Waterblowing* is a Cantonese slang for bullshitting or small talk. But here it mainly refers to the former.
 
 I'm thrilled to share a major achievement in my career: I am now officially a Certified Offensive Waterblower (COW)! 🐄💧🔥
 
