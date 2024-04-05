@@ -6,6 +6,7 @@
 		"debug": "DEBUG=Eleventy* npx @11ty/eleventy",
 		"debugstart": "DEBUG=Eleventy* npx @11ty/eleventy --serve --quiet",
 		"benchmark": "DEBUG=Eleventy:Benchmark* npx @11ty/eleventy",
+		"validate-html": "html-validate _site/",
 		"check-links": "lychee --base https://trebledj.me --user-agent 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36' --no-progress --accept '200,201,202,203,204,429' --include-verbatim --include-fragments --exclude-path _site/404.html _site",
 		"test": "jest",
 		"lint": "npx eslint . --fix",
@@ -17,7 +18,7 @@
 		"prod:eleventy": "eleventy",
 		"dev": "ENVIRONMENT=development npm-run-all dev:sass --parallel watch:*",
 		"fast": "ENVIRONMENT=fast npm-run-all dev:sass --parallel watch:*",
-		"prod": "ENVIRONMENT=production npm-run-all --parallel prod:*"
+		"prod": "ENVIRONMENT=production npm-run-all --parallel prod:* && npm run validate-html"
 	},
 	"repository": {
 		"type": "git",
@@ -52,6 +53,7 @@
 		"eslint-plugin-import": "^2.29.1",
 		"eslint-plugin-jest": "^27.9.0",
 		"html-minifier": "^4.0.0",
+		"html-validate": "^8.18.1",
 		"jest": "^29.7.0",
 		"luxon": "^3.4.4",
 		"markdown-it": "^14.1.0",
