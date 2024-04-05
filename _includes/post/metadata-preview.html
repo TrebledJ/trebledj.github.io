@@ -4,7 +4,7 @@
 {# Show simplified date. #}
 {% block post_metadata_date %}
     <span>
-        <i class="fa fa-calendar post-meta-icon me-1"></i>
+        <i class="fas fa-calendar post-meta-icon me-1"></i>
     </span>
     {# DON'T FORMAT!!! #}
     <span class="fs-7 post-posted-date">{{ post.page.date | date | safe }}</span>
@@ -17,7 +17,7 @@
 {% block post_metadata_tags %}
     {% if post.data.tags.length > 0 %}
         <span>
-            <i class="fa fa-tag post-meta-icon me-1 mt-2"></i>
+            <i class="fas fa-tag post-meta-icon me-1 mt-2"></i>
         </span>
         <div class="tag-list d-flex flex-row flex-wrap align-items-center">
             {{render_tag_list(post.data.tags | exclude(excludeTags), 3)}}

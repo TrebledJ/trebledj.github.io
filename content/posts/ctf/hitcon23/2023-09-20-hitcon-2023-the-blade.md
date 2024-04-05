@@ -1,5 +1,5 @@
 ---
-title: HITCON 2023 – The Blade
+title: HITCON 2023 – The Blade
 excerpt: Beginner-friendly writeup for a nifty Rust reversing challenge.
 tags:
   - reverse
@@ -689,8 +689,6 @@ Sometimes the solution is simple and straightforward. But occasionally, we make 
 It's easy to miss things out. I know I did. Lots of hair was lost until I realised I left out the shellcode. I also tried to search the shellcode on ExploitDB, but no luck, because it was hand-spun.
 
 But overall, a sweet challenge. And one that left me with nice rave music to power me through Saturday.
-
-Was this writeup easy to follow? Hard to follow? Do [leave some feedback](#comment)!
 
 ## Solve Script
 

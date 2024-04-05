@@ -15,10 +15,15 @@ function count(str, needle) {
 module.exports = function (eleventyConfig) {
   // Formatting tokens for Luxon: https://moment.github.io/luxon/#/formatting?id=table-of-tokens
   eleventyConfig.addFilter('date', (dateObj, format, zone) => (
-    DateTime.fromJSDate(dateObj, { zone: zone ?? 'utc' }).toFormat(format ?? 'yyyy-LL-dd').replace(/-/g, '&#8209;')
+    DateTime.fromJSDate(
+      new Date(dateObj),
+      { zone: zone ?? 'utc' },
+    ).toFormat(format ?? 'yyyy-LL-dd').replace(/-/g, '&#8209;')
   ));
 
-  eleventyConfig.addFilter('dateISO', (dateObj, zone) => DateTime.fromJSDate(dateObj, { zone: zone ?? 'utc' }).toISO());
+  eleventyConfig.addFilter('dateISO', (dateObj, zone) => (
+    DateTime.fromJSDate(new Date(dateObj), { zone: zone ?? 'utc' }).toISO()
+  ));
 
   eleventyConfig.addFilter('contains', (array, e) => array.includes(e));
 
@@ -187,6 +192,8 @@ module.exports = function (eleventyConfig) {
     breaks: false,
     linkify: true,
   });
+  // eslint-disable-next-line global-require
+  md.use(require('markdown-it-attrs'));
 
   eleventyConfig.addFilter('markdownify', markdownString => md.render(markdownString));
   eleventyConfig.addFilter('markdownifyInline', markdownString => md.renderInline(markdownString));

@@ -28,7 +28,7 @@ layout: layouts/page-default
                     width="100%" loading="lazy"></iframe>
                 <div class="d-flex flex-row align-items-center">
                     <span>
-                        <i class="fa fa-tag post-meta-icon me-1"></i>
+                        <i class="fas fa-tag post-meta-icon me-1"></i>
                     </span>
                     <div class="track-tags">
                         {# ${tags} #}
@@ -65,7 +65,7 @@ layout: layouts/page-default
 
                             el
                                 .find(".track-desc")
-                                .html(item.excerpt);
+                                .html(`<b>${item.excerpt}</b>`);
 
                             const track = el.find("iframe");
                             track.attr("title", `Track: ${item.title}`);
@@ -83,9 +83,10 @@ layout: layouts/page-default
                                 .html(tags);
 
                             /* Fill description and link. */
+                            const htmldecode = t => $("<textarea/>").html(t).text();
                             el
                                 .find(".track-content")
-                                .prepend(item.content);
+                                .prepend(htmldecode(item.content));
                             el
                                 .find(".track-link")
                                 .attr("href", url);

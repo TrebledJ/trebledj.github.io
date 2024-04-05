@@ -1,5 +1,5 @@
 ---
-title: DUCTF 2023 – Wrong Signal
+title: DUCTF 2023 – Wrong Signal
 excerpt: You straight to `oops()`. Right away.
 tags:
   - reverse

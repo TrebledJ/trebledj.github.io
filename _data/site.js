@@ -24,7 +24,7 @@ module.exports = function () {
       /* eslint-disable max-len */
       shortbio: multiline(`
       Passionate problem-solver,
-      [software engineer](/tags/software-engineering/), [infosec enthusiast](/tags/cybersec/),
+      [software engineer](/tags/software-engineering/), [infosec enthusiast](/tags/infosec/),
       and amateur [music composer](/tags/composition/).
       I enjoy teaching others and thrive on learning new things.
       When not immersed in [programming](/tags/programming/), I can be found taking walks, [reflecting on life](/tags/faith/), 
@@ -33,7 +33,7 @@ module.exports = function () {
       bio: multiline(`
       Hi! (｡＾ ᴗ＾)ﾉ
       I'm Johnathan, a passionate problem-solver,
-      [software engineer](/tags/software-engineering/), [infosec enthusiast](/tags/cybersec/),
+      [software engineer](/tags/software-engineering/), [infosec enthusiast](/tags/infosec/),
       and amateur [music composer](/tags/composition/).
       I enjoy teaching others and thrive on learning new things.
       When not immersed in [programming](/tags/programming/), I can be found taking walks, [reflecting on life](/tags/faith/), 
@@ -58,12 +58,14 @@ module.exports = function () {
       resultIcons: [
         { tag: 'project', icon: 'star' },
         { tag: 'experience', icon: 'rocket' },
+        { tag: 'infosec', icon: 'user-secret' },
         { tag: 'ctf', icon: 'flag' },
         { tag: 'composition', icon: 'music' },
         { tag: 'embedded', icon: 'bolt' },
         { tag: 'programming', icon: 'code' },
       ],
-      resultDefaultIcon: 'book',
+      resultDefaultIcon: 'newspaper',
+      maxResults: 50,
     },
     lightbox: {
       // To disable lightbox, comment out the corresponding plugin in plugins.js.
@@ -71,19 +73,18 @@ module.exports = function () {
       combined: true, // Combines all lightbox images in a post into a single gallery.
     },
     banner: {
-      enabled: false,
+      enabled: true,
       sticky: true,
       closeButton: true,
       disableInPosts: true, // Don't detract from content.
-      scope: 'local', // Possible values: 'session', 'local', ''.
+      scope: 'session', // Possible values: 'session', 'local', ''.
       // bgColor: 'primary', // Any Bootstrap `bg-` values.
       // fgColor: 'black', // Any Bootstrap `text-` values.
-      icon: 'rocket fa-bounce',
+      icon: 'droplet',
       icon_style: '--fa-animation-delay: 5s; --fa-animation-duration: 3s',
       /* eslint-disable max-len */
       content: multiline(`
-        Welcome to the new *trebledj\\.me* site!
-        Check out what's new: <a class="text-white" href="/posts/site-migration-to-cloudflare">***Site Updates and Migration***</a>.
+        [***I'm now a Certified Offensive Waterblower!***](/posts/im-a-certified-offensive-waterblower){.text-warning}
         `),
       /* eslint-enable max-len */
     },
@@ -114,8 +115,8 @@ module.exports = function () {
       // Unique identifiers and instances.
       musescore: '20636901',
       disqus: 'trebledj',
-      getform: '3b2a26ea-31c4-49ef-a496-d4d765773e59',
-      hcaptcha: '85d67539-c1f8-4bed-b164-17c3b4528972',
+      formcarry: '17b5CJZ3OWy',
+      // hcaptcha: '85d67539-c1f8-4bed-b164-17c3b4528972',
     },
     color: {
       soundcloud: '2631c8',

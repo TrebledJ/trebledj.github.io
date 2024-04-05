@@ -2,7 +2,7 @@ const htmlmin = require('html-minifier');
 const { minify } = require('terser');
 const { Transform } = require('stream');
 const chalk = require('chalk');
-const { addAttributesToExternalLinks } = require('./eleventy/detail/helpers');
+const { modifyExternalLinksToOpenInSeparateTab } = require('./eleventy/detail/helpers');
 const htmlcsp = require('./eleventy/detail/html-csp-transform');
 
 const plugins = require('./eleventy/plugins');
@@ -92,6 +92,7 @@ module.exports = function (eleventyConfig) {
           minifyCSS: true,
           minifyJS: true,
           collapseWhitespace: true,
+          collapseBooleanAttributes: true, // e.g. no <script defer="defer">.
         });
         return minified;
       }
@@ -99,7 +100,25 @@ module.exports = function (eleventyConfig) {
       return content;
     });
 
-    eleventyConfig.addTransform('jsonmin', async function (content) {
+    eleventyConfig.addTransform('jsmin', async function (content) {
+      if (this.page.outputPath && this.page.outputPath.endsWith('.js')) {
+        try {
+          const minified = (await minify(content)).code;
+          return minified;
+        } catch (error) {
+          const {
+            message, filename, line, col, pos,
+          } = error;
+          console.error(chalk.red(
+            `[11ty] Error while minifying JS: ${message} in ${filename} L${line}:${col}:${pos}`,
+          ));
+        }
+      }
+
+      return content;
+    });
+
+    eleventyConfig.addTransform('jsonmin', function (content) {
       if (this.page.outputPath && this.page.outputPath.endsWith('.json'))
         return JSON.stringify(JSON.parse(content));
 
@@ -110,7 +129,7 @@ module.exports = function (eleventyConfig) {
   if (process.env.ENVIRONMENT !== 'fast') {
     eleventyConfig.addTransform('external-links', function (content) {
       if (this.page.outputPath && this.page.outputPath.endsWith('.html'))
-        content = addAttributesToExternalLinks(content, 'target="_blank" rel="noreferrer"');
+        content = modifyExternalLinksToOpenInSeparateTab(content);
       return content;
     });
 

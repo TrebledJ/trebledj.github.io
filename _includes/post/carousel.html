@@ -26,10 +26,18 @@
     <div class="row d-flex align-items-center">
         {# Left Navigation Button #}
         <div class="carousel-control-container d-flex align-items-center justify-content-center">
-            <a type="button" data-bs-target="#{{carouselId}}" data-bs-slide="prev">
+        <button class="tj-carousel-control-prev" type="button" data-bs-target="#{{carouselId}}" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        {# <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button> #}
+            {# <a type="button" data-bs-target="#{{carouselId}}" data-bs-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                 <span class="visually-hidden">Previous</span>
-            </a>
+            </a> #}
         </div>
         
         <div class="carousel-content-container">
@@ -47,10 +55,15 @@
 
         {# Right Navigation Button #}
         <div class="carousel-control-container d-flex align-items-center justify-content-center">
-            <a type="button" data-bs-target="#{{carouselId}}" data-bs-slide="next">
+            {# <a type="button" data-bs-target="#{{carouselId}}" data-bs-slide="next">
                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
                 <span class="visually-hidden">Next</span>
-            </a>
+            </a> #}
+
+            <button class="tj-carousel-control-next" type="button" data-bs-target="#{{carouselId}}" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
         </div>
     </div>
 {% endmacro %}

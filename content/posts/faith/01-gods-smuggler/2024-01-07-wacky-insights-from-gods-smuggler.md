@@ -135,7 +135,7 @@ What's that? Missionaries discovered distributed computing and load balancing?
 
 As Andrew's team and work grew, so did their modus operandi. And as absurd as it sounds, this principle is still carried on today.
 
-It's interesting to muse on this 'technique'. Clearly there will be situations where both members are occupied and unable to pray. So what's the dealio? The point, I think, is to (again) [cease control](#cease-control), i.e. to acknowledge God's hand on the matter. By praying, we rely not only on ourselves but also on the one with the high ground.
+It's interesting to muse on this 'technique'. Clearly there will be situations where both members are occupied and unable to pray. So what's the dealio? The point, I think, is to (again) [cease control](#1-cease-control), i.e. to acknowledge God's hand on the matter. By praying, we rely not only on ourselves but also on the one with the high ground.
 
 
 {% details "Context" %}

@@ -361,7 +361,7 @@ info watchpoint
 info wat
 ```
 
-If hardware watchpoints are supported, then you can also use [read watchpoints](#read-watchpoints) and [access watchpoints](#access-watchpoints).
+If hardware watchpoints are supported, then you can also use read watchpoints and access watchpoints.
 
 ```sh
 # Check if hardware watchpoints are supported.

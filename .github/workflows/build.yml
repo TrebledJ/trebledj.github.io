@@ -33,10 +33,30 @@ jobs:
     name: Build
     runs-on: ubuntu-latest
     steps:
+      - name: Get Ref
+        id: get-ref
+        run: |
+          pr_ref="${{ github.event.pull_request.head.ref }}"
+          if [ -z "$pr_ref" ]; then
+            echo 'Using default ref.'
+            echo "ref=" >> $GITHUB_OUTPUT
+          else
+            echo 'Using PR ref.'
+            echo "ref=$pr_ref" >> $GITHUB_OUTPUT
+          fi
+
       - name: Checkout
         uses: actions/checkout@v4
         with:
           fetch-depth: 0  # Fetch all commit history.
+          ref: ${{ steps.get-ref.outputs.ref }}
+
+      - name: Sanity Check
+        run: |
+          echo '## `git status`' >> $GITHUB_STEP_SUMMARY
+          echo '```' >> $GITHUB_STEP_SUMMARY
+          git status >> $GITHUB_STEP_SUMMARY
+          echo '```' >> $GITHUB_STEP_SUMMARY
 
       - name: Detect Package Manager
         id: detect-package-manager
@@ -57,7 +77,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: 16
+          node-version: 20
           cache: ${{ steps.detect-package-manager.outputs.manager }}
 
       - name: Restore cache

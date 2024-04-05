@@ -4,7 +4,7 @@
             <button aria-controls="navbar-container" aria-expanded="false" aria-label="Toggle navigation"
             class="navbar-toggler shadow-none" data-bs-target="#navbar-container" data-bs-toggle="collapse" type="button">
                 <span id="navbar-toggler-icon">
-                    <i class="fa fa-bars"></i>
+                    <i class="fas fa-bars"></i>
                 </span>
             </button>
             <a class="navbar-brand no-decoration" href="/">{{site.title}}</a>
@@ -19,12 +19,12 @@
                 <ul class="navbar-nav">
                     <li>
                         <a class="nav-link me-2" data-bs-toggle="modal" data-bs-target="#search-modal" aria-label="Search..." role="button">
-                            <i class="fa fa-search nav-icon"></i>
+                            <i class="fas fa-search nav-icon"></i>
                         </a>
                     </li>
                     <li>
                         <a class="nav-link" id="mode-switch" aria-label="Theme Switch" role="button">
-                            <i id="mode-switch-icon" class="fa fa-moon nav-icon"></i>
+                            <i id="mode-switch-icon" class="fas fa-moon nav-icon"></i>
                         </a>
                         <script>modeInitIcon()</script>
                     </li>
@@ -41,13 +41,13 @@
 </header>
 
 <!-- Search Form -->
-<div aria-hidden="true" aria-labelledby="search-modal-label" class="modal fade" id="search-modal" tabindex="-1">
+<div id="search-modal" class="modal fade wide-modal" aria-hidden="true" aria-label="Search" tabindex="-1">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header pb-2 d-flex flex-row justify-content-between">
                 <div class="container-fluid ps-0" id="search-box-container">
                     <input type="text" autofocus class="container-fluid" id="search-box" placeholder="Search">
-                    <i class="fa fa-search"></i>
+                    <i class="fas fa-search"></i>
                 </div>
                 <button aria-label="Close" class="btn-close" data-bs-dismiss="modal" type="button"></button>
             </div>

@@ -1,6 +1,6 @@
 /* eslint-disable max-len */
 const fs = require('fs');
-const { stripBetweenTags, addAttributesToExternalLinks } = require('../detail/helpers');
+const { stripBetweenTags, modifyExternalLinksToOpenInSeparateTab } = require('../detail/helpers');
 
 test('stripBetweenTags: simple', () => {
   expect(stripBetweenTags('1<sub>abc</sub>2', ['sub'])).toBe('12');
@@ -24,8 +24,8 @@ test('stripBetweenTags: allow some', () => {
   expect(stripBetweenTags('in<b>bet<em>w</em>ee<br>n</b>', ['em', 'br'])).toBe('in<b>beteen</b>');
 });
 
-test('addAttributesToExternalLinks', () => {
+test('modifyExternalLinksToOpenInSeparateTab', () => {
   const before = fs.readFileSync('eleventy/fixtures/before-exlink-transform.html').toString();
   const after = fs.readFileSync('eleventy/fixtures/after-exlink-transform.html').toString();
-  expect(addAttributesToExternalLinks(before, 'target="_blank" rel="noreferrer"')).toBe(after);
+  expect(modifyExternalLinksToOpenInSeparateTab(before)).toBe(after);
 });

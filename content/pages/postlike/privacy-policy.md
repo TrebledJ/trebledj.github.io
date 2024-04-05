@@ -23,7 +23,7 @@ We collect the following personal data:
 	* {{ site.title }} will only access such data in aggregate forms, and thus won't (be able to) link this data back to you.
 	* This data is provided automatically by your browser when you load a web page. A VPN may be used to suppress or hide such data.
 * **Cookies**
-	* This is data associated with you and may be used by third-party services to track you.
+	* This is data associated with you (based on your browser activity) and may be used by third-party services to track you.
 	* Used by Cloudflare Pages^[Cloudflare Pages may use cookies to combat spam and malicious activity. See their [cookie policy](https://www.cloudflare.com/cookie-policy/).], Disqus, and SoundCloud embeds.
 	* Cloudflare *Analytics* and jsDelivr claim they don't use cookies. ([Cloudflare](https://www.cloudflare.com/web-analytics/#:~:text=Cloudflare%20Web%20Analytics%20does%20not,the%20purpose%20of%20displaying%20analytics.); [jsDelivr](https://www.jsdelivr.com/terms/privacy-policy-jsdelivr-net#:~:text=We%20do%20not%20use%20cookies))
 * **Identity Data**: Name, Email address.
@@ -47,7 +47,7 @@ We do not share your personal data with third-parties. Any personal data collect
 
 Whilst personal data helps us improve the site, such data does not reside with us, but with third-party services. For policies on data protection, retention, and rights to access/correct/delete, please refer to their [privacy policies](#third-party) for details.
 
-For names or email addresses, if you'd like to delete data entered into the [Contact Form][contact-form], you may also [contact us][contact-form] directly.
+Data entered into the contact form is retained up to 30 days by FormCarry, according to custom configuration.
 
 
 ## Changes to the Privacy Policy
@@ -68,7 +68,7 @@ For your reference, here is a collection of third-party services we use and thei
 | jsDelivr        | CDN                     |         ✓          |                   |                     | [Link][pjsd]                       |
 | Disqus[^disqus] | Comments                |         ✓          |      ✓[^dq1]      |          ✓          | [Link][pdqs]                       |
 | SoundCloud      | Music Embeds            |         ✓          |      ✓[^sc1]      |          ✓          | [Link][pscl] (*SoundCloud Widget*) |
-| Getform         | Forms                   |         ✓          |      ✓[^gf1]      |       ✓[^gf2]       | [Link][pgfm] (*Respondents*)       |
+| FormCarry       | Forms                   |         ✓          |      ✓[^fc1]      |                     |                                    |
 
 {% endtable %}
 
@@ -78,18 +78,16 @@ For your reference, here is a collection of third-party services we use and thei
 [pclf]: https://www.cloudflare.com/privacypolicy
 [pdqs]: https://help.disqus.com/en/articles/1717103-disqus-privacy-policy
 [pscl]: https://soundcloud.com/pages/privacy
-[pgfm]: https://getform.io/legal/privacy-policy
 
 [^u]: Third-party data collection as of writing. Their policies may have updated since.
 [^dq1]: Applicable if commenting or logged in.
 [^sc1]: Applicable if logged in.
-[^gf1]: Applicable if filled in.
-[^gf2]: Applicable when redirected to getform.io.
+[^fc1]: Applicable if filled in.
 
 - Cloudflare and jsDelivr are present on all HTML pages of our site.
 - Disqus will only be loaded on posts which allow comments, and when the page is scrolled down far enough.
 - SoundCloud embeds are only loaded on relevant pages (music pages, home page, etc.).
-- Getform only applies to pages containing forms (e.g. the contact form).
+- FormCarry only applies to pages containing forms (e.g. the contact form).
 
 [^disqus]: Free tier. Supposedly comes with advertising.
 
