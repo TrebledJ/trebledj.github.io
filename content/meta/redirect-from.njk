@@ -27,37 +27,41 @@
 ---
 <!DOCTYPE html>
 <html lang="en-US">
-  <meta charset="utf-8">
-  <title>Redirecting&hellip;</title>
-  <link rel="canonical" href="{{ redirect.to | url }}">
-  <script>
-    location = "{{ redirect.to | url }}"
-  </script>
-  <meta http-equiv="refresh" content="0; url={{ redirect.to | url }}">
-  <meta name="robots" content="noindex">
-  <h1>Redirecting&hellip;</h1>
-  <a href="{{ redirect.to | url }}">Click here if you are not redirected.</a>
+  <head>
+    <meta charset="utf-8">
+    <title>Redirecting&hellip;</title>
+    <link rel="canonical" href="{{ redirect.to | url }}">
+    <script>
+      location = "{{ redirect.to | url }}"
+    </script>
+    <meta http-equiv="refresh" content="0; url={{ redirect.to | url }}">
+    <meta name="robots" content="noindex">
 
-  {# Simple OG metadata to make social media embeds work. #}
-  {% if redirect.page.data.title %}
-    <meta content="{{ redirect.page.data.title | stripBetweenTags(['sup', 'sub']) | striptags }}" property="og:title"/>
-    <meta content="article" property="og:type"/>
-  {% else %}
-    <meta content="{{ site.title }}" property="og:title"/>
-    <meta content="website" property="og:type"/>
-  {% endif %}
+    {# Simple OG metadata to make social media embeds work. #}
+    {% if redirect.page.data.title %}
+      <meta content="{{ redirect.page.data.title | stripBetweenTags(['sup', 'sub']) | striptags }}" property="og:title"/>
+      <meta content="article" property="og:type"/>
+    {% else %}
+      <meta content="{{ site.title }}" property="og:title"/>
+      <meta content="website" property="og:type"/>
+    {% endif %}
 
-  {% if redirect.page.data.excerpt %}
+    {% if redirect.page.data.excerpt %}
       {% set meta_desc = (redirect.page.data.excerpt | mdInline | striptags) + "\n\n" + (redirect.page.content | annihilate('.article-header, .metadata-container, .metadata-tag-container, #toc-sidebar') | striptags | truncateWords(30)) %}
-  {% else %}
+    {% else %}
       {% set meta_desc = site.description %}
-  {% endif %}
-  <meta content="{{meta_desc}}" property="og:description"/>
+    {% endif %}
+    <meta content="{{meta_desc}}" property="og:description"/>
 
-  {% if redirect.page.url %}
-    <meta content="{{ site.url }}{{ redirect.page.url }}" property="og:url"/>
-  {% endif %}
-  {% if redirect.page.data.thumbnail_src %}
-    <meta content="{{ site.url }}{{ redirect.page.data.thumbnail_src | resolveImageOutputPath(redirect.page) }}" property="og:image"/>
-  {% endif %}
+    {% if redirect.page.url %}
+      <meta content="{{ site.url }}{{ redirect.page.url }}" property="og:url"/>
+    {% endif %}
+    {% if redirect.page.data.thumbnail_src %}
+      <meta content="{{ site.url }}{{ redirect.page.data.thumbnail_src | resolveImageOutputPath(redirect.page) }}" property="og:image"/>
+    {% endif %}
+  </head>
+  <body>
+    <h1>Redirecting&hellip;</h1>
+    <a href="{{ redirect.to | url }}">Click here if you are not redirected.</a>
+  </body>
 </html>
