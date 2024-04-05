@@ -4,5 +4,9 @@
   ],
   "extends": [
     "html-validate:standard"
-  ]
+  ],
+  "rules": {
+    "valid-autocomplete": "off",
+    "no-deprecated-attr": "warn"
+  }
 }

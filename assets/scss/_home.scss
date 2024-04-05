@@ -192,6 +192,17 @@ html[data-theme="light"] {
     }
 }
 
+.tj-carousel-control-prev, .tj-carousel-control-next {
+    z-index: 1;
+    padding: 0;
+    color: #fff;
+    text-align: center;
+    background: 0 0;
+    border: 0;
+    opacity: .5;
+    transition: opacity .15s ease;
+}
+
 @include media-breakpoint-down(sm) {
     // Small view, compress the preview.
     #home {
