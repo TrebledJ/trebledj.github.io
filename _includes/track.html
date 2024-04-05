@@ -3,7 +3,7 @@
     {# Developer Note: I decided to avoid `loading="lazy"` and implement custom lazy loading due to wanting to dynamically load the `src`. #}
     {# If the window is small, we'll load a slightly more responsive embed with `src="...&visual=true"`. #}
     {# Otherwise, we'll just load it as normal. #}
-    <iframe class="soundcloud-track lazy" title="SoundCloud Track #{{track_id}}" itemprop="sharedContent audio" allow="autoplay" height="166" data-src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/{{track_id}}&color=%23{{site.color.soundcloud}}&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=false" width="100%"></iframe>
+    <iframe class="soundcloud-track lazy" title="SoundCloud Track #{{track_id}}" itemprop="sharedContent audio" allow="autoplay" frameborder="no" height="166" scrolling="no" data-src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/{{track_id}}&color=%23{{site.color.soundcloud}}&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=false" width="100%"></iframe>
     {% if site.id.musescore and score_id %}<p class="track-caption"><sup>The score for this piece has been made available <a href="https://musescore.com/user/{{site.id.musescore}}/scores/{{score_id}}">online</a>.</sup></p>{% endif %}
     {# Developer Note: Keep the above line UNFORMATTED, so that a `<p>` isn't generated between the iframe and span caption. #}
 </div>
