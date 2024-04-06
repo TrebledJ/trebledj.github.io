@@ -3,6 +3,7 @@ $space-base: 1rem;
 $space-double: $space-base * 2;
 $space-half: $space-base * 0.5;
 $space-quarter: $space-base * 0.25;
+$space-eighth: $space-base * 0.125;
 $space-threehalves: $space-base * 1.5;
 
 $space-container-mult: 1;
@@ -10,6 +11,7 @@ $space-container-base: $space-base * $space-container-mult;
 $space-container-double: $space-double * $space-container-mult;
 $space-container-half: $space-half * $space-container-mult;
 $space-container-quarter: $space-quarter * $space-container-mult;
+$space-container-eighth: $space-eighth * $space-container-mult;
 $space-container-threehalves: $space-threehalves * $space-container-mult;
 
 
@@ -42,43 +44,59 @@ $transition-duration-slow: 0.5s;
 
 :root {
     --header-extra: 0px; // Extra header spacing due to banner. Computed dynamically.
+    
     --link-color: rgb(var(--link-color-rgb));
+    --link-hover-color: rgb(var(--link-hover-color-rgb));
+    --accent-color: rgb(var(--accent-color-rgb));
+    --special-color: rgb(var(--special-color-rgb));
+
+    --main-background-color: rgb(var(--main-background-color-rgb));
+    --medium-background-color: rgb(var(--medium-background-color-rgb));
+    --light-background-color: rgb(var(--light-background-color-rgb));
+
+    --bold-color: rgb(var(--bold-color-rgb));
+    --contrast-color: rgb(var(--contrast-color-rgb));
+    --highlight-color: rgb(var(--highlight-color-rgb));
+    --border-color: rgb(var(--border-color-rgb));
+
+    --main-text-color: rgb(var(--main-text-color-rgb));
+    --light-text-color: rgb(var(--light-text-color-rgb));
 }
 
 html[data-theme="dark"] {
     --link-color-rgb: 243, 128, 32;
-    --link-hover-color: rgb(197, 100, 17);
-    --accent-color: var(--link-color);
-    --special-color: rgb(120, 90, 200);
+    --link-hover-color-rgb: 197, 100, 17;
+    --accent-color-rgb: var(--link-color-rgb);
+    --special-color-rgb: 120, 90, 200;
 
-    --main-background-color: rgb(20, 20, 24);
-    --medium-background-color: rgb(35, 35, 35);
-    --light-background-color: rgb(42, 42, 42);
+    --main-background-color-rgb: 20, 20, 24;
+    --medium-background-color-rgb: 35, 35, 35;
+    --light-background-color-rgb: 42, 42, 42;
 
-    --bold-color: rgb(175, 175, 175);
-    --contrast-color: rgb(255, 255, 255);
-    --highlight-color: rgb(75, 75, 75);
-    --border-color: rgb(58, 57, 60);
+    --bold-color-rgb: 190, 190, 190;
+    --contrast-color-rgb: 255, 255, 255;
+    --highlight-color-rgb: 75, 75, 75;
+    --border-color-rgb: 58, 57, 60;
 
-    --main-text-color: rgb(145, 145, 145);
-    --light-text-color: rgb(118, 120, 120);
+    --main-text-color-rgb: 145, 145, 145;
+    --light-text-color-rgb: 118, 120, 120;
 }
 
 html[data-theme="light"] {
     --link-color-rgb: 218, 100, 4;
-    --link-hover-color: rgb(200, 90, 0);
-    --accent-color: var(--link-color);
-    --special-color: rgb(120, 90, 200);
+    --link-hover-color-rgb: 200, 90, 0;
+    --accent-color-rgb: var(--link-color-rgb);
+    --special-color-rgb: 120, 90, 200;
     
-    --main-background-color: rgb(255, 255, 255);
-    --medium-background-color: rgb(240, 240, 240);
-    --light-background-color: rgb(210, 210, 210);
+    --main-background-color-rgb: 255, 255, 255;
+    --medium-background-color-rgb: 240, 240, 240;
+    --light-background-color-rgb: 210, 210, 210;
 
-    --bold-color: rgb(0, 0, 0);
-    --contrast-color: var(--bold-color);
-    --highlight-color: rgb(190, 190, 190);
-    --border-color: rgb(230, 230, 230);
+    --bold-color-rgb: 0, 0, 0;
+    --contrast-color-rgb: var(--bold-color-rgb);
+    --highlight-color-rgb: 190, 190, 190;
+    --border-color-rgb: 230, 230, 230;
 
-    --main-text-color: rgb(10, 10, 10);
-    --light-text-color: rgb(51, 51, 51);
+    --main-text-color-rgb: 10, 10, 10;
+    --light-text-color-rgb: 51, 51, 51;
 }
