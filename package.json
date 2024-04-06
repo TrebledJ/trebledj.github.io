@@ -8,7 +8,7 @@
 		"benchmark": "DEBUG=Eleventy:Benchmark* npx @11ty/eleventy",
 		"test:jest": "jest",
 		"test:validate-html": "html-validate _site/",
-		"test:check-links": "bash scripts/links.sh",
+		"test:check-links": ". scripts/links.sh",
 		"test": "npm-run-all --parallel test:*",
 		"lint": "npx eslint . --fix",
 		"rake": "cd eleventy/detail/rake-js && npm install --ignore-scripts && npm run build",
@@ -28,7 +28,7 @@
 	"author": {
 		"name": "TrebledJ",
 		"email": "trebledjjj@gmail.com",
-		"url": "https://trebledj.github.io/"
+		"url": "https://trebledj.me/"
 	},
 	"license": "MIT",
 	"engines": {
