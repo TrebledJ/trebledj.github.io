@@ -7,14 +7,15 @@
 My personal website. Visit it here: [trebledj.me](https://trebledj.me).
 
 
-## Note on Plagiarism
+## Copyright, Plagiarism, and Other Legal Palaver
 
-Feel free to refer to my code—sewn together from various sources—for your inspiration.
+All textual content and opinions expressed are my own, unless otherwise cited. Images come from a variety of sources; some are self-made, some (especially memes) are copied or generated using a pre-existing template.
 
-Aside from that, please don't plagiarise any of my blog content.
-You may be a stackoverflow-code-copypasta guru, but don't be so low as to copypasta my writing without citing/linking back.
+Code is sewn together from various sources. Feel free to refer to the logic, templating, and design for your inspiration.
 
-Please respect the copyright. (c) TrebledJ. 
+Aside from that, please don't plagiarise any of my blog content. If you do reference the content, please link to the relevant post.
+
+This is not a legal notice; just a call to be human.
 
 
 ## Setup
@@ -36,7 +37,7 @@ npm run prod
 
 ## Credits / Appreciation
 
-This site was inspired and built from many different libraries. Mentioning all of them would be a nigh impossible task, as even listing node modules is a nightmare. Regardless, here are some key projects that played a significant role in this site.
+This site was inspired and built from many libraries. Mentioning all of them would be a nigh impossible task, as even listing node modules is a nightmare. Regardless, here are some key projects that played a significant role in this site.
 
 * [11ty](https://www.11ty.dev) – Fast and modular SSG. Also: helpful community.
   * [Image Plugin](https://www.11ty.dev/docs/plugins/image/)
