@@ -17,7 +17,9 @@
 
     a {
         display: inline-block; // Render word-wrap + padding-left properly (https://stackoverflow.com/a/10602221/10239789).
-        padding: $space-container-eighth 0 $space-container-eighth $space-container-base;
+        // padding: $space-container-eighth 0 $space-container-eighth $space-container-base;
+        padding-left: $space-container-base;
+        margin-top: $space-container-quarter;
         
         --bs-link-color-rgb: var(--main-text-color-rgb);
         --bs-link-hover-color-rgb: var(--main-text-color-rgb);
