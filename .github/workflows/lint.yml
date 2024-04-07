@@ -49,3 +49,6 @@ jobs:
             chore(lint): fix issues with ${linter}
 
             [skip ci]
+
+        # `[skip ci]` skips workflow calls triggered by this eslint fix push.
+        # See https://docs.github.com/en/actions/managing-workflow-runs/skipping-workflow-runs

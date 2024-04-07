@@ -1,0 +1,27 @@
+# Workflow to validate HTML.
+
+name: Validate HTML
+
+on:
+  workflow_dispatch:
+  push:
+    branches: site
+    paths:      
+      - '_site/**'
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: site
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Run validate-html
+        run: npm run validate-html
