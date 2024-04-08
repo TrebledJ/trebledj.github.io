@@ -8,10 +8,17 @@ tags:
   - notes
 thumbnail_src: assets/penguin.jpg
 related:
-    tags: [learning]
+    tags: [cheatsheet, learning]
 ---
 
-This is a collection of commands I've picked up over the last few years.
+This is a collection of commands I've picked up over the last few years, which I've found immensely useful. My favourite ones are probably:
+
+- `less`: search/filter on a file or long text
+- `^r`: reverse search
+- `!$`: last argument of previous command
+
+By "favourite", I mean I've used these commands a *lot*, and they've drastically increased my productivity.
+PRs on GitHub are welcome.
 
 ## Cool Stuff
 
@@ -75,7 +82,7 @@ echo -n $'can\'t,don\'t,I\'ll,I\'m,won\'t' | awk -vRS=, $'$0 ~ /\'t/'
 ```sh
 $?
 ```
-- 0 usually means OK. Non-0 implies error.
+- By convention, 0 means no error. Non-0 implies an error occurred.
 
 **Previous Command**
 ```sh
@@ -91,6 +98,8 @@ sudo !!
 **Last Arg of Previous Command**
 ```sh
 !$
+# or
+$_
 
 # Examples
 ## Found an interesting directory, but forgot to cd.
@@ -101,6 +110,17 @@ cd !$
 cat long/path/to/neverland/file.txt
 mv "!$" "$(dirname !$)/booyah.md"
 ```
+
+**Other Useful Commands**
+<sub>(stolen from [here](https://stackoverflow.com/a/36654936/10239789))</sub>
+
+- `!!:n` - nth argument from previous command
+- `!^` - first argument (after the program/built-in/script) from previous command
+- `!*` - all arguments from previous command
+- `!n` - command number `n` from `history`
+- `!pattern` - most recent command matching `pattern`
+- `!!:s/find/replace` - last command, substitute `find` with `replace`
+
 
 ### Redirection
 
@@ -201,19 +221,31 @@ seq 1 1000 | xargs -P 50 -I{} proxychains4 -q nmap -p {} -sT -Pn --open -n -T4 -
 ### Other Utilities
 
 ```sh
-basename # Filename, without path, e.g. `.bashrc`.
-dirname  # Path of file, e.g. `/home/bob/`.
+basename # Filename, without path.
+dirname  # Path to file.
+
+# Example
+basename ~/.bashrc # .bashrc
+dirname ~/.bashrc  # /home/bob/
 ```
 
 **Directory Stack**
 ```sh
 pushd # Push current directory, for easier returning.
 popd  # Return to directory on top of stack.
+
+# Example
+cd ~/a/b/c
+pushd deep/nested/directory
+# Jump to `deep/nested/directory`, save `~/a/b/c` in the stack.
+cd ../../jump/around/some/more
+cd ../../and/a/little/more
+popd  # Return to `~/a/b/c`.
 ```
 
 ## less
 
-`less` is a powerful file viewer (read-only), with capabilities to navigate, search, and filter lines in a file.
+`less` is a powerful text viewer (read-only), with capabilities to navigate, search, and filter lines in a file or long text.
 
 **Nice Options**
 ```sh
