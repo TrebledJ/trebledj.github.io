@@ -3,6 +3,7 @@ title: GDB/GEF Cheatsheet
 excerpt: Quick command reference on one of the most powerful tools for dynamic analysis.
 tags:
   - ctf
+  - infosec
   - pwn
   - reverse
   - learning
