@@ -60,7 +60,18 @@ echo '$((1+1))' '$SHELL'
 # $((1+1)) $SHELL
 ```
 
-**Multi-Line Strings**
+**Multi-Line / Escape**  
+Prefix the string with `$`.
+```sh
+echo $'...'
+```
+
+#### Escape Single-Quotes
+
+{% alert "success" %}
+**Example**
+
+Multi-Line Strings.
 ```sh
 echo $'1\n2\n3'
 # 1
@@ -68,51 +79,52 @@ echo $'1\n2\n3'
 # 3
 ```
 
-**Escape Single-Quotes**
+Find words containing `'t` in comma-separated line.
 ```sh
-# Example: find words containing 't in comma-separated line.
 echo -n $'can\'t,don\'t,I\'ll,I\'m,won\'t' | awk -vRS=, $'$0 ~ /\'t/'
 # can't
 # don't
 # won't
 ```
+{% endalert %}
+
 
 ### Previous-Command Tricks
-**Exit-Code**
-```sh
-$?
-```
-- By convention, 0 means no error. Non-0 implies an error occurred.
 
-**Previous Command**
-```sh
-!!
+- `$?`: exit code of previous command
+  - By convention, 0 means no error. Non-0 implies an error occurred.
+- `!!`: previous command
+- `!$` or `$_`: last argument of previous command
 
-# Example
-## Retry with sudo.
+{% alert "success" %}
+**Examples**
+
+Retry with sudo.
+```sh
 mkdir /var/tmp/lol
 # Permission denied.
 sudo !!
+# Yay!
 ```
 
-**Last Arg of Previous Command**
+Found an interesting directory, but forgot to *cd*.
 ```sh
-!$
-# or
-$_
-
-# Examples
-## Found an interesting directory, but forgot to cd.
-ls long/path/going/somewhere
+ls long/path
 cd !$
-
-## Rename file in folder from file.txt to booyah.md.
-cat long/path/to/neverland/file.txt
-mv "!$" "$(dirname !$)/booyah.md"
+# → cd long/path
 ```
+
+Rename file in folder from file.txt to booyah.md.
+```sh
+cat long/path/file.txt
+mv "!$" "$(dirname !$)/booyah.md"
+# → mv long/path/file.txt long/path/booyah.md
+```
+{% endalert %}
+
 
 **Other Useful Commands**
-<sub>(stolen from [here](https://stackoverflow.com/a/36654936/10239789))</sub>
+(stolen from [here](https://stackoverflow.com/a/36654936/10239789))
 
 - `!!:n` - nth argument from previous command
 - `!^` - first argument (after the program/built-in/script) from previous command
@@ -149,22 +161,26 @@ mv "!$" "$(dirname !$)/booyah.md"
 
 I won't cover too much of these commands here, as tons of articles already cover them. And you can browse examples online or in their `man` pages.
 
-### `awk`ward things
+### awkward things
 
-**Cut**
+#### awk - Cut
 ```sh
-awk '$0=$3' # Set line to third field (and output it).
-awk '{print $3}' # Print third field.
-awk -F , '{print $3}' # Field Separator=',' (or awk -v FS=,)
+awk '$0=$3' # Cut third field.
+awk '{print $3}' # Print third field. (Pretty much same as the command above.)
+
+# Use ',' as field delimiter, e.g. for CSVs.
+awk -F, '{print $3}'
+# or use the script variable `FS` (Field Separator).
+awk -v FS=, '{print $3}
 ```
 
-**Filtering**
+#### awk - Filtering
 ```sh
 awk '$1 == 1' # Filter lines with first field = 1.
 awk '$0 ~ /^foo/' # Filter lines with regex.
 ```
 
-**Math**
+#### awk - Math
 ```sh
 awk '{$1 += 5}1' # Add 5 to the first arg, then print the line.
 
@@ -174,7 +190,7 @@ seq 1 3 | awk '{$1 += 5}1'
 # 8
 ```
 
-**Scripting**
+#### awk - Scripting
 ```sh
 awk '{print "booyah",$1,"yahoo"}'
 # awk also has variables, if, for, while, arrays, etc.
@@ -203,51 +219,66 @@ Script variables. (Useful for configuring row/column delimiters.)
 
 ### xargs
 
-**Combine multiple lines into 1 line.**
+xargs is a versatile command-line utility that allows efficient execution of commands from, making it a powerful tool for automation and batch processing.
+
+Interesting options:
+```sh
+-P <n> # max procs
+-n <n> # num args
+-I {}  # pattern to insert into command
+```
+
+{% alert "success" %}
+**Examples**
+
+Combine multiple lines into 1 line.
 ```sh
 echo $'1\n2\n3' | xargs 
 # Output: 1 2 3 (no newline)
 ```
 
-**Simple Multi-Processing**
+Multi-Processing: Execute `./do-something-to-file.sh <file>` on multiple files, with at most 4 processes.
 ```sh
 cat files.txt | xargs -P 4 -n1 ./do-something-to-file.sh
-# Executes `./do-something-to-file.sh <file>` on multiple files, with at most 4 processes.
+```
 
-# Example: Port scan with ports 1-1000 through proxychains.
+Multi-Processing: Port Scan with Ports 1-1000 Through `proxychains`.
+```sh
 seq 1 1000 | xargs -P 50 -I{} proxychains4 -q nmap -p {} -sT -Pn --open -n -T4 --oN nmap.txt --append-output 192.168.101.10
 ```
+{% endalert %}
+
 
 ### Other Utilities
 
 ```sh
-basename # Filename, without path.
-dirname  # Path to file.
-
-# Example
-basename ~/.bashrc # .bashrc
-dirname ~/.bashrc  # /home/bob/
+basename ~/.bashrc # .bashrc     # Filename, without path.
+dirname ~/.bashrc  # /home/bob/  # Path to file.
 ```
 
-**Directory Stack**
+#### Directory Stack
 ```sh
 pushd # Push current directory, for easier returning.
 popd  # Return to directory on top of stack.
+```
 
-# Example
+{% alert "success" %}
+**`pushd`/`popd` Example**
+```sh
 cd ~/a/b/c
 pushd deep/nested/directory
-# Jump to `deep/nested/directory`, save `~/a/b/c` in the stack.
+# Jump to `deep/nested/directory`, push `~/a/b/c` into the stack.
 cd ../../jump/around/some/more
 cd ../../and/a/little/more
 popd  # Return to `~/a/b/c`.
 ```
+{% endalert %}
 
 ## less
 
 `less` is a powerful text viewer (read-only), with capabilities to navigate, search, and filter lines in a file or long text.
 
-**Nice Options**
+#### less - Nice Options
 ```sh
 less file.txt
 
@@ -261,7 +292,7 @@ less -I file.txt
 less -N file.txt
 ```
 
-**Navigation**
+#### less - Navigation
 ```sh
 j # Line down.
 k # Line up.
@@ -269,7 +300,6 @@ f # Page down.
 b # Page up.
 d # Half-page down.
 u # Half-page up.
-# Note: if a number precedes d/u, that number is configured to be the number of lines jumped.
 
 g # Go to start of file.
 G # Go to end of file.
@@ -284,11 +314,11 @@ G # Go to end of file.
 ^g
 ```
 
-**Search / Filtering**
+#### less - Search / Filtering
 ```sh
 # Search (regex enabled).
 / <pattern>
-# For case-insensitive search, use -I when starting less.
+# For case-insensitive search, use `less -I`.
 
 # Navigate search results: next/prev result.
 nN
@@ -301,8 +331,8 @@ nN
 & <enter>
 ```
 
-**Scrolling**  
-Personally, I like this better than `tail -f`.  
+#### less - Scrolling
+Personally, I prefer `less+F` over `tail -f`.  
 Use `^c` to exit the feed.
 
 ```sh
@@ -310,7 +340,7 @@ Use `^c` to exit the feed.
 F
 ```
 
-**Multiple Files**  
+#### less - Working with Multiple Files
 `less` also works with multiple files passed in the command line, e.g. `less *.txt`.
 ```sh
 # Next file.
@@ -339,10 +369,34 @@ kill <pid> # Kill process with given process ID.
 
 # Start a command in the background.
 <cmd> &
-
-# Example: start a HTTP server on port 8080.
-python -m http.server 8080 &
 ```
+
+{% alert "success" %}
+**Example**
+
+Start an HTTP server on port 8080.
+```sh
+python -m http.server 8080 &
+# [1] 17999
+```
+The process is started in the background with job number 1, PID 17999.
+
+To kill the process:
+```sh
+fg
+^c
+# or
+kill 17999
+```
+{% endalert %}
+
+{% alert "warning" %}
+Process ID (PID) and Job Number are two different things.
+
+- PIDs apply to *all* users in the *entire system*, and are assigned by the kernel.
+- Job Numbers apply to the *current* shell, and are numbered linearly from 1 onwards.
+{% endalert %}
+
 
 ### View Running Procs
 
