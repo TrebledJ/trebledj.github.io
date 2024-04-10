@@ -1,5 +1,5 @@
 ---
-title: Practical Linux Tricks for the Aspiring Programmer/Hacker
+title: Practical Linux Tricks for the Aspiring Hacker
 excerpt: A curated list of fanciful Linux tricks I use to bolster my command-line prowess and activate Sage Mode.
 tags:
   - infosec
