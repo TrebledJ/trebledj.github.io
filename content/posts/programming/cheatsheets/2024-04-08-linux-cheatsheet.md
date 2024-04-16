@@ -45,6 +45,11 @@ reset
 source ~/.zshrc
 ```
 
+**Tree view of files.**
+```sh
+tree
+```
+
 ### Strings
 
 **Double-Quotes vs. Single-Quotes**
