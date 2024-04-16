@@ -18,7 +18,6 @@ This is a collection of commands I've picked up over the last few years, which I
 - `!$`: last argument of previous command
 
 By "favourite", I mean I've used these commands a *lot*, and they've drastically increased my productivity.
-PRs on GitHub are welcome.
 
 ## Cool Stuff
 
