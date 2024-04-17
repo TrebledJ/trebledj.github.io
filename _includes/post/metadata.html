@@ -10,7 +10,7 @@
                     <i class="fas fa-calendar post-meta-icon me-1"></i>
                 </span>
                 {# DON'T FORMAT!!! #}
-                <span class="fs-7 post-posted-date">Posted on <span itemprop="dateCreated">{{ page.date | date | safe }}</span></span>
+                <span class="fs-7 post-posted-date">Posted on <span itemprop="datePublished" content="{{ page.date | dateISO('utc+8') }}">{{ page.date | date | safe }}</span></span>
             {% endif %}
         {% endblock %}
     </div>
@@ -25,7 +25,7 @@
                     <i class="fas fa-calendar post-meta-icon me-1"></i>
                 </span>
                 {# DON'T FORMAT!!! #}
-                <span class="fs-7 post-updated-date">Updated on <span itemprop="dateModified">{{ updatedDate | date | safe }}</span></span>
+                <span class="fs-7 post-updated-date">Updated on <span itemprop="dateModified" content="{{ updatedDate | dateISO('utc+8') }}">{{ updatedDate | date | safe }}</span></span>
             {% endif %}
         {% endblock %}
     </div>
