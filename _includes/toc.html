@@ -2,11 +2,12 @@
 <div class="toc-container">
     {% if title != '404' %}
         <span>
-            <a id="toc-content">Content</a>
+            {# Anchor requires href to trigger hover pseudoclass. https://stackoverflow.com/a/1040937/10239789 #}
+            <a id="toc-content" href="javascript:void(0);">Content</a>
         </span>
         {% if toc %}
             {{toc | safe}}
         {% endif %}
     {% endif %}
-    <br/>
+    <hr/>
 </div>

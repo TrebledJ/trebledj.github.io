@@ -6,9 +6,9 @@
 		"debug": "DEBUG=Eleventy* npx @11ty/eleventy",
 		"debugstart": "DEBUG=Eleventy* npx @11ty/eleventy --serve --quiet",
 		"benchmark": "DEBUG=Eleventy:Benchmark* npx @11ty/eleventy",
+		"check-links": ". scripts/links.sh",
+		"validate-html": "html-validate _site/",
 		"test:jest": "jest",
-		"test:validate-html": "html-validate _site/",
-		"test:check-links": "bash scripts/links.sh",
 		"test": "npm-run-all --parallel test:*",
 		"lint": "npx eslint . --fix",
 		"rake": "cd eleventy/detail/rake-js && npm install --ignore-scripts && npm run build",
@@ -28,7 +28,7 @@
 	"author": {
 		"name": "TrebledJ",
 		"email": "trebledjjj@gmail.com",
-		"url": "https://trebledj.github.io/"
+		"url": "https://trebledj.me/"
 	},
 	"license": "MIT",
 	"engines": {
@@ -52,7 +52,7 @@
 		"eslint": "^8.57.0",
 		"eslint-config-airbnb-base": "^15.0.0",
 		"eslint-plugin-import": "^2.29.1",
-		"eslint-plugin-jest": "^27.9.0",
+		"eslint-plugin-jest": "^28.2.0",
 		"html-minifier": "^4.0.0",
 		"html-validate": "^8.18.1",
 		"jest": "^29.7.0",
@@ -62,7 +62,7 @@
 		"markdown-it-attrs": "^4.1.6",
 		"markdown-it-footnote": "^4.0.0",
 		"npm-run-all": "^4.1.5",
-		"sass": "^1.72.0",
+		"sass": "^1.75.0",
 		"terser": "^5.30.0"
 	},
 	"dependencies": {

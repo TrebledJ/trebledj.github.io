@@ -1,6 +1,6 @@
 ---
 title: <sub><sup>N[</sup></sub>Subtype Metaprogramming<sub><sup>]</sup></sub> is <sub><sup>N[</sup></sub>Mostly Harmless<sub><sup>]</sup></sub>
-excerpt: Inheritance go brrrrrrrr... (ab)using types to write programs.
+excerpt: Inheritance go brrrrrrrr... abusing turing-complete typesystems to write fun programs in Python.
 tags:
   - ctf
   - types
@@ -54,6 +54,15 @@ You can follow along by getting these files [*here*](https://github.com/TrebledJ
 What? A section titled "solve"? Already? What about the usual analysis and observations?
 
 Usually I begin my writeups with an extensive analysis section. Contrary to this, *Mostly Harmless* is one of those blursed challenges which favours those with strong guess-fu; but the challenge is so intellectually challenging and ***deep***, that to properly reverse (let alone understand) it would take ~~a PhD,~~ ~~years,~~ extra study post-CTF.
+
+{% alert "fact" %}
+The key idea is to recognise:
+
+1. How does the flag checking work? Where is the final condition which decides whether the input is correct or not?
+    - *By using the mypy type checker.*
+2. How do the classes containing numbers (e.g. `QLW_s1`, `QRW_s1`) relate to the classes containing a letter (e.g. `L_x`, `L_a`)?
+    - *By inheriting classes *in a specific manner*, therefore creating a subtyping relationship.*
+{% endalert %}
 
 Still, let's look at some key insights:
 

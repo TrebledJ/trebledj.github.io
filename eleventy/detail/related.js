@@ -111,7 +111,10 @@ function getRelatedPosts(posts, tags, related) {
       if (finalRelated.size >= numTargetPosts)
         break;
 
-      if (related.tags.every(t => post.data.tags.includes(t)))
+      // and-based relevant tags.
+      // if (related.tags.every(t => post.data.tags.includes(t)))
+      // or-based relevant tags.
+      if (related.tags.some(t => post.data.tags.includes(t)))
         addPosts([post]);
     }
   }

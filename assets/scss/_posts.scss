@@ -225,20 +225,9 @@ img.center {
     font-family: "Open Sans", arial, sans-serif;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-    &:not(:hover) {
-        .md-anchor {
-            display: none;
-        }
-    }
-}
-
 .md-anchor {
+    opacity: 0;
+
     &::before {
         float: left;
         width: 50px;
@@ -247,6 +236,10 @@ h6 {
         text-align: right;
         content: "#";
     }
+}
+
+*:hover > .md-anchor {
+    opacity: 1;
 }
 
 .header-404 {
