@@ -238,8 +238,21 @@ img.center {
     }
 }
 
-*:hover > .md-anchor {
-    opacity: 1;
+@include media-breakpoint-up(lg) {
+    *:hover > .md-anchor {
+        opacity: 1;
+    }
+}
+
+@include media-breakpoint-down(lg) {
+    .md-anchor {
+        opacity: 0.5;
+        &::before {
+            // width: 20px;
+            // margin-left: -40px;
+            padding-right: 2px;
+        }
+    }
 }
 
 .header-404 {
