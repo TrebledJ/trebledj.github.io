@@ -1,9 +1,9 @@
-# https://nicolasiensen.github.io/2022-07-23-automating-dependency-updates-with-dependabot-github-auto-merge-and-github-actions/
+# Adapted from https://nicolasiensen.github.io/2022-07-23-automating-dependency-updates-with-dependabot-github-auto-merge-and-github-actions/
 
 name: Dependabot Reviewer
 
-on: pull_request_target
-# on: workflow_dispatch
+# on: pull_request_target
+on: workflow_dispatch 
 # on:
 #   workflow_run:
 #     workflows: [Dry Run Build]
