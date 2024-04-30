@@ -2,13 +2,13 @@
 title: Practical Linux Tricks for the Aspiring Hacker
 excerpt: A curated list of fanciful Linux tricks I use to bolster my command-line prowess and activate Sage Mode.
 tags:
+  - cheatsheet
   - infosec
   - learning
-  - cheatsheet
   - notes
 thumbnail_src: assets/penguin.jpg
 related:
-    tags: [cheatsheet, learning]
+    tags: [cheatsheet]
 ---
 
 This is a collection of commands I've picked up over the last few years, which I've found immensely useful. My favourite ones are probably:
@@ -23,8 +23,9 @@ By "favourite", I mean I've used these commands a *lot*, and they've drastically
 
 **Control (`^`) Commands**
 ```sh
-^c # https://xkcd.com/416/
+^c # Duh. https://xkcd.com/416/
 ^d # Exit / EOF.
+
 ^r # Reverse search: for those long commands stashed in history.
 ```
 
@@ -34,7 +35,7 @@ By "favourite", I mean I've used these commands a *lot*, and they've drastically
 # true
 ```
 
-**Clear screen**. Useful for hiccups.
+**Clear screen**. Useful for graphical hiccups.
 ```sh
 reset
 ```
