@@ -536,13 +536,13 @@ Buffer overflow for fun and profit.
 echo -n '\x01\x02'
 
 echo -n '\x41' | xxd
-00000000: 41                                       A
+00000000: 41                     A
 ```
 
 **perl** (good for repetitive sequences)
 ```sh
 perl -e 'print "\x41"x4 . "\x42\x43"' | xxd
-00000000: 4141 4141 4243                           AAAABC
+00000000: 4141 4141 4243         AAAABC
 ```
 
 {% alert "danger" %}
