@@ -116,10 +116,8 @@ Thus, it’s crucial to consider the design requirements of the software being d
 
 Dynamic memory isn't bad in all cases, if used properly. Some appropriate situations:
 
-- You only allocate during init. For example, we want to allocate memory based on a setting from a config file, and that setting doesn't change throughout runtime.
-- It's difficult to decide on a maximum bound. To quote a [Reddit comment](https://www.reddit.com/r/embedded/comments/8rc2vz/comment/e0qmr9s):
-    
-    > Since networking like what [ESP32] IDF is used in is so extremely variable in data sizes, it's impossible to predict memory usage up front. Furthermore, networking is extremely not hard real time compatible, especially wireless. All these combined relax the constraints and allow the usage of malloc.
+- You only allocate during init. For example, we allocate memory based on a setting from an SSD card.
+- It's difficult to decide on a maximum bound at compile time. It's easy to cap small strings at 32, 64, or 256 chars. But what about HTTP requests? JSON payloads? These vary a lot between applications, so libraries typically default to dynamic allocation.
 
 There are [various ways to implement dynamic memory allocation](https://en.wikipedia.org/wiki/Memory_management). The "best" method depends on your specific scenario. [Memory pools](https://en.wikipedia.org/wiki/Memory_pool) are one implementation admired for their simplicity and lightweight nature. FreeRTOS documents other [heap implementations](https://www.freertos.org/a00111.html) which aim to be thread-safe. [Heap 4](https://www.freertos.org/a00111.html#heap_4) is of particular interest, as it mitigates fragmentation.
 
