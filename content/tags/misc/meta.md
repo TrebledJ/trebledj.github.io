@@ -1,4 +1,4 @@
 ---
 ---
 
-Posts regarding this very site. Not the ~~evil megacorporation~~ multinational conglomerate!
+Posts regarding this very site. Not Zucky's megacorporation!
