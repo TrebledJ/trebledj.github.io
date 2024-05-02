@@ -47,6 +47,10 @@ layout: layouts/page-default
                 (function ($) {
                     const visual = ($(window).width() < 600);
                     const template = $($("#template-track").html());
+                    const htmldecode = t => new DOMParser()
+                        .parseFromString(t, "text/html")
+                        .documentElement
+                        .textContent;
 
                     const l = InfiniteLoader({
                         data: '/tracks.json',
@@ -61,11 +65,11 @@ layout: layouts/page-default
 
                             const title = el.find(".subheading a");
                             title.attr("href", url);
-                            title.html(item.title);
+                            title.html(htmldecode(item.title));
 
                             el
                                 .find(".track-desc")
-                                .html(`<b>${item.excerpt}</b>`);
+                                .html(`<b>${htmldecode(item.excerpt)}</b>`);
 
                             const track = el.find("iframe");
                             track.attr("title", `Track: ${item.title}`);
@@ -83,7 +87,6 @@ layout: layouts/page-default
                                 .html(tags);
 
                             /* Fill description and link. */
-                            const htmldecode = t => $("<textarea/>").html(t).text();
                             el
                                 .find(".track-content")
                                 .prepend(htmldecode(item.content));

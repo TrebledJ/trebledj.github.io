@@ -33,7 +33,7 @@ This year's MapleCTF graced us with a challenge involving much class, much inher
 
 > Some people consider type annotations to be useless. I consider everything _but_ type annotations redundant.
 
-Author: [apropos](https://apropos.codes/)  
+Author: [JJ](https://toki.la/)  
 17/291 solves.
 
 The {% abbr "chal", "challenge" %} is also humorously tagged "cursed" and "misc". Well, that's reassuring...

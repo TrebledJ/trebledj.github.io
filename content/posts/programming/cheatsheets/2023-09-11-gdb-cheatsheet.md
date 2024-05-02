@@ -2,16 +2,16 @@
 title: GDB/GEF Cheatsheet
 excerpt: Quick command reference on one of the most powerful tools for dynamic analysis.
 tags:
-  - ctf
+  - cheatsheet
   - infosec
+  - ctf
   - pwn
   - reverse
   - learning
-  - cheatsheet
   - notes
 thumbnail_src: assets/gef.png
 related:
-    tags: [learning]
+    tags: [cheatsheet]
 ---
 
 This is a curated collection of GDB/GEF commands which I find incredibly useful for dynamic analysis and reverse engineering. These are mainly personal notes and may be incomplete, but suggestions are welcome! If there's a useful GDB/GEF command you use that's not on this list, do [leave a comment](#comments) or [let me know](/#contact) so that I can add it. :)

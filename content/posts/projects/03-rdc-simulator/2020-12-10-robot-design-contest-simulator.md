@@ -154,7 +154,7 @@ Also, some final reflections:
 {% endalert %}
 
 
-[ustrobotics]: https://robotics.ust.hk/
+[ustrobotics]: https://robotics.hkust.edu.hk/
 [emulator-flow]: https://hackmd.io/@TrebledJ/S1Zh67hOv#General-Flow
 [emulator-cmds]: https://hackmd.io/@TrebledJ/S1Zh67hOv#Emulator-Commands
 [emulator-start]: https://github.com/HKUST-Robocon/RDC-Emulator-2020/blob/master/README.md
