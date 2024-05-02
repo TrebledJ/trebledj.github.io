@@ -22,8 +22,7 @@ module.exports = function (eleventyConfig) {
     './assets/img': '/img',
     './content/**/assets/*.mp4': '/img',
     './assets/webfonts': '/webfonts',
-    './assets/css/third-party/*.{css,map}': '/css/third-party',
-    './assets/css/[!third-party]**/*.{css,map}': '/css',
+    './assets/css/**/*.{css,map}': '/css',
   });
   eleventyConfig.addPassthroughCopy({
     './assets/js/**/*.js': '/js/',
