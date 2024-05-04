@@ -93,6 +93,11 @@
         margin-top: $space-half;
     }
 
+    b, strong {
+        // Don't bold buttons, etc.
+        color: var(--bold-color);
+    }
+
     // Default most elements to have top margin instead of bottom margin.
     // *:not(ul, ol, li, hr, svg, p>a, .gist *) 
     p,
