@@ -8,6 +8,7 @@
 		"benchmark": "DEBUG=Eleventy:Benchmark* npx @11ty/eleventy",
 		"check-links": ". scripts/links.sh",
 		"validate-html": "html-validate _site/",
+		"icon-minify": "cd eleventy/icon-minifier && npm install --ignore-scripts && node dist/src/index.js $INIT_CWD/_site --exts html,js,json --replace-css-links",
 		"test:jest": "jest",
 		"test": "npm-run-all --parallel test:*",
 		"lint": "npx eslint . --fix",
@@ -19,7 +20,7 @@
 		"prod:eleventy": "eleventy",
 		"dev": "ENVIRONMENT=development npm-run-all dev:sass --parallel watch:*",
 		"fast": "ENVIRONMENT=fast npm-run-all dev:sass --parallel watch:*",
-		"prod": "ENVIRONMENT=production npm-run-all --parallel prod:*"
+		"prod": "ENVIRONMENT=production npm-run-all --parallel prod:* && npm run icon-minify"
 	},
 	"repository": {
 		"type": "git",
