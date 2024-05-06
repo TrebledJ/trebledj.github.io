@@ -8,7 +8,7 @@
 		"benchmark": "DEBUG=Eleventy:Benchmark* npx @11ty/eleventy",
 		"check-links": ". scripts/links.sh",
 		"validate-html": "html-validate _site/",
-		"icon-minify": "cd eleventy/icon-minifier && npm install --ignore-scripts && node dist/src/index.js $INIT_CWD/_site --exts html,js,json --replace-css-links",
+		"icon-minify": "cd icon-minifier && npm install --ignore-scripts && node dist/src/index.js $INIT_CWD/_site --exts html,js,json --replace-css-links --cache-bust --output-css-folder ./cb/css --output-font-folder ./cb/webfonts",
 		"test:jest": "jest",
 		"test": "npm-run-all --parallel test:*",
 		"lint": "npx eslint . --fix",
