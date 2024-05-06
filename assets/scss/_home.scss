@@ -139,12 +139,14 @@ html[data-theme="light"] .hero-section {
 
     .carousel-tab-group {
         .btn {
-            border: var(--border-color) solid $border-width !important;
-            color: var(--main-text-color);
+            --bs-btn-border-color: var(--border-color);
+            --bs-btn-border-width: 1px;
+            --bs-btn-color: var(--main-text-color);
+        }
 
-            &:hover {
-                color: var(--main-text-color);
-            }
+        .btn.active-tab {
+            --bs-btn-bg: var(--bs-primary);
+            --bs-btn-color: var(--bs-white);
         }
     }
 }

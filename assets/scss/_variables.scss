@@ -32,7 +32,7 @@ $border-radius-block: $border-radius-small;
 
 $opacity-full: 1;
 $opacity-low: 0.9;
-$opacity-lower: 0.75;
+$opacity-lower: 0.8;
 $opacity-lowest: 0.6;
 
 $line-height-cozy: 1.8;
@@ -73,12 +73,12 @@ html[data-theme="dark"] {
     --medium-background-color-rgb: 35, 35, 35;
     --light-background-color-rgb: 42, 42, 42;
 
-    --bold-color-rgb: 195, 195, 195;
+    --bold-color-rgb: 180, 180, 180;
     --contrast-color-rgb: 255, 255, 255;
     --highlight-color-rgb: 75, 75, 75;
     --border-color-rgb: 58, 57, 60;
 
-    --main-text-color-rgb: 145, 145, 145;
+    --main-text-color-rgb: 140, 140, 140;
     --light-text-color-rgb: 118, 120, 120;
 }
 
