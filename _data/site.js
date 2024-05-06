@@ -56,13 +56,13 @@ module.exports = function () {
     search: {
       // https://fontawesome.com/icons/
       resultIcons: [
-        { tag: 'project', icon: 'star' },
-        { tag: 'experience', icon: 'rocket' },
-        { tag: 'infosec', icon: 'user-secret' },
-        { tag: 'ctf', icon: 'flag' },
-        { tag: 'composition', icon: 'music' },
-        { tag: 'embedded', icon: 'bolt' },
-        { tag: 'programming', icon: 'code' },
+        { tag: 'project', icon: 'fas fa-star' },
+        { tag: 'experience', icon: 'fas fa-rocket' },
+        { tag: 'infosec', icon: 'fas fa-user-secret' },
+        { tag: 'ctf', icon: 'fas fa-flag' },
+        { tag: 'composition', icon: 'fas fa-music' },
+        { tag: 'embedded', icon: 'fas fa-bolt' },
+        { tag: 'programming', icon: 'fas fa-code' },
       ],
       resultDefaultIcon: 'newspaper',
       maxResults: 50,
@@ -80,7 +80,7 @@ module.exports = function () {
       scope: 'session', // Possible values: 'session', 'local', ''.
       // bgColor: 'primary', // Any Bootstrap `bg-` values.
       // fgColor: 'black', // Any Bootstrap `text-` values.
-      icon: 'droplet',
+      icon: 'fas fa-droplet',
       icon_style: '--fa-animation-delay: 5s; --fa-animation-duration: 3s',
       /* eslint-disable max-len */
       content: multiline(`
