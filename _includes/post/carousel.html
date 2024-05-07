@@ -1,9 +1,9 @@
 {% from "home/topic-preview.html" import render_topic_preview with context %}
 
-{% macro render_posts_carousel(uniquePosts, name, icon, categories, interval) %}
+{% macro render_posts_carousel(uniquePosts, name, categories, interval) %}
     {# Title #}
     <div class="carousel-title d-flex flex-row justify-content-between align-items-center">
-        <h2 id="{{name | slugify}}" class="mb-0">{{name}} <i class="fas fa-{{icon}} ms-1"></i></h2>
+        <h2 id="{{name | slugify}}" class="mb-0">{{name}}</h2>
     </div>
     <br/>
 
