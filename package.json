@@ -20,7 +20,7 @@
 		"prod:eleventy": "eleventy",
 		"dev": "ENVIRONMENT=development npm-run-all dev:sass --parallel watch:*",
 		"fast": "ENVIRONMENT=fast npm-run-all dev:sass --parallel watch:*",
-		"prod": "ENVIRONMENT=production npm-run-all --parallel prod:* && npm run icon-minify"
+		"prod": "ENVIRONMENT=production npm-run-all --parallel prod:*"
 	},
 	"repository": {
 		"type": "git",
