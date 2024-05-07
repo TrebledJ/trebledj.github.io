@@ -8,12 +8,11 @@
     {% set uniquePosts = collections.postsr | selectHomePosts(tags, npostsPerTab) %}
 
     {# Recent Posts Section #}
-    {{render_posts_carousel(uniquePosts, "Recent Posts", "pencil", professionalCategories, carouselAutoInterval)}}
+    {{render_posts_carousel(uniquePosts, "Recent Posts", professionalCategories, carouselAutoInterval)}}
 
     {# Recent Music Section #}
     {% if featuredTracks %}
-        <h2 id="recent-music" class="mb-0">Music for the Front Page <i class="fas fa-music ms-1"></i>
-        </h2>
+        <h2 id="recent-music" class="mb-0">Music for the Front Page</h2>
         <br/>
 
         <div class="row">
