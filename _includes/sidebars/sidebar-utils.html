@@ -3,7 +3,7 @@
 
 {% macro tags_sidebar(heading, groups) %}
     <div class="sticky-right dim-gentle">
-        <h3>
+        <h3 id="{{heading | slugify}}">
             <i class="fas fa-tags me-2"></i>{{heading}}
         </h3>
         {% for data in groups %}

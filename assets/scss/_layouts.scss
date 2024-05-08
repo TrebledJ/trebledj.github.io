@@ -31,7 +31,8 @@
 // --- Scroll to Top --- //
 // --- Mobile ToC --- //
 #btn-back-to-top,
-#btn-mobile-toc {
+#btn-mobile-toc,
+#btn-go-to-tags {
     position: fixed;
     bottom: 10px;
     display: none;
@@ -54,6 +55,13 @@
     left: 10px;
 }
 
+#btn-go-to-tags {
+    left: 10px;
+    color: var(--main-text-color);
+    i {
+        color: var(--main-text-color);
+    }
+}
 
 // --- Sticky Components --- //
 .sticky-right {
