@@ -20,26 +20,57 @@ $(() => {
 
   /* Scroll to Top */
   const btnBackToTop = $('#btn-back-to-top');
-  function check() {
-    if ($(this).scrollTop() > 250)
-      btnBackToTop.fadeIn();
-    else
-      btnBackToTop.fadeOut();
-  }
 
-  $(window).on('scroll', () => {
-    check();
+  const backtotopObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        btnBackToTop.fadeOut();
+      } else {
+        btnBackToTop.fadeIn();
+      }
+    });
+  }, {
+    rootMargin: "250px",
+    threshold: 0,
   });
 
-  check(); // Check on doc ready, e.g. if page was reloaded, we could already be in the middle of the page.
+  backtotopObserver.observe(document.querySelector("#top-of-the-morning-to-you"));
 
   btnBackToTop.on('click', () => {
-    document.body.scrollTop = 0;
-    document.documentElement.scrollTop = 0;
+    document.body.scrollIntoView({
+      behavior: 'smooth'
+    });
   });
 
   // Add a special class for dropdown items.
   $('#btn-mobile-toc nav.toc a').addClass('dropdown-item');
+
+  // Go to Tag Button in /posts/.
+  const gototagsButton = $('#btn-go-to-tags');
+  const tagsHeading = document.querySelector("#tags");
+  gototagsButton.on('click', () => {
+    tagsHeading.scrollIntoView({
+      behavior: 'smooth'
+    });
+  });
+
+  if (tagsHeading) {
+    const tagsSection = document.querySelector(".sticky-right");
+    const gototagObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          gototagsButton.fadeOut();
+        } else {
+          gototagsButton.fadeIn();
+        }
+      });
+    }, {
+      rootMargin: "0px", // Lazy-load when the iframe is 300px away from the viewport.
+      threshold: 0,
+    });
+  
+    gototagObserver.observe(tagsSection);
+  }
 
   /* Load Tooltips */
   const tooltips = document.querySelectorAll('[data-bs-toggle="tooltip"]');
@@ -58,7 +89,6 @@ $(() => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         const track = entry.target;
-        console.log('loading a track');
         let src = track.dataset.src;
         if (visual)
           src += '&visual=true'; // Compressed view, more suitable for small screens.

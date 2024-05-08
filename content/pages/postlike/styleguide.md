@@ -358,22 +358,22 @@ Does it work with {% abbr '{% tag "tags", "meta" %}', 'Probably not...' %}?
 ### Alerts
 
 {% alert "fact" %}
-Bears eat beets.
-Bears, beets, battlestar galactica.
+Bears eat `beets`.
+Bears, beets, **battlestar** galactica.
 {% endalert %}
 
 {% alert "info" %}
-According to all known laws of aviation, there is no way a bee should be able to fly.
+According to all known laws of `aviation`, *there is no way a bee* **should be able to fly**.
 
 Its wings are too small to get its fat little body off the ground. The bee, of course, flies anyway because bees don't *care* what humans think is impossible.
 
-`.` stands for function {% tag "composition" %}, similar to those in math ($f \circ g$). On the practical side, it applies the right-hand-side function first, followed by the left-hand-side function. $ 1 \mapsto 1 $ :)
+`.` stands for [function](/) {% tag "composition" %}, similar to those in math ($f \circ g$). On the practical side, it applies the right-hand-side function first, followed by the left-hand-side function. $ 1 \mapsto 1 $ :)
 {% endalert %}
 
 {% alert "success" %}
 {% image "~/assets/img/memes/nou.jpg", "" %}
 
-> Trust in the Lord with all your heart, and lean not on your own understanding.
+> Trust in the Lord with all your heart, and lean not on your own `understanding`.
 > In all your ways, submit to Him, and He will make your paths straight.
 > Proverbs 3:5-6
 
@@ -402,11 +402,11 @@ echo "test"
 
 [^mega]: Ahem. Megamind would like a word with you.
 
-Some other superheroes that may take issue with you:
+Some other `superheroes` that may take issue with you:
 
 - Lord Spithorman
 - Captain Wonderica
-- Supramat
+- Supraman
 {% endalert %}
 
 {% alert "simple" %}
