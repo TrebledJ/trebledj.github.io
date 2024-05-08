@@ -34,8 +34,9 @@ $(() => {
   check(); // Check on doc ready, e.g. if page was reloaded, we could already be in the middle of the page.
 
   btnBackToTop.on('click', () => {
-    document.body.scrollTop = 0;
-    document.documentElement.scrollTop = 0;
+    document.body.scrollIntoView({
+      behavior: 'smooth'
+    });
   });
 
   // Add a special class for dropdown items.
@@ -86,7 +87,6 @@ $(() => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         const track = entry.target;
-        console.log('loading a track');
         let src = track.dataset.src;
         if (visual)
           src += '&visual=true'; // Compressed view, more suitable for small screens.
