@@ -243,13 +243,13 @@ img.center {
     }
 }
 
-@include media-breakpoint-up(lg) {
+@media (hover: hover) {
     *:hover > .md-anchor {
         opacity: 1;
     }
 }
 
-@include media-breakpoint-down(lg) {
+@media (hover: none) {
     .md-anchor {
         opacity: 0.5;
         &::before {

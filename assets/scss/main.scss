@@ -104,19 +104,21 @@ $carousel-transition: transform 2s ease, opacity 1.5s ease-out .5s;
     background-repeat: no-repeat;
     transform: all $transition-duration linear;
 
-    &:not(.special):hover {
-        color: var(--contrast-color) !important;
-        --clr: var(--link-color);
-        animation: tag-box 3s infinite;
-    
-    }
-    &.special:hover {
-        color: var(--contrast-color) !important;
-        --clr: var(--special-color);
-        animation: tag-box 3s infinite;
-    }
-    html[data-theme="dark"] &:hover {
-        filter: drop-shadow(0 0 1px var(--clr));
+    @media (hover: hover) {
+        &:not(.special):hover {
+            color: var(--contrast-color) !important;
+            --clr: var(--link-color);
+            animation: tag-box 3s infinite;
+        
+        }
+        &.special:hover {
+            color: var(--contrast-color) !important;
+            --clr: var(--special-color);
+            animation: tag-box 3s infinite;
+        }
+        html[data-theme="dark"] &:hover {
+            filter: drop-shadow(0 0 1px var(--clr));
+        }
     }
 }
 
@@ -199,7 +201,7 @@ $carousel-transition: transform 2s ease, opacity 1.5s ease-out .5s;
 }
 
 // Interactive opaque on hover (only for large screens).
-@include media-breakpoint-up(lg) {
+@media (hover: hover) {
     blockquote,
     .dim-gentle {
         opacity: $opacity-lower;
@@ -221,7 +223,7 @@ $carousel-transition: transform 2s ease, opacity 1.5s ease-out .5s;
     }
 }
 
-@include media-breakpoint-down(lg) {
+@media (hover: none) {
     blockquote,
     .dim-gentle {
         opacity: $opacity-low;
