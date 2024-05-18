@@ -9,6 +9,7 @@ module.exports = {
   eleventyExcludeFromCollections: false,
   layout: 'layouts/page-tag',
   sortByLatest: true,
+  date: '2022-08-01',
   eleventyComputed: {
     permalink: data => `/tags/${data.page.fileSlug}/index.html`,
     title: data => data.title || toTitleCase(data.page.fileSlug),
