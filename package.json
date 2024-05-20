@@ -8,7 +8,6 @@
 		"benchmark": "DEBUG=Eleventy:Benchmark* npx @11ty/eleventy",
 		"check-links": ". scripts/links.sh",
 		"validate-html": "html-validate _site/",
-		"icon-minify": "node node_modules/icon-minifier/dist/src/index.js _site --exts html,js,json --replace-css-links --cache-bust --output-css-folder ./cb/css --output-font-folder ./cb/webfonts",
 		"test:jest": "jest",
 		"test": "npm-run-all --parallel test:*",
 		"lint": "npx eslint . --fix",
@@ -20,7 +19,7 @@
 		"prod:eleventy": "eleventy",
 		"dev": "ENVIRONMENT=development npm-run-all dev:sass --parallel watch:*",
 		"fast": "ENVIRONMENT=fast npm-run-all dev:sass --parallel watch:*",
-		"prod": "ENVIRONMENT=production npm-run-all --parallel prod:* && npm run icon-minify"
+		"prod": "ENVIRONMENT=production npm-run-all --parallel prod:*"
 	},
 	"repository": {
 		"type": "git",
@@ -57,7 +56,6 @@
 		"eslint-plugin-jest": "^28.2.0",
 		"html-minifier": "^4.0.0",
 		"html-validate": "^8.18.1",
-		"icon-minifier": "github:TrebledJ/icon-minifier",
 		"jest": "^29.7.0",
 		"luxon": "^3.4.4",
 		"markdown-it": "^14.1.0",
