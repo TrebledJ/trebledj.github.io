@@ -1,7 +1,7 @@
 {% set tags = collections.tagcount | dictsort %}
 {% for tag, count in tags %}
     {% set perc = count * 2.5 + 70 %}
-    <a class="tag{{ " special" if collections.specialTags | contains(tag) }}" href="/tags/{{ tag | slugify }}/" style="font-size: {{perc}}%; padding: {{count / 3}}px 5px;">
+    <a class="jtag{{ " special" if collections.specialTags | contains(tag) }}" href="/tags/{{ tag | slugify }}/" style="font-size: {{perc}}%; padding: {{count / 3}}px 5px;">
         {{ tag }}
     </a>
 {% endfor %}
