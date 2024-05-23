@@ -7,6 +7,7 @@ tags:
   - cpp
   - tutorial
   - software-engineering
+  - performance
   - notes
 thumbnail_src: assets/dynamic-memory-1.jpg
 # thumbnail_banner: true
