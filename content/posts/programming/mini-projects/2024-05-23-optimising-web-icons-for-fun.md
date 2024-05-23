@@ -1,6 +1,6 @@
 ---
 title: Optimising Web Icons for Fun
-excerpt: Ejecting unused cargo has never been so exhilarating.
+excerpt: Ejecting unused cargo for leaner performance.
 tags:
   - web
   - performance
