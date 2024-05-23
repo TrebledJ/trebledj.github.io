@@ -6,6 +6,7 @@ tags:
   - performance
   - meta
   - notes
+  - writeup
 thumbnail_src: assets/webicons/icons-thumbnail.png
 ---
 
