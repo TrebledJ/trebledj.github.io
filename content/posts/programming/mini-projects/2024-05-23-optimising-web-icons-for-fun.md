@@ -9,7 +9,7 @@ tags:
 thumbnail_src: assets/webicons/icons-thumbnail.png
 ---
 
-I decided to spend this Labour Day doing a bit of frontend performance engineering and learn Typescript along the way. I've been eyeing my Font Awesome (FA) assets for a while, and lately they've been a curious itch.
+I decided to spend this Labour Day doing a bit of frontend performance engineering, learning Typescript along the way. I've been eyeing my Font Awesome (FA) assets for a while, and lately they've been a curious itch.
 
 Here’s the dealio: icon webfonts are known to bundle *all* icons. This includes icons we don't use. For Font Awesome, this means 19kB CSS + 287kB WOFF2 gzipped. But my site just uses 40 out of 2000… so why am I downloading 90% dead data?^[287kB gzipped comes from fa-brands, plus fa-regular, plus fa-solid. Fortunately, these variants are only downloaded if used. 2000 icons just counts solid, regular, and brands. Imagine the number of icons if premium FA was used!]
 
