@@ -39,7 +39,7 @@
 #}
 
 {% macro render_tag(name) %}
-    <a class="tag {{ "special" if collections.specialTags | contains(name) }}" href="/tags/{{name}}/" itemprop="keywords">{{name}}</a>
+    <a class="jtag {{ "special" if collections.specialTags | contains(name) }}" href="/tags/{{name}}/" itemprop="keywords">{{name}}</a>
 {% endmacro %}
 
 {% macro render_tag_list(tags, limit = 3) %}

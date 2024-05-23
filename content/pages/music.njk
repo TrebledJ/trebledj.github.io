@@ -75,7 +75,7 @@ layout: layouts/page-default
                             track.attr("title", `Track: ${item.title}`);
                             track.attr("src", `https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/${item.track_id}&color=%23{{ site.color.soundcloud }}&auto_play=false&hide_related=true&show_comments=true&show_user=true&show_reposts=false&show_teaser=false&visual=${visual}`);
 
-                            const toHTMLTag = t => `<span><a class="tag" href="{{ site.baseurl }}/tags/${t}/">${t}</a></span>`;
+                            const toHTMLTag = t => `<span><a class="jtag" href="{{ site.baseurl }}/tags/${t}/">${t}</a></span>`;
 
                             /* Exclude common tags and convert into html code. */
                             const tags = item
