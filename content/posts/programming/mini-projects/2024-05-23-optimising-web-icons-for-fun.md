@@ -4,6 +4,7 @@ excerpt: Ejecting unused cargo has never been so exhilarating.
 tags:
   - web
   - performance
+  - meta
   - notes
 thumbnail_src: assets/webicons/icons-thumbnail.png
 ---
