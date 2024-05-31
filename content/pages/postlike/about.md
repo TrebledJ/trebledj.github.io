@@ -96,7 +96,7 @@ A fun pastime that began in uni. There's a whole world of practical consideratio
 
 {% tag "ctf" %}
 
-A relatively recent hobby I picked up. You get to learn cybersecurity—in the form of binary/web exploitation, reverse engineering, cryptography, and other fun knick-knacks—all the while having fun earning points (and taking away an occasional prize).
+A fun competitive pastime I picked up in my last few years of uni. You get to learn cybersecurity—in the form of binary/web exploitation, reverse engineering, cryptography, and other knick-knacks—all while having fun earning points (and taking away an occasional prize).
 
 Things I'm interested in exploring:
 - {% tag "Reverse", "reverse" %} Engineering
@@ -114,7 +114,7 @@ Ah, board games... one of my favourite pastimes. When I'm bored ~~game~~, you ma
 
 ### Education
 
-I'm recently graduated from the [Hong Kong University of Science and Technology](https://hkust.edu.hk/), where I studied a combination of mathematics, computer science, and music. Fun times.
+I'm graduated from the [Hong Kong University of Science and Technology](https://hkust.edu.hk/) in May 2023. Here, I studied a combination of mathematics, computer science, and music. Fun times.
 
 
 ### Collaborating
