@@ -119,9 +119,9 @@ Let’s recognise some highs level patterns.
 It’s easy to be intimidated by the multitude of loops; but really, half the loops are the same, just wearing different clothes.
 
 There are the 3 parts to the encryption:
-- Part 1 !!(`112d10` – `113017`)!!.
-- Part 2 !!(`113020` – `11309c`)!!.
-- Part 3 !!(`11310e` – `1133a5`)!!.
+- Part 1 !!(`112d10` – `113017`)!!.
+- Part 2 !!(`113020` – `11309c`)!!.
+- Part 3 !!(`11310e` – `1133a5`)!!.
 
 The procedure is roughly:
 
@@ -138,7 +138,7 @@ part3(flag, interesting_data_a7516852)
 
 {% image "https://media0.giphy.com/media/NusOH30J7QiJy/giphy.gif", "w-80", "Even cats can catch sneaky permutations!" %}
 
-Address: `112d10` – `113017`.
+Address: `112d10` – `113017`.
 
 Eight loops, doing pretty much the same thing. Let’s focus on the first one.
 
@@ -231,7 +231,7 @@ First part done!
 
 ### 2. Constructing An Inverse Map
 
-Address: `113020` – `11309c`.
+Address: `113020` – `11309c`.
 
 {% details "Part 2 Decompile", "open" %}
 
@@ -397,7 +397,7 @@ This characteristic is crucial as it *guarantees* an **invertible operation**.
 
 ### 3. Cracking the Shellcode
 
-Address: `11310e` – `1133a5`.
+Address: `11310e` – `1133a5`.
 
 The final part. Subtle, but delectable.
 

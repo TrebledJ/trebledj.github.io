@@ -23,11 +23,11 @@ If you want to follow along, you can grab the challenge here: [GitHub](https://g
 Author: [harrier](https://twitter.com/harrier_lcc)  
 4/5 stars ⭐️. 5/311 solves.
 
-> So let's learn reverse with Decompetition!^[[Decompetition](https://ctftime.org/event/list/?year=2022#:~:text=Decompetition%20v2.0) is a reverse-engineering CTF held irregularly.] The goal is simple: try to recover the original source code as much as possible, while understand the code logic deeply to get the internal flag! Only with two of those together, you will win this flag.
+> So let's learn reverse with Decompetition!^[[Decompetition](https://ctftime.org/event/list/?year=2022#:~:text=Decompetition%20v2.0) is a reverse-engineering CTF held irregularly.] The goal is simple: try to recover the original source code as much as possible, while understand the code logic deeply to get the internal flag! Only with two of those together, you will win this flag.
 > 
-> [STL](https://en.cppreference.com/w/cpp) is used everywhere, so it would be nice to be able to reverse them!
+> [STL](https://en.cppreference.com/w/cpp) is used everywhere, so it would be nice to be able to reverse them!
 > 
-> Note there is an internal flag with flag format `internal{}`. Please do not submit this directly to the platform.
+> Note there is an internal flag with flag format `internal{}`. Please do not submit this directly to the platform.
 > 
 > g++ version: g++ (Debian 12.2.0-14) 12.2.0
 > 
@@ -37,7 +37,7 @@ Author: [harrier](https://twitter.com/harrier_lcc)
 
 And a note on testing:
 
-> If you want to run this locally, you can install all the prerequisite library with `pip`, and run `python compiler trie.disasm`.
+> If you want to run this locally, you can install all the prerequisite library with `pip`, and run `python compiler trie.disasm`.
 > 
 > ```sh
 > pip install pyyaml capstone intervaltree pyelftools diff_match_patch

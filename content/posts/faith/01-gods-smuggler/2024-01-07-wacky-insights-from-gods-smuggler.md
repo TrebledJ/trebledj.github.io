@@ -26,7 +26,7 @@ As I read this book, it struck me how the book offers scandalous perspectives to
 > 
 > *'Lord, in my luggage I have Scripture that I want to take to Your children across this border. When You were on earth, You made blind eyes see. Now, I pray, make seeing eyes blind. Do not let the guards see those things You do not want them to see.'*
 > 
->  – Brother Andrew, Lanterns in the Dark, Page 117.
+>  – Brother Andrew, Lanterns in the Dark, Page 117.
 
 One aspect to living a Christ-fearing life lies in the *Cost of Discipleship*: to give up plans and desires for the sake of Christ. With the amount of travelling Andrew goes through, it’s only a matter of time before stringent border checks catch up with him.
 
@@ -34,7 +34,7 @@ In another instance, this relinquishment is spelled out more explicitly—a dire
 
 > *'Lord,' I went on, 'I know that no amount of cleverness on my part can get me through this border search. Dare I ask for a miracle? Let me take some of the Bibles out and leave them in the open where they will be seen. Then, Lord, I cannot possibly be depending on my own stratagems, can I? I will be depending utterly upon You.'*
 > 
->  – Brother Andrew, The Greenhouse in the Garden, Page 185. 
+>  – Brother Andrew, The Greenhouse in the Garden, Page 185. 
 
 This character reflects how we can live a Christ-directed life through prayer, rather than living a self-directed life.
 
@@ -53,7 +53,7 @@ This can be very difficult to accept. After all, it requires us to deny ourselve
 > 
 > *And so, armed with this prayer, I started the motor and drove up to the barrier...*
 > 
->  – Brother Andrew, Lanterns in the Dark, Page 117-118.
+>  – Brother Andrew, Lanterns in the Dark, Page 117-118.
 
 In a separate trip to Romania…
 
@@ -84,7 +84,7 @@ In a separate trip to Romania…
 > *<sup>5</sup>Trust in the Lord with all your heart <br/>and lean not on your own understanding;  
 > <sup>6</sup>in all your ways acknowledge him, <br/>and he will make your paths straight.*
 > 
->  – Proverbs 3:5-6 (NIV)
+>  – Proverbs 3:5-6 (NIV)
 
 {% enddetails %}
 
@@ -101,11 +101,11 @@ This idea is reflected in 1 Corinthians 7:7, where the apostle Paul addresses si
 
 At the start of this chapter, Andrew prayed for a wife, but was directed to Isaiah 54:1: "*The children of the desolate are more than the children of the married.*", implying his ministry to the spiritually lost should come first before marriage. Yet, he prayed another prayer:
 
-> *'Lord', I said one morning, sitting on the little iron fold-down bed in my room over the toolshed, 'I've got to pray just one more time about this bachelor life You plan for me. Now I know about those children You promise the desolate, but Lord, You also promise the desolate a home!' I quickly found the verse in Psalm 68, as though to refresh His memory: "God gives the desolate a home to dwell in." 'It isn't that I don't thank You for this room about the toolshed, Lord. Just because it's dark and dank and mildewy and – doesn't mean I'm not grateful. But, dear God, it is not a home. Not really. A home is where there's a wife and children – real ones.*
+> *'Lord', I said one morning, sitting on the little iron fold-down bed in my room over the toolshed, 'I've got to pray just one more time about this bachelor life You plan for me. Now I know about those children You promise the desolate, but Lord, You also promise the desolate a home!' I quickly found the verse in Psalm 68, as though to refresh His memory: "God gives the desolate a home to dwell in." 'It isn't that I don't thank You for this room about the toolshed, Lord. Just because it's dark and dank and mildewy and – doesn't mean I'm not grateful. But, dear God, it is not a home. Not really. A home is where there's a wife and children – real ones.*
 > 
 > *'Lord, Paul prayed three times for release from the torn in the flesh that was bothering him. And you refused him. I have prayed twice for a wife. I am going to pray once more. Perhaps You will refuse me a third time, too, Lord, and if You do, I shall never again bring up the question. I'm going to write it here in my Bible.' I opened the Bible to the back cover and scribbled one last notation, 'Prayed ... for ... wife ... third time ... Witte, 7th July ... 1957.' Then I closed the Bible with a snap, 'Some people, Lord, are built for the lonely walk. But not me, please. Not me.'*
 > 
->  – Brother Andrew, "The Third Prayer", Page 132.
+>  – Brother Andrew, "The Third Prayer", Page 132.
 
 Although much of the passage sees Andrew asking for a wife, I thought the last bit was amusing and deserves a bit of attention.
 
@@ -116,11 +116,11 @@ If anything, the casual tone of the prayer goes to show how close Andrew regards
 {% details "Relevant Verses" %}
 > *<sup>7</sup>I wish that all men were as I am. But each man has his own gift from God; one has this gift, another has that.*
 > 
->  – 1 Corinthians 7:7 (NIV)
+>  – 1 Corinthians 7:7 (NIV)
 
 >  *<sup>17</sup>Nevertheless, each one should retain the place in life that the Lord assigned to him and to which God has called him. This is the rule I lay down in all the churches.*
 > 
->  – 1 Corinthians 7:17 (NIV)
+>  – 1 Corinthians 7:17 (NIV)
 
 {% enddetails %}
 
@@ -129,7 +129,7 @@ If anything, the casual tone of the prayer goes to show how close Andrew regards
 
 > *Only one of us would be talking at a time; the other would be constantly in prayer.*
 > 
->  – Brother Andrew, The Work Begins to Expand, Page 213.
+>  – Brother Andrew, The Work Begins to Expand, Page 213.
 
 What's that? Missionaries discovered distributed computing and load balancing?
 
@@ -142,9 +142,9 @@ It's interesting to muse on this 'technique'. Clearly there will be situations w
 
 Andrew and his missionary partner Hans were crossing the border into Russia. As was custom, guards would inspect their papers and vehicle.
 
-> *At last came time for the inspection of the car itself. Hans and I had agreed ahead of time on the technique that we used ever afterwards whenever two people were crossing a border together. Only one of us would be talking at a time; the other would be constantly in prayer: prayer that God's will be done in each detail of the inspection, prayer for the country we were entering – beginning with these employees at the border.*
+> *At last came time for the inspection of the car itself. Hans and I had agreed ahead of time on the technique that we used ever afterwards whenever two people were crossing a border together. Only one of us would be talking at a time; the other would be constantly in prayer: prayer that God's will be done in each detail of the inspection, prayer for the country we were entering – beginning with these employees at the border.*
 > 
->  – Brother Andrew, The Work Begins to Expand, Page 213.
+>  – Brother Andrew, The Work Begins to Expand, Page 213.
 
 {% enddetails %}
 
@@ -152,11 +152,11 @@ Andrew and his missionary partner Hans were crossing the border into Russia. As 
 
 > *<sup>17</sup>pray continually;*
 > 
->  – 1 Thessalonians 5:17 (NIV)
+>  – 1 Thessalonians 5:17 (NIV)
 
 > *<sup>6</sup>Do not be anxious about anything, but in every situation, by prayer and petition, with thanksgiving, present your requests to God. <sup>7</sup>And the peace of God, which transcends all understanding, will guard your hearts and your minds in Christ Jesus.*
 > 
->  – Philippians 4:6-7 (NIV)
+>  – Philippians 4:6-7 (NIV)
 
 {% enddetails %}
 
@@ -165,7 +165,7 @@ Andrew and his missionary partner Hans were crossing the border into Russia. As 
 
 > *We stay because— if we go, who will be left to pray?*
 > 
->  – Brother Andrew, The Greenhouse in the Garden, Page 194.
+>  – Brother Andrew, The Greenhouse in the Garden, Page 194.
 
 Ah– migration, the perennial exodus from one country to another. You would think wars and mass migration were left behind in the 20th century, but they still exist today. Wars aren't the only reason of migration; political storms and socioeconomic circumstances also lead to uncertainty, fear, and instability. No hooman worried only about their individual (or immediate family) life wants that...
 
@@ -183,7 +183,7 @@ While in Romania...
 > 
 > *The farmer and his wife both looked shocked. 'Of course not,' he said. 'In fact, we certainly will lose the farm. We stay because—' he let his eyes travel across the valley—'because if we go, who will be left to pray?'*
 > 
->  – Brother Andrew, The Greenhouse in the Garden, Page 193-194.
+>  – Brother Andrew, The Greenhouse in the Garden, Page 193-194.
 
 {% enddetails %}
 
@@ -192,7 +192,7 @@ While in Romania...
 > 
 > *Life in Cuba in 1965 was not easy. But perhaps God had had His reasons for putting them in this place at this time. Perhaps they were to be His arms and legs and His healing hands in this situation, without whom He would have no representative in this land.*
 > 
->  – Brother Andrew, Twelve Apostles of Hope, Page 261.
+>  – Brother Andrew, Twelve Apostles of Hope, Page 261.
 
 {% details "Context" %}
 
@@ -204,7 +204,7 @@ While in Romania...
 > 
 > *There was pandemonium. Everyone in the church had to shake his hand. I heard shouts of joy, cries of '*gracias, pastor!*'*
 > 
->  – Brother Andrew, Twelve Apostles of Hope, Page 261.
+>  – Brother Andrew, Twelve Apostles of Hope, Page 261.
 
 {% enddetails %}
 
@@ -242,13 +242,13 @@ It started off with impromptu driving lessons by a peer, Karl de Graaf. Imagine 
 > 
 > *'Have you been taking your driving lessons?'*
 > 
-> *'Well – not exactly...'*
+> *'Well – not exactly...'*
 > 
 > *'Haven't you learned yet how important obedience is? I suppose I'm going to have to teach you myself. Hop in.'*
 > 
 > *That afternoon I sat behind the wheel of a motor vehicle for the first time since that disastrous morning eleven years earlier when I had driven the Bren carrier full speed down the company street. Mr de Graaf returned again and again, and so skilled a teacher was he that a few weeks later I took my driving test and pass it the first time around—a rare thing in Holland. I still could see no reason why I—who didn't even own a bicycle any more—should be carrying an automobile driver's licence around in my pocket. But Mr de Graaf refused to speculate. 'That's the excitement in obedience,' he said. 'Finding out later what God had in mind.'*
 > 
->  – Brother Andrew, The Foundations are Laid, Page 109.
+>  – Brother Andrew, The Foundations are Laid, Page 109.
 
 A few page flips later, Andrew found a use for his driver's licence...
 
@@ -268,7 +268,7 @@ A few page flips later, Andrew found a use for his driver's licence...
 > 
 > *'I did. To your Volkswagen. We've talked it all over, and there's no untalking us. Mrs Whetstra and I decided months ago that if you got the visa, you also got our automobile. Come home and pick up the keys.'*
 > 
->  – Brother Andrew, The Foundations are Laid Page 114
+>  – Brother Andrew, The Foundations are Laid Page 114
 
 Oh joy. Free car!
 
@@ -310,7 +310,7 @@ And finally, a modern take on technology:
 > 
 > *'And I won't even consider installing one of those call-waiting monstrosities,' he exclaimed, 'that interrupt one phone conversation to announce another.' Technology, Andrew says, makes us far too accessible to the demands and pressures of the moment. 'Our first priority should be listening in patience and silence for the voice of God.'*
 > 
->  – Brother Andrew, The Journey in the New Millennium, Page 277.
+>  – Brother Andrew, The Journey in the New Millennium, Page 277.
 
 This last statement is true. Sometimes I wonder if I place technology (apps, games, notifications) first, before God... and I shudder at the thought. Thankfully, most phones now come with *Do Not Disturb*, but without self-discipline it's pointless.
 

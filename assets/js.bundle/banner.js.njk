@@ -1,0 +1,27 @@
+{# Non-critical, file-based JS for banner-related behaviour. #}
+{% if site.banner.enabled %}
+    {% if site.banner.scope %}
+        {% set scopeStorage = site.banner.scope + 'Storage' %}
+    {% endif %}
+    {% js %}
+        const root = document.querySelector(':root');
+        const bannerHeight = $('#banner').outerHeight();
+        if (bannerHeight) {
+            root.style.setProperty('--header-extra', `${bannerHeight}px`);
+        }
+
+        $('#banner .btn-close').on('click', () => {
+            {% if site.banner.scope %}
+                {{- scopeStorage }}.setItem('bannerClosed', true);
+            {% endif %}
+
+            const b = $('#banner');
+            b.css('max-height', b.outerHeight());
+            root.style.setProperty('--header-extra', '0px');
+            window.requestAnimationFrame(() => b.addClass('collapsed'));
+            setTimeout(() => {
+                b.addClass('d-none');
+            }, 600);
+        });
+    {% endjs %}
+{% endif %}

@@ -13,11 +13,19 @@
 
         {# Critical: check if banner was already closed. #}
         <script>
-            {% if site.banner.scope %}
-                const open = !{{site.banner.scope + 'Storage' | safe}}.getItem('bannerClosed');
-            {% else %}
-                const open = true;
-            {% endif %}
+            let scope = {{ site.banner.scope | dump | safe }};
+            switch (scope) {
+                case 'local':
+                    scope = localStorage;
+                    break;
+                case 'session':
+                    scope = sessionStorage;
+                    break;
+                default:
+                    scope = undefined;
+                    break;
+            }
+            const open = scope ? !scope.getItem('bannerClosed') : true;
             if (open) {
                 const banner = document.getElementById('banner');
                 banner

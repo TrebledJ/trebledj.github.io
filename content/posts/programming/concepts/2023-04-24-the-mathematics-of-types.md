@@ -156,7 +156,7 @@ We call `Just` a *data constructor*. This means we can construct concrete data b
 
 Let’s familiarise ourselves with ADTs and look at a few use cases.
 
-{% image "assets/wild-types.jpg", "w-45", "std::any — I choose you!", "Pokemon battle with the user pulling out their prized pokemon: std::any." %}
+{% image "assets/wild-types.jpg", "w-45", "std::any — I choose you!", "Pokemon battle with the user pulling out their prized pokemon: std::any." %}
 
 ### Product Types in the Wild
 
@@ -345,7 +345,7 @@ You may verify that the bijections[^bijection] hold, i.e. show that $\texttt{toL
 <br/>
 Functions such as $x \mapsto \sqrt{x}$ and $x \mapsto \lfloor x \rfloor$ are not bijections since multiple inputs may map to the same output—we can't recover a unique input given an output. This is the whole idea of being *invertible*.
 
-As for other algebraic constructions, I shall kindly leave them as an exercise for the reader. 🙃 Try coming up with examples of types and bijections for the following:
+As for other algebraic constructions, I shall kindly leave them as an exercise for the reader. 🙃 Try coming up with examples of types and bijections for the following:
 
 - Associativity: $(a + b) + c = a + (b + c)$, $(ab)c = a(bc)$
 - Commutativity: $a + b = b + a$, $ab = ba$

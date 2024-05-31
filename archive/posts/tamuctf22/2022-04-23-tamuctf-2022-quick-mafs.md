@@ -1,5 +1,5 @@
 ---
-title: TAMUctf 2022 – Quick Mafs
+title: TAMUctf 2022 – Quick Mafs
 excerpt: ROP chaining on steroids.
 tags:
   - reverse

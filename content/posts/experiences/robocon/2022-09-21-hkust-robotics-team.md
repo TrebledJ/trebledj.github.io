@@ -18,7 +18,7 @@ Ah Fall... the time of year when undergrads decide what activities, societies, a
 
 The purpose of this post is to reflect on and share about this experience. The first several sections provide background on my journey in the team. The final section is more reflective. Hopefully the reader finds something meaningful in this jumble of words.
 
-Please understand that the team has a culture of keeping things secret. 🤫 So I won’t delve precisely into what I worked on. Also understand that each person experiences things differently, so don’t take my writing below as representative of the entire team and experience. Things may change in the next few years, or may have already changed.
+Please understand that the team has a culture of keeping things secret. 🤫 So I won’t delve precisely into what I worked on. Also understand that each person experiences things differently, so don’t take my writing below as representative of the entire team and experience. Things may change in the next few years, or may have already changed.
 
 ## Joining the Team 🚪
 

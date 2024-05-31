@@ -48,5 +48,7 @@ rules:
   no-multi-assign: off
   no-new: off
   no-lonely-if: off
+  no-nested-ternary: off
+  no-underscore-dangle: off
   prefer-destructuring: off
   prefer-arrow-callback: off

@@ -11,13 +11,13 @@ thumbnail_src: assets/hkcert22-thumbnail.jpg
 
 350 points. 4/5 ⭐️. 4/311 solves.
 
-> Seems someone encrypt their flag with some weird online website. And seems the website is written in C++...
+> Seems someone encrypt their flag with some weird online website. And seems the website is written in C++...
 > 
 > Does anyone even use C++ to write their web server? I guess C++ is still charm but it must be easy to reverse.... right?
 
 ## Analysis
 
-We’re provided with the server binary written in C++. No source code. 😟 We’re also provided with a link to a website (presumably hosted by the server).
+We’re provided with the server binary written in C++. No source code. 😟 We’re also provided with a link to a website (presumably hosted by the server).
 
 Hmm, I wonder what the website has in store for us. Let’s check it out!
 

@@ -1,7 +1,9 @@
-document.addEventListener('keydown', function(event) {
-  if((event.ctrlKey || event.metaKey) && event.key === 'k') {
+/* eslint-disable no-undef */
+
+document.addEventListener('keydown', function (event) {
+  if ((event.ctrlKey || event.metaKey) && event.key === 'k') {
     event.preventDefault();
-    $("#search-modal").modal('show');
+    $('#search-modal').modal('show');
   }
 });
 
@@ -21,7 +23,7 @@ $(() => {
   /* Scroll to Top */
   const btnBackToTop = $('#btn-back-to-top');
 
-  const backtotopObserver = new IntersectionObserver((entries) => {
+  const backtotopObserver = new IntersectionObserver(entries => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         btnBackToTop.fadeOut();
@@ -30,15 +32,15 @@ $(() => {
       }
     });
   }, {
-    rootMargin: "250px",
+    rootMargin: '250px',
     threshold: 0,
   });
 
-  backtotopObserver.observe(document.querySelector("#top-of-the-morning-to-you"));
+  backtotopObserver.observe(document.querySelector('#top-of-the-morning-to-you'));
 
   btnBackToTop.on('click', () => {
     document.body.scrollIntoView({
-      behavior: 'smooth'
+      behavior: 'smooth',
     });
   });
 
@@ -47,16 +49,16 @@ $(() => {
 
   // Go to Tag Button in /posts/.
   const gototagsButton = $('#btn-go-to-tags');
-  const tagsHeading = document.querySelector("#tags");
+  const tagsHeading = document.querySelector('#tags');
   gototagsButton.on('click', () => {
     tagsHeading.scrollIntoView({
-      behavior: 'smooth'
+      behavior: 'smooth',
     });
   });
 
   if (tagsHeading) {
-    const tagsSection = document.querySelector(".sticky-right");
-    const gototagObserver = new IntersectionObserver((entries, observer) => {
+    const tagsSection = document.querySelector('.sticky-right');
+    const gototagObserver = new IntersectionObserver((entries, _observer) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           gototagsButton.fadeOut();
@@ -65,10 +67,10 @@ $(() => {
         }
       });
     }, {
-      rootMargin: "0px", // Lazy-load when the iframe is 300px away from the viewport.
+      rootMargin: '0px', // Lazy-load when the iframe is 300px away from the viewport.
       threshold: 0,
     });
-  
+
     gototagObserver.observe(tagsSection);
   }
 
@@ -80,7 +82,7 @@ $(() => {
   const visual = $(window).width() < 600;
 
   const options = {
-    rootMargin: "300px", // Lazy-load when the iframe is 300px away from the viewport.
+    rootMargin: '300px', // Lazy-load when the iframe is 300px away from the viewport.
     threshold: 0,
   };
 
@@ -93,91 +95,23 @@ $(() => {
         if (visual)
           src += '&visual=true'; // Compressed view, more suitable for small screens.
         track.src = src;
-        track.classList.remove("lazy");
+        track.classList.remove('lazy');
         observer.unobserve(track);
       }
     });
   }, options);
 
   // Observe tracks for lazy loading.
-  const tracks = document.querySelectorAll(".soundcloud-track.lazy");
+  const tracks = document.querySelectorAll('.soundcloud-track.lazy');
   tracks.forEach(e => trackObserver.observe(e));
 
   // Carousel auto-label update.
   $('.carousel').each(function () {
     // Update labels on slide.
     const id = $(this).attr('id');
-    $(this).on('slide.bs.carousel', (event) => {
+    $(this).on('slide.bs.carousel', event => {
       $(`#${id}-tab${event.from + 1}-label`).removeClass('active-tab');
       $(`#${id}-tab${event.to + 1}-label`).addClass('active-tab');
     });
   });
-
-  {% if site.lightbox.enabled %}
-  const lightboxCommonOptions = {
-    type: 'image',
-    fixedContentPos: false,
-    mainClass: 'mfp-with-zoom',
-    callbacks: {
-      open() {
-        $('body').addClass('noscroll');
-      },
-      close() {
-        $('body').removeClass('noscroll');
-      },
-    },
-    zoom: {
-      enabled: true,
-      duration: 300, // Duration of the effect, in milliseconds.
-      easing: 'ease-in-out', // CSS transition easing function.
-    },
-  };
-
-  {% if site.lightbox.combined %}
-  
-  $('.lightbox-single, .lightbox-gallery > a').magnificPopup({
-    gallery: {
-      enabled: true,
-    },
-    ...lightboxCommonOptions,
-  });
-
-  {% else %}
-
-  $('.lightbox-single').magnificPopup({
-    ...lightboxCommonOptions,
-  });
-
-  $('.lightbox-gallery').each(function () {
-    $(this).find('a').magnificPopup({
-      gallery: {
-        enabled: true,
-      },
-      ...lightboxCommonOptions,
-    });
-  });
-  
-  {% endif %}
-  {% endif %}
-
-  {% if site.banner.enabled %}
-  const root = document.querySelector(':root');
-  const bannerHeight = $('#banner').outerHeight();
-  if (bannerHeight)
-    root.style.setProperty('--header-extra', bannerHeight + 'px');
-
-  $('#banner .btn-close').on('click', () => {
-    {% if site.banner.scope %}
-    {{ site.banner.scope + 'Storage' | safe }}.setItem('bannerClosed', true);
-    {% endif %}
-
-    const b = $('#banner');
-    b.css('max-height', b.outerHeight());
-    root.style.setProperty('--header-extra', '0px');
-    window.requestAnimationFrame(() => b.addClass('collapsed'));
-    setTimeout(() => {
-      b.addClass('d-none');
-    }, 600);
-  });
-  {% endif %}
 });

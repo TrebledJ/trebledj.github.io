@@ -44,7 +44,7 @@ Audio is usually sampled at 44.1kHz or 48kHz (i.e. 44,100 or 48,000 samples per 
 
 The **Nyquist-Shannon Sampling Theorem** (aka the Nyquist Theorem) is an important consideration when choosing a sample rate for your application. According to this theorem, in order to accurately reconstruct a continuous signal such as audio, it must be sampled at a rate that is *at least **twice** the highest frequency component of the signal*. This threshold is also called the **Nyquist frequency**.
 
-For example, if we want to store a 1kHz audio signal, we would need to sample at 2kHz or more. Humans can hear frequencies in the range 20Hz – 20kHz, so if we want to capture all audible sounds, our sample rate needs to be at least 40kHz.
+For example, if we want to store a 1kHz audio signal, we would need to sample at 2kHz or more. Humans can hear frequencies in the range 20Hz – 20kHz, so if we want to capture all audible sounds, our sample rate needs to be at least 40kHz.
 
 This is important to avoid **aliasing**, which occurs when high frequency components of a signal are mistakenly interpreted as lower frequency components. Aliasing results in distortion and can lead to inaccurate representation of the original signal.
 
@@ -96,7 +96,7 @@ While sampling deals with resolution in time, **quantisation** deals with resolu
 
 ## Audio Mishaps and Bugs 🐞
 
-> *If you know the enemy and know yourself, you need not fear the result of a hundred battles.* – Sun Tzu, The Art of War
+> *If you know the enemy and know yourself, you need not fear the result of a hundred battles.* – Sun Tzu, The Art of War
 
 Sometimes when experimenting with audio, something goes amiss. The most common issues are aliasing, clipping, and clicks. These pesky lil' issues may crop up when processing audio... all the more important to understand how to mitigate them.
 

@@ -85,7 +85,7 @@ for (int i = 0; i < size; i++)
     array2[i] = i;
 ```
 
-With complex data structures, more work is needed to eliminate dynamic allocation. This is what ETL containers achieve, as opposed to STL containers.
+With complex data structures, more work is needed to eliminate dynamic allocation. This is what ETL containers achieve, as opposed to STL containers.
 
 {% alert "success" %}
 The [ETL](https://github.com/ETLCPP/etl) (Embedded Template Library) is an alternative to the C++ standard library, and contains many standard features plus libraries useful for embedded systems programming (e.g. circular buffers).
