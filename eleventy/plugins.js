@@ -6,6 +6,7 @@ const { EleventyHtmlBasePlugin, EleventyRenderPlugin } = require('@11ty/eleventy
 const eleventySass = require('eleventy-sass');
 // eslint-disable-next-line import/no-extraneous-dependencies
 const sitemap = require('@quasibit/eleventy-plugin-sitemap');
+const { minify } = require('terser');
 
 module.exports = function (eleventyConfig) {
   eleventyConfig.addPlugin(pluginRss);
@@ -13,8 +14,22 @@ module.exports = function (eleventyConfig) {
     errorOnInvalidLanguage: true,
   });
   eleventyConfig.addPlugin(pluginNavigation);
-  
-  eleventyConfig.addPlugin(pluginBundle);
+
+  eleventyConfig.addPlugin(pluginBundle, {
+    toFileDirectory: 'cb',
+    transforms: [
+      async function (content) {
+        if (process.env.ENVIRONMENT !== 'production')
+          return content;
+
+        if (this.type === 'js') {
+          const result = await minify(content);
+          return result.code;
+        }
+        return content;
+      },
+    ],
+  });
 
   eleventyConfig.addPlugin(EleventyHtmlBasePlugin);
   eleventyConfig.addPlugin(EleventyRenderPlugin);

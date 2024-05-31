@@ -13,19 +13,28 @@
 
         {# Critical: check if banner was already closed. #}
         <script>
-            if (site.banner.enabled) {
-                const scope = site.banner.scope;
-                const open = scope ? scope.getItem('bannerClosed') : true;
-                if (open) {
-                    const banner = document.getElementById('banner');
-                    banner
-                        .parentElement
-                        .classList
-                        .remove('d-none');
-                    banner
-                        .classList
-                        .remove('collapsed');
-                }
+            let scope = {{ site.banner.scope | dump | safe }};
+            switch (scope) {
+                case 'local':
+                    scope = localStorage;
+                    break;
+                case 'session':
+                    scope = sessionStorage;
+                    break;
+                default:
+                    scope = undefined;
+                    break;
+            }
+            const open = scope ? !scope.getItem('bannerClosed') : true;
+            if (open) {
+                const banner = document.getElementById('banner');
+                banner
+                    .parentElement
+                    .classList
+                    .remove('d-none');
+                banner
+                    .classList
+                    .remove('collapsed');
             }
         </script>
     {% endif %}

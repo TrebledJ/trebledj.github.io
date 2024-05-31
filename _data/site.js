@@ -73,11 +73,11 @@ module.exports = function () {
       combined: true, // Combines all lightbox images in a post into a single gallery.
     },
     banner: {
-      enabled: false,
+      enabled: true,
       sticky: true,
       closeButton: true,
       disableInPosts: true, // Don't detract from content.
-      scope: 'session', // Possible values: 'session', 'local', ''.
+      scope: 'local', // Possible values: 'session', 'local', ''.
       // bgColor: 'primary', // Any Bootstrap `bg-` values.
       // fgColor: 'black', // Any Bootstrap `text-` values.
       icon: 'fas fa-droplet',

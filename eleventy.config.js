@@ -43,7 +43,6 @@ module.exports = function (eleventyConfig) {
         },
       });
     },
-
   });
 
   // Run Eleventy when these files change:
@@ -51,6 +50,7 @@ module.exports = function (eleventyConfig) {
 
   // Process content images to the image pipeline.
   eleventyConfig.addWatchTarget('content/**/*.{png,jpg,jpeg,gif,webp,svg}');
+  eleventyConfig.addWatchTarget('assets/js.bundle/**');
   eleventyConfig.watchIgnores.add('{package,package-lock}.json');
   eleventyConfig.watchIgnores.add('.gitignore');
 

@@ -1,9 +1,6 @@
 /* eslint-disable no-undef, no-var */
+// JS controller for https://github.com/tameemsafi/typewriterjs.
 // For documentation, see Typewriter JS: https://safi.me.uk/typewriterjs/.
-
-// {# For documentation, see Typewriter JS: https://safi.me.uk/typewriterjs/ #}
-// {# Reduce number of web requests by combining library and user code. #}
-// {% include "../../assets/js/third-party/typewriter.js" %}
 
 function prefixLength(a, b) {
   const n = Math.min(a.length, b.length);

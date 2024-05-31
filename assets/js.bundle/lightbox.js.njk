@@ -1,0 +1,45 @@
+{# Non-critical, file-based JS for lightbox-related behaviour. #}
+{% if site.lightbox.enabled %}
+    {% js %}
+        const lightboxCommonOptions = {
+            type: 'image',
+            fixedContentPos: false,
+            mainClass: 'mfp-with-zoom',
+            callbacks: {
+                open() {
+                    $('body').addClass('noscroll');
+                },
+                close() {
+                    $('body').removeClass('noscroll');
+                },
+            },
+            zoom: {
+                enabled: true,
+                duration: 300, // Duration of the effect, in milliseconds.
+                easing: 'ease-in-out', // CSS transition easing function.
+            },
+        };
+
+        {% if site.lightbox.combined %}
+        $('.lightbox-single, .lightbox-gallery > a').magnificPopup({
+            gallery: {
+                enabled: true,
+            },
+            ...lightboxCommonOptions,
+        });
+        {% else %}
+        $('.lightbox-single').magnificPopup({
+            ...lightboxCommonOptions,
+        });
+
+        $('.lightbox-gallery').each(function () {
+            $(this).find('a').magnificPopup({
+                gallery: {
+                    enabled: true,
+                },
+                ...lightboxCommonOptions,
+            });
+        });
+        {% endif %}
+    {% endjs %}
+{% endif %}
