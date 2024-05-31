@@ -13,38 +13,7 @@
         <script defer src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
         <script defer src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script>
 
-        {# Bundle JS. #}
-        {% js %}
-            var tocOptions = '{{ tocOptions | safe }}';
-            var site = {
-                typewrite: {{ site.typewrite | dump | safe }},
-                search: {{ site.search | dump | safe }},
-                lightbox: {{ site.lightbox | dump | safe }},
-            };
-        {% endjs %}
-        {% js %} {% include "assets/js.bundle/head.js" %} {% endjs %}
-        {% js %} {% include "assets/js.bundle/banner.js.njk" %} {% endjs %}
-        {% js %} {% include "assets/js.bundle/lightbox.js.njk" %} {% endjs %}
-        {% js %} {% include "assets/js.bundle/404.js" %} {% endjs %}
-        {% js %} {% include "assets/js.bundle/post.js" %} {% endjs %}
-        {% js %} {% include "assets/js.bundle/search.js" %} {% endjs %}
-        {% js %} {% include "assets/js.bundle/typewriter.js" %} {% endjs %}
-        {% js %} {% include "assets/js.bundle/my-typewrite.js" %} {% endjs %}
-        {% set jsBundle %}
-            {%- getBundleFileUrl "js" -%}
-        {% endset %}
-        <script defer src="{{jsBundle}}"></script>
-
-        {# <script defer src="/js/head.js"></script>
-        <script defer src="/js/search.js"></script>
-
-        {% if assets %}
-            {% if assets.js %}
-                {% for asset in assets.js %}
-                    <script defer src="{{asset}}"></script>
-                {% endfor %}
-            {% endif %}
-        {% endif %} #}
+        {% include "utilities/bundle-js.html" %}
 
         {% if use_math %}
             {# {% include "utilities/mathjax.html" %} #}

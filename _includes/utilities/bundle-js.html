@@ -1,0 +1,21 @@
+{# Bundle JS. #}
+{% js %}
+    var tocOptions = '{{ tocOptions | safe }}';
+    var site = {
+        typewrite: {{ site.typewrite | dump | safe }},
+        search: {{ site.search | dump | safe }},
+        lightbox: {{ site.lightbox | dump | safe }},
+    };
+{% endjs %}
+{% js %} {% include "assets/js.bundle/head.js" %} {% endjs %}
+{% js %} {% include "assets/js.bundle/banner.js.njk" %} {% endjs %}
+{% js %} {% include "assets/js.bundle/lightbox.js.njk" %} {% endjs %}
+{% js %} {% include "assets/js.bundle/404.js" %} {% endjs %}
+{% js %} {% include "assets/js.bundle/post.js" %} {% endjs %}
+{% js %} {% include "assets/js.bundle/search.js" %} {% endjs %}
+{% js %} {% include "assets/js.bundle/typewriter.js" %} {% endjs %}
+{% js %} {% include "assets/js.bundle/my-typewrite.js" %} {% endjs %}
+{% set jsBundle %}
+    {%- getBundleFileUrl "js" -%}
+{% endset %}
+<script defer src="{{jsBundle}}"></script>
