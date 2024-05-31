@@ -1,6 +1,7 @@
 const pluginRss = require('@11ty/eleventy-plugin-rss');
 const pluginSyntaxHighlight = require('@11ty/eleventy-plugin-syntaxhighlight');
 const pluginNavigation = require('@11ty/eleventy-navigation');
+const pluginBundle = require('@11ty/eleventy-plugin-bundle');
 const { EleventyHtmlBasePlugin, EleventyRenderPlugin } = require('@11ty/eleventy');
 const eleventySass = require('eleventy-sass');
 // eslint-disable-next-line import/no-extraneous-dependencies
@@ -12,6 +13,9 @@ module.exports = function (eleventyConfig) {
     errorOnInvalidLanguage: true,
   });
   eleventyConfig.addPlugin(pluginNavigation);
+  
+  eleventyConfig.addPlugin(pluginBundle);
+
   eleventyConfig.addPlugin(EleventyHtmlBasePlugin);
   eleventyConfig.addPlugin(EleventyRenderPlugin);
 
