@@ -89,7 +89,7 @@ layout: layouts/page-default
                             /* Fill description and link. */
                             el
                                 .find(".track-content")
-                                .prepend(htmldecode(item.content));
+                                .prepend(htmldecode(item.content) + ' ');
                             el
                                 .find(".track-link")
                                 .attr("href", url);
