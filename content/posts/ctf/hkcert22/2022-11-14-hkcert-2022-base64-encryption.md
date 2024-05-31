@@ -199,7 +199,7 @@ There are probably better ways to automatically perform frequency analysis and s
 hkcert22{b4s3_s1x7y_f0ur_1s_4n_3nc0d1n9_n07_4n_encryp710n}
 ```
 
-[^extended-ascii]: What about é and à, as in déjà vu? Well, although those *are* technically in the extended ASCII character set, they should be rare enough. (Also I think Python encodes them differently from regular ASCII.)
+[^extended-ascii]: What about é and à, as in déjà vu? Well, although those *are* technically in the extended ASCII character set, they should be rare enough. (Also I think Python encodes them differently from regular ASCII.)
 
 [^newline]: But what about newline (`\n`, ASCII 10) and carriage return (`\r`, ASCII 13)? These are also possible to have in plaintext messages. We shouldn’t entirely discount these, but as they’re relatively rare, we won’t consider them for now.
 

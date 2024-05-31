@@ -38,7 +38,7 @@ You may be wondering: so what codepoints map to icons? This is up to icon packs 
 
 ### Fonts and CSS <i class="fa-brands fa-css3-alt"></i>
 
-For webfonts to work, codepoints need to exist in the HTML text. But that's terribly inconvenient — writing magic numbers makes for hard-to-maintain code.
+For webfonts to work, codepoints need to exist in the HTML text. But that's terribly inconvenient — writing magic numbers makes for hard-to-maintain code.
 
 This is where CSS comes in. Specialised CSS rules connect the HTML code to the exact font glyph via a two-step process: 1) identifying the font file and 2) identifying the codepoint. Once the browser has these two pieces of information, it can render the glyph.
 
@@ -167,7 +167,7 @@ Aside from the glaring potential for a delightful, thought-provoking discussion 
 
 Similar to a CDN, we would like to take advantage of browser cache by providing a high cache time. This way, if the user visits the site across the week, they wouldn't need to re-download the measly 8kB of gzipped assets. This is ideal for sites that update sporadically.
 
-You're probably thinking — come on, it's just 8kB, are you masochistic? And my response would be: it's a potential saving of 100ms for return visitors, and yes.
+You're probably thinking — come on, it's just 8kB, are you masochistic? And my response would be: it's a potential saving of 100ms for return visitors, and yes.
 
 By default, Cloudflare Pages has a browser cache time of 4 hours. We can change this duration by modifying the `Cache-Control` header.
 

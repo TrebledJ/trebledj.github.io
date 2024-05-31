@@ -285,7 +285,7 @@ break main.c:6 if i == 5
 ```
 
 Further reading:
-- [SO: GDB – Break if variable equal value](https://stackoverflow.com/q/14390256/10239789)
+- [SO: GDB – Break if variable equal value](https://stackoverflow.com/q/14390256/10239789)
 
 ### Breakpoint Control
 

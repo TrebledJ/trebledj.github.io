@@ -512,10 +512,10 @@ git bisect [start|reset|good|bad|skip]
 git log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all
 
 # More detailed git-tree 
-git log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)' --all
+git log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)' --all
 
 # Add them as git aliases in ~/.gitconfig or script aliases in ~/.bashrc.
-# See https://stackoverflow.com/a/9074343/10239789.
+# See https://stackoverflow.com/a/9074343/10239789.
 ```
 
 Fun watch: [So You Think You Know Git?](https://www.youtube.com/watch?v=aolI_Rz0ZqY)
@@ -537,13 +537,13 @@ Buffer overflow for fun and profit.
 echo -n '\x01\x02'
 
 echo -n '\x41' | xxd
-00000000: 41                     A
+00000000: 41                     A
 ```
 
 **perl** (good for repetitive sequences)
 ```sh
 perl -e 'print "\x41"x4 . "\x42\x43"' | xxd
-00000000: 4141 4141 4243         AAAABC
+00000000: 4141 4141 4243         AAAABC
 ```
 
 {% alert "danger" %}

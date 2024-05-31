@@ -31,7 +31,7 @@ This year's MapleCTF graced us with a challenge involving much class, much inher
 
 **Mostly Harmless**
 
-> Some people consider type annotations to be useless. I consider everything _but_ type annotations redundant.
+> Some people consider type annotations to be useless. I consider everything _but_ type annotations redundant.
 
 Author: [JJ](https://toki.la/)  
 17/291 solves.
