@@ -482,4 +482,4 @@ While zip files offer convenience and efficiency in compressing and sharing data
 ## Other References
 
 - [PentesterAcademy: From Zip Slip to System Takeover](https://blog.pentesteracademy.com/from-zip-slip-to-system-takeover-8564433ea542)
-- [SecurityVault: Attacks with Zip Files and Mitigations](https://thesecurityvault.com/attacks-with-zip-files-and-mitigations/)
+- [SecurityVault: Attacks with Zip Files and Mitigations](https://web.archive.org/web/20221213052327/https://thesecurityvault.com/attacks-with-zip-files-and-mitigations/)
