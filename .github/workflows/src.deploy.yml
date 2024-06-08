@@ -63,13 +63,12 @@ jobs:
           skip_fetch: true
 
       - name: Upload Artifact
-        if: ${{ env.DEPLOY_TO_GHPAGES }}
+        if: env.DEPLOY_TO_GHPAGES
         uses: actions/upload-pages-artifact@v3
         with:
           path: _site/
 
   deploy-ghpages:
-    if: ${{ env.DEPLOY_TO_GHPAGES }}
     environment:
       name: github-pages
       # url: ${{ steps.deployment.outputs.page_url }}
@@ -79,4 +78,5 @@ jobs:
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
+        if: env.DEPLOY_TO_GHPAGES
         uses: actions/deploy-pages@v4

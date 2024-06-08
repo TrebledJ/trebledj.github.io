@@ -63,7 +63,7 @@ jobs:
       - name: Diff Folders
         id: diff
         continue-on-error: true
-        run: git diff --word-diff --no-index --output .diff -- master/_site/ pr/
+        run: git diff --no-index --output .diff -- master/_site/ pr/
 
       - name: Diff Found
         if: steps.diff.outcome != 'success'
