@@ -2,8 +2,8 @@
 
 name: Dependabot Reviewer
 
-# on: pull_request_target
-on: workflow_dispatch 
+on: pull_request_target
+# on: workflow_dispatch 
 # on:
 #   workflow_run:
 #     workflows: [Dry Run Build]
@@ -11,6 +11,9 @@ on: workflow_dispatch
 #       - 'dependabot/**'
 #     types:
 #       - completed
+
+env:
+  OLD_BUILD_FOLDER: old-build
 
 permissions:
   pull-requests: write
@@ -30,15 +33,52 @@ jobs:
           echo "- mergeable: ${{ github.event.pull_request.mergeable }}" >> $GITHUB_STEP_SUMMARY
           echo "- mergeable_state: ${{ github.event.pull_request.mergeable_state }}" >> $GITHUB_STEP_SUMMARY
 
+  pre-compare:
+    name: Pre-Compare Checkout
+    runs-on: ubuntu-latest
+    steps:
+      - name: Pre-Checkout Site
+        uses: actions/checkout@v4
+        with:
+          ref: site
+          path: ${{ env.OLD_BUILD_FOLDER }}
+
+      - name: Sanity Check
+        run: |
+          echo "cwd: `pwd`" && echo "Workspace: $GITHUB_WORKSPACE" && ls -Al $GITHUB_WORKSPACE
+
   build:
     uses: ./.github/workflows/build.yml
+
+  diff:
+    name: Diff Builds
+    runs-on: ubuntu-latest
+    steps:
+      - name: Sanity Check
+        run: |
+          echo "cwd: $(pwd)" && echo "Workspace: $GITHUB_WORKSPACE" && ls -Al $GITHUB_WORKSPACE
+          echo "\ndiff: $(which diff)"
+      
+      - name: Diff Folders
+        continue-on-error: true
+        run: diff --unified --recursive ${{ env.OLD_BUILD_FOLDER }}/_site/ $GITHUB_WORKSPACE/_site/ >.diff
+      
+      - name: Epic Fail
+        if: steps.diff-result.outcome != 'success'
+        run: |
+          echo "## Diff Output" >> $GITHUB_STEP_SUMMARY
+          echo '```diff' >> $GITHUB_STEP_SUMMARY
+          cat .diff >> $GITHUB_STEP_SUMMARY
+          echo '```' >> $GITHUB_STEP_SUMMARY
+          exit 1
+        
 
   test:
     uses: ./.github/workflows/test.yml
 
   review-dependabot-pr:
     runs-on: ubuntu-latest
-    needs: [build, test]
+    needs: [build, compare, test]
     # if: github.event.pull_request.user.login == 'dependabot[bot]' && github.event.pull_request.mergeable == true
     steps:
       - name: Get Dependabot Metadata
