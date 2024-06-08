@@ -106,8 +106,8 @@ jobs:
 
       - uses: actions/upload-artifact@v4
         with:
-          name: site-${{ github.ref }}
+          name: site-${{ github.ref_name }}
           path: _site/
       
       - id: upload
-        run: echo 'site-${{ github.ref }}' >> $GITHUB_OUTPUT
+        run: echo 'site-${{ github.ref_name }}' >> $GITHUB_OUTPUT

@@ -20,7 +20,7 @@ jobs:
         run: |
           echo "## Debug" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
-          echo "- ref: ${{ github.ref }}" >> $GITHUB_STEP_SUMMARY
+          echo "- ref: ${{ github.ref_name }}" >> $GITHUB_STEP_SUMMARY
           echo "- user.login: ${{ github.event.pull_request.user.login }}" >> $GITHUB_STEP_SUMMARY
           echo "- merged: ${{ github.event.pull_request.merged }}" >> $GITHUB_STEP_SUMMARY
           echo "- merged_at: ${{ github.event.pull_request.merged_at }}" >> $GITHUB_STEP_SUMMARY
@@ -29,6 +29,7 @@ jobs:
 
   sanity:
     if: github.event.pull_request.user.login == 'dependabot[bot]'
+    steps:
 
   build:
     needs: sanity
