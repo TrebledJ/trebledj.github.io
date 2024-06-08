@@ -33,11 +33,11 @@ jobs:
           echo "- mergeable: ${{ github.event.pull_request.mergeable }}" >> $GITHUB_STEP_SUMMARY
           echo "- mergeable_state: ${{ github.event.pull_request.mergeable_state }}" >> $GITHUB_STEP_SUMMARY
 
-  pre-compare:
-    name: Pre-Compare Checkout
+  pre-diff:
+    name: Pre-Diff Checkout
     runs-on: ubuntu-latest
     steps:
-      - name: Pre-Checkout Site
+      - name: Checkout Base Site
         uses: actions/checkout@v4
         with:
           ref: site
@@ -52,6 +52,7 @@ jobs:
 
   diff:
     name: Diff Builds
+    needs: [pre-diff, build]
     runs-on: ubuntu-latest
     steps:
       - name: Sanity Check
@@ -78,7 +79,7 @@ jobs:
 
   review-dependabot-pr:
     runs-on: ubuntu-latest
-    needs: [build, compare, test]
+    needs: [build, diff, test]
     # if: github.event.pull_request.user.login == 'dependabot[bot]' && github.event.pull_request.mergeable == true
     steps:
       - name: Get Dependabot Metadata
