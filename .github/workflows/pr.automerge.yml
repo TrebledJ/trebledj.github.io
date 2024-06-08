@@ -70,7 +70,7 @@ jobs:
         run: |
           echo '## Diff Output' >> $GITHUB_STEP_SUMMARY
           echo '```diff' >> $GITHUB_STEP_SUMMARY
-          head -200 <.diff >> $GITHUB_STEP_SUMMARY
+          head -100 <.diff >> $GITHUB_STEP_SUMMARY
           echo '```' >> $GITHUB_STEP_SUMMARY
           exit 1
 
