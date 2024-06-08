@@ -111,4 +111,4 @@ jobs:
           path: _site/
       
       - id: upload
-        run: echo 'site-${{ github.ref_name }}' >> $GITHUB_OUTPUT
+        run: echo 'artifact=site-${{ github.ref_name }}' >> $GITHUB_OUTPUT
