@@ -1,5 +1,6 @@
 # Workflow to validate site files.
-name: Validate
+
+name: Validate Site
 
 on:
   workflow_dispatch:

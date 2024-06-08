@@ -1,3 +1,4 @@
+# Automerge Dependabot PRs.
 # Adapted from https://nicolasiensen.github.io/2022-07-23-automating-dependency-updates-with-dependabot-github-auto-merge-and-github-actions/
 
 name: Dependabot Reviewer
@@ -27,9 +28,10 @@ jobs:
           echo "- mergeable: ${{ github.event.pull_request.mergeable }}" >> $GITHUB_STEP_SUMMARY
           echo "- mergeable_state: ${{ github.event.pull_request.mergeable_state }}" >> $GITHUB_STEP_SUMMARY
 
-  sanity:
-    if: github.event.pull_request.user.login == 'dependabot[bot]'
+  is-dependabot:
+    if: github.event.pull_request.user.login != 'dependabot[bot]'
     steps:
+      - run: exit 1
 
   build:
     needs: sanity
