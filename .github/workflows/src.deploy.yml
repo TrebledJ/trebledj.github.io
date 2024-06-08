@@ -35,15 +35,44 @@ concurrency:
 
 jobs:
   build:
-    uses: ./.github/workflows/src.build.yml
-
-  push:
     needs: build
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/download-artifact@v4
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
         with:
-          name: ${{ needs.build.outputs.artifact }}
+          node-version: 20
+          cache: npm
+
+      - name: Restore 11ty Cache
+        uses: actions/cache@v4
+        with:
+          path: .cache
+          # Generate a new cache whenever packages or source files change.
+          key: ${{ runner.os }}-eleventy-${{ hashFiles('**/package-lock.json') }}-${{ hashFiles('**.[jt]s', '**.[jt]sx') }}
+          # If source files changed but packages didn't, rebuild from a prior cache.
+          restore-keys: ${{ runner.os }}-eleventy-${{ hashFiles('**/package-lock.json') }}-
+
+      - name: Restore npm Cache
+        id: cache-npm
+        uses: actions/cache@v4
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-npm-${{ hashFiles('**/package-lock.json') }}
+
+      - name: Install Dependencies
+        if: steps.cache-npm.outputs.cache-hit != 'true'
+        run: npm ci
+
+      - name: Build
+        run: |
+          echo "## Build Output" >> $GITHUB_STEP_SUMMARY
+          echo '```' >> $GITHUB_STEP_SUMMARY
+          npm run prod >> $GITHUB_STEP_SUMMARY
+          echo '```' >> $GITHUB_STEP_SUMMARY
 
       - name: Commit & Push Site Build
         uses: stefanzweifel/git-auto-commit-action@v5
