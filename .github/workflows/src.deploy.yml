@@ -1,5 +1,5 @@
 # Workflow for building and deploying an Eleventy site to a local site branch (for further workflow automation)
-name: Deploy Site
+name: Deploy
 
 on:
   # Runs on pushes targeting the default branch

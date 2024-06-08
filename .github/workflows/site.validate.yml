@@ -5,9 +5,9 @@ name: Validate Site
 on:
   workflow_dispatch:
 
-  # Run after a site build completed.
+  # Run after a site deploy completed.
   workflow_run:
-    workflows: [Build]
+    workflows: [Deploy]
     types: [completed]
     branches: [master]
 
