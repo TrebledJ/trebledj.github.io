@@ -4,16 +4,9 @@ name: Dependabot Reviewer
 
 on: pull_request_target
 # on: workflow_dispatch 
-# on:
-#   workflow_run:
-#     workflows: [Dry Run Build]
-#     branches:
-#       - 'dependabot/**'
-#     types:
-#       - completed
 
 env:
-  OLD_BUILD_FOLDER: old-build
+  MASTER_REF: master
 
 permissions:
   pull-requests: write
@@ -27,55 +20,58 @@ jobs:
         run: |
           echo "## Debug" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
+          echo "- ref: ${{ github.ref }}" >> $GITHUB_STEP_SUMMARY
           echo "- user.login: ${{ github.event.pull_request.user.login }}" >> $GITHUB_STEP_SUMMARY
           echo "- merged: ${{ github.event.pull_request.merged }}" >> $GITHUB_STEP_SUMMARY
           echo "- merged_at: ${{ github.event.pull_request.merged_at }}" >> $GITHUB_STEP_SUMMARY
           echo "- mergeable: ${{ github.event.pull_request.mergeable }}" >> $GITHUB_STEP_SUMMARY
           echo "- mergeable_state: ${{ github.event.pull_request.mergeable_state }}" >> $GITHUB_STEP_SUMMARY
 
-  pre-diff:
-    name: Pre-Diff Checkout
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout Base Site
-        uses: actions/checkout@v4
-        with:
-          ref: site
-          path: ${{ env.OLD_BUILD_FOLDER }}
-
-      - name: Sanity Check
-        run: |
-          echo "cwd: `pwd`" && echo "Workspace: $GITHUB_WORKSPACE" && ls -Al $GITHUB_WORKSPACE
+  sanity:
+    if: github.event.pull_request.user.login == 'dependabot[bot]'
 
   build:
+    needs: sanity
     uses: ./.github/workflows/build.yml
 
   diff:
     name: Diff Builds
-    needs: [pre-diff, build]
+    needs: build
     runs-on: ubuntu-latest
     steps:
       - name: Sanity Check
         run: |
           echo "cwd: $(pwd)" && echo "Workspace: $GITHUB_WORKSPACE" && ls -Al $GITHUB_WORKSPACE
-          echo "\ndiff: $(which diff)"
+          echo "diff: $(which diff)"
+
+      - name: Download Master Site
+        uses: actions/download-artifact@v4
+        with:
+          name: site-${{ env.MASTER_REF }}
+          path: master/
+
+      - name: Download PR Site
+        uses: actions/download-artifact@v4
+        with:
+          name: ${{ needs.build.outputs.artifact }}
+          path: pr/
       
       - name: Diff Folders
         id: diff
         continue-on-error: true
-        run: diff --unified --recursive ${{ env.OLD_BUILD_FOLDER }}/_site/ $GITHUB_WORKSPACE/_site/ >.diff
-      
-      - name: Epic Fail
+        run: diff --unified --recursive master/ pr/ >.diff
+
+      - name: Diff Found
         if: steps.diff.outcome != 'success'
         run: |
-          echo "## Diff Output" >> $GITHUB_STEP_SUMMARY
+          echo '## Diff Output' >> $GITHUB_STEP_SUMMARY
           echo '```diff' >> $GITHUB_STEP_SUMMARY
           cat .diff >> $GITHUB_STEP_SUMMARY
           echo '```' >> $GITHUB_STEP_SUMMARY
           exit 1
-        
 
   test:
+    needs: sanity
     uses: ./.github/workflows/test.yml
 
   review-dependabot-pr:

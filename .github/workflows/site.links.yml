@@ -13,13 +13,17 @@ on:
   schedule:
     - cron: "00 11 * * 2,5" # HKT 7PM Tuesday/Friday
 
+env:
+  REF: master
+
 jobs:
   check:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
         with:
-          ref: site
+          name: site-${{ env.REF }}
+          path: _site/
 
       # - name: Restore Lychee Cache
       #   uses: actions/cache@v3

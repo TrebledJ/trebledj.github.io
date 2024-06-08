@@ -1,0 +1,44 @@
+# Workflow to validate site files.
+name: Validate
+
+on:
+  workflow_dispatch:
+
+  # Run after a site build completed.
+  workflow_run:
+    workflows: [Build]
+    types: [completed]
+    branches: [master]
+
+env:
+  REF: master
+  
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          name: site-${{ env.REF }}
+          path: _site/
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Restore npm Cache
+        id: cache-npm
+        uses: actions/cache@v4
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-npm-${{ hashFiles('**/package-lock.json') }}
+
+      - name: Install Dependencies
+        if: steps.cache-npm.outputs.cache-hit != 'true'
+        run: npm ci
+
+      - name: Validate HTML
+        run: npm run validate-html
