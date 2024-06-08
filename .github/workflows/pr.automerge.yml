@@ -35,7 +35,7 @@ jobs:
       - run: exit 1
 
   build:
-    needs: sanity
+    needs: is-dependabot
     uses: ./.github/workflows/src.build.yml
 
   diff:
@@ -75,7 +75,7 @@ jobs:
           exit 1
 
   test:
-    needs: sanity
+    needs: is-dependabot
     uses: ./.github/workflows/src.test.yml
 
   review-dependabot-pr:
