@@ -61,11 +61,12 @@ jobs:
           echo "\ndiff: $(which diff)"
       
       - name: Diff Folders
+        id: diff
         continue-on-error: true
         run: diff --unified --recursive ${{ env.OLD_BUILD_FOLDER }}/_site/ $GITHUB_WORKSPACE/_site/ >.diff
       
       - name: Epic Fail
-        if: steps.diff-result.outcome != 'success'
+        if: steps.diff.outcome != 'success'
         run: |
           echo "## Diff Output" >> $GITHUB_STEP_SUMMARY
           echo '```diff' >> $GITHUB_STEP_SUMMARY
