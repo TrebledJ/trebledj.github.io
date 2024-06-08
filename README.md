@@ -1,8 +1,8 @@
 # trebledj.me
  
-[![Build](https://github.com/TrebledJ/trebledj.github.io/actions/workflows/deploy.yml/badge.svg)](https://github.com/TrebledJ/trebledj.github.io/actions/workflows/deploy.yml)
-[![Check Links](https://github.com/TrebledJ/trebledj.github.io/actions/workflows/links.yml/badge.svg)](https://github.com/TrebledJ/trebledj.github.io/actions/workflows/links.yml)
-[![Lint](https://github.com/TrebledJ/trebledj.github.io/actions/workflows/lint.yml/badge.svg)](https://github.com/TrebledJ/trebledj.github.io/actions/workflows/lint.yml)
+[![Build](https://github.com/TrebledJ/trebledj.github.io/actions/workflows/src.build.yml/badge.svg)](https://github.com/TrebledJ/trebledj.github.io/actions/workflows/src.build.yml)
+[![Check Links](https://github.com/TrebledJ/trebledj.github.io/actions/workflows/site.links.yml/badge.svg)](https://github.com/TrebledJ/trebledj.github.io/actions/workflows/site.links.yml)
+[![Lint](https://github.com/TrebledJ/trebledj.github.io/actions/workflows/src.lint.yml/badge.svg)](https://github.com/TrebledJ/trebledj.github.io/actions/workflows/src.lint.yml)
 
 My personal website. Visit it here: [trebledj.me](https://trebledj.me).
 
