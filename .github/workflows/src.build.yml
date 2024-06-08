@@ -104,12 +104,11 @@ jobs:
           echo '```' >> $GITHUB_STEP_SUMMARY
           npm run prod >> $GITHUB_STEP_SUMMARY
           echo '```' >> $GITHUB_STEP_SUMMARY
+      
+      - id: upload
+        run: echo 'artifact=site-${{ steps.get-ref.outputs.ref }}' >> $GITHUB_OUTPUT
 
       - uses: actions/upload-artifact@v4
         with:
-          name: site-${{ github.ref_name }}
+          name: site-${{ steps.upload.outputs.artifact }}
           path: _site/
-      
-      - id: upload
-        run: |
-          echo 'artifact=site-${{ steps.get-ref.outputs.ref }}' >> $GITHUB_OUTPUT
