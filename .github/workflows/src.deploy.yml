@@ -1,0 +1,82 @@
+# Workflow for building and deploying an Eleventy site to a local site branch (for further workflow automation)
+name: Deploy Site
+
+on:
+  # Runs on pushes targeting the default branch
+  push:
+    branches: master
+    paths:
+      - 'deploy.yml'
+      - '*.json'
+      - '_data/**'
+      - '_includes/**'
+      - 'assets/**'
+      - 'content/**'
+      - 'eleventy/**'
+      - 'pages/**'
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# Environment variables
+env:
+  DEPLOY_TO_GHPAGES: false       # Set `true` to deploy to GitHub Pages.
+
+# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+# Allow one concurrent deployment
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
+jobs:
+  build:
+    uses: ./.github/workflows/src.build.yml
+
+  push:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: ${{ needs.build.outputs.artifact }}
+
+      - name: Commit & Push Site Build
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: Build site from GitHub Actions
+          branch: site
+          create_branch: true
+
+          file_pattern: '_site/**'
+
+          commit_options: '--no-verify --signoff'
+          add_options: '-f'
+          push_options: '--force'
+
+          skip_checkout: true
+          skip_dirty_check: true
+          skip_fetch: true
+
+      - name: Upload Artifact
+        if: ${{ env.DEPLOY_TO_GHPAGES }}
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site/
+
+  deploy-ghpages:
+    if: ${{ env.DEPLOY_TO_GHPAGES }}
+    environment:
+      name: github-pages
+      # url: ${{ steps.deployment.outputs.page_url }}
+      # url: trebledj.github.io
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

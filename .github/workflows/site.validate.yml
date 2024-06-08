@@ -11,18 +11,13 @@ on:
     types: [completed]
     branches: [master]
 
-env:
-  REF: master
-  
 jobs:
   check:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/download-artifact@v4
         with:
-          name: site-${{ env.REF }}
-          path: _site/
+          ref: site
 
       - name: Setup Node
         uses: actions/setup-node@v4

@@ -19,10 +19,6 @@ on:
       - '!scripts/**'
       - '!ust/**'
 
-  # Regularly build (to keep the main site artifact alive).
-  schedule:
-    - cron: "00 10 1 * *" # HKT 6PM, first day of each month
-
   # Allows this workflow to be called from other workflows.
   workflow_call:
     outputs:
@@ -112,3 +108,4 @@ jobs:
         with:
           name: ${{ steps.upload.outputs.artifact }}
           path: _site/
+          retention-days: 1
