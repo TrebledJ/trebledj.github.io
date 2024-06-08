@@ -9,15 +9,19 @@ module.exports = function (eleventyConfig) {
     return counter;
   });
 
-  eleventyConfig.addCollection('tags', collectionApi => (
-    collectionApi.getAll().filter(p => p.page.filePathStem.match(/tags\/.+/))
-  ));
+  eleventyConfig.addCollection('tags', collectionApi => {
+    const pages = collectionApi.getAll().filter(p => p.page.filePathStem.match(/tags\/.+/));
+    // Tags are not deterministically sorted, since they're marked as the same 'date'. So let's sort dem!
+    pages.sort((p, q) => (p.page.fileSlug < q.page.fileSlug ? -1 : p.page.fileSlug > q.page.fileSlug ? 1 : 0));
+    return pages;
+  });
 
   eleventyConfig.addCollection('specialTags', collectionApi => (
     collectionApi.getAll()
       .filter(p => p.page.filePathStem.match(/tags\/.+/))
       .filter(p => p.data.special)
       .map(p => p.data.tag)
+      .sort()
   ));
 
   eleventyConfig.addCollection('postsr', collectionApi => (
