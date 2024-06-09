@@ -45,7 +45,7 @@ module.exports = function (eleventyConfig) {
     '<div class="details-collapse-bottom"><sub><a class="details-collapse-button">(collapse)</a></sub></div></div></details>'
   ));
 
-  eleventyConfig.addShortcode('table', clss => `<div class="table-container ${clss ?? ''}">`);
+  eleventyConfig.addShortcode('table', style => `<div class="table-container" style="${style ?? ''}">`);
 
   // Paired shortcode workaround: see Note [endalert Workaround].
   eleventyConfig.addShortcode('endtable', () => '</div>');
