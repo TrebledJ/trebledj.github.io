@@ -43,9 +43,9 @@ We’re provided with an encryption script `chall.py` (written in Python), along
 
 So how do we go about cracking this? Brute-force will be undoubtedly inefficient as we have $64! \approx 1.27 \times 10^{89}$ mapping combinations to try. It would take *years* before we have any progress! Also we’d need to look at results to determine if the English looks right (or automate it by checking a word list)—this would take even more time! Regardless, we need to find some other way.
 
-## Let’s Get Cracking
+## First Steps: Elimination by ASCII Range
 
-Here’s one idea: since the plaintext is an English article, this means that most (if not all) characters are in the printable ASCII range (32-127). This means that the most significant bit (MSB) of each byte *cannot* be 1. We can use this to create a **blacklist** of mappings. For example, originally we have 64 mappings for the letter `A`. After blacklisting, we may be left with, say, 16 mappings. This drastically reduces the search space.[^extended-ascii]
+Here’s one idea: since the plaintext is an English article, this means that most (if not all) characters are in the printable ASCII range (32-127). This means that the most significant bit (MSB) of each byte *cannot* be 1. We can use this to create a **blacklist** of mappings. For example, originally we have 64 possible mappings for the letter `A`. After blacklisting, we may be left with, say, 16 possible mappings. This drastically reduces the search space.[^extended-ascii]
 
 Since Base64 simply maps 8-bits to 6-bits, so 3 characters of ASCII would be translated to 4 characters of Base64.
 
@@ -62,23 +62,31 @@ def get_chars_with_mask(m):
     """Get Base64 chars which are masked with m."""
     return {c for i, c in enumerate(charset) if (i & m) == m}
 
+# List the 4 Base64 positions. We'll cycle through these positions (i.e. i % 4).
 msbs = [0b100000, 0b001000, 0b000010, 0b000000]
+
+# Get impossible characters for each position.
 subchars = [get_chars_with_mask(m) for m in msbs]
 
+# Create a blacklist for each Base64 char.
+# e.g. blacklist['A'] returns the set of chars which 'A' can NOT map to.
 blacklist = {c: set() for c in charset}
 
+# Loop through each char in the shuffled Base64 text.
 for i, c in enumerate(txt):
-    # Ignore char mappings which have 1 in corresponding msb.
+    # Ignore char mappings which have '1' in corresponding msb.
     # These can't map to a printable ASCII char.
     blacklist[c] |= subchars[i % 4]
 
+# Invert the blacklist to get a dictionary of possible mappings.
+# e.g. whitelist['A'] returns the set of chars which 'A' CAN map to.
 whitelist = {k: set(charset) - v for k, v in blacklist.items()}
 ```
 
 We can check the mappings we’ve eliminated:
 
 ```python
-print(''.join(sorted(blacklist['J']))
+print(''.join(sorted(blacklist['J'])))
 # '+/0123456789CDGHKLOPSTWXabefghijklmnopqrstuvwxyz'
 ```
 
@@ -97,8 +105,11 @@ We can do a similar thing on the low end. Again, since the smallest printable AS
 def get_inverted_chars_with_mask(m):
     return {c for i, c in enumerate(charset) if ((2**6 - 1 - i) & m) == m}
 
-subchars_not_in_ascii = [get_inverted_chars_with_mask(m) for m in in_ascii] # chars that don't have bits set in ascii.
+# chars that don't have bits set in ascii.
+subchars_not_in_ascii = [get_inverted_chars_with_mask(m) for m in in_ascii]
 ```
+
+## Frequency Analysis with Known Text
 
 Another idea comes to mind. Remember the plaintext is in English? Well, with English text, some letters appear more frequently than others. The same applies to words and sequences. 
 
@@ -120,7 +131,7 @@ V2UncmUgbm8gc3RyYW5nZXJzIHRvIGxvdmUKWW91IGtub3cgdGhlIHJ1bGVzIGFuZCBzbyBkbyBJIChk
 {% image "assets/b64-crypt-1gram.jpg", "", "dcode.fr frequency analysis for encrypted Base64." %}
 {% endimages %}
 
-<sup>Frequency analysis of plain vs. encrypted Base64.</sup>
+<sup>Frequency analysis of plain vs. encrypted Base64. Left: CNN Lite articles. Right: Encrypted challenge text.</sup>
 {.caption}
 
 From this, we can deduce that 'w' was mapped from 'G' in the original encoding (due to the gap in frequency).
@@ -132,10 +143,12 @@ One useful option is the **bigrams/n-grams** option. We can tell dcode to analys
 {% image "assets/b64-crypt-4gram.jpg", "", "dcode.fr 4-gram for encrypted Base64." %}
 {% endimages %}
 
-<sup>Frequency analysis of 4-grams in plain vs. encrypted Base64.</sup>
+<sup>Frequency analysis of 4-grams in plain vs. encrypted Base64. Left: CNN Lite articles. Right: Encrypted challenge text.</sup>
 {.caption}
 
 Observe how "YoJP0H" occurs (relatively) frequently. This corresponds to "IHRoZS", which happens to be the Base64 encoding for " the".
+
+## More Heuristics
 
 Frequency analysis is useful to group letters into buckets. But using frequency analysis alone is painful. Some guesswork is needed. Here's the complete process I went through:
 
@@ -143,7 +156,9 @@ Frequency analysis is useful to group letters into buckets. But using frequency 
     - We can make use of our earlier constraints to eliminate wrong guesses.[^byebye-constraints]
         
         ```python
-        guesses = { # Dictionary of guessed mappings.
+        # Dictionary of guessed mappings.
+        # key: shuffled Base64; value: plain Base64
+        guesses = {
             'w': 'G',       'Y': 'I',
             'o': 'H',       'c': 'B',
 
