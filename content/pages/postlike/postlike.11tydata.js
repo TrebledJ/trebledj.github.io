@@ -22,7 +22,6 @@ module.exports = {
   layout: 'layouts/post-default',
   showToc: true,
   eleventyComputed: {
-    date: getCachedPostlikeDate,
     lastContentCommit: getCachedPostlikeDate,
   },
   thumbnail_src: '~/assets/img/posts/thumbnail/default.png',

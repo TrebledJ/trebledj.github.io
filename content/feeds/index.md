@@ -2,6 +2,8 @@
 title: Feeds
 layout: layouts/page-default
 logo: rss
+sitemap:
+  ignore: true
 ---
 
 ## <i class="fas fa-square-rss me-1"></i> Feeds
