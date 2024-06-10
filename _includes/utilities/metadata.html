@@ -1,6 +1,6 @@
 <meta charset="utf-8"/>
 
-{% set isArticle = layout.includes("layouts/post-") %}
+{% set isArticle = layout.includes("layouts/post-") and title != "404" %}
 
 {% if title %}
 <meta name="__debug" content="{{title}}">

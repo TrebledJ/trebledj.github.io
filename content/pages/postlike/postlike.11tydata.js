@@ -1,15 +1,29 @@
 const { getGitCommitDate } = require('../../../eleventy/detail/git-commit-date');
 
+const dateCache = {};
+
+function getPostlikeDate(data) {
+  if (process.env.ENVIRONMENT === 'production')
+    return getGitCommitDate(data.page.inputPath, { keep: /^content/ })
+      ?? getGitCommitDate(data.page.inputPath); // Fallback to any last commit.
+  return undefined;
+}
+
+function getCachedPostlikeDate(data) {
+  if (data.page.inputPath in dateCache) {
+    return dateCache[data.page.inputPath];
+  }
+  const val = getPostlikeDate(data);
+  dateCache[data.page.inputPath] = val;
+  return val;
+}
+
 module.exports = {
   layout: 'layouts/post-default',
   showToc: true,
   eleventyComputed: {
-    lastContentCommit: data => {
-      if (process.env.ENVIRONMENT === 'production')
-        return getGitCommitDate(data.page.inputPath, { keep: /^content/ })
-          ?? getGitCommitDate(data.page.inputPath); // Fallback to any last commit.
-      return undefined;
-    },
+    date: getCachedPostlikeDate,
+    lastContentCommit: getCachedPostlikeDate,
   },
   thumbnail_src: '~/assets/img/posts/thumbnail/default.png',
   thumbnail_banner: false,
