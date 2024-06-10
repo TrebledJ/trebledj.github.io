@@ -3,21 +3,21 @@
 name: Build
 
 on:
-  push:
-    branches: master
-    paths:
-      - '**'
-      - '!.gitignore'
-      - '!*.md'
-      - '!LICENSE'
-      - '!.eslintignore'
-      - '!.eslintrc.yml'
-      - '!.github/**'
-      - '!.lycheeignore'
-      - '!.vscode/**'
-      - '!archive/**'
-      - '!scripts/**'
-      - '!ust/**'
+  # push:
+  #   branches: master
+  #   paths:
+  #     - '**'
+  #     - '!.gitignore'
+  #     - '!*.md'
+  #     - '!LICENSE'
+  #     - '!.eslintignore'
+  #     - '!.eslintrc.yml'
+  #     - '!.github/**'
+  #     - '!.lycheeignore'
+  #     - '!.vscode/**'
+  #     - '!archive/**'
+  #     - '!scripts/**'
+  #     - '!ust/**'
 
   # Allows this workflow to be called from other workflows.
   workflow_call:
