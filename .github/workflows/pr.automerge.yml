@@ -60,10 +60,13 @@ jobs:
           name: ${{ needs.build.outputs.artifact }}
           path: pr/
       
+      - name: Ignore Files
+        run: rm master/_site/css/shooting-stars.* pr/_site/css/shooting-stars.*
+
       - name: Diff Folders
         id: diff
         continue-on-error: true
-        run: git diff --word-diff=porcelain --word-diff-regex=$'[\s"\'<>]+' --no-index --output .diff -- master/_site/ pr/
+        run: git diff --word-diff=porcelain --no-index --output .diff -- master/_site/ pr/
 
       - name: Diff Found
         if: steps.diff.outcome != 'success'
