@@ -52,7 +52,9 @@ jobs:
         uses: actions/checkout@v4
         with:
           ref: site
-          path: master/
+          path: tmp/
+
+      - run: cp -r tmp/_site/ master/
 
       - name: Download PR Site
         uses: actions/download-artifact@v4
@@ -61,12 +63,13 @@ jobs:
           path: pr/
       
       - name: Ignore Files
-        run: rm master/_site/css/shooting-stars.* pr/_site/css/shooting-stars.*
+        # Ignore files which rely on compile-time RNG.
+        run: rm master/css/shooting-stars.* pr/css/shooting-stars.*
 
       - name: Diff Folders
         id: diff
         continue-on-error: true
-        run: git diff --word-diff=porcelain --no-index --output .diff -- master/_site/ pr/
+        run: git diff --word-diff=porcelain --no-index --output .diff -- master/ pr/
 
       - name: Diff Found
         if: steps.diff.outcome != 'success'
