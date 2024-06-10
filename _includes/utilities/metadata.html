@@ -1,5 +1,7 @@
 <meta charset="utf-8"/>
 
+{% set isArticle = layout.includes("layouts/post-") %}
+
 {% if title %}
 <meta name="__debug" content="{{title}}">
 {% set safeTitle = title | stripBetweenTags(['sup', 'sub']) | striptags %}
@@ -70,7 +72,7 @@
 {# OpenGraph Metadata #}
 {# See https://ogp.me/. #}
 <meta property="og:site_name" content="{{ site.title }}"/>
-{% if title %}
+{% if isArticle %}
     {% set meta_title = safeTitle %}
     <meta property="og:type" content="article"/>
 {% else %}
@@ -96,18 +98,7 @@
     <meta property="og:image" content="{{ site.url }}{{ thumbnail_src | resolveImageOutputPath(page) }}"/>
     <meta property="twitter:image" content="{{ site.url }}{{ thumbnail_src | resolveImageOutputPath(page) }}"/>
 {% endif %}
-{% if page.date %}
-    <meta property="article:published_time" content="{{ page.date | dateISO }}"/>
-{% endif %}
-{% if updated %}
-    <meta property="article:modified_time" content="{{ updated | dateISO }}"/>
-{% endif %}
-<meta property="article:author" content="{{ site.author.alias }}"/>
-{% if ogsection %}
-    <meta property="article:section" content="{{ ogsection }}"/>
-{% endif %}
-{% if tags %}
-    {% for t in tags | exclude('posts') %}
-        <meta property="article:tag" content="{{t}}"/>
-    {% endfor %}
+
+{% if isArticle %}
+    {% include "utilities/metadata-article.html" %}
 {% endif %}

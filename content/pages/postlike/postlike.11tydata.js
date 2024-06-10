@@ -6,7 +6,8 @@ module.exports = {
   eleventyComputed: {
     lastContentCommit: data => {
       if (process.env.ENVIRONMENT === 'production')
-        return getGitCommitDate(data.page.inputPath, { keep: /^content/ });
+        return getGitCommitDate(data.page.inputPath, { keep: /^content/ })
+          ?? getGitCommitDate(data.page.inputPath); // Fallback to any last commit.
       return undefined;
     },
   },
