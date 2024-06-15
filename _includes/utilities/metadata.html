@@ -97,6 +97,10 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta property="og:image" content="{{ site.url }}{{ thumbnail_src | resolveImageOutputPath(page) }}"/>
     <meta property="twitter:image" content="{{ site.url }}{{ thumbnail_src | resolveImageOutputPath(page) }}"/>
+{% else %}
+    <meta name="twitter:card" content="summary_large_image">
+    <meta property="og:image" content="{{ site.url }}/img/profile-icon-md.jpg"/>
+    <meta property="twitter:image" content="{{ site.url }}/img/profile-icon-md.jpg"/>
 {% endif %}
 
 {% if isArticle %}
