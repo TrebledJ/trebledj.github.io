@@ -170,9 +170,7 @@ It's worth mentioning that Christianity is a nuanced faith. Although we worship 
 
 But it gets murkier. Christianity itself has many branches and sub-branches (aka denominations and sub-denominations). Between branches, we disagree when it comes to emphasis on certain spiritual gifts, debatable metaphysical concepts, and other things.
 
-So just be aware that "Christianity" is an umbrella term for many many beliefs.[^by-name-christian]
-
-[^by-name-christian]: And I don't think it's fair for people to say: "Oh, I've been a Christian for a while. I did the usual things, but I didn't like it." To me, that sounds like someone who only played in a shallow kiddy pool without experiencing the exhilaration of swimming free-style. But then again life isn't fair, so I can't really complain. Who am I to judge. ¯\\\_(ツ)\_/¯ I can sympathise with heart-wrenching situations such as free-will, grudges/revenge, and pain; and my heart goes out to you, if you've ever had to experience a dark moment.
+So just be aware that "Christianity" is an umbrella term for many similar beliefs, like Elgar's Enigma Variations.
 {% enddetails %}
 
 {% details "So why Christianity?", "open" %}
