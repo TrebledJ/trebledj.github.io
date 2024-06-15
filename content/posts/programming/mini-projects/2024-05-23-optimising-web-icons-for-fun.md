@@ -134,7 +134,7 @@ What is a CDN? CDNs (Content Delivery Networks) are servers deployed all over th
 Moreover, if the file is guaranteed to *not* change (e.g. a versioned library asset), then the server can return a high browser cache duration, typically 1 year. Subsequent requests can just reuse the downloaded file.
 {% endalert %}
 
-The [original](https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css) [files](https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/webfonts/fa-solid-900.woff2) are delivered over a CDN. On the other hand, the minified files are served from Cloudflare Pages. Further, CF Pages may perform modify the URL/request/response via Page Rules or Cache Rules, and this built-in server-side processing takes a toll on the response speed.
+The [original](https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css) [files](https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/webfonts/fa-solid-900.woff2) are delivered over a CDN. On the other hand, the minified files are served from Cloudflare Pages, which aren't optimised for low-latency delivery. Further, CF Pages may modify the URL/request/response via Page Rules or Cache Rules, and this extra server-side processing takes a toll on the response speed.
 
 I benchmarked the response speed of delivery by CDN versus the site directory. The methodology is simple: collect download times from multiple points around the world, repeat this a couple times, and find the median. And we perform this for 6 different asset files.
 
