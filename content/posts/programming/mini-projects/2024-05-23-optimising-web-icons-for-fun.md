@@ -16,9 +16,9 @@ Here’s the dealio: icon webfonts are known to bundle *all* icons. This include
 
 {% image "assets/webicons/fonts-are-pretty-heavy.jpg", "w-50", "I present you the heaviest objects in the universe: Font Files." %}
 
-I should take a step back. There are generally two established ways to handle icons on the web: 1) CSS + webfonts, and 2) inline SVGs (Scalable Vector Graphics). The modern web standard recommends SVGs for most cases; but due to historical reasons, this site uses the other option. As its name suggests, SVGs scale nicely to any screen size and remove the need for font files.^[For the curious, Font Awesome wrote a solid comparison between webfonts and SVGs [*here*](https://blog.fontawesome.com/webfont-vs-svg/).]
+I should take a step back. There are generally two established ways to handle icons on the web: 1) webfonts (plus CSS), and 2) inline SVGs (Scalable Vector Graphics). As its name suggests, SVGs scale nicely to any screen size and remove the need for font files. Both have their [use cases](https://blog.fontawesome.com/webfont-vs-svg/), but the modern web recommends SVGs for general cases.
 
-Unfortunately, replacing webfonts with SVGs is not a simple *find-and-replace*. If it were, I would've included it in this analysis. After a painful struggle migrating a few icons, I decided to drop the ordeal and come back later. Didn't really feel like tuning CSS.
+Due to historical reasons, this site uses webfonts; and unfortunately, replacing webfonts with SVGs is not a simple *find-and-replace*. If it were, I would've included it in this analysis. After a painful struggle migrating a few icons, I decided to postpone migration. Didn't really feel like tuning CSS.
 
 So I turned my attention to slimming down webfonts like Garfield doing cardio. But before I explain the process, let's understand how icon webfonts work.
 
