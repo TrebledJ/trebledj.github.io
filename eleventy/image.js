@@ -173,7 +173,7 @@ module.exports = function (eleventyConfig) {
       // Hence, it's a main target for optimisations.
 
       // Return a default dummy without any processing.
-      return `<img src="/img/posts/thumbnail/default.png" class="${classes}" />`;
+      return `<img src="/img/posts/thumbnail/default.webp" class="${classes}" />`;
     }
 
     const { page } = post;

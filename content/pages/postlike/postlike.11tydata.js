@@ -24,7 +24,7 @@ module.exports = {
   eleventyComputed: {
     lastContentCommit: getCachedPostlikeDate,
   },
-  thumbnail_src: '~/assets/img/posts/thumbnail/default.png',
+  thumbnail_src: '~/assets/img/posts/thumbnail/default.webp',
   thumbnail_banner: false,
   sharable: false,
   comments: false,

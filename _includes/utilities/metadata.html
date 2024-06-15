@@ -13,14 +13,14 @@
 {% endif %}
 
 {# Title / Description #}
-{% set titleTagText %}
-{% if title %}
-    {{ safeTitle }} - {{ site.title }}
+{% set titleTagText -%}
+{%- if title -%}
+    {{- safeTitle }} - {{ site.title -}}
 {% else %}
-    {{ site.title }} - {{ site.description }}
+    {{- site.title }} - {{ site.description -}}
 {% endif %}
-{% endset %}
-<title>{{titleTagText | trim | safe}}</title>
+{%- endset %}
+<title>{{titleTagText | safe}}</title>
 
 {% if excerpt %}
     <meta name="description" content="{{ safeExcerpt }}">
@@ -73,14 +73,12 @@
 {# See https://ogp.me/. #}
 <meta property="og:site_name" content="{{ site.title }}"/>
 {% if isArticle %}
-    {% set meta_title = safeTitle %}
     <meta property="og:type" content="article"/>
 {% else %}
-    {% set meta_title = site.title %}
     <meta property="og:type" content="website"/>
 {% endif %}
-<meta property="og:title" content="{{ meta_title }}"/>
-<meta property="twitter:title" content="{{ meta_title }}"/>
+<meta property="og:title" content="{{ titleTagText | safe }}"/>
+<meta property="twitter:title" content="{{ titleTagText | safe }}"/>
 
 {% if excerpt %}
     {% set meta_desc = safeExcerpt + "\n\n" + (content | annihilate('.article-header, .post-preamble, .metadata-container, .metadata-tag-container, #toc-sidebar') | striptags | truncateWords(30)) %}
@@ -99,8 +97,8 @@
     <meta property="twitter:image" content="{{ site.url }}{{ thumbnail_src | resolveImageOutputPath(page) }}"/>
 {% else %}
     <meta name="twitter:card" content="summary_large_image">
-    <meta property="og:image" content="{{ site.url }}/img/profile-icon-md.jpg"/>
-    <meta property="twitter:image" content="{{ site.url }}/img/profile-icon-md.jpg"/>
+    <meta property="og:image" content="{{ site.url }}/img/thumbnail.webp"/>
+    <meta property="twitter:image" content="{{ site.url }}/img/thumbnail.webp"/>
 {% endif %}
 
 {% if isArticle %}
