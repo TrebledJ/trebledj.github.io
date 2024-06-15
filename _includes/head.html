@@ -21,6 +21,7 @@
             <link rel="stylesheet" href="{{asset}}" media="print"/>
         {% endfor %}
     {% endif %}
+    <style>{% getBundle "css" %}</style>
 
     {% include "utilities/async-css.html" %}
     {% include "utilities/theme-switch.html" %}

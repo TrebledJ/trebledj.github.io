@@ -1,16 +1,13 @@
+# Automerge Dependabot PRs.
 # Adapted from https://nicolasiensen.github.io/2022-07-23-automating-dependency-updates-with-dependabot-github-auto-merge-and-github-actions/
 
 name: Dependabot Reviewer
 
-# on: pull_request_target
-on: workflow_dispatch 
-# on:
-#   workflow_run:
-#     workflows: [Dry Run Build]
-#     branches:
-#       - 'dependabot/**'
-#     types:
-#       - completed
+on: pull_request_target
+# on: workflow_dispatch 
+
+env:
+  MASTER_REF: master
 
 permissions:
   pull-requests: write
@@ -24,26 +21,77 @@ jobs:
         run: |
           echo "## Debug" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
+          echo "- ref: ${{ github.ref_name }}" >> $GITHUB_STEP_SUMMARY
           echo "- user.login: ${{ github.event.pull_request.user.login }}" >> $GITHUB_STEP_SUMMARY
           echo "- merged: ${{ github.event.pull_request.merged }}" >> $GITHUB_STEP_SUMMARY
           echo "- merged_at: ${{ github.event.pull_request.merged_at }}" >> $GITHUB_STEP_SUMMARY
           echo "- mergeable: ${{ github.event.pull_request.mergeable }}" >> $GITHUB_STEP_SUMMARY
           echo "- mergeable_state: ${{ github.event.pull_request.mergeable_state }}" >> $GITHUB_STEP_SUMMARY
 
+  is-dependabot:
+    if: github.event.pull_request.user.login == 'dependabot[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - run: exit 0
+
   build:
-    uses: ./.github/workflows/build.yml
+    needs: is-dependabot
+    uses: ./.github/workflows/src.build.yml
+
+  diff:
+    name: Diff Builds
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Sanity Check
+        run: |
+          echo "cwd: $(pwd)" && echo "Workspace: $GITHUB_WORKSPACE" && ls -Al $GITHUB_WORKSPACE
+          echo "diff: $(which diff)"
+
+      - name: Download Master Site
+        uses: actions/checkout@v4
+        with:
+          ref: site
+          path: tmp/
+
+      - run: cp -r tmp/_site/ master/
+
+      - name: Download PR Site
+        uses: actions/download-artifact@v4
+        with:
+          name: ${{ needs.build.outputs.artifact }}
+          path: pr/
+      
+      - name: Ignore Files
+        # Ignore files which rely on compile-time RNG.
+        run: rm master/css/shooting-stars.* pr/css/shooting-stars.*
+
+      - name: Diff Folders
+        id: diff
+        continue-on-error: true
+        run: git diff --word-diff=porcelain --no-index --output .diff -- master/ pr/
+
+      - name: Diff Found
+        if: steps.diff.outcome != 'success'
+        run: |
+          echo '## Diff Output' >> $GITHUB_STEP_SUMMARY
+          echo '```diff' >> $GITHUB_STEP_SUMMARY
+          cat .diff | head -100 >> $GITHUB_STEP_SUMMARY
+          echo '```' >> $GITHUB_STEP_SUMMARY
+          exit 1
 
   test:
-    uses: ./.github/workflows/test.yml
+    needs: is-dependabot
+    uses: ./.github/workflows/src.test.yml
 
   review-dependabot-pr:
     runs-on: ubuntu-latest
-    needs: [build, test]
+    needs: [build, diff, test]
     # if: github.event.pull_request.user.login == 'dependabot[bot]' && github.event.pull_request.mergeable == true
     steps:
       - name: Get Dependabot Metadata
         id: dependabot-metadata
-        uses: dependabot/fetch-metadata@v2.0.0
+        uses: dependabot/fetch-metadata@v2.1.0
       - name: Enable auto-merge for Dependabot PRs
         run: gh pr merge --auto --merge "$PR_URL"
         env:
