@@ -20,7 +20,7 @@ module.exports = {
 
     eleventyExcludeFromCollections: data => (data.draft && !process.env.BUILD_DRAFTS),
   },
-  thumbnail_src: '~/assets/img/posts/thumbnail/default.png',
+  thumbnail_src: '~/assets/img/posts/thumbnail/default.webp',
   thumbnail_banner: false,
   sharable: true,
   comments: true,
