@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        
+            
+                <item>
+                    <title>Optimising Web Icons for Fun</title>
+                    <description>Ejecting unused cargo for leaner performance.</description>
+                    <pubDate>2024-05-23T00:00:00Z</pubDate>
+                    <link>https://trebledj.me/posts/optimising-web-icons-for-fun/</link>
+                    
+                        <category>programming</category>
+                    
+                        <category>web</category>
+                    
+                        <category>performance</category>
+                    
+                        <category>meta</category>
+                    
+                        <category>notes</category>
+                    
+                        <category>writeup</category>
+                    
+                </item>
+            
+        
+            
+                <item>
+                    <title>My OSCP Adventure — Lessons, Tips, and Thoughts</title>
+                    <description>Reflections on my journey tackling one of the most rigorous exams in cybersecurity.</description>
+                    <pubDate>2024-04-14T00:00:00Z</pubDate>
+                    <link>https://trebledj.me/posts/oscp/</link>
+                    
+                        <category>infosec</category>
+                    
+                        <category>experience</category>
+                    
+                        <category>reflection</category>
+                    
+                </item>
+            
+        
+            
+                <item>
+                    <title>Practical Linux Tricks for the Aspiring Hacker</title>
+                    <description>A curated list of fanciful Linux tricks I use to bolster my command-line prowess and activate Sage Mode.</description>
+                    <pubDate>2024-04-08T00:00:00Z</pubDate>
+                    <link>https://trebledj.me/posts/linux-cheatsheet/</link>
+                    
+                        <category>programming</category>
+                    
+                        <category>cheatsheet</category>
+                    
+                        <category>infosec</category>
+                    
+                        <category>learning</category>
+                    
+                        <category>notes</category>
+                    
+                </item>
+            
+        
+            
+                <item>
+                    <title>I&#39;m now a Certified Offensive Waterblower!</title>
+                    <description>Emotional penetration testing is no joke. Millions suffer each year.</description>
+                    <pubDate>2024-04-01T00:00:00Z</pubDate>
+                    <link>https://trebledj.me/posts/im-a-certified-offensive-waterblower/</link>
+                    
+                        <category>satire</category>
+                    
+                        <category>infosec</category>
+                    
+                        <category>experience</category>
+                    
+                        <category>programming</category>
+                    
+                </item>
+            
+        
+            
+                <item>
+                    <title>From Compression to Compromise: Unmasking Zip File Threats</title>
+                    <description>Deep dive into zip file attacks and mitigations (with examples!).</description>
+                    <pubDate>2024-02-15T00:00:00Z</pubDate>
+                    <link>https://trebledj.me/posts/attack-of-the-zip/</link>
+                    
+                        <category>infosec</category>
+                    
+                        <category>notes</category>
+                    
+                        <category>web</category>
+                    
+                        <category>python</category>
+                    
+                        <category>programming</category>
+                    
+                        <category>tutorial</category>
+                    
+                        <category>ctf</category>
+                    
+                        <category>linux</category>
+                    
+                        <category>windows</category>
+                    
+                </item>
+            
+        
+            
+                <item>
+                    <title>Relay</title>
+                    <description>Electronica on racing light. A variation on Remorse.</description>
+                    <pubDate>2024-01-20T00:00:00Z</pubDate>
+                    <link>https://trebledj.me/posts/relay/</link>
+                    
+                        <category>composition</category>
+                    
+                        <category>music</category>
+                    
+                        <category>electronica</category>
+                    
+                        <category>synths</category>
+                    
+                        <category>dubsy-wubsy</category>
+                    
+                        <category>modal</category>
+                    
+                        <category>faith</category>
+                    
+                </item>
+            
+        
+            
+                <item>
+                    <title>5 Wacky Insights from God&#39;s Smuggler</title>
+                    <description>Reflections on a story with an unconventional mission.</description>
+                    <pubDate>2024-01-07T00:00:00Z</pubDate>
+                    <link>https://trebledj.me/posts/wacky-insights-from-gods-smuggler/</link>
+                    
+                        <category>faith</category>
+                    
+                        <category>reading</category>
+                    
+                        <category>reflection</category>
+                    
+                        <category>notes</category>
+                    
+                </item>
+            
+        
+            
+                <item>
+                    <title>HKCERT CTF 2023 – Decompetition: Vitamin C++</title>
+                    <description>A beginner-friendly writeup to reverse-engineering C++. Years of complex shenanigans condensed!</description>
+                    <pubDate>2023-11-16T00:00:00Z</pubDate>
+                    <link>https://trebledj.me/posts/hkcert-2023-decompetition-vitamin-cpp/</link>
+                    
+                        <category>ctf</category>
+                    
+                        <category>writeup</category>
+                    
+                        <category>reverse</category>
+                    
+                        <category>cpp</category>
+                    
+                        <category>tutorial</category>
+                    
+                        <category>programming</category>
+                    
+                </item>
+            
+        
+            
+                <item>
+                    <title>Site Updates and Migration to Cloudflare Pages</title>
+                    <description>Improvements, Optimisations, and a Better Stack with Cloudflare Hosting</description>
+                    <pubDate>2023-11-09T00:00:00Z</pubDate>
+                    <link>https://trebledj.me/posts/site-migration-to-cloudflare/</link>
+                    
+                        <category>meta</category>
+                    
+                        <category>writeup</category>
+                    
+                        <category>web</category>
+                    
+                </item>
+            
+        
+            
+                <item>
+                    <title>Subtype Metaprogramming is Mostly Harmless</title>
+                    <description>Inheritance go brrrrrrrr... abusing turing-complete typesystems to write fun programs in Python.</description>
+                    <pubDate>2023-10-02T00:00:00Z</pubDate>
+                    <link>https://trebledj.me/posts/subtype-metaprogramming-is-mostly-harmless/</link>
+                    
+                        <category>programming</category>
+                    
+                        <category>ctf</category>
+                    
+                        <category>types</category>
+                    
+                        <category>python</category>
+                    
+                        <category>tutorial</category>
+                    
+                        <category>reverse</category>
+                    
+                        <category>programming-languages</category>
+                    
+                        <category>metaprogramming</category>
+                    
+                        <category>oop</category>
+                    
+                        <category>writeup</category>
+                    
+                </item>
+            
+        
+    </channel>
+</rss>

@@ -1,0 +1,599 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:base="https://trebledj.me">
+  <title>TrebledJ&#39;s Pages</title>
+  <subtitle>TrebledJ&#39;s personal blog on programming, music, and memes.</subtitle>
+  <link href="https://trebledj.me/feeds/experience.xml" rel="self"/>
+  <link href="https://trebledj.me"/>
+  <updated>2024-04-14T00:00:00Z</updated>
+  <id>https://trebledj.me</id>
+  <author>
+    <name>TrebledJ</name>
+    <email>trebledjjj@gmail.com</email>
+  </author>
+  
+    
+      
+      <entry>
+        <title>My OSCP Adventure — Lessons, Tips, and Thoughts</title>
+        <description>Reflections on my journey tackling one of the most rigorous exams in cybersecurity.</description>
+        <link href="https://trebledj.me/posts/oscp/"/>
+        <updated>2024-04-14T00:00:00Z</updated>
+        <id>https://trebledj.me/posts/oscp/</id>
+        <content xml:lang="en" type="html">&lt;p&gt;&lt;a class=&quot;lightbox-single&quot; title=&quot;OSCP badge.&quot; href=&quot;https://trebledj.me/img/posts/infosec/oscp/assets/oscp-badge-600w.webp&quot;&gt;&lt;img class=&quot;rw float-right m-1 w-45 p-2&quot; src=&quot;https://trebledj.me/img/posts/infosec/oscp/assets/oscp-badge-600w.webp&quot; loading=&quot;lazy&quot; decoding=&quot;async&quot; style=&quot;aspect-ratio: auto 600 / 600&quot; alt=&quot;OSCP badge.&quot; title=&quot;OSCP badge.&quot; srcset=&quot;https://trebledj.me/img/posts/infosec/oscp/assets/oscp-badge-256w.webp 256w, https://trebledj.me/img/posts/infosec/oscp/assets/oscp-badge-512w.webp 512w, https://trebledj.me/img/posts/infosec/oscp/assets/oscp-badge-600w.webp 600w&quot; sizes=&quot;(max-width: 256px) 256px, (max-width: 512px) 512px, 600px&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Certifications are somewhat of a big deal in the information security industry. Among the various certifications available, the Offensive Security Certified Professional (OSCP) stands out as a highly regarded entry-level credential for its demanding technical challenges and emphasis on real-world penetration testing.&lt;/p&gt;
+&lt;p&gt;Preparing for the OSCP is no easy task, and I wanted to share with the wider community some tips and lessons learnt.&lt;/p&gt;
+&lt;h2 id=&quot;enumeration-on-learning&quot; tabindex=&quot;-1&quot;&gt;&lt;a class=&quot;md-anchor&quot; href=&quot;https://trebledj.me/posts/oscp/#enumeration-on-learning&quot; aria-hidden=&quot;true&quot;&gt;&lt;/a&gt; enumeration - On Learning&lt;/h2&gt;
+&lt;p&gt;The realm of technology is vast, it’s no wonder there is a lot of literature on “learning how to learn”. This is by far one of the most important lessons for an IT/infosec career. I&#39;ve gathered some points on effective learning to feed into your subconscious.&lt;/p&gt;
+&lt;h4 id=&quot;try-harder&quot; tabindex=&quot;-1&quot;&gt;&lt;a class=&quot;md-anchor&quot; href=&quot;https://trebledj.me/posts/oscp/#try-harder&quot; aria-hidden=&quot;true&quot;&gt;&lt;/a&gt; Try Harder&lt;/h4&gt;
+&lt;p&gt;A common reply to pleas for help, &amp;quot;Try Harder&amp;quot; isn&#39;t just about blunt knowledge. Rather, it&#39;s about being &lt;a href=&quot;https://www.offsec.com/offsec/what-it-means-to-try-harder/&quot;&gt;persistent, creative, and perceptive&lt;/a&gt; in the face of challenging circumstances, be it new frontiers, time limits and unknown variables.&lt;/p&gt;
+&lt;h4 id=&quot;know-the-fundamentals&quot; tabindex=&quot;-1&quot;&gt;&lt;a class=&quot;md-anchor&quot; href=&quot;https://trebledj.me/posts/oscp/#know-the-fundamentals&quot; aria-hidden=&quot;true&quot;&gt;&lt;/a&gt; Know the Fundamentals&lt;/h4&gt;
+&lt;p&gt;A stable foundation lays the groundwork for a magnificent structure.&lt;/p&gt;
+&lt;p&gt;Running commands is fun and all, but what happens if something goes awry? A misbehaving command? Weird wonky error messages?&lt;/p&gt;
+&lt;p&gt;Not all machines are built like the textbook exercise. Often, there will be variations, ranging from the micro scale (name and IP) to the macro scale (attack paths, exploits). In these cases, it helps to understand the deeper elements at work, and save yourself from mindless flailing.&lt;/p&gt;
+&lt;p&gt;Although I entered cybersecurity with barely any networking knowledge, I found it valuable to understand concepts such as TCP/UDP, Public vs. Private IPs to better comprehend &lt;em&gt;port scanning&lt;/em&gt; and &lt;em&gt;port forwarding&lt;/em&gt;.&lt;/p&gt;
+&lt;h4 id=&quot;know-your-tools&quot; tabindex=&quot;-1&quot;&gt;&lt;a class=&quot;md-anchor&quot; href=&quot;https://trebledj.me/posts/oscp/#know-your-tools&quot; aria-hidden=&quot;true&quot;&gt;&lt;/a&gt; Know Your Tools&lt;/h4&gt;
+&lt;p&gt;A sharp arsenal can yield returns in productivity.&lt;/p&gt;
+&lt;p&gt;Over the past few months, I grew intimate with commands like &lt;code&gt;less&lt;/code&gt;, reverse search (&lt;code&gt;^r&lt;/code&gt;), and other terminal shortcuts. The beauty of these commands is their portability; if I SSH into a Linux machine, I can immediately enjoy these shortcuts.&lt;sup class=&quot;footnote-ref&quot;&gt;&lt;a href=&quot;https://trebledj.me/posts/oscp/#fn1&quot; id=&quot;fnref1&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+&lt;p&gt;For those interested in maximising productivity on the Linux terminal, I&#39;ve collected most of my command arsenal into a &lt;a href=&quot;https://trebledj.me/posts/linux-cheatsheet&quot;&gt;Linux cheatsheet&lt;/a&gt;.&lt;/p&gt;
+&lt;h4 id=&quot;engage-more-through-active-learning&quot; tabindex=&quot;-1&quot;&gt;&lt;a class=&quot;md-anchor&quot; href=&quot;https://trebledj.me/posts/oscp/#engage-more-through-active-learning&quot; aria-hidden=&quot;true&quot;&gt;&lt;/a&gt; Engage More Through Active Learning&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;Summarise portions of text.&lt;/li&gt;
+&lt;li&gt;Take notes along the way.&lt;/li&gt;
+&lt;li&gt;Ask yourself questions about the content, then answer them by googling or asking others.&lt;/li&gt;
+&lt;li&gt;Practice with the exercises and labs.&lt;/li&gt;
+&lt;li&gt;Share your knowledge with others, be it colleagues, friends, or in writing. Give yourself the opportunity to explain concepts. Not only do others get to learn, but &lt;em&gt;you&lt;/em&gt; also get to learn through teaching.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&quot;reshape-your-thinking-with-a-growth-mindset&quot; tabindex=&quot;-1&quot;&gt;&lt;a class=&quot;md-anchor&quot; href=&quot;https://trebledj.me/posts/oscp/#reshape-your-thinking-with-a-growth-mindset&quot; aria-hidden=&quot;true&quot;&gt;&lt;/a&gt; Reshape Your Thinking with a Growth Mindset&lt;/h4&gt;
+&lt;p&gt;Identify weaknesses and opportunities &lt;em&gt;for improvement&lt;/em&gt;, rather than for &lt;em&gt;comparison&lt;/em&gt;. Everyone&#39;s learning journey is different.&lt;/p&gt;
+&lt;p&gt;Instead of saying &amp;quot;&lt;em&gt;Rubbish, how am I expected to know that technique?&lt;/em&gt;&amp;quot;, ask yourself: &amp;quot;&lt;em&gt;How can I improve my methodology to ensure I don&#39;t miss this during future enumerations?&lt;/em&gt;&amp;quot;&lt;/p&gt;
+&lt;h2 id=&quot;foothold-tips-and-tricks&quot; tabindex=&quot;-1&quot;&gt;&lt;a class=&quot;md-anchor&quot; href=&quot;https://trebledj.me/posts/oscp/#foothold-tips-and-tricks&quot; aria-hidden=&quot;true&quot;&gt;&lt;/a&gt; foothold - Tips and Tricks&lt;/h2&gt;
+&lt;h3 id=&quot;before-purchasing&quot; tabindex=&quot;-1&quot;&gt;&lt;a class=&quot;md-anchor&quot; href=&quot;https://trebledj.me/posts/oscp/#before-purchasing&quot; aria-hidden=&quot;true&quot;&gt;&lt;/a&gt; Before Purchasing&lt;/h3&gt;
+&lt;h4 id=&quot;1-plan-your-3-months&quot; tabindex=&quot;-1&quot;&gt;&lt;a class=&quot;md-anchor&quot; href=&quot;https://trebledj.me/posts/oscp/#1-plan-your-3-months&quot; aria-hidden=&quot;true&quot;&gt;&lt;/a&gt; 1. Plan your 3 months.&lt;/h4&gt;
+&lt;p&gt;If you plan on doing the course bundle with 90-days lab access, make sure you find a good three months with fewer obligations.&lt;/p&gt;
+&lt;p&gt;I made the mistake of starting in December, which unfortunately for me, was packed with events I couldn&#39;t exactly weasel out of. Oh, then there was Chinese New Year in February. :D&lt;/p&gt;
+&lt;p&gt;Maybe your December is less busy or it&#39;s just that my personality demanded social relief, but understand that you&#39;ll need to balance your time down the line and account for full-time work/study and events.&lt;/p&gt;
+&lt;h4 id=&quot;2-htb-starting-point&quot; tabindex=&quot;-1&quot;&gt;&lt;a class=&quot;md-anchor&quot; href=&quot;https://trebledj.me/posts/oscp/#2-htb-starting-point&quot; aria-hidden=&quot;true&quot;&gt;&lt;/a&gt; 2. HTB Starting Point&lt;/h4&gt;
+&lt;p&gt;To those with some technical background (programming, CTFs, etc.), I recommend trying out HTB Starting Point. Although these challenges are more CTF-esque (not so real-world/OSCP-like), they strengthen your networking and Linux fundamentals, while providing practice enumerating boxes with nmap and searching for exploits. The walkthroughs also tend to be well-written and explain concepts in detail.&lt;/p&gt;
+&lt;h4 id=&quot;3-linux-networking-python-c&quot; tabindex=&quot;-1&quot;&gt;&lt;a class=&quot;md-anchor&quot; href=&quot;https://trebledj.me/posts/oscp/#3-linux-networking-python-c&quot; aria-hidden=&quot;true&quot;&gt;&lt;/a&gt; 3. Linux, Networking, Python, C&lt;/h4&gt;
+&lt;p&gt;To those with less technical background, I suggest strengthening your fundamentals. In the OSCP, you&#39;ll be running Linux commands and occasionally modifying exploits.&lt;/p&gt;
+&lt;p&gt;Familiarise yourself with the common Linux commands. How do you go to a folder? Create/move/delete a file? Edit a file? With practice, these commands will become second nature, enabling you to navigate the Linux environment efficiently.&lt;/p&gt;
+&lt;p&gt;Rudimentary networking knowledge is also useful. HTB Academy has some free modules (&lt;a href=&quot;https://academy.hackthebox.com/course/preview/introduction-to-networking&quot;&gt;Intro to Networking&lt;/a&gt;) which you can read in your spare time.&lt;/p&gt;
+&lt;p&gt;It would also be worthwhile to strengthen your programming fundamentals, especially in Python and C. Most exploits are written in Python, possibly the archaic Python 2. (You may also want to read up on differences between Python 2 and 3.) C is also common for low-level exploits.&lt;/p&gt;
+&lt;h3 id=&quot;techniques&quot; tabindex=&quot;-1&quot;&gt;&lt;a class=&quot;md-anchor&quot; href=&quot;https://trebledj.me/posts/oscp/#techniques&quot; aria-hidden=&quot;true&quot;&gt;&lt;/a&gt; Techniques&lt;/h3&gt;
+&lt;h4 id=&quot;1-enumerate-all-tcp-ports-and-snmp&quot; tabindex=&quot;-1&quot;&gt;&lt;a class=&quot;md-anchor&quot; href=&quot;https://trebledj.me/posts/oscp/#1-enumerate-all-tcp-ports-and-snmp&quot; aria-hidden=&quot;true&quot;&gt;&lt;/a&gt; 1. Enumerate all TCP ports... and SNMP.&lt;/h4&gt;
+&lt;p&gt;Enumeration is the first step towards obtaining a foothold. Missing a port can lead to hours wasted following a rabbit hole.&lt;/p&gt;
+&lt;p&gt;Make sure you enumerate &lt;strong&gt;all TCP ports&lt;/strong&gt; &lt;em&gt;plus&lt;/em&gt; &lt;strong&gt;SNMP (UDP port 161/162)&lt;/strong&gt;. Don&#39;t be quick to dismiss SNMP. It&#39;s a good hiding spot for misconfigured credentials.&lt;/p&gt;
+&lt;p&gt;Often, a full port scan will take a while. Run a fast scan first, so that you can begin enumerating web services, FTP, SMB, etc.&lt;/p&gt;
+&lt;pre class=&quot;language-sh&quot;&gt;&lt;code class=&quot;language-sh&quot;&gt;&lt;span class=&quot;token comment&quot;&gt;# By default, only the first 1000 ports are scanned.&lt;/span&gt;
+nmap &lt;span class=&quot;token parameter variable&quot;&gt;-sS&lt;/span&gt; &lt;span class=&quot;token parameter variable&quot;&gt;-T4&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;..&lt;/span&gt;.
+&lt;span class=&quot;token comment&quot;&gt;# Run a full port scan in a different tab...&lt;/span&gt;
+nmap &lt;span class=&quot;token parameter variable&quot;&gt;-sS&lt;/span&gt; &lt;span class=&quot;token parameter variable&quot;&gt;-T4&lt;/span&gt; -p- &lt;span class=&quot;token punctuation&quot;&gt;..&lt;/span&gt;.&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Some better recon tools may cover this for you.&lt;/p&gt;
+&lt;h4 id=&quot;2-save-enumeration-output&quot; tabindex=&quot;-1&quot;&gt;&lt;a class=&quot;md-anchor&quot; href=&quot;https://trebledj.me/posts/oscp/#2-save-enumeration-output&quot; aria-hidden=&quot;true&quot;&gt;&lt;/a&gt; 2. Save enumeration output.&lt;/h4&gt;
+&lt;p&gt;Do yourself a favour by saving all nmap, dirbust, PEAS output to files. Output is easily lost in the command line, either due to new command output, VM issues, or happy little accidents (oops! you accidentally pressed &lt;code&gt;^D&lt;/code&gt; and closed your terminal).&lt;/p&gt;
+&lt;p&gt;Examples:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;nmap (&lt;code&gt;-oN out.txt&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;feroxbuster (&lt;code&gt;-o out.txt&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;winPEAS (&lt;code&gt;winpeas.exe log&lt;/code&gt;, outputs to &lt;code&gt;out.txt&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;linPEAS (&lt;code&gt;linpeas.sh &amp;gt;out.txt&lt;/code&gt;).&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;I usually exfiltrate my PEAS and mimikatz output, keeping a local copy in case I need to revert the machine. (Also I just like to use &lt;code&gt;less&lt;/code&gt; to browse large files.)&lt;/p&gt;
+&lt;h3 id=&quot;tools&quot; tabindex=&quot;-1&quot;&gt;&lt;a class=&quot;md-anchor&quot; href=&quot;https://trebledj.me/posts/oscp/#tools&quot; aria-hidden=&quot;true&quot;&gt;&lt;/a&gt; Tools&lt;/h3&gt;
+&lt;h4 id=&quot;1-less-is-more&quot; tabindex=&quot;-1&quot;&gt;&lt;a class=&quot;md-anchor&quot; href=&quot;https://trebledj.me/posts/oscp/#1-less-is-more&quot; aria-hidden=&quot;true&quot;&gt;&lt;/a&gt; 1. less is more&lt;/h4&gt;
+&lt;p&gt;For browsing lengthy text such as scan output, help output, and logs, I like to use &lt;strong&gt;&lt;code&gt;less&lt;/code&gt;&lt;/strong&gt;. Less is a built-in program with neat features, such as searching and filtering with regex. Some scenarios where I use it are:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Reading &lt;code&gt;nmap&lt;/code&gt; output and jumping to a specific host.&lt;/li&gt;
+&lt;li&gt;Scrolling through PEAs output.&lt;/li&gt;
+&lt;li&gt;Running &lt;code&gt;less&lt;/code&gt;, &lt;code&gt;F&lt;/code&gt; to get a scrolling view of a running command.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;I&#39;ve included &lt;code&gt;less&lt;/code&gt; commands in my &lt;a href=&quot;https://trebledj.me/posts/linux-cheatsheet#less&quot;&gt;Linux cheatsheet&lt;/a&gt;, so that you can be fear&lt;em&gt;less&lt;/em&gt; on the command line. 🙂&lt;/p&gt;
+&lt;h4 id=&quot;2-don-t-rely-on-automated-exploitation-tools&quot; tabindex=&quot;-1&quot;&gt;&lt;a class=&quot;md-anchor&quot; href=&quot;https://trebledj.me/posts/oscp/#2-don-t-rely-on-automated-exploitation-tools&quot; aria-hidden=&quot;true&quot;&gt;&lt;/a&gt; 2. Don&#39;t rely on automated exploitation tools.&lt;/h4&gt;
+&lt;p&gt;Although Metasploit and SQLMap are great tools, avoid relying too much on them. Their usage is restricted during the exam (for good reasons). To prepare for the exam, refrain from using automated exploitation tools in the practice labs. Reach for Metasploit only if you really need it.&lt;/p&gt;
+&lt;h4 id=&quot;3-kali-vs-parrotos&quot; tabindex=&quot;-1&quot;&gt;&lt;a class=&quot;md-anchor&quot; href=&quot;https://trebledj.me/posts/oscp/#3-kali-vs-parrotos&quot; aria-hidden=&quot;true&quot;&gt;&lt;/a&gt; 3. Kali vs. ParrotOS&lt;/h4&gt;
+&lt;p&gt;If you&#39;re using a VM on a resource-constrained machine, consider using ParrotOS over Kali.&lt;/p&gt;
+&lt;p&gt;My laptop only had 8GB RAM with a poor GPU, and Kali was rather resource-intensive. Opening BurpSuite/Firefox quickly made a helicopter out of my hunk of metal.&lt;/p&gt;
+&lt;p&gt;ParrotOS consumes less resources, runs pretty fast on smaller machines, and has a helpful community. And although the PEN-200 course is designed for Kali Linux, it&#39;s not too hard to rewrite commands for ParrotOS.&lt;/p&gt;
+&lt;p&gt;This is not for the faint of heart. I would only recommend switching to ParrotOS if you&#39;re already familiar with Linux, you have the patience for environment setup, and you like birds.&lt;/p&gt;
+&lt;div class=&quot;table-container &quot;&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;th&gt;Graphical Acceleration&lt;/th&gt;
+&lt;th&gt;Min. RAM (GB)&lt;/th&gt;
+&lt;th&gt;Min. Storage Available (GB)&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href=&quot;https://www.kali.org/docs/installation/hard-disk-install/&quot;&gt;Kali&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;Required&lt;/td&gt;
+&lt;td&gt;2 (8 for Burp/Firefox)&lt;/td&gt;
+&lt;td&gt;20&lt;sup class=&quot;footnote-ref&quot;&gt;&lt;a href=&quot;https://trebledj.me/posts/oscp/#fn2&quot; id=&quot;fnref2&quot;&gt;2&lt;/a&gt;&lt;/sup&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href=&quot;https://www.parrotsec.org/download/&quot;&gt;ParrotOS&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;Not Required&lt;/td&gt;
+&lt;td&gt;1&lt;/td&gt;
+&lt;td&gt;20&lt;sup class=&quot;footnote-ref&quot;&gt;&lt;a href=&quot;https://trebledj.me/posts/oscp/#fn2&quot; id=&quot;fnref2:1&quot;&gt;2&lt;/a&gt;&lt;/sup&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+&lt;h3 id=&quot;doomsday-the-exam&quot; tabindex=&quot;-1&quot;&gt;&lt;a class=&quot;md-anchor&quot; href=&quot;https://trebledj.me/posts/oscp/#doomsday-the-exam&quot; aria-hidden=&quot;true&quot;&gt;&lt;/a&gt; Doomsday (The Exam)&lt;/h3&gt;
+&lt;h4 id=&quot;1-preparing-for-the-exam&quot; tabindex=&quot;-1&quot;&gt;&lt;a class=&quot;md-anchor&quot; href=&quot;https://trebledj.me/posts/oscp/#1-preparing-for-the-exam&quot; aria-hidden=&quot;true&quot;&gt;&lt;/a&gt; 1. Preparing for the Exam&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;Ensure you have two free days. 1 for the exam, 1 for the report.&lt;/li&gt;
+&lt;li&gt;Prepare snacks/water and a space free from distractions.&lt;/li&gt;
+&lt;li&gt;Breaks: you&#39;re allowed to take &lt;em&gt;any&lt;/em&gt; amount of breaks (just message the proctor then go). Eat, exercise, poop, nap, whatever.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&quot;2-during-the-exam&quot; tabindex=&quot;-1&quot;&gt;&lt;a class=&quot;md-anchor&quot; href=&quot;https://trebledj.me/posts/oscp/#2-during-the-exam&quot; aria-hidden=&quot;true&quot;&gt;&lt;/a&gt; 2. During the Exam&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;Get a good rest before the exam.
+&lt;a class=&quot;lightbox-single&quot; title=&quot;Go to sleepppppppp~&quot; href=&quot;https://trebledj.me/img/go-to-sleep-memes-7-1024x1024-1024w.webp&quot;&gt;&lt;img class=&quot;mb-2 rw center w-50&quot; src=&quot;https://trebledj.me/img/go-to-sleep-memes-7-1024x1024-1024w.webp&quot; loading=&quot;lazy&quot; decoding=&quot;async&quot; style=&quot;aspect-ratio: auto 1024 / 1024&quot; alt=&quot;Go to sleepppppppp~&quot; title=&quot;Go to sleepppppppp~&quot; srcset=&quot;https://trebledj.me/img/go-to-sleep-memes-7-1024x1024-256w.webp 256w, https://trebledj.me/img/go-to-sleep-memes-7-1024x1024-512w.webp 512w, https://trebledj.me/img/go-to-sleep-memes-7-1024x1024-1024w.webp 1024w&quot; sizes=&quot;(max-width: 256px) 256px, (max-width: 512px) 512px, (max-width: 1024px) 1024px, 1024px&quot; /&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Screenshot &lt;em&gt;all&lt;/em&gt; interesting commands and findings.
+&lt;ul&gt;
+&lt;li&gt;These screenshots provide necessary evidence during report writing. You’re expected to walk through your exploit chain step-by-step. It&#39;s also a good habit for real-life pentesting.&lt;/li&gt;
+&lt;li&gt;Do &lt;strong&gt;not&lt;/strong&gt; forget to screenshot your local/proof.txt. (Refer to the exam guide.)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;You&#39;re allowed unlimited use of msfvenom + msfconsole &lt;em&gt;&lt;strong&gt;for simple reverse shells&lt;/strong&gt;&lt;/em&gt;. They’re useful for generating exe&#39;s fixed to a specific port.&lt;/li&gt;
+&lt;li&gt;Don’t underestimate a good nap. Even a power nap (10-30 min) can help. You have plenty of time to work in your meals plus some naps.&lt;/li&gt;
+&lt;li&gt;If you can, bag the 10 bonus points! They increase your chances of passing. Without bonus points, 3 out of 5 &lt;a href=&quot;https://help.offsec.com/hc/en-us/articles/4412170923924-OSCP-Exam-FAQ#h_01FP8EC382T08YAJ6V8ZQXKF5F&quot;&gt;pass scenarios&lt;/a&gt; would be ruled out. (I was not willing to take that chance. And it was worth it.)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;resources&quot; tabindex=&quot;-1&quot;&gt;&lt;a class=&quot;md-anchor&quot; href=&quot;https://trebledj.me/posts/oscp/#resources&quot; aria-hidden=&quot;true&quot;&gt;&lt;/a&gt; Resources&lt;/h3&gt;
+&lt;p&gt;Useful tools and resources:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;less&lt;/code&gt; - built-in Linux tool for viewing text.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/epi052/feroxbuster&quot;&gt;feroxbuster&lt;/a&gt; - dirbusting with nicer UX.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://academy.hackthebox.com/course/preview/introduction-to-networking&quot;&gt;HackTheBox Academy: Introduction to Networking&lt;/a&gt; - reading material to get up to speed on networking basics.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;More resources you may enjoy, which I didn&#39;t use (so I don&#39;t have a well-formed opinion).&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/Tib3rius/AutoRecon&quot;&gt;autorecon&lt;/a&gt; - automated enumeration tool which combines port scanning, dirbusting, SMB, SNMP scanning, etc.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://docs.google.com/spreadsheets/u/1/d/1dwSMIAPIam0PuRBkCiDI88pU3yzrqqHkDtBngUHNCw8/htmlview?pli=1&quot;&gt;TJ Null’s list&lt;/a&gt;  - extra boxes in HackTheBox, TryHackMe, OffSec Proving Grounds, and more. The PEN-200 exercises + labs are sufficient preparation, but extra practice doesn&#39;t hurt.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;pe-personal-experience&quot; tabindex=&quot;-1&quot;&gt;&lt;a class=&quot;md-anchor&quot; href=&quot;https://trebledj.me/posts/oscp/#pe-personal-experience&quot; aria-hidden=&quot;true&quot;&gt;&lt;/a&gt; pe  - Personal Experience&lt;/h2&gt;
+&lt;p&gt;&lt;em&gt;A brief reflection of my OSCP journey.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;Four years ago, I wouldn&#39;t imagine myself learning Windows in detail. Unix systems always seemed more developer-friendly, and I had no intention of leaving that ecosystem. One year ago, I wouldn&#39;t imagine myself being able to explain Active Directory concepts — it was &lt;em&gt;that&lt;/em&gt; intimidating. But after practice, I can confidently say that I&#39;m now in a better place. 🙃&lt;/p&gt;
+&lt;p&gt;A bit about me… I come from a programming/CTF background. By some luck, I secured a job offer working as a cybersec consultant—gruelling hours, rewarding learning experiences. It wasn&#39;t easy balancing study with work; flexible work conditions helped for sure, but &lt;a href=&quot;https://trebledj.me/posts/relay/&quot;&gt;other&lt;/a&gt; &lt;a href=&quot;https://trebledj.me/posts/attack-of-the-zip/&quot;&gt;commitments&lt;/a&gt; began to creep into my schedule.&lt;/p&gt;
+&lt;p&gt;Despite that, I managed to complete 80% exercises and 4 labs (1, 2, 4, 5), nabbing the 10 bonus points before the exam. The labs were exceptionally helpful in strengthening my methodology and knowledge base, without which I probably wouldn&#39;t have passed.&lt;/p&gt;
+&lt;p&gt;Come exam time, I woke up with a refreshed mind and executed what I had rehearsed. Port scanning. Directory busting.&lt;/p&gt;
+&lt;p&gt;About an hour in, my VM suddenly froze. &amp;quot;Arghh! Not again!&amp;quot; This has been happening on-off for a while, and to this day I still don&#39;t have a fix. But I was mentally prepared; and after reenacting &amp;quot;Y U NO&amp;quot; guy for a few minutes, we were back in business. Don&#39;t you just love unexpected interruptions?&lt;/p&gt;
+&lt;p&gt;&lt;a class=&quot;lightbox-single&quot; title=&quot;VM—y u no run?! My life a-dependa on u.&quot; href=&quot;https://trebledj.me/img/posts/infosec/oscp/assets/vm-yunorun-500w.webp&quot;&gt;&lt;img class=&quot;mb-2 rw center w-60&quot; src=&quot;https://trebledj.me/img/posts/infosec/oscp/assets/vm-yunorun-500w.webp&quot; loading=&quot;lazy&quot; decoding=&quot;async&quot; style=&quot;aspect-ratio: auto 500 / 500&quot; alt=&quot;VM—y u no run?! My life a-dependa on u.&quot; title=&quot;VM—y u no run?! My life a-dependa on u.&quot; srcset=&quot;https://trebledj.me/img/posts/infosec/oscp/assets/vm-yunorun-256w.webp 256w, https://trebledj.me/img/posts/infosec/oscp/assets/vm-yunorun-500w.webp 500w&quot; sizes=&quot;(max-width: 256px) 256px, 500px&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Finding footholds were tough. There were moments when I harboured fears of failure. But I persisted. Because I had to try harder. And because I didn’t want to deal with the corporate administrative bullshit for failing and registering a second attempt.&lt;sup class=&quot;footnote-ref&quot;&gt;&lt;a href=&quot;https://trebledj.me/posts/oscp/#fn3&quot; id=&quot;fnref3&quot;&gt;3&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+&lt;p&gt;Thankfully, privilege escalation wasn&#39;t too hard on my set of machines. After gaining a foothold, it took about 15 minutes (for each machine) to escalate and obtain root. Eventually, I made it out with 3 rooted individual machines plus a local admin on the external AD computer — 70 points including bonus.&lt;/p&gt;
+&lt;p&gt;All that&#39;s left was to type the report on Obsidian, export it to PDF, submit the report, and call it a day.&lt;/p&gt;
+&lt;p&gt;By the way, if you think the OSCP is hard, you should try the Hong Kong Driving Test. Most people fail on their first try.&lt;sup class=&quot;footnote-ref&quot;&gt;&lt;a href=&quot;https://trebledj.me/posts/oscp/#fn4&quot; id=&quot;fnref4&quot;&gt;4&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+&lt;h2 id=&quot;pwned-in-closing&quot; tabindex=&quot;-1&quot;&gt;&lt;a class=&quot;md-anchor&quot; href=&quot;https://trebledj.me/posts/oscp/#pwned-in-closing&quot; aria-hidden=&quot;true&quot;&gt;&lt;/a&gt; pwned - In Closing&lt;/h2&gt;
+&lt;p&gt;Learning is a process; you don&#39;t learn by simply taking an exam. Rather, true learning comes from the preparation and the valuable lessons gained from your mistakes along the way.&lt;/p&gt;
+&lt;p&gt;Learning is not a linear path, but rather a dynamic and iterative process. It involves pushing your boundaries, exploring new ideas, and embracing challenges along the way. Exams are just milestones in the larger journey of learning. Stay curious, and keep learning!&lt;/p&gt;
+&lt;hr class=&quot;footnotes-sep&quot; /&gt;
+&lt;b&gt;Footnotes&lt;/b&gt;
+&lt;section class=&quot;footnotes&quot;&gt;
+&lt;ol class=&quot;footnotes-list&quot;&gt;
+&lt;li id=&quot;fn1&quot; class=&quot;footnote-item&quot;&gt;&lt;p&gt;Surprisingly, Windows PowerShell also uses &lt;code&gt;^r&lt;/code&gt; for reverse search. Double win! &lt;a href=&quot;https://trebledj.me/posts/oscp/#fnref1&quot; class=&quot;footnote-backref&quot;&gt;↩︎&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&quot;fn2&quot; class=&quot;footnote-item&quot;&gt;&lt;p&gt;20GB is for a &lt;em&gt;minimal&lt;/em&gt; install (e.g. no desktop). This is usually not enough. Considering common hacking tools, BloodHound, wordlists, personal notes, etc., we&#39;re looking at 50GB or more. I&#39;ve set mine to 60GB. &lt;a href=&quot;https://trebledj.me/posts/oscp/#fnref2&quot; class=&quot;footnote-backref&quot;&gt;↩︎&lt;/a&gt; &lt;a href=&quot;https://trebledj.me/posts/oscp/#fnref2:1&quot; class=&quot;footnote-backref&quot;&gt;↩︎&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&quot;fn3&quot; class=&quot;footnote-item&quot;&gt;&lt;p&gt;&amp;quot;Hi, I regret to inform you I did not pass my exam.&amp;quot; &amp;quot;Noted with thanks. If you plan on a second attempt, please reapply through the appropriate 12-step procedure.&amp;quot; Ugh, no thanks. &lt;a href=&quot;https://trebledj.me/posts/oscp/#fnref3&quot; class=&quot;footnote-backref&quot;&gt;↩︎&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&quot;fn4&quot; class=&quot;footnote-item&quot;&gt;&lt;p&gt;Surprisingly, the OSCP and the Hong Kong Driving Test are on-par on so many levels. The passing rate is low. They don&#39;t precisely reflect real-world situations, due to being overcautious. There are multiple components (written + practical). &lt;a href=&quot;https://trebledj.me/posts/oscp/#fnref4&quot; class=&quot;footnote-backref&quot;&gt;↩︎&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/section&gt;
+</content>
+        
+          <category>infosec</category>
+        
+          <category>experience</category>
+        
+          <category>reflection</category>
+        
+      </entry>
+    
+  
+    
+      
+      <entry>
+        <title>I&#39;m now a Certified Offensive Waterblower!</title>
+        <description>Emotional penetration testing is no joke. Millions suffer each year.</description>
+        <link href="https://trebledj.me/posts/im-a-certified-offensive-waterblower/"/>
+        <updated>2024-04-01T00:00:00Z</updated>
+        <id>https://trebledj.me/posts/im-a-certified-offensive-waterblower/</id>
+        <content xml:lang="en" type="html">&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;Waterblowing&lt;/em&gt; is a Cantonese slang for bullshitting or small talk. But here it mainly refers to the former.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;I&#39;m thrilled to share a major achievement in my career: I am now officially a Certified Offensive Waterblower (COW)! 🐄💧🔥&lt;/p&gt;
+&lt;p&gt;After months of rigorous training, unwavering dedication, and countless facepalms, I have successfully mastered the art of offensive waterblowing. 💪💧💨&lt;/p&gt;
+&lt;p&gt;Curious about offensive waterblowing? It&#39;s a cutting-edge technique where practitioners combine the power of blunt, no-bullshit remarks and third-degree burns to deliver roasts hot enough to cook an A5 wagyu to perfection. 🔥🥩 (Check out the &lt;a href=&quot;https://www.youtube.com/watch?v=dQw4w9WgXcQ&quot;&gt;official registration process&lt;/a&gt;!)&lt;/p&gt;
+&lt;p&gt;Here is a demonstration of practical offensive techniques out in the wild.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;“Looks like you grew some white hair. Did you recently pick up Rust?”&lt;/li&gt;
+&lt;li&gt;“The S in C stands for Secure.”&lt;/li&gt;
+&lt;li&gt;“You don’t use SQL prepared statements? What are you? A PHP dev?” 🐬&lt;/li&gt;
+&lt;li&gt;“Triangles are the most versatile shape, except when they’re in the same room as a percussionist.”&lt;/li&gt;
+&lt;li&gt;“How do you keep a violin from being stolen? Put it in a viola case.”&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;With the COW certification, I’ve honed the ability to execute penetration tests against a target’s mental state and deliver unforgiving emotional damage. By testing every insult vector, we develop the target’s emotional quotient, the EQualisation of the mind.&lt;/p&gt;
+&lt;p&gt;Professional COWs are trained in practical offensive tools, such as Burping mid-conversation, SQueaLing inappropriately, and employing Common Vituperative Exclamations (CVEs).&lt;/p&gt;
+&lt;p&gt;For instance:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;“You are old.” (CVE-1970-421337)&lt;/li&gt;
+&lt;li&gt;“You suck.” (CVE-1980-5432)&lt;/li&gt;
+&lt;li&gt;“Your country sucks.” (CVE-1984-5432)&lt;/li&gt;
+&lt;li&gt;“Your code sucks.” (CVE-2000-311299)&lt;/li&gt;
+&lt;li&gt;“You talk too much.” (CVE-2024-80420)&lt;/li&gt;
+&lt;li&gt;“Why are you so quiet?” (CVE-2024-80421)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;In latter stages, we are trained in more advanced techniques, such as deploying botnets to take over 300 million electric toothbrushes running Java, poisoning Devin with insecure code (it’s called job security), and sidechaining modern SSH libraries (so that we can be backdoored by xz-utils).&lt;/p&gt;
+&lt;p&gt;Now, you might be wondering why I embarked on this unique certification journey in offensive waterblowing. Well, as an IT professional in a world full of superfluous certificates and endless new JS runtimes, I&#39;ve made the most of my time by learning what matters most: building emotional intelligence and sipping milk tea.&lt;/p&gt;
+&lt;p&gt;With my COW certification, I aim to redefine the boundaries of professional interaction in the business world. By injecting Common Vituperative Exclamations, we can foster a more creative and resilient industry. 🔒💡&lt;/p&gt;
+&lt;hr /&gt;
+&lt;p&gt;On a historic note, although this certification was originally designated for individuals of a certain gender with a certain intellectual capacity, the Association of Bombastic Certifications Inclusion and Diversity Department has opened the floor to various groups, so that &lt;em&gt;everyone&lt;/em&gt; can now be an offensive waterblower. How nice is that! 🌐💧&lt;/p&gt;
+&lt;p&gt;Get your COW certificate today! (&lt;a href=&quot;https://www.youtube.com/watch?v=dQw4w9WgXcQ&quot;&gt;Click here to get it now!&lt;/a&gt;) Only costs $50,000 USD, your job, and a childhood. 💸🐮&lt;/p&gt;
+&lt;p&gt;/s&lt;/p&gt;
+</content>
+        
+          <category>satire</category>
+        
+          <category>infosec</category>
+        
+          <category>experience</category>
+        
+          <category>programming</category>
+        
+      </entry>
+    
+  
+    
+      
+      <entry>
+        <title>The HKUST Firebird CTF Team</title>
+        <description>Experiences and reflections journeying with the HKUST Firebird CTF Team.</description>
+        <link href="https://trebledj.me/posts/hkust-firebird-ctf-team/"/>
+        <updated>2023-05-29T00:00:00Z</updated>
+        <id>https://trebledj.me/posts/hkust-firebird-ctf-team/</id>
+        <content xml:lang="en" type="html">&lt;p&gt;&lt;a class=&quot;lightbox-single&quot; title=&quot;CTFs explained through the Dunning-Kruger effect. I&#39;m sure there are a lot more trenches.&quot; href=&quot;https://trebledj.me/img/posts/experiences/firebird/assets/ctf-dunning-kruger-2-500w.webp&quot;&gt;&lt;img class=&quot;mb-2 rw center w-65&quot; src=&quot;https://trebledj.me/img/posts/experiences/firebird/assets/ctf-dunning-kruger-2-500w.webp&quot; loading=&quot;lazy&quot; decoding=&quot;async&quot; style=&quot;aspect-ratio: auto 500 / 500&quot; alt=&quot;CTFs explained through the Dunning-Kruger effect. I&#39;m sure there are a lot more trenches.&quot; title=&quot;CTFs explained through the Dunning-Kruger effect. I&#39;m sure there are a lot more trenches.&quot; srcset=&quot;https://trebledj.me/img/posts/experiences/firebird/assets/ctf-dunning-kruger-2-256w.webp 256w, https://trebledj.me/img/posts/experiences/firebird/assets/ctf-dunning-kruger-2-500w.webp 500w&quot; sizes=&quot;(max-width: 256px) 256px, 500px&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;As an avid programmer with a passion for technology and programming, I was always intrigued by the world of cybersecurity. In my last two years of university, I was thrilled to explore this field further by joining the HKUST Firebird CTF Team. As someone with a programming background but no cybersecurity knowledge (besides rudimentary SQL injection), I was excited to develop my skills in this field.&lt;/p&gt;
+&lt;p&gt;Note that my experiences don’t speak for everyone and may not reflect the current situation of the team. With that said, let me introduce the process a bit more. The training is structured as three stages/courses, each taking place over a semester.&lt;/p&gt;
+&lt;p&gt;&lt;a class=&quot;lightbox-single&quot; title=&quot;Evolution stages of a firebird trainee.&quot; href=&quot;https://trebledj.me/img/posts/experiences/firebird/assets/firebird-stages-1000w.webp&quot;&gt;&lt;img class=&quot;mb-2 rw center w-65&quot; src=&quot;https://trebledj.me/img/posts/experiences/firebird/assets/firebird-stages-1000w.webp&quot; loading=&quot;lazy&quot; decoding=&quot;async&quot; style=&quot;aspect-ratio: auto 1000 / 500&quot; alt=&quot;Evolution stages of a firebird trainee.&quot; title=&quot;Evolution stages of a firebird trainee.&quot; srcset=&quot;https://trebledj.me/img/posts/experiences/firebird/assets/firebird-stages-256w.webp 256w, https://trebledj.me/img/posts/experiences/firebird/assets/firebird-stages-512w.webp 512w, https://trebledj.me/img/posts/experiences/firebird/assets/firebird-stages-1000w.webp 1000w&quot; sizes=&quot;(max-width: 256px) 256px, (max-width: 512px) 512px, 1000px&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&quot;torchic-the-hatchling&quot; tabindex=&quot;-1&quot;&gt;&lt;a class=&quot;md-anchor&quot; href=&quot;https://trebledj.me/posts/hkust-firebird-ctf-team/#torchic-the-hatchling&quot; aria-hidden=&quot;true&quot;&gt;&lt;/a&gt; Torchic, the Hatchling&lt;/h2&gt;
+&lt;p&gt;The first stage (COMP2633) takes place during the Fall term. The Firebird team would host a &lt;a href=&quot;https://intro.firebird.sh/&quot;&gt;beginner-friendly CTF platform&lt;/a&gt; for us to explore the basics. This platform is open to any UST student, even students not registered in COMP2633.&lt;/p&gt;
+&lt;p&gt;Each week, senior Firebird members mentor us on various categories of CTF, including binary pwn, reverse engineering, web attacks, cryptography, and forensics. In the first couple weeks, Python and Linux basics are taught, so the training assumes no prior knowledge of cybersecurity/scripting. Regardless, I found my C++, Python, and computer organisation experience helpful to better absorb concepts.&lt;/p&gt;
+&lt;p&gt;Two topics are presented each week, and include in-class exercises and homework to reinforce concepts learned. These challenges are similar to CTF challenges, which require us to find a flag. For example, we may need to use a software to reverse-engineer a binary or exploit a web vulnerability. The homework is usually more challenging than the exercises and require more time and effort.&lt;/p&gt;
+&lt;p&gt;Some challenges are easier to solve. But don&#39;t be fooled! There&#39;s more where they came from!&lt;/p&gt;
+&lt;p&gt;&lt;a class=&quot;lightbox-single&quot; title=&quot;You know, I&#39;m something of an idiot myself.&quot; href=&quot;https://trebledj.me/img/posts/experiences/firebird/assets/hacker-567w.webp&quot;&gt;&lt;img class=&quot;mb-2 rw center w-55&quot; src=&quot;https://trebledj.me/img/posts/experiences/firebird/assets/hacker-567w.webp&quot; loading=&quot;lazy&quot; decoding=&quot;async&quot; style=&quot;aspect-ratio: auto 567 / 500&quot; alt=&quot;You know, I&#39;m something of an idiot myself.&quot; title=&quot;You know, I&#39;m something of an idiot myself.&quot; srcset=&quot;https://trebledj.me/img/posts/experiences/firebird/assets/hacker-256w.webp 256w, https://trebledj.me/img/posts/experiences/firebird/assets/hacker-512w.webp 512w, https://trebledj.me/img/posts/experiences/firebird/assets/hacker-567w.webp 567w&quot; sizes=&quot;(max-width: 256px) 256px, (max-width: 512px) 512px, 567px&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;We participated in two (plus one extra) CTF competitions this term. In November, we participated in the &lt;a href=&quot;https://www.hkcert.org/event/capture-the-flag-challenge-2021&quot;&gt;HKCERT CTF competition&lt;/a&gt;, a regional event where secondary and tertiary schools from all over HK (and invited teams outside) compete to hunt for flags.&lt;/p&gt;
+&lt;p&gt;In December, some of us were selected to participate in the PwC Hackaday CTF. The format for this CTF was different, where points can be spent to buy hints. Aside from the format, the vibe was much more exhilarating too, as we get to compete in person. (The other events were held online, so they were relatively lacklustre.)&lt;/p&gt;
+&lt;p&gt;Finally, in January, we participated in an internal Firebird CTF held to assess our capabilities and select candidates to proceed to the next stage of training. These challenges were designed by Firebird seniors.&lt;/p&gt;
+&lt;p&gt;These competitions allowed us to apply our newfound skills in a competitive setting, learn from mistakes, and exchange ideas afterwards through a tradition of &lt;a href=&quot;https://trebledj.me/tags/writeup/&quot;&gt;write-ups&lt;/a&gt;.&lt;/p&gt;
+&lt;h2 id=&quot;combusken-the-fledgling&quot; tabindex=&quot;-1&quot;&gt;&lt;a class=&quot;md-anchor&quot; href=&quot;https://trebledj.me/posts/hkust-firebird-ctf-team/#combusken-the-fledgling&quot; aria-hidden=&quot;true&quot;&gt;&lt;/a&gt; Combusken, the Fledgling&lt;/h2&gt;
+&lt;p&gt;The second stage (COMP3633) takes place during the Spring term. Again, training is structured as a course, with weekly sessions and grading. There are two notable activities in this stage: 1) presentations on a CTF topic of our choice, 2) more CTFs!&lt;/p&gt;
+&lt;p&gt;The presentations allowed us specialise in a topic and learn from each other. Topics we covered range from advanced pwn techniques (e.g. heap-based attacks) to advanced cryptographic techniques (e.g. lattice-based attacks). This was a great opportunity to practice delivering a presentation, as it prepared us for the next stage (where we would be involved in &lt;em&gt;&lt;strong&gt;a lot&lt;/strong&gt;&lt;/em&gt; of presentations).&lt;/p&gt;
+&lt;p&gt;Since I was interested in reverse engineering, I presented on &lt;a href=&quot;https://github.com/TrebledJ/advanced-angr&quot;&gt;advanced angr features and tricks&lt;/a&gt;. Angr is a popular Python symbolic execution library, which is useful for reverse engineering, especially in CTF challenges.&lt;/p&gt;
+&lt;p&gt;Another key activity is the participation in more CTFs. We participated in four CTFs hosted worldwide, such as AngstromCTF, zer0ptsCTF, and TAMUCTF. In most of these CTFs, we would participate in one big team (14-16 of us together). In one CTF, we achieved 4th place—perhaps due to our superior manpower—but it was a nice feeling nonetheless. Through these competitions, we gained exposure to a wider range of challenges and take away valuable learnings for future training.&lt;/p&gt;
+&lt;h2 id=&quot;blaziken-the-firebird&quot; tabindex=&quot;-1&quot;&gt;&lt;a class=&quot;md-anchor&quot; href=&quot;https://trebledj.me/posts/hkust-firebird-ctf-team/#blaziken-the-firebird&quot; aria-hidden=&quot;true&quot;&gt;&lt;/a&gt; Blaziken, the Firebird&lt;/h2&gt;
+&lt;p&gt;In the third and final stage of Firebird&#39;s CTF training, we evolve into senior students, teaching new joiners and designing challenges for exercises, homework, and the internal CTF.&lt;/p&gt;
+&lt;p&gt;In this part of training, we learn through teaching and mentoring. Teaching not only provides us an opportunity to share our knowledge and experience, but also the opportunity to give back to the community, to reinforce our understanding of the material, and to develop soft skills.&lt;/p&gt;
+&lt;p&gt;I focused on teaching reverse engineering topics, which largely consists of disassembly, decompilation, and symbolic execution—three 2-hour presentations in total.&lt;sup class=&quot;footnote-ref&quot;&gt;&lt;a href=&quot;https://trebledj.me/posts/hkust-firebird-ctf-team/#fn1&quot; id=&quot;fnref1&quot;&gt;1&lt;/a&gt;&lt;/sup&gt; I had loads of fun designing &lt;a href=&quot;https://github.com/TrebledJ/USTSim&quot;&gt;challenges&lt;/a&gt; (especially for the internal CTF), helping out on Discord, and rick-rolling oblivious trainees.&lt;/p&gt;
+&lt;h2 id=&quot;conclusion&quot; tabindex=&quot;-1&quot;&gt;&lt;a class=&quot;md-anchor&quot; href=&quot;https://trebledj.me/posts/hkust-firebird-ctf-team/#conclusion&quot; aria-hidden=&quot;true&quot;&gt;&lt;/a&gt; Conclusion&lt;/h2&gt;
+&lt;p&gt;Overall, the HKUST Firebird CTF team is a great opportunity for students to gain hands-on experience in cybersecurity and to develop their skills and knowledge in the field. The program is structured in a way that provides a strong foundation for beginners and allows for the growth and development of more advanced students.&lt;/p&gt;
+&lt;p&gt;Through this experience, I gained practical skills and knowledge in cybersecurity. The challenges encountered and time spent designing/executing attacks strongly shaped my understanding and interest for cybersecurity. Aside from technical skills, the latter stages were also great opportunities to improve my presentation and organisation skills. All in all, this extracurricular raised my awareness on the importance of security and of having a moral/ethical mindset, and bolstered my ability to speak.&lt;/p&gt;
+&lt;p&gt;If you&#39;re interested in cybersecurity and looking for a way to gain hands-on experience, the HKUST Firebird CTF team is definitely worth considering.&lt;/p&gt;
+&lt;p&gt;I encourage those interested in cybersecurity to challenge themselves by trying out online CTFs&lt;sup class=&quot;footnote-ref&quot;&gt;&lt;a href=&quot;https://trebledj.me/posts/hkust-firebird-ctf-team/#fn2&quot; id=&quot;fnref2&quot;&gt;2&lt;/a&gt;&lt;/sup&gt; and, if you’re a UST student, take the opportunity to train with Firebird.&lt;/p&gt;
+&lt;hr class=&quot;footnotes-sep&quot; /&gt;
+&lt;b&gt;Footnotes&lt;/b&gt;
+&lt;section class=&quot;footnotes&quot;&gt;
+&lt;ol class=&quot;footnotes-list&quot;&gt;
+&lt;li id=&quot;fn1&quot; class=&quot;footnote-item&quot;&gt;&lt;p&gt;Why do I like reverse engineering? Analysing assembly can be pretty fun, and it’s also crucial when analysing performance of software systems. This is especially important in low-level environments such as embedded devices, or in general for benchmarking. Finding out how things work under the hood is one way to learn. &lt;a href=&quot;https://trebledj.me/posts/hkust-firebird-ctf-team/#fnref1&quot; class=&quot;footnote-backref&quot;&gt;↩︎&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&quot;fn2&quot; class=&quot;footnote-item&quot;&gt;&lt;p&gt;There are various platforms available online (for free!). Some are HackTheBox, TryHackMe, and VulnHub. &lt;a href=&quot;https://trebledj.me/posts/hkust-firebird-ctf-team/#fnref2&quot; class=&quot;footnote-backref&quot;&gt;↩︎&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/section&gt;
+</content>
+        
+          <category>experience</category>
+        
+          <category>ctf</category>
+        
+          <category>hkust</category>
+        
+          <category>reflection</category>
+        
+      </entry>
+    
+  
+    
+      
+      <entry>
+        <title>Smart-Tracking Tray</title>
+        <description>Enhancing wet labs with IoT.</description>
+        <link href="https://trebledj.me/posts/smart-tracking-tray/"/>
+        <updated>2023-05-23T00:00:00Z</updated>
+        <id>https://trebledj.me/posts/smart-tracking-tray/</id>
+        <content xml:lang="en" type="html">&lt;p&gt;Capstone project for my final semester at HKUST.&lt;/p&gt;
+&lt;p&gt;For my capstone project, I served as an embedded software developer at &lt;a href=&quot;https://www.wesharetechnology.com/&quot;&gt;WeShare Technology&lt;/a&gt;, programming a smart-tracking tray to track chemicals in a wet lab environment. The tray revolutionises the lab environment by automating manual processes. It collects various chemical data (weight, RFID) and interfaces with a backend service to process and analyse the data.&lt;/p&gt;
+&lt;p&gt;My role pertains to developing and improving the embedded software infrastructure. In the process, I enhanced the tray with an RTOS, a unit testing framework, and numerous software improvements.&lt;/p&gt;
+&lt;p&gt;I&#39;m grateful for this opportunity to revitalise wet labs with technology, all the while learning more about embedded systems.&lt;/p&gt;
+</content>
+        
+          <category>project</category>
+        
+          <category>iot</category>
+        
+          <category>embedded</category>
+        
+          <category>cpp</category>
+        
+          <category>esp32</category>
+        
+          <category>software-engineering</category>
+        
+          <category>experience</category>
+        
+          <category>hkust</category>
+        
+      </entry>
+    
+  
+    
+      
+      <entry>
+        <title>The HKUST Robotics Team</title>
+        <description>Experiences and reflections journeying with the HKUST Robotics Team.</description>
+        <link href="https://trebledj.me/posts/hkust-robotics-team/"/>
+        <updated>2022-09-21T00:00:00Z</updated>
+        <id>https://trebledj.me/posts/hkust-robotics-team/</id>
+        <content xml:lang="en" type="html">&lt;p&gt;&lt;a class=&quot;lightbox-single&quot; title=&quot;Bye bye CGA.&quot; href=&quot;https://trebledj.me/img/posts/experiences/robocon/assets/off-ramp-robotics-524w.webp&quot;&gt;&lt;img class=&quot;mb-2 rw center w-55&quot; src=&quot;https://trebledj.me/img/posts/experiences/robocon/assets/off-ramp-robotics-524w.webp&quot; loading=&quot;lazy&quot; decoding=&quot;async&quot; style=&quot;aspect-ratio: auto 524 / 499&quot; alt=&quot;Off-ramp meme. Did I study subjects belonging to major? Nah.&quot; title=&quot;Bye bye CGA.&quot; srcset=&quot;https://trebledj.me/img/posts/experiences/robocon/assets/off-ramp-robotics-256w.webp 256w, https://trebledj.me/img/posts/experiences/robocon/assets/off-ramp-robotics-512w.webp 512w, https://trebledj.me/img/posts/experiences/robocon/assets/off-ramp-robotics-524w.webp 524w&quot; sizes=&quot;(max-width: 256px) 256px, (max-width: 512px) 512px, 524px&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Ah Fall... the time of year when undergrads decide what activities, societies, and extra-curriculars to join.&lt;/p&gt;
+&lt;p&gt;The purpose of this post is to reflect on and share about this experience. The first several sections provide background on my journey in the team. The final section is more reflective. Hopefully the reader finds something meaningful in this jumble of words.&lt;/p&gt;
+&lt;p&gt;Please understand that the team has a culture of keeping things secret. 🤫 So I won’t delve precisely into what I worked on. Also understand that each person experiences things differently, so don’t take my writing below as representative of the entire team and experience. Things may change in the next few years, or may have already changed.&lt;/p&gt;
+&lt;h2 id=&quot;joining-the-team&quot; tabindex=&quot;-1&quot;&gt;&lt;a class=&quot;md-anchor&quot; href=&quot;https://trebledj.me/posts/hkust-robotics-team/#joining-the-team&quot; aria-hidden=&quot;true&quot;&gt;&lt;/a&gt; Joining the Team 🚪&lt;/h2&gt;
+&lt;p&gt;I joined the HKUST Robotics Team in my first year of university. In the Fall semester, the team would have a semester-long recruitment process, designed to filter candidates. Recruitment was separated into multiple stages:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Workshop + Interview&lt;/li&gt;
+&lt;li&gt;Mech/Hardware/Software Tutorials&lt;/li&gt;
+&lt;li&gt;Robot Design Contest (Internal Competition)&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&quot;the-workshop&quot; tabindex=&quot;-1&quot;&gt;&lt;a class=&quot;md-anchor&quot; href=&quot;https://trebledj.me/posts/hkust-robotics-team/#the-workshop&quot; aria-hidden=&quot;true&quot;&gt;&lt;/a&gt; The Workshop 🔨&lt;/h3&gt;
+&lt;p&gt;I found out about the team from an email about a free robotics exploration workshop. (Keyword is &lt;em&gt;free&lt;/em&gt;.) So of course I signed up. It was a fun little experience to kickstart my university life, even though I lacked robotics experience. I thought it would be a good opportunity to explore different things while in uni.&lt;/p&gt;
+&lt;p&gt;&lt;a class=&quot;lightbox-single&quot; title=&quot;Example of the chassis used.&quot; href=&quot;https://trebledj.me/img/posts/experiences/robocon/assets/chassis-example-500w.webp&quot;&gt;&lt;img class=&quot;mb-2 rw center w-35&quot; src=&quot;https://trebledj.me/img/posts/experiences/robocon/assets/chassis-example-500w.webp&quot; loading=&quot;lazy&quot; decoding=&quot;async&quot; style=&quot;aspect-ratio: auto 500 / 500&quot; alt=&quot;Example of the chassis used.&quot; title=&quot;Example of the chassis used.&quot; srcset=&quot;https://trebledj.me/img/posts/experiences/robocon/assets/chassis-example-256w.webp 256w, https://trebledj.me/img/posts/experiences/robocon/assets/chassis-example-500w.webp 500w&quot; sizes=&quot;(max-width: 256px) 256px, 500px&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;In the workshop, we were given a chassis (like the one shown above) and were asked to build and program a bot to dribble a ping-pong ball across a maze. The workshop closed with a casual interview asking about our interests.&lt;/p&gt;
+&lt;p&gt;We were asked to pick a division (or department, as some call it): mechanical, hardware (electrical), or software engineering. Having had prior programming experience and wanting to boost my skills I decided to go with the software division.&lt;/p&gt;
+&lt;h3 id=&quot;the-training&quot; tabindex=&quot;-1&quot;&gt;&lt;a class=&quot;md-anchor&quot; href=&quot;https://trebledj.me/posts/hkust-robotics-team/#the-training&quot; aria-hidden=&quot;true&quot;&gt;&lt;/a&gt; The Training ✏️&lt;/h3&gt;
+&lt;p&gt;&lt;a class=&quot;lightbox-single&quot; title=&quot;Training is tuff!&quot; href=&quot;https://trebledj.me/img/posts/experiences/robocon/assets/training-495w.webp&quot;&gt;&lt;img class=&quot;mb-2 rw center w-55&quot; src=&quot;https://trebledj.me/img/posts/experiences/robocon/assets/training-495w.webp&quot; loading=&quot;lazy&quot; decoding=&quot;async&quot; style=&quot;aspect-ratio: auto 495 / 256&quot; alt=&quot;Training is tuff!&quot; title=&quot;Training is tuff!&quot; srcset=&quot;https://trebledj.me/img/posts/experiences/robocon/assets/training-256w.webp 256w, https://trebledj.me/img/posts/experiences/robocon/assets/training-495w.webp 495w&quot; sizes=&quot;(max-width: 256px) 256px, 495px&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Next up were the tutorials. The first software tutorial was on basic programming using the C language. My prior experience with C++ helped a lot here.&lt;/p&gt;
+&lt;p&gt;The next few tutorials? Not as easy. 😕 Quite challenging, in fact. We learned about GPIO and PWM, two different ways to communicate data. We also played with sensors and servos, and touched on image processing.&lt;/p&gt;
+&lt;p&gt;There was classwork and homework assigned for each tutorial. They were quite challenging, &lt;s&gt;and I didn’t manage to complete everything&lt;/s&gt;, but overall, the exercises were fun and good for practice.&lt;/p&gt;
+&lt;h3 id=&quot;the-internal&quot; tabindex=&quot;-1&quot;&gt;&lt;a class=&quot;md-anchor&quot; href=&quot;https://trebledj.me/posts/hkust-robotics-team/#the-internal&quot; aria-hidden=&quot;true&quot;&gt;&lt;/a&gt; The Internal ⚙️&lt;/h3&gt;
+&lt;p&gt;Lastly, to top off the recruitment process, trainees would form groups to compete in an internal contest. The contest tries to combine elements from the different robotics subdivisions: Robocon (2v2 robots), ROV (underwater robotics&lt;sup class=&quot;footnote-ref&quot;&gt;&lt;a href=&quot;https://trebledj.me/posts/hkust-robotics-team/#fn1&quot; id=&quot;fnref1&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;), and Smart Car (racing). Rules are rigorous, and robots need to be carefully designed to meet the criteria and complete tasks to gain the most points.&lt;/p&gt;
+&lt;p&gt;The primary objective of the internal contest is to observe how well candidates work with others and at the same time, how well we apply the technical skills gained in the tutorial. (You may also find yourself self-learning to solve problems better.) Whether you win 1st place or not—that is secondary. Winning doesn’t guarantee you a spot in the team. Similarly, losing doesn’t guarantee you get kicked out immediately. Let this be a life lesson. :P&lt;/p&gt;
+&lt;p&gt;Unfortunately, due to the protests and temporary closure of the university, the contest was cancelled T_T and we jumped straight to peer evaluation followed by the next phase: entering subteams.&lt;/p&gt;
+&lt;h2 id=&quot;team-freshman&quot; tabindex=&quot;-1&quot;&gt;&lt;a class=&quot;md-anchor&quot; href=&quot;https://trebledj.me/posts/hkust-robotics-team/#team-freshman&quot; aria-hidden=&quot;true&quot;&gt;&lt;/a&gt; Team Freshman 🍎&lt;/h2&gt;
+&lt;p&gt;Each year, the HKUST Robotics Team participates in several competitions, with a dedicated subteam for each. At the time of joining, I had to choose between the ABU Robocon, MATE ROV, and NXP Smart Car subteams. I was persuaded to join Robocon, and well—here I am now. 😐&lt;/p&gt;
+&lt;p&gt;You would’ve thought that, after the internal contest and trainee selection, the hardest part of training would be over and we could relax after. Haha, nope! We had to prepare for the upcoming &lt;a href=&quot;https://trebledj.me/posts/robocon-2020&quot;&gt;Robocon 2020&lt;/a&gt; competition!&lt;/p&gt;
+&lt;p&gt;During the winter break, we trainees went through more rigorous training. We were introduced to the team’s development environment, libraries, and tooling.&lt;/p&gt;
+&lt;p&gt;And guess what happened during the Spring semester? Classes shifted online! There was a period when not much work was done due to reduced manpower (e.g. international members being out of HK).&lt;/p&gt;
+&lt;p&gt;I became more involved in the summer. It was during this time that I got to know the other team members much better. I also had tons of fun playing with the LCD (display screen), messing with the buzzer, fixing bugs in the libraries, and getting more practice playing with motors and sensors.&lt;/p&gt;
+&lt;p&gt;This year’s experience was, by far, a lot different from the previous years’. For one, the regional Robocon competition was postponed thrice. Also, the global competition (originally in Fiji) was moved online, so we lost the opportunity to visit the small island. :(&lt;/p&gt;
+&lt;p&gt;More reflections can be found in my &lt;a href=&quot;https://trebledj.me/posts/robocon-2020&quot;&gt;Robocon 2020 post&lt;/a&gt;.&lt;/p&gt;
+&lt;h2 id=&quot;from-small-fry-to-big-fish&quot; tabindex=&quot;-1&quot;&gt;&lt;a class=&quot;md-anchor&quot; href=&quot;https://trebledj.me/posts/hkust-robotics-team/#from-small-fry-to-big-fish&quot; aria-hidden=&quot;true&quot;&gt;&lt;/a&gt; From Small Fry to Big Fish 🐠&lt;/h2&gt;
+&lt;p&gt;In my second year of university, I had the opportunity to take on more roles in the team, from helping in the workshop to planning the internal to teaching and mentoring.&lt;/p&gt;
+&lt;p&gt;One of my major contributions during the recruitment phase was the &lt;a href=&quot;https://trebledj.me/posts/robot-design-contest-simulator&quot;&gt;RDC Simulator&lt;/a&gt;, a desktop app for juniors to program a robot on a 2D field during the internal competition.&lt;/p&gt;
+&lt;p&gt;Unlike before, this year’s recruitment (2020 Fall) was completely online. This meant we had to find online alternatives for our tutorials, exercises, and internal competition. Of all three divisions, the software division suffered the least (no surprise). The mechanical division, on the other hand, had a hard time training and assessing trainees.&lt;/p&gt;
+&lt;p&gt;Once recruitment was over, it was time to prepare for the &lt;a href=&quot;https://trebledj.me/posts/robocon-2021&quot;&gt;Robocon 2021&lt;/a&gt; competition. Fortunately, the lab was open even though courses were still online.&lt;/p&gt;
+&lt;p&gt;Mentoring is tough, but rewarding. There is the urge to stay ahead of the juniors, being able to answer their questions and deciding whether the ideas/solutions they come up are feasible and effective.&lt;/p&gt;
+&lt;p&gt;More reflections can be found in my &lt;a href=&quot;https://trebledj.me/posts/robocon-2021&quot;&gt;Robocon 2021 post&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Nowadays, my role is more passive—I monitor the team, provide training, and offer guidance.&lt;/p&gt;
+&lt;h2 id=&quot;personal-improvement-development&quot; tabindex=&quot;-1&quot;&gt;&lt;a class=&quot;md-anchor&quot; href=&quot;https://trebledj.me/posts/hkust-robotics-team/#personal-improvement-development&quot; aria-hidden=&quot;true&quot;&gt;&lt;/a&gt; Personal Improvement/Development 🚀&lt;/h2&gt;
+&lt;p&gt;In robotics and control theory, PID is one of the core elements contributing to stable motors, mechanisms, and machinery. How does a heater know when to start/stop heating? PID. How does a drone know how fast to spin its motors to hover midair? PID.&lt;/p&gt;
+&lt;p&gt;PID stands for proportional, integral, and derivative—rather mathy terms, and quite so, because that’s how PID controls are computed.&lt;/p&gt;
+&lt;p&gt;But this post is supposed to be a reflection, so why am I blabbering about PID? It’s because there is another PID I’d like to draw attention to (and to the computer geeks, no, I don’t mean Process ID :P). I’m referring to personal improvement/development, &lt;s&gt;which is something I sort of made up, so don’t be surprised if searching “PID personal development” doesn’t yield any results&lt;/s&gt;.&lt;/p&gt;
+&lt;p&gt;Through the robotics team experience, one of my biggest areas of growth is in soft skills, in particular communication and mentoring. Communicating in a group project for a course almost always seems superficial and is usually short-term.&lt;/p&gt;
+&lt;div class=&quot;alert alert-info d-flex align-items-start&quot;&gt; &lt;i class=&quot;fas fa-circle-info ms-1 me-3 mt-1 fs-4&quot; role=&quot;img&quot;&gt;&lt;/i&gt; &lt;div class=&quot;alert-content flex-fill mt-0&quot;&gt;
+&lt;p&gt;You would be forgiven to think, oh what makes it different from other team activities or group projects. In Robocon, it’s different. We’re stuck with our teammates for half a year—maybe more. There&#39;s lots of room for bondage and growth. It takes skill to decide when and how to reprimand someone, and patience to mentor.&lt;/p&gt;
+&lt;p&gt;Communication between divisions is also important. The best way to kill a team is to minimise communication. Of course, communication needs to be effective and should be followed up with action. In the end, it’s about becoming better humans in society.&lt;/p&gt;
+&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;I’ve mentioned this in some other posts, but I am quite terrible when it comes to dealing with people. I’ve learned a great deal over the past couple years, and I’m still learning—it’s a process.&lt;/p&gt;
+&lt;hr class=&quot;footnotes-sep&quot; /&gt;
+&lt;b&gt;Footnotes&lt;/b&gt;
+&lt;section class=&quot;footnotes&quot;&gt;
+&lt;ol class=&quot;footnotes-list&quot;&gt;
+&lt;li id=&quot;fn1&quot; class=&quot;footnote-item&quot;&gt;&lt;p&gt;It&#39;s hard to incorporate underwater robotics into an internal game, so they usually settle on combining the business aspects, i.e. presentations. &lt;a href=&quot;https://trebledj.me/posts/hkust-robotics-team/#fnref1&quot; class=&quot;footnote-backref&quot;&gt;↩︎&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/section&gt;
+</content>
+        
+          <category>experience</category>
+        
+          <category>robotics</category>
+        
+          <category>software-engineering</category>
+        
+          <category>hkust</category>
+        
+          <category>reflection</category>
+        
+      </entry>
+    
+  
+    
+      
+      <entry>
+        <title>Advent of Code 2021</title>
+        <description>Synopsis and reflections on solving the Advent of Code 2021 challenges through various programming languages.</description>
+        <link href="https://trebledj.me/posts/aoc-2021/"/>
+        <updated>2022-07-23T00:00:00Z</updated>
+        <id>https://trebledj.me/posts/aoc-2021/</id>
+        <content xml:lang="en" type="html">&lt;p&gt;If you&#39;re new to Advent of Code (AOC), you can &lt;a href=&quot;https://trebledj.me/tags/aoc/&quot;&gt;read more about it&lt;/a&gt; for some background info.&lt;/p&gt;
+&lt;p&gt;This was my second year completing the full set of challenges and obtaining all 50 stars. These challenges were released in December last year, but I only completed the first few challenges then and completed the rest this summer. The stress and study of the Spring term made me put off AOC until I was utterly and completely bored at work with nothing to do.&lt;/p&gt;
+&lt;p&gt;Some people like to play AOC competitively. It has a global leaderboard as well as a private leaderboard (so you can compare yourself against others in a group). For me, I rather take my time about it; figure out problems slowly without the pressure of a race.&lt;/p&gt;
+&lt;p&gt;This year&#39;s AOC story leads us diving deep underwater trying to find a key or something to kickstart Santa&#39;s sleigh. The author really put some effort into creating the wackiest of scenarios. There were also a plethora of sea animals among the challenges: from giant squids, to cute little dumbo octopi, to crabs.&lt;/p&gt;
+&lt;p&gt;I tried using Haskell and Rust. Initially, I planned to solve &lt;em&gt;every&lt;/em&gt; challenge in &lt;em&gt;both&lt;/em&gt; Haskell and Rust, but I realise this is quite annoying. And after gaining the star, I&#39;m slightly less motivated to solve it in a second language. So I opted to use Haskell &lt;em&gt;and/or&lt;/em&gt; Rust. (One challenge was solved using Python.) Perhaps some day I&#39;ll solve the challenges in both languages.&lt;/p&gt;
+&lt;p&gt;Both Haskell and Rust are modern programming languages in design. Haskell is heavy on functional programming, whereas Rust is multi-paradigm. Both are general-purpose PLs, so both have a wealth of libraries and frameworks.&lt;/p&gt;
+&lt;p&gt;I continued using Haskell Stack for compilation. It&#39;s somewhat inefficient. The way I set up my project, I listed each day as a separate executable. This way I could do something like &lt;code&gt;stack run d01&lt;/code&gt;, and it would run my code for the challenges on the first day. Previously, due to some issue with its dependencies, Stack will compile &lt;em&gt;&lt;strong&gt;all&lt;/strong&gt;&lt;/em&gt; executables and modules within the project... and. that. is super. annoying. 🤮 Since then, I&#39;ve tweaked the module and project setup for faster compile times. Anyhow, I continue using Stack as its dependency resolution is good, and I could extend my code with unit testing or benchmarking if I&#39;m up for it in the future.&lt;/p&gt;
+&lt;p&gt;Several problems lent themselves well to functional programming, especially the parsing ones (Day 10, Day 16). I tried learning the &lt;a href=&quot;https://wiki.haskell.org/Monad/ST&quot;&gt;&lt;code&gt;ST&lt;/code&gt; monad&lt;/a&gt; (which is how Haskell magically jumps between the immutable and mutable worlds) and tried applying it for Day 25. The functions (&lt;code&gt;writeArray&lt;/code&gt;, &lt;code&gt;newSTRef&lt;/code&gt;, &lt;code&gt;writeSTRef&lt;/code&gt;) were verbose, and didn&#39;t have the same inherent beauty of &lt;code&gt;array[i] = 0&lt;/code&gt; in imperative languages. But from an academic perspective, it was interesting to read about &lt;code&gt;ST&lt;/code&gt; and how Haskell bridged the gap between pure functions and state mutations.&lt;/p&gt;
+&lt;p&gt;In last year&#39;s AOC, I tried solving everything with Haskell, but was suuuper annoyed with simulation challenges. These were challenges asking us to do stuff like: &amp;quot;&lt;em&gt;oh, please simulate this 1,000x1,000 grid for 1,000,000 steps with Conway&#39;s game of life&lt;/em&gt;&amp;quot;. With a purely functional &lt;abbr data-bs-placement=&quot;top&quot; data-bs-toggle=&quot;tooltip&quot; title=&quot;programming language&quot;&gt;PL&lt;/abbr&gt; like Haskell, this isn&#39;t easy. Taking a functional approach is extremely costly, as you would be building entirely new grids each step. Haskell &lt;em&gt;does&lt;/em&gt; have imperative programming and mutability (via monad magic)... but it&#39;s not Haskell&#39;s strong suit, and coding-wise, you need to jump through so many mental hoops to get it working properly. And it wasn&#39;t exactly beginner-friendly.&lt;/p&gt;
+&lt;p&gt;&lt;a class=&quot;lightbox-single&quot; title=&quot;Ooh~ mutations! Scawy!&quot; href=&quot;https://trebledj.me/img/posts/experiences/aoc/assets/haskell-mutations-540w.webp&quot;&gt;&lt;img class=&quot;mb-2 rw center w-55&quot; src=&quot;https://trebledj.me/img/posts/experiences/aoc/assets/haskell-mutations-540w.webp&quot; loading=&quot;lazy&quot; decoding=&quot;async&quot; style=&quot;aspect-ratio: auto 540 / 499&quot; alt=&quot;Patrick tries to scare Squidward with x equals x plus 1. Stop it Patrick, you&#39;ll scare him!&quot; title=&quot;Ooh~ mutations! Scawy!&quot; srcset=&quot;https://trebledj.me/img/posts/experiences/aoc/assets/haskell-mutations-256w.webp 256w, https://trebledj.me/img/posts/experiences/aoc/assets/haskell-mutations-512w.webp 512w, https://trebledj.me/img/posts/experiences/aoc/assets/haskell-mutations-540w.webp 540w&quot; sizes=&quot;(max-width: 256px) 256px, (max-width: 512px) 512px, 540px&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;So this year, I decided to use Rust for most of the challenges where mutability is essential to the algorithm. Rust seems to be emerging in industry, has solid tooling, and a growing community; I think it&#39;s more than enough reason to try learning it through AOC.&lt;/p&gt;
+&lt;p&gt;Rust&#39;s package manager, &lt;code&gt;cargo&lt;/code&gt;, was fast. The documentation, Rust Book, was extremely helpful and cleanly edited. I ran into some issues where adding a &lt;code&gt;println!&lt;/code&gt; caused the compiled binary to not run (OS error, could not run executable?). But this only happened on my work desktop. Probably a security thing.&lt;/p&gt;
+&lt;p&gt;Also, all the hype I see about Rust&#39;s error messages is completely justified. They really did put a lot of effort into explaining the nuances of the Rust compiler. And they have pretty colours as well. 😱 On a couple of occasions, the error messages don&#39;t help at all (e.g. adding &lt;code&gt;dyn&lt;/code&gt; to an &lt;code&gt;impl&lt;/code&gt; trait in a function type?); but usually there is some blog post explaining and providing a proper solution to the problem.&lt;/p&gt;
+&lt;p&gt;Overall, this year&#39;s AOC was a fun experience and the &lt;em&gt;EUREKA&lt;/em&gt; moments were definitely worth it. It was nice having different programming languages available to use, as some PLs had more flexible approaches to some problems (e.g. solving Day 14 using Haskell&#39;s parser combinators), some had built-in features/design that made it easier to solve challenges (e.g. mutability in Day 25 with Rust), and some had more familiar libraries (e.g. z3 in Python for Day 24). If anything, this strengthens my belief that diversifying across PLs is a productive effort.&lt;/p&gt;
+&lt;p&gt;My solutions for this year have been uploaded &lt;a href=&quot;https://github.com/TrebledJ/aoc/tree/master/2021&quot;&gt;online&lt;/a&gt;. But if you&#39;re interested in programming and problem solving, you should definitely &lt;a href=&quot;https://adventofcode.com/&quot;&gt;give AOC a try&lt;/a&gt; first before peeking at my solutions! :P&lt;/p&gt;
+</content>
+        
+          <category>experience</category>
+        
+          <category>aoc</category>
+        
+          <category>haskell</category>
+        
+          <category>rust</category>
+        
+          <category>python</category>
+        
+          <category>reflection</category>
+        
+      </entry>
+    
+  
+    
+      
+      <entry>
+        <title>ABU Robocon 2021</title>
+        <description>Reflections on participating in my second Robocon competition. Working with people is tough but sometimes rewarding.</description>
+        <link href="https://trebledj.me/posts/robocon-2021/"/>
+        <updated>2021-06-20T00:00:00Z</updated>
+        <id>https://trebledj.me/posts/robocon-2021/</id>
+        <content xml:lang="en" type="html">&lt;h3 id=&quot;synopsis&quot; tabindex=&quot;-1&quot;&gt;&lt;a class=&quot;md-anchor&quot; href=&quot;https://trebledj.me/posts/robocon-2021/#synopsis&quot; aria-hidden=&quot;true&quot;&gt;&lt;/a&gt; Synopsis&lt;/h3&gt;
+&lt;p&gt;ABU Robocon 2021 was originally scheduled at Jimo, China and the game was based on the traditional game of East Asian countries &lt;a href=&quot;https://en.wikipedia.org/wiki/Pitch-pot&quot;&gt;pitch-pot&lt;/a&gt; (投壺), or throwing arrows into a pot. In this game, each team designs two robots. The Throwing Robot (TR) can pick up arrows and throw them into the five pots located on the field, but is restricted to moving along the outer area of the field. The Defence Robot (DR), in addition to throwing arrows from the outer area, can navigate through both the outer and inner area of the field, rotating pots, blocking throwing attempts of the opponent, or handing leftover arrows on the field to the first robot. Teams score points based on the number of arrows thrown into each pot; but if a team scored two arrows in each of their five pots, they achieve &lt;em&gt;Great Victory&lt;/em&gt; which immediately ends the game.&lt;/p&gt;
+&lt;p&gt;&lt;a class=&quot;lightbox-single&quot; title=&quot;Image of the Robocon 2021 game field.&quot; href=&quot;https://trebledj.me/img/posts/experiences/robocon/assets/robocon-2021-field-800w.webp&quot;&gt;&lt;img class=&quot;mb-2 rw center w-65&quot; src=&quot;https://trebledj.me/img/posts/experiences/robocon/assets/robocon-2021-field-800w.webp&quot; loading=&quot;lazy&quot; decoding=&quot;async&quot; style=&quot;aspect-ratio: auto 800 / 514&quot; alt=&quot;Image of the Robocon 2021 game field.&quot; title=&quot;Image of the Robocon 2021 game field.&quot; srcset=&quot;https://trebledj.me/img/posts/experiences/robocon/assets/robocon-2021-field-256w.webp 256w, https://trebledj.me/img/posts/experiences/robocon/assets/robocon-2021-field-512w.webp 512w, https://trebledj.me/img/posts/experiences/robocon/assets/robocon-2021-field-800w.webp 800w&quot; sizes=&quot;(max-width: 256px) 256px, (max-width: 512px) 512px, 800px&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;The above image shows the Robocon 2021 game field. Each team owns half of the field.&lt;/p&gt;
+&lt;h3 id=&quot;experience&quot; tabindex=&quot;-1&quot;&gt;&lt;a class=&quot;md-anchor&quot; href=&quot;https://trebledj.me/posts/robocon-2021/#experience&quot; aria-hidden=&quot;true&quot;&gt;&lt;/a&gt; Experience&lt;/h3&gt;
+&lt;p&gt;Unlike &lt;a href=&quot;https://trebledj.me/posts/robocon-2020&quot;&gt;last year&#39;s Robocon&lt;/a&gt;, this year&#39;s game is more competitive and dynamic. Teams can block the opponent&#39;s arrows and spin the tables in the middle, denying the opponent points.&lt;/p&gt;
+&lt;p&gt;Having gained one year of experience, last year&#39;s juniors (me included) have been promoted to seniors. We&#39;ve also recruited a new set of juniors interested in the HKUST Robotics Team experience. Each year, HKUST Robocon deploys two teams: &amp;quot;Fiery Dragon&amp;quot; and &amp;quot;War Dragon&amp;quot;. I joined the Fiery Dragon team again.&lt;/p&gt;
+&lt;p&gt;This year&#39;s game was held face-to-face with audience bleachers, seats for sponsors, etc. The entire atmosphere was quite competitive and heated (in a fun way), unlike last year.&lt;/p&gt;
+&lt;h4 id=&quot;team-management&quot; tabindex=&quot;-1&quot;&gt;&lt;a class=&quot;md-anchor&quot; href=&quot;https://trebledj.me/posts/robocon-2021/#team-management&quot; aria-hidden=&quot;true&quot;&gt;&lt;/a&gt; Team Management&lt;/h4&gt;
+&lt;p&gt;The most common leadership style I&#39;ve observed in Robocon history is to appoint one leader and have him/her manage the entire team—although with some delegation, e.g. letting hardware seniors manage hardware juniors at a closer level. However, this style did not work for our team as our seniors had rather high expectations of leadership.&lt;/p&gt;
+&lt;p&gt;Instead of a single leader, we distributed our leadership among the five seniors, each taking on roles according to their strengths. Some were better regarding mechanical matters (e.g. sourcing, design) and took care of the mechanical division. One had a clearer vision and goals regarding the software aspect, and oversaw the software juniors. Another was better at public speaking and handled interviews from local media. I was better at note-taking and was more organised—well, only in some aspects—so I organised some meetings, took notes during meetings, and made announcements to the team WhatsApp group.&lt;/p&gt;
+&lt;p&gt;All seniors had some juniors to mentor. But mentoring is a struggle. Even with a clear list of tasks to complete, I sometimes need to push my juniors to complete their responsibilities.&lt;/p&gt;
+&lt;p&gt;I am not the best when it comes to dealing with people. There are many different characteristics a person might have. They might be loud. Full of ideas. Extremely enthusiastic. They might be obstinate, perhaps a bit stubborn.  They might be quiet. Soft-spoken. They might dislike criticism. Some might not budge until told to do so. To work effectively, we need to keep these characteristics in mind and sometimes adjust the way we speak. To me, this is a very taxing mental process, but I think it gets things done more effectively.&lt;/p&gt;
+&lt;p&gt;Tensions occasionally spark among certain team members that have this... magnetic repulsion against each other. One member would disagree with another member&#39;s modus operandi. If the latter member is resistant to change, then be prepared for more friction and pent-up frustration. It helps to talk with them, to mediate between arguments.&lt;/p&gt;
+&lt;p&gt;Although the notion is slightly cynical, maintaining good mental health among teammates goes a long way. Put another way, caring for others is important. Since we are all students, we all face the pressures of HKUST&#39;s culture, the pressure of assessments and exams, pressure from family, etc. Again, I am not a people person, so it was tough learning how to converse and say the right things—I&#39;m still learning as I write.&lt;/p&gt;
+&lt;h4 id=&quot;technical-side&quot; tabindex=&quot;-1&quot;&gt;&lt;a class=&quot;md-anchor&quot; href=&quot;https://trebledj.me/posts/robocon-2021/#technical-side&quot; aria-hidden=&quot;true&quot;&gt;&lt;/a&gt; Technical Side&lt;/h4&gt;
+&lt;p&gt;More learning. Yayyy. We tested some new interesting sensors and slowly moved R&amp;amp;D projects along. When it comes to coding the robot, initially, us software seniors did most of the heavy lifting, guiding juniors along the way. Towards the end, we gave juniors more responsibility in adding features and testing new mechanisms.&lt;/p&gt;
+&lt;p&gt;Since this year&#39;s game is a lot more dynamic, we need to be open-minded about our opponents&#39; strategies and keep our strategy flexible as well. This year I worked on the Defence Robot (DR). This was one of the keys to our flexibility in the competition. (Another key was our dedicated gamefield members.)&lt;/p&gt;
+&lt;p&gt;&lt;a class=&quot;lightbox-single&quot; title=&quot;Annotated photo of HKUST Fiery Dragon&#39;s Robocon 2021 Defence Robot&quot; href=&quot;https://trebledj.me/img/posts/experiences/robocon/assets/2021-dr-annotated-2000w.webp&quot;&gt;&lt;img class=&quot;mb-2 rw center w-65&quot; src=&quot;https://trebledj.me/img/posts/experiences/robocon/assets/2021-dr-annotated-2000w.webp&quot; loading=&quot;lazy&quot; decoding=&quot;async&quot; style=&quot;aspect-ratio: auto 2000 / 1500&quot; alt=&quot;Annotated photo of HKUST Fiery Dragon&#39;s Robocon 2021 Defence Robot&quot; title=&quot;Annotated photo of HKUST Fiery Dragon&#39;s Robocon 2021 Defence Robot&quot; srcset=&quot;https://trebledj.me/img/posts/experiences/robocon/assets/2021-dr-annotated-256w.webp 256w, https://trebledj.me/img/posts/experiences/robocon/assets/2021-dr-annotated-512w.webp 512w, https://trebledj.me/img/posts/experiences/robocon/assets/2021-dr-annotated-1024w.webp 1024w, https://trebledj.me/img/posts/experiences/robocon/assets/2021-dr-annotated-2000w.webp 2000w&quot; sizes=&quot;(max-width: 256px) 256px, (max-width: 512px) 512px, (max-width: 1024px) 1024px, 2000px&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;In the picture above, the DR is outfitted with three main weapons:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;A claw to latch onto the handles of a spinnable table. This allowed for precise control of the table&#39;s angle.
+&lt;ul&gt;
+&lt;li&gt;We didn&#39;t end up using this too much, since latching on and off takes quite a bit of time.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;A bumper to smash the table handles to quickly spin it. Shock-resistant pads were added on the sides to soften blows from the left/right so that the robot doesn&#39;t tilt.&lt;/li&gt;
+&lt;li&gt;A &amp;quot;choppy&amp;quot; mechanism for slicing and dicing incoming opponent arrows.
+&lt;ul&gt;
+&lt;li&gt;The idea is to knock opponent arrows out of their trajectory in a &lt;strong&gt;horizontal chopping motion&lt;/strong&gt;.&lt;/li&gt;
+&lt;li&gt;We also rarely used this mechanism, since we realised it wasn&#39;t too effective. And also, using this mechanism means we need to allocate one arrow from our supply of 20. The benefits did not exceed the costs.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;So in the end, we mostly relied on our DR driver&#39;s skill and not on the complicated mechanisms. However, besides the driver&#39;s skill, having a good design was necessary. The robot needed to maintain a low centre of gravity so that it was less susceptible to tilting. Tilting would cause at least one wheel to be lifted off the ground, and the driver would need to wait for the robot to &amp;quot;untilt&amp;quot; to continue driving effectively. So tilting was a big no-no.&lt;/p&gt;
+&lt;p&gt;To an extent, &lt;strong&gt;the workload of a software member depends on the robot design of mechanical and soldering of hardware divisions&lt;/strong&gt;. A poor joint design may lead to ineffective fixes via software. Poorly soldered boards or power management may lead to power cuts or shortages in the robot. Indeed, technical skills of members are important, but to alleviate the issue mentioned, proper communication and a clear vision is also required for a software member. Don&#39;t sit around when you see a confusing pin wiring configuration or loose panel. Suggest changes. Discuss ideas.&lt;/p&gt;
+&lt;p&gt;In last year&#39;s game, we relied more heavily on automation, since the situation was mostly static (placing balls in the same place), plus all the paths were the same. This year, with a dynamic game, we relied on more manual control. And this meant more practice and sweating for gamefield members.&lt;/p&gt;
+&lt;h3 id=&quot;concluding-remarks&quot; tabindex=&quot;-1&quot;&gt;&lt;a class=&quot;md-anchor&quot; href=&quot;https://trebledj.me/posts/robocon-2021/#concluding-remarks&quot; aria-hidden=&quot;true&quot;&gt;&lt;/a&gt; Concluding Remarks&lt;/h3&gt;
+&lt;p&gt;Through the dedication, hard work, and intense training of our team, we managed to obtain 1st place in the competition. (In fact, we tied with one of CUHK&#39;s teams... in a... somewhat controversial finale.)&lt;/p&gt;
+&lt;p&gt;In my &lt;a href=&quot;https://trebledj.me/posts/robocon-2020&quot;&gt;Robocon 2020 reflection&lt;/a&gt;, I mentioned experiencing the team gestalt, of how a united team is greater than the sum of the individuals comprising it. This year, I had the rare opportunity in maintaining and nurturing the gestalt, or in other words, the team spirit. This doesn&#39;t mean that only seniors can nurture the team spirit. Everyone has a part in it, and it can be shown through various means (dedication, organisation, etc.).&lt;/p&gt;
+&lt;p&gt;Looking back I am grateful for the experience and opportunity of learning soft skills and management skills from the HKUST Robocon team. There were some things I might have done differently, such as talking with other teammates more in order to understand their position better and to care for them better. But working with people is tough, and can be beyond annoying &amp;gt;_&amp;lt;. It requires a lot of patience, one that I hope to steadily improve.&lt;/p&gt;
+&lt;h3 id=&quot;the-ultimate-defence-robot&quot; tabindex=&quot;-1&quot;&gt;&lt;a class=&quot;md-anchor&quot; href=&quot;https://trebledj.me/posts/robocon-2021/#the-ultimate-defence-robot&quot; aria-hidden=&quot;true&quot;&gt;&lt;/a&gt; The Ultimate Defence Robot&lt;/h3&gt;
+&lt;p&gt;As I was proofreading this piece of writing, I realised I haven&#39;t come up with any good memes. Suddenly, I received a vision for the ultimate defence robot. I propose the following blueprint:&lt;/p&gt;
+&lt;p&gt;&lt;a class=&quot;lightbox-single&quot; title=&quot;The ultimate defence robot!&quot; href=&quot;https://trebledj.me/img/posts/experiences/robocon/assets/ultimate-robot-960w.webp&quot;&gt;&lt;img class=&quot;mb-2 rw center w-90&quot; src=&quot;https://trebledj.me/img/posts/experiences/robocon/assets/ultimate-robot-960w.webp&quot; loading=&quot;lazy&quot; decoding=&quot;async&quot; style=&quot;aspect-ratio: auto 960 / 640&quot; alt=&quot;The ultimate defence robot!&quot; title=&quot;The ultimate defence robot!&quot; srcset=&quot;https://trebledj.me/img/posts/experiences/robocon/assets/ultimate-robot-256w.webp 256w, https://trebledj.me/img/posts/experiences/robocon/assets/ultimate-robot-512w.webp 512w, https://trebledj.me/img/posts/experiences/robocon/assets/ultimate-robot-960w.webp 960w&quot; sizes=&quot;(max-width: 256px) 256px, (max-width: 512px) 512px, 960px&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+</content>
+        
+          <category>experience</category>
+        
+          <category>robotics</category>
+        
+          <category>embedded</category>
+        
+          <category>c</category>
+        
+          <category>stm32</category>
+        
+          <category>hkust</category>
+        
+          <category>reflection</category>
+        
+      </entry>
+    
+  
+    
+      
+      <entry>
+        <title>ABU Robocon 2020</title>
+        <description>Reflections on participating in my first Robocon competition and the team gestalt.</description>
+        <link href="https://trebledj.me/posts/robocon-2020/"/>
+        <updated>2020-08-29T00:00:00Z</updated>
+        <id>https://trebledj.me/posts/robocon-2020/</id>
+        <content xml:lang="en" type="html">&lt;h3 id=&quot;synopsis&quot; tabindex=&quot;-1&quot;&gt;&lt;a class=&quot;md-anchor&quot; href=&quot;https://trebledj.me/posts/robocon-2020/#synopsis&quot; aria-hidden=&quot;true&quot;&gt;&lt;/a&gt; Synopsis&lt;/h3&gt;
+&lt;p&gt;ABU Robocon 2020 was originally scheduled to host in Suva, Fiji and the game will be based on Fiji&#39;s national sport rugby. The theme is &amp;quot;ROBO RUGBY 7s&amp;quot;. In this game, each team designs two robots, one as pass robot (PR), and another as try robot (TR). Each can either be manual or automated. The PR will pass rugby balls and the TR will catch and place them on distinct try spots. For each successful try (ball placed in a try spot), the team is allowed to kick one ball through the conversion post. Teams score points depending on the zone location, but points can be awarded to the opponent&#39;s team if the kicking ball lands on the opponent&#39;s zone. The game ends when three minutes have passed, or when all seven kicking balls (shared by both teams) have been kicked.&lt;/p&gt;
+&lt;p&gt;&lt;a class=&quot;lightbox-single&quot; title=&quot;Image of the Robocon 2020 game field.&quot; href=&quot;https://trebledj.me/img/posts/experiences/robocon/assets/robocon-2020-field-638w.webp&quot;&gt;&lt;img class=&quot;mb-2 rw center w-65&quot; src=&quot;https://trebledj.me/img/posts/experiences/robocon/assets/robocon-2020-field-638w.webp&quot; loading=&quot;lazy&quot; decoding=&quot;async&quot; style=&quot;aspect-ratio: auto 638 / 837&quot; alt=&quot;Image of the Robocon 2020 game field.&quot; title=&quot;Image of the Robocon 2020 game field.&quot; srcset=&quot;https://trebledj.me/img/posts/experiences/robocon/assets/robocon-2020-field-256w.webp 256w, https://trebledj.me/img/posts/experiences/robocon/assets/robocon-2020-field-512w.webp 512w, https://trebledj.me/img/posts/experiences/robocon/assets/robocon-2020-field-638w.webp 638w&quot; sizes=&quot;(max-width: 256px) 256px, (max-width: 512px) 512px, 638px&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;The above image shows the Robocon 2020 game field. Each team takes half a field. The PRSZ and TRSZ denote the start zones of the PR and TR. KZ1 to KZ3 denote different levels of kick zones. Kicking from KZ3 will score higher points than kicking from KZ1.&lt;/p&gt;
+&lt;p&gt;Under normal circumstances, teams would play against each other in a single game. But due to the Covid-19 pandemic, the Hong Kong regional competition changed format. Instead of playing against each other, teams would play solo and aim to get the highest score within the shortest time.&lt;/p&gt;
+&lt;h3 id=&quot;experience&quot; tabindex=&quot;-1&quot;&gt;&lt;a class=&quot;md-anchor&quot; href=&quot;https://trebledj.me/posts/robocon-2020/#experience&quot; aria-hidden=&quot;true&quot;&gt;&lt;/a&gt; Experience&lt;/h3&gt;
+&lt;h4 id=&quot;breaking-the-ice&quot; tabindex=&quot;-1&quot;&gt;&lt;a class=&quot;md-anchor&quot; href=&quot;https://trebledj.me/posts/robocon-2020/#breaking-the-ice&quot; aria-hidden=&quot;true&quot;&gt;&lt;/a&gt; Breaking the Ice&lt;/h4&gt;
+&lt;p&gt;This was my first time joining a robotics competition. The previous competition I joined was a scholars&#39; competition five years before—which I was terrible at—so competition experiences and atmospheres were still very new to me.&lt;/p&gt;
+&lt;p&gt;The Robocon international contest is usually held in the summer (July-August?) and the regional HK contest is usually held in June, after the participating universities have finished their exam periods. This year, due to Covid-19, the international contest was postponed to December, and the regional contest was postponed to August.&lt;/p&gt;
+&lt;p&gt;HKUST has two Robocon teams, traditionally named &amp;quot;Fiery Dragon&amp;quot; and &amp;quot;War Dragon&amp;quot;. Both teams use the same lab and tools, but with different team leaders and composition of members. This year&#39;s &amp;quot;Fiery Dragon&amp;quot; had more international students than ever before. We were a diverse bunch with people hailing from Hong Kong, Indonesia, India, Malaysia, and South Korea.&lt;/p&gt;
+&lt;p&gt;As it turns out, the HKUST Robocon team has a solid history with a preset team hierarchy and generational development cycle. The mechanical and hardware divisions have preset tools and technology which allowed newcomers to quickly design robots. The software libraries were also somewhat mature, modularised to scale nicely with the number of components. Our seniors were also solid in both technical and soft skills, which was really nice.&lt;/p&gt;
+&lt;p&gt;Most of the game strategising and planning was left to the seniors. They would still take suggestions from juniors, but as they are more experienced, the planning was mostly left to them.&lt;/p&gt;
+&lt;p&gt;Due to Covid-19, the game format in the regional HK competition kept changing, so our strategy also kept evolving.&lt;/p&gt;
+&lt;h4 id=&quot;developing-character&quot; tabindex=&quot;-1&quot;&gt;&lt;a class=&quot;md-anchor&quot; href=&quot;https://trebledj.me/posts/robocon-2020/#developing-character&quot; aria-hidden=&quot;true&quot;&gt;&lt;/a&gt; Developing Character&lt;/h4&gt;
+&lt;p&gt;There was quite a lot to learn in the team.&lt;/p&gt;
+&lt;p&gt;On the interpersonal side, I&#39;m rather soft-spoken, but it was encouraging to speak with other team members, most of whom were nice and friendly. Lunches together were a good environment to practice my next-to-non-existent communication skills. Throughout the months, tension and miscommunication occurred from time to time–this is inevitable; but I find that keeping calm and talking helps douse the flames of anger.&lt;/p&gt;
+&lt;p&gt;&lt;a class=&quot;lightbox-single&quot; title=&quot;Voice box, I am once again asking for your unconditional support.&quot; href=&quot;https://trebledj.me/img/posts/experiences/robocon/assets/voice-box-500w.webp&quot;&gt;&lt;img class=&quot;mb-2 rw center w-50&quot; src=&quot;https://trebledj.me/img/posts/experiences/robocon/assets/voice-box-500w.webp&quot; loading=&quot;lazy&quot; decoding=&quot;async&quot; style=&quot;aspect-ratio: auto 500 / 500&quot; alt=&quot;Voice box, I am once again asking for your unconditional support.&quot; title=&quot;Voice box, I am once again asking for your unconditional support.&quot; srcset=&quot;https://trebledj.me/img/posts/experiences/robocon/assets/voice-box-256w.webp 256w, https://trebledj.me/img/posts/experiences/robocon/assets/voice-box-500w.webp 500w&quot; sizes=&quot;(max-width: 256px) 256px, 500px&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;In Robocon, the robots can be designed by an unlimited number of people, but the actual game is played by only three gamefield members. Two members would each control the two robots, while a third member would act as a commander and shout directives. As a software member working on the PR, I would collaborate closely with the gamefield member controlling the PR: adjusting the control layout, providing convenience features for tuning and debugging, and taking suggestions on improvements or features.&lt;/p&gt;
+&lt;p&gt;On the technical side, I&#39;m rather forgetful when it comes to technical pieces of knowledge; but over time I learned to take notes on a text file and prepare questions to ask seniors. Google and StackOverflow are, as usual, a valuable resource. Perhaps less so for the embedded world, but there &lt;em&gt;are&lt;/em&gt; some helpful articles and forum threads.&lt;/p&gt;
+&lt;p&gt;The robotics world of software development offers an interesting blend of low-level tech—such as playing with PWM, working with threads and real-time operating systems—with a mixture of high-level concepts—such as state machines, getting from point A to point B. The low-level stuff was harder to grasp (no surprise), but the high-level stuff was more enjoyable.&lt;/p&gt;
+&lt;p&gt;As a software junior, most of my tasks involved reading sensor input and using the collected data to (1) determine what parts of the robot should move and (2) how fast to move them. I think it was fun being able to work with lasers—not the &lt;em&gt;pew pew!&lt;/em&gt; kind of lasers, but the &lt;em&gt;ziiing&lt;/em&gt; kind, except they don&#39;t shred things apart. Besides this, we need to adjust (tune) paths and values to find an optimal velocity (because speed matters!).&lt;/p&gt;
+&lt;p&gt;I primarily worked on the PR. This robot is equipped with a grabbing and shooting mechanism and is also responsible for firing the kicking balls. Here&#39;s a little photo I took from before:&lt;/p&gt;
+&lt;p&gt;&lt;a class=&quot;lightbox-single&quot; title=&quot;Annotated image of HKUST Fiery Dragon&#39;s Robocon 2020 Pass Robot.&quot; href=&quot;https://trebledj.me/img/posts/experiences/robocon/assets/2020-pr-annotated-446w.webp&quot;&gt;&lt;img class=&quot;mb-2 rw center w-55&quot; src=&quot;https://trebledj.me/img/posts/experiences/robocon/assets/2020-pr-annotated-446w.webp&quot; loading=&quot;lazy&quot; decoding=&quot;async&quot; style=&quot;aspect-ratio: auto 446 / 409&quot; alt=&quot;Annotated image of HKUST Fiery Dragon&#39;s Robocon 2020 Pass Robot.&quot; title=&quot;Annotated image of HKUST Fiery Dragon&#39;s Robocon 2020 Pass Robot.&quot; srcset=&quot;https://trebledj.me/img/posts/experiences/robocon/assets/2020-pr-annotated-256w.webp 256w, https://trebledj.me/img/posts/experiences/robocon/assets/2020-pr-annotated-446w.webp 446w&quot; sizes=&quot;(max-width: 256px) 256px, 446px&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Is it a good robot? Well... it certainly does the job of passing balls quickly and accurately. But when it comes to kicking, the design isn&#39;t too effective. During the kicking procedure, the robot will carry the tees and kick balls from the PRSZ to KZ3. The sad point is, the tees are barely lifted off the ground. And due to the uneven surface of the floor, the tees would likely shift position, moving the balls nested above, and thus potentially messing up the angle of the ball.&lt;/p&gt;
+&lt;h4 id=&quot;safety&quot; tabindex=&quot;-1&quot;&gt;&lt;a class=&quot;md-anchor&quot; href=&quot;https://trebledj.me/posts/robocon-2020/#safety&quot; aria-hidden=&quot;true&quot;&gt;&lt;/a&gt; Safety&lt;/h4&gt;
+&lt;p&gt;In the welcome presentation, the professor supervising the Robotics Team mentioned three important things: safety, safety, and safety.&lt;/p&gt;
+&lt;p&gt;The lab can be quite a dangerous environment at times. On numerous occasions I&#39;ve scratched my hands, arms, or legs on the robot. The cuts weren&#39;t too deep, but the edges and corners of aluminium are rather sharp, so care needs to be taken.&lt;/p&gt;
+&lt;p&gt;One time, a team member got headshot by a rugby ball; the game requires robots to &amp;quot;kick&amp;quot; a football, so the resulting velocity was quite high... and quite dangerous. Another team member took a misconfigured SWD USB port—which are used to upload programs from our computer to the microcontroller—and connected it, leading to the unfortunate consequence of shorting his laptop.&lt;/p&gt;
+&lt;p&gt;&lt;a class=&quot;lightbox-single&quot; title=&quot;Safety is the topmost concern.&quot; href=&quot;https://trebledj.me/img/posts/experiences/robocon/assets/robotics-safety-500w.webp&quot;&gt;&lt;img class=&quot;mb-2 rw center w-55&quot; src=&quot;https://trebledj.me/img/posts/experiences/robocon/assets/robotics-safety-500w.webp&quot; loading=&quot;lazy&quot; decoding=&quot;async&quot; style=&quot;aspect-ratio: auto 500 / 649&quot; alt=&quot;Safety is the topmost concern.&quot; title=&quot;Safety is the topmost concern.&quot; srcset=&quot;https://trebledj.me/img/posts/experiences/robocon/assets/robotics-safety-256w.webp 256w, https://trebledj.me/img/posts/experiences/robocon/assets/robotics-safety-500w.webp 500w&quot; sizes=&quot;(max-width: 256px) 256px, 500px&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;There were also times when the robot would randomly and rapidly spin like the spinner on a cotton candy machine. This was due to a bug in code which we eventually fixed.&lt;/p&gt;
+&lt;p&gt;Not only do we need to look out for ourselves, but we also need to look out for other teammates and be ready to help when needed.&lt;/p&gt;
+&lt;h3 id=&quot;concluding-remarks&quot; tabindex=&quot;-1&quot;&gt;&lt;a class=&quot;md-anchor&quot; href=&quot;https://trebledj.me/posts/robocon-2020/#concluding-remarks&quot; aria-hidden=&quot;true&quot;&gt;&lt;/a&gt; Concluding Remarks&lt;/h3&gt;
+&lt;p&gt;Eventually we ended up with 4th place in the regional competition. Our team could&#39;ve reached 1st place had we kicked a rugby ball more accurately. It was pretty close. 😔 Regardless of what place we achieved, the process was enjoyable.&lt;/p&gt;
+&lt;div class=&quot;alert alert-info d-flex align-items-start&quot;&gt; &lt;i class=&quot;fas fa-circle-info ms-1 me-3 mt-1 fs-4&quot; role=&quot;img&quot;&gt;&lt;/i&gt; &lt;div class=&quot;alert-content flex-fill mt-0&quot;&gt;
+&lt;p&gt;The term &amp;quot;gestalt&amp;quot; refers to the idea that the whole is greater than the sum of its parts. Put in this context, the team as a whole has greater potential when it is functional, compared to a team which is divided and dysfunctional where its members are doing their own thing. Participating in Robocon with HKUST&#39;s robotics team helped me experience this in a tangible environment.&lt;/p&gt;
+&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;Overall, it was quite an enriching experience as a fresh undergrad. It was nice to meet new people and work together towards a common goal.&lt;/p&gt;
+</content>
+        
+          <category>experience</category>
+        
+          <category>robotics</category>
+        
+          <category>embedded</category>
+        
+          <category>c</category>
+        
+          <category>stm32</category>
+        
+          <category>hkust</category>
+        
+          <category>reflection</category>
+        
+      </entry>
+    
+  
+</feed>
