@@ -49,10 +49,11 @@ kill     # Kill process.
 quit     # Leave GDB.
 ```
 
-**Shell**
+**Shell Commands**
 ```sh
 shell <cmd>
 shell echo Hi
+!<cmd>
 ```
 
 ### Interrupting
