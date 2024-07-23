@@ -1,8 +1,8 @@
 {# See Note [with context]. #}
 {% from "tag.html" import render_tag with context %}
 
-{% macro tags_sidebar(heading, groups) %}
-    <div class="sticky-right dim-gentle">
+{% macro tags_sidebar(heading, groups, sticky=true) %}
+    <div class="{{"sticky-right" if sticky}} dim-gentle">
         <h3 id="{{heading | slugify}}">
             <i class="fas fa-tags me-2"></i>{{heading}}
         </h3>
