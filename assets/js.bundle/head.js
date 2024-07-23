@@ -50,14 +50,14 @@ $(() => {
   // Go to Tag Button in /posts/.
   const gototagsButton = $('#btn-go-to-tags');
   const tagsSection = document.querySelector('#tags-sidebar');
-  
+
   if (tagsSection) {
     gototagsButton.on('click', () => {
       tagsSection.scrollIntoView({
         behavior: 'smooth',
       });
     });
-    
+
     const gototagObserver = new IntersectionObserver((entries, _observer) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
