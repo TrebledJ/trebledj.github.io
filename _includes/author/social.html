@@ -2,13 +2,7 @@
     itemprop="author" itemscope itemtype="https://schema.org/Person">
     <img src="/img/{{ site.author.logo }}" class="profile-img" alt="" loading="lazy" decoding="async" itemprop="image"/>
     <div class="author-info d-flex flex-column gap-1">
-        <div class="d-flex flex-row">
-            <p class="profile-name" itemprop="name">{{ site.author.alias | default(site.author.name) }}</p>
-            <div id="post-author-social-items-wrapper" class="ms-auto">
-                <button class="btn btn-primary py-1">Stalk&nbsp;Me</button>
-                {% include "author/social-links.html" %}
-            </div>
-        </div>
+        <p class="profile-name" itemprop="name">{{ site.author.alias | default(site.author.name) }}</p>
         <p class="profile-bio" itemprop="description">{{ site.author.shortbio | mdInline | safe }}</p>
     </div>
 </div>

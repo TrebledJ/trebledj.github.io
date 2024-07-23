@@ -1,20 +1,11 @@
-<ul class="social-item-list hidden">
+<div class="d-flex flex-row gap-1 mx-auto" style="width:fit-content;">
     {% for item in site.social %}
-        <li>
-            <div class="d-flex align-items-center">
-                <a rel="me" href="{{item.link}}">
-                    {% if item.icon %}
-                        <i class="social-icon {{item.icon}}" {% if item.color %}style="color:{{item.color}} !important;"{% endif %}></i>
-                    {% else %}
-                        <i class="social-icon d-flex align-items-center"><img src="{{item.img}}" alt="" loading="lazy" decoding="async"/></i>
-                    {% endif %}
-                </a>
-                <a rel="me" href="{{item.link}}">
-                    <span class="social-link">
-                        {{item.name}}
-                    </span>
-                </a>
-            </div>
-        </li>
+        <a rel="me" href="{{item.link}}" >
+            {% if item.icon %}
+                <i class="social-icon {{item.icon}}" {% if item.color %}style="color:{{item.color}} !important;"{% endif %}></i>
+            {% else %}
+                <i class="social-icon d-flex align-items-center"><img src="{{item.img}}" alt="" loading="lazy" decoding="async"/></i>
+            {% endif %}
+        </a>
     {% endfor %}
-</ul>
+</div>

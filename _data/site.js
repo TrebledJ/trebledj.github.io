@@ -125,12 +125,12 @@ module.exports = function () {
       {
         name: 'GitHub', icon: 'fab fa-github', color: 'rgb(150, 60, 180)', link: 'https://github.com/TrebledJ',
       },
-      {
-        name: 'Mastodon (infosec.exchange)',
-        icon: 'fab fa-mastodon',
-        color: 'rgb(99, 101, 255)',
-        link: 'https://infosec.exchange/@trebledj',
-      },
+      // {
+      //   name: 'Mastodon (infosec.exchange)',
+      //   icon: 'fab fa-mastodon',
+      //   color: 'rgb(99, 101, 255)',
+      //   link: 'https://infosec.exchange/@trebledj',
+      // },
       {
         name: 'StackOverflow',
         icon: 'fab fa-stack-overflow',
