@@ -49,15 +49,15 @@ $(() => {
 
   // Go to Tag Button in /posts/.
   const gototagsButton = $('#btn-go-to-tags');
-  const tagsHeading = document.querySelector('#tags');
-  gototagsButton.on('click', () => {
-    tagsHeading.scrollIntoView({
-      behavior: 'smooth',
+  const tagsSection = document.querySelector('#tags-sidebar');
+  
+  if (tagsSection) {
+    gototagsButton.on('click', () => {
+      tagsSection.scrollIntoView({
+        behavior: 'smooth',
+      });
     });
-  });
-
-  if (tagsHeading) {
-    const tagsSection = document.querySelector('.sticky-right');
+    
     const gototagObserver = new IntersectionObserver((entries, _observer) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {

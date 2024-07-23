@@ -7,6 +7,8 @@ logo: tag
 {% from "post/preview.html" import render_post_preview with context %}
 {% from "sidebars/sidebar-utils.html" import tags_sidebar with context %}
 
+{# {% include "utilities/mobile-go-to-tags.html" %} #}
+
 <div class="page-content-container d-flex row gx-6">
     <div class="col-lg-4">
         {% set groups = [tag] | getRelatedTags(collections.tags, collections.tagcount) %}
