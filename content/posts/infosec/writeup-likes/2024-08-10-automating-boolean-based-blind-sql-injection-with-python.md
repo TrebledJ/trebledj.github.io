@@ -2,10 +2,10 @@
 title: Automating Boolean-Based Blind SQL Injection with Python
 excerpt: How to be efficiently lazy at finding hidden gems in predictable places – Database Edition
 tags:
-  - infosec
   - sql
   - python
   - web
+  - programming
   - notes
   - writeup
 thumbnail_src: assets/automating-sqli/bbb-sqli-thumbnail.png

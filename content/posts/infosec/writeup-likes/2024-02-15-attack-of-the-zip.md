@@ -10,7 +10,7 @@ tags:
   - ctf
   - linux
   - windows
-thumbnail_src: assets/thumbnail.jpg
+thumbnail_src: assets/attack-of-the-zip/thumbnail.jpg
 tocOptions: '{"tags":["h2","h3","h4"]}'
 preamble: |
   *Last month, I designed a CTF challenge involving zip file attacks. This post is a collection of the techniques, insights, and notes I've gathered. I've also uploaded the challenge on [GitHub](https://github.com/TrebledJ/attack-of-the-zip) along with a simplified playground.*
@@ -20,7 +20,7 @@ Zip files are *everywhere* in our daily lives, seamlessly integrated into our pe
 
 But as we know from *Silicon Valley*, zip files have the potential to be dangerous.
 
-{% image "assets/yikes-its-a-zip-bomb.jpg", "w-80", "Filmmakers' impression of a zip bomb." %}
+{% image "assets/attack-of-the-zip/yikes-its-a-zip-bomb.jpg", "w-80", "Filmmakers' impression of a zip bomb." %}
 <sup>YouTube: [Silicon Valley - The Ultimate Hack](https://www.youtube.com/watch?v=jnDk8BcqoR0)</sup>{.caption}
 
 In this post, we'll delve into the intriguing world of zip file attacks, exploring various attacks and mitigations involving zip files. These attacks allow attackers to potentially gain unauthorised file read/write privileges—or even cause denial of service. This calls for mitigations to bolster our systems’ defences.
@@ -33,7 +33,7 @@ Disclaimer: The content provided in this blog post is intended purely for educat
 
 ## Zip Attacks
 
-{% image "assets/evil-zip-unveiled.jpg", "w-50", "Fred dissects evil zip files. Spoofy-spoofy doo!" %}
+{% image "assets/attack-of-the-zip/evil-zip-unveiled.jpg", "w-50", "Fred dissects evil zip files. Spoofy-spoofy doo!" %}
 
 ### Zip Slip ⛸
 
@@ -301,7 +301,7 @@ Zip bombs are designed to cripple computers, systems, and virus scanners (rather
 {% images "h-auto" %}
 {% image "https://i.redd.it/68j4sr9h3dg21.jpg" %}
 {% image "https://img.devrant.com/devrant/rant/r_674011_CfdZB.jpg" %}
-{% image "assets/unzip42.jpg" %}
+{% image "assets/attack-of-the-zip/unzip42.jpg" %}
 {% endimages %}
 
 <sup>Some fork bomb memes. And zip bomb memes adapted from fork bomb memes. Zip bomb memes where?^[There probably aren't as many memes on zip bombs as they tend to be a software bug which can be swiftly patched.]</sup>
@@ -374,7 +374,7 @@ Let's explore a few ways to mitigate zip attacks. (Some of these can also be app
 ### Permissions
 *For sysadmins.*
 
-{% image "assets/you-guys-apply-hardening-question-mark.jpg", "w-60", "Input sanitisation? Never heard of it!" %}
+{% image "assets/attack-of-the-zip/you-guys-apply-hardening-question-mark.jpg", "w-60", "Input sanitisation? Never heard of it!" %}
 
 {% alert "success" %}
 1. Avoid running applications as `root` or `Administrator`. Instead, run it with a minimum privilege user.
