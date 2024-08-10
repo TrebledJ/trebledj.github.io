@@ -91,7 +91,7 @@ One quick and simple optimisation whenever we’re searching an ordered sequence
 
 This is a good thing for real life engagements: fewer iterations → less traffic → more sneaky → better opsec.
 
-Normally, binary search relies on three outputs for a test: equals, less-than, and greater-than. But it is possible to make do with just two outputs: less-than, and greater-than-or-equals. If it’s less, we eliminate the upper half (`high = mid`); otherwise, we eliminate the lower half (`low = mid`).
+Normally, binary search relies on three outputs for a test: equals, less-than, and greater-than. But it is possible to make do with just two outputs: less-than, and greater-than-or-equals. If it’s less, we eliminate the upper half; otherwise, we eliminate the lower half.
 
 ```python
 def binary_search(val: int, low: int, high: int) -> int:
@@ -104,9 +104,9 @@ def binary_search(val: int, low: int, high: int) -> int:
         
         print(f'{low:3} - {high:3}\tGuess: {mid:4}')
         if val < mid:
-            high = mid
+            high = mid  # Eliminate upper half.
         else:
-            low = mid
+            low = mid   # Eliminate lower half.
 ```
 
 Here’s a quick example, where we progress towards 125 in 7 steps (which will translate to 7 HTTP requests later on).
