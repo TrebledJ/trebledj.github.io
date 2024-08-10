@@ -46,7 +46,7 @@ Built this website. Tada?
 
 [^stack-overflow]: Being on StackOverflow also helped me learn by 1) digging deeper into languages in the process of answering, and 2) learning from better answers, what techniques are better/worse. Also, contrary to popular belief, most communities don't seem that toxic? I'm guessing just the mainstream ones (JS).
 
-See [*Collaborating*](#collaborating) for various topics to collaborate on. Most have a software component.
+{# See [*Collaborating*](#collaborating) for various topics to collaborate on. Most have a software component. #}
 
 #### Music Composition
 
@@ -63,6 +63,8 @@ Some of my favourite composers:
 - Shostakovich
 - John Adams
 - Steve Reich
+- Hans Zimmer
+- Joe Hisaishi
 
 Things I'm interested in exploring:
 - Modes, {% tag "Modal", "modal" %} Harmony
@@ -114,10 +116,10 @@ Ah, board games... one of my favourite pastimes. When I'm bored ~~game~~, you ma
 
 ### Education
 
-I'm graduated from the [Hong Kong University of Science and Technology](https://hkust.edu.hk/) in May 2023. Here, I studied a combination of mathematics, computer science, and music. Fun times.
+I'm graduated from the [Hong Kong University of Science and Technology](https://hkust.edu.hk/) in May 2023, where I studied a combination of mathematics, computer science, and music. Fun times.
 
 
-### Collaborating
+{# ### Collaborating
 
 I have several project ideas, the scope of which is beyond my capacity given my full-time work. I’ve kept the description generic for certain reasons.
 
@@ -127,12 +129,12 @@ I have several project ideas, the scope of which is beyond my capacity given my 
 	- (No, I’m not thinking of rhythm games, but I’m open to other ideas.)
 	- Looking to work with... game designers/programmers who are also music enthusiasts.
 
-If you’re interested in collaborating, hit me up.
+If you’re interested in collaborating, hit me up. #}
 
 
 ## About This Website
 
-This website breathed its first breath in summer of 2022. I had a bit of free time and wanted a place to share thoughts, music, etc. I also wanted it to be customisable; most {% abbr "CMSs", "content management systems (e.g. Weebly, Wix, Medium)" %} are limited and force my hands to be tied.
+This website breathed its first breath in summer of 2022. I had a bit of free time and wanted a place to share thoughts, music, etc. I also wanted it to be customisable; most {% abbr "mainstream CMSs", "content management systems (e.g. Weebly, Wix, Medium)" %} are limited and force my hands to be tied.
 
 You may see some posts "published" prior to 2022. Those are usually older projects or experiences which I've included for posterity. The dates there typically indicate the date the experience ended.
 
@@ -151,7 +153,7 @@ I didn't know what I wanted to do career-wise. So I looked for a subject I liked
 
 #### Why is your LinkedIn so... professionally unprofessional?
 
-Wdym? You mean you don't have a sense of humour?
+You mean you don't have a sense of humour?
 
 #### Why do you believe in all this Jesus stuff?
 
