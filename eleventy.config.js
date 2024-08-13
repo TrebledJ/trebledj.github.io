@@ -48,7 +48,7 @@ module.exports = function (eleventyConfig) {
     './content/pages/slides': '/slides',
   }, {
     filter: ['**/*', '!**/*.html', '!**/*.js'],
-  })
+  });
 
   // Run Eleventy when these files change:
   // https://www.11ty.dev/docs/watch-serve/#add-your-own-watch-targets
