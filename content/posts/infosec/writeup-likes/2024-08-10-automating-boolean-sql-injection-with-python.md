@@ -1,5 +1,5 @@
 ---
-title: Automating Boolean-Based Blind SQL Injection with Python
+title: Automating Boolean-Based SQL Injection with Python
 excerpt: How to be efficiently lazy at finding hidden gems in predictable places – Database Edition
 tags:
   - sql
@@ -11,22 +11,23 @@ tags:
 thumbnail_src: assets/automating-sqli/bbb-sqli-thumbnail.png
 thumbnail_banner: true
 preamble: |
-  *This is meant as an introductory post on Blind SQLi and automation with Python; with ideas, tricks, and tips gleaned from developing [a custom SQLi script](https://github.com/TrebledJ/bsqli.py). More experienced scripters or pentesters may find the middle sections more informative.*
+  *This is meant as an introductory post on Boolean-Based SQLi and automation with Python; with ideas, tricks, and tips gleaned from developing [a custom SQLi script](https://github.com/TrebledJ/bsqli.py). More experienced scripters or pentesters may find the middle sections more informative.*
 ---
 
-When performing a penetration test, we occasionally come across SQL injection (SQLi) vulnerabilities. One particular class of SQLi is particularly tedious to manually exploit — Blind SQLi.
+When performing a penetration test, we occasionally come across SQL injection (SQLi) vulnerabilities. One particular class of SQLi is particularly tedious to manually exploit — Boolean-Based SQLi.
 
-Tedious, heavily-repetitive tasks often present themselves as nice opportunities for automation. In this post, we’ll review Boolean-Based Blind SQL Injection, and explore how to automate it with Python by starting with a basic script, optimising, applying multithreading, and more.
+Tedious, heavily-repetitive tasks often present themselves as nice opportunities for automation. In this post, we’ll review Boolean-Based SQL Injection, and explore how to automate it with Python by starting with a basic script, optimising, applying multithreading, and more.
 
 ## What is Boolean-Based Blind SQL Injection?
 
 What a long name.^[I'm tempted to shorten it to B³SQLi.]
 
-Let’s break it down:
+Let’s break it down from right to left:
 
 - **SQL Injection**: an SQL query is combined with a user payload which makes the resulting query behave differently, potentially resulting in sensitive information disclosure or remote code execution.
-- **Blind**: SQL output is not returned directly in the response, but indirectly by some other indicator, such as a distinct response or time.
-- **Boolean-Based**: the attacker crafts SQL queries that return a *true* or *false* response based on the injected conditions. This could appear as:
+- **Blind**: SQL output is not returned directly in the response, but indirectly by some other indicator, such as a boolean response or time.
+    - Sometimes, this term is dropped when discussing Boolean-Based SQLi, because Boolean-Based *implies* Blind.
+- **Boolean-Based**: the attacker crafts SQL queries that return a *TRUE* or *FALSE* response based on the injected conditions. This could appear as:
 	- different status codes (e.g. 302 redirect on success, 401 on fail),
 	- different response body (e.g. error messages, full search results), or
 	- (rarely) different headers (e.g. Set-Cookie).
@@ -74,7 +75,7 @@ where everything after `--` is treated as a comment.
 
 Since `1=1` is always true, all users will be selected, and the page returns: "Login successful".
 
-{% image "assets/automating-sqli/login-success.png", "", "Basic Proof-of-Concept showing a TRUE/FALSE response from our demo server." %}
+{% image "assets/automating-sqli/login-success.png", "", "Basic Proof-of-Concept showing a *TRUE*/*FALSE* response from our demo server." %}
 
 Using this, we can detect *TRUE* responses by checking if the body contains "success".
 
@@ -87,7 +88,7 @@ Moreover, we can leak further information by changing `1=1` to other guessy quer
 
 ## Optimisations with Binary Search
 
-One quick and simple optimisation whenever we’re searching an ordered sequence is to apply binary search. This drastically reduces the max number of requests for each character from 96 to 7.^[This should make sense in bit terms. We only need 7 queries to figure out the 7 bits of an ASCII character. (The first bit is assumed to be 0.) Most Boolean-Based Blind SQLi throwaway scripts don't do binary search because the algorithm is tricky to get right. But it's useful to know, and can be applied to time-based blind SQLi as well for massive time discounts.]
+One quick and simple optimisation whenever we’re searching an ordered sequence is to apply binary search. This drastically reduces the max number of requests for each character from 96 to 7.^[This should make sense in bit terms. We only need 7 queries to figure out the 7 bits of an ASCII character. (The first bit is assumed to be 0.) Most Boolean-Based SQLi throwaway scripts don't do binary search because the algorithm is tricky to get right. But it's useful to know, and can be applied to time-based SQLi (another type of blind SQLi) as well for massive time discounts.]
 
 This is a good thing for real life engagements: fewer iterations → less traffic → more sneaky → better opsec.
 
@@ -275,6 +276,6 @@ Instead of modifying the shell command on each SQL change, it would be nice to h
 
 ## Conclusion
 
-In this post, we introduced (Boolean-Based) Blind SQL injection, how it can be used to enumerate a database, and some optimisations and workarounds for exfiltrating data more reliably. We also explored some useful Python libraries to glue onto your project.
+In this post, we introduced Boolean-Based Blind SQL injection, how it can be used to enumerate a database, and some optimisations and workarounds for exfiltrating data more reliably. We also explored some useful Python libraries to glue onto your project.
 
 Automation and scripting can be a powerful time saver when the need exists. We identified a tedious task — brute forcing characters for possibly long strings — and followed up with incremental changes. Hopefully the reader has picked up a few tips on automation.
