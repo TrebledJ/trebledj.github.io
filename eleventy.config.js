@@ -47,7 +47,7 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy({
     './content/pages/slides': '/slides',
   }, {
-    filter: ['**/*', '!**/*.html', '!**/*.js'],
+    filter: ['**/*', '!**/*.html', '!**/*.md', '!**/*.pdf', '!**/*.js'],
   });
 
   // Run Eleventy when these files change:
