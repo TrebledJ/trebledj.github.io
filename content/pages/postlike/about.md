@@ -22,6 +22,9 @@ Moved to [C++](/tags/cpp/).
 Got stuck with pointers.  
 Cried internally for a week.  
 Got stuck with linked lists.  
+Played with Lua using my calculator's scripting engine.  
+Learnt recursion by reverse engineering a Minesweeper implementation in Lua.  
+Played Minesweeper and 2048 on my calc when bored in class.  
 Made a [{% abbr "POS", "point-of-sale" %} desktop application with Qt](/posts/e-payment-desktop-application).  
 Learnt template metaprogramming.  
 Procrastinated a lot by playing Codingame.  
