@@ -23,7 +23,6 @@ module.exports = function (eleventyConfig) {
     './content/**/assets/*.mp4': '/img',
     './assets/webfonts': '/webfonts',
     './assets/css/**/*.{css,map}': '/css',
-    './content/pages/slides/assets': '/img/slides',
   });
   eleventyConfig.addPassthroughCopy({
     './assets/js/**/*.js': '/js/',
@@ -45,6 +44,11 @@ module.exports = function (eleventyConfig) {
       });
     },
   });
+  eleventyConfig.addPassthroughCopy({
+    './content/pages/slides': '/slides',
+  }, {
+    filter: ['**/*', '!**/*.html', '!**/*.js'],
+  })
 
   // Run Eleventy when these files change:
   // https://www.11ty.dev/docs/watch-serve/#add-your-own-watch-targets
