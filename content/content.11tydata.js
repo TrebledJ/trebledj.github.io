@@ -19,6 +19,6 @@ module.exports = {
         return getGitCommitDate(data.page.inputPath);
       }
       // Posts will default to their own date or updated date.
-    }
+    },
   },
 };
