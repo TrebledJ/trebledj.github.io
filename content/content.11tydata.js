@@ -1,3 +1,5 @@
+const { getGitCommitDate } = require('../eleventy/detail/git-commit-date');
+
 module.exports = {
   // Defaults.
   excerpt: '',
@@ -11,5 +13,12 @@ module.exports = {
       return !!(file.match(/^\d+-\d+-\d+/) || data.date);
     },
     hasUpdatedDate: _ => true,
+    date: data => {
+      if (!data.page.inputPath.includes('/posts/')) {
+        // Set date for sitemap lastmod.
+        return getGitCommitDate(data.page.inputPath);
+      }
+      // Posts will default to their own date or updated date.
+    }
   },
 };
