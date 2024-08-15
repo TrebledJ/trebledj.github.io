@@ -6,7 +6,7 @@ $(() => {
     // Not a post.
     return;
   }
-  
+
   // --- Author Socials Button --- //
   const authorSocialButton = $('#post-author-container').find('button');
   authorSocialButton.on('click', () => {
