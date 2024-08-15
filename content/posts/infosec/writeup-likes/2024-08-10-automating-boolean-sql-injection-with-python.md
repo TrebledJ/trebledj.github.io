@@ -28,9 +28,9 @@ Let’s break it down from right to left:
 - **Blind**: SQL output is not returned directly in the response, but indirectly by some other indicator, such as a boolean response or time.
     - Sometimes, this term is dropped when discussing Boolean-Based SQLi, because Boolean-Based *implies* Blind.
 - **Boolean-Based**: the attacker crafts SQL queries that return a *TRUE* or *FALSE* response based on the injected conditions. This could appear as:
-	- different status codes (e.g. 302 redirect on success, 401 on fail),
-	- different response body (e.g. error messages, full search results), or
-	- (rarely) different headers (e.g. Set-Cookie).
+    - different status codes (e.g. 302 redirect on success, 401 on fail),
+    - different response body (e.g. error messages, full search results), or
+    - (rarely) different headers (e.g. Set-Cookie).
 
 By carefully analysing the application's response to these manipulated queries, we can extract data bit by bit, deduce the structure of the database, and potentially leak sensitive data.
 
@@ -128,9 +128,9 @@ In the code snippets above, `val` is known for demo purposes. But in reality, `v
 
 ```python
 def binary_search(sql_query: str, low: int, high: int) -> int:
-	"""Find the value of sql_query using binary search, between
-	low (inclusive) and high (exclusive). Assuming the guessed value
-	is within range."""
+    """Find the value of sql_query using binary search, between
+    low (inclusive) and high (exclusive). Assuming the guessed value
+    is within range."""
     while low < high:
         mid = (low + high) // 2
         if low == mid:
@@ -142,9 +142,9 @@ def binary_search(sql_query: str, low: int, high: int) -> int:
             low = mid
 
 def check_sql_value(sql_query: str, n: int) -> bool:
-	# Make web request to check sql_query < n.
-	# And then check if the response is a TRUE or FALSE response.
-	...
+    # Make web request to check sql_query < n.
+    # And then check if the response is a TRUE or FALSE response.
+    ...
 ```
 
 The idea here is we can pass an SQL query, such as `ASCII(SUBSTRING(@@version, 1, 1))`, followed by the expected ranged.
@@ -160,15 +160,15 @@ We can make the code more generic or flexible, but the underlying idea is there.
 Not all types of data are easy to exfiltrate. Here are some tricks I've picked up (some of which could be scripted):
 
 - Use subqueries to select data from arbitrary tables.
-	- e.g. `ASCII(SUBSTRING( (SELECT password FROM users LIMIT 1 OFFSET 5), 1, 1 ))`
+    - e.g. `ASCII(SUBSTRING( (SELECT password FROM users LIMIT 1 OFFSET 5), 1, 1 ))`
 - Use `GROUP_CONCAT` to combine multiple rows into one row. This function is available in MySQL and SQLite.
-	- Subqueries only work when 1 row and 1 column is selected.
-	- Occasionally, there is a *lot* of data across multiple rows.
-		- We can use `LIMIT` (or `TOP` for SQL Server) to restrict the data to one row.
-		- Or we could `GROUP_CONCAT` to capture more data in a single subquery. Then there would be one less number to change.
+    - Subqueries only work when 1 row and 1 column is selected.
+    - Occasionally, there is a *lot* of data across multiple rows.
+        - We can use `LIMIT` (or `TOP` for SQL Server) to restrict the data to one row.
+        - Or we could `GROUP_CONCAT` to capture more data in a single subquery. Then there would be one less number to change.
 - Cast SQL output to `char`/`varchar` to capture numbers, dates, and other types.
-	- e.g. `CAST(id AS VARCHAR(32))` in MySQL
-	- Cast with `NULL`, may not work. Additional `NULL`-checks may be needed.
+    - e.g. `CAST(id AS VARCHAR(32))` in MySQL
+    - Cast with `NULL`, may not work. Additional `NULL`-checks may be needed.
 
 I later realised — some of these are also used by SQLmap, a popular automatic SQL enumeration/exploitation script.
 
@@ -208,20 +208,20 @@ We can process finished tasks as they roll in using `concurrent.futures.as_compl
 
 ```python
 with concurrent.futures.ThreadPoolExecutor(max_workers=8) as executor:
-	future_map = {}
+    future_map = {}
 
-	# Create a task for each character.
-	for idx in range(length):
-		future = executor.submit(get_by_bsearch, f"ASCII(SUBSTRING(({sql}),{idx+1},1))", 0, 128)
-		future_map[future] = idx
+    # Create a task for each character.
+    for idx in range(length):
+        future = executor.submit(get_by_bsearch, f"ASCII(SUBSTRING(({sql}),{idx+1},1))", 0, 128)
+        future_map[future] = idx
 
     # Handle finished tasks concurrently.
-	for future in concurrent.futures.as_completed(future_map):
-		idx = future_map[future]
-		ch = future.result()
-		# We found the character at a particular index!
-		# Store it somewhere...
-		somewhere[idx] = ch
+    for future in concurrent.futures.as_completed(future_map):
+        idx = future_map[future]
+        ch = future.result()
+        # We found the character at a particular index!
+        # Store it somewhere...
+        somewhere[idx] = ch
 ```
 
 The length of the string can be determined beforehand with another binary search. Assuming the max length is 2048...
@@ -270,8 +270,8 @@ Some challenges arise when mixing progress bars with multithreading. In general.
 Instead of modifying the shell command on each SQL change, it would be nice to have an interactive, shell-like program for running SQL statements. Throwing `input()` in a while-loop could work, but doesn't have the usual shortcuts (e.g. up for previous command^[Although in Windows, this appears to be built-in?! At least Windows or Python on Windows does one thing well. 🤷‍♂️]). To have a nicer, cross-platform terminal interface, we can use:
 
 - [`prompt_toolkit`](https://github.com/prompt-toolkit/python-prompt-toolkit)
-	- Has the usual terminal shortcuts: up, down, reverse search `^r`.
-	- Command history can be stored in a file so that it persists across runs.
+    - Has the usual terminal shortcuts: up, down, reverse search `^r`.
+    - Command history can be stored in a file so that it persists across runs.
 
 
 ## Conclusion
