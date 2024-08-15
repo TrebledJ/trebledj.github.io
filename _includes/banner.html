@@ -25,8 +25,9 @@
                     scope = undefined;
                     break;
             }
-            const open = scope ? !scope.getItem('bannerClosed') : true;
-            if (open) {
+            const lastClosed = scope ? scope.getItem('bannerLastClosedHash') : "";
+            if (lastClosed !== {{ site.banner.hash() | dump | safe }}) {
+                {# Show banner. #}
                 const banner = document.getElementById('banner');
                 banner
                     .parentElement

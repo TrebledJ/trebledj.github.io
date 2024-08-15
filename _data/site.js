@@ -2,6 +2,15 @@ const csp = require('./csp');
 
 const multiline = text => text.trim().replace(/^[ \t]+/gm, '');
 
+function djb2(str) {
+  var len = str.length;
+  var hash = 5381;
+  for (var idx = 0; idx < len; ++idx) {
+    hash = ((hash << 5) + hash + str.charCodeAt(idx)) & 0xFFFFFFFF;
+  }
+  return hash >>> 0;
+}
+
 module.exports = function () {
   const email = 'trebledjjj@gmail.com';
   const domain = {
@@ -84,9 +93,12 @@ module.exports = function () {
       icon_style: '--fa-animation-delay: 5s; --fa-animation-duration: 3s',
       /* eslint-disable max-len */
       content: multiline(`
-        [***I'm now a Certified Offensive Waterblower!***](/posts/im-a-certified-offensive-waterblower){.text-warning}
+        [***I'm now a  Certified Offensive Waterblower!***](/posts/im-a-certified-offensive-waterblower){.text-warning}
         `),
       /* eslint-enable max-len */
+      hash() {
+        return djb2(this.content).toString(36);
+      },
     },
     typewrite: {
       strings:
