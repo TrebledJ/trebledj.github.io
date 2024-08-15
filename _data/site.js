@@ -3,9 +3,9 @@ const csp = require('./csp');
 const multiline = text => text.trim().replace(/^[ \t]+/gm, '');
 
 function djb2(str) {
-  var len = str.length;
-  var hash = 5381;
-  for (var idx = 0; idx < len; ++idx) {
+  const len = str.length;
+  let hash = 5381;
+  for (let idx = 0; idx < len; ++idx) {
     hash = ((hash << 5) + hash + str.charCodeAt(idx)) & 0xFFFFFFFF;
   }
   return hash >>> 0;
