@@ -11,7 +11,7 @@ function prefixLength(a, b) {
 }
 
 $(function () {
-  const typewriter = new Typewriter('#typewrite-text', {
+  const typewriter = new Typewriter(site.typewrite.selector, {
     loop: site.typewrite.loop,
   });
 

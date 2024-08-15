@@ -13,8 +13,13 @@
 {% js %} {% include "assets/js.bundle/404.js" %} {% endjs %}
 {% js %} {% include "assets/js.bundle/post.js" %} {% endjs %}
 {% js %} {% include "assets/js.bundle/search.js" %} {% endjs %}
-{% js %} {% include "assets/js.bundle/typewriter.js" %} {% endjs %}
-{% js %} {% include "assets/js.bundle/my-typewrite.js" %} {% endjs %}
+{% js %}
+    if (document.querySelector(site.typewrite.selector))
+    {
+        {% include "assets/js.bundle/typewriter.js" %}
+        {% include "assets/js.bundle/my-typewrite.js" %}
+    }
+{% endjs %}
 {% set jsBundle %}
     {%- getBundleFileUrl "js" -%}
 {% endset %}

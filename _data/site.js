@@ -101,6 +101,7 @@ module.exports = function () {
       },
     },
     typewrite: {
+      selector: '#typewrite-text',
       strings:
         [
           'Coding 💻',
