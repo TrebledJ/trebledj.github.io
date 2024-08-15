@@ -10,10 +10,13 @@
             root.style.setProperty('--header-extra', `${bannerHeight}px`);
         }
 
-        $('#banner .btn-close').on('click', () => {
+        $('#banner .btn-close').on('click', function() {
             {% if site.banner.scope %}
-                {{- scopeStorage }}.setItem('bannerClosed', true);
+                {{- scopeStorage }}.setItem('bannerLastClosedHash', {{ site.banner.hash() | dump | safe }});
             {% endif %}
+
+            {# Hide button. #}
+            this.style.opacity = 0;
 
             const b = $('#banner');
             b.css('max-height', b.outerHeight());

@@ -33,6 +33,7 @@ related:
   # See more params in related.js.
 noindex: true
 showToc: true
+eleventyExcludeFromCollections: true
 ---
 
 Cat ipsum dolor sit amet, always hungry. **Poop** on *grasses* ~~i show my fluffy belly~~ <sup>but it's a trap!</sup> if you pet it i will tear up your hand and sniff sniff sniff sniff but step on your keyboard while you're gaming and then turn in a circle but human is washing you why halp oh the horror flee scratch hiss bite hell is other people.
