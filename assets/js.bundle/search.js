@@ -61,10 +61,10 @@ lunr.Builder.prototype.addEncoded = function (ref, fieldName, field) {
   }
 };
 
-$(async function () {
-  const searchResultIcons = site.search.resultIcons;
-  const searchResultDefaultIcon = site.search.resultDefaultIcon;
+const searchResultIcons = site.search.resultIcons;
+const searchResultDefaultIcon = site.search.resultDefaultIcon;
 
+async function loadSearch(searchBox, resultDiv) {
   const store = await (await fetch('/search.json')).json();
   const idx = lunr(function () {
     this.ref('id');
@@ -83,9 +83,6 @@ $(async function () {
       this.addEncoded(i, 'keywords', store[i].keywords);
     }
   });
-
-  const resultdiv = $('#search-results-list');
-  const searchBox = $('input#search-box');
 
   function getItemParams(i) {
     const item = store[i];
@@ -119,9 +116,9 @@ $(async function () {
   function addResults(result) {
     const maxResults = site.search.maxResults;
 
-    resultdiv.empty();
+    resultDiv.empty();
     // eslint-disable-next-line max-len
-    resultdiv.prepend(`<p class="search-results-list__count ps-1">${result.length > maxResults ? `${maxResults}<sup>+</sup>` : result.length} result(s) found</p>`);
+    resultDiv.prepend(`<p class="search-results-list__count ps-1">${result.length > maxResults ? `${maxResults}<sup>+</sup>` : result.length} result(s) found</p>`);
 
     let count = 0;
     for (const item in result) {
@@ -137,7 +134,7 @@ $(async function () {
           </div>
       </div>
       `);
-      child.appendTo(resultdiv);
+      child.appendTo(resultDiv);
 
       count++;
       if (count > maxResults) {
@@ -172,9 +169,16 @@ $(async function () {
 
     addResults(result);
   });
+  
+  searchBox.trigger('keyup'); // Trigger a search and pre-fill results.
+}
 
-  $('.modal').on('shown.bs.modal', function () {
+$(() => {
+  const searchBox = $('input#search-box');
+  const resultDiv = $('#search-results-list')
+
+  $('.modal').on('shown.bs.modal', async function () {
     $(this).find('[autofocus]').trigger('focus');
-    searchBox.trigger('keyup');
+    await loadSearch(searchBox, resultDiv);
   });
 });
