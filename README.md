@@ -56,6 +56,7 @@ This site was inspired and built from many libraries. Mentioning all of them wou
 * Cloudflare Pages – Hosting.
 * imgflip – Quintessential Meme Generator.
 * Cloudflare Analytics.
+* [Yusuke Nakaya's Beautiful Shooting Star CSS Animation](https://codepen.io/YusukeNakaya/pen/XyOaBj).
 
 ### 3rd Party Libs
 * jQuery.
