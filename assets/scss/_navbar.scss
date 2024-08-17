@@ -12,7 +12,7 @@ header {
     width: 100vw;
 
     html[data-theme="light"] & {
-        box-shadow: 0 20px 20px rgba(0, 0, 0, .05);
+        box-shadow: 0 25px 15px rgba(0, 0, 0, .05);
     }
     html[data-theme="dark"] & {
         border-bottom: 1px solid var(--border-color);
