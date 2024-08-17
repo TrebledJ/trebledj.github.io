@@ -7,7 +7,7 @@ tags:
   - web
   - programming
   - writeup
-thumbnail_src: assets/automating-sqli/bbb-sqli-thumbnail.png
+thumbnail_src: assets/automating-boolean-sqli-thumbnail.png
 thumbnail_banner: true
 preamble: |
   *This is meant as an introductory post on Boolean-Based SQLi and automation with Python; with ideas, tricks, and tips gleaned from developing [a custom SQLi script](https://github.com/TrebledJ/bsqli.py). More experienced scripters or pentesters may find the middle sections more informative.*
@@ -74,7 +74,7 @@ where everything after `--` is treated as a comment.
 
 Since `1=1` is always true, all users will be selected, and the page returns: "Login successful".
 
-{% image "assets/automating-sqli/login-success.png", "", "Basic Proof-of-Concept showing a *TRUE*/*FALSE* response from our demo server." %}
+{% image "assets/login-success.png", "", "Basic Proof-of-Concept showing a *TRUE*/*FALSE* response from our demo server." %}
 
 Using this, we can detect *TRUE* responses by checking if the body contains "success".
 
@@ -253,7 +253,7 @@ Common options are:
 - [`rich`](https://github.com/Textualize/rich), colourful, great look-and-feel
 - [`tqdm`](https://github.com/tqdm/tqdm), traditional rectangular progress bar
 
-{% image "assets/automating-sqli/progress-bar.png", "", "Example of a `rich` progress bar in action." %}
+{% image "assets/progress-bar.png", "", "Example of a `rich` progress bar in action." %}
 
 Some challenges arise when mixing progress bars with multithreading. In general...
 

