@@ -15,7 +15,7 @@ related:
     posts: [attack-of-the-zip]
 # preamble: |
 ---
-Earlier this month, I released two CTF web challenges for CrewCTF 2024: Nice View 1 and Nice View 2. These build upon an earlier challenge — an audio synthesis web service running on the Drogon Web Framework. This time, our focus shifts from [exploring zip attacks in Juce](/posts/attack-of-the-zip) to exploring an alarming configuration in Drogon: Dynamic Views Loading (hereafter abbreviated DVL).
+Earlier this month, I released two CTF web challenges for CrewCTF 2024: Nice View 1 and Nice View 2. These build upon an earlier challenge — an audio synthesis web service running on the Drogon Web Framework. This time, our focus shifts from [exploring zip attacks in Juce](/posts/attack-of-the-zip/) to exploring an alarming configuration in Drogon: Dynamic Views Loading (hereafter abbreviated DVL).
 
 In a hypothetical situation where a Drogon server with DVL is exposed to hackers, how many holes can be poked? What attack vectors can be achieved?^[This situation may be less hypothetical than we think. According to Shodan, there are over 1000 servers around the world (mostly in East Asia) running Drogon. How many do you think were poorly configured, with devs thinking… “I’ll just enable Dynamic Views Loading for convenience. Nobody can find my IP anyway.” I’m willing to bet there’s at least 1.]
 
