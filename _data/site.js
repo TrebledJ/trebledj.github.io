@@ -33,11 +33,11 @@ module.exports = function () {
       /* eslint-disable max-len */
       shortbio: multiline(`
       Passionate problem-solver,
-      [software engineer](/tags/software-engineering/), [infosec enthusiast](/tags/infosec/),
-      and amateur [music composer](/tags/composition/).
+      software engineer, infosec enthusiast,
+      and amateur music composer.
       I enjoy teaching others and thrive on learning new things.
-      When not immersed in [programming](/tags/programming/), I can be found taking walks, [reflecting on life](/tags/faith/), 
-      and occasionally indulging in [CTF challenges](/tags/ctf/).
+      When not immersed in programming, I can be found taking walks, reflecting on life, 
+      and occasionally indulging in CTF challenges.
       `),
       bio: multiline(`
       Hi! (｡＾ ᴗ＾)ﾉ
