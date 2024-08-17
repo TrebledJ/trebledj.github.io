@@ -7,13 +7,13 @@ tags:
   - python
   - programming
 thumbnail_src: assets/hitcon-thumbnail.jpg
+preamble: |
+  This writeup is also intended for beginners. I’ll be taking a didactic approach to this writeup, with some sections starting with questions for guidance.^[Also, a good excuse for me to introduce !!spoilers!! to this site!] Anytime there's a set of questions, feel free to pause, challenge yourself, and think through them. :) If you want to follow along, you can grab the challenge binary [*here*](https://github.com/TrebledJ/ctf-binaries/tree/c8e9259c8f7d9cee149d99269d9b691cf54e53b9/hitcon-2023/the-blade).
+
+  I'll be mainly using [ghidra](https://ghidra-sre.org/) as my decompiler, along with GDB + GEF. For those unfamiliar with GDB, you may find my [recently posted cheatsheet](/posts/gdb-cheatsheet) helpful.
 ---
 
 My first Rust {% tag "rev", "reverse" %} solve! Though in hindsight, not much Rust knowledge was needed.
-
-This writeup is also intended for beginners. I’ll be taking a didactic approach to this writeup, with some sections starting with questions for guidance.^[Also, a good excuse for me to introduce !!spoilers!! to this site!] Anytime there's a set of questions, feel free to pause, challenge yourself, and try thinking through them. :) If you want to follow along, you can grab the challenge binary [*here*](https://github.com/TrebledJ/ctf-binaries/tree/c8e9259c8f7d9cee149d99269d9b691cf54e53b9/hitcon-2023/the-blade).
-
-I'll be mainly using [ghidra](https://ghidra-sre.org/) as my decompiler, along with GDB + GEF. For those unfamiliar with GDB, you may find my [recently posted cheatsheet](/posts/gdb-cheatsheet) helpful.
 
 ## Description
 
@@ -28,7 +28,7 @@ Author: [wxrdnx](https://github.com/wxrdnx)
 
 Let’s start by running the binary. We can get a feel by navigating the program with `help` and other commands.
 
-Turns out we’re given a C2 (Command and Control) interface which sends shellcodes. Imagine we control a compromised machine. By running a malicious shellcode, we can trigger a reverse shell to our server, so that we can easily send more commands from the server.
+Turns out we’re given a C2 (Command and Control) interface which sends shellcode. Imagine we control a compromised machine. By running a malicious shellcode, we can trigger a reverse shell to our server, so that we can easily send more commands from the server.
 
 Anyhow, we can start the server with:
 
@@ -114,7 +114,7 @@ Time to play the UNO reverse card on this binary!
 - There are 3 parts to the encryption. What addresses do they begin and end?
 - What is each part doing?
 
-Let’s recognise some highs level patterns.
+Let’s recognise some high level patterns.
 
 It’s easy to be intimidated by the multitude of loops; but really, half the loops are the same, just wearing different clothes.
 
