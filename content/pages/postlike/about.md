@@ -55,7 +55,7 @@ Built this website. Tada?
 
 {% tag "composition" %}
 
-My composing journey began in Grade 10 (～中四) when my music teacher assigned composition homework. Not only that—he introduced us to interesting composition techniques and took us on a tour analysing Joe Hisashi's Studio Ghibli music. Since then, I've been writing down ideas and organising them into coherent pieces.
+My composing journey began in Grade 10 (～中四) when my music teacher assigned composition homework. Not only that—he introduced us to interesting composition techniques and took us on a (theoretical) tour analysing Joe Hisashi's Studio Ghibli music. Since then, I've been writing down ideas and organising them into coherent pieces.
 
 In uni, I picked up electronic music composition (mixing/production) during a course taught by Prof. Timothy Page.
 
@@ -208,4 +208,10 @@ Moreover, I want the site to be hackable (in the open-source sense) and approach
 
 #### Why did you choose Eleventy as your site generator?
 
-See [Site Migration to Eleventy](/posts/site-migration-to-eleventy/).
+- Framework-independent.
+- Nunjucks is a more powerful templating language compared to Liquid, so I get to iterate more quickly. Pains here are Nunjuck macros don't work with async (contributing to longer build times), and error message interop with Eleventy is hard to decipher.
+- Loads of decent Eleventy plugins by decent folks.
+- JS and Node are mature ecosystems, so some libraries just work™. The only major pains are import styles (ESM vs. CommonJS) and bloat (libraries/tooling).
+- Active community/development.
+
+See also: [Site Migration to Eleventy](/posts/site-migration-to-eleventy/).
