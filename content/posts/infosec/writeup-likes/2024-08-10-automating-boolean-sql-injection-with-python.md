@@ -6,7 +6,6 @@ tags:
   - python
   - web
   - programming
-  - notes
   - writeup
 thumbnail_src: assets/automating-sqli/bbb-sqli-thumbnail.png
 thumbnail_banner: true
