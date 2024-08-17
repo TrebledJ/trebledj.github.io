@@ -61,10 +61,10 @@ html[data-theme="light"] .hero-section {
 
             @include media-breakpoint-up(lg) {
                 .post-content {
-                    width: 75%;
+                    width: 60%;
                 }
                 .post-thumbnail {
-                    width: 25%;
+                    width: 40%;
                 }
             }
 

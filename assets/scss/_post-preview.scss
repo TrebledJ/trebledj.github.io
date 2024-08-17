@@ -138,7 +138,7 @@
 
     .post-thumbnail {
         @include media-breakpoint-up(sm) {
-            width: 35%;
+            width: 40%;
             height: inherit; // height isn't defined, so we'll auto-fit to parent height.
         }
         @include media-breakpoint-down(sm) {
@@ -149,7 +149,7 @@
 
     .post-content {
         @include media-breakpoint-up(sm) {
-            width: 65%;
+            width: 60%;
         }
         @include media-breakpoint-down(sm) {
             width: 100%;
