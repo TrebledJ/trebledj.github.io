@@ -1,7 +1,6 @@
 ---
 title: TrebledJ's Profile
-layout: profile
-permalink: /profile/
+layout: layouts/profile
 redirect_from:
   - /online-cv
   - /cv

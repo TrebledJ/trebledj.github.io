@@ -8,7 +8,7 @@ tags:
   - functional
   - software-engineering
   - programming-languages
-thumbnail_src: assets/abstract.jpg
+thumbnail_src: assets/thumbnail.jpg
 # thumbnail_banner: true
 use_math: true
 related:

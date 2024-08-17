@@ -169,13 +169,13 @@ async function loadSearch(searchBox, resultDiv) {
 
     addResults(result);
   });
-
+  
   searchBox.trigger('keyup'); // Trigger a search and pre-fill results.
 }
 
 $(() => {
   const searchBox = $('input#search-box');
-  const resultDiv = $('#search-results-list');
+  const resultDiv = $('#search-results-list')
 
   $('.modal').on('shown.bs.modal', async function () {
     $(this).find('[autofocus]').trigger('focus');

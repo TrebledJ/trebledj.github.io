@@ -9,10 +9,15 @@ header {
 .navbar {
     --bs-navbar-padding-x: 2vw !important;
     background-color: var(--main-background-color);
-    border-bottom: 1px solid var(--border-color);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, .05);
     width: 100vw;
 
+    html[data-theme="light"] & {
+        box-shadow: 0 25px 15px rgba(0, 0, 0, .05);
+    }
+    html[data-theme="dark"] & {
+        border-bottom: 1px solid var(--border-color);
+    }
+    
     @include media-breakpoint-down(md) {
         --bs-navbar-padding-x: 0 !important;
     }
