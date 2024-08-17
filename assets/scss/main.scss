@@ -73,6 +73,15 @@ $carousel-transition: transform 2s ease, opacity 1.5s ease-out .5s;
 @import "toc-sidebar";
 
 
+html[data-theme="dark"] {
+    *::selection {
+        background-color: #1b1b84;
+    }
+    *::-moz-selection {
+        background-color: #1b1b84;
+    }
+}
+
 .jtag {
     display: inline-block;
     margin: 3px 2px;
@@ -109,7 +118,7 @@ $carousel-transition: transform 2s ease, opacity 1.5s ease-out .5s;
             color: var(--contrast-color) !important;
             --clr: var(--link-color);
             animation: tag-box 3s infinite;
-        
+
         }
         &.special:hover {
             color: var(--contrast-color) !important;
@@ -272,6 +281,7 @@ p.subheading {
     overflow-y: hidden;
 }
 
-a.lightbox-single, .lightbox-gallery > a {
+a.lightbox-single,
+.lightbox-gallery > a {
     background-image: none;
 }

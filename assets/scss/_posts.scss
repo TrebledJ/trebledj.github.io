@@ -98,6 +98,10 @@
         color: var(--bold-color);
     }
 
+    a b, a strong {
+        color: inherit;
+    }
+
     // Default most elements to have top margin instead of bottom margin.
     // *:not(ul, ol, li, hr, svg, p>a, .gist *) 
     p,
