@@ -1,5 +1,5 @@
 ---
-title: Dynamic Views Loading - Abusing Server Side Rendering in Drogon
+title: Dynamic Views Loading – Abusing Server Side Rendering in Drogon
 excerpt: What could go wrong releasing a C++ web server with "live reload" into the wild?
 tags:
   - cpp
@@ -21,7 +21,7 @@ In a hypothetical situation where a Drogon server with DVL is exposed to hackers
 
 At the same time, this is also a good exercise in defensive programming. If we released such a server, what (programming) defences are necessary to cover our sorry arse? When and where should we apply sanitisation and filtering? How do we properly allow “safe” programs? Is that even possible to begin with?
 
-This turned out to be a fascinating endeavour, as there are a *ton* of ways to compromise a vulnerable DVL-enabled server. In the making of the CTF challenges, I struggled to eliminate every single unintended solution.
+This turned out to be a fascinating endeavour, as we found a *ton* of ways to compromise a vulnerable DVL-enabled server. In the making of the CTF challenges, I struggled to eliminate every single unintended solution.
 
 {% image "assets/drogon/craft-a-ctf-web-chal.jpg", "w-60", "Every time I find an unintended solution, a new one is just around the corner." %}
 
@@ -206,9 +206,11 @@ which generates Example.h and Example.cc.
 There are countless attack vectors to address.
 
 1. **RCE via Rendered CSP.** First, we'll start by looking at a simple PoC which triggers RCE when the view is rendered.
-2. **Bypasses.** We'll survey common C++ functions and tricks to bypass a denylist.
+2. **Bypasses.** We'll survey common functions and tricks to bypass a denylist.
 3. **RCE via Init Section.** Here, we'll trigger RCE without rendering the view.
 4. **RCE via File Name.** Finally, we'll discuss a harrowing insecurity in the DVL code path.
+
+Not all of these were exploitable in my CTF chals. I selected a few vectors which I thought were interesting.
 
 ### 1. RCE via Rendered CSP
 
@@ -370,14 +372,16 @@ Handy Reference: [Using Inline Assembly in C/C++](https://www.codeproject.com/Ar
 
 Filters applied to a set of file extensions can be easily bypassed by uploading a file with an unfiltered extension, then `#include`-ing it in the CSP. All `#include` really does is copy-paste the included file's content, which then gets compiled as C/C++ code.
 
-Assume .csp files are strictly checked, while all other files don't go through the same checks.
-
 - Example.csp - with stringent checks on denied words.
     ```cpp
     <%inc #include "safe.txt" %>
     ```
 
 - safe.txt - other C++ code which gets a free pass, possibly using a technique above.
+
+This allows us to bypass situations where, say, .csp files are strictly checked, but certain extensions are not checked at all.
+
+I'll admit this one slipped my mind and quite a few players discovered this unintended solution in the CTF chals.
 
 #### Bypass with Macro Token Concatenation (`##`)
 
@@ -400,7 +404,7 @@ C/C++ macros have some quirky features:
 
 The second feature allows us to bypass denylists which only match full words.
 
-For instance, if a denylist blocks `system`, we can do `GLUE(s, ystem)`. For instance:
+For instance, if a denylist blocks `system`, we can do `GLUE(s, ystem)`.
 
 ```cpp
 <%inc #define GLUE(X, Y) X ## Y %>
