@@ -292,6 +292,8 @@ img.center {
 
 
 // Handle svg images in both light/dark mode.
+// alpha-img: if the image is originally meant for light mode
+// alpha-imgv: if the image is originally meant for dark mode
 
 html[data-theme="light"] .alpha-img {
     filter: invert(0%);
@@ -299,6 +301,14 @@ html[data-theme="light"] .alpha-img {
 
 html[data-theme="dark"] .alpha-img {
     filter: invert(100%);
+}
+
+html[data-theme="light"] .alpha-imgv {
+    filter: invert(100%);
+}
+
+html[data-theme="dark"] .alpha-imgv {
+    filter: invert(0%);
 }
 
 
