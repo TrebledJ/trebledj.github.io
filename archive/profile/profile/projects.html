@@ -1,18 +1,18 @@
 <ul class="timeline">
-    {% for post in site.tags["project"] %}
+    {% for post in collections.project %}
         <li class="timeline-item rounded ms-3 p-4 pb-3 shadow">
             <div class="timeline-arrow"></div>
-            <h2 class="h5 mb-1"><a href="{{site.baseurl}}{{post.url}}">{{post.title | mdInline | safe}}</a></h2>
+            <h2 class="h5 mb-1"><a href="{{site.baseurl}}{{post.url}}">{{post.data.title | mdInline | safe}}</a></h2>
             <span class="small text-gray">
                 <i class="fas fa-calendar"></i>
-                {{post.date | date | safe }}
-                {% set nonproj_tags = post.tags | where_exp: "tag", "tag != 'project'" %}
+                {{post.page.date | date | safe }}
+                {% set nonproj_tags = post.data.tags | exclude("project") %}
                 {% for tag in nonproj_tags | head(3) %}
                     &nbsp;•&nbsp;
                     {% include "tag.html" %}
                 {% endfor %}
             </span>
-            <p class="text-small mt-2 font-weight-light">{{post.pitch}}</p>
+            <p class="text-small mt-2 font-weight-light">{{post.data.pitch}}</p>
         </li>
     {% endfor %}
 </ul>
