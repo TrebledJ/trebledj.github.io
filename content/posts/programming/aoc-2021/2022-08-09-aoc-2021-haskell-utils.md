@@ -347,7 +347,7 @@ part2_intersect cmds = ...
 
 [aoc-utils]: https://github.com/TrebledJ/aoc/blob/master/2021/haskell/src/Utils.hs
 [aoc-haskell]: https://github.com/TrebledJ/aoc/tree/master/2021/haskell/app
-[lyah]: http://learnyouahaskell.com/chapters
-[lyah-folds]: http://learnyouahaskell.com/higher-order-functions#folds
-[lyah-guards]: http://learnyouahaskell.com/syntax-in-functions#guards-guards
+[lyah]: https://learnyouahaskell.github.io/chapters
+[lyah-folds]: https://learnyouahaskell.github.io/higher-order-functions#folds
+[lyah-guards]: https://learnyouahaskell.github.io/syntax-in-functions#guards-guards
 [data-hashmap-strict]: https://hackage.haskell.org/package/unordered-containers-0.2.19.1/docs/Data-HashMap-Strict.html
