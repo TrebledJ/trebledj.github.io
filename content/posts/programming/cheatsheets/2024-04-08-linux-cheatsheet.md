@@ -3,12 +3,13 @@ title: Practical Linux Tricks for the Aspiring Hacker
 excerpt: A curated list of fanciful Linux tricks I use to bolster my command-line prowess and activate Sage Mode.
 tags:
   - cheatsheet
+  - linux
   - infosec
   - learning
   - notes
 thumbnail_src: assets/penguin.jpg
 related:
-    tags: [cheatsheet]
+    tags: [cheatsheet, linux]
 ---
 
 This is a collection of commands I've picked up over the last few years, which I've found immensely useful. My favourite ones are probably:
