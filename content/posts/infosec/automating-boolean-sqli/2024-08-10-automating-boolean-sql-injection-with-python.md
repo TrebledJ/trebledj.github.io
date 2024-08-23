@@ -279,6 +279,4 @@ In this post, we introduced Boolean-Based Blind SQL injection, how it can be use
 
 Automation and scripting can be a powerful time saver when the need exists. We identified a tedious task — brute forcing characters for possibly long strings — and followed up with incremental changes. Hopefully the reader has picked up a few tips on automation.
 
-{% video "https://github.com/user-attachments/assets/99af450a-9847-44cd-a376-11ca1d98e05c", "w-100" %}
-
 
