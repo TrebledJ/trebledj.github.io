@@ -278,3 +278,7 @@ Instead of modifying the shell command on each SQL change, it would be nice to h
 In this post, we introduced Boolean-Based Blind SQL injection, how it can be used to enumerate a database, and some optimisations and workarounds for exfiltrating data more reliably. We also explored some useful Python libraries to glue onto your project.
 
 Automation and scripting can be a powerful time saver when the need exists. We identified a tedious task — brute forcing characters for possibly long strings — and followed up with incremental changes. Hopefully the reader has picked up a few tips on automation.
+
+{% video "https://github.com/user-attachments/assets/99af450a-9847-44cd-a376-11ca1d98e05c", "w-100" %}
+
+
