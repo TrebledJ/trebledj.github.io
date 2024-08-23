@@ -19,7 +19,7 @@ Tedious, heavily-repetitive tasks often present themselves as nice opportunities
 
 ## What is Boolean-Based Blind SQL Injection?
 
-What a long name.^[I'm tempted to shorten it to B³SQLi.]
+What a long name.
 
 Let’s break it down from right to left:
 
