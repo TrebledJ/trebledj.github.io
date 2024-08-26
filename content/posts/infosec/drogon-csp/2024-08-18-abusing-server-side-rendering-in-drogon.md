@@ -64,7 +64,7 @@ app().registerHandler(
     });
 ```
 
-Now we can run `curl 127.0.0.1:8080/hello/Picard` and observe the following HTML:
+After starting the server, we can run `curl 127.0.0.1:8080/hello/Picard` and observe the following HTML:
 
 ```html
 <!DOCTYPE html>
@@ -382,7 +382,7 @@ Filters applied to a set of file extensions can be easily bypassed by uploading 
 
 This allows us to bypass situations where, say, .csp files are strictly checked, but certain extensions are not checked at all.
 
-I'll admit this one slipped my mind and quite a few players discovered this unintended solution in the CTF chals.
+I'll admit this one slipped my mind; quite a few players discovered this unintended solution during the CTF.
 
 #### Bypass with Macro Token Concatenation (`##`)
 
@@ -536,7 +536,7 @@ And mitigations?
 3. Protecc your dynamic views directory. Don't allow untrusted files to be written there.
     - It doesn't matter if the view will be rendered in application code, because — [as we discovered earlier](#4-rce-via-file-name) — once `drogon_ctl` is run, an RCE endpoint is already exposed.
 4. If, on the off chance, your environment accepts untrusted CSP files, you should consider using some filtering/denylist mechanism.
-    - If filtering is performed, it should happen before files are written to the dynamic views directory. Once files are written, it's (likely) too late: Drogon kicks in and devours the CSP.
+    - If filtering is performed, it should happen before files are written to the dynamic views directory. Once files are written, it's too late: Drogon kicks in and devours the CSP.
     {% image "assets/drogon-dynamic-view-loading-defence.png", "w-70 alpha-imgv", "Defensive filtering, if any, should occur before CSP files are written." %}
     <p class="caption">
     <sup>Defensive filtering, if any, should occur before CSP files are written.</sup>
