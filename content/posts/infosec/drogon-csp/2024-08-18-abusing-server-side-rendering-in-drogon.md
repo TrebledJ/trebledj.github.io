@@ -6,6 +6,7 @@ tags:
   - ctf
   - web
   - programming
+  - linux
   - notes
   - writeup
 thumbnail_src: assets/drogon-thumbnail.png
