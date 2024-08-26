@@ -28,6 +28,7 @@ module.exports = compileCsp(
     // unsafe-inline.
     .add(...(process.env.ENVIRONMENT === 'fast' ? ["'unsafe-inline'"] : []))
     // .add('*.disqus.com', '*.disquscdn.com')
+    .add('comments.trebledj.me')
     .add('code.jquery.com', 'cdn.jsdelivr.net')
     .add('gist.github.com')
     .add('static.cloudflareinsights.com'),
