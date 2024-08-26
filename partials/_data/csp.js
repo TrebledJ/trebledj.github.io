@@ -51,6 +51,7 @@ module.exports = compileCsp(
     // .add('disqus.com')
     .add('*.soundcloud.com'),
   tag('connect')
+    .add('comments.trebledj.me')
     .add('cloudflareinsights.com')
     .add('formcarry.com') // contact form
   ,
