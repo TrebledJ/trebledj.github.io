@@ -36,11 +36,13 @@ module.exports = compileCsp(
     .add("'unsafe-inline'")
     // .add(`'unsafe-hashes'`)
     // .add('*.disquscdn.com')
+    .add('comments.trebledj.me')
     .add('cdn.jsdelivr.net')
     .add('cdnjs.cloudflare.com')
     .add('github.githubassets.com'),
   tag('font')
     .add('data:')
+    .add('comments.trebledj.me')
     .add('cdn.jsdelivr.net')
     .add('cdnjs.cloudflare.com'),
   tag('img')
@@ -52,6 +54,7 @@ module.exports = compileCsp(
     .add('*.soundcloud.com'),
   tag('connect')
     .add('comments.trebledj.me')
+    .add('wss://comments.trebledj.me')
     .add('cloudflareinsights.com')
     .add('formcarry.com') // contact form
   ,
