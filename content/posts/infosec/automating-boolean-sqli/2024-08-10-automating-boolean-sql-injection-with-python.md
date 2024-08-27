@@ -6,14 +6,16 @@ tags:
   - python
   - web
   - programming
+  - project
   - writeup
+  - tutorial
 thumbnail_src: assets/automating-boolean-sqli-thumbnail.png
 thumbnail_banner: true
 preamble: |
   *This is meant as an introductory post on Boolean-Based SQLi and automation with Python; with ideas, tricks, and tips gleaned from developing [a custom SQLi script](https://github.com/TrebledJ/bsqli.py). More experienced scripters or pentesters may find the middle sections more informative.*
 ---
 
-When performing a penetration test, we occasionally come across SQL injection (SQLi) vulnerabilities. One particular class of SQLi is particularly tedious to manually exploit — Boolean-Based SQLi.
+When performing a penetration test, we occasionally come across SQL injection (SQLi) vulnerabilities. One particular class of SQLi is particularly tedious to exploit — Boolean-Based SQLi.
 
 Tedious, heavily-repetitive tasks often present themselves as nice opportunities for automation. In this post, we’ll review Boolean-Based SQL Injection, and explore how to automate it with Python by starting with a basic script, optimising, applying multithreading, and more.
 
