@@ -6,7 +6,9 @@ tags:
   - python
   - web
   - programming
+  - project
   - writeup
+  - tutorial
 thumbnail_src: assets/automating-boolean-sqli-thumbnail.png
 thumbnail_banner: true
 preamble: |
