@@ -7,6 +7,7 @@ tags:
   - meta
   - notes
   - writeup
+  - project
 thumbnail_src: assets/optimising-web-icons-thumbnail.png
 ---
 
