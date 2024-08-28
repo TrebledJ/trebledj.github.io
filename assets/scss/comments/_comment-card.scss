@@ -44,6 +44,9 @@
         // Custom: extra padding so that highlight looks more spacy and less choked.
         margin-left: -10px;
         padding-left: 10px;
+
+        // Add some breather space to the right.
+        padding-right: 6px;
     }
 
     .comentario-card-children {
