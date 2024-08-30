@@ -3,12 +3,12 @@
 {% set isArticle = page.url.startsWith("/posts/") and layout.startsWith("layouts/post-") %}
 
 {% if title %}
-<meta name="__debug" content="{{title}}">
+{# <meta name="__debug" content="{{title}}"> #}
 {% set safeTitle = title | stripBetweenTags(['sup', 'sub']) | striptags %}
-<meta name="__debug" content="{{safeTitle}}">
+{# <meta name="__debug" content="{{safeTitle}}"> #}
 {% endif %}
 {% if excerpt %}
-<meta name="__debug" content="{{excerpt}}">
+{# <meta name="__debug" content="{{excerpt}}"> #}
 {% set safeExcerpt = excerpt | mdInline | safe | striptags %}
 {% endif %}
 
@@ -30,7 +30,7 @@
 
 {# Compatibility #}
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
 
 {# Meta: Keywords #}
 {# List a bunch of keywords which make sense for this page. #}

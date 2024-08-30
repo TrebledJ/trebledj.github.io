@@ -28,6 +28,7 @@ module.exports = compileCsp(
     // unsafe-inline.
     .add(...(process.env.ENVIRONMENT === 'fast' ? ["'unsafe-inline'"] : []))
     // .add('*.disqus.com', '*.disquscdn.com')
+    .add('comments.trebledj.me')
     .add('code.jquery.com', 'cdn.jsdelivr.net')
     .add('gist.github.com')
     .add('static.cloudflareinsights.com'),
@@ -35,21 +36,26 @@ module.exports = compileCsp(
     .add("'unsafe-inline'")
     // .add(`'unsafe-hashes'`)
     // .add('*.disquscdn.com')
+    .add('comments.trebledj.me')
     .add('cdn.jsdelivr.net')
     .add('cdnjs.cloudflare.com')
     .add('github.githubassets.com'),
   tag('font')
     .add('data:')
+    .add('comments.trebledj.me')
     .add('cdn.jsdelivr.net')
     .add('cdnjs.cloudflare.com'),
   tag('img')
-    .add('data:'),
+    .add('data:')
+    .add('comments.trebledj.me'),
   // .add('c.disquscdn.com'), // .add('*')
 
   tag('frame')
     // .add('disqus.com')
     .add('*.soundcloud.com'),
   tag('connect')
+    .add('comments.trebledj.me')
+    .add('wss://comments.trebledj.me')
     .add('cloudflareinsights.com')
     .add('formcarry.com') // contact form
   ,

@@ -89,11 +89,11 @@ module.exports = function () {
       scope: 'local', // Possible values: 'session', 'local', ''.
       // bgColor: 'primary', // Any Bootstrap `bg-` values.
       // fgColor: 'black', // Any Bootstrap `text-` values.
-      icon: 'fas fa-droplet',
+      icon: 'fas fa-comments',
       icon_style: '--fa-animation-delay: 5s; --fa-animation-duration: 3s',
       /* eslint-disable max-len */
       content: multiline(`
-        [***I'm now a  Certified Offensive Waterblower!***](/posts/im-a-certified-offensive-waterblower){.text-warning}
+        Comments are back! Privacy-focused, without ads, bloatware, and trackers.
         `),
       /* eslint-enable max-len */
       hash() {
