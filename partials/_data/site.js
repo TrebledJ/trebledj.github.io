@@ -82,14 +82,14 @@ module.exports = function () {
       combined: true, // Combines all lightbox images in a post into a single gallery.
     },
     banner: {
-      enabled: true,
+      enabled: false,
       sticky: true,
       closeButton: true,
       disableInPosts: true, // Don't detract from content.
       scope: 'local', // Possible values: 'session', 'local', ''.
       // bgColor: 'primary', // Any Bootstrap `bg-` values.
       // fgColor: 'black', // Any Bootstrap `text-` values.
-      icon: 'fas fa-droplet',
+      icon: 'fas fa-comments',
       icon_style: '--fa-animation-delay: 5s; --fa-animation-duration: 3s',
       /* eslint-disable max-len */
       content: multiline(`
