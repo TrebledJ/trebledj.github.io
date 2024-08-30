@@ -3,12 +3,12 @@
 {% set isArticle = page.url.startsWith("/posts/") and layout.startsWith("layouts/post-") %}
 
 {% if title %}
-<meta name="__debug" content="{{title}}">
+{# <meta name="__debug" content="{{title}}"> #}
 {% set safeTitle = title | stripBetweenTags(['sup', 'sub']) | striptags %}
-<meta name="__debug" content="{{safeTitle}}">
+{# <meta name="__debug" content="{{safeTitle}}"> #}
 {% endif %}
 {% if excerpt %}
-<meta name="__debug" content="{{excerpt}}">
+{# <meta name="__debug" content="{{excerpt}}"> #}
 {% set safeExcerpt = excerpt | mdInline | safe | striptags %}
 {% endif %}
 
