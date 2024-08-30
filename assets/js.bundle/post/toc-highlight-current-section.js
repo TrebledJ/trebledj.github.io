@@ -31,7 +31,6 @@ const mainNavLinks = document.querySelectorAll('#toc-sidebar nav.toc a');
 const mobileNavLinks = document.querySelectorAll('#btn-mobile-toc nav.toc a');
 
 const { hash } = window.location;
-const articleEnd = document.querySelector('#end-of-article').offsetTop;
 
 const highlightLink = idx => {
   if (mainNavLinks[idx]) {
@@ -60,6 +59,8 @@ const debounce = f => {
 
 const docElem = document.documentElement;
 const docBody = document.body;
+const articleEndElement = document.querySelector('#end-of-article');
+
 const sectionsBottomUp = [...sections].reverse();
 let currentActive = 0;
 
@@ -67,7 +68,7 @@ const updateTOCHighlight = () => {
   const scrollTop = (docBody.scrollTop || docElem.scrollTop);
 
   /* After scrolling past the article end (plus some offset), mark nothing as selected. */
-  if (scrollTop > articleEnd - headerOffset) {
+  if (scrollTop > articleEndElement.offsetTop - headerOffset) {
     if (currentActive !== -1) {
       removeAllActive();
       currentActive = -1;
@@ -96,3 +97,4 @@ if (hash) { // Set pre-selected item.
 }
 
 $(window).on('scroll', debounce(updateTOCHighlight));
+updateTOCHighlight();
