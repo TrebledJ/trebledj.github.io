@@ -18,23 +18,31 @@ related:
 
 We collect the following personal data:
 
-* **Technical Data**: IP address, Browser type, Device type, Referrer data.
-	* This is collected by Cloudflare Pages, Cloudflare Web Analytics, and jsDelivr.
-	* {{ site.title }} will only access such data in aggregate forms, and thus won't (be able to) link this data back to you.
-	* This data is provided automatically by your browser when you load a web page. A VPN may be used to suppress or hide such data.
-* **Cookies**
-	* This is data associated with you due to activities such as login/commenting.
-	* Used by Cloudflare Pages^[Cloudflare Pages may use cookies to combat spam and malicious activity. See their [cookie policy](https://www.cloudflare.com/cookie-policy/).], our commenting system, and SoundCloud embeds.
-	* Cloudflare *Analytics* and jsDelivr claim they don't use cookies. ([Cloudflare](https://www.cloudflare.com/web-analytics/#:~:text=Cloudflare%20Web%20Analytics%20does%20not,the%20purpose%20of%20displaying%20analytics.); [jsDelivr](https://www.jsdelivr.com/terms/privacy-policy-jsdelivr-net#:~:text=We%20do%20not%20use%20cookies))
-* **Identity Data**: Name, Email address.
-	* In the [Contact Form][contact-form] and Commenting Forms, these are **optional** fields. You have the discretion to *not* fill in those fields.
+- **Technical Data**: IP address, Browser type, Device type, Referrer data.
+	- This is collected by Cloudflare Pages, Cloudflare Web Analytics, Google Cloud Platform, and jsDelivr.
+	- {{ site.title }} will only access such data in aggregate forms, and thus won't (be able to) link this data back to you.
+	- This data is provided automatically by your browser when you load a web page. A VPN or privacy-enhanced browser may be used to suppress or hide such data.
+- **Cookies**
+	- This is data associated with you due to activities such as login/commenting.
+    	- e.g. SoundCloud uses cookies to link you with your account, if you're logged in prior to using this site.
+	- Used by Cloudflare Pages^[Cloudflare Pages may use cookies to combat spam and malicious activity. See their [cookie policy](https://www.cloudflare.com/cookie-policy/).], our commenting system, and SoundCloud embeds.
+	- Cloudflare *Analytics* and jsDelivr claim they don't use cookies. ([Cloudflare](https://www.cloudflare.com/web-analytics/#:~:text=Cloudflare%20Web%20Analytics%20does%20not,the%20purpose%20of%20displaying%20analytics.); [jsDelivr](https://www.jsdelivr.com/terms/privacy-policy-jsdelivr-net#:~:text=We%20do%20not%20use%20cookies))
+- **Identity Data**: Name, Email address.
+	- In the [Contact Form][contact-form] and Commenting Forms, identity data is **optional**. You can choose to *not* fill in those fields.
+	- For commenting, any identity data provided is owned and managed by {{ site.title }}.
 
 ## Data Usage
 
 We use personal data for the following purposes:
 
-- **Technical Data**: To optimise website experience. To draw insights from readers and to improve the site.
-- **Identity Data**: For contact and communication purposes. To personalise responses to comments.
+- **Technical Data**:
+    - To optimise website experience.
+    - To draw insights from users and to improve the site.
+    - To prevent fraud/spam.
+- **Identity Data**:
+    - For contact and communication purposes.
+    - To personalise responses to comments.
+    - For identification and fraud-prevention.
 
 Third-party services may have other clauses, especially for cookies. Please refer to their [privacy policies](#third-party).
 
@@ -62,12 +70,13 @@ For your reference, here is a collection of third-party services we use and thei
 
 {% table %}
 
-| Service         | Purpose                 | Technical Data[^u] | Identity Data[^u] |     Cookies[^u]     | Privacy Policy                     |
-|-----------------|-------------------------|:------------------:|:-----------------:|:-------------------:|------------------------------------|
-| Cloudflare      | Hosting, CDN, Analytics |         ✓          |                   | √ (See [CP][cclf].) | [Link][pclf] (*End Users*)         |
-| jsDelivr        | CDN                     |         ✓          |                   |                     | [Link][pjsd]                       |
-| SoundCloud      | Music Embeds            |         ✓          |      ✓[^sc1]      |          ✓          | [Link][pscl] (*SoundCloud Widget*) |
-| FormCarry       | Forms                   |         ✓          |      ✓[^fc1]      |                     |                                    |
+| Service               | Purpose                 | Technical Data[^u] | Identity Data[^u] |     Cookies[^u]     | Privacy Policy                     |
+|-----------------------|-------------------------|:------------------:|:-----------------:|:-------------------:|------------------------------------|
+| Cloudflare            | Hosting, CDN, Analytics |         ✓          |                   | √ (See [CP][cclf].) | [Link][pclf] (*End Users*)         |
+| jsDelivr              | CDN                     |         ✓          |                   |                     | [Link][pjsd]                       |
+| SoundCloud            | Music Embeds            |         ✓          |      ✓[^sc1]      |          ✓          | [Link][pscl] (*SoundCloud Widget*) |
+| FormCarry             | Forms                   |         ✓          |      ✓[^fc1]      |                     |                                    |
+| Google Cloud Platform | Comments (CaaS)         |         ✓          |                   |                     | [Link][pgcp] (*End Users*)         |
 
 {% endtable %}
 
@@ -76,6 +85,7 @@ For your reference, here is a collection of third-party services we use and thei
 [cclf]: https://www.cloudflare.com/cookie-policy/
 [pclf]: https://www.cloudflare.com/privacypolicy
 [pscl]: https://soundcloud.com/pages/privacy
+[pgcp]: https://cloud.google.com/terms/data-processing-addendum/?hl=en
 
 [^u]: Third-party data collection as of writing. Their policies may have updated since.
 [^sc1]: Applicable if logged in.
@@ -84,6 +94,7 @@ For your reference, here is a collection of third-party services we use and thei
 - Cloudflare and jsDelivr are present on all HTML pages of our site.
 - SoundCloud embeds are only loaded on relevant pages (music pages, home page, etc.).
 - FormCarry only applies to pages containing forms (e.g. the contact form).
+- Google Cloud Platform (GCP) itself doesn't use cookies or store identity data, but our application *running on* GCP does; and that application's data belongs to {{ site.title }}, not GCP.
 
 ## Contact
 
