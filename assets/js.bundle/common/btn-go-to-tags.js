@@ -18,7 +18,7 @@ if (tagsSection) {
       }
     });
   }, {
-    rootMargin: '0px', // Lazy-load when the iframe is 300px away from the viewport.
+    rootMargin: '0px',
     threshold: 0,
   });
 
