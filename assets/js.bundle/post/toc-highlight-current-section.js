@@ -10,19 +10,19 @@ const headerOffset = document.querySelector('header').offsetHeight + 20;
 
 let tags = ['h2', 'h3']; // Default.
 if (tocOptions) {
-    tocOptions = JSON.parse(tocOptions);
-    if (tocOptions.tags && tocOptions.tags.length > 0) {
-        const newTags = [];
-        for (const t of tocOptions.tags) {
-            // Check if it matches hN header pattern.
-            if (t.startsWith('h') && !Number.isNaN(t[1]) && t[1] > 0 && t[1] <= 6) {
-                newTags.push(t);
-            }
-        }
-        if (newTags.length > 0) {
-            tags = newTags;
-        }
+  tocOptions = JSON.parse(tocOptions);
+  if (tocOptions.tags && tocOptions.tags.length > 0) {
+    const newTags = [];
+    for (const t of tocOptions.tags) {
+      // Check if it matches hN header pattern.
+      if (t.startsWith('h') && !Number.isNaN(t[1]) && t[1] > 0 && t[1] <= 6) {
+        newTags.push(t);
+      }
     }
+    if (newTags.length > 0) {
+      tags = newTags;
+    }
+  }
 }
 
 const headerSelectors = tags.map(t => `.post-body > ${t}`).join(',');
@@ -34,28 +34,28 @@ const { hash } = window.location;
 const articleEnd = document.querySelector('#end-of-article').offsetTop;
 
 const highlightLink = idx => {
-    if (mainNavLinks[idx]) {
-        mainNavLinks[idx].classList.add('active');
-        mobileNavLinks[idx].classList.add('active');
-    }
+  if (mainNavLinks[idx]) {
+    mainNavLinks[idx].classList.add('active');
+    mobileNavLinks[idx].classList.add('active');
+  }
 };
 const lowlightLink = idx => {
-    if (mainNavLinks[idx]) {
-        mainNavLinks[idx].classList.remove('active');
-        mobileNavLinks[idx].classList.remove('active');
-    }
+  if (mainNavLinks[idx]) {
+    mainNavLinks[idx].classList.remove('active');
+    mobileNavLinks[idx].classList.remove('active');
+  }
 };
 const removeAllActive = () => sections.forEach((_, i) => lowlightLink(i));
 
 const debounce = f => {
-    let flag = false;
-    return (...args) => {
-        if (flag)
-            return;
-        flag = true;
-        f(...args);
-        flag = false;
-    };
+  let flag = false;
+  return (...args) => {
+    if (flag)
+      return;
+    flag = true;
+    f(...args);
+    flag = false;
+  };
 };
 
 const docElem = document.documentElement;
@@ -64,35 +64,35 @@ const sectionsBottomUp = [...sections].reverse();
 let currentActive = 0;
 
 const updateTOCHighlight = () => {
-    const scrollTop = (docBody.scrollTop || docElem.scrollTop);
+  const scrollTop = (docBody.scrollTop || docElem.scrollTop);
 
-    /* After scrolling past the article end (plus some offset), mark nothing as selected. */
-    if (scrollTop > articleEnd - headerOffset) {
-        if (currentActive !== -1) {
-            removeAllActive();
-            currentActive = -1;
-        }
-        return;
+  /* After scrolling past the article end (plus some offset), mark nothing as selected. */
+  if (scrollTop > articleEnd - headerOffset) {
+    if (currentActive !== -1) {
+      removeAllActive();
+      currentActive = -1;
     }
+    return;
+  }
 
-    const idx = sectionsBottomUp.findIndex(sec => sec.offsetTop - headerOffset <= scrollTop);
-    const currentHeading = sections.length - idx - 1;
+  const idx = sectionsBottomUp.findIndex(sec => sec.offsetTop - headerOffset <= scrollTop);
+  const currentHeading = sections.length - idx - 1;
 
-    if (currentHeading !== currentActive) {
-        removeAllActive();
-        currentActive = currentHeading;
-        highlightLink(currentHeading);
-    }
+  if (currentHeading !== currentActive) {
+    removeAllActive();
+    currentActive = currentHeading;
+    highlightLink(currentHeading);
+  }
 };
 
 if (hash) { // Set pre-selected item.
-    for (let i = 0; i < mainNavLinks.length; i++) {
-        if (mainNavLinks[i].href.endsWith(hash)) {
-            mainNavLinks[i].classList.add('active');
-            mobileNavLinks[i].classList.add('active');
-            break;
-        }
+  for (let i = 0; i < mainNavLinks.length; i++) {
+    if (mainNavLinks[i].href.endsWith(hash)) {
+      mainNavLinks[i].classList.add('active');
+      mobileNavLinks[i].classList.add('active');
+      break;
     }
+  }
 }
 
 $(window).on('scroll', debounce(updateTOCHighlight));
