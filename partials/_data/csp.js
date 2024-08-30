@@ -46,7 +46,8 @@ module.exports = compileCsp(
     .add('cdn.jsdelivr.net')
     .add('cdnjs.cloudflare.com'),
   tag('img')
-    .add('data:'),
+    .add('data:')
+    .add('comments.trebledj.me'),
   // .add('c.disquscdn.com'), // .add('*')
 
   tag('frame')
