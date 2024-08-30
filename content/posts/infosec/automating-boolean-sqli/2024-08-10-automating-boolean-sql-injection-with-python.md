@@ -21,7 +21,7 @@ Tedious, heavily-repetitive tasks often present themselves as nice opportunities
 
 The end result is a script which automates network requests and brute-forcing into a nice interface:
 
-{% video "assets/hkirc-ctf-2024-demo.mp4", "w-100" %}
+{% video "assets/hkirc-ctf-2024-demo.mp4", "jw-100" %}
 
 <sup>Demo of the Python script in a CTF challenge.</sup>{.caption}
 
@@ -46,7 +46,7 @@ Each {% abbr "DBMS", "Database Management System (e.g. MySQL, Microsoft SQL Serv
 
 By comparing the values with **ASCII numbers**, we can determine the character stored.
 
-{% image "https://www.asciitable.com/asciifull.gif", "w-80", "ASCII table." %}
+{% image "https://www.asciitable.com/asciifull.gif", "jw-80", "ASCII table." %}
 
 {% details "Simple SQLi Example" %}
 
@@ -87,7 +87,7 @@ Since `1=1` is always true, all users will be selected, and the page returns: "L
 
 Using this, we can detect *TRUE* responses by checking if the body contains "success".
 
-{% image "https://imageio.forbes.com/specials-images/imageserve/5f9875237283b142dc3c7f2d/Sacha-Baron-Cohen-in-Amazon-s--Borat-Subsequent-Moviefilm-/960x0.png?format=png&width=960", "w-60", "Great success!" %}
+{% image "https://imageio.forbes.com/specials-images/imageserve/5f9875237283b142dc3c7f2d/Sacha-Baron-Cohen-in-Amazon-s--Borat-Subsequent-Moviefilm-/960x0.png?format=png&width=960", "jw-60", "Great success!" %}
 
 Moreover, we can leak further information by changing `1=1` to other guessy queries. For instance, we can use this bad boy — `UNICODE(SUBSTRING(sqlite_version(), 1, 1))=51` — to test if the first character of `sqlite_version()` is `'3'`. This is where the tedious part comes in: we need to scan two variables: the index and the ASCII character. Scripting helps eliminate this manual labour.
 
@@ -122,7 +122,7 @@ for idx in range(1, max_data_len):
 
 Output:
 
-{% image "assets/brute-sqlite-version.png", "w-70", "We successfully determined the SQLite Version: 3.41.2." %}
+{% image "assets/brute-sqlite-version.png", "jw-70", "We successfully determined the SQLite Version: 3.41.2." %}
 
 
 {% enddetails %}

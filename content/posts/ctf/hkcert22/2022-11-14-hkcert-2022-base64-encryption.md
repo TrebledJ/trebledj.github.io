@@ -49,7 +49,7 @@ Here’s one idea: since the plaintext is an English article, this means that mo
 
 Since Base64 simply maps 8-bits to 6-bits, so 3 characters of ASCII would be translated to 4 characters of Base64.
 
-{% image "assets/base64-is-so-cool.png", "w-65", "Base64 maps three characters to four." %}
+{% image "assets/base64-is-so-cool.png", "jw-65", "Base64 maps three characters to four." %}
 
 <sup>Base64 maps three characters to four. ([Source](https://www.tenminutetutor.com/img/data-formats/binary-encoding/base64.png))</sup>
 {.caption}
@@ -113,7 +113,7 @@ subchars_not_in_ascii = [get_inverted_chars_with_mask(m) for m in in_ascii]
 
 Another idea comes to mind. Remember the plaintext is in English? Well, with English text, some letters appear more frequently than others. The same applies to words and sequences. 
 
-{% image "assets/base64-letter-frequencies.jpg", "w-65", "Frequency of English letters. But we need to be careful with letter cases." %}
+{% image "assets/base64-letter-frequencies.jpg", "jw-65", "Frequency of English letters. But we need to be careful with letter cases." %}
 
 <sup>Frequency of the English alphabet. (Source: Wikipedia.)</sup>
 {.caption}
@@ -126,7 +126,7 @@ With this in mind, we can compare the ciphertext to the Base64 encoding of some 
 V2UncmUgbm8gc3RyYW5nZXJzIHRvIGxvdmUKWW91IGtub3cgdGhlIHJ1bGVzIGFuZCBzbyBkbyBJIChkbyBJKQpBIGZ1bGwgY29tbWl0bWVudCdzIHdoYXQgSSdtIHRoaW5raW5nIG9mCllvdSB3b3VsZG4ndCBnZXQgdGhpcyBmcm9tIGFueSBvdGhlciBndXkKSSBqdXN0IHdhbm5hIHRlbGwgeW91IGhvdyBJJ20gZmVlbGluZwpHb3R0YSBtYWtlIHlvdSB1bmRlcnN0YW5kCk5ldmVyIGdvbm5hIGdpdmUgeW91IHVwCk5ldmVyIGdvbm5hIGxldCB5b3UgZG93bgpOZXZlciBnb25uYSBydW4gYXJvdW5kIGFuZCBkZXNlcnQgeW91Ck5ldmVyIGdvbm5hIG1ha2UgeW91IGNyeQpOZXZlciBnb25uYSBzYXkgZ29vZGJ5ZQpOZXZlciBnb25uYSB0ZWxsIGEgbGllIGFuZCBodXJ0IHlvdQo=
 ```
 
-{% images "w-90" %}
+{% images "jw-90" %}
 {% image "assets/b64-plain-1gram.jpg", "", "dcode.fr frequency analysis for normal Base64." %}
 {% image "assets/b64-crypt-1gram.jpg", "", "dcode.fr frequency analysis for encrypted Base64." %}
 {% endimages %}
@@ -138,7 +138,7 @@ From this, we can deduce that 'w' was mapped from 'G' in the original encoding (
 
 One useful option is the **bigrams/n-grams** option. We can tell dcode to analyse frequencies of *groups of characters* with a sliding window. This is useful to identify words and sequences.
 
-{% images "w-90" %}
+{% images "jw-90" %}
 {% image "assets/b64-plain-4gram.jpg", "", "dcode.fr 4-gram for normal Base64." %}
 {% image "assets/b64-crypt-4gram.jpg", "", "dcode.fr 4-gram for encrypted Base64." %}
 {% endimages %}
@@ -198,7 +198,7 @@ Frequency analysis is useful to group letters into buckets. But using frequency 
 - Google: after decoding a sizeable portion, let's pray and hope the plaintext is open-source. Then use the plaintext to derive the rest of the mapping.
     - It turns out the plaintext is—quite aptly—the [Wikipedia summary of frequency analysis](https://en.wikipedia.org/wiki/Frequency_analysis).
     
-        {% image "assets/base64-wikipedia-frequency-analysis.jpg", "w-85", "Rrrreeeeeeeeeeeee.", "Wikipedia summary of frequency analysis." %}
+        {% image "assets/base64-wikipedia-frequency-analysis.jpg", "jw-85", "Rrrreeeeeeeeeeeee.", "Wikipedia summary of frequency analysis." %}
     
 Finding the rest of the mappings was quite easy. After a bit more tuning, we get the flag.
 

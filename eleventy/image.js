@@ -97,8 +97,8 @@ module.exports = function (eleventyConfig) {
       classes.splice(idx, 1);
 
     if (!['thumbnail'].includes(foundKey)) {
-      if (classes.every(c => !c.startsWith('w-')))
-        classes.push('w-100'); // Default to full-width;
+      if (classes.every(c => !c.startsWith('jw-')))
+        classes.push('jw-100'); // Default to full-width;
     }
 
     // Push rest of classes.
@@ -250,7 +250,7 @@ module.exports = function (eleventyConfig) {
 
     const ext = src.split('.').pop();
     // eslint-disable-next-line max-len
-    return `<div class="${classes.join(' ')}"><video autoplay loop muted class="w-100"><source src="/img/${src}" type="video/${ext}"></video></div>`;
+    return `<div class="${classes.join(' ')}"><video autoplay loop muted class="jw-100"><source src="/img/${src}" type="video/${ext}"></video></div>`;
   });
 
   eleventyConfig.addPairedShortcode('images', (images, containerClasses) => {
@@ -261,8 +261,8 @@ module.exports = function (eleventyConfig) {
     const CONTAINER_EFFECTIVE_WIDTH = 0.95;
 
     const defaultWidths = {
-      2: 'w-45',
-      3: 'w-30',
+      2: 'jw-45',
+      3: 'jw-30',
     };
 
     containerClasses = (containerClasses ?? '').split(' ');
@@ -279,7 +279,7 @@ module.exports = function (eleventyConfig) {
     const heights = wh.map(x => x[1]);
 
     DEFAULT_IMG_CLASSES.forEach(c => imgNodes.removeClass(c));
-    imgNodes.removeClass('w-100');
+    imgNodes.removeClass('jw-100');
 
     if (containerClasses.includes('h-auto')) {
       // h-auto: Make images have equal height so it appears as one seamless block.

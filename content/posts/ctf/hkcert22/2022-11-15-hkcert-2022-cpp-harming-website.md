@@ -21,13 +21,13 @@ We’re provided with the server binary written in C++. No source code. 😟 We�
 
 Hmm, I wonder what the website has in store for us. Let’s check it out!
 
-{% image "assets/website-seems-to-work.jpg", "w-65", "Website seems to work!", "Output of a GET request to the server. It doesn't seem to handle GET requests." %}
+{% image "assets/website-seems-to-work.jpg", "jw-65", "Website seems to work!", "Output of a GET request to the server. It doesn't seem to handle GET requests." %}
 
 How disappointing. Oh well, perhaps the binary is more helpful. Maybe we can find out how to work the website. Might be important. Might not be important. Who knows?[^might-be-important]
 
 Firing up Ghidra and loading the binary, we start by going to `main` (okay so far!). `main` doesn't seem to do much, besides calling `init`, `run`, and `std::cout`. Things get a lot more interesting when we look at `run`:
 
-{% image "assets/decompile-run.jpg", "w-85", "You can run, but you can't hide!" %}
+{% image "assets/decompile-run.jpg", "jw-85", "You can run, but you can't hide!" %}
 
 It’s easy to be intimidated by such a large application. And it’s in C++, so there’s a ton of garbage (`std`, templates, constructors, destructors, etc.).[^cpp]
 
@@ -51,22 +51,22 @@ After a bit of digging, we uncover quite a bit of info:
       - We can guess which JSON keys are parsed by looking at other strings. It appears the only key used is `message`.
       - We can try to use Postman or whatever to test the endpoint. Let's have a spin:
 
-        {% image "assets/postman-pat-postman-pat-postman-pat-and-his-black-and-white-cat.jpg", "w-95", "Postman Pat", "Postman output of a POST request to the server." %}
+        {% image "assets/postman-pat-postman-pat-postman-pat-and-his-black-and-white-cat.jpg", "jw-95", "Postman Pat", "Postman output of a POST request to the server." %}
 
     - There’s also some interesting strings such as “*charm.c*”. But I thought this was a C++ application? Perhaps a third-party library? Maybe we can use this later on.
 - The gold can be found in **`MyController::Encrypt::encrypt`**. This is where all the juicy stuff takes place. You can arrive here through a number of ways (e.g. following XREFs of `uc_encrypt`).
     - The function begins by generating a random Initialisation Vector (IV).
     - It then initialises some state using `uc_state_init` with a key.
         
-        {% image "assets/decompile-encrypt-1.jpg", "w-70", "Juicy init.", "Decompilation of the encrypt function. The code initialises random bytes and inits the state of the encryptor." %}
+        {% image "assets/decompile-encrypt-1.jpg", "jw-70", "Juicy init.", "Decompilation of the encrypt function. The code initialises random bytes and inits the state of the encryptor." %}
 
         Fortunately, the key is stored in static memory. In plain sight. This is very blursed: blessed, because (from a CTF POV) we don't need much work; and cursed, because (from a dev vs. exploiter POV) we don't need much work.
 
-        {% image "assets/encryption-rev-chal-with-hardcoded-key.jpg", "w-50", "YAS!", "Third world success meme!" %}
+        {% image "assets/encryption-rev-chal-with-hardcoded-key.jpg", "jw-50", "YAS!", "Third world success meme!" %}
 
     - The message is then encrypted using `uc_encrypt`.
 
-        {% image "assets/decompile-encrypt-2.jpg", "w-70", "Juicy encrypt.", "Decompilation of the encryption function being called." %}
+        {% image "assets/decompile-encrypt-2.jpg", "jw-70", "Juicy encrypt.", "Decompilation of the encryption function being called." %}
 
         I have no idea what `puVar[-0x227] = X` does, and apparently it's not important.
 

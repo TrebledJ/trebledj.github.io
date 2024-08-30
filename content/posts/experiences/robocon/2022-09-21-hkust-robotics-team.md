@@ -12,7 +12,7 @@ related:
     tags: [hkust, robotics]
 ---
 
-{% image "assets/off-ramp-robotics.jpg", "w-55", "Bye bye CGA.", "Off-ramp meme. Did I study subjects belonging to major? Nah." %}
+{% image "assets/off-ramp-robotics.jpg", "jw-55", "Bye bye CGA.", "Off-ramp meme. Did I study subjects belonging to major? Nah." %}
 
 Ah Fall... the time of year when undergrads decide what activities, societies, and extra-curriculars to join.
 
@@ -32,7 +32,7 @@ I joined the HKUST Robotics Team in my first year of university. In the Fall sem
 
 I found out about the team from an email about a free robotics exploration workshop. (Keyword is *free*.) So of course I signed up. It was a fun little experience to kickstart my university life, even though I lacked robotics experience. I thought it would be a good opportunity to explore different things while in uni.
 
-{% image "assets/chassis-example.jpg", "w-35", "Example of the chassis used." %}
+{% image "assets/chassis-example.jpg", "jw-35", "Example of the chassis used." %}
 
 In the workshop, we were given a chassis (like the one shown above) and were asked to build and program a bot to dribble a ping-pong ball across a maze. The workshop closed with a casual interview asking about our interests.
 
@@ -40,7 +40,7 @@ We were asked to pick a division (or department, as some call it): mechanical, h
 
 ### The Training ✏️
 
-{% image "assets/training.jpg", "w-55", "Training is tuff!" %}
+{% image "assets/training.jpg", "jw-55", "Training is tuff!" %}
 
 Next up were the tutorials. The first software tutorial was on basic programming using the C language. My prior experience with C++ helped a lot here.
 
