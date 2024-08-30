@@ -10,7 +10,7 @@ if (commentsElement) {
   const loadComments = new IntersectionObserver((entries, observer) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
-        console.log("loading comments...");
+        console.log('loading comments...');
         commentsElement.main();
         observer.unobserve(entry.target);
       }
