@@ -527,6 +527,16 @@ Haha. Nope.
 
 Not covering that here.
 
+### How to Exit Vim
+
+Obligatory.
+```sh
+:wq  # Write to file + exit.
+:q!  # Force exit.
+```
+
+Okay, that's enough vim.
+
 ## Hacky Hack Hack
 
 ### Generate Bytes
