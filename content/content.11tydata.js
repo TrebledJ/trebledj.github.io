@@ -8,7 +8,12 @@ module.exports = {
 
   eleventyComputed: {
     permalink: data => (data.draft && !process.env.BUILD_DRAFTS ? false : data.permalink),
-    hasPostedDate: data => !!(data.page.fileSlug.match(/^\d+-\d+-\d+/)),
+    hasPostedDate: data => {
+      // Check if the file contains a date.
+      // We need to use `inputPath`. `fileSlug` doesn't work because 11ty alrdy strips the date.
+      const file = data.page.inputPath.split('/').pop();
+      return !!(file.match(/^\d+-\d+-\d+/));
+    },
     hasUpdatedDate: _ => true,
 
     // Set date for sitemap lastmod.
