@@ -282,6 +282,8 @@ Did I mention that equal-height layouts are a thing!? This is made possible with
 
 ### Code
 
+Inline highlight, thanks to `markdown-it-prism` + `markdown-it-attr`: `class Demo { };`{language=cpp}, `function foo(a) { console.log(1); }`{language=js}.
+
 ```cpp
 #include <iostream>
 
@@ -321,11 +323,15 @@ cmake ..
 make
 ```
 
+When no language is provided, a code block is poorly rendered:
+
 ```  {.command-line data-a=abc}
 Just plain text.
 ```
 
-```txt
+_Hint: Check your browser devtools for element attributes!_
+
+```txt {data-copyable=true data-filename="a/file/path"}
 Supercalifragilisticespieladocious! Supercalifragilisticespieladocious! Supercalifragilisticespieladocious! Supercalifragilisticespieladocious! Supercalifragilisticespieladocious! Supercalifragilisticespieladocious! 
 ```
 
