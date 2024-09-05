@@ -79,11 +79,11 @@ For example, if our crumbs are 3, 1, 1, 1, then we've already arrived at our tar
 
 wRoNg! Ay c-rumba.
 
-{% image "assets/wrong.png", "w-55", "Very WrOnG!", "Terminal output showing 'Wrong!'" %}
+{% image "assets/wrong.png", "jw-55", "Very WrOnG!", "Terminal output showing 'Wrong!'" %}
 
 Using a Z3 script spun by reversing the program, we can output some test payloads. Now obviously this isn't the flag, but I'm interested in testing out some cases. Using `I` as the first letter, we trigger case 3 (`+0x15000`) as our first operation.^[Verifiable through GDB, with `b *main+245` and `p $rax`.] Turns out we can't do that as our first move, because it catapults us into `oops()`.
 
-{% image "assets/straight-to-oops.jpg", "w-55", "You straight to oops. Right away.", "Jail meme. But going to the oops function instead of jail." %}
+{% image "assets/straight-to-oops.jpg", "jw-55", "You straight to oops. Right away.", "Jail meme. But going to the oops function instead of jail." %}
 
 <sup>We have the best flag. Because of `oops()`.</sup>
 {.caption}
@@ -106,7 +106,7 @@ Don't underestimate these few lines. Even though the dereferenced value is unuse
 
 So why are some reads causing segfaults? To answer this, we can use the `vmmap` command that comes with GDB [GEF](https://github.com/hugsy/gef). This shows various segments of a binary, their address ranges, and whether they're readable/writable.^[There are other similar tools, but I'm accustomed to GEF's vmmap.]
 
-{% image "assets/vmmap.png", "w-95", "vmmap shows us a comprehensive list of regions in the ELF.", "Image of vmmap command and output in GEF." %}
+{% image "assets/vmmap.png", "jw-95", "vmmap shows us a comprehensive list of regions in the ELF.", "Image of vmmap command and output in GEF." %}
 
 Yikes! That's a lot of segments. Notice how some of them disallow all permissions? Our pointer was trying to read those regions. All that's left is to filter out the regions in our code.
 

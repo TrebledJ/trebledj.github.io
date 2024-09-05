@@ -7,6 +7,7 @@ tags:
   - meta
   - notes
   - writeup
+  - project
 thumbnail_src: assets/optimising-web-icons-thumbnail.png
 ---
 
@@ -14,7 +15,7 @@ I decided to spend this Labour Day doing a bit of frontend performance engineeri
 
 Here’s the dealio: icon webfonts are known to bundle *all* icons. This includes icons we don't use. For Font Awesome, this means the browser downloads 19kB CSS + 287kB WOFF2 gzipped data. But my site just uses 40 out of 2000… why download so much?^[287kB gzipped comes from fa-brands, plus fa-regular, plus fa-solid. Fortunately, these variants are only downloaded if used. 2000 icons just counts solid, regular, and brands. Imagine the number of icons if premium FA was used!]
 
-{% image "assets/fonts-are-pretty-heavy.jpg", "w-50", "I present you the heaviest objects in the universe: Font Files." %}
+{% image "assets/fonts-are-pretty-heavy.jpg", "jw-50", "I present you the heaviest objects in the universe: Font Files." %}
 
 I should take a step back. There are generally two established ways to handle icons on the web: 1) webfonts (plus CSS), and 2) inline SVGs (Scalable Vector Graphics). As its name suggests, SVGs scale nicely to any screen size and remove the need for font files. Both have their [use cases](https://blog.fontawesome.com/webfont-vs-svg/), but the modern web recommends SVGs for general cases.
 
@@ -124,7 +125,7 @@ After integrating the minification into my build process, I excitedly waited for
 
 But even after refreshing multiple times, the **Time to First Byte (TTFB)** was roughly the same compared to loading the original files.
 
-{% image "assets/y-server-no-fast.jpg", "w-60", "Server - why u no fast?" %}
+{% image "assets/y-server-no-fast.jpg", "jw-60", "Server - why u no fast?" %}
 
 The answer? CDN.
 

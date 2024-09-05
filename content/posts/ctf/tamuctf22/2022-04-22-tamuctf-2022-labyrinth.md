@@ -116,13 +116,13 @@ simgr.explore(find=tar_addr)  # GOGOGO!!!
 #### Path Explosion
 Unfortunately, this takes forever to run due to *path explosion*. Notice how the control flow makes the paths diverge in one of the binaries:
 
-{% image "assets/labyrinth-path-explosion-graph.jpg", "w-80", "Paths go boom.", "Example diagram of path explosion." %}
+{% image "assets/labyrinth-path-explosion-graph.jpg", "jw-80", "Paths go boom.", "Example diagram of path explosion." %}
 
 Now angr is pretty smart, but not too smart. angr will simulate all paths and if it encounters a branch, it will simulate both branches together. However, it will treat the `function_133` branches as separate states...
 
 To get a more concrete view of paths exploding, Gru tried calling `simgr.run(n=50)`—which simulates 50 steps...
 
-{% image "assets/labyrinth-path-explosion-gru.jpg", "w-80", "Good going, Gru!", "Gru explains his plan to avoid path explosion. (not)" %}
+{% image "assets/labyrinth-path-explosion-gru.jpg", "jw-80", "Good going, Gru!", "Gru explains his plan to avoid path explosion. (not)" %}
 
 90 active states is quite a lot! Usually we'd want to limit ourselves to around 10 active states to ensure good simulation speed.
 

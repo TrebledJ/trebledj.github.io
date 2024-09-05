@@ -7,11 +7,41 @@
         lightbox: {{ site.lightbox | dump | safe }},
     };
 {% endjs %}
-{% js %} {% include "assets/js.bundle/head.js" %} {% endjs %}
+
+{% js %}
+    {# head.js #}
+    {% include "assets/js.bundle/common/ctrlk-to-search.js" %}
+    {% include "assets/js.bundle/common/scroll-progress.js" %}
+    $(() => {
+        {% include "assets/js.bundle/common/btn-back-to-top.js" %}
+        {% include "assets/js.bundle/common/btn-go-to-tags.js" %}
+        {% include "assets/js.bundle/common/carousel-dyn-update.js" %}
+        {% include "assets/js.bundle/common/load-tooltips.js" %}
+        {% include "assets/js.bundle/common/load-soundcloud.js" %}
+        {% include "assets/js.bundle/common/misc.js" %}
+    });
+{% endjs %}
+
 {% js %} {% include "assets/js.bundle/banner.js.njk" %} {% endjs %}
 {% js %} {% include "assets/js.bundle/lightbox.js.njk" %} {% endjs %}
 {% js %} {% include "assets/js.bundle/404.js" %} {% endjs %}
-{% js %} {% include "assets/js.bundle/post.js" %} {% endjs %}
+{# {% js %} {% include "assets/js.bundle/post.js" %} {% endjs %} #}
+
+{% js %}
+    $(() => {
+        if ($('.post-body').length === 0) {
+            // Not a post.
+            return;
+        }
+
+        {% include "assets/js.bundle/post/copy-url.js" %}
+        {% include "assets/js.bundle/post/toc-misc.js" %}
+        {% include "assets/js.bundle/post/toc-highlight-current-section.js" %}
+        {% include "assets/js.bundle/post/details.js" %}
+        {% include "assets/js.bundle/post/load-comments.js" %}
+    });
+{% endjs %}
+
 {% js %} {% include "assets/js.bundle/search.js" %} {% endjs %}
 {% js %}
     if (document.querySelector(site.typewrite.selector))

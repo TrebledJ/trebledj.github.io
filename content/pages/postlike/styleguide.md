@@ -220,7 +220,7 @@ Check line breaks here:
 
 {% image "https://imgs.xkcd.com/comics/purity.png", "", "Full-width image.", "xkcd on purity of subjects" %}
 
-{% image "~/assets/img/memes/unlimited-power.jpg", "w-85", "Muahahahaha! Fear the power of title text.", "Palpatine shooting out bolts of alt text." %}
+{% image "~/assets/img/memes/unlimited-power.jpg", "jw-85", "Muahahahaha! Fear the power of title text.", "Palpatine shooting out bolts of alt text." %}
 
 <sup>Have you heard of Darth Plagueis the Wise?^[No? Then allow me to entertain you...]</sup>
 {.caption}
@@ -238,12 +238,12 @@ We can splay multiple images in a row too!
 
 Did I mention that equal-height layouts are a thing!? This is made possible with `h-auto`. 
 
-{% images "h-auto w-80" %}
+{% images "h-auto jw-80" %}
 {% image "~/assets/img/memes/404-4.jpg", "", "first" %}
 {% image "~/assets/img/memes/interesting.jpg", "", "second" %}
 {% endimages %}
 
-<sup>Two images are better than one, for if either of them ~~falls~~ sucks, one can help the other up. (`images "h-auto w-80"`)</sup>
+<sup>Two images are better than one, for if either of them ~~falls~~ sucks, one can help the other up. (`images "h-auto jw-80"`)</sup>
 {.caption}
 
 {% images %}

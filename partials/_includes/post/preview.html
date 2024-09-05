@@ -4,7 +4,7 @@
 {% macro render_thumbnail(post) %}
     <a class="post-thumbnail" href="{{post.url}}">
         {% thumbnail post, "post-img-blurred-bg" %}
-        <div class="post-img-container d-flex w-100 h-100">
+        <div class="post-img-container d-flex jw-100 h-100">
             {% thumbnail post, "post-img-contain" %}
         </div>
     </a>

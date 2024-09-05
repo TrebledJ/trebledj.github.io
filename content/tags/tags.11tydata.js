@@ -14,6 +14,8 @@ module.exports = {
     permalink: data => `/tags/${data.page.fileSlug}/index.html`,
     title: data => data.title || toTitleCase(data.page.fileSlug),
     tag: data => data.page.fileSlug,
+
+    // Remove /tags/, /{fileSlug}..., and convert the remaining folders into dotty notation.
     group: data => data.page.filePathStem.replace(/^\/tags\//, '').replace(/\/[\w-]+$/, '').replace('/', '.'),
   },
 };

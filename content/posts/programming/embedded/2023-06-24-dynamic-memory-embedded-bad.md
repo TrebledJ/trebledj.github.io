@@ -15,7 +15,7 @@ related:
     auto: true
 ---
 
-{% image "assets/dynamic-memory-1.jpg", "w-45", "'Memory management is not my concern.' - Clueless Embedded Engineers." %}
+{% image "assets/dynamic-memory-1.jpg", "jw-45", "'Memory management is not my concern.' - Clueless Embedded Engineers." %}
 
 <sup>Getting better hardware is not always the solution. Sometimes; but not always. Don't be clueless.</sup>
 {.caption}
@@ -29,7 +29,7 @@ To clarify, dynamic memory allocation (in embedded) isn't *always* bad, just as 
 
 {% endalert %}
 
-{% image "assets/dynamic-memory-2.jpg", "w-65", "Ooooh, dynamic memory—fancy!" %}
+{% image "assets/dynamic-memory-2.jpg", "jw-65", "Ooooh, dynamic memory—fancy!" %}
 
 <sup>Clueless software engineers thinking "the more advanced the concept, the better". Don't be clueless.</sup>
 {.caption}
@@ -40,7 +40,7 @@ Not only is allocation an issue. Virtual classes, exceptions, runtime type infor
 
 Because of **Memory Fragmentation**. This occurs when we keep allocating and deallocating memory in various sizes. This may lead to wasted memory, leading to slower allocations (due to the need to reallocate and compact memory) or our worst nightmare: an out-of-memory exception. 🤯
 
-{% image "assets/memory-fragmentation.jpg", "w-85", "Memory is fragmented, like buildings with alleys in between, where rats and other vermin fester." %}
+{% image "assets/memory-fragmentation.jpg", "jw-85", "Memory is fragmented, like buildings with alleys in between, where rats and other vermin fester." %}
 
 <sup>Memory becomes fragmented after multiple allocs and deallocs, leading to wasted memory space. ([source](https://er.yuvayana.org/memory-fragmentation-in-operating-system/))</sup>
 {.caption}

@@ -18,7 +18,7 @@
     {# Updated Date #}
     <div class="d-flex flex-row align-items-center">
         {% block post_metadata_updated %}
-            {% set updatedDate = lastContentCommit | maxDate(updated) %}
+            {% set updatedDate = modified | maxDate(updated) %}
             {# `not hasPostedDate` needed to check if `page.date` exists. #}
             {% if hasUpdatedDate and updatedDate and ((not hasPostedDate) or (updatedDate | date) > (page.date | date)) %}
                 <span class="post-updated-date-icon">

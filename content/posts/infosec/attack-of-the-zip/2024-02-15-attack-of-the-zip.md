@@ -20,7 +20,7 @@ Zip files are *everywhere* in our daily lives, seamlessly integrated into our pe
 
 But as we know from *Silicon Valley*, zip files have the potential to be dangerous.
 
-{% image "assets/yikes-its-a-zip-bomb.jpg", "w-80", "Filmmakers' impression of a zip bomb." %}
+{% image "assets/yikes-its-a-zip-bomb.jpg", "jw-80", "Filmmakers' impression of a zip bomb." %}
 <sup>YouTube: [Silicon Valley - The Ultimate Hack](https://www.youtube.com/watch?v=jnDk8BcqoR0)</sup>{.caption}
 
 In this post, we'll delve into the intriguing world of zip file attacks, exploring various attacks and mitigations involving zip files. These attacks allow attackers to potentially gain unauthorised file read/write privileges—or even cause denial of service. This calls for mitigations to bolster our systems’ defences.
@@ -33,7 +33,7 @@ Disclaimer: The content provided in this blog post is intended purely for educat
 
 ## Zip Attacks
 
-{% image "assets/evil-zip-unveiled.jpg", "w-50", "Fred dissects evil zip files. Spoofy-spoofy doo!" %}
+{% image "assets/evil-zip-unveiled.jpg", "jw-50", "Fred dissects evil zip files. Spoofy-spoofy doo!" %}
 
 ### Zip Slip ⛸
 
@@ -365,7 +365,7 @@ Any service processing such files has potential to be vulnerable.
 
 ## Mitigations and Other Considerations
 
-{% image "https://csis-website-prod.s3.amazonaws.com/s3fs-public/publication/171212_cyber_Defense.jpg", "w-40 floatr1", "Credit: Cybrain/Adobe Stock" %}
+{% image "https://csis-website-prod.s3.amazonaws.com/s3fs-public/publication/171212_cyber_Defense.jpg", "jw-40 floatr1", "Credit: Cybrain/Adobe Stock" %}
 
 So much for the offensive side. How about the defensive aspect? What approaches can we take to secure our systems?
 
@@ -374,7 +374,7 @@ Let's explore a few ways to mitigate zip attacks. (Some of these can also be app
 ### Permissions
 *For sysadmins.*
 
-{% image "assets/you-guys-apply-hardening-question-mark.jpg", "w-60", "Input sanitisation? Never heard of it!" %}
+{% image "assets/you-guys-apply-hardening-question-mark.jpg", "jw-60", "Input sanitisation? Never heard of it!" %}
 
 {% alert "success" %}
 1. Avoid running applications as `root` or `Administrator`. Instead, run it with a minimum privilege user.

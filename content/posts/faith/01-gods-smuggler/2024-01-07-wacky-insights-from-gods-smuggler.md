@@ -10,7 +10,7 @@ related:
     tags: [faith]
 ---
 
-{% image "assets/thumbnail.jpg", "w-45 p-2 floatr1", "Cover image of God's Smuggler." %}
+{% image "assets/thumbnail.jpg", "jw-45 p-2 floatr1", "Cover image of God's Smuggler." %}
 
 Last year, a friend lent me his copy of <ins>God’s Smuggler</ins>, an autobiography of Brother Andrew’s adventures behind the Iron Curtain (into Communist countries).
 

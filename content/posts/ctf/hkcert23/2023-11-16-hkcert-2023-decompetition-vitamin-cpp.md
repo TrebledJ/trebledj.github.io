@@ -81,13 +81,13 @@ But hey, it’s just a simple lil’ trie, not a friggin standard template conta
 
 ## Trie Me
 
-{% image "assets/there-is-no-trie.jpg", "w-45", "If you never trie, you will never know.", "Do or do not, there is no trie!" %}
+{% image "assets/there-is-no-trie.jpg", "jw-45", "If you never trie, you will never know.", "Do or do not, there is no trie!" %}
 
 Let’s briefly review tries. What is a trie?
 
 Tries, or prefix trees, are data structures commonly used to efficiently store and retrieve strings. They are particularly useful for tasks like autocomplete or spell checking. The key idea behind tries is that each node in the tree represents a *prefix of a string*, and the edges represent the *characters* that can follow that prefix.
 
-{% image "https://theoryofprogramming.files.wordpress.com/2015/01/trie12.jpg", "w-60 alpha-img", "A trie containing the words: *that*, *there*, *this*, *does*, and *did*." %}
+{% image "https://theoryofprogramming.files.wordpress.com/2015/01/trie12.jpg", "jw-60 alpha-img", "A trie containing the words: *that*, *there*, *this*, *does*, and *did*." %}
 <sup>Example of trie containing the words *that*, *there*, *this*, *does*, and *did*. Each edge represents a letter to the next prefix. ([Source](https://theoryofprogramming.wordpress.com/2015/01/16/trie-tree-implementation/))</sup>{.caption}
 
 - In terms of matching an exact string, the complexity is similar to a hashmap: `O(n)` insert/search time, w.r.t. the length of the string. But a hashmap is typically faster as it requires fewer operations.
@@ -608,11 +608,11 @@ I'm sure the chal is called Vitamin C++ because it's designed to make us (mental
 
 Lots of tuning was involved; but the various tricks employed above netted us a first blood, so I can't complain. Despite a couple lines of janky const-uncorrect code, it was a nice challenge.
 
-{% image "assets/where-mah-const-correctness.jpg", "w-60", "Hello?! Const-correctness? Ever heard of it?" %}
+{% image "assets/where-mah-const-correctness.jpg", "jw-60", "Hello?! Const-correctness? Ever heard of it?" %}
 
 Also, who doesn't like a good pun hidden in a challenge?
 
-{% image "assets/nice-trie-graph.jpg", "w-60", "An error message saying 'nice trie(graph)' embedded in the sanity checker." %}
+{% image "assets/nice-trie-graph.jpg", "jw-60", "An error message saying 'nice trie(graph)' embedded in the sanity checker." %}
 
 
 ## Solve Sauce

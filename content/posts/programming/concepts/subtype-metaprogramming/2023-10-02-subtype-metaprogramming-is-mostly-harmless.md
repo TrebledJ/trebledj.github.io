@@ -87,7 +87,7 @@ Still, let's look at some key insights:
 
 And guess what? That's all we need! Just follow the numbers like how Alice follows the White Rabbit!
 
-{% image "assets/shocker.jpg", "w-45", "Naur way!!!", "Shocked meme. That feeling when Mostly Harmless is an eyesore, but is actually pretty harmless." %}
+{% image "assets/shocker.jpg", "jw-45", "Naur way!!!", "Shocked meme. That feeling when Mostly Harmless is an eyesore, but is actually pretty harmless." %}
 
 ### Script
 
@@ -344,7 +344,7 @@ At this point, you should be able to appreciate the double entendre in the title
 
 ## Metaprogramming with Type Hints
 
-{% image "assets/magic.jpg", "w-50", "SpongeBob agrees: it's all magic.", "Spongebob gesturing a rainbow, suggesting metaprogramming with type hints is magic." %}
+{% image "assets/magic.jpg", "jw-50", "SpongeBob agrees: it's all magic.", "Spongebob gesturing a rainbow, suggesting metaprogramming with type hints is magic." %}
 
 {% alert "warning" %}
 **Disclaimer: Here be dragons.**
@@ -460,7 +460,7 @@ The whole ordeal is rather complicated. Essentially, there are two things to be 
 
 * Type Encoding. Different aspects of the tape machine are encoded as types. For example, the `L_*` encode the set of possible values (excluding $\bot$, i.e. no value), and `ML` encodes the machine head.
     
-    {% image "assets/table1.png", "w-70", "Table showing various symbols in Grigore's encoding; copied from Roth's paper." %}
+    {% image "assets/table1.png", "jw-70", "Table showing various symbols in Grigore's encoding; copied from Roth's paper." %}
 
     <sup>The components of Grigore’s subtyping machine. All classes are parameterised by a contravariant type parameter $x$, except $Z$, which is monomorphic.[^roth2023]</sup>
     {.caption}
@@ -469,7 +469,7 @@ The whole ordeal is rather complicated. Essentially, there are two things to be 
 
 * Inheritance Rules. These are used to encode state transitions and the general mechanics of the Turing machine.
 
-    {% image "assets/table4.png", "w-80", "Table showing various inheritance rules; copied from Roth's paper." %}
+    {% image "assets/table4.png", "jw-80", "Table showing various inheritance rules; copied from Roth's paper." %}
 
     <sup>Roth's subtyping inheritance rules. This image is included to illustrate inheritance rules. They differ from the rules in the challenge (which are based on Grigore's work). The first 4 rows encode Turing Machine state transitions. Again, the type parameter $x$ is contravariant.[^roth2023]</sup>
     {.caption}
