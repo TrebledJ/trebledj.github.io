@@ -298,12 +298,19 @@ fn main() {
 }
 ```
 
+```txt {.line-numbers data-start=2}
+This raw text
+is not highlighted
+but it still has
+line numbers
+```
+
 ```haskell
 main :: IO ()
 main = putStrLn "Hello world!"
 ```
 
-```scala
+```scala {.line-numbers}
 object HelloWorld {
   def main(args: Array[String]): Unit = {
     println("Hello world!")
@@ -315,12 +322,22 @@ object HelloWorld {
 echo "Hello world!"
 ```
 
-```sh {.command-line data-a=abc}
+```sh {.command-line data-output=1}
 # Multiline.
 mkdir build
 cd build
 cmake ..
 make
+```
+
+```txt {.command-line .line-numbers data-output=6}
+What
+if
+we
+mix
+them
+# woohoo!
+together?
 ```
 
 When no language is provided, a code block is poorly rendered:

@@ -5,6 +5,18 @@ const markdownItSpoiler = require('@traptitech/markdown-it-spoiler');
 const markdownItPrism = require('markdown-it-prism');
 const pluginTOC = require('eleventy-plugin-toc');
 
+// import loadLanguages from 'prismjs/components/'
+const loadLanguages = require('prismjs/components/');
+
+
+const jsdom = require("jsdom");
+const { JSDOM } = jsdom;
+
+global.window = (new JSDOM('')).window;
+global.document = global.window.document;
+global.getComputedStyle = window.getComputedStyle;
+// global.document = 1;
+
 module.exports = function (eleventyConfig) {
   eleventyConfig.amendLibrary('md', mdLib => {
     mdLib.use(markdownItAttrs, {
@@ -50,12 +62,15 @@ module.exports = function (eleventyConfig) {
       // }
       return n;
     };
-    
+  
     // Codeblocks and Syntax Highlighting
     mdLib.use(markdownItPrism, {
       highlightInlineCode: true,
+      plugins: ['diff-highlight', 'command-line', 'line-numbers']
     });
+    // loadLanguages(['diff']);
 
+    // TODO: cleanup and refactor
     const HTML_ESCAPE_TEST_RE = /[&<>"]/
     const HTML_ESCAPE_REPLACE_RE = /[&<>"]/g
     const HTML_REPLACEMENTS = {
@@ -139,17 +154,32 @@ module.exports = function (eleventyConfig) {
         langName = arr[0]
         langAttrs = arr.slice(2).join('')
       }
-    
+
+      if (token.content.startsWith('\n'))
+        token.content = token.content.substring(1);
+      if (token.content.endsWith('\n'))
+        token.content = token.content.substring(0, token.content.length - 1);
+      
       let highlighted
       if (options.highlight) {
-        highlighted = options.highlight(token.content, langName, langAttrs) || escapeHtml(token.content)
+        if (langName.startsWith('diff-')) {
+          let diffRemovedRawName = langName.substring("diff-".length);
+          if (!Prism.languages[diffRemovedRawName])
+            loadLanguages([diffRemovedRawName]);
+          if (!Prism.languages.diff)
+            loadLanguages(['diff']);
+          Prism.languages[langName] = Prism.languages.diff;
+          highlighted = Prism.highlight(token.content, Prism.languages.diff, langName);
+        } else {
+          highlighted = options.highlight(token.content, langName, langAttrs) || escapeHtml(token.content)
+        }
       } else {
         highlighted = escapeHtml(token.content)
       }
     
-      if (highlighted.indexOf('<pre') === 0) {
-        return highlighted + '\n'
-      }
+      // if (highlighted.indexOf('<pre') === 0) {
+      //   return highlighted + '\n'
+      // }
     
       // If language exists, inject class gently, without modifying original token.
       // May be, one day we will add .deepClone() for token and simplify this part, but
@@ -170,7 +200,24 @@ module.exports = function (eleventyConfig) {
           attrs: tmpAttrs
         }
     
-        return `<pre${slf.renderAttrs(tmpToken)}><code class="${options.langPrefix}${langName}">${highlighted}</code></pre>\n`
+        if (Prism.languages[langName] === undefined) {
+          loadLanguages([langName])
+          // langObject = Prism.languages[langName]
+        }
+
+        const result = `<pre${slf.renderAttrs(tmpToken)}><code class="${options.langPrefix}${langName}">${highlighted}</code></pre>\n`
+        // if (langName === 'sh' && highlighted.includes('Multiline')) {
+        
+        const clss = tmpAttrs.find(e => e[0] === 'class');
+        if (tmpAttrs.length > 1 || (clss && (clss[1].match(/ /g)?.length ?? 0) >= 1)) {
+          // Complex info - highlight with custom Prism plugins.
+          const el = JSDOM.fragment(result);
+          Prism.highlightElement(el.firstChild.firstChild);
+          const newResult = el.firstChild.outerHTML;
+          return newResult;
+        }
+        
+        return result;
       }
     
       return `<pre${slf.renderAttrs(token)}><code>${highlighted}</code></pre>\n`

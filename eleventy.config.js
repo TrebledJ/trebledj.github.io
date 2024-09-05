@@ -23,6 +23,8 @@ module.exports = function (eleventyConfig) {
     './content/**/assets/*.mp4': '/img',
     './assets/webfonts': '/webfonts',
     './assets/css/**/*.{css,map}': '/css',
+    './node_modules/prismjs/plugins/command-line/prism-command-line.css': '/css',
+    './node_modules/prismjs/plugins/line-numbers/prism-line-numbers.css': '/css',
   });
   eleventyConfig.addPassthroughCopy({
     './assets/js/**/*.js': '/js/',
