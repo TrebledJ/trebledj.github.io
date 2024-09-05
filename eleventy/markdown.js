@@ -66,7 +66,7 @@ module.exports = function (eleventyConfig) {
     // Codeblocks and Syntax Highlighting
     mdLib.use(markdownItPrism, {
       highlightInlineCode: true,
-      plugins: ['diff-highlight', 'command-line', 'line-numbers',/*  'toolbar', 'copy-to-clipboard' */]
+      plugins: ['diff-highlight', 'command-line', 'line-numbers', 'toolbar', 'copy-to-clipboard']
     });
 
     // TODO: cleanup and refactor
@@ -205,19 +205,23 @@ module.exports = function (eleventyConfig) {
           // langObject = Prism.languages[langName]
         }
 
-        const result = `<pre${slf.renderAttrs(tmpToken)}><code class="${options.langPrefix}${langName}">${highlighted}</code></pre>\n`
+        // Some plugins such as toolbar venture into codeElement.parentElement.parentElement,
+        // so we'll wrap the `pre` in an additional `div` for class purposes.
+        const result = `<div><pre${slf.renderAttrs(tmpToken)}><code class="${options.langPrefix}${langName}">${highlighted}</code></pre></div>`
         // if (langName === 'sh' && highlighted.includes('Multiline')) {
         
         // const clss = tmpAttrs.find(e => e[0] === 'class');
         // if (tmpAttrs.length > 1 || (clss && (clss[1].match(/ /g)?.length ?? 0) >= 1)) {
           // Complex info - highlight with custom Prism plugins.
           const el = JSDOM.fragment(result);
-          Prism.highlightElement(el.firstChild.firstChild);
-          const newResult = el.firstChild.outerHTML;
+          Prism.highlightElement(el.firstChild.firstChild.firstChild);
+          let newResult = el.firstChild.firstChild.outerHTML;
+          if (!newResult.endsWith('\n'))
+            newResult += '\n';
           return newResult;
         // }
         
-        return result;
+        // return result;
       }
     
       return `<pre${slf.renderAttrs(token)}><code>${highlighted}</code></pre>\n`
