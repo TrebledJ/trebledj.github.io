@@ -8,11 +8,9 @@ module.exports = {
 
   eleventyComputed: {
     permalink: data => (data.draft && !process.env.BUILD_DRAFTS ? false : data.permalink),
-    hasPostedDate: data => {
-      return !!(data.page.fileSlug.match(/^\d+-\d+-\d+/));
-    },
+    hasPostedDate: data => !!(data.page.fileSlug.match(/^\d+-\d+-\d+/)),
     hasUpdatedDate: _ => true,
-    
+
     // Set date for sitemap lastmod.
     modified: data => {
       if (process.env.ENVIRONMENT !== 'production')
@@ -22,7 +20,7 @@ module.exports = {
         const date = getGitCommitDate(data.page.inputPath);
         return date;
       }
-      
+
       // Posts will default to their own date or updated date.
       return undefined;
     },
