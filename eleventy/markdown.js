@@ -66,9 +66,8 @@ module.exports = function (eleventyConfig) {
     // Codeblocks and Syntax Highlighting
     mdLib.use(markdownItPrism, {
       highlightInlineCode: true,
-      plugins: ['diff-highlight', 'command-line', 'line-numbers']
+      plugins: ['diff-highlight', 'command-line', 'line-numbers',/*  'toolbar', 'copy-to-clipboard' */]
     });
-    // loadLanguages(['diff']);
 
     // TODO: cleanup and refactor
     const HTML_ESCAPE_TEST_RE = /[&<>"]/
@@ -161,7 +160,7 @@ module.exports = function (eleventyConfig) {
         token.content = token.content.substring(0, token.content.length - 1);
       
       let highlighted
-      if (options.highlight) {
+      // if (options.highlight) {
         if (langName.startsWith('diff-')) {
           let diffRemovedRawName = langName.substring("diff-".length);
           if (!Prism.languages[diffRemovedRawName])
@@ -169,12 +168,13 @@ module.exports = function (eleventyConfig) {
           if (!Prism.languages.diff)
             loadLanguages(['diff']);
           Prism.languages[langName] = Prism.languages.diff;
-          highlighted = Prism.highlight(token.content, Prism.languages.diff, langName);
-        } else {
-          highlighted = options.highlight(token.content, langName, langAttrs) || escapeHtml(token.content)
-        }
+          highlighted = Prism.highlight(token.content, Prism.languages.diff, langName) || escapeHtml(token.content);
+      //   } else {
+      //     highlighted = options.highlight(token.content, langName, langAttrs) || escapeHtml(token.content)
+        // }
       } else {
         highlighted = escapeHtml(token.content)
+        // highlighted = token.content;
       }
     
       // if (highlighted.indexOf('<pre') === 0) {
@@ -208,14 +208,14 @@ module.exports = function (eleventyConfig) {
         const result = `<pre${slf.renderAttrs(tmpToken)}><code class="${options.langPrefix}${langName}">${highlighted}</code></pre>\n`
         // if (langName === 'sh' && highlighted.includes('Multiline')) {
         
-        const clss = tmpAttrs.find(e => e[0] === 'class');
-        if (tmpAttrs.length > 1 || (clss && (clss[1].match(/ /g)?.length ?? 0) >= 1)) {
+        // const clss = tmpAttrs.find(e => e[0] === 'class');
+        // if (tmpAttrs.length > 1 || (clss && (clss[1].match(/ /g)?.length ?? 0) >= 1)) {
           // Complex info - highlight with custom Prism plugins.
           const el = JSDOM.fragment(result);
           Prism.highlightElement(el.firstChild.firstChild);
           const newResult = el.firstChild.outerHTML;
           return newResult;
-        }
+        // }
         
         return result;
       }

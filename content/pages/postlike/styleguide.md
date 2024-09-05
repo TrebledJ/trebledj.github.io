@@ -335,9 +335,10 @@ What
 if
 we
 mix
-them
+command line
 # woohoo!
-together?
+and
+line numbers?
 ```
 
 When no language is provided, a code block is poorly rendered:
@@ -353,6 +354,13 @@ Supercalifragilisticespieladocious! Supercalifragilisticespieladocious! Supercal
 ```
 
 ```diff-js
++function myFunction() {
+   // …
+-  return true;
+ }
+```
+
+```diff-js {.line-numbers}
 +function myFunction() {
    // …
 -  return true;
