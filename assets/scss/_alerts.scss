@@ -26,7 +26,7 @@ html[data-theme="dark"] {
                 color: var(--#{$prefix}alert-link-color);
             }
 
-            code {
+            :not(pre) > code {
                 color: color-mix(in srgb, var(--bs-code-color) 75%, #{shift-color($alert-color, -60%)} 25%);
             }
 
