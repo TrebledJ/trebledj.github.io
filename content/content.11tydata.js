@@ -9,16 +9,22 @@ module.exports = {
   eleventyComputed: {
     permalink: data => (data.draft && !process.env.BUILD_DRAFTS ? false : data.permalink),
     hasPostedDate: data => {
-      const file = data.page.inputPath.split('/').pop();
-      return !!(file.match(/^\d+-\d+-\d+/));
+      return !!(data.page.fileSlug.match(/^\d+-\d+-\d+/));
     },
     hasUpdatedDate: _ => true,
-    date: data => {
+    
+    // Set date for sitemap lastmod.
+    modified: data => {
+      if (process.env.ENVIRONMENT !== 'production')
+        return undefined;
+
       if (!data.page.inputPath.includes('/posts/')) {
-        // Set date for sitemap lastmod.
-        return getGitCommitDate(data.page.inputPath);
+        const date = getGitCommitDate(data.page.inputPath);
+        return date;
       }
+      
       // Posts will default to their own date or updated date.
+      return undefined;
     },
   },
 };

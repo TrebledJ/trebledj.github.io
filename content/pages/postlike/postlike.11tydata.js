@@ -22,7 +22,7 @@ module.exports = {
   layout: 'layouts/post-default',
   showToc: true,
   eleventyComputed: {
-    lastContentCommit: getCachedPostlikeDate,
+    modified: getPostlikeDate,
   },
   thumbnail_src: '~/assets/img/posts/thumbnail/default.webp',
   thumbnail_banner: false,

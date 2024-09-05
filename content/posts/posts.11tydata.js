@@ -7,7 +7,8 @@ module.exports = {
   layout: 'layouts/post-default',
   showToc: true,
   eleventyComputed: {
-    lastContentCommit: data => {
+    // Note: `modified` is also used to determine a page's lastmod field for sitemap.xml.
+    modified: data => {
       if (process.env.ENVIRONMENT === 'production')
         return getGitCommitDate(data.page.inputPath, { keep: /^content/ });
       return undefined;
