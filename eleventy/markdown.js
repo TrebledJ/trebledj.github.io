@@ -68,10 +68,10 @@ module.exports = function (eleventyConfig) {
       highlightInlineCode: true,
       plugins: ['diff-highlight', 'command-line', 'toolbar']
     });
-    require('./detail/prism-trebledj-line-numbers');
-    // require('./detail/prism-trebledj-show-filename');
-    require('./detail/prism-trebledj-show-language');
-    require('./detail/prism-trebledj-copy-to-clipboard');
+    require('./detail/prism-line-numbers');
+    // require('./detail/prism-show-filename');
+    require('./detail/prism-show-language');
+    require('./detail/prism-copy-to-clipboard');
 
     // TODO: cleanup and refactor
     const HTML_ESCAPE_TEST_RE = /[&<>"]/
