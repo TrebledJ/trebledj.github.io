@@ -298,13 +298,6 @@ fn main() {
 }
 ```
 
-```txt {.line-numbers data-start=2}
-This raw text
-is not highlighted
-but it still has
-line numbers
-```
-
 ```haskell
 main :: IO ()
 main = putStrLn "Hello world!"
@@ -321,6 +314,48 @@ object HelloWorld {
 ```sh
 echo "Hello world!"
 ```
+
+When no language is provided, a code block is poorly rendered:
+
+```
+Just plain text.
+```
+
+_Hint: Check for element attributes with your browser devtools!_
+
+```txt {data-test=true data-filename-abc="a/file/path"}
+Supercalifragilisticespieladocious! Supercalifragilisticespieladocious! Supercalifragilisticespieladocious! Supercalifragilisticespieladocious! Supercalifragilisticespieladocious! Supercalifragilisticespieladocious! 
+```
+
+#### Code: `line-numbers`
+
+We use a modified `line-numbers` plugin, which allows skipping lines.
+
+```txt {.line-numbers data-start=2}
+This raw text
+is not highlighted
+but it still has
+line numbers
+```
+
+To skip lines, specify a `data-ln-skip` attribute. The format is similar to the `command-line` plugin.
+
+* e.g. `1-2, 5, 9-20` means skip lines 1-2, 5, and 9-20.
+* The following uses `{.line-numbers data-start=3 data-ln-skip=2,5-6}` attr.
+
+```cpp {.line-numbers data-start=3 data-ln-skip=2,5-6}
+int main() {
+  // This line is skipped.
+  Dog d;
+  d.speak();
+  // These lines are 
+  // also skipped.
+}
+```
+
+#### Code: `command-line`
+
+Reference: [PrismJS `command-line` Plugin](https://prismjs.com/plugins/command-line/)
 
 ```sh {.command-line data-output=1}
 # Multiline.
@@ -345,17 +380,29 @@ MORE
 MOREEE
 ```
 
-When no language is provided, a code block is poorly rendered:
+```powershell {.command-line data-prompt="PS C:\Users\Chris>" data-output=2-19}
+dir
 
-```  {.command-line data-a=abc}
-Just plain text.
+
+    Directory: C:\Users\Chris
+
+
+Mode                LastWriteTime     Length Name
+----                -------------     ------ ----
+d-r--        10/14/2015   5:06 PM            Contacts
+d-r--        12/12/2015   1:47 PM            Desktop
+d-r--         11/4/2015   7:59 PM            Documents
+d-r--        10/14/2015   5:06 PM            Downloads
+d-r--        10/14/2015   5:06 PM            Favorites
+d-r--        10/14/2015   5:06 PM            Links
+d-r--        10/14/2015   5:06 PM            Music
+d-r--        10/14/2015   5:06 PM            Pictures
+d-r--        10/14/2015   5:06 PM            Saved Games
+d-r--        10/14/2015   5:06 PM            Searches
+d-r--        10/14/2015   5:06 PM            Videos
 ```
 
-_Hint: Check your browser devtools for element attributes!_
-
-```txt {data-copyable=true data-filename="a/file/path"}
-Supercalifragilisticespieladocious! Supercalifragilisticespieladocious! Supercalifragilisticespieladocious! Supercalifragilisticespieladocious! Supercalifragilisticespieladocious! Supercalifragilisticespieladocious! 
-```
+#### Code: `diff-highlight`
 
 ```diff-js
 +function myFunction() {
@@ -364,12 +411,16 @@ Supercalifragilisticespieladocious! Supercalifragilisticespieladocious! Supercal
  }
 ```
 
+`line-numbers` doesn't work too well with `diff-highlight` because our stylesheet introduces 4px extra padding per highlighted line for breathing space. We can change this in `prism-diff.css`, but well – `line-numbers` don't make too much sense with diffing, don't ya think? 
+
 ```diff-js {.line-numbers}
 +function myFunction() {
    // …
 -  return true;
  }
 ```
+
+#### Code: `filename`
 
 
 ## Custom

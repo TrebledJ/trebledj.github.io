@@ -44,7 +44,7 @@ pre[class*="language-diff-"] {
 	color: inherit; /* override del, ins, mark defaults */
 }
 
-/* Custom (TrebledJ): More whitespace between +/- and start of line. */
+/* More whitespace between +/- and start of line. */
 .token.prefix {
 	margin-right: 3px;
 }
