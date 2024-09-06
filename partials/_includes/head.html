@@ -4,16 +4,11 @@
     <link rel="stylesheet" href="/css/main.css"/>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"/>
-    {% if assets and assets.critical_css %}
-        {% for asset in assets.critical_css %}
-            <link rel="stylesheet" href="{{asset}}"/>
-        {% endfor %}
-    {% endif %}
 
     {% if site.lightbox.enabled %}
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/magnific-popup@1.1.0/dist/magnific-popup.min.css" media="print"/>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/magnific-popup@1.1.0/dist/magnific-popup.min.css" />
     {% endif %}
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.min.css" media="print"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.min.css" />
 
     {% css %}
         {% include "assets/css/prism/prism-command-line.css" %}
@@ -27,28 +22,20 @@
     {% endset %}
     <link rel="stylesheet" href="{{cssFileBundle}}" media="print"/>
 
-    {% if assets and assets.css %}
-        {% for asset in assets.css %}
-            <link rel="stylesheet" href="{{asset}}" media="print"/>
-        {% endfor %}
+    {% if page.url == "/" %}
+        {# Home page. #}
+        <link rel="stylesheet" href="/css/shooting-stars.css"/>
     {% endif %}
+
     <style>{% getBundle "inlinecss" %}</style>
     
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/jquery@3.7.0/dist/jquery.min.js" as="script" />
 
     {% include "utilities/async-css.html" %}
     {% include "utilities/theme-switch.html" %}
 
     {# Critical scripts here. Other scripts should go at end of body to avoid blocking DOM load. #}
     <script defer src="https://cdn.jsdelivr.net/npm/jquery@3.7.0/dist/jquery.min.js"></script>
-    {% if site.lightbox.enabled %}
-        <script defer src="https://cdn.jsdelivr.net/npm/magnific-popup@1.1.0/dist/jquery.magnific-popup.min.js"></script>
-    {% endif %}
-
-    {% if assets and assets.critical_js %}
-        {% for asset in assets.critical_js %}
-            <script defer src="{{asset}}"></script>
-        {% endfor %}
-    {% endif %}
 
     {% if comments %}
         <link rel="stylesheet" href="/css/comments.css"/>
