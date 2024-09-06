@@ -86,20 +86,21 @@ function selectElementText(element) {
 }
 
 var clipboardSettings = {
-    'copy': 'Copy',
-    'copy-error': 'Press Ctrl+C to copy',
-    'copy-success': 'Copied!',
+    'copy': 'var(--icon-copy)',
+    // 'copy-error': '',
+    'copy-success': 'var(--icon-copied)',
     'copy-timeout': 5000
 };
 
 document.querySelectorAll('.copy-to-clipboard-button').forEach(el => {
     function setState(state) {
-        el.firstChild.textContent = clipboardSettings[state];
+        // el.firstChild.textContent = clipboardSettings[state];
+        el.style.backgroundImage = clipboardSettings[state];
         el.setAttribute('data-copy-state', state);
     }
 
     function resetText() {
-        setTimeout(function () { setState('copy'); }, settings['copy-timeout']);
+        setTimeout(function () { setState('copy'); }, clipboardSettings['copy-timeout']);
     }
 
     registerClipboard(el, {
@@ -118,7 +119,7 @@ document.querySelectorAll('.copy-to-clipboard-button').forEach(el => {
             resetText();
         },
         error: function () {
-            setState('copy-error');
+            // setState('copy-error');
 
             setTimeout(function () {
                 selectElementText(el);

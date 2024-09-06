@@ -66,9 +66,11 @@ module.exports = function (eleventyConfig) {
     // Codeblocks and Syntax Highlighting
     mdLib.use(markdownItPrism, {
       highlightInlineCode: true,
-      plugins: ['diff-highlight', 'command-line', /* 'line-numbers', */ 'toolbar', 'copy-to-clipboard']
+      plugins: ['diff-highlight', 'command-line', 'toolbar']
     });
     require('./detail/prism-trebledj-line-numbers');
+    require('./detail/prism-trebledj-show-language');
+    require('./detail/prism-trebledj-copy-to-clipboard');
 
     // TODO: cleanup and refactor
     const HTML_ESCAPE_TEST_RE = /[&<>"]/
