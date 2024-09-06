@@ -311,19 +311,21 @@
 			return (id.substring(0, 1).toUpperCase() + id.substring(1)).replace(/s(?=cript)/, 'S');
 		}
 
-        var language;
-        if (env.language.match(/^diff-/)) {
-            const baseLang = env.language.substring('diff-'.length);
-            language = (Languages[baseLang] || guessTitle(baseLang)) + ' (diff)';
-        } else {
-            language = pre.getAttribute('data-language') || Languages[env.language] || guessTitle(env.language);
-        }
-
+        var language = pre.getAttribute('data-language');
+		if (!language) {
+			if (env.language.match(/^diff-/)) {
+				const baseLang = env.language.substring('diff-'.length);
+				language = (Languages[baseLang] || guessTitle(baseLang)) + ' (diff)';
+			} else {
+				language =  Languages[env.language] || guessTitle(env.language);
+			}
+		}
 
 		if (!language) {
 			return;
 		}
 		var element = document.createElement('span');
+		element.classList.add('lang');
 		element.textContent = language;
 
 		return element;

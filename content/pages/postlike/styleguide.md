@@ -420,8 +420,30 @@ d-r--        10/14/2015   5:06 PM            Videos
  }
 ```
 
-#### Code: `filename`
+#### Code: `data-label`
 
+```js {data-label="prism-show-filename.js" .line-numbers data-start=13}
+Prism.plugins.toolbar.registerButton('show-filename', function (env) {
+  var pre = env.element.parentNode;
+  if (!pre || !/pre/i.test(pre.nodeName)) {
+    return;
+  }
+
+  var filename = pre.getAttribute('data-filename');
+  if (!filename) {
+      return;
+  }
+
+  var element = document.createElement('span');
+  element.textContent = filename;
+
+  return element;
+});
+```
+
+```txt {data-label="Just a casual label."}
+Hello world!
+```
 
 ## Custom
 
@@ -481,6 +503,9 @@ Its wings are too small to get its fat little body off the ground. The bee, of c
 ```sh
 echo "Conversely, if you drive, don't drink."
 echo "test"
+```
+```txt
+Supercalifragilisticespieladocious! Supercalifragilisticespieladocious! Supercalifragilisticespieladocious! Supercalifragilisticespieladocious! Supercalifragilisticespieladocious! Supercalifragilisticespieladocious!
 ```
 {% endalert %}
 

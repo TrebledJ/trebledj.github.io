@@ -69,6 +69,7 @@ module.exports = function (eleventyConfig) {
       plugins: ['diff-highlight', 'command-line', 'toolbar']
     });
     require('./detail/prism-trebledj-line-numbers');
+    // require('./detail/prism-trebledj-show-filename');
     require('./detail/prism-trebledj-show-language');
     require('./detail/prism-trebledj-copy-to-clipboard');
 

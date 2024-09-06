@@ -16,6 +16,7 @@
 		var linkCopy = document.createElement('button');
 		linkCopy.className = 'copy-to-clipboard-button';
 		linkCopy.setAttribute('type', 'button');
+		linkCopy.setAttribute('title', 'Copy Code')
 		// var linkSpan = document.createElement('span');
 		// linkCopy.appendChild(linkSpan);
 
