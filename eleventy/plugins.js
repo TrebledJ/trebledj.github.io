@@ -16,6 +16,7 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPlugin(pluginNavigation);
 
   eleventyConfig.addPlugin(pluginBundle, {
+    bundles: ['inlinecss'],
     toFileDirectory: 'cb',
     transforms: [
       async function (content) {

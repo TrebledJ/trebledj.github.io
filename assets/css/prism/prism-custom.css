@@ -4,28 +4,18 @@
 }
 
 .copy-to-clipboard-button {
-    // direction: ltr;
-    // position: absolute;
-    // top: 12px;
-    // right: 12px;
-    // z-index: 3;
     color: var(--main-text-color);
-    // border: 1px solid var(--border-color);
     border: none;
     border-radius: 5px;
     width: 30px;
     height: 30px;
     background-color: var(--medium-background-color);
-    // opacity: 0;
-    // cursor: pointer;
     background-image: var(--icon-copy);
     background-position: 50%;
     background-size: 18px;
     background-repeat: no-repeat; 
-    // transition: border-color .25s,background-color .25s,opacity .25s;
 }
 
-// Don't allow selection of language label.
 div.code-toolbar > .toolbar > .toolbar-item > span.lang {
     -webkit-user-select: none;
 	user-select: none;

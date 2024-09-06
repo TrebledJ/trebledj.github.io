@@ -14,17 +14,26 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/magnific-popup@1.1.0/dist/magnific-popup.min.css" media="print"/>
     {% endif %}
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.min.css" media="print"/>
-    <link rel="stylesheet" href="/css/prism-diff.css" media="print"/>
-    <link rel="stylesheet" href="/css/prism-command-line.css" media="print"/>
-    <link rel="stylesheet" href="/css/prism-line-numbers.css" media="print"/>
-    <link rel="stylesheet" href="/css/prism-toolbar.css" media="print"/>
+
+    {% css %}
+        {% include "assets/css/prism/prism-command-line.css" %}
+        {% include "assets/css/prism/prism-diff.css" %}
+        {% include "assets/css/prism/prism-line-numbers.css" %}
+        {% include "assets/css/prism/prism-toolbar.css" %}
+        {% include "assets/css/prism/prism-custom.css" %}
+    {% endcss %}
+    {% set cssFileBundle %}
+        {%- getBundleFileUrl "css" -%}
+    {% endset %}
+    <link rel="stylesheet" href="{{cssFileBundle}}" media="print"/>
 
     {% if assets and assets.css %}
         {% for asset in assets.css %}
             <link rel="stylesheet" href="{{asset}}" media="print"/>
         {% endfor %}
     {% endif %}
-    <style>{% getBundle "css" %}</style>
+    <style>{% getBundle "inlinecss" %}</style>
+    
 
     {% include "utilities/async-css.html" %}
     {% include "utilities/theme-switch.html" %}
