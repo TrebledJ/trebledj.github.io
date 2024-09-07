@@ -435,10 +435,18 @@ Combine with `grep`/`less` for filtered results.
 
 ## Networking
 
-**IP**
+### IP and Ports
+
+**IP Addresses and Networks**
 ```sh {data-lang-off .command-line data-prompt="$" data-filter-output="# "}
 ifconfig
 ifconfig tun0
+```
+
+**Get Our Public IP**
+```sh {data-lang-off .command-line data-prompt="$" data-filter-output="# "}
+curl ifconfig.me
+# X.X.X.X
 ```
 
 **Open Ports/Sockets**
