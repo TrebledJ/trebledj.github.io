@@ -178,9 +178,9 @@ So how do we reverse this? Generally, there are two approaches to take:
 - Static analysis. This means we reverse the binary by looking at the bytecode, assembly, decompiler, etc. We don't run or emulate anything.
 - Dynamic analysis. In this approach, we observe the program's behaviour by running it. Common tools are `gdb`, `strace`, and `ltrace`.
 
-Approaching this statically seems faster, but error-prone. For example, what does `memcpy(&some_buffer,"/",0x200);` even mean??? Copy 512 slashes? Copy 1 slash and 511 null-bytes? Or are Rust semantics not easily decompiled?
+Approaching this statically seems faster, but integer semantics may get lost in translation. Our conclusion may be unstable.
 
-For fun (and practice), we'll go the dynamic route. Let's insert some breakpoints, input our flag of !!64 unique characters (e.g. Base64 alphabet)!!, grab the permuted string, and construct a mapping.
+Thus, for fun (and practice), we'll go the dynamic route. Let's insert some breakpoints, input our flag of !!64 unique characters (e.g. Base64 alphabet)!!, grab the permuted string, and construct a mapping.
 
 In GDB:
 
