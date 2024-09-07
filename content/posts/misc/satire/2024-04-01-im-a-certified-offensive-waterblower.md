@@ -4,7 +4,6 @@ excerpt: Emotional penetration testing is no joke. Millions suffer each year.
 tags:
   - satire
   - infosec
-  - experience
   - programming
 thumbnail_src: assets/cow-thumbnail.png
 thumbnail_banner: true
