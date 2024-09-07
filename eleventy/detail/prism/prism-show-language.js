@@ -79,7 +79,8 @@
 		"cobol": "COBOL",
 		"coffee": "CoffeeScript",
 		"conc": "Concurnas",
-		"csp": "Content-Security-Policy",
+		// "csp": "Content-Security-Policy",
+		"csp": "C++ Server Pages",
 		"css-extras": "CSS Extras",
 		"csv": "CSV",
 		"cue": "CUE",
@@ -295,6 +296,10 @@
 	Prism.plugins.toolbar.registerButton('show-language', function (env) {
 		var pre = env.element.parentNode;
 		if (!pre || !/pre/i.test(pre.nodeName)) {
+			return;
+		}
+
+		if (pre.getAttribute('data-lang-off') !== null) {
 			return;
 		}
 

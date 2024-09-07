@@ -4,12 +4,9 @@
 }
 
 .copy-to-clipboard-button {
-    color: var(--main-text-color);
     border: none;
-    border-radius: 5px;
     width: 30px;
     height: 30px;
-    background-color: var(--medium-background-color);
     background-image: var(--icon-copy);
     background-position: 50%;
     background-size: 18px;
