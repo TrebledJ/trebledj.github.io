@@ -231,12 +231,8 @@
 		// var lines = new Array(linesNum + 1).join('<span></span>');
 		var lines = new Array(linesNum).fill('<span></span>');
 
-		// Skip lines
-		var lineNumbersToSkip = pre.getAttribute('data-ln-skip');
-		if (lineNumbersToSkip === null && pre.classList.contains("command-line")) {
-			// Otherwise, default to `data-output` attribute from the command-line plugin.
-			lineNumbersToSkip = pre.getAttribute('data-output');
-		}
+		// Skip lines using the same attribute as command-lines.
+		var lineNumbersToSkip = pre.getAttribute('data-output');
 
 		if (lineNumbersToSkip !== null) {
 			// Parse line numbers - adapted from the command-line plugin.

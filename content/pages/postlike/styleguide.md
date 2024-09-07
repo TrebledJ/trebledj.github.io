@@ -338,12 +338,12 @@ but it still has
 line numbers
 ```
 
-To skip lines, specify a `data-ln-skip` attribute. The format is similar to the `command-line` plugin.
+To skip lines, specify a `data-output` attribute. The format is similar to the `command-line` plugin.
 
 * e.g. `1-2, 5, 9-20` means skip lines 1-2, 5, and 9-20.
-* The following uses `{.line-numbers data-start=3 data-ln-skip=2,5-6}` attr.
+* The following uses `{.line-numbers data-start=3 data-output=2,5-6}` attr.
 
-```cpp {.line-numbers data-start=3 data-ln-skip=2,5-6}
+```cpp {.line-numbers data-start=3 data-output=2,5-6}
 int main() {
   // This line is skipped.
   Dog d;
@@ -352,6 +352,8 @@ int main() {
   // also skipped.
 }
 ```
+
+On second thought, this use of `line-numbers` may not make much sense, since copying this code will result in the comments being copied as well.
 
 #### Code: `command-line`
 
