@@ -61,7 +61,7 @@ shell echo Hi
 We want to inspect a program in the guts. But how do we stop it where we want?
 
 - `^C` during program execution. (Also throws a {% abbr "`SIGINT`", "SIGnal INTerrupt." %}.)
-- Use `start` instead of `run`. {% abbr "Breaks", "Pauses the program" %} after starting the program.
+- Use `start` instead of `run`. Breaks after starting the program.
 - Use [breakpoints](#breakpoints) (break on address).
 - Use [watchpoints](#watchpoints) (break on data).
 
@@ -69,7 +69,7 @@ We want to inspect a program in the guts. But how do we stop it where we want?
 
 Once we've stopped, what do we do? How do we navigate instructions and functions effectively?
 
-Step debugging is one of the core features of GDB, and an invaluable tool for all programmers. Modern IDEs have step debugging functionality built-in to operate seamlessly with code.
+Step debugging is one of the core features of GDB, and an invaluable tool for all programmers. Modern IDEs have step debugging functionality built-in to operate seamlessly with code. But in GDB, you can operate it with the familiar touch of your keyboard!
 
 ```sh {data-lang-off}
 # Step Debugging
@@ -180,8 +180,11 @@ set {c-type}<address> = <value>
 # For self-compiled sources.
 set var i = 10
 set {int}0x83040 = 4
+```
 
-# With cast + dereference.
+You can also modify memory at a pointer location by casting to an appropriate type and dereferencing.
+
+```sh {data-lang-off}
 ## C++
 set *{uint32_t*}0x7fffffffd000 = 0xdeadbeef
 ## Rust
@@ -267,7 +270,7 @@ heap bins
 
 ## Breakpoints
 
-{% abbr "Breaks", "Pauses the program" %} when address reaches an instruction.
+Breaks when address reaches an instruction.
 
 ```sh {data-lang-off}
 break *<address>
@@ -285,7 +288,7 @@ break *main+200
 break main.c:6 if i == 5
 ```
 
-Further reading:
+Further Reading:
 - [SO: GDB – Break if variable equal value](https://stackoverflow.com/q/14390256/10239789)
 
 ### Breakpoint Control
@@ -333,7 +336,7 @@ enable once <breakpoint-id>
 
 ### Watchpoints
 
-{% abbr "Breaks", "Pauses the program" %} when data changes. More specifically, whenever the *value of an expression* changes, a break occurs.
+Breaks when data changes. More specifically, whenever the *value of an expression* changes, a break occurs.
 
 This includes:
 - when an address is **written** to. (`watch`, `awatch`)
@@ -382,6 +385,29 @@ Further Reading:
 
 - [GDB: Setting Watchpoints](https://sourceware.org/gdb/current/onlinedocs/gdb.html/Set-Watchpoints.html)
 
+
+### GDB Script
+
+GDB commands can be placed in files and run in the following ways:
+
+- `~/.gdbinit` and `./.gdbinit` are executed automatically on GDB startup.
+
+- On the command line, with `-x`/`--command`:
+  ```sh
+  gdb --batch --command=test.gdb --args ./test.exe 5
+  ```
+
+- Using the `source` command in GDB:
+  ```sh {data-language=GDB}
+  source myscript.gdb
+  ```
+
+Further Reading:
+- [GDB Reference - Command Files](https://sourceware.org/gdb/current/onlinedocs/gdb.html/Command-Files.html)
+- [GDB Scripting Commands and Examples](https://cgi.cse.unsw.edu.au/~learn/debugging/modules/gdb_init_file/)
+- [SO: What are the best ways to automate a GDB debugging session?](https://stackoverflow.com/q/10748501/10239789)
+
+
 ## Miscellaneous
 
 ### Install GEF
@@ -406,7 +432,35 @@ gdb -q
 Further Reading:
 - [GitHub: GEF](https://github.com/hugsy/gef)
 
+### `pwnlib.gdb.attach`
+
+This allows you to programmatically interact with the binary with an initial GDB script or send I/O with Python. This uses the Python `pwn` module — a versatile exploit development package — which you can install with `pip install pwntools`.
+
+```python
+from pwn import *
+
+bash = process('bash')
+
+# Attach the debugger
+gdb.attach(bash, '''
+set follow-fork-mode child
+break execve
+continue
+''')
+
+# Interact with the process
+bash.sendline(b"echo Hello World")
+```
+
+Further Reading:
+
+- [SO: `gdb.attach` Example](https://stackoverflow.com/a/62014210/10239789)
+- [`gdb.attach` Documentation](https://docs.pwntools.com/en/stable/gdb.html#pwnlib.gdb.attach)
+
+
 ### Input Non-Printable Characters
+
+Sometimes you may want to manually fuzz or construct complex attack payloads. There are multiple ways to do so.
 
 {% alert "danger" %}
 I don't recommend using Python 3 to generate strings on-the-fly, as its string/byte-string mechanics are unintuitive. Prefer `perl` or `echo` instead.
@@ -426,7 +480,7 @@ Printing bytes in Python is [difficult to do concisely](https://stackoverflow.co
 r <<<$(perl -e 'print "A"x4 . "\x01\x02"x2;')
 ```
 
-This uses a Bash [here-string](https://www.gnu.org/savannah-checkouts/gnu/bash/manual/bash.html#Here-Strings) to feed goodies into input.
+This uses a Bash [here-string](https://www.gnu.org/savannah-checkouts/gnu/bash/manual/bash.html#Here-Strings) to feed goodies into input. Not supported on all machines.
 
 <!--
 **Directly from GDB: Continue**
@@ -459,28 +513,12 @@ This empties `args`. You can also use this command to set arbitrary arguments. T
 set args [arguments...]
 ```
 
-**Using `pwnlib.gdb.attach`**
+**With [`pwnlib.gdb.attach`](#pwnlib-gdb-attach)**
 
 ```python
-from pwn import *
-
-bash = process('bash')
-
-# Attach the debugger
-gdb.attach(bash, '''
-set follow-fork-mode child
-break execve
-continue
-''')
-
-# Interact with the process
 bash.sendline(b"echo '\x01\x02\x03\x04'")
 ```
 
-Further Reading:
-
-- [SO: `gdb.attach` Example](https://stackoverflow.com/a/62014210/10239789)
-- [`gdb.attach` Documentation](https://docs.pwntools.com/en/stable/gdb.html#pwnlib.gdb.attach)
 
 ### Enable ASLR
 
