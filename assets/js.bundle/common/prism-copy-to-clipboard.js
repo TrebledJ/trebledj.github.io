@@ -151,6 +151,11 @@ function filterTextToCopy(preElement, code) {
         });
 
         code = lines.filter(s => s !== undefined).join('\n');
+    } else if (preElement.classList.contains('command-line')) {
+        var nonOutputLines = preElement.querySelectorAll('.token.command');
+        code = Array.prototype.slice.call(nonOutputLines)
+            .map(e => e.textContent)
+            .join('\n')
     }
 
     return code;
