@@ -38,6 +38,7 @@
 		"aql": "AQL",
 		"ino": "Arduino",
 		"arff": "ARFF",
+		"asm": "Assembly",
 		"armasm": "ARM Assembly",
 		"arm-asm": "ARM Assembly",
 		"art": "Arturo",
