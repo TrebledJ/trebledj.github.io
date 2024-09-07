@@ -61,6 +61,10 @@
     i {
         color: var(--main-text-color);
     }
+
+    @include media-breakpoint-up(lg) {
+        display: none !important; // Requires !important because jquery fadeIn fadeOut modifies display.
+    }
 }
 
 // --- Sticky Components --- //
