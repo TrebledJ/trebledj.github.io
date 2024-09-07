@@ -72,8 +72,9 @@ module.exports = function () {
         { tag: 'composition', icon: 'fas fa-music' },
         { tag: 'embedded', icon: 'fas fa-bolt' },
         { tag: 'programming', icon: 'fas fa-code' },
+        { tag: 'reading', icon: 'fas fa-book' },
       ],
-      resultDefaultIcon: 'newspaper',
+      resultDefaultIcon: 'fas fa-newspaper',
       maxResults: 50,
     },
     lightbox: {
