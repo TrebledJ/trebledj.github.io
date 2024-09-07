@@ -98,6 +98,10 @@ blockquote {
     border-left: $border-width-thick solid #3642df;
 }
 
+html[data-theme=dark] code {
+    --bs-code-color: #f8c555;
+}
+
 form {
     --bs-body-color: #212529;
 }
@@ -126,7 +130,7 @@ h6 {
 
 pre,
 .alert {
-    border-radius: $border-radius-block !important;
+    border-radius: $border-radius !important;
 }
 
 

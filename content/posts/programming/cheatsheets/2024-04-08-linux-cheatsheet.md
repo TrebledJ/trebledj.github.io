@@ -23,32 +23,31 @@ By "favourite", I mean I've used these commands a *lot*, and they've drastically
 ## Cool Stuff
 
 **Control (`^`) Commands**
-```sh
+```sh {data-lang-off .command-line data-prompt="$" data-filter-output="# "}
 ^c # Duh. https://xkcd.com/416/
 ^d # Exit / EOF.
-
 ^r # Reverse search: for those long commands stashed in history.
 ```
 
 **Ternary Expression**
-```sh
+```sh {data-lang-off .command-line data-prompt="$" data-filter-output="# "}
 [ 1 -eq 1 ] && echo 'true' || echo 'false'
 # true
 ```
 
 **Clear screen**. Useful for graphical hiccups.
-```sh
+```sh {data-lang-off .command-line data-prompt="$" data-filter-output="# "}
 reset
 ```
 
 **Run shell script without `chmod +x`.**
-```sh
-. ~/.zshrc  # Dot command.
+```sh {data-lang-off .command-line data-prompt="$" data-filter-output="# "}
+. ~/.zshrc
 source ~/.zshrc
 ```
 
 **Tree view of files.**
-```sh
+```sh {data-lang-off .command-line data-prompt="$" data-filter-output="# "}
 tree
 ```
 
@@ -58,17 +57,16 @@ tree
 - Double-quotes allow variable expansion and command substitution.
 - Single-quotes don't. **Prefer single-quotes for simple strings.**
 
-```sh
+```sh {data-lang-off .command-line data-prompt="$" data-filter-output="# "}
 echo "$((1+1))" "$SHELL"
 # 2 /bin/zsh
-
 echo '$((1+1))' '$SHELL'
 # $((1+1)) $SHELL
 ```
 
 **Multi-Line / Escape**  
 Prefix the string with `$`.
-```sh
+```sh {data-lang-off .command-line data-prompt="$" data-filter-output="# "}
 echo $'...'
 ```
 
@@ -78,7 +76,7 @@ echo $'...'
 **Example**
 
 Multi-Line Strings.
-```sh
+```sh {data-lang-off .command-line data-prompt="$" data-filter-output="# "}
 echo $'1\n2\n3'
 # 1
 # 2
@@ -86,7 +84,7 @@ echo $'1\n2\n3'
 ```
 
 Find words containing `'t` in comma-separated line.
-```sh
+```sh {data-lang-off .command-line data-prompt="$" data-filter-output="# "}
 echo -n $'can\'t,don\'t,I\'ll,I\'m,won\'t' | awk -vRS=, $'$0 ~ /\'t/'
 # can't
 # don't
@@ -106,22 +104,23 @@ echo -n $'can\'t,don\'t,I\'ll,I\'m,won\'t' | awk -vRS=, $'$0 ~ /\'t/'
 **Examples**
 
 Retry with sudo.
-```sh
+```sh {data-lang-off .command-line data-prompt="$" data-filter-output="# "}
 mkdir /var/tmp/lol
 # Permission denied.
 sudo !!
-# Yay!
+# → sudo mkdir /var/tmp/lol
+# Success!
 ```
 
 Found an interesting directory, but forgot to *cd*.
-```sh
+```sh {data-lang-off .command-line data-prompt="$" data-filter-output="# "}
 ls long/path
 cd !$
 # → cd long/path
 ```
 
 Rename file in folder from file.txt to booyah.md.
-```sh
+```sh {data-lang-off .command-line data-prompt="$" data-filter-output="# "}
 cat long/path/file.txt
 mv "!$" "$(dirname !$)/booyah.md"
 # → mv long/path/file.txt long/path/booyah.md
@@ -142,7 +141,7 @@ mv "!$" "$(dirname !$)/booyah.md"
 
 ### Redirection
 
-```sh
+```sh {data-lang-off}
 < out.txt # Read from file (to stdin).
 > out.txt # Write to file (from stdout).
 >> out.txt # Append to file (from stdout).
@@ -170,26 +169,38 @@ I won't cover too much of these commands here, as tons of articles already cover
 ### awkward things
 
 #### awk - Cut
-```sh
-awk '$0=$3' # Cut third field.
-awk '{print $3}' # Print third field. (Pretty much same as the command above.)
-
+```sh {data-lang-off .command-line data-prompt="$" data-filter-output="# "}
+# Cut third field.
+awk '$0=$3'
+# 
+# Print third field. (Pretty much same as the command above.)
+awk '{print $3}'
+# 
 # Use ',' as field delimiter, e.g. for CSVs.
 awk -F, '{print $3}'
-# or use the script variable `FS` (Field Separator).
+# 
+# Or use the script variable `FS` (Field Separator).
 awk -v FS=, '{print $3}
 ```
 
 #### awk - Filtering
-```sh
-awk '$1 == 1' # Filter lines with first field = 1.
-awk '$0 ~ /^foo/' # Filter lines with regex.
+
+Without entering the scripting environment `{...}`, `awk` will run filters against each line.
+
+```sh {data-lang-off .command-line data-prompt="$" data-filter-output="# "}
+seq 1 4 | awk '$1 % 2 == 1'
+# 1
+# 3
+echo $'foo1\nbar1\nfoo2' | awk '$0 ~ /^foo/'
+# foo1
+# foo2
 ```
 
 #### awk - Math
-```sh
-awk '{$1 += 5}1' # Add 5 to the first arg, then print the line.
-
+```sh {data-lang-off .command-line data-prompt="$" data-filter-output="# "}
+# Add 5 to the first arg, then print the line.
+awk '{$1 += 5}1'
+# 
 seq 1 3 | awk '{$1 += 5}1'
 # 6
 # 7
@@ -197,7 +208,7 @@ seq 1 3 | awk '{$1 += 5}1'
 ```
 
 #### awk - Scripting
-```sh
+```sh {data-lang-off .command-line data-prompt="$" data-filter-output="# "}
 awk '{print "booyah",$1,"yahoo"}'
 # awk also has variables, if, for, while, arrays, etc.
 ```
@@ -214,7 +225,7 @@ Script variables. (Useful for configuring row/column delimiters.)
 ### grep
 
 **Useful Flags**
-```sh
+```sh {data-lang-off}
 # case-insensitive
 -i
 # regex
@@ -228,7 +239,7 @@ Script variables. (Useful for configuring row/column delimiters.)
 xargs is a versatile command-line utility that allows efficient execution of commands from, making it a powerful tool for automation and batch processing.
 
 Interesting options:
-```sh
+```sh {data-lang-off .command-line data-prompt="$" data-filter-output="# "}
 -P <n> # max procs
 -n <n> # num args
 -I {}  # pattern to insert into command
@@ -238,18 +249,22 @@ Interesting options:
 **Examples**
 
 Combine multiple lines into 1 line.
-```sh
+```sh {data-lang-off .command-line data-prompt="$" data-filter-output="# "}
+echo $'1\n2\n3'
+# 1
+# 2
+# 3
 echo $'1\n2\n3' | xargs 
-# Output: 1 2 3 (no newline)
+# 1 2 3
 ```
 
 Multi-Processing: Execute `./do-something-to-file.sh <file>` on multiple files, with at most 4 processes.
-```sh
+```sh {data-lang-off .command-line data-prompt="$" data-filter-output="# "}
 cat files.txt | xargs -P 4 -n1 ./do-something-to-file.sh
 ```
 
 Multi-Processing: Port Scan with Ports 1-1000 Through `proxychains`.
-```sh
+```sh {data-lang-off .command-line data-prompt="$" data-filter-output="# "}
 seq 1 1000 | xargs -P 50 -I{} proxychains4 -q nmap -p {} -sT -Pn --open -n -T4 --oN nmap.txt --append-output 192.168.101.10
 ```
 {% endalert %}
@@ -257,20 +272,22 @@ seq 1 1000 | xargs -P 50 -I{} proxychains4 -q nmap -p {} -sT -Pn --open -n -T4 -
 
 ### Other Utilities
 
-```sh
-basename ~/.bashrc # .bashrc     # Filename, without path.
-dirname ~/.bashrc  # /home/bob/  # Path to file.
+```sh {data-lang-off .command-line data-prompt="$" data-filter-output="# "}
+basename ~/.bashrc
+# .bashrc
+dirname ~/.bashrc
+# /home/trebledj
 ```
 
 #### Directory Stack
-```sh
+```sh {data-lang-off .command-line data-prompt="$" data-filter-output="# "}
 pushd # Push current directory, for easier returning.
 popd  # Return to directory on top of stack.
 ```
 
 {% alert "success" %}
 **`pushd`/`popd` Example**
-```sh
+```sh {data-lang-off .command-line data-prompt="$" data-filter-output="# "}
 cd ~/a/b/c
 pushd deep/nested/directory
 # Jump to `deep/nested/directory`, push `~/a/b/c` into the stack.
@@ -285,21 +302,21 @@ popd  # Return to `~/a/b/c`.
 `less` is a powerful text viewer (read-only), with capabilities to navigate, search, and filter lines in a file or long text.
 
 #### less - Nice Options
-```sh
+```sh {data-lang-off .command-line data-prompt="$" data-filter-output="# "}
 less file.txt
-
+# 
 # Renders ANSI colors.
 less -R file.txt
-
+# 
 # Pager search becomes case insensitive.
 less -I file.txt
-
+# 
 # Line numbers.
 less -N file.txt
 ```
 
 #### less - Navigation
-```sh
+```sh {data-lang-off}
 j # Line down.
 k # Line up.
 f # Page down.
@@ -321,7 +338,7 @@ G # Go to end of file.
 ```
 
 #### less - Search / Filtering
-```sh
+```sh {data-lang-off}
 # Search (regex enabled).
 / <pattern>
 # For case-insensitive search, use `less -I`.
@@ -341,14 +358,14 @@ nN
 Personally, I prefer `less+F` over `tail -f`.  
 Use `^c` to exit the feed.
 
-```sh
+```sh {data-lang-off}
 # Continuous feed (e.g. for streams of data)
 F
 ```
 
 #### less - Working with Multiple Files
 `less` also works with multiple files passed in the command line, e.g. `less *.txt`.
-```sh
+```sh {data-lang-off}
 # Next file.
 :n
 # Previous file.
@@ -363,16 +380,16 @@ More commands in `man less`.
 
 Shells allow you to move processes between the foreground (which accepts interactive input) and background (to run things which don't require input).
 
-```sh
+```sh {data-lang-off .command-line data-prompt="$" data-filter-output="# "}
 ^z # Push process to background (and pause it).
 bg # Start background process.
 fg # Bring most recent background process into foreground.
 fg 2 # Bring job 2 into foreground.
 jobs # View background jobs.
-
+# 
 ^c # Good ol' ctrl-c stops the process in fg.
 kill <pid> # Kill process with given process ID.
-
+# 
 # Start a command in the background.
 <cmd> &
 ```
@@ -381,19 +398,23 @@ kill <pid> # Kill process with given process ID.
 **Example**
 
 Start an HTTP server on port 8080.
-```sh
+```sh {data-lang-off .command-line data-prompt="$" data-filter-output="# "}
 python -m http.server 8080 &
 # [1] 17999
 ```
 The process is started in the background with job number 1, PID 17999.
 
 To kill the process:
-```sh
+```sh {data-lang-off .command-line data-prompt="$" data-filter-output="# "}
 fg
 ^c
-# or
+```
+
+or...
+```sh {data-lang-off .command-line data-prompt="$" data-filter-output="# "}
 kill 17999
 ```
+
 {% endalert %}
 
 {% alert "warning" %}
@@ -406,7 +427,7 @@ Process ID (PID) and Job Number are two different things.
 
 ### View Running Procs
 
-```sh
+```sh {data-lang-off .command-line data-prompt="$" data-filter-output="# "}
 ps aux
 ```
 
@@ -414,64 +435,59 @@ Combine with `grep`/`less` for filtered results.
 
 ## Networking
 
-**Information**
-```sh
-# IP
+**IP**
+```sh {data-lang-off .command-line data-prompt="$" data-filter-output="# "}
 ifconfig
 ifconfig tun0
-
-# Open Ports/Sockets
-netstat -anp
-# -a: all sockets
-# -n: numeric addresses
-# -p: associated processes
 ```
 
+**Open Ports/Sockets**
+```sh {data-lang-off .command-line data-prompt="$" data-filter-output="# "}
+netstat -anp
+```
+- `-a`: all sockets
+- `-n`: numeric addresses
+- `-p`: associated processes
+
 **Listen/Connect**
-```sh
+```sh {data-lang-off .command-line data-prompt="$" data-filter-output="# "}
 # Initiate a connection.
 nc 192.168.1.1 8080
-
+# 
 # Listen for a connection.
 nc -nlvp 4444
-
+# 
 # Listen persistently (keep listening after disconnect).
 nc -nklvp 4444
 ```
 
 ### Download Files
 
-**wget**
-```sh
-# Quick download.
+```sh {data-lang-off .command-line data-prompt="$" data-filter-output="# "}
+# Download and save to a local file.
+curl <url> -O
 wget <url>
-
-# Save to specific location.
+# 
+# Download with a custom filename.
+curl <url> -o filename.txt
 wget <url> -O filename.txt
-
-# Download silently (no progress), and display in less.
-wget <url> -s | less
-```
-
-**curl**
-```sh
+# 
+# Download silently and display in `less`.
 curl <url> -s | less
-
-# Use jq to format JSON.
+wget <url> -s | less
 curl some.api.site/api/v1/users/ -s | jq | less
 ```
 
+
 ### Upload Files
 
-**Server**
-```sh
+```sh {data-lang-off .command-line data-prompt="$" data-filter-output="# " data-label=Server}
 python -m uploadserver
 ```
 - By default, `uploadserver` starts a server at port 8000.
 - Get our IP from `ifconfig`.
 
-**Client**
-```sh
+```sh {data-lang-off .command-line data-prompt="$" data-filter-output="# " data-label=Client}
 curl -F files=@file1.txt -F files=@file2.txt 192.168.45.179:8000/upload
 ```
 
@@ -479,42 +495,42 @@ curl -F files=@file1.txt -F files=@file2.txt 192.168.45.179:8000/upload
 
 Git commands for completeness.
 
-```sh
+```sh {data-lang-off .command-line data-prompt="$" data-filter-output="# "}
 # Make new branch.
 git checkout -b <name>
-
+# 
 # Checkout commits in tree before HEAD.
 git checkout HEAD~1  # 1 commit before.
 git checkout HEAD~10 # 10 commits before.
-
+# 
 # Checkout commit from parent.
 git checkout HEAD^  # 1 commit before (from parent 1, base).
 git checkout HEAD^2 # 1 commit before (from parent 2, target).
-
+# 
 # Store changes locally.
 git stash
 git stash pop
-
+# 
 # Clean edited files.
 git reset [--hard]
 # --hard removes unstaged files.
-
+# 
 # View changes.
 git diff | less
 git diff <file> # See change in specific file.
-
+# 
 # Jump through commits (to find, say, the cause of a bug).
 git bisect [start|reset|good|bad|skip]
 ```
 
 **git tree**
-```sh
+```sh {data-lang-off .command-line data-prompt="$" data-filter-output="# "}
 # Command-line git tree from git log.
 git log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all
-
+# 
 # More detailed git-tree 
 git log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)' --all
-
+# 
 # Add them as git aliases in ~/.gitconfig or script aliases in ~/.bashrc.
 # See https://stackoverflow.com/a/9074343/10239789.
 ```
@@ -530,7 +546,7 @@ Not covering that here.
 ### How to Exit Vim
 
 Obligatory.
-```sh
+```sh {data-lang-off}
 :wq  # Write to file + exit.
 :q!  # Force exit.
 ```
@@ -544,17 +560,17 @@ Okay, that's enough vim.
 Buffer overflow for fun and profit.
 
 **echo**
-```sh
+```sh {data-lang-off .command-line data-prompt="$" data-filter-output="# "}
 echo -n '\x01\x02'
-
+# 
 echo -n '\x41' | xxd
-00000000: 41                     A
+# 00000000: 41                     A
 ```
 
 **perl** (good for repetitive sequences)
-```sh
+```sh {data-lang-off .command-line data-prompt="$" data-filter-output="# "}
 perl -e 'print "\x41"x4 . "\x42\x43"' | xxd
-00000000: 4141 4141 4243         AAAABC
+# 00000000: 4141 4141 4243         AAAABC
 ```
 
 {% alert "danger" %}

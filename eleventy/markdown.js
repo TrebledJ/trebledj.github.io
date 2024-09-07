@@ -2,7 +2,13 @@ const markdownItAnchor = require('markdown-it-anchor');
 const markdownItAttrs = require('markdown-it-attrs');
 const markdownItFootnote = require('markdown-it-footnote');
 const markdownItSpoiler = require('@traptitech/markdown-it-spoiler');
+const markdownItPrism = require('markdown-it-prism');
 const pluginTOC = require('eleventy-plugin-toc');
+
+const loadLanguages = require('prismjs/components/');
+
+require('./detail/markdown-it/domify.js');
+
 
 module.exports = function (eleventyConfig) {
   eleventyConfig.amendLibrary('md', mdLib => {
@@ -49,6 +55,24 @@ module.exports = function (eleventyConfig) {
       // }
       return n;
     };
+  
+    // Codeblocks and Syntax Highlighting
+    mdLib.use(markdownItPrism, {
+      highlightInlineCode: true,
+      plugins: ['diff-highlight', 'command-line', 'toolbar'],
+      init(Prism) {
+        loadLanguages(['cpp']);
+        Prism.languages.csp = Prism.languages.cpp;
+        loadLanguages(['armasm']);
+        Prism.languages.asm = Prism.languages.armasm;
+      },
+    });
+    require('./detail/prism/prism-line-numbers');
+    // require('./detail/prism/prism-show-filename');
+    require('./detail/prism/prism-show-language');
+    require('./detail/prism/prism-copy-to-clipboard');
+
+    mdLib.renderer.rules.fence = require('./detail/markdown-it/markdown-it-prism-adapter');
   });
 
   eleventyConfig.addPlugin(pluginTOC, {

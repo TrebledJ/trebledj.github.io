@@ -282,6 +282,8 @@ Did I mention that equal-height layouts are a thing!? This is made possible with
 
 ### Code
 
+Inline highlight, thanks to `markdown-it-prism` + `markdown-it-attr`: `class Demo { };`{language=cpp}, `function foo(a) { console.log(1); }`{language=js}.
+
 ```cpp
 #include <iostream>
 
@@ -301,7 +303,7 @@ main :: IO ()
 main = putStrLn "Hello world!"
 ```
 
-```scala
+```scala {.line-numbers}
 object HelloWorld {
   def main(args: Array[String]): Unit = {
     println("Hello world!")
@@ -313,7 +315,51 @@ object HelloWorld {
 echo "Hello world!"
 ```
 
-```sh {.command-line data-a=abc}
+When no language is provided, a code block is poorly rendered:
+
+```
+Just plain text.
+```
+
+_Hint: Check for element attributes with your browser devtools!_
+
+```txt {data-test=true data-filename-abc="a/file/path"}
+Supercalifragilisticespieladocious! Supercalifragilisticespieladocious! Supercalifragilisticespieladocious! Supercalifragilisticespieladocious! Supercalifragilisticespieladocious! Supercalifragilisticespieladocious! 
+```
+
+#### Code: `line-numbers`
+
+We use a modified `line-numbers` plugin, which allows skipping lines.
+
+```txt {.line-numbers data-start=2}
+This raw text
+is not highlighted
+but it still has
+line numbers
+```
+
+To skip lines, specify a `data-output` attribute. The format is similar to the `command-line` plugin.
+
+* e.g. `1-2, 5, 9-20` means skip lines 1-2, 5, and 9-20.
+* The following uses `{.line-numbers data-start=3 data-output=2,5-6}` attr.
+
+```cpp {.line-numbers data-start=3 data-output=2,5-6}
+int main() {
+  // This line is skipped.
+  Dog d;
+  d.speak();
+  // These lines are 
+  // also skipped.
+}
+```
+
+On second thought, this use of `line-numbers` may not make much sense, since copying this code will result in the comments being copied as well.
+
+#### Code: `command-line`
+
+Reference: [PrismJS `command-line` Plugin](https://prismjs.com/plugins/command-line/)
+
+```sh {.command-line data-output=1}
 # Multiline.
 mkdir build
 cd build
@@ -321,13 +367,44 @@ cmake ..
 make
 ```
 
-```  {.command-line data-a=abc}
-Just plain text.
+```txt {.command-line .line-numbers data-output=6}
+What
+if
+we
+mix
+command line
+# woohoo!
+and
+line numbers?
+More
+MOre
+MORE
+MOREEE
 ```
 
-```txt
-Supercalifragilisticespieladocious! Supercalifragilisticespieladocious! Supercalifragilisticespieladocious! Supercalifragilisticespieladocious! Supercalifragilisticespieladocious! Supercalifragilisticespieladocious! 
+```powershell {.command-line data-prompt="PS C:\Users\Chris>" data-output=2-19}
+dir
+
+
+    Directory: C:\Users\Chris
+
+
+Mode                LastWriteTime     Length Name
+----                -------------     ------ ----
+d-r--        10/14/2015   5:06 PM            Contacts
+d-r--        12/12/2015   1:47 PM            Desktop
+d-r--         11/4/2015   7:59 PM            Documents
+d-r--        10/14/2015   5:06 PM            Downloads
+d-r--        10/14/2015   5:06 PM            Favorites
+d-r--        10/14/2015   5:06 PM            Links
+d-r--        10/14/2015   5:06 PM            Music
+d-r--        10/14/2015   5:06 PM            Pictures
+d-r--        10/14/2015   5:06 PM            Saved Games
+d-r--        10/14/2015   5:06 PM            Searches
+d-r--        10/14/2015   5:06 PM            Videos
 ```
+
+#### Code: `diff-highlight`
 
 ```diff-js
 +function myFunction() {
@@ -336,6 +413,39 @@ Supercalifragilisticespieladocious! Supercalifragilisticespieladocious! Supercal
  }
 ```
 
+`line-numbers` doesn't work too well with `diff-highlight` because our stylesheet introduces 4px extra padding per highlighted line for breathing space. We can change this in `prism-diff.css`, but well – `line-numbers` don't make too much sense with diffing, don't ya think? 
+
+```diff-js {.line-numbers}
++function myFunction() {
+   // …
+-  return true;
+ }
+```
+
+#### Code: `data-label`
+
+```js {data-label="prism-show-filename.js" .line-numbers data-start=13}
+Prism.plugins.toolbar.registerButton('show-filename', function (env) {
+  var pre = env.element.parentNode;
+  if (!pre || !/pre/i.test(pre.nodeName)) {
+    return;
+  }
+
+  var filename = pre.getAttribute('data-filename');
+  if (!filename) {
+      return;
+  }
+
+  var element = document.createElement('span');
+  element.textContent = filename;
+
+  return element;
+});
+```
+
+```txt {data-label="Just a casual label."}
+Hello world!
+```
 
 ## Custom
 
@@ -395,6 +505,9 @@ Its wings are too small to get its fat little body off the ground. The bee, of c
 ```sh
 echo "Conversely, if you drive, don't drink."
 echo "test"
+```
+```txt
+Supercalifragilisticespieladocious! Supercalifragilisticespieladocious! Supercalifragilisticespieladocious! Supercalifragilisticespieladocious! Supercalifragilisticespieladocious! Supercalifragilisticespieladocious!
 ```
 {% endalert %}
 

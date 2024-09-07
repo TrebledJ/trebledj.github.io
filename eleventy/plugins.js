@@ -10,12 +10,13 @@ const { minify } = require('terser');
 
 module.exports = function (eleventyConfig) {
   eleventyConfig.addPlugin(pluginRss);
-  eleventyConfig.addPlugin(pluginSyntaxHighlight, {
-    errorOnInvalidLanguage: true,
-  });
+  // eleventyConfig.addPlugin(pluginSyntaxHighlight, {
+  //   errorOnInvalidLanguage: true,
+  // });
   eleventyConfig.addPlugin(pluginNavigation);
 
   eleventyConfig.addPlugin(pluginBundle, {
+    bundles: ['inlinecss'],
     toFileDirectory: 'cb',
     transforms: [
       async function (content) {

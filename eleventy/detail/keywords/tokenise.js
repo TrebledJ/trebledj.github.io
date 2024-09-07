@@ -1,7 +1,7 @@
 /* eslint-disable */
 
 const fs = require('fs');
-const stopwords = fs.readFileSync('./eleventy/detail/stopwords.txt', 'utf8').split('\n');
+const stopwords = fs.readFileSync('./eleventy/detail/keywords/stopwords.txt', 'utf8').split('\n');
 
 const puncStart = '\\{\\[\\(<#&\\|';
 const puncEnd = '\\.\\?\\!:;\\}\\]\\)>';

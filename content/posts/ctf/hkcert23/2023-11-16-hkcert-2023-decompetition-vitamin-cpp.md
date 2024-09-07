@@ -31,7 +31,7 @@ Author: [harrier](https://twitter.com/harrier_lcc)
 > 
 > g++ version: g++ (Debian 12.2.0-14) 12.2.0
 > 
-> ```sh
+> ```sh {data-lang-off}
 > nc chal.hkcert23.pwnable.hk 28157
 > ```
 
@@ -39,7 +39,7 @@ And a note on testing:
 
 > If you want to run this locally, you can install all the prerequisite library with `pip`, and run `python compiler trie.disasm`.
 > 
-> ```sh
+> ```sh {data-lang-off}
 > pip install pyyaml capstone intervaltree pyelftools diff_match_patch
 > ```
 
@@ -246,9 +246,9 @@ void mix(char cmix)
 
 Now if you run this through the compiler diff, it should respond with some lines:
 
-```diff-cpp
--  call    _ZSt3getILm0EKcP8TrieNodeERNSt13tuple_elementIXT_ESt4pairIT0_T1_EE4typeERS7_
-+  call    _ZSt3getILm0EKcP8TrieNodeERKNSt13tuple_elementIXT_ESt4pairIT0_T1_EE4typeERKS7_
+```diff-asm
+- call    _ZSt3getILm0EKcP8TrieNodeERNSt13tuple_elementIXT_ESt4pairIT0_T1_EE4typeERS7_
++ call    _ZSt3getILm0EKcP8TrieNodeERKNSt13tuple_elementIXT_ESt4pairIT0_T1_EE4typeERKS7_
 ```
 
 Subtle. But there is a good reason why this occurs.
@@ -479,13 +479,13 @@ N.B. With optimisations, these indicators would be less obvious. Thankfully the 
 
 We're still short of our target though. Some diff lines stand out:
 
-```diff-cpp
-   // Extra stack variables!
+```diff-asm
+   ; Extra stack variables!
 -  sub     rsp, 0xc8
 -  mov     [rbp-0xc8], rdi
 +  sub     rsp, 0xb8
 +  mov     [rbp-0xb8], rdi
-   // Calling the wrong overload!
+   ; Calling the wrong overload!
 -  call    _ZSt3getILm0EKcP8TrieNodeERNSt13tuple_elementIXT_ESt4pairIT0_T1_EE4typeERS7_
 +  call    _ZSt3getILm0EKcP8TrieNodeERKNSt13tuple_elementIXT_ESt4pairIT0_T1_EE4typeERKS7_
 ```
@@ -494,9 +494,8 @@ We're still short of our target though. Some diff lines stand out:
 1. Looks like we declared 16-bytes of extra stack variables.
 	- Local variables are stored on the stack, which allocates memory by a simple `sub` instruction.
 	- Larger subtraction = more stack memory allocated.
-2. It also looks like we called the wrong overload. The mangled names roughly translate to:
+2. It also looks like we called the wrong overload. The mangled names — simplified for readability — translate to:
 	```diff-cpp
-	// simplified for readability
 	- std::get<0>(std::pair<char, TrieNode*>&)
     + std::get<0>(std::pair<char, TrieNode*> const&)
 	```
@@ -625,6 +624,6 @@ Also, who doesn't like a good pun hidden in a challenge?
 
 ## Flag
 
-```text
+```text {data-lang-off}
 hkcert23{c++stl_i5_ev3rywh3r3_dur1ng_r3v}
 ```

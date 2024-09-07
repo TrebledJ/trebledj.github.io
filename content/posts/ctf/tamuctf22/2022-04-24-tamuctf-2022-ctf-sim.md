@@ -254,8 +254,8 @@ We'll try the following:
 
 To understand the exploit the details better and what happens under the hood, we'll use GDB to step through the exploit.
 
-A brief refresher on some commands we'll be using.
-```sh
+A brief refresher on some commands we'll be using. (See this [GDB cheatsheet](/posts/gdb-cheatsheet/) for more commands.)
+```sh {data-language=GDB}
 r               # Run the file.
 c               # Continue running where we left off.
 heap chunks     # View active chunks on the heap.
@@ -267,11 +267,11 @@ kill            # Useful for stopping the current run in case we make an oopsie 
 ```
 
 After starting up my Kali Linux VM, downloading the challenge onto it, and firing up GDB; we inspect the initial state of the heap.
-```sh
-$ gdb ctf_sim
-r
-^C
-heap chunks
+```sh {.command-line data-prompt="$" data-continuation-prompt="gef>" data-continuation-str="  "}
+gdb ctf_sim  
+r  
+^C  
+heap chunks  
 ```
 
 {% image "assets/ctf-sim-1-heap-init.jpg", "" %}
@@ -280,10 +280,10 @@ Ooo, looks a bit busy, even though we haven't `malloc`ed or `new`ed anything yet
 
 We perform our first action: downloading a challenge. The challenge type and index to store the challenge don't really matter, so we'll just go with the first option (`new forensics`) and index 0.
 
-```sh
-c
-1
-1
+```sh {data-language=GDB .command-line data-prompt="gef>" data-continuation-prompt=">" data-continuation-str="  "}
+c  
+1  
+1  
 0
 ```
 
@@ -291,8 +291,8 @@ c
 
 Let's pause again and check the state of the heap.
 
-```sh
-^C
+```sh {data-language=GDB .command-line data-prompt=">" data-continuation-prompt="gef>" data-continuation-str="  "}
+^C  
 heap chunks
 ```
 
@@ -306,7 +306,7 @@ Indeed, if we peek into the binary's memory using `x /20wx 0x403d38`, we see wha
 
 We'll move on to the second step: solving the challenge. This step is rather simple, but I want to show how the vtable magic is done in assembly. Let's disassemble the `solveChallenge()` function and set a breakpoint near the hotspot.
 
-```sh
+```sh {data-language=GDB .command-line data-prompt="gef>" data-continuation-prompt=">" data-continuation-str="  "}
 disas solveChallenge
 b *solveChallenge+191
 ```
@@ -316,9 +316,9 @@ b *solveChallenge+191
 {% image "assets/ctf-sim-4b-disas-2.jpg", "jw-95", "" %}
 
 Now we'll continue running and feed it input for solving our `forensics` challenge.
-```sh
-c
-2
+```sh {data-language=GDB .command-line data-prompt="gef>" data-continuation-prompt=">" data-continuation-str="  "}
+c  
+2  
 0
 ```
 Our breakpoint gets triggered. Notice the interesting chain of addresses in the `rax` register in the image below. There's a chain of 3 addresses:
@@ -336,8 +336,8 @@ So *this* is what happens when we call a virtual function... InTeReStInG!
 
 Let's continue so that it finishes `delete`-ing the chunk, and let's check the heap state again:
 
-```sh
-c
+```sh {data-language=GDB .command-line data-prompt="gef>" data-continuation-prompt=">" data-continuation-str="  "}
+c  
 ^C
 heap chunks
 ```
@@ -348,18 +348,18 @@ It appears that our `forensics` vptr has been replaced with some other data. ðŸ˜
 
 Since we want to reuse the chunk previously deallocated, we want to make sure the chunk we allocate when submitting the writeup isn't too big. But the chunk shouldn't be too small either: we want it to be at least 9 bytes, so that it could fit 8 bytes of payload plus a null terminator. So we'll settle for 16 bytes.
 
-```sh
-c
-3
-16
+```sh {data-language=GDB .command-line data-prompt="gef>" data-continuation-prompt=">" data-continuation-str="  "}
+c  
+3  
+16  
 AABBCCDD
 ```
 
 {% image "assets/ctf-sim-6-input-3.jpg", "" %}
 
 Let's check our heap.
-```sh
-^C
+```sh {data-language=GDB .command-line data-prompt=">" data-continuation-prompt="gef>" data-continuation-str="  "}
+^C  
 heap chunks
 ```
 
@@ -473,7 +473,7 @@ p.interactive()
 ```
 
 ### Flag
-```text
+```text {data-lang-off}
 gigem{h34pl355_1n_53477l3}
 ```
 

@@ -44,13 +44,11 @@ Well, this isn't entirely accurate due to currying, but it's a decent mental mod
 In the type signature, `a` is a generic type, similar to template parameters in C++ and generics in Java/Scala (although the convention in those languages is to use `T` and `A`).
 
 ```cpp
-// C++
 template <typename T>
 int32_t count(std::function<bool(T)> p, std::list<T> const& xs) { /* ... */ }
 ```
 
 ```scala
-// Scala
 def count[A](p: A => Boolean, xs: List[A]): Int = { /* ... */ }
 ```
 

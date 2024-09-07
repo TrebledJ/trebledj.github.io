@@ -113,7 +113,7 @@ This module was inspired by the VSCode bookmarks plugin. In VSCode, bookmarks al
 
 Something else to note—and this applies to all my plugins here: currently, I use a rather hacky method to jump to the selected notes:
 
-```text
+```js
 cmd("note-input")
 cmd("note-input")
 ```
