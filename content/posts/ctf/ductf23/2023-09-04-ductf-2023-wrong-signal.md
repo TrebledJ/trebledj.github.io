@@ -94,7 +94,7 @@ So there must be something we're missing.
 ### Where are the segfaults coming from?
 
 While all the above observations are fine and dandy, the decompilation leaves out something crucial. Isn't it weird how `local_c0` seems to be working with addresses and jumping around without actually doing *anything*? Turns out, there's a sneaky little dereference after the switch-case, at `0x401305`.
-```armasm
+```asm
 ; 0x4012fe. Load `local_c0` from stack to RAX.
 MOV        RAX,qword ptr [RBP + local_c0]
 
@@ -122,6 +122,6 @@ I didn't do a step-by-step walkthrough of my solve script this time, but I've li
 
 ## Flag
 
-```txt
+```txt {data-lang-off}
 DUCTF{hElCYi8OxUF7PAA5}
 ```

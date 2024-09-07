@@ -121,7 +121,7 @@ while idx != 71:
 ### Flag
 
 {% details "Lé Flaggo" %}
-```txt
+```txt {data-lang-off}
 maple{no_type_system_is_safe_from_pl_grads_with_too_much_time_on_their_hands}
 ```
 

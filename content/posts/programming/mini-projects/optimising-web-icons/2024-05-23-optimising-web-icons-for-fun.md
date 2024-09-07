@@ -45,7 +45,7 @@ This is where CSS comes in. Specialised CSS rules connect the HTML code to the e
 
 Suppose we write the following HTML code:
 
-```html
+```html {data-lang-off}
 <i class="fas fa-rocket"></i>
 ```
 

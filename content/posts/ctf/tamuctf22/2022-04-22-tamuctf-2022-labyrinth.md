@@ -17,8 +17,7 @@ thumbnail_src: assets/labyrinth-thumbnail.jpg
 #### Preliminary Observations and Analysis
 Unlike other reverse challenges, this one requires us to connect to a server and auto-hack not one, but *five* binaries. We're provided with this template:
 
-```py
-# solver-template.py
+```py {data-label=solver-template.py}
 from pwn import *
 
 p = remote("tamuctf.com", 443, ssl=True, sni="labyrinth")
@@ -35,8 +34,8 @@ Modifying the template slightly, we run and download a couple binaries for analy
 
 As a first step, we'll run `checksec` to see what securities are in place.
 
-```sh
-% checksec elf
+```sh {.command-line data-prompt="$" data-output=2-7}
+checksec elf
 [*] '/Users/<redacted>/labyrinth/elf'
     Arch:     amd64-64-little
     RELRO:    Partial RELRO
@@ -251,6 +250,6 @@ p.interactive()
 ```
 
 ### Flag
-```text
+```text {data-lang-off} {data-lang-off}
 gigem{w0w_y0ur3_r34lly_600d_w17h_m4z35}
 ```

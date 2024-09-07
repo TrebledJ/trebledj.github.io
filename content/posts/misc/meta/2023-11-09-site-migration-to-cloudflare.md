@@ -101,14 +101,14 @@ GitHub Pages tells our browser to only cache for 600 seconds (10 minutes). This 
 
 We can use `curl` to fetch headers and compare results. At the time of writing:
 
-```sh
+```sh {.command-line data-prompt="$" data-filter-output="# "}
 # GitHub Pages
 curl -I https://trebledj.github.io/css/main.css | grep cache-control
-cache-control: max-age=600
-
-# Cloudflare Pages
+# cache-control: max-age=600
+# 
+# Cloudflare Pages with custom headers
 curl -I https://trebledj.me/css/main.css | grep cache-control
-cache-control: public, max-age=14400, must-revalidate
+# cache-control: public, max-age=14400, must-revalidate
 ```
 
 With Cloudflare Pages, our cache duration is longer (4 hours by default). Thanks to their flexibility, we can customise this further by...

@@ -32,7 +32,7 @@ Turns out we’re given a C2 (Command and Control) interface which sends shellco
 
 Anyhow, we can start the server with:
 
-```txt
+```txt {data-lang-off}
 server
 run
 ```
@@ -80,7 +80,7 @@ So how is the flag actually processed? This requires a careful study of !!`verif
 
 Like most flag checkers, it turns out we just pass the flag as input (alongside the `flag` command).
 
-```txt
+```txt {data-lang-off}
 flag hitcon{test_flag}
 ```
 
@@ -101,7 +101,7 @@ if (param_3 != 0x40) {
 
 When we try sending a flag 64-bytes long, we get something on our other shell. We're not immediately hit with an "*Incorrect*".
 
-```txt
+```txt {data-lang-off}
 flag hitcon{AAAABBBBCCCCDDDDEEEEFFFFGGGGHHHHIIIIJJJJKKKKLLLLMMMMNNNN}
 ```
 
@@ -184,25 +184,29 @@ For fun (and practice), we'll go the dynamic route. Let's insert some breakpoint
 
 In GDB:
 
-```sh
-> start
-# Break to determine __ptr location.
-> break *_ZN13seccomp_shell5shell6verify17h898bf5fa26dafbabE + 61
-# Break to grab permuted string.
-> break *_ZN13seccomp_shell5shell6verify17h898bf5fa26dafbabE + 935
-> continue
-server
-run
+```sh {data-language=GDB .command-line data-prompt="gdb>" data-continuation-prompt=">" data-continuation-str="  " data-filter-output="out>"}
+start
+out>
+out>Break to determine __ptr location.
+break *_ZN13seccomp_shell5shell6verify17h898bf5fa26dafbabE + 61
+out>Break to grab permuted string.
+break *_ZN13seccomp_shell5shell6verify17h898bf5fa26dafbabE + 935
+out>
+continue  
+server  
+run  
 flag abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789+/
-> # (breakpoint triggered)
-# Get location of __ptr.
-> p $rax
-$1 = 0x5555555d63e0
-> continue
-> # (breakpoint triggered)
-# Get permuted string.
-> x/s 0x5555555d63e0
-Rp5v+AZmM8XWy1sgNhTB/oCzYVdPrGn6KD3Q9lke4qtFxHb0uUOcS2jIEJfL7aiw
+out>(breakpoint triggered)
+out>
+out>Get location of __ptr.
+p $rax
+out>$1 = 0x5555555d63e0
+continue
+out>(breakpoint triggered)
+out>
+out>Get permuted string.
+x/s 0x5555555d63e0
+out>Rp5v+AZmM8XWy1sgNhTB/oCzYVdPrGn6KD3Q9lke4qtFxHb0uUOcS2jIEJfL7aiw
 ```
 
 All that's left is to match the characters.
@@ -278,13 +282,13 @@ Let's start with some basic GDB analysis:
 {% details "Oh where to go?" %}
 
 We'll break after !!the loop, at `11309e`!!.
-```sh
-> break *_ZN13seccomp_shell5shell6verify17h898bf5fa26dafbabE + 1070
+```sh {data-language=GDB .command-line data-prompt="gdb>" data-filter-output="out>"}
+break *_ZN13seccomp_shell5shell6verify17h898bf5fa26dafbabE + 1070
 ```
 
 As for memory location, the code still modifies `__ptr`, so we'll read from the same location.
 
-```sh
+```sh {data-language=GDB .command-line data-prompt="gdb>" data-filter-output="out>"}
 x/16wx 0x5555555d63e0
 ```
 {% enddetails %}
@@ -300,29 +304,31 @@ Two things I'd like to point out:
 
    Y'know what? Let's go with the last option!
 
-```sh
-> start
-# Break before the loop.
-> break *_ZN13seccomp_shell5shell6verify17h898bf5fa26dafbabE + 937
-# Break after the loop.
-> break *_ZN13seccomp_shell5shell6verify17h898bf5fa26dafbabE + 1070
-> continue
-> # (breakpoint-before-loop triggered)
-
-# Set 8x8 = 64 bytes. (I used a Python script to generate these `set` cmds from the missing input bytes.)
-> set *(0x5555555d63e0 as *mut u64) = 0x0001020304050607
-> set *(0x5555555d63e8 as *mut u64) = 0x08090a0b0c0d0e0f
-# and so on...
-> set *(0x5555555d6410 as *mut u64) = 0x3c3d3e3f405b5c5d
-> set *(0x5555555d6418 as *mut u64) = 0x5e5f607b7c7d7e7f
-
-> continue
-> # (breakpoint-after-loop triggered)
-
-# Get mapped bytes.
-> x/16wx 0x5555555d63e0
-
-# Repeat until all mappings are deduced...
+```sh {data-language=GDB .command-line data-prompt="gdb>" data-filter-output="out>"}
+start
+out>
+out>Break before the loop.
+break *_ZN13seccomp_shell5shell6verify17h898bf5fa26dafbabE + 937
+out>Break after the loop.
+break *_ZN13seccomp_shell5shell6verify17h898bf5fa26dafbabE + 1070
+out>
+continue
+out>(breakpoint-before-loop triggered)
+out>
+out>Set 8x8 = 64 bytes. (I used a Python script to generate these `set` cmds from the missing input bytes.)
+set *(0x5555555d63e0 as *mut u64) = 0x0001020304050607
+set *(0x5555555d63e8 as *mut u64) = 0x08090a0b0c0d0e0f
+out>and so on...
+set *(0x5555555d6410 as *mut u64) = 0x3c3d3e3f405b5c5d
+set *(0x5555555d6418 as *mut u64) = 0x5e5f607b7c7d7e7f
+out>
+continue
+out>(breakpoint-after-loop triggered)
+out>
+out>Get mapped bytes.
+x/16wx 0x5555555d63e0
+out>...
+out>Repeat until all mappings are deduced...
 ```
 
 Finished gathering data? Let's analyse it!
@@ -430,7 +436,7 @@ We can disassemble it with `pwntools.disasm` to get the following ASM.
 Small caveat: you'll want to set `context.arch = 'amd64'` for `disasm` to interpret the shellcode correctly. In the disassembly, we see our two points of insertion (`0xdeadbeef`) treated as values, so `amd64` is probably the right choice.
 {% endalert %}
 
-```arm-asm
+```asm
 -- snip --
   b2:   0f 05                   syscall             ; read from /dev/zero
   b4:   58                      pop    rax          ; rax = 0
@@ -503,7 +509,7 @@ In case you'd like to have a stab at dissecting the assembly, the full (unblemis
 
 Have fun! :)
 
-```arm-asm
+```asm
    0:   54                      push   rsp
    1:   5d                      pop    rbp
    2:   31 f6                   xor    esi, esi
@@ -696,7 +702,7 @@ But overall, a sweet challenge. And one that left me with nice rave music to pow
 
 ## Flag
 
-```txt
+```txt {data-lang-off}
 hitcon{<https://soundcloud.com/monstercat/noisestorm-crab-rave>}
 ```
 

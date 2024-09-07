@@ -122,7 +122,7 @@ In the same vein, some letters and sequences in the *Base64 encoding* will also 
 
 With this in mind, we can compare the ciphertext to the Base64 encoding of some random article (also in English, of course). For this, I copied some articles from [CNN Lite](https://lite.cnn.com/en) (text-only, so it's easier to copy), encoded it, then analysed letter frequencies using [dcode.fr](https://www.dcode.fr/frequency-analysis). You could use this excellent article as well:
 
-```text
+```text {data-lang-off}
 V2UncmUgbm8gc3RyYW5nZXJzIHRvIGxvdmUKWW91IGtub3cgdGhlIHJ1bGVzIGFuZCBzbyBkbyBJIChkbyBJKQpBIGZ1bGwgY29tbWl0bWVudCdzIHdoYXQgSSdtIHRoaW5raW5nIG9mCllvdSB3b3VsZG4ndCBnZXQgdGhpcyBmcm9tIGFueSBvdGhlciBndXkKSSBqdXN0IHdhbm5hIHRlbGwgeW91IGhvdyBJJ20gZmVlbGluZwpHb3R0YSBtYWtlIHlvdSB1bmRlcnN0YW5kCk5ldmVyIGdvbm5hIGdpdmUgeW91IHVwCk5ldmVyIGdvbm5hIGxldCB5b3UgZG93bgpOZXZlciBnb25uYSBydW4gYXJvdW5kIGFuZCBkZXNlcnQgeW91Ck5ldmVyIGdvbm5hIG1ha2UgeW91IGNyeQpOZXZlciBnb25uYSBzYXkgZ29vZGJ5ZQpOZXZlciBnb25uYSB0ZWxsIGEgbGllIGFuZCBodXJ0IHlvdQo=
 ```
 
@@ -210,7 +210,7 @@ There are probably better ways to automatically perform frequency analysis and s
 
 ## Flag
 
-```text
+```text {data-lang-off}
 hkcert22{b4s3_s1x7y_f0ur_1s_4n_3nc0d1n9_n07_4n_encryp710n}
 ```
 
