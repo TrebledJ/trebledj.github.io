@@ -7,6 +7,8 @@ const eleventySass = require('eleventy-sass');
 // eslint-disable-next-line import/no-extraneous-dependencies
 const sitemap = require('@quasibit/eleventy-plugin-sitemap');
 const { minify } = require('terser');
+const CleanCSS = require("clean-css");
+const chalk = require('chalk');
 
 module.exports = function (eleventyConfig) {
   eleventyConfig.addPlugin(pluginRss);
@@ -22,6 +24,19 @@ module.exports = function (eleventyConfig) {
       async function (content) {
         if (process.env.ENVIRONMENT !== 'production')
           return content;
+
+        if (this.type === 'css' || this.type === 'inlinecss') {
+          const output = new CleanCSS({}).minify(content);
+          if (output.errors.length > 0) {
+            console.error(chalk.red(`Errors encountered while running CleanCSS for bundle ${this.type}.`));
+            console.error(chalk.red(output.errors.join("\n")));
+          }
+          if (output.warnings.length > 0) {
+            console.warn(chalk.yellow(`Warnings encountered while running CleanCSS for bundle ${this.type}.`));
+            console.warn(chalk.yellow(output.warnings.join("\n")));
+          }
+          return output.styles;
+        }
 
         if (this.type === 'js') {
           const result = await minify(content);
