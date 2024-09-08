@@ -53,6 +53,7 @@ $transition-duration-slow: 0.5s;
     --main-background-color: rgb(var(--main-background-color-rgb));
     --medium-background-color: rgb(var(--medium-background-color-rgb));
     --light-background-color: rgb(var(--light-background-color-rgb));
+    --toolbar-background-color: rgb(var(--toolbar-background-color-rgb));
 
     --bold-color: rgb(var(--bold-color-rgb));
     --contrast-color: rgb(var(--contrast-color-rgb));
@@ -72,6 +73,7 @@ html[data-theme="dark"] {
     --main-background-color-rgb: 20, 20, 24;
     --medium-background-color-rgb: 35, 35, 35;
     --light-background-color-rgb: 42, 42, 42;
+    --toolbar-background-color-rgb: var(--medium-background-color-rgb);
 
     --bold-color-rgb: 180, 180, 180;
     --contrast-color-rgb: 255, 255, 255;
@@ -91,6 +93,7 @@ html[data-theme="light"] {
     --main-background-color-rgb: 235, 240, 255;
     --medium-background-color-rgb: 240, 240, 240;
     --light-background-color-rgb: 210, 210, 210;
+    --toolbar-background-color-rgb: var(--light-background-color-rgb);
 
     --bold-color-rgb: 0, 0, 0;
     --contrast-color-rgb: var(--bold-color-rgb);

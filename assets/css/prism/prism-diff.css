@@ -16,6 +16,15 @@ pre[class*="language-diff-"] {
 	color: inherit;
 }
 
+html[data-theme=light] .token.deleted {
+	background-color: hsl(0, 51%, 83%);
+	color: inherit;
+}
+html[data-theme=light] .token.inserted {
+	background-color: hsl(126, 28%, 83%);
+	color: inherit;
+}
+
 /* Make the + and - characters unselectable for copy/paste */
 .token.prefix.unchanged,
 .token.prefix.inserted,
