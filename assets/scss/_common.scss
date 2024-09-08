@@ -70,6 +70,10 @@ abbr:visited,
 abbr:hover,
 abbr:active {
     text-decoration: underline dotted;
+
+    @media (hover: none) {
+        text-decoration: underline dotted !important;
+    }
 }
 
 body {
