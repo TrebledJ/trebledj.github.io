@@ -28,6 +28,10 @@ html[data-theme=light] pre[class*="language-"] {
 	hyphens: none;
 }
 
+html[data-theme=light] pre[class*="language-"] {
+	border: 1px solid var(--border-color);
+}
+
 html[data-theme=light] pre[class*="language-"]::-moz-selection, html[data-theme=light] pre[class*="language-"] ::-moz-selection,
 html[data-theme=light] code[class*="language-"]::-moz-selection, html[data-theme=light] code[class*="language-"] ::-moz-selection {
 	text-shadow: none;
