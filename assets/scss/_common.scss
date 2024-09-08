@@ -70,9 +70,11 @@ abbr:visited,
 abbr:hover,
 abbr:active {
     text-decoration: underline dotted;
+    cursor: help;
 
     @media (hover: none) {
         text-decoration: underline dotted !important;
+        text-decoration-skip-ink: none !important;
     }
 }
 
