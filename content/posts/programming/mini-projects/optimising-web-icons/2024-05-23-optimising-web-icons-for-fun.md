@@ -82,11 +82,9 @@ It's a lot of indirection, and this is one reason why SVGs are preferred; but he
 To complicate matters, FA fonts have different **variants**, and they modularise this by using the same codepoint, but separate font files. Not all fonts do this though. Devicon packs all their styles into a single font file. Here are some examples of FA styles.
 
 {% inlinecss %}
-  .icon-table {
-    td {
-      text-align: center;
-      vertical-align: middle;
-    }
+  .icon-table td {
+    text-align: center;
+    vertical-align: middle;
   }
 {% endinlinecss %}
 

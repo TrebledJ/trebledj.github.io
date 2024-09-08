@@ -8,7 +8,7 @@
     {% if site.lightbox.enabled %}
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/magnific-popup@1.1.0/dist/magnific-popup.min.css" />
     {% endif %}
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.min.css" />
+    {# <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.min.css" /> #}
 
     {% css %}
         {% include "assets/css/prism/prism-command-line.css" %}
@@ -16,6 +16,8 @@
         {% include "assets/css/prism/prism-line-numbers.css" %}
         {% include "assets/css/prism/prism-toolbar.css" %}
         {% include "assets/css/prism/prism-custom.css" %}
+        {% include "assets/css/prism/theme/prism.css" %}
+        {% include "assets/css/prism/theme/prism-tomorrow.min.css" %}
     {% endcss %}
     {% set cssFileBundle %}
         {%- getBundleFileUrl "css" -%}

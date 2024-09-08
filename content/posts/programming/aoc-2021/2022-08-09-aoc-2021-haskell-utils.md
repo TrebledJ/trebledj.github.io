@@ -20,10 +20,10 @@ In Advent of Code (AOC) 2021, I found it useful to separate common functions int
 
 I'll introduce some basic utilities first before moving on to advanced ones. However, I won't make too many attempts to teach the basics. For that you may refer yourself to [Learn You a Haskell][lyah] (LYAH), which provides a very nice tutorial into Haskell.
 
-### List Utilities
-#### `count :: (a -> Bool) -> [a] -> Int`
+## List Utilities
+### `count :: (a -> Bool) -> [a] -> Int`
 
-```haskell
+```haskell {data-lang-off}
 count p xs = length (filter p xs)
 ```
 
@@ -65,7 +65,7 @@ count p = length . filter p
 
 In the code above, you can think of `count` as taking one parameter `p :: a -> Bool` and returning a function `[a] -> Int` which is the composition of `length` and `filter p`. It may help if I refine the type signature, so that it's clear that it returns `[a] -> Int`:
 
-```haskell
+```haskell {data-lang-off}
 count :: (a -> Bool) -> ([a] -> Int)
 ```
 
@@ -76,15 +76,15 @@ So we can actually think of `count` as having several types:
 
 Either way the function does the same thing. Under the hood, however, the Haskell compiler thinks using the latter version. This phenomenon is known as currying and its flexibility is quite useful for creating partial functions.
 
-#### `firstBy, lastBy :: (a -> Bool) -> [a] -> a`
-```haskell
+### `firstBy, lastBy :: (a -> Bool) -> [a] -> a`
+```haskell {data-lang-off}
 firstBy p = head . filter p
 lastBy p = last . filter p
 ```
 
 Both `firstBy` and `lastBy` have similar function types: they take a predicate `(a -> Bool)`, a list `[a]`, and return an element `a`. You can probably guess what these do by just looking at the names and types.
 
-```haskell
+```haskell {data-lang-off}
 ghci> firstBy even [1..5]
 2
 ghci> lastBy (< 4) [1..5]
@@ -95,8 +95,8 @@ ghci> lastBy (< 4) [1..5]
 
 These functions are useful when we've generated a list of possible solutions, but only want the first or last element which meets some criteria.
 
-#### `fromBinary :: String -> Int`
-```haskell
+### `fromBinary :: String -> Int`
+```haskell {data-lang-off}
 fromBinary = foldl (\acc d -> 2 * acc + digitToInt d) 0
 ```
 
@@ -106,7 +106,7 @@ Folds in functional programming are powerful and useful because they are general
 
 To illustrate `fromBinary` in action:
 
-```haskell
+```haskell {data-lang-off}
 fromBinary "10" 
     = 2 * (2 * 0 + digitToInt '1') + digitToInt '0'
     = 2 * (1) + digitToInt '0'
@@ -122,10 +122,10 @@ fromBinary "1011"
 
 `digitToInt` is a function defined in `Data.Char` which converts a char digit (`'0'..'9'`) to the corresponding integer `0..9`.
 
-### Debug Utilities
+## Debug Utilities
 Debugging in the functional world is slightly more nuanced than debugging in the imperative world. Haskell's `Debug.Trace` library—with its signature function `trace`—allows us to print messages to standard output, bypassing the restrictions of pure functions. Some examples of `trace` in action:
 
-```haskell
+```haskell {data-lang-off}
 hello :: String -> String
 hello x = trace "trace says 'hello'" x
 
@@ -150,14 +150,14 @@ In `foo`, we define the tracing on a separate line so that it's easy to comment 
 
 Here are some convenience utilities that may spare a few keystrokes:
 
-#### `(++$) :: (Show a) => String -> a -> String`
-```haskell
+### `(++$) :: (Show a) => String -> a -> String`
+```haskell {data-lang-off}
 (++$) s x = s ++ " " ++ show x
 ```
 
 So that we don't have to write `show` for every non-string item we want to print. We can use this in `foo`'s trace message to replace `++ show n` with `++$ n`.
 
-```haskell
+```haskell {data-lang-off}
 foo :: Int -> String -> Int
 foo n s | trace ("int:" ++$ n ++ ";  string: " ++ s) False = undefined
 foo n s = n + length s
@@ -165,18 +165,18 @@ foo n s = n + length s
 
 It's a bit superfluous, but I think writing `show` all the time bloats the debug message.
 
-#### `trace' :: (Show a) => a -> a`
-```haskell
+### `trace' :: (Show a) => a -> a`
+```haskell {data-lang-off}
 trace' x = trace (show x) x
 ```
 
 A helper to print and return its argument, to avoid repetition.
 
-### Advanced Utilities
+## Advanced Utilities
 In the following sections, I'll talk about fundamentals less so that I can focus more on the higher-level things. I'll presume the reader has a solid grasp of fundamentals.
 
-#### `counter :: (Hashable a, Eq a) => [a] -> M.HashMap a Int`
-```haskell
+### `counter :: (Hashable a, Eq a) => [a] -> M.HashMap a Int`
+```haskell {data-lang-off}
 counter = foldr (\x -> M.insertWith (+) x 1) M.empty
 ```
 
@@ -186,14 +186,14 @@ This helper function takes a list and counts the number of occurrences, packing 
 
 After all, if Python has such a convenience (`collections.Counter`), why shouldn't Haskell have something similar?
 
-```haskell
+```haskell {data-lang-off}
 counter [1, 2, 3, 1, 5, 3, 4, 1]
     = M.fromList [(1,3), (2,1), (3,2), (4,1), (5,1)]
 ```
 
 In fact, we can generalise this to not only work with lists as input, but for any `Foldable` type. This is what we would get if we let the Haskell's type inference work its magic:
 
-```haskell
+```haskell {data-lang-off}
 ghci> counter = foldr (\x -> M.insertWith (+) x 1) M.empty
 ghci> :t counter
 counter
@@ -204,7 +204,7 @@ counter
 
 That is:
 
-```haskell
+```haskell {data-lang-off}
 counter :: (Foldable t, Eq k, Hashable k, Num v) => 
             t k -> M.HashMap k v
 ```
@@ -215,28 +215,28 @@ I used the [strict hashmap][data-hashmap-strict] provided in the `unordered-coll
 If you want to use the `Hashable` typeclass in code, you'll need to jump through some hoops by ["exposing" the hidden `hashable` package and importing `Data.Hashable`](https://stackoverflow.com/a/68761231/10239789).
 {% endalert %}
 
-### Parser Utilities
+## Parser Utilities
 I used MegaParsec this year, but the idea of the following utilities can also be applied for other parser combinator libraries.
 
-#### `digits :: (Num i, Read i) => Parser i`
-```haskell
+### `digits :: (Num i, Read i) => Parser i`
+```haskell {data-lang-off}
 digits = read <$> some digitChar
 ```
 
 Convenience function for parsing a number (string of digits).
 
-#### `integer :: (Num i, Read i, Show i) => Parser i`
-```haskell
+### `integer :: (Num i, Read i, Show i) => Parser i`
+```haskell {data-lang-off}
 integer = (negate <$> try (char '-' *> digits)) <|> digits
 ```
 
 Convenience function for parsing a (possibly negative) integer.
 
-### AOC-specific Utilities
+## AOC-specific Utilities
 Some more utilities which I wrote solely for AOC.
 
-#### `defaultMain`
-```haskell
+### `defaultMain`
+```haskell {data-lang-off}
 defaultMain
   :: (ParseLike p, Print b, Print c)
   => String   -- Default input file, if no -f option was provided from args.
@@ -259,7 +259,7 @@ This utility may seem scary since there it's packed with other user-defined util
 
 One thing I found useful was having flexible parse methods. Sometimes I want to parse using a `String -> a` function because it was enough to simply do `map read . lines`. Other times I want to parse using a `Parser a` combinator due to more complicated syntax in the input. Thanks to ad-hoc polymorphism, we can achieve this using typeclasses; and so the `ParseLike` typeclass was born:
 
-```haskell
+```haskell {data-lang-off}
 class ParseLike p where
   -- Parser object, filename, contents -> result.
   doParse :: p a -> String -> String -> a
@@ -277,7 +277,7 @@ instance ParseLike Parser where
 
 Here's an example usage from [Day 1](https://github.com/TrebledJ/aoc/blob/master/2021/haskell/src/Days/D01.hs):
 
-```haskell
+```haskell {data-lang-off}
 main :: IO ()
 main = defaultMain defaultFile parse part1 part2
 
@@ -297,8 +297,8 @@ part2 xs =
 
 Other usage examples can be found in [my Haskell AOC solutions][aoc-haskell].
 
-#### `criterionMain`
-```haskell
+### `criterionMain`
+```haskell {data-lang-off}
 criterionMain
   :: (ParseLike p)
   => String   -- Default input file, if no -f option was provided from args.
@@ -315,7 +315,7 @@ Criterion is an excellent benchmarking library with various config options and o
 
 Example usage from [Day 22](https://github.com/TrebledJ/aoc/blob/master/2021/haskell/src/Days/D22.hs):
 
-```haskell
+```haskell {data-lang-off}
 main :: IO ()
 main = criterionMain defaultFile parser $ \input ->
   [ C.bgroup "part1" [C.bench "part1" $ C.whnf part1 input]
