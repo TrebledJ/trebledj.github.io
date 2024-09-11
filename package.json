@@ -43,7 +43,6 @@
 		"@11ty/eleventy-plugin-rss": "^1.2.0",
 		"@11ty/eleventy-plugin-syntaxhighlight": "^5.0.0",
 		"@quasibit/eleventy-plugin-sitemap": "^2.2.0",
-		"@traptitech/markdown-it-spoiler": "^1.1.6",
 		"chalk": "^4",
 		"cheerio": "^1.0.0-rc.12",
 		"clean-css": "^5.3.3",

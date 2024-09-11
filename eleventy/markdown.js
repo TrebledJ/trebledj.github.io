@@ -1,7 +1,7 @@
 const markdownItAnchor = require('markdown-it-anchor');
 const markdownItAttrs = require('markdown-it-attrs');
 const markdownItFootnote = require('markdown-it-footnote');
-const markdownItSpoiler = require('@traptitech/markdown-it-spoiler');
+const markdownItSpoiler = require('./detail/markdown-it/markdown-it-spoiler');
 const markdownItPrism = require('markdown-it-prism');
 const pluginTOC = require('eleventy-plugin-toc');
 

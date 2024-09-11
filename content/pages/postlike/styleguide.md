@@ -571,6 +571,12 @@ Tags: {% tag "ctf" %} {% tag "programming" %} {% tag "music" %} {% tag "electron
 {% enddetails %}
 
 
+### Spoilers
+
+!!abc!!
+
+!!The **quick** *brown* ~~fox~~ jumped over the lazy dog.!!
+
 ## Embeds
 
 ### SoundCloud
