@@ -42,7 +42,7 @@ html[data-theme=dark] {
 }
 
 html[data-theme=light] {
-    strong {
+    .alert strong {
         // color: color-mix(in srgb, #{$alert-color} 80%, #fff 20%);
         --bold-color: var(--bs-alert-color);
     }

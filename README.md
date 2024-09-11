@@ -49,7 +49,7 @@ This site was inspired and built from many libraries. Mentioning all of them wou
 * [Devlopr – Jekyll](https://github.com/sujaykundu777/devlopr-jekyll)
   * Base project that got me started. Even though I've moved on from Jekyll and a lot of the original code, it was still a rewarding (but annoying) experience fixing all the small persistent issues and bugs. What doesn't kill makes me stronger.
   * I still like some things from the original project:
-    * Bootstrap/jQuery: Good for starters and prototyping.
+    * Bootstrap/jQuery: Good for starters and prototyping. Although Bootstrap is a bit bloated.
     * SCSS: Enables rapid CSS development. Less headaches.
     * Scroll progress.
     * Navbar.
@@ -64,7 +64,8 @@ This site was inspired and built from many libraries. Mentioning all of them wou
   * Examples, documentation, guides.
   * Core functionality, without which the site would be much weaker and take a *lot longer* to develop.
   * Alerts. Tooltips. Dropdowns. Modals. Buttons. Carousels.
-* ~~[MathJax](https://github.com/mathjax/MathJax) – for Fuzzy Wuzzy Math~~ (sorry mathjax)
+* [PrismJS](https://github.com/PrismJS/prism) - awesome code highlighting and code block mods.
+* [markdown-it](https://github.com/markdown-it/markdown-it) - extensible Markdown parser.
 * [KaTeX](https://github.com/KaTeX/KaTeX) – for performant math.
 * [sharer.js](https://github.com/ellisonleao/sharer.js) – Abstracts away social links. I just need to worry about the icons and UI.
 * [lunr.js](https://github.com/olivernn/lunr.js) – Site-wide Search Engine.
