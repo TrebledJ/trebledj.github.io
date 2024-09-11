@@ -85,7 +85,7 @@ const postProcess = (state, delimiters) => {
     const tokenO = state.tokens[startDelim.token]
     tokenO.type = "spoiler_open"
     tokenO.tag = "span"
-    tokenO.attrs = [["class", "spoiler"], ["tabindex", "0"], ["onKeyUp", "(event.key==='Enter'||event.keyCode===13)?this.classList.add('active'):void(0)"]]
+    tokenO.attrs = [["class", "spoiler"], ["tabindex", "0"]]
     tokenO.nesting = 1
     tokenO.markup = "!!"
     tokenO.content = ""
