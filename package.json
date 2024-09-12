@@ -12,7 +12,7 @@
 		"test:jest": "jest",
 		"test": "npm-run-all --parallel test:*",
 		"lint": "npx eslint . --fix",
-		"rake": "cd eleventy/detail/rake-js && npm install --ignore-scripts && npm run build",
+		"rake": "cd eleventy/detail/keywords/rake-js && npm install --ignore-scripts && npm run build",
 		"dev:sass": "sass assets/scss:_site/css",
 		"watch:sass": "sass --watch assets/scss:_site/css --quiet",
 		"prod:sass": "sass --style=compressed assets/scss:_site/css && cleancss --batch --batch-suffix '.min' -O2 _site/css/*.css !_site/css/*.min.css",
