@@ -6,6 +6,7 @@ https://www.st.com/resource/en/reference_manual/rm0090-stm32f405415-stm32f407417
 https://www.google.com/doodles/alan-turings-100th-birthday
 https://web.archive.org/
 http://127.0.0.1:?[0-9]*/.*
+https://gitlab.kitware.com/cmake/cmake/-/issues/18355
 
 # False positive from marp HTML.
 http://highlightjs.readthedocs.io/en/latest/style-guide.html
