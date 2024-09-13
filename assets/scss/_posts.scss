@@ -186,6 +186,10 @@
         border: 0px solid var(--bold-color);
         border-radius: 3px;
         cursor: pointer;
+
+        * {
+            color: transparent !important;
+        }
     }
 
     .spoiler {
