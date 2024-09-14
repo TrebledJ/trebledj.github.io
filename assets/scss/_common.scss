@@ -32,10 +32,8 @@ html {
 
 
 a {
-    // See Note [!important].
     --bs-link-color-rgb: var(--link-color-rgb);
     --bs-link-hover-color-rgb: var(--link-color-rgb);
-    // color: var(--link-color) !important;
 }
 
 // Animated underline.
