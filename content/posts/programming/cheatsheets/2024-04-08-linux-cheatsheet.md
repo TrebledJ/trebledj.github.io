@@ -26,8 +26,15 @@ By "favourite", I mean I've used these commands a *lot*, and they've drastically
 ```sh {data-lang-off .command-line data-prompt="$" data-filter-output="# "}
 ^c # Duh. https://xkcd.com/416/
 ^d # Exit / EOF.
-^r # Reverse search: for those long commands stashed in history.
 ```
+
+**Reverse/Forward Search**: for those long commands stashed in history. Works in PowerShell and REPLs too!
+```sh {data-lang-off .command-line data-prompt="$" data-filter-output="# "}
+^r
+^s
+```
+
+<sup>Note: to make `^s` work in bash/zsh, you may need to run `stty -ixon`, which [disables software control flow](https://superuser.com/questions/472846/how-to-reverse-i-search-back-and-forth).</sup>{.caption}
 
 **Ternary Expression**
 ```sh {data-lang-off .command-line data-prompt="$" data-filter-output="# "}

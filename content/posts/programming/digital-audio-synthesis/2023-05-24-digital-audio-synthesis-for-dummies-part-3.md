@@ -458,7 +458,7 @@ Double buffering is also used for video and displays, where each buffer stores a
 
 ### Example: Playing Multiple Notes with DMA and Double Buffering 🎶
 
-With some minor changes, we can make our device generate audio for multiple notes. Let’s go ahead and play an A major chord!^[I love minor chords too, but it's not appropriate to play A minor. I'll see myself out. Hope you enjoyed the read.]
+With some minor changes, we can make our device generate audio for multiple notes. Let’s go ahead and play an A major chord!
 
 ```cpp
 // Prep the buffer.

@@ -8,9 +8,9 @@ tags:
   - programming
 thumbnail_src: assets/hitcon-thumbnail.jpg
 preamble: |
-  This writeup is also intended for beginners. I’ll be taking a didactic approach to this writeup, with some sections starting with questions for guidance.^[Also, a good excuse for me to introduce !!spoilers!! to this site!] Anytime there's a set of questions, feel free to pause, challenge yourself, and think through them. :) If you want to follow along, you can grab the challenge binary [*here*](https://github.com/TrebledJ/ctf-binaries/tree/c8e9259c8f7d9cee149d99269d9b691cf54e53b9/hitcon-2023/the-blade).
+  *This writeup is also intended for beginners. Anytime there's a set of questions, feel free to pause, challenge yourself, and think through them. :) If you want to follow along, you can grab the challenge binary [here](https://github.com/TrebledJ/ctf-binaries/tree/c8e9259c8f7d9cee149d99269d9b691cf54e53b9/hitcon-2023/the-blade).*
 
-  I'll be mainly using [ghidra](https://ghidra-sre.org/) as my decompiler, along with GDB + GEF. For those unfamiliar with GDB, you may find my [recently posted cheatsheet](/posts/gdb-cheatsheet) helpful.
+  *I'll be mainly using [ghidra](https://ghidra-sre.org/) as my decompiler, along with GDB + GEF. For those unfamiliar with GDB, you may find my [recently posted cheatsheet](/posts/gdb-cheatsheet) helpful.*
 ---
 
 My first Rust {% tag "rev", "reverse" %} solve! Though in hindsight, not much Rust knowledge was needed.

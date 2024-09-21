@@ -32,10 +32,8 @@ html {
 
 
 a {
-    // See Note [!important].
     --bs-link-color-rgb: var(--link-color-rgb);
     --bs-link-hover-color-rgb: var(--link-color-rgb);
-    // color: var(--link-color) !important;
 }
 
 // Animated underline.
@@ -97,6 +95,10 @@ blockquote {
 
     border: none;
     border-left: $border-width-thick solid #3642df;
+}
+
+html[data-theme=light] code {
+    --bs-code-color: #905;
 }
 
 html[data-theme=dark] code {
