@@ -1,5 +1,5 @@
 const pluginRss = require('@11ty/eleventy-plugin-rss');
-const pluginSyntaxHighlight = require('@11ty/eleventy-plugin-syntaxhighlight');
+// const pluginSyntaxHighlight = require('@11ty/eleventy-plugin-syntaxhighlight');
 const pluginNavigation = require('@11ty/eleventy-navigation');
 const pluginBundle = require('@11ty/eleventy-plugin-bundle');
 const { EleventyHtmlBasePlugin, EleventyRenderPlugin } = require('@11ty/eleventy');
@@ -7,7 +7,7 @@ const eleventySass = require('eleventy-sass');
 // eslint-disable-next-line import/no-extraneous-dependencies
 const sitemap = require('@quasibit/eleventy-plugin-sitemap');
 const { minify } = require('terser');
-const CleanCSS = require("clean-css");
+const CleanCSS = require('clean-css');
 const chalk = require('chalk');
 
 module.exports = function (eleventyConfig) {
@@ -29,11 +29,11 @@ module.exports = function (eleventyConfig) {
           const output = new CleanCSS({}).minify(content);
           if (output.errors.length > 0) {
             console.error(chalk.red(`Errors encountered while running CleanCSS for bundle ${this.type}.`));
-            console.error(chalk.red(output.errors.join("\n")));
+            console.error(chalk.red(output.errors.join('\n')));
           }
           if (output.warnings.length > 0) {
             console.warn(chalk.yellow(`Warnings encountered while running CleanCSS for bundle ${this.type}.`));
-            console.warn(chalk.yellow(output.warnings.join("\n")));
+            console.warn(chalk.yellow(output.warnings.join('\n')));
           }
           return output.styles;
         }

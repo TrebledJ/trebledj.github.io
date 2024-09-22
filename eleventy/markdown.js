@@ -1,14 +1,13 @@
 const markdownItAnchor = require('markdown-it-anchor');
 const markdownItAttrs = require('markdown-it-attrs');
 const markdownItFootnote = require('markdown-it-footnote');
-const markdownItSpoiler = require('./detail/markdown-it/markdown-it-spoiler');
 const markdownItPrism = require('markdown-it-prism');
 const pluginTOC = require('eleventy-plugin-toc');
 
 const loadLanguages = require('prismjs/components/');
+const markdownItSpoiler = require('./detail/markdown-it/markdown-it-spoiler');
 
-require('./detail/markdown-it/domify.js');
-
+require('./detail/markdown-it/domify');
 
 module.exports = function (eleventyConfig) {
   eleventyConfig.amendLibrary('md', mdLib => {
@@ -55,7 +54,7 @@ module.exports = function (eleventyConfig) {
       // }
       return n;
     };
-  
+
     // Codeblocks and Syntax Highlighting
     mdLib.use(markdownItPrism, {
       highlightInlineCode: true,

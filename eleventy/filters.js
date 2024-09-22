@@ -192,7 +192,6 @@ module.exports = function (eleventyConfig) {
     breaks: false,
     linkify: true,
   });
-  // eslint-disable-next-line global-require
   md.use(require('markdown-it-attrs'));
 
   eleventyConfig.addFilter('markdownify', markdownString => md.render(markdownString));

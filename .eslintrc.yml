@@ -52,3 +52,5 @@ rules:
   no-underscore-dangle: off
   prefer-destructuring: off
   prefer-arrow-callback: off
+  no-bitwise: off
+  global-require: off
