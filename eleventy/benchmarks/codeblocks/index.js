@@ -96,5 +96,5 @@ plot({
   title: 'Markdown-to-HTML with Prism - DOM Benchmark',
   labels,
   data: times,
-  filename: 'dom-benchmark.png',
+  filename: 'dist/dom-benchmark.png',
 });
