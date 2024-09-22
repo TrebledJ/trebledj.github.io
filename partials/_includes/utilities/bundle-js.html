@@ -1,6 +1,11 @@
 {# Bundle JS. #}
-{% js %}
+
+{# Some variables are per-post. For instance, some posts have different ToC options. #}
+{% inlinejs %}
     var tocOptions = {{ tocOptions | default({}) | dump | safe }};
+{% endinlinejs %}
+
+{% js %}
     var site = {
         typewrite: {{ site.typewrite | dump | safe }},
         search: {{ site.search | dump | safe }},
@@ -55,4 +60,6 @@
 {% set jsBundle %}
     {%- getBundleFileUrl "js" -%}
 {% endset %}
+
+<script>{% getBundle "inlinejs" %}</script>
 <script defer src="{{jsBundle}}"></script>

@@ -11,7 +11,8 @@ tags:
   - writeup
 thumbnail_src: assets/drogon-thumbnail.png
 thumbnail_banner: true
-tocOptions: '{"tags":["h2","h3","h4"]}'
+tocOptions:
+    tags: [h2, h3, h4]
 related:
     posts: [attack-of-the-zip]
 # preamble: |

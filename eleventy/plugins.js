@@ -18,7 +18,7 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPlugin(pluginNavigation);
 
   eleventyConfig.addPlugin(pluginBundle, {
-    bundles: ['inlinecss'],
+    bundles: ['inlinecss', 'inlinejs'],
     toFileDirectory: 'cb',
     transforms: [
       async function (content) {
@@ -38,7 +38,7 @@ module.exports = function (eleventyConfig) {
           return output.styles;
         }
 
-        if (this.type === 'js') {
+        if (this.type === 'js' || this.type === 'inlinejs') {
           const result = await minify(content);
           return result.code;
         }
