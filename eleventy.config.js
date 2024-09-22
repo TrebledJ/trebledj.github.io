@@ -141,7 +141,7 @@ module.exports = function (eleventyConfig) {
     });
 
     // Indirect: wrap addTransform with addPlugin, so that bundled inline JS
-    // gets substituted before calling htmlcsp. 
+    // gets substituted before calling htmlcsp.
     eleventyConfig.addPlugin(function (eleventyConfig) {
       eleventyConfig.addTransform('htmlcsp', htmlcsp);
     });
