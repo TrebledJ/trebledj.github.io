@@ -1,10 +1,12 @@
 const loadLanguages = require('prismjs/components/');
 
-const jsdom = require('jsdom');
+function textToDOM(text) {
+    // domino: Use `template` as a workaround: https://github.com/fgnass/domino/issues/73
+    const templ = document.createElement('template');
+    templ.innerHTML = text;
+    return templ.content;
+}
 
-const { JSDOM } = jsdom;
-
-/* eslint-disable */
 const HTML_ESCAPE_TEST_RE = /[&<>"]/
 const HTML_ESCAPE_REPLACE_RE = /[&<>"]/g
 const HTML_REPLACEMENTS = {
@@ -53,11 +55,11 @@ function replaceEntityPattern(match, name) {
     return match
 }
 
-/* function replaceEntities(str) {
-  if (str.indexOf('&') < 0) { return str; }
+// function replaceEntities(str) {
+//   if (str.indexOf('&') < 0) { return str; }
 
-  return str.replace(ENTITY_RE, replaceEntityPattern);
-} */
+//   return str.replace(ENTITY_RE, replaceEntityPattern);
+// }
 
 function unescapeMd(str) {
     if (str.indexOf('\\') < 0) { return str }
@@ -138,7 +140,7 @@ module.exports = function (tokens, idx, options, _env, slf) {
         // so we'll wrap the `pre` in an additional `div` for class purposes.
         const result = `<div><pre${slf.renderAttrs(tmpToken)}><code class="${options.langPrefix}${langName}">${highlighted}</code></pre></div>`
 
-        const el = JSDOM.fragment(result);
+        const el = textToDOM(result);
         Prism.highlightElement(el.firstChild.firstChild.firstChild);
         let newResult = el.firstChild.firstChild.outerHTML;
         if (!newResult.endsWith('\n'))
