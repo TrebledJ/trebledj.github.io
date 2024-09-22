@@ -140,7 +140,11 @@ module.exports = function (eleventyConfig) {
       return content;
     });
 
-    eleventyConfig.addTransform('htmlcsp', htmlcsp);
+    // Indirect: wrap addTransform with addPlugin, so that bundled inline JS
+    // gets substituted before calling htmlcsp. 
+    eleventyConfig.addPlugin(function (eleventyConfig) {
+      eleventyConfig.addTransform('htmlcsp', htmlcsp);
+    });
   }
 
   // Customize Markdown library settings:

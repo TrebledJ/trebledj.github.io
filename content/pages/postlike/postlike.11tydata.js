@@ -1,7 +1,5 @@
 const { getGitCommitDate } = require('../../../eleventy/detail/git-commit-date');
 
-const dateCache = {};
-
 function getPostlikeDate(data) {
   if (process.env.ENVIRONMENT === 'production')
     return getGitCommitDate(data.page.inputPath, { keep: /^content/ })
@@ -9,14 +7,15 @@ function getPostlikeDate(data) {
   return undefined;
 }
 
-function getCachedPostlikeDate(data) {
-  if (data.page.inputPath in dateCache) {
-    return dateCache[data.page.inputPath];
-  }
-  const val = getPostlikeDate(data);
-  dateCache[data.page.inputPath] = val;
-  return val;
-}
+// const dateCache = {};
+// function getCachedPostlikeDate(data) {
+//   if (data.page.inputPath in dateCache) {
+//     return dateCache[data.page.inputPath];
+//   }
+//   const val = getPostlikeDate(data);
+//   dateCache[data.page.inputPath] = val;
+//   return val;
+// }
 
 module.exports = {
   layout: 'layouts/post-default',

@@ -1,4 +1,4 @@
-/* eslint-disable no-undef, no-var */
+/* global site, Typewriter */
 // JS controller for https://github.com/tameemsafi/typewriterjs.
 // For documentation, see Typewriter JS: https://safi.me.uk/typewriterjs/.
 

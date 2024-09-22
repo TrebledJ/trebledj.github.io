@@ -1,9 +1,7 @@
 // Introduce browser APIs such as `document` and `window` to Node.
 // Make sure to call this prior to using `document`, e.g. before loading Prism plugins.
 
-const jsdom = require("jsdom");
-const { JSDOM } = jsdom;
+const domino = require('domino');
 
-global.window = (new JSDOM('')).window;
+global.window = domino.createWindow('');
 global.document = global.window.document;
-global.getComputedStyle = window.getComputedStyle;

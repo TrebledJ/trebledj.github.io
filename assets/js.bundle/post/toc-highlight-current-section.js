@@ -1,27 +1,23 @@
+/* global tocOptions */
+
 // --- TOC Current Section Highlight --- //
 // 1. Check if post is configured to also show h3, h4, h5, etc...
 // 2. Get all HTML heading elements.
 // 3. Construct main calculation logic and attach to event handler.
 
-// eslint-disable-next-line no-var
-var tocOptions;
-
 const headerOffset = document.querySelector('header').offsetHeight + 20;
 
 let tags = ['h2', 'h3']; // Default.
-if (tocOptions) {
-  tocOptions = JSON.parse(tocOptions);
-  if (tocOptions.tags && tocOptions.tags.length > 0) {
-    const newTags = [];
-    for (const t of tocOptions.tags) {
-      // Check if it matches hN header pattern.
-      if (t.startsWith('h') && !Number.isNaN(t[1]) && t[1] > 0 && t[1] <= 6) {
-        newTags.push(t);
-      }
+if (tocOptions && tocOptions.tags && tocOptions.tags.length > 0) {
+  const newTags = [];
+  for (const t of tocOptions.tags) {
+    // Check if it matches hN header pattern.
+    if (t.startsWith('h') && !Number.isNaN(t[1]) && t[1] > 0 && t[1] <= 6) {
+      newTags.push(t);
     }
-    if (newTags.length > 0) {
-      tags = newTags;
-    }
+  }
+  if (newTags.length > 0) {
+    tags = newTags;
   }
 }
 

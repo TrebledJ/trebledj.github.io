@@ -1,14 +1,13 @@
 const markdownItAnchor = require('markdown-it-anchor');
 const markdownItAttrs = require('markdown-it-attrs');
 const markdownItFootnote = require('markdown-it-footnote');
-const markdownItSpoiler = require('./detail/markdown-it/markdown-it-spoiler');
 const markdownItPrism = require('markdown-it-prism');
 const pluginTOC = require('eleventy-plugin-toc');
 
-const loadLanguages = require('prismjs/components/');
+const PrismLoad = require('prismjs/components/');
+const markdownItSpoiler = require('./detail/markdown-it/markdown-it-spoiler');
 
-require('./detail/markdown-it/domify.js');
-
+require('./detail/markdown-it/domify');
 
 module.exports = function (eleventyConfig) {
   eleventyConfig.amendLibrary('md', mdLib => {
@@ -55,20 +54,21 @@ module.exports = function (eleventyConfig) {
       // }
       return n;
     };
-  
+
     // Codeblocks and Syntax Highlighting
     mdLib.use(markdownItPrism, {
       highlightInlineCode: true,
-      plugins: ['diff-highlight', 'command-line', 'toolbar'],
+      plugins: ['command-line', 'toolbar'],
       init(Prism) {
-        loadLanguages(['cpp']);
+        PrismLoad(['cpp']);
         Prism.languages.csp = Prism.languages.cpp;
-        loadLanguages(['armasm']);
+        PrismLoad(['armasm']);
         Prism.languages.asm = Prism.languages.armasm;
+        PrismLoad(['diff']);
       },
     });
+    require('prismjs/plugins/diff-highlight/prism-diff-highlight');
     require('./detail/prism/prism-line-numbers');
-    // require('./detail/prism/prism-show-filename');
     require('./detail/prism/prism-show-language');
     require('./detail/prism/prism-copy-to-clipboard');
 

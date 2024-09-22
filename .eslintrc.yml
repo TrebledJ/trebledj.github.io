@@ -8,6 +8,8 @@ env:
 extends: airbnb-base
 parserOptions:
   ecmaVersion: latest
+globals:
+  Prism: readonly
 rules:
   max-len:
     - error
@@ -52,3 +54,5 @@ rules:
   no-underscore-dangle: off
   prefer-destructuring: off
   prefer-arrow-callback: off
+  no-bitwise: off
+  global-require: off
