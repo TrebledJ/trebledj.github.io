@@ -1,5 +1,4 @@
-/* eslint-disable no-undef */
-
+/* global site, lunr */
 // Use a modified `lunr.Builder.add` which accepts run-length-encoded
 // text, so that we can pack our JSON a bit tighter.
 lunr.Builder.prototype.addEncoded = function (ref, fieldName, field) {

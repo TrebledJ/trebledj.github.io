@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 (function () {
   if (typeof Prism === 'undefined' || typeof document === 'undefined') {
     return;

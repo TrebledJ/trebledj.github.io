@@ -64,8 +64,10 @@ const times = [];
 for (const { name, loaderFile } of cases) {
   const timer = new Timer(name);
   timer.time({
+    /* eslint-disable no-undef */
     count: (typeof count === 'undefined' ? undefined : count),
     seconds: (typeof seconds === 'undefined' ? undefined : seconds),
+    /* eslint-enable no-undef */
     setup() {
       const { setup } = require(loaderFile);
       setup(md);

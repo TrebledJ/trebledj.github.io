@@ -8,6 +8,8 @@ env:
 extends: airbnb-base
 parserOptions:
   ecmaVersion: latest
+globals:
+  Prism: readonly
 rules:
   max-len:
     - error

@@ -1,6 +1,6 @@
 {# Bundle JS. #}
 {% js %}
-    var tocOptions = '{{ tocOptions | safe }}';
+    var tocOptions = {{ tocOptions | default({}) | dump | safe }};
     var site = {
         typewrite: {{ site.typewrite | dump | safe }},
         search: {{ site.search | dump | safe }},
