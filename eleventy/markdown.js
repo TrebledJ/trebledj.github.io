@@ -4,7 +4,7 @@ const markdownItFootnote = require('markdown-it-footnote');
 const markdownItPrism = require('markdown-it-prism');
 const pluginTOC = require('eleventy-plugin-toc');
 
-const loadLanguages = require('prismjs/components/');
+const PrismLoad = require('prismjs/components/');
 const markdownItSpoiler = require('./detail/markdown-it/markdown-it-spoiler');
 
 require('./detail/markdown-it/domify');
@@ -60,11 +60,11 @@ module.exports = function (eleventyConfig) {
       highlightInlineCode: true,
       plugins: ['command-line', 'toolbar'],
       init(Prism) {
-        loadLanguages(['cpp']);
+        PrismLoad(['cpp']);
         Prism.languages.csp = Prism.languages.cpp;
-        loadLanguages(['armasm']);
+        PrismLoad(['armasm']);
         Prism.languages.asm = Prism.languages.armasm;
-        loadLanguages(['diff']);
+        PrismLoad(['diff']);
       },
     });
     require('prismjs/plugins/diff-highlight/prism-diff-highlight');

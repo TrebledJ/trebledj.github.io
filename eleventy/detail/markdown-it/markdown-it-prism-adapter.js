@@ -1,4 +1,4 @@
-const loadLanguages = require('prismjs/components/');
+const PrismLoad = require('prismjs/components/');
 
 function textToDOM(text) {
     // domino: Use `template` as a workaround: https://github.com/fgnass/domino/issues/73
@@ -100,9 +100,9 @@ module.exports = function (tokens, idx, options, _env, slf) {
     if (langName.startsWith('diff-')) {
         let diffRemovedRawName = langName.substring("diff-".length);
         if (!Prism.languages[diffRemovedRawName])
-            loadLanguages([diffRemovedRawName]);
+            PrismLoad([diffRemovedRawName]);
         if (!Prism.languages.diff)
-            loadLanguages(['diff']);
+            PrismLoad(['diff']);
         Prism.languages[langName] = Prism.languages.diff;
         highlighted = Prism.highlight(token.content, Prism.languages.diff, langName) || escapeHtml(token.content);
         //   } else {
@@ -132,7 +132,7 @@ module.exports = function (tokens, idx, options, _env, slf) {
         }
 
         if (Prism.languages[langName] === undefined) {
-            loadLanguages([langName])
+            PrismLoad([langName])
             // langObject = Prism.languages[langName]
         }
 

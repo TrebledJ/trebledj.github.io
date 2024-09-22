@@ -1,6 +1,6 @@
 /* eslint-disable import/no-dynamic-require, no-console */
 const fs = require('fs');
-const loadLanguages = require('prismjs/components/');
+const PrismLoad = require('prismjs/components/');
 const MarkdownIt = require('markdown-it');
 const { Timer } = require('./stoolmark');
 const isEqualHTML = require('./isEqualHTML');
@@ -23,14 +23,14 @@ md.use(require('markdown-it-prism'), {
   highlightInlineCode: true,
   plugins: ['command-line', 'toolbar'],
   init(Prism) {
-    loadLanguages(['cpp']);
+    PrismLoad(['cpp']);
     Prism.languages.csp = Prism.languages.cpp;
-    loadLanguages(['armasm']);
+    PrismLoad(['armasm']);
     Prism.languages.asm = Prism.languages.armasm;
   },
 });
 
-loadLanguages(['diff']);
+PrismLoad(['diff']);
 require('prismjs/plugins/diff-highlight/prism-diff-highlight');
 require('../../detail/prism/prism-line-numbers');
 require('../../detail/prism/prism-show-language');

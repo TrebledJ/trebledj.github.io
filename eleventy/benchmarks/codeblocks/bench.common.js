@@ -1,4 +1,4 @@
-const loadLanguages = require('prismjs/components/');
+const PrismLoad = require('prismjs/components/');
 const { unescapeAll, escapeHtml } = require('./markdown-it-helpers');
 
 module.exports.setGlobals = function (_document) {
@@ -30,9 +30,9 @@ module.exports.setRenderFenceRule = function (md, fTextToNode) {
     if (langName.startsWith('diff-')) {
       const diffRemovedRawName = langName.substring('diff-'.length);
       if (!Prism.languages[diffRemovedRawName])
-        loadLanguages([diffRemovedRawName]);
+        PrismLoad([diffRemovedRawName]);
       if (!Prism.languages.diff)
-        loadLanguages(['diff']);
+        PrismLoad(['diff']);
       Prism.languages[langName] = Prism.languages.diff;
       highlighted = Prism.highlight(token.content, Prism.languages.diff, langName) || escapeHtml(token.content);
       //   } else {
@@ -62,7 +62,7 @@ module.exports.setRenderFenceRule = function (md, fTextToNode) {
       };
 
       if (Prism.languages[langName] === undefined) {
-        loadLanguages([langName]);
+        PrismLoad([langName]);
         // langObject = Prism.languages[langName]
       }
 
