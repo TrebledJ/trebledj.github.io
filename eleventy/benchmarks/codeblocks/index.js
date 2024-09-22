@@ -41,7 +41,7 @@ const content = fs.readFileSync('eleventy/benchmarks/codeblocks/fixtures/codeblo
 const expectedHtml = fs.readFileSync('eleventy/benchmarks/codeblocks/fixtures/codeblocks.out.html', 'utf8');
 
 // Benchmark cases.
-const seconds = 10;
+const seconds = 120;
 const cases = [
   {
     name: 'JSDOM',
