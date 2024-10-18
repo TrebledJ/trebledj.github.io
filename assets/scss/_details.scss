@@ -46,13 +46,14 @@ summary:before {
 }
 
 details[open] > summary {
-    &:before {
-        transform: rotate(90deg);
-    }
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
     border: solid math.div($border-width-block, 2) transparent;
     border-bottom-color: var(--highlight-color);
+
+    &:before {
+        transform: rotate(90deg);
+    }
 }
 
 details > summary {
