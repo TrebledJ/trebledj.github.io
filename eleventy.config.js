@@ -1,5 +1,6 @@
 const { Transform } = require('stream');
 const chalk = require('chalk');
+const { minify } = require('terser');
 
 const plugins = require('./eleventy/plugins');
 const filters = require('./eleventy/filters');

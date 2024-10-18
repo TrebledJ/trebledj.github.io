@@ -10,8 +10,8 @@ const { minify } = require('terser');
 const CleanCSS = require('clean-css');
 const chalk = require('chalk');
 
-const { modifyExternalLinksToOpenInSeparateTab } = require('./eleventy/detail/helpers');
-const htmlcsp = require('./eleventy/detail/html-csp-transform');
+const { modifyExternalLinksToOpenInSeparateTab } = require('./detail/helpers');
+const htmlcsp = require('./detail/html-csp-transform');
 
 module.exports = function (eleventyConfig) {
   eleventyConfig.addPlugin(pluginRss);
@@ -89,7 +89,7 @@ module.exports = function (eleventyConfig) {
   });
 
   if (process.env.ENVIRONMENT === 'production') {
-    eleventyConfig.addPlugin(require('./eleventy/plugins.filemin'));
+    eleventyConfig.addPlugin(require('./plugins.filemin'));
   }
 
   // Other Transforms
