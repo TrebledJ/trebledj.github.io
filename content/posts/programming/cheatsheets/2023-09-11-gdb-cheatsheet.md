@@ -441,14 +441,14 @@ from pwn import *
 
 bash = process('bash')
 
-# Attach the debugger
+# Attach the debugger and run GDB commands.
 gdb.attach(bash, '''
 set follow-fork-mode child
 break execve
 continue
 ''')
 
-# Interact with the process
+# Interact with the process.
 bash.sendline(b"echo Hello World")
 ```
 
@@ -456,6 +456,10 @@ Further Reading:
 
 - [SO: `gdb.attach` Example](https://stackoverflow.com/a/62014210/10239789)
 - [`gdb.attach` Documentation](https://docs.pwntools.com/en/stable/gdb.html#pwnlib.gdb.attach)
+
+To unlock the full potential of the GDB API, check out:
+
+- [pwntools - Working with GDB](https://docs.pwntools.com/en/stable/gdb.html)
 
 
 ### Input Non-Printable Characters
@@ -465,7 +469,7 @@ Sometimes you may want to manually fuzz or construct complex attack payloads. Th
 {% alert "danger" %}
 I don't recommend using Python 3 to generate strings on-the-fly, as its string/byte-string mechanics are unintuitive. Prefer `perl` or `echo` instead.
 
-For example: `python -c 'print("\xc0")'` prints `\xc3\x80` (À) instead of `\xc0`. Why? Because the Python string `"\xc0"` is interpreted as U+00C0, which is `\xc3\x80` in UTF-8.
+For example: `python -c 'print("\xc0")'` prints `\xc3\x80` (À) instead of `\xc0`. Why? Because the Python string `"\xc0"` is interpreted as U+00C0, which is `\xc3\x80` in UTF-8. In other words, characters are interpreted as Unicode codepoints instead of bytes.
 
 ```py
 assert '\xc0'.encode() == b'\xc3\x80'
