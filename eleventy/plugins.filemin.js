@@ -2,7 +2,7 @@ const htmlmin = require('html-minifier');
 const { minify } = require('terser');
 const chalk = require('chalk');
 
-module.exports = (eleventyConfig) => {
+module.exports = eleventyConfig => {
   // Dev Note: You may be wondering why we wrap the addTransform with
   // addPlugin when we could simply call addTransform outside directly. We
   // do this to sequence file minification transforms after plugins add
@@ -57,4 +57,4 @@ module.exports = (eleventyConfig) => {
 
     return content;
   });
-}
+};

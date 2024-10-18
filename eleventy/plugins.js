@@ -89,7 +89,7 @@ module.exports = function (eleventyConfig) {
   });
 
   if (process.env.ENVIRONMENT === 'production') {
-    eleventyConfig.addPlugin(require("./eleventy/plugins.filemin"));
+    eleventyConfig.addPlugin(require('./eleventy/plugins.filemin'));
   }
 
   // Other Transforms
