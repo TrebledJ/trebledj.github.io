@@ -290,6 +290,7 @@ dirname ~/.bashrc
 ```sh {data-lang-off .command-line data-prompt="$" data-filter-output="# "}
 pushd # Push current directory, for easier returning.
 popd  # Return to directory on top of stack.
+dirs  # List history of dirs.
 ```
 
 {% alert "success" %}
@@ -308,6 +309,12 @@ popd  # Return to `~/a/b/c`.
 
 `less` is a powerful text viewer (read-only), with capabilities to navigate, search, and filter lines in a file or long text.
 
+Get some help. See all commands:
+
+```sh {data-lang-off}
+h
+```
+
 #### less - Nice Options
 ```sh {data-lang-off .command-line data-prompt="$" data-filter-output="# "}
 less file.txt
@@ -321,6 +328,8 @@ less -I file.txt
 # Line numbers.
 less -N file.txt
 ```
+
+You can turn on/off these options *inside `less`* by typing `-I<Enter>`, `-R<Enter>`, or `-N<Enter>`. This is useful if you forget to turn them on beforehand (e.g. after curling a web request).
 
 #### less - Navigation
 ```sh {data-lang-off}
@@ -567,6 +576,13 @@ Obligatory.
 ```
 
 Okay, that's enough vim.
+
+### Useful Things
+
+Set line numbers.
+```sh {data-lang-off}
+:set number
+```
 
 ## Hacky Hack Hack
 
