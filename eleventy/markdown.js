@@ -16,7 +16,7 @@ function PrismAlias(target, aliases) {
       Prism.languages[a] = Prism.languages[target];
     });
   } else {
-    throw Error("unable to parse aliases");
+    throw Error('unable to parse aliases');
   }
 }
 
@@ -70,7 +70,7 @@ module.exports = function (eleventyConfig) {
     mdLib.use(markdownItPrism, {
       highlightInlineCode: true,
     });
-    
+
     mdLib.use(require('./detail/markdown-it/markdown-it-prism-adapter'), {
       init(_Prism) {
         PrismAlias('cpp', ['csp']);
@@ -84,7 +84,7 @@ module.exports = function (eleventyConfig) {
         require('./detail/prism/prism-line-numbers');
         require('./detail/prism/prism-show-language');
         require('./detail/prism/prism-copy-to-clipboard');
-      }
+      },
     });
   });
 

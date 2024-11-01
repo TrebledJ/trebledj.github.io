@@ -1,19 +1,18 @@
-// ------------------------------------------ // 
+// ------------------------------------------ //
 // Markdown-It Prism Adapter
 // ----------
-
 
 const PrismLoad = require('prismjs/components/');
 const { escapeHtml, unescapeAll } = require('./markdown-it-utils');
 
-let _prism = undefined;
+let _prism;
 if (typeof Prism === 'undefined') {
   _prism = require('prismjs');
 } else {
   _prism = Prism;
 }
 
-// ------------------------------------------ // 
+// ------------------------------------------ //
 // DOMify the runtime.
 // ----------
 
@@ -27,7 +26,6 @@ if (typeof window === 'undefined') {
   global.document = global.window.document;
 }
 
-
 function textToDOM(text) {
   // domino: Use `template` as a workaround: https://github.com/fgnass/domino/issues/73
   const templ = document.createElement('template');
@@ -35,7 +33,7 @@ function textToDOM(text) {
   return templ.content;
 }
 
-// ------------------------------------------ // 
+// ------------------------------------------ //
 
 const DEFAULT_OPTIONS = {
   init: () => {},
@@ -44,7 +42,7 @@ const DEFAULT_OPTIONS = {
 };
 
 exports.default = function MarkdownItPrismAdapter(markdownit, useroptions) {
-  const options = Object.assign({}, DEFAULT_OPTIONS, useroptions);
+  const options = { ...DEFAULT_OPTIONS, ...useroptions };
 
   options.init(_prism);
 
@@ -53,7 +51,7 @@ exports.default = function MarkdownItPrismAdapter(markdownit, useroptions) {
   markdownit.renderer.rules.fence = function (tokens, idx, options, _env, slf) {
     const token = tokens[idx];
     const info = token.info ? unescapeAll(token.info).trim() : '';
-    let langName = undefined;
+    let langName;
 
     if (info) {
       const arr = info.split(/(\s+)/g);
@@ -105,7 +103,7 @@ exports.default = function MarkdownItPrismAdapter(markdownit, useroptions) {
       const result = `<div><pre${slf.renderAttrs(tmpToken)}><code class="${options.langPrefix}${langName}">${escaped}</code></pre></div>`;
       const el = textToDOM(result);
       Prism.highlightElement(el.firstChild.firstChild.firstChild);
-      let newResult = el.firstChild.firstChild.outerHTML;
+      const newResult = el.firstChild.firstChild.outerHTML;
       // let newResult = result;
       // if (!newResult.endsWith('\n'))
       //   newResult += '\n';
@@ -114,7 +112,7 @@ exports.default = function MarkdownItPrismAdapter(markdownit, useroptions) {
 
     return `<pre${slf.renderAttrs(token)}><code>${escaped}</code></pre>\n`;
   };
-}
+};
 
 module.exports = exports.default;
 module.exports.default = exports.default;
