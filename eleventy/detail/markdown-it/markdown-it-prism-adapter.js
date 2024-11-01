@@ -23,6 +23,7 @@ if (typeof Prism === 'undefined') {
 if (typeof window === 'undefined') {
   const domino = require('domino');
   global.window = domino.createWindow('');
+  global.getComputedStyle = global.window.getComputedStyle;
   global.document = global.window.document;
 }
 
@@ -67,7 +68,7 @@ exports.default = function MarkdownItPrismAdapter(markdownit, useroptions) {
     if (token.content.endsWith('\n'))
       token.content = token.content.substring(0, token.content.length - 1);
 
-    const highlighted = escapeHtml(token.content);
+    const escaped = escapeHtml(token.content);
 
     // If language exists, inject class gently, without modifying original token.
     // May be, one day we will add .deepClone() for token and simplify this part, but
@@ -94,15 +95,14 @@ exports.default = function MarkdownItPrismAdapter(markdownit, useroptions) {
         if (!Prism.languages[diffRemovedRawName])
           PrismLoad([diffRemovedRawName]);
       } else {
-        if (Prism.languages[langName] === undefined) {
+        if (Prism.languages[langName] === undefined)
           PrismLoad([langName]);
-        }
       }
 
       // Some plugins such as toolbar venture into codeElement.parentElement.parentElement,
       // so we'll wrap the `pre` in an additional `div` for class purposes.
       // eslint-disable-next-line max-len
-      const result = `<div><pre${slf.renderAttrs(tmpToken)}><code class="${options.langPrefix}${langName}">${highlighted}</code></pre></div>`;
+      const result = `<div><pre${slf.renderAttrs(tmpToken)}><code class="${options.langPrefix}${langName}">${escaped}</code></pre></div>`;
       const el = textToDOM(result);
       Prism.highlightElement(el.firstChild.firstChild.firstChild);
       let newResult = el.firstChild.firstChild.outerHTML;
@@ -112,7 +112,7 @@ exports.default = function MarkdownItPrismAdapter(markdownit, useroptions) {
       return newResult;
     }
 
-    return `<pre${slf.renderAttrs(token)}><code>${highlighted}</code></pre>\n`;
+    return `<pre${slf.renderAttrs(token)}><code>${escaped}</code></pre>\n`;
   };
 }
 

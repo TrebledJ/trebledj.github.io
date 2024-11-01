@@ -316,7 +316,7 @@
     if (!language) {
       if (env.language.match(/^diff-/)) {
         const baseLang = env.language.substring('diff-'.length);
-        language = `${Languages[baseLang] || guessTitle(baseLang)} (diff)`;
+        language = Languages[baseLang] || guessTitle(baseLang);
       } else {
         language = Languages[env.language] || guessTitle(env.language);
       }
