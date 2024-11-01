@@ -1,3 +1,4 @@
+// Modified from Prism's built-in plugins.
 (function () {
   if (typeof Prism === 'undefined' || typeof document === 'undefined') {
     return;

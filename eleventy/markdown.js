@@ -59,15 +59,26 @@ module.exports = function (eleventyConfig) {
     mdLib.use(markdownItPrism, {
       highlightInlineCode: true,
       plugins: ['command-line', 'toolbar'],
-      init(Prism) {
-        PrismLoad(['cpp']);
-        Prism.languages.csp = Prism.languages.cpp;
-        PrismLoad(['armasm']);
-        Prism.languages.asm = Prism.languages.armasm;
-        PrismLoad(['diff']);
-      },
     });
+
+    function PrismAlias(target, aliases) {
+      PrismLoad([target]);
+      if (typeof aliases === 'string') {
+        Prism.languages[aliases] = Prism.languages[target];
+      } else if (Array.isArray(aliases)) {
+        aliases.map(a => {
+          Prism.languages[a] = Prism.languages[target];
+        });
+      } else {
+        throw Error("unable to parse aliases");
+      }
+    }
+    PrismAlias('cpp', ['csp']);
+    PrismAlias('armasm', ['asm']);
+    PrismLoad(['diff']);
+    // Load diff-highlight plugin after mdLib.use to avoid triggering warning.
     require('prismjs/plugins/diff-highlight/prism-diff-highlight');
+    // Load custom plugins.
     require('./detail/prism/prism-line-numbers');
     require('./detail/prism/prism-show-language');
     require('./detail/prism/prism-copy-to-clipboard');
