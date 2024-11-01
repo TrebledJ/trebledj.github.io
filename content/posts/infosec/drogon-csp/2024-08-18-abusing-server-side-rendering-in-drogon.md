@@ -33,7 +33,7 @@ This turned out to be a fascinating endeavour, as there happen to be a *ton* of 
 
 [Drogon](https://github.com/drogonframework/drogon) is a C++ web framework built with C++17, containing a whole slew of features such as session handling, server side rendering, and websockets — features you would expect in a modern web framework.
 
-Drogon's server side rendering is handled by CSP views (C++ Server Pages). Similar to ASP, JSP, PHP, and other HTML templates, these files are sprinkled with special markup such as `<%inc ... %>`, `<%c++ ... %>`, and {% raw %}`{% ... %}`{% endraw %}. This markup will be substituted with appropriate text or HTML when rendered.
+Drogon's server side rendering is handled by CSP views (C++ Server Pages). Similar to ASP, JSP, PHP, and other HTML templates, these files are sprinkled with special markup such as `<%inc ... %>`, `<%c++ ... %>`, and {% raw %}`{% ... %}`{% endraw %}, which are evaluated when rendered.
 
 ### Simple View Example
 
@@ -52,7 +52,9 @@ Here's a simple example of a CSP:
 </html>
 ```
 
-To convert this file into HTML with the right variables, we need to render it by calling `newHttpViewResponse`. We'll also pass a `name` from the URL endpoint:
+We can specify C++ control-flow logic with `<%c++ ... %>` and substitute variables with `[[ ... ]]`.
+
+To render this file, we'll call `newHttpViewResponse` and pass a `name` from the URL endpoint:
 
 ```cpp {data-label=main.cpp}
 app().registerHandler(
@@ -67,7 +69,7 @@ app().registerHandler(
 
 After starting the server, we can run `curl 127.0.0.1:8080/hello/Picard` and observe the following HTML:
 
-```html
+```html {data-copy-off}
 <!DOCTYPE html>
 <html>
 <body>
