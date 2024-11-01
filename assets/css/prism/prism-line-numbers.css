@@ -18,7 +18,7 @@ pre[class*="language-"].line-numbers>code {
 .line-numbers .line-numbers-rows {
     position: absolute;
     pointer-events: none;
-    top: 1.1rem;
+    top: 1rem;
     font-size: 100%;
     /* left: -3.8em; */
     left: 0;
