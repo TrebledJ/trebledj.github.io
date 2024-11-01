@@ -243,7 +243,7 @@ void generate_samples_w(float freq) {
 ```
 For a sine wave, we don't gain much in terms of performance. But when it comes to generating complex waveforms, wavetable synthesis rocks![^leaf]
 
-[^leaf]: Guess what? There are more ways to optimise wavetable synthesis—so it'll rock even more! See the open source [LEAF](https://github.com/spiricom/LEAF/blob/a0b0b7915cce3792ea00f06d0a6861be1a73d609/leaf/Src/leaf-oscillators.c#L67) library for an example of heavily optimised wavetable synthesis.
+[^leaf]: Guess what? There are more ways to optimise wavetable synthesis—so it'll rock even more! See the open source [LEAF](https://github.com/spiricom/LEAF/blob/a0b0b7915cce3792ea00f06d0a6861be1a73d609/leaf/Src/leaf-oscillators.c#L67) library for an example of optimised wavetable synthesis in C.
 
 {% alert "fact" %}
 Wavetable synthesis is commonly used by {% abbr "MIDI", "a protocol for music" %} to generate sounds. Each instrument has its own *soundfont*, which is a collection of wavetables of different pitches. This unifies the synthesis approach for all instruments, as some may be simple to generate (e.g. clarinet) while others are more complex.
