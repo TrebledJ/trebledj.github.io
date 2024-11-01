@@ -1,6 +1,6 @@
 <meta charset="utf-8"/>
 
-{% set isArticle = page.url.startsWith("/posts/") and layout.startsWith("layouts/post-") %}
+{% set isArticle = page.url and page.url.startsWith("/posts/") and layout.startsWith("layouts/post-") %}
 
 {% if title %}
 {# <meta name="__debug" content="{{title}}"> #}
