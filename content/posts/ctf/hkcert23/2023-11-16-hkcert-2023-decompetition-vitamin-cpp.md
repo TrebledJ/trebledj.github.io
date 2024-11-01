@@ -114,7 +114,7 @@ void print(std::string s) { /* ... */ }
 With function overloading, names are reused. Now if the names are the same, how can the linker find and call the right function? The compiler solves this by encoding a function’s signature into its name, so that all names are unique. (We don't have this problem in plain old C, because function overloading isn’t even a concept!)
 {% enddetails %}
 
-To demangle these cryptic monstrosities, we can throw them into online tools (e.g. [demangler.com](http://demangler.com/)) or just use a C++-enabled decompiler (e.g. Ghidra) which automatically demangles names.
+To demangle these cryptic monstrosities, we can throw them into online tools (e.g. demangler.com^[[2024 Nov] demangler.com seems to be down. Here's a different site with similar functionality: [n.fuqu.jp/c++filtjs/](https://n.fuqu.jp/c++filtjs/)]) or just use a C++-enabled decompiler (e.g. Ghidra) which automatically demangles names.
 
 ### Classy Types
 

@@ -353,7 +353,7 @@ int main() {
 }
 ```
 
-On second thought, this use of `line-numbers` may not make much sense, since copying this code will result in the comments being copied as well.
+On second thought, this use of `line-numbers` may not make much sense, since copying this code (manually) will result in the comments being copied as well.
 
 #### Code: `command-line`
 

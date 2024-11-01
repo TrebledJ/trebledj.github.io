@@ -10,6 +10,9 @@ const { minify } = require('terser');
 const CleanCSS = require('clean-css');
 const chalk = require('chalk');
 
+const { modifyExternalLinksToOpenInSeparateTab } = require('./detail/helpers');
+const htmlcsp = require('./detail/html-csp-transform');
+
 module.exports = function (eleventyConfig) {
   eleventyConfig.addPlugin(pluginRss);
   // eleventyConfig.addPlugin(pluginSyntaxHighlight, {
@@ -84,4 +87,23 @@ module.exports = function (eleventyConfig) {
       }
     });
   });
+
+  if (process.env.ENVIRONMENT === 'production') {
+    eleventyConfig.addPlugin(require('./plugins.filemin'));
+  }
+
+  // Other Transforms
+  if (process.env.ENVIRONMENT !== 'fast') {
+    eleventyConfig.addTransform('external-links', function (content) {
+      if (this.page.outputPath && this.page.outputPath.endsWith('.html'))
+        content = modifyExternalLinksToOpenInSeparateTab(content);
+      return content;
+    });
+
+    // Indirect: wrap addTransform with addPlugin, so that bundled inline JS
+    // gets substituted before calling htmlcsp.
+    eleventyConfig.addPlugin(function (eleventyConfig) {
+      eleventyConfig.addTransform('htmlcsp', htmlcsp);
+    });
+  }
 };

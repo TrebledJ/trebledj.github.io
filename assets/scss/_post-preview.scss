@@ -7,6 +7,14 @@
     // Nested anchors: https://stackoverflow.com/a/52076345/10239789.
     position: relative;
 
+    overflow: hidden;
+
+    border-radius: $border-radius;
+    border: $border-width-block solid var(--border-color);
+    box-shadow: 0 1px 1px 0 rgba(31, 35, 46, 0.15);
+
+    transition: all $transition-duration ease !important;
+
     & > a {
         position: absolute;
         top: 0;
@@ -18,19 +26,10 @@
     a {
         background-image: none;
     }
+
     .jtag {
         font-size: 12px;
     }
-
-    // ---
-
-    overflow: hidden;
-
-    border-radius: $border-radius;
-    border: $border-width-block solid var(--border-color);
-    box-shadow: 0 1px 1px 0 rgba(31, 35, 46, 0.15);
-
-    transition: all $transition-duration ease !important;
 
     .post-thumbnail {
         position: relative;

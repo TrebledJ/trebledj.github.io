@@ -17,13 +17,13 @@ related:
     posts: [attack-of-the-zip]
 # preamble: |
 ---
-Earlier this month, I released two CTF web challenges for CrewCTF 2024: Nice View 1 and Nice View 2. These build upon an earlier challenge — an audio synthesis web service running on the Drogon Web Framework. This time, our focus shifts from [exploring zip attacks in Juce](/posts/attack-of-the-zip/) to exploring an alarming configuration in Drogon: Dynamic Views Loading (hereafter abbreviated DVL).
+Earlier this month, I released two CTF web challenges for CrewCTF 2024: Nice View 1 and Nice View 2. These build upon an earlier challenge — an audio synthesis web service running on the Drogon Web Framework. This time, our focus shifts from [exploring zip attacks in Juce](/posts/attack-of-the-zip/) to **exploring an alarming configuration in Drogon: Dynamic Views Loading** (hereafter abbreviated DVL).
 
-In a hypothetical situation where a Drogon server with DVL is exposed to hackers, how many holes can be poked? What attack vectors can be achieved?^[This situation may be less hypothetical than we think. According to Shodan, there are over 1000 servers around the world (mostly in East Asia) running Drogon. How many do you think were poorly configured, with devs thinking… “I’ll just enable Dynamic Views Loading for convenience. Nobody can find my IP anyway.” I’m willing to bet there’s at least 1.]
+In a hypothetical situation where a Drogon server with DVL is exposed to hackers, how many holes can be poked? What attack vectors can be achieved?^[This situation may be less hypothetical than we think. According to Shodan, there are over 1000 servers around the world running Drogon. How many do you think were poorly configured, with devs thinking… “I’ll just enable Dynamic Views Loading for convenience. Nobody can find my IP anyway.” I’m willing to bet there’s at least 1.]
 
 At the same time, this is also a good exercise in defensive programming. If we released such a server, what (programming) defences are necessary to cover our sorry arse? When and where should we apply sanitisation and filtering? How do we properly allow “safe” programs? Is that even possible to begin with?
 
-This turned out to be a fascinating endeavour, as we found a *ton* of ways to compromise a vulnerable DVL-enabled server. In the making of the CTF challenges, I struggled to eliminate every single unintended solution.
+This turned out to be a fascinating endeavour, as there happen to be a *ton* of ways to compromise a vulnerable DVL-enabled server. In the making of the CTF challenges, I struggled to eliminate every single unintended solution.
 
 {% image "assets/craft-a-ctf-web-chal.jpg", "jw-60", "Every time I find an unintended solution, a new one is just around the corner." %}
 
@@ -33,11 +33,11 @@ This turned out to be a fascinating endeavour, as we found a *ton* of ways to co
 
 [Drogon](https://github.com/drogonframework/drogon) is a C++ web framework built with C++17, containing a whole slew of features such as session handling, server side rendering, and websockets — features you would expect in a modern web framework.
 
-Drogon's server side rendering is handled by CSP views (C++ Server Pages). These are like HTML templates, sprinkled with special markup such as `<%inc ... %>`, `<%c++ ... %>`, and {% raw %}`{% ... %}`{% endraw %}. This markup will be substituted with appropriate text or HTML when rendered, similar to PHP's `<?php` and `<?=` markup.
+Drogon's server side rendering is handled by CSP views (C++ Server Pages). Similar to ASP, JSP, PHP, and other HTML templates, these files are sprinkled with special markup such as `<%inc ... %>`, `<%c++ ... %>`, and {% raw %}`{% ... %}`{% endraw %}, which are evaluated when rendered.
 
 ### Simple View Example
 
-Here's a simple example:
+Here's a simple example of a CSP:
 
 ```csp {data-label=Example.csp}
 <!DOCTYPE html>
@@ -52,7 +52,9 @@ Here's a simple example:
 </html>
 ```
 
-Then render the CSP by calling `newHttpViewResponse`. We'll also pass a `name` from the URL endpoint:
+We can specify C++ control-flow logic with `<%c++ ... %>` and substitute variables with `[[ ... ]]`.
+
+To render this file, we'll call `newHttpViewResponse` and pass a `name` from the URL endpoint:
 
 ```cpp {data-label=main.cpp}
 app().registerHandler(
@@ -67,7 +69,7 @@ app().registerHandler(
 
 After starting the server, we can run `curl 127.0.0.1:8080/hello/Picard` and observe the following HTML:
 
-```html
+```html {data-copy-off}
 <!DOCTYPE html>
 <html>
 <body>
