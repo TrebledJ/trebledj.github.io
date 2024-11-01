@@ -615,3 +615,20 @@ assert '\xc0'.encode() == b'\xc3\x80'
 
 Printing bytes in Python is [difficult to do concisely](https://stackoverflow.com/q/908331/10239789).
 {% endalert %}
+
+### Simple Binary Analysis
+
+**Look for strings.**
+```sh {data-lang-off .command-line data-prompt="$" data-filter-output="# "}
+strings file
+strings -n <numchars> file
+```
+
+**Look for strings and print addresses (in hex)!**
+```sh {data-lang-off .command-line data-prompt="$" data-filter-output="# "}
+od -A x -S 4 file
+```
+
+**Tracing**
+- `strace` - trace system calls (open, read, write, etc.)
+- `ltrace` - trace library (glibc) calls
