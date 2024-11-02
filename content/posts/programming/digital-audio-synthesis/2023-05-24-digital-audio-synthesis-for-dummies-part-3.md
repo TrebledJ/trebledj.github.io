@@ -120,7 +120,7 @@ Other pairs of PSC and ARR can also work. We can *choose* any PSC and ARR which 
 
 Exercises for the reader:
 
-* What is the difference between different pairs, such as `PSC = 0`, `ARR = 3999` vs. `PSC = 1`, `ARR = 1999`? (Hint: counter.)
+* What is the difference between different pairs, such as `PSC = 0`, `ARR = 3999` vs. `PSC = 1`, `ARR = 1999`? (Hint: !!counter!!.)
 * Is there a PSC/ARR pair that is "better"?^[What is the difference between pairs of prescaler/auto-reload, such as `PSC = 0`, `ARR = 3999` vs. `PSC = 1`, `ARR = 1999`? <br/> Indeed, given a fixed clock frequency, the same timer frequency will be generated (since the divisor is the same: 2000). However, the difference lies in the counter. Recall each step of auto-reload equals a step of the counter. <br/> The counter is used in calculating the on-time (or duty cycle). By using a *higher* `ARR`, we gain a *higher resolution* in the counter, which allows us to say, control servos with finer granularity. Thus, a lower prescaler is often preferred. <br/> Of course, different vendors may implement timers differently or have different features attached to timer peripherals. Other considerations may come into play, depending on the vendor and your application.]
 {% endalert %}
 
@@ -140,7 +140,7 @@ We can use {% abbr "STM32 CubeMX", "a GUI for configuring STM hardware" %} to in
 
 Remember to generate code once done.[^codegen] CubeMX should generate the following code in `main.c`:
 
-[^codegen]: In CubeMX, you can generate code by choosing the *Project* > *Generate Code* menu option. Keep in mind that only code between `USER CODE BEGIN` and `USER CODE END` comments will be preserved by ST's code generator.
+[^codegen]: In CubeMX, you can generate code by choosing the *Project* > *Generate Code* menu option. When coding, keep in mind that only code between `USER CODE BEGIN` and `USER CODE END` comments will be preserved by ST's code generator.
 
 ```cpp
 static void MX_TIM8_Init(void)
@@ -395,7 +395,7 @@ while (1) {
 }
 ```
 
-The results? As expected, artefacts (nefarious little glitches) invade our signal, since our buffer is updated during DMA transfer. This may result in [unpleasant clicks from our speaker](/posts/digital-audio-synthesis-for-dummies-part-1#clicks).
+The results? As expected, pesky little {% abbr "artefacts", "glitches, disruptions" %} invade our signal since our buffer is updated during DMA transfer. This may result in [unpleasant clicks from our speaker](/posts/digital-audio-synthesis-for-dummies-part-1#clicks).
 
 {% image "assets/osc-sine-440-glitch.jpg", "jw-75", "Artefacts distort the signal, resulting in occasional clips and sound defects." %}
 
