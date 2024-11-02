@@ -6,7 +6,7 @@ tags:
   - js
   - tutorial
   - meta
-thumbnail_src: assets/thumbnail.png
+thumbnail_src: assets/thumbnail.jpg
 draft: true
 ---
 
