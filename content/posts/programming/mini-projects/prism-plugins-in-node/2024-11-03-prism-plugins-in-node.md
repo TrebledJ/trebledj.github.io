@@ -27,7 +27,6 @@ There are many cases where such codeblocks are warranted:
 - A post refers to a code snippet within a large file (line-numbers)
 - A post refers to multiple files (label)
 
-
 {% details "Example: Catching Reverse Shells" %}
 This is really useful when presenting narratives for red teaming scenarios, where multiple machines are involved. Here are some simple notes on catching a reverse shell from a Windows machine.
 
@@ -51,7 +50,11 @@ This is really useful when presenting narratives for red teaming scenarios, wher
 
 {% enddetails %}
 
-Another problem I notice on many documentation pages is the use of `$`, denoting the start of a new command on a shell. These are commonly seen in installation scripts or guides. Here's an example installing a Makefile-based project:
+Another problem I notice on many documentation pages is the use of `$`, denoting the start of a new command on a shell. These are poor for a couple reasons: it doesn't accurately present the actual code (from both the writer's and readers' PoV) and may disrupt syntax highlighters.
+
+{% details "Example: The Obstructive $" %}
+
+These are commonly seen in installation scripts or guides. Here's an example installing a Makefile-based project:
 
 ```sh
 $ tar -xvzf who_doesnt_like_to_copy_lines_of_code_one_by_one.tar.gz
@@ -61,7 +64,19 @@ $ make -j4
 $ make install
 ```
 
-Atrocious! You can't copy multiple lines without the nasty $ getting in the way! What terrible UX. It's like when your parent or sibling stands in front of the television!^[To be fair, there's an argument to be made for "not running these commands all at once". Failure isn't handled. But this largely exists in relatively low-level build commands for C/C++, which is reknown for the many toolchains (i.e. potential build errors).]
+Atrocious! You can't copy multiple lines without the nasty $ getting in the way! What terrible UX. It's like when your parent or sibling stands in front of the television!^[To be fair, there's an argument to be made for "not running these commands all at once". Failure isn't handled. But this largely exists in relatively low-level build commands for C/C++, which are renowned for their many toolchains (read: potential build errors).]
+
+Compare it to this:
+
+```sh {.command-line data-prompt="$"}
+tar -xvzf who_doesnt_like_to_copy_lines_of_code_one_by_one.tar.gz
+cd who_doesnt_like_to_copy_lines_of_code_one_by_one
+./configure
+make -j4
+make install
+```
+
+{% enddetails %}
 
 With that small rant out of the way, let's begin!
 
@@ -213,9 +228,9 @@ In case you wish to fine-tune some plugins, you can always copy them into your l
 
 Understandably, one major bottleneck in our strategy is DOM manipulation. A suitable library needs to parse HTML fragments, manipulate DOM elements, and create new ones.
 
-Although I originally selected JSDOM in my quick-n-dirty hack for its popularity, I later switched to domino for significant (2x!) speedup. I made this decision based on a simple benchmark, which compares the three most popular(?) NodeJS DOM-manipulation libraries: [JSDOM](https://www.npmjs.com/package/jsdom), [domino](https://www.npmjs.com/package/domino), and [LinkeDOM](https://www.npmjs.com/package/linkedom).
+Although I originally selected JSDOM in my quick-n-dirty hack for its popularity, I later switched to domino for significant (2x!) speedup. This is based on a simple benchmark, which compares the three most popular(?) NodeJS DOM-manipulation libraries: [JSDOM](https://www.npmjs.com/package/jsdom), [domino](https://www.npmjs.com/package/domino), and [LinkeDOM](https://www.npmjs.com/package/linkedom).
 
-{% image "assets/dom-benchmark.png", "jw-60", "Benchmark of time to render the ~400 codeblocks on this site with JSDOM, domino, and LinkeDOM." %}
+{% image "assets/dom-benchmark.png", "jw-60 alpha-imgv", "Benchmark of time to render the ~400 codeblocks on this site with JSDOM, domino, and LinkeDOM." %}
 
 <sup>Benchmark of time to render the ~400 codeblocks on this site with JSDOM, domino, and LinkeDOM.</sup>
 {.caption}
@@ -254,9 +269,9 @@ Running: LinkeDOM
  - mean: µ=279.861ms / σ=69.691ms
  - minmax: 214.418ms / 666.151ms
 ```
-
 {% enddetails %}
 
+Moreover, domino has 0 dependencies — it's basically written from the ground up! JSDOM has 21 dependencies. A reduced set of dependencies reduces the attack surface of an application; and with increasing reports of supply chain attacks, it's good to limit such risks.
 
 ## Final Remarks
 
