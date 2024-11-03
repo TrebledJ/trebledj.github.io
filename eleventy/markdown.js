@@ -92,7 +92,6 @@ module.exports = function (eleventyConfig) {
       // ---
       // defaultLanguageForUnspecified: 'text',
     });
-
   });
 
   eleventyConfig.addPlugin(pluginTOC, {
