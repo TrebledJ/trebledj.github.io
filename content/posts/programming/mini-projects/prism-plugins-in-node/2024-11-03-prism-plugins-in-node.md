@@ -1,6 +1,6 @@
 ---
 title: How to Use PrismJS Plugins with NodeJS and MarkdownIt
-excerpt: Improve storytelling with code with these dead simple hacks for rendering fancy Prism plugins in Node.
+excerpt: Improve your storytelling with these dead simple hacks for rendering fancy Prism plugins in Node!
 tags:
   - web
   - js
