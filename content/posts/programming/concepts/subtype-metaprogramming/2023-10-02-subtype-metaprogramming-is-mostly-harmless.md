@@ -486,10 +486,10 @@ Just for fun, let's solve some subtype queries from the challenge. Who needs a j
 Although the given subtype query in `output.py` doesn't work, we can still try simpler versions. It turns out the query recurses on the numbers. For example, the following queries compile:
 
 ```python
-a: E[E[Z]] = QRW_s71[L___TAPE_END__[N[MR[N[L___TAPE_END__[N[E[E[Z]]]]]]]]]()
-b: E[E[Z]] = QRW_s46[L___TAPE_END__[N[L_s[N[MR[N[L___TAPE_END__[N[E[E[Z]]]]]]]]]]]()
-c: E[E[Z]] = QRW_s06[L___TAPE_END__[N[L_s[N[L_d[N[MR[N[L___TAPE_END__[N[E[E[Z]]]]]]]]]]]]]()
-d: E[E[Z]] = QRW_s30[L___TAPE_END__[N[L_s[N[L_d[N[L_n[N[MR[N[L___TAPE_END__[N[E[E[Z]]]]]]]]]]]]]]]()
+E[E[Z]] = QRW_s71[L___TAPE_END__[N[MR[N[L___TAPE_END__[N[E[E[Z]]]]]]]]]()
+E[E[Z]] = QRW_s46[L___TAPE_END__[N[L_s[N[MR[N[L___TAPE_END__[N[E[E[Z]]]]]]]]]]]()
+E[E[Z]] = QRW_s06[L___TAPE_END__[N[L_s[N[L_d[N[MR[N[L___TAPE_END__[N[E[E[Z]]]]]]]]]]]]]()
+E[E[Z]] = QRW_s30[L___TAPE_END__[N[L_s[N[L_d[N[L_n[N[MR[N[L___TAPE_END__[N[E[E[Z]]]]]]]]]]]]]]]()
 ```
 
 We just started with the base case (empty suffix of flag), and worked backwards.
