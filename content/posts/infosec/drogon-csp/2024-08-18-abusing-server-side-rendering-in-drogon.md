@@ -135,7 +135,7 @@ which generates Example.h and Example.cc.
     <h2>Hello world!</h2>
     ```
 
-    ```cpp {data-label=Example.cc}
+    ```cpp {data-label=Example.cc data-copy-off}
     // Boilerplate: includes...
     using namespace drogon;
     std::string Example::genText(const DrTemplateData& Example_view_data)
@@ -163,7 +163,7 @@ which generates Example.h and Example.cc.
     <h1>Example</h1>
     ```
     
-    ```cpp {data-label=Example.cc}
+    ```cpp {data-label=Example.cc data-copy-off}
     // Boilerplate: includes...
     #include <algorithm>
     #define MY_MACRO
@@ -184,7 +184,7 @@ which generates Example.h and Example.cc.
     <h1>Hi [[name]]!</h1>
     ```
 
-    ```cpp {data-label=Example.cc}
+    ```cpp {data-label=Example.cc data-copy-off}
     // ...
     Example_tmp_stream << "<h1>Hi ";
     {
@@ -472,7 +472,7 @@ std::string dummy(const DrTemplateData&)
 
 and here's the generated C++:
 
-```cpp {data-label=Example.cc}
+```cpp {data-label=Example.cc data-copy-off}
 // Boilerplate: includes...
 std::string Example::genText(const DrTemplateData& Example_view_data)
 {
@@ -519,7 +519,7 @@ Although this was meant for a couple fun 48-hour CTF challenges, it feels approp
 
 So what did we learn?
 
-1. Drogon, at the moment, does not sandbox or properly sanitise CSP content.^[At the time of writing, I'm using Drogon 1.9.1.] This is by design, since CSPs inherently contain trusted content.
+1. Drogon, at the moment, does not sandbox or properly sanitise CSP content.^[At the time of writing, I'm using Drogon version 1.9.1.] This is by design, since CSPs inherently contain trusted content.
 2. There are three main ways to achieve RCE on a DVL-enabled Drogon server. And this comes with the prerequisite of file-write privileges.
    1. RCE via Rendered CSP
    2. RCE via Init Section
