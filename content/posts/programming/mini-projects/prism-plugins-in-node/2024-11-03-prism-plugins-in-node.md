@@ -6,6 +6,7 @@ tags:
   - js
   - tutorial
   - meta
+  - performance
 thumbnail_src: assets/thumbnail.jpg
 ---
 

@@ -8,6 +8,7 @@ tags:
   - notes
   - writeup
   - project
+  - software-engineering
 thumbnail_src: assets/optimising-web-icons-thumbnail.png
 ---
 
