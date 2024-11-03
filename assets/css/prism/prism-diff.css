@@ -17,11 +17,11 @@ pre[class*="language-diff-"] {
 }
 
 html[data-theme=light] .token.deleted {
-	background-color: hsl(0, 51%, 83%);
+	background-color: hsl(0, 51%, 83%, 50%);
 	color: inherit;
 }
 html[data-theme=light] .token.inserted {
-	background-color: hsl(126, 28%, 83%);
+	background-color: hsl(126, 28%, 83%, 60%);
 	color: inherit;
 }
 

@@ -93,7 +93,7 @@ exports.default = function MarkdownItPrismAdapter(markdownit, useroptions) {
         if (!Prism.languages[diffRemovedRawName])
           PrismLoad([diffRemovedRawName]);
       } else {
-        if (Prism.languages[langName] === undefined)
+        if (!Prism.languages[langName])
           PrismLoad([langName]);
       }
 

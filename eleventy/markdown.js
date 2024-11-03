@@ -67,10 +67,6 @@ module.exports = function (eleventyConfig) {
     };
 
     // Codeblocks and Syntax Highlighting
-    mdLib.use(markdownItPrism, {
-      highlightInlineCode: true,
-    });
-
     mdLib.use(require('./detail/markdown-it/markdown-it-prism-adapter'), {
       init(_Prism) {
         PrismAlias('cpp', ['csp']);
@@ -81,11 +77,22 @@ module.exports = function (eleventyConfig) {
         require('prismjs/plugins/toolbar/prism-toolbar');
         require('prismjs/plugins/diff-highlight/prism-diff-highlight');
         // Load custom plugins.
+        // require('prismjs/plugins/line-numbers/prism-line-numbers');
         require('./detail/prism/prism-line-numbers');
         require('./detail/prism/prism-show-language');
         require('./detail/prism/prism-copy-to-clipboard');
       },
     });
+
+    // Apply fence-rendering AFTER applying prism adapter.
+    mdLib.use(markdownItPrism, {
+      highlightInlineCode: true,
+      // defaultLanguage will also set the language for non-pre code elements
+      // and overwrite the pretty colours we set. So... not the best idea.
+      // ---
+      // defaultLanguageForUnspecified: 'text',
+    });
+
   });
 
   eleventyConfig.addPlugin(pluginTOC, {
