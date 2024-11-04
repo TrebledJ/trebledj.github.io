@@ -105,7 +105,7 @@ global.document = global.window.document;
 
 NodeJS's `global` object enables us to add global variables. Now Prism can access our `window` and `document` globals.
 
-For convenience later, we’ll also create a function which converts HTML strings to DOM objects. We'll use the `template` element to achieve this.^[Unlike JSDOM, domino doesn't have a "create fragment from HTML" function, so `template` is the [suggested workaround](https://github.com/fgnass/domino/issues/73). Even so, it's fast!]
+For convenience later, we’ll also create a function which converts HTML strings to DOM objects. We'll use the `template` element to achieve this.^[Unlike JSDOM, domino doesn't have a "create fragment from HTML" function, so `template` is the [suggested workaround](https://github.com/fgnass/domino/issues/73).]
 
 ```js
 function textToDOM(text) {
@@ -215,8 +215,35 @@ eleventyConfig.amendLibrary('md', mdLib => {
 });
 ```
 
+## Step 3: Use `markdown-it-attrs`
 
-## Step 3: (Optional) Modify Plugins
+To add attributes to your codeblocks, introduce [`markdown-it-attrs`](https://github.com/arve0/markdown-it-attrs/) to your MarkdownIt object.
+
+You can now add attributes and classes to your codeblocks which will then be parsed by Prism.
+
+<pre class="language-md">
+<code>For instance, this becomes:
+
+```js {data-label=hello.js .inspect-me-lol}
+function hello() {
+  console.log("Hello world!");
+}
+```</code>
+</pre>
+
+For instance, this becomes:
+
+```js {data-label=hello.js .inspect-me-lol}
+function hello() {
+  console.log("Hello world!");
+}
+```
+
+{% alert "warning" %}
+In 11ty, this is incompatible with `eleventy-plugin-syntaxhighlight` due to the way codeblocks are parsed.
+{% endalert %}
+
+## Step 4: (Optional) Modify Plugins
 
 With those two changes, we have all we need to start importing fancy plugins!
 
@@ -246,7 +273,7 @@ Although I originally selected JSDOM in my quick-n-dirty hack for its popularity
 
 {% details "Benchmark Details and CLI Output" %}
 
-The benchmark was run on a MacBook Air with a 1.6 GHz Intel Core i5 processor and 8 GB 2133 MHz LPDDR3 RAM. Benchmark code can be found [*here*](https://github.com/TrebledJ/trebledj.github.io/tree/master/eleventy/benchmarks/codeblocks#readme).
+The benchmark was run on a MacBook Air with a 1.6 GHz Intel Core i5 processor and 8 GB 2133 MHz LPDDR3 RAM. Benchmark code can be found [*here*](https://github.com/TrebledJ/trebledj.github.io/tree/1f1163a022738da81f6a83f06dceb793c68e856d/eleventy/benchmarks/codeblocks#readme).
 
 ```shell {.command-line data-prompt="$" data-output=2-100}
 node eleventy/benchmarks/codeblocks

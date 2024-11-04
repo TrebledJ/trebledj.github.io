@@ -28,24 +28,15 @@ module.exports = function (eleventyConfig) {
       allowedAttributes: [], // empty array = all attributes are allowed
     });
 
-    if (process.env.ENVIRONMENT === 'fast') {
-      // Fast: Just slugify main headers.
-      mdLib.use(markdownItAnchor, {
-        level: [2, 3],
-        slugify: eleventyConfig.getFilter('slugify'),
-      });
-    } else {
-      // Default: Anchor and slugify everything.
-      mdLib.use(markdownItAnchor, {
-        permalink: markdownItAnchor.permalink.ariaHidden({
-          placement: 'before',
-          class: 'md-anchor',
-          symbol: '',
-        }),
-        level: [2, 3, 4, 5, 6],
-        slugify: eleventyConfig.getFilter('slugify'),
-      });
-    }
+    mdLib.use(markdownItAnchor, {
+      permalink: markdownItAnchor.permalink.ariaHidden({
+        placement: 'before',
+        class: 'md-anchor',
+        symbol: '',
+      }),
+      level: [2, 3, 4, 5, 6],
+      slugify: eleventyConfig.getFilter('slugify'),
+    });
 
     mdLib.use(markdownItSpoiler);
     mdLib.use(markdownItFootnote);
