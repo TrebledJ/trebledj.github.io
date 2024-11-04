@@ -246,7 +246,7 @@ Although I originally selected JSDOM in my quick-n-dirty hack for its popularity
 
 {% details "Benchmark Details and CLI Output" %}
 
-The benchmark was run on a MacBook Air with a 1.6 GHz Intel Core i5 processor and 8 GB 2133 MHz LPDDR3 RAM. Benchmark code can be found [*here*](https://github.com/TrebledJ/trebledj.github.io/tree/master/eleventy/benchmarks/codeblocks#readme).
+The benchmark was run on a MacBook Air with a 1.6 GHz Intel Core i5 processor and 8 GB 2133 MHz LPDDR3 RAM. Benchmark code can be found [*here*](https://github.com/TrebledJ/trebledj.github.io/tree/1f1163a022738da81f6a83f06dceb793c68e856d/eleventy/benchmarks/codeblocks#readme).
 
 ```shell {.command-line data-prompt="$" data-output=2-100}
 node eleventy/benchmarks/codeblocks
