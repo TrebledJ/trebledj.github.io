@@ -85,12 +85,12 @@ html[data-theme="dark"] {
 }
 
 html[data-theme="light"] {
-    --link-color-rgb: 255, 75, 0;
+    --link-color-rgb: 230, 55, 0;
     --link-hover-color-rgb: 200, 90, 0;
     --accent-color-rgb: var(--link-color-rgb);
     --special-color-rgb: 120, 90, 200;
     
-    --main-background-color-rgb: 230, 233, 239;
+    --main-background-color-rgb: 245, 249, 255;
     --medium-background-color-rgb: 240, 240, 240;
     --light-background-color-rgb: 210, 210, 210;
     --toolbar-background-color-rgb: var(--light-background-color-rgb);
