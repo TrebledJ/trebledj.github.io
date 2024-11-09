@@ -233,13 +233,14 @@ html[data-theme="dark"] {
 }
 
 @media (hover: none) {
+    // Can't hover. Bring to full opacity.
     blockquote,
     .dim-gentle {
-        opacity: $opacity-low;
+        opacity: $opacity-full;
     }
 
     .dim-deep {
-        opacity: $opacity-lower;
+        opacity: $opacity-full;
     }
 }
 
