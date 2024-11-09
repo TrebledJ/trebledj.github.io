@@ -50,10 +50,10 @@ html[data-theme=light] {
 
 
 @include media-breakpoint-down(sm) {
-    .alert i.fa {
+    .alert i[class*="fa-"] {
         margin-left: -1.7rem !important;
     }
-    .alert i.fa.fa-lightbulb {
+    .alert i.fa-lightbulb {
         margin-left: -1.5rem !important;
     }
 }
