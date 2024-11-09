@@ -44,8 +44,7 @@ header {
 }
 
 .navbar-toggler {
-    border-color: transparent;
-    box-shadow: none;
+    --bs-border-width: 0;
 }
 
 #navbar-container {
