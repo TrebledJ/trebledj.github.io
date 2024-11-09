@@ -265,7 +265,7 @@ img.center {
 @media (hover: none) {
     // Note: make sure this breakpoint matches .page-container in _layouts.scss.
     // For small non-hover screens without a large padding, don't make the anchor visible.
-    @include media-breakpoint-down(lg) {
+    @include media-breakpoint-up(lg) {
         .md-anchor {
             opacity: 1;
         }
