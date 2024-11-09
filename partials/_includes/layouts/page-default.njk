@@ -2,16 +2,10 @@
 layout: layouts/default-container
 ---
 
+{# page-container: add some left padding to shift the content more to the center #}
 <div class="page-container col-lg-12">
+    {# container-lg: to prevent text from sprawling across wide screens (e.g. 2400px screens) #}
     <div class="container-lg px-0">
-        {# <div class="row justify-content-center "> #}
-        {# <div class="col-lg-3">
-            {% include "sidebar-left.html" %}
-        </div> #}
-        {# <div class="col-lg-9">
-            {{ content | safe }}
-        </div> #}
-        {# </div> #}
         {{ content | safe }}
     </div>
 </div>

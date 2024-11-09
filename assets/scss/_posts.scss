@@ -244,6 +244,7 @@ img.center {
 
 .md-anchor {
     opacity: 0;
+    position: absolute;
 
     &::before {
         float: left;
@@ -256,18 +257,11 @@ img.center {
 }
 
 @media (hover: hover) {
-    *:hover > .md-anchor {
-        opacity: 1;
-    }
-}
-
-@media (hover: none) {
-    .md-anchor {
-        opacity: 0.5;
-        &::before {
-            // width: 20px;
-            // margin-left: -40px;
-            padding-right: 2px;
+    // Note: make sure this breakpoint matches .page-container in _layouts.scss.
+    // For small hover screens without a large padding, don't make the anchor visible.
+    @include media-breakpoint-down(lg) {
+        *:hover > .md-anchor {
+            opacity: 1;
         }
     }
 }
