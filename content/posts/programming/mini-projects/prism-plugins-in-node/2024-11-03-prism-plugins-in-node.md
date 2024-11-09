@@ -132,10 +132,17 @@ This will override the rule completely without reusing previous implementations.
 3. Wrap the escaped code in `<div><pre><code>` with the right attributes, convert it to a DOM element, highlight it to `Prism.highlightElement`, then return the rendered HTML.
 4. We also moved the attributes to `<pre>` instead of `<code>`, which is required for PrismJS to function properly.
 
-```js
-markdownit.renderer.rules.fence = function (tokens, idx, options, _env, slf) {
-  ...
-}
+The most important part is step 3, where we call Prism magic with `.highlightElement`.
+
+```diff-js
+ markdownit.renderer.rules.fence = function (tokens, idx, options, _env, slf) {
+   ...
++  const result = `<div><pre${preAttrs}><code class="${codeClasses}">${escaped}</code></pre></div>`
++  const el = textToDOM(result)
++  Prism.highlightElement(el.firstChild.firstChild.firstChild)
++  return el.firstChild.firstChild.outerHTML
+   ...
+ }
 ```
 
 {% details "See Full Changes" %}
@@ -221,17 +228,17 @@ To add attributes to your codeblocks, introduce [`markdown-it-attrs`](https://gi
 
 You can now add attributes and classes to your codeblocks which will then be parsed by Prism.
 
-<pre class="language-md">
-<code>For instance, this becomes:
+For instance, this:
 
-```js {data-label=hello.js .inspect-me-lol}
+<pre class="language-md">
+<code>```js {data-label=hello.js .inspect-me-lol}
 function hello() {
   console.log("Hello world!");
 }
 ```</code>
 </pre>
 
-For instance, this becomes:
+becomes:
 
 ```js {data-label=hello.js .inspect-me-lol}
 function hello() {
@@ -240,7 +247,7 @@ function hello() {
 ```
 
 {% alert "warning" %}
-In 11ty, this is incompatible with `eleventy-plugin-syntaxhighlight` due to the way codeblocks are parsed.
+In 11ty, `markdown-it-attrs` is incompatible with `eleventy-plugin-syntaxhighlight` due to the way codeblocks are parsed.
 {% endalert %}
 
 ## Step 4: (Optional) Modify Plugins
