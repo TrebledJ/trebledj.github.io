@@ -20,7 +20,7 @@ div.code-toolbar > .toolbar > .toolbar-item > span.lang {
 
 @media (max-width: 576px) {
     /* rw-prompt: response width prompt */
-    .command-line-prompt.data-rw-prompt {
+    pre[data-rw-prompt] .command-line-prompt {
         display: none;
     }
 }
