@@ -252,6 +252,31 @@ In case you wish to fine-tune some plugins, you can always copy them into your l
 - modding `line-numbers` for compatibility with `command-line` and `diff` (Yes, this doesn't really make sense to present, but who knows if I'll need it in the future?)
 - modding `show-language` to display the base language when the highlight language is `diff-*`.
 
+You can also add custom attributes with some simple CSS additions! For instance, I added a CSS class which hides the command-line prompt when a `data-rw-prompt` attribute is specified.^[Here, rw stands for responsive width.] This may be useful for long prompts, which may cover the entire screen's width when scrolling on a phone.
+
+```css
+@media (max-width: 576px) {
+    /* rw-prompt: response width prompt */
+    pre[data-rw-prompt] .command-line-prompt {
+        display: none;
+    }
+}
+```
+
+And here it is in action on some notes. Try viewing on both mobile and computer.
+
+```powershell {.command-line data-rw-prompt data-prompt="PS C:\Users\Chris>" data-output=2-100}
+Get-DomainTrust -domain dollarcorp.moneycorp.local
+
+SourceName      : dollarcorp.moneycorp.local
+TargetName      : moneycorp.local
+TrustType       : WINDOWS_ACTIVE_DIRECTORY
+TrustAttributes : WITHIN_FOREST
+TrustDirection  : Bidirectional
+WhenCreated     : 11/12/2022 5:59:01 AM
+WhenChanged     : 9/25/2024 10:12:06 PM
+```
+
 
 ## Benchmarking DOM Libraries
 
