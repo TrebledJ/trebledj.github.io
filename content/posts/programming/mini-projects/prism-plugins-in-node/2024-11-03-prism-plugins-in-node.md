@@ -252,7 +252,7 @@ In case you wish to fine-tune some plugins, you can always copy them into your l
 - modding `line-numbers` for compatibility with `command-line` and `diff` (Yes, this doesn't really make sense to present, but who knows if I'll need it in the future?)
 - modding `show-language` to display the base language when the highlight language is `diff-*`.
 
-You can also add custom attributes with some simple CSS additions! For instance, I added a CSS class which hides the command-line prompt when a `data-rw-prompt` attribute is specified.^[Here, rw stands for responsive width.] This may be useful for long prompts, which may cover the entire screen's width when scrolling on a phone.
+You can also add custom attributes with some simple CSS! For instance, I added a CSS class which hides the command-line prompt when a `data-rw-prompt` attribute is specified.^[Here, rw stands for responsive width.] This may be useful for long prompts, which may cover the entire screen's width when scrolling on a phone.
 
 ```css
 @media (max-width: 576px) {
