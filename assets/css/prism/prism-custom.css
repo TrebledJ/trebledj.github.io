@@ -17,3 +17,10 @@ div.code-toolbar > .toolbar > .toolbar-item > span.lang {
     -webkit-user-select: none;
 	user-select: none;
 }
+
+@media (max-width: 576px) {
+    /* rw-prompt: response width prompt */
+    .command-line-prompt.data-rw-prompt {
+        display: none;
+    }
+}

@@ -382,6 +382,13 @@ MORE
 MOREEE
 ```
 
+Response-width command line prompt:
+```txt {.command-line .line-numbers data-rw-prompt}
+A
+B
+C
+```
+
 ```powershell {.command-line data-prompt="PS C:\Users\Chris>" data-output=2-19}
 dir
 
