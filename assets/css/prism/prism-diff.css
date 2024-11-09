@@ -57,3 +57,8 @@ html[data-theme=light] .token.inserted {
 .token.prefix {
 	margin-right: 3px;
 }
+
+/* Required for full-width diff highlight lines. */
+pre[class*="language-diff-"] code {
+	display: inline-block;
+}
