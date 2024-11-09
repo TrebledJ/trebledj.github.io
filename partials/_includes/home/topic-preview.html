@@ -4,15 +4,15 @@
 
 {% macro render_topic_preview(name, tag, about, excludeTags, uniquePosts) %}
     {# Description #}
-    <div class="recent-posts d-flex mb-3 gap-2">
+    {# <div class="recent-posts d-flex mb-3 gap-2">
         <span class="mb-1">{{about}}</span>
         <div>
             {{ render_tag(tag) }}
         </div>
-    </div>
+    </div> #}
 
     {# Exclude the topic tag itself. #}
-    {% set excludeTags = excludeTags | push(tag) %}
+    {# {% set excludeTags = excludeTags | push(tag) %} #}
 
     {# Get a few posts with the relevant tag. #}
     <div class="collection-list">
