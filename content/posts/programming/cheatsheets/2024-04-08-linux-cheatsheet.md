@@ -233,17 +233,28 @@ Script variables. (Useful for configuring row/column delimiters.)
 
 **Useful Flags**
 ```sh {data-lang-off}
-# case-insensitive
--i
-# regex
--E
-# non-match (inVert)
--v
+-i # case-insensitive
+-E # regex
+-v # non-match (inVert)
 ```
+
+### grep – Find String in Files
+
+```sh {data-lang-off .command-line data-prompt="$" data-filter-output="# "}
+grep -rnw /path/to/somewhere/ -e 'pattern'
+```
+
+* `-r` or `-R` is recursive,
+* `-n` is line number, and
+* `-w` stands for match the whole word.
+* `-l` can be added to just give the file name of matching files.
+* `-e` is the pattern used during the search
+
+Ref: https://stackoverflow.com/a/16957078/10239789
 
 ### xargs
 
-xargs is a versatile command-line utility that allows efficient execution of commands from, making it a powerful tool for automation and batch processing.
+xargs is a versatile command-line utility that allows efficient execution of commands, making it a powerful tool for automation and batch processing.
 
 Interesting options:
 ```sh {data-lang-off .command-line data-prompt="$" data-filter-output="# "}
@@ -270,7 +281,7 @@ Multi-Processing: Execute `./do-something-to-file.sh <file>` on multiple files, 
 cat files.txt | xargs -P 4 -n1 ./do-something-to-file.sh
 ```
 
-Multi-Processing: Port Scan with Ports 1-1000 Through `proxychains`.
+Multi-Processing: Port Scan with Ports 1-1000 through `proxychains`.
 ```sh {data-lang-off .command-line data-prompt="$" data-filter-output="# "}
 seq 1 1000 | xargs -P 50 -I{} proxychains4 -q nmap -p {} -sT -Pn --open -n -T4 --oN nmap.txt --append-output 192.168.101.10
 ```
