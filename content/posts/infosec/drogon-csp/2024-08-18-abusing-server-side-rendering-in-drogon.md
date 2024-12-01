@@ -128,6 +128,8 @@ drogon_ctl create view Example.csp
 ```
 which generates Example.h and Example.cc.
 
+Let's look at how C++ is generated from markup.
+
 - `<%c++ ... %>` - content inside this tag is inserted into a `genText()` function.  
     ```csp {data-label=Example.csp}
     <h1>Example</h1>

