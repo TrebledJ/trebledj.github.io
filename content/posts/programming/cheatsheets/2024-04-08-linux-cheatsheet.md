@@ -254,7 +254,7 @@ Ref: https://stackoverflow.com/a/16957078/10239789
 
 ### xargs
 
-xargs is a versatile command-line utility that allows efficient execution of commands from, making it a powerful tool for automation and batch processing.
+xargs is a versatile command-line utility that allows efficient execution of commands, making it a powerful tool for automation and batch processing.
 
 Interesting options:
 ```sh {data-lang-off .command-line data-prompt="$" data-filter-output="# "}
