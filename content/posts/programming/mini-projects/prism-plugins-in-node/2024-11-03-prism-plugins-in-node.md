@@ -256,7 +256,7 @@ With those two changes, we have all we need to start importing fancy plugins!
 
 In case you wish to fine-tune some plugins, you can always copy them into your local project and modify them directly! Some changes I made were:
 
-- modding `line-numbers` for compatibility with `command-line` and `diff` (Yes, this doesn't really make sense to present, but who knows if I'll need it in the future?)
+- modding `line-numbers` for compatibility with `command-line` and `diff` (Yes, this doesn't really make sense, but who knows if I'll need it in the future?)
 - modding `show-language` to display the base language when the highlight language is `diff-*`.
 
 You can also add custom attributes with some simple CSS! For instance, I added a CSS class which hides the command-line prompt when a `data-rw-prompt` attribute is specified.^[Here, rw stands for responsive width.] This may be useful for long prompts, which may cover the entire screen's width when scrolling on a phone.
@@ -270,7 +270,7 @@ You can also add custom attributes with some simple CSS! For instance, I added a
 }
 ```
 
-And here it is in action on some notes. Try viewing on both mobile and computer.
+And here it is in action on some notes. Try viewing on both mobile and computer (or use your browser DevTools).
 
 ```powershell {.command-line data-rw-prompt data-prompt="PS C:\Users\Chris>" data-output=2-100}
 Get-DomainTrust -domain dollarcorp.moneycorp.local
@@ -289,11 +289,11 @@ WhenChanged     : 9/25/2024 10:12:06 PM
 
 Understandably, one major bottleneck in our strategy is DOM manipulation. A suitable library needs to parse HTML fragments, manipulate DOM elements, and create new ones.
 
-Although I originally selected JSDOM in my quick-n-dirty hack for its popularity, I later switched to domino for significant (2x!) speedup. This is based on a simple benchmark, which compares the three most popular(?) NodeJS DOM-manipulation libraries: [JSDOM](https://www.npmjs.com/package/jsdom), [domino](https://www.npmjs.com/package/domino), and [LinkeDOM](https://www.npmjs.com/package/linkedom).
+Although I originally selected JSDOM in my quick-n-dirty hack for its popularity, I later switched to domino for a significant (2x!) speedup. This is based on a simple benchmark, which compares the three most popular(?) NodeJS DOM-manipulation libraries: [JSDOM](https://www.npmjs.com/package/jsdom), [domino](https://www.npmjs.com/package/domino), and [LinkeDOM](https://www.npmjs.com/package/linkedom).
 
 {% image "assets/dom-benchmark.png", "jw-60 alpha-imgv", "Benchmark of time to render the ~400 codeblocks on this site with JSDOM, domino, and LinkeDOM." %}
 
-<sup>Benchmark of time to render the ~400 codeblocks on this site with JSDOM, domino, and LinkeDOM.</sup>
+<sup>Benchmark of time to render the ~400 codeblocks on this site with JSDOM, domino, and LinkeDOM. Lower time = faster.</sup>
 {.caption}
 
 | Library  | Mean (ms) | Min. (ms) | Max. (ms) |
