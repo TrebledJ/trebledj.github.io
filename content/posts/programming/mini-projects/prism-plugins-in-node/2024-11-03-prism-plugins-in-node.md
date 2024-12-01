@@ -20,7 +20,7 @@ Simple codeblocks suffice for most writers who need supporting text with pretty 
 
 To tell a good story, the characters, plot, and location need to be clear to the audience. Similarly, blog posts and tutorials benefit from enhancements such as command-line demarcations, line numbers, labels, and inline markup.
 
-There are many cases where such codeblocks are warranted:
+There are many cases where such codeblocks are warranted (brackets contain remedial plugins):
 
 - Interaction: input and output should be contrasted, think: shell or Jupyter notebook (command-line)
 - A post compares or demonstrates a technique in multiple languages (show-language)
