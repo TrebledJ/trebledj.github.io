@@ -124,15 +124,17 @@ While MarkdownIt works great out-of-the-box, the default {% abbr "rendering", "R
 
 Prism has two primary highlight functions: `Prism.highlight` and `Prism.highlightElement`. Most server-side libraries are happy to use the former. But a lot of *hooks* aren't called by `.highlight`, so we'll also have to customise the renderer to call `.highlightElement`.
 
-We'll reference [MarkdownIt's default fence rule](https://github.com/markdown-it/markdown-it/blob/0fe7ccb4b7f30236fb05f623be6924961d296d3d/lib/renderer.mjs#L29) and customise it accordingly. (The full implementation can be found in [this site's repository](https://github.com/TrebledJ/trebledj.github.io/blob/e110c1861f566907019f4384b3eb5d7d7861ccc0/eleventy/detail/markdown-it/markdown-it-prism-adapter.js).)
+We'll reference [MarkdownIt's default fence rule](https://github.com/markdown-it/markdown-it/blob/0fe7ccb4b7f30236fb05f623be6924961d296d3d/lib/renderer.mjs#L29) and customise it accordingly.
 
 {% alert "danger" %}
-This will override the rule completely without reusing previous implementations. If you use another plugin which modifies and reuses the fence rule (e.g. `markdown-it-prism`), consider performing this overwrite first before calling the other plugin.
+The code presented below will override the `.renderer.rules.fence` rule completely, overwriting any previous implementations.
+
+If you use another plugin which reuses the fence rule (e.g. `markdown-it-prism`), consider calling code in this order: 1) the below code, 2) other code. This way no code is overwritten and lost.
 {% endalert %}
 
-1. Remove the default text-based highlighting `options.highlight`. We still escape the HTML since we'll substitute it in an HTML string.
-2. Handle `diff-*` languages by loading the right language.
-3. Wrap the escaped code in `<div><pre><code>` with the right attributes, convert it to a DOM element, highlight it to `Prism.highlightElement`, then return the rendered HTML.
+1. Remove the default text-based highlighting `options.highlight`. We still need to escape the HTML because we'll substitute it in a HTML string.
+2. (Optional, if you want `diff` support.) Handle `diff-*` languages by loading the right language.
+3. Wrap the escaped code in `<div><pre><code>` with the right attributes^[Normally, wrapping it in `<pre><code>` is sufficient. But some plugins such as toolbar will traverse up to the parent of `pre`, so... `<div><pre><code>`. Yay, more workarounds!], convert it to a DOM element, highlight it to `Prism.highlightElement`, then return the rendered HTML.
 4. We also moved the attributes to `<pre>` instead of `<code>`, which is required for PrismJS to function properly.
 
 The most important part is step 3, where we call Prism magic with `.highlightElement`.
@@ -262,7 +264,7 @@ In case you wish to fine-tune some plugins, you can always copy them into your l
 - modding `line-numbers` for compatibility with `command-line` and `diff` (Yes, this doesn't really make sense, but who knows if I'll need it in the future?)
 - modding `show-language` to display the base language when the highlight language is `diff-*`.
 
-You can also add custom attributes with some simple CSS! For instance, I added a CSS class which hides the command-line prompt when a `data-rw-prompt` attribute is specified.^[Here, rw stands for responsive width.] This may be useful for long prompts, which may cover the entire screen's width when scrolling on a phone.
+You can also add custom attributes with some simple CSS! For instance, I added a CSS class which hides the command-line prompt when a `data-rw-prompt` attribute is specified.^[Here, rw stands for responsive width.] This is useful for long prompts, which may cover the entire screen's width when scrolling on a phone.
 
 ```css
 @media (max-width: 576px) {
@@ -340,3 +342,19 @@ Moreover, domino has 0 dependencies — it's basically written from the ground 
 ## Final Remarks
 
 I'll be the first to admit — this is a rather crude hack with some loose ends.^[It would be better to pass codeblock attributes directly to Prism without the extra stringification and parsing. Guess I'll leave this as an exercise for the front-end engineers.] But it works! Not to mention, it looks nice with enough CSS! And to some that's all that matters.
+
+For those interested in the code, you can check out the code here:
+
+* [module](https://github.com/TrebledJ/trebledj.github.io/blob/e110c1861f566907019f4384b3eb5d7d7861ccc0/eleventy/detail/markdown-it/markdown-it-prism-adapter.js)
+* [example usage](https://github.com/TrebledJ/trebledj.github.io/blob/e110c1861f566907019f4384b3eb5d7d7861ccc0/eleventy/markdown.js#L74-L88)
+
+Just copy the module into your build and load it.
+
+Other mods:
+* copy-to-clipboard: [plugin](https://github.com/TrebledJ/trebledj.github.io/blob/e110c1861f566907019f4384b3eb5d7d7861ccc0/eleventy/detail/prism/prism-copy-to-clipboard.js) / [js](https://github.com/TrebledJ/trebledj.github.io/blob/e110c1861f566907019f4384b3eb5d7d7861ccc0/assets/js.bundle/common/prism-copy-to-clipboard.js) / [css](https://github.com/TrebledJ/trebledj.github.io/blob/e110c1861f566907019f4384b3eb5d7d7861ccc0/assets/css/prism/prism-custom.css)
+* line-numbers: [plugin](https://github.com/TrebledJ/trebledj.github.io/blob/e110c1861f566907019f4384b3eb5d7d7861ccc0/eleventy/detail/prism/prism-line-numbers.js) / [css](https://github.com/TrebledJ/trebledj.github.io/blob/e110c1861f566907019f4384b3eb5d7d7861ccc0/assets/css/prism/prism-line-numbers.css)
+* show-language: [plugin](https://github.com/TrebledJ/trebledj.github.io/blob/e110c1861f566907019f4384b3eb5d7d7861ccc0/eleventy/detail/prism/prism-show-language.js)
+* command-line: [css](https://github.com/TrebledJ/trebledj.github.io/blob/e110c1861f566907019f4384b3eb5d7d7861ccc0/assets/css/prism/prism-command-line.css)
+* toolbar: [css](https://github.com/TrebledJ/trebledj.github.io/blob/e110c1861f566907019f4384b3eb5d7d7861ccc0/assets/css/prism/prism-toolbar.css)
+* diff: [css](https://github.com/TrebledJ/trebledj.github.io/blob/e110c1861f566907019f4384b3eb5d7d7861ccc0/assets/css/prism/prism-diff.css) (based on a Eleventy customisation)
+
