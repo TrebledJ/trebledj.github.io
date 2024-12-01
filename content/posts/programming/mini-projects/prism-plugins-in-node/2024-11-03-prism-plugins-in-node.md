@@ -10,7 +10,7 @@ tags:
 thumbnail_src: assets/thumbnail.jpg
 ---
 
-With over 7 million weekly downloads on NPM, PrismJS is one of the most widely used code highlighting packages in JavaScript, lauded for its unparalleled extensibility through plugins. But one recurring issue plagues developers: most plugins require a {% abbr "DOM", "document object model, responsible for managing the UI you see in your wonderful browser" %}! Fancy plugins such as `command-line`, `line-numbers`, and the toolbar-suite require a DOM to manipulate HTML. This isn't normally possible in runtime environments such as Node, which aren't designed to render UIs, hence, no DOM.
+With over 7 million weekly downloads on NPM, PrismJS is one of the most widely used code highlighting packages in JavaScript, lauded for its unparalleled extensibility through plugins. But one recurring issue plagues developers: most plugins require a {% abbr "DOM", "document object model, responsible for managing the UI you see in your wonderful browser" %}! Fancy plugins such as `command-line`, `line-numbers`, and the toolbar suite require a DOM to manipulate HTML. This isn't normally possible in runtime environments such as Node, which aren't designed to render UIs, hence, no DOM.
 
 In this post, I’ll demonstrate a few simple changes to easily coerce these plugins into compatibility with NodeJS and MarkdownIt, a popular markdown renderer.^[One workaround is to use regex to modify HTML — but let’s face it, I sleep more soundly knowing the current implementation is mature and battle-tested. By introducing a DOM API to Node, you're placing trust in a library to be spec-compliant. By handwriting regex, you're placing trust in your code to work. Which would you rather have?]
 
