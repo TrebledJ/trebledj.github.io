@@ -484,3 +484,4 @@ While zip files offer convenience and efficiency in compressing and sharing data
 
 - [PentesterAcademy: From Zip Slip to System Takeover](https://blog.pentesteracademy.com/from-zip-slip-to-system-takeover-8564433ea542)
 - [SecurityVault: Attacks with Zip Files and Mitigations](https://web.archive.org/web/20221213052327/https://thesecurityvault.com/attacks-with-zip-files-and-mitigations/)
+- [zipattack.py](https://gist.github.com/TrebledJ/c5c9d469b77c6e4a4c061de59392c1e7) - various functions to construct zip payloads in Python
