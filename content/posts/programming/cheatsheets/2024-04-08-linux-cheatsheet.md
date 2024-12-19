@@ -526,6 +526,36 @@ python -m uploadserver
 curl -F files=@file1.txt -F files=@file2.txt 192.168.45.179:8000/upload
 ```
 
+## Files
+
+### Check File Sizes
+
+```sh {data-lang-off .command-line data-prompt="$" data-filter-output="# "}
+# Get available disk space.
+df -h
+# Get file size of current directory, in human readable format.
+du -sh .
+# Get file size of txt files, in human readable format.
+du -sh *.txt
+```
+
+### Find/Operate on Files
+
+```sh {data-lang-off .command-line data-prompt="$" data-filter-output="# "}
+# Find files in operating system, and ignore errors.
+find / -name '*needle*' 2>/dev/null
+# 
+# Find [f]iles or [d]irectories.
+find . -type f -name '*needle*'
+find . -type d -name '*needle*'
+# 
+# Find and run command on files. \; is needed for `find` to know where to terminate.
+find . -type f -name '*complex*' -exec echo {} \;
+find . -type f \( -name '*complex*' -or -name 'query' \) -exec du -h {} \;
+```
+
+
+
 ## git gud
 
 Git commands for completeness.
