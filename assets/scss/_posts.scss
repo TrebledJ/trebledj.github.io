@@ -211,6 +211,10 @@
         font-size: .65em;
         line-height: .75;
     }
+    a.no-exlink::after
+    {
+        content: none;
+    }
 }
 
 div.center,
