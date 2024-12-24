@@ -214,7 +214,7 @@ Here are some interesting examples of encapsulation I've observed.
    
 2. Common in regulated industries (such as finance) is the segregation of *customer identification data*, i.e. personal information such as name, ID number, phone number, home address, and email address. These may compromise a customers' privacy if leaked. Customer data should be encapsulated in a separate database with strong encryption and access control.
 
-3. During several pentests, we discovered broken access controls simply due to public read/write access, which ideally should be disabled by default. But then again, access control was neither available nor considered at the design level, so there wasn't much to do except apply preventative/detective controls.
+3. During several network pentests, we discovered poorly encapsulated systems with public read/write access. To make things worse, access control was neither available nor considered at the design level (i.e. there was no config option to flip), so there wasn't much to do except apply preventative/detective controls.
 
 ### 5. What a programmer finds useful, an attacker (often) will too
 
