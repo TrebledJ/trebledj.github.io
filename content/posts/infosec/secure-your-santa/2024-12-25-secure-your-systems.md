@@ -1,6 +1,6 @@
 ---
-title: 12 Days of Christmas – Secure Your Systems Edition
-excerpt: Insights, observations, and reflections from a penetration tester on developing secure systems.
+title: 12 Days of Christmas – 2024 Cybersecurity Edition
+excerpt: Insights, observations, and reflections from a penetration tester on securing your ~~sh\*t~~ systems. For developers, hackers, and system administrators.
 tags: 
   - software-engineering
   - web
@@ -65,7 +65,7 @@ Ultimately, this comes down to humans and processes.
 
 1. **Humans.**
    - Many breaches start from an innocuous phishing email. A couple of clicks is all it takes to compromise a computer.
-   - Insufficient training and cybersecurity awareness may lead to poor security practices, such as writing usernames and passwords on sticky notes.
+   - Insufficient training and cybersecurity awareness may lead to poor security practices, such as storing passwords in plain text or using weak passwords.
    - Driven by looming deadlines and milestones, devs may inadvertently overlook logical aspects, resulting in buggy software. Despite the advancements of modern technologies and AI, the human factor remains a fundamental component in software development.
 2. **Processes.** These are your workflows, CI/CD pipelines, monthly access reviews, etc.
    - Arguably, processes are also a human problem stemming from **inadequate management and supervision**. We humans are prone to forgetfulness, particularly when guidelines are communicated verbally rather than documented in writing. This underscores the significance of establishing structured processes.
@@ -312,7 +312,7 @@ But the flipside to this is: **dependencies are also an attack surface**. This i
 Is rolling your own auth better? Is using a third-party component better? There’s no clear right or wrong answer. This will depend on your situation, your business strategy, your manpower, and ultimately the risk you’re willing to take. Either way, upholding a robust security posture is essential for the long-term success of any project.[^risk]
 {% endalert %}
 
-[Previously, we discussed processes to reduce the risk of supply chain attacks](#2-an-application-is-as-secure-as-its-weakest-link), such as dependency management and {% abbr "SCA", "Software Component Analysis" %}. Relevant to this discussion is: **Should you automatically apply patches/updates?**
+[Previously, we discussed processes to reduce the risk of supply chain attacks](#2-an-application-is-as-secure-as-its-weakest-link), such as dependency management and {% abbr "SCA", "Software Component Analysis" %}. Relevant to this discussion is: **Should you automatically apply patches/updates?** Here's the breakdown:
 
 * If you don’t auto-apply updates... Your system is stable, but you risk exposing yourself to critical issues in the long term, unless you manually update. (Decent strategy for production-critical systems, such as life-support at a hospital?)
 * If you auto-apply updates... You get the latest features and security fixes, but you risk ingesting a supply chain attack (like xzutils). Even so, a patch for that attack will be auto-applied. (Good strategy for high-risk items with many vulnerabilities like routers, your OS, your browser.)
@@ -447,7 +447,7 @@ If you're interested in seeing a Business Logic Bypass story, you can read the e
 
 ## tl;dr and Takeaways
 
-- [Modern tech can still be insecure.](#1-myth-modern-tech-is-secure-and-bug-free) This can be attributed to [human factors and procedural gaps](#2-an-application-is-as-secure-as-its-weakest-link) and can be addressed by training, investment, and better management.
+- [Modern tech can still be insecure.](#1-myth-modern-tech-is-secure-and-bug-free) This can be attributed to [human factors and procedural gaps](#2-an-application-is-as-secure-as-its-weakest-link) and can be addressed by training and better management. Use strong and memorable passwords. Write and automate tests.
 - When architecting systems, consider [encapsulating components to enhance access control](#4-encapsulation-is-good-for-security).
 - [Knowledge is power; don't expose too much information.](#11-knowledge-is-power) Value your privacy. [Sometimes sacrificing convenience is essential to safeguarding your data.](#5-what-a-programmer-finds-useful-an-attacker-often-will-too)
 - All software components carry inherent risks.
