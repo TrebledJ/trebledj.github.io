@@ -22,7 +22,7 @@ So to end this year, I thought it would be nice to reflect on the technical shen
 
 *Disclaimer: All examples included below are based on examples from real-life penetration tests, but details have been fudged to protect confidential information ~~and ensure I don’t get fired~~. No mention/screenshots of the original targets are included.*
 
-## Humans (and processes) are the weakest link.
+## Humans (and processes) are the weakest link
 
 Here's a great quote by a well-known cybersecurity professional:
 
@@ -33,7 +33,7 @@ While this is a common occurrence with phishing attacks, sometimes I think this 
 
 Let's start by busting a myth.
 
-### 1. Myth: Modern tech is secure and bug-free.
+### 1. Myth: Modern tech is secure and bug-free
 
 > Modern tech is secure and bug-free. A modern language/library/framework will handle security for us.
 
@@ -49,7 +49,7 @@ Using modern technology is not an excuse to eliminate security programs.
 
 But why is software still insecure even though the tech is new?
 
-### 2. An application is as secure as its weakest link.
+### 2. An application is as secure as its weakest link
 
 A common saying in cybersecurity goes like this:
 
@@ -75,7 +75,7 @@ Ultimately, this comes down to humans and processes.
 
 You want your application secured? Invest in your talent. Review code. Improve your processes. Stay humble.
 
-### 3. Copy and Paste Invites Disaster
+### 3. Copy and Paste invites Disaster
 
 {% image "assets/copy-paste-disaster.jpg", "jw-65", "“Hi Disaster, I'm Paste! How do you do? And this is my friend Copy. We're so excited to work together on this project and to create great impact in the shortest amount of time possible!”" %}
 
@@ -142,11 +142,11 @@ Oops — disaster! The post got published! It's apparent both endpoints use the
 
 This is just one illustration of the dangers of copy-and-paste. I’m sure there are graver examples out there.
 
-## General Comments
+## General comments
 
 During my pentesting experience, I observed some good and poor designs which can be generalised to wider statements about community/industry mindset. Here are my observations...
 
-### 4. Encapsulation is Good for Security
+### 4. Encapsulation is good for security
 
 In software engineering, encapsulation refers to the practice of bundling data and methods within a class, allowing for better *access control over data* and preventing *unintended modifications*. In most object-oriented programming languages, you control access by declaring functions to be `public` (callable by anyone) or `private` (callable within the class).
 
@@ -214,7 +214,7 @@ Here are some interesting examples of encapsulation I've observed.
    
 2. Common in regulated industries (such as finance) is the segregation of *customer identification data*, i.e. personal information such as name, ID number, phone number, home address, and email address. These may compromise a customers' privacy if leaked. Customer data should be encapsulated in a separate database with strong encryption and access control.
 
-### 5. What a programmer finds useful, an attacker (often) will too.
+### 5. What a programmer finds useful, an attacker (often) will too
 
 If you will, another story. During a penetration test, we encountered a *very old* piece of software with debug functions allowing the user to print arbitrary information (such as variables and the program stack) from the server. Understandably, tooling during Programming Antiquity wasn't great, so the developers came up with this function to aid sysadmins in reporting and troubleshooting. However, this function proved alarmingly insecure, allowing us to access and read all user passwords (including admins!) with ease. Additionally, the password for regular users was predictably simple, allowing one to swiftly escalate from zero to admin...
 
@@ -235,7 +235,7 @@ Here are some common conveniences which can *really* bite you in the butt:
 The first step to breaking an application is to find out what it uses and what it does.
 On the flip side, the first step to securing your production environment is to strip out debug functionality and enable secure configurations. And sometimes this requires sacrificing convenience for security.
 
-### 6. Assume Breach
+### 6. Assume breach
 
 This is one of those mindsets to promote security in the Software Development Lifecycle (SDLC). This is meant to complement, rather than replace, ideas such as "Shift Left".
 
@@ -243,7 +243,7 @@ In red teaming (Active Directory pentesting) scenarios, we often "assume breach"
 
 Breaches are a stark reality in today's cybersecurity landscape. Instead of assuming that a segregated network is impenetrable, apply defence-in-depth and set appropriate security controls.
 
-## Software Components and the Supply Chain
+## Software components and the supply chain
 
 The events this year (2024) highlight how third-party components and underlying infrastructure (dubbed "the supply chain") can pose heavy risks to security. Let's have a quick recap:
 
@@ -265,7 +265,7 @@ Amidst this chaos, I think there's something we can pick out and learn from thes
 
 Let's start by justifying supply chains with a common piece of advice.
 
-### 7. Don't Roll Your Own Auth
+### 7. Don't roll your own auth
 
 ...unless you know what you're doing! This is old news to some. Here, auth refers authentication, such as registration, login, federated logins (e.g. OAuth, SSO), and — to some extent, access control. There are reasons *for* and *against* developing a custom auth. Let's go through them very quickly:
 
@@ -302,7 +302,7 @@ When you roll your own auth, you don’t just deal with “auth issues”. You n
 This doesn’t apply only to auth. In general, any complex system will have a myriad of test cases. The common saying is: if it’s mission-critical, build it yourself.^[For instance, Cloudflare builds its own infrastructure and [proxy](https://github.com/cloudflare/pingora) because it’s critical to their network.] Otherwise, is the complexity really worth it?
 {% endalert %}
 
-### 8. Patch your systems.
+### 8. Patch your systems
 
 Earlier, we mentioned that using mature, battle-tested components tends to be more secure and convenient compared to reinventing your own from scratch.
 
@@ -319,7 +319,7 @@ Is rolling your own auth better? Is using a third-party component better? There�
 
 For this site (static site generator with npm dependencies), I use a hybrid approach by auto-applying minor updates but manually upgrading + testing major updates.
 
-### 9. Don't (Solely) Rely on WAFs
+### 9. Don't (solely) rely on WAFs
 
 You think {% abbr "WAFs", "Web Application Firewalls" %} will protect your smelly derelict backlogged spaghetti codebase? Think again.
 
@@ -358,7 +358,7 @@ Simply applying a WAF is ineffective unless other countermeasures such as regula
 
 [^risk]: Adjust for risk accordingly, if that’s your thing.
 
-## Common Bug Classes
+## Common bug classes
 
 Apart from buggy auth and vulnerable components, there are a few other bug classes I frequently encounter in the realm of web and mobile applications:
 
@@ -366,7 +366,7 @@ Apart from buggy auth and vulnerable components, there are a few other bug class
 2. Information Disclosure (versions, file paths, error messages)
 3. Logic/Design Bugs (Business Logic, Race Conditions)
 
-### 10. String Concatenation Considered Dangerous /s
+### 10. String concatenation considered dangerous /s
 
 {% image "assets/strings.jpg", "jw-60", "Strings, amirite?" %}
 
@@ -396,7 +396,7 @@ Let's address some concerns:
     - **Parameterized Queries**
         - Use parameterized queries in database interactions to prevent SQL injection attacks. This approach separates SQL code from user input, reducing the risk of malicious code execution and data leaks.
 
-### 11. Knowledge is Power
+### 11. Knowledge is power
 
 **Information disclosure** is a severely underestimated issue with the potential to accelerate attacks.
 
@@ -429,7 +429,7 @@ Here are some good tips to consider:
     Or better yet, don't include the software framework at all! For instance, AWS’s load balancer will return `Server: awselb`.
 {% endalert %}
 
-### 12. Elementary, Dear Watson
+### 12. Elementary, dear Watson
 
 **Logic** is the essence of software. Unfortunately, security flaws often arise from broken logic.
 
@@ -445,7 +445,7 @@ Most scanners don't tend to catch these, since business logic is unique to each 
 If you're interested in seeing a Business Logic Bypass story, you can read the example in [Copy and Paste Invites Disaster](#3-copy-and-paste-invites-disaster).
 
 
-## tl;dr and Takeaways
+## tl;dr and takeaways
 
 - [Modern tech can still be insecure.](#1-myth-modern-tech-is-secure-and-bug-free) This can be attributed to [human factors and procedural gaps](#2-an-application-is-as-secure-as-its-weakest-link) and can be addressed by training and better management. Use strong and memorable passwords. Write and automate tests.
 - When architecting systems, consider [encapsulating components to enhance access control](#4-encapsulation-is-good-for-security).
