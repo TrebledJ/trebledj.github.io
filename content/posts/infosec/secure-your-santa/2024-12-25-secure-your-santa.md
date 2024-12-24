@@ -1,6 +1,6 @@
 ---
-title: 12 Days of Christmas – Secure Your Santa Edition
-excerpt: Insights and observations from a penetration tester on developing secure systems.
+title: 12 Days of Christmas – Secure Your Systems Edition
+excerpt: Insights, observations, and reflections from a penetration tester on developing secure systems.
 tags: 
   - software-engineering
   - web
@@ -70,7 +70,7 @@ Ultimately, this comes down to humans and processes.
 2. **Processes.** These are your workflows, CI/CD pipelines, monthly access reviews, etc.
    - Arguably, processes are also a human problem stemming from **inadequate management and supervision**. We humans are prone to forgetfulness, particularly when guidelines are communicated verbally rather than documented in writing. This underscores the significance of establishing structured processes.
    - Absence of a **dependency management and maintenance process** allows vulnerable components to linger in your codebase like a festering wound. Unmaintained code and technical debt pile up, ever-increasing the risk of a system. Consider using an **{% abbr "SCA", "Software Component Analysis, basically a dependency analyser" %}** to automate dependency checks.
-   - Absence of **DevSecOps and security in the Software Development Lifecycle (SDLC)** can result in easily exploitable vulnerabilities. These bugs, often considered low-hanging fruit, are favoured by ransomware groups seeking quick exploits. By incorporating tools such as **{% abbr "SASTs", "Static App Security Testing, basically a source code scanner" %}** and **{% abbr "DASTs", "Dynamic App Security Testing, basically automates simple black-box pentests" %}**, you can enhance your application's security posture by identifying common bugs.
+   - Absence of **DevSecOps and security in the Software Development Lifecycle (SDLC)** increase the presence of easily exploitable vulnerabilities. These bugs, often considered low-hanging fruit, are favoured by ransomware groups seeking quick exploits. By using automated tools such as **{% abbr "SASTs", "Static App Security Testing, basically a source code scanner" %}** and **{% abbr "DASTs", "Dynamic App Security Testing, basically automates simple black-box pentests" %}**, you can identify common bugs thereby enhancing your application's security posture.
    - Lack of **continuous auditing and oversight** may inadvertently lead to breaches. Don’t be surprised when your [legacy test accounts bite you in the butt](https://www.bleepingcomputer.com/news/security/microsoft-reveals-how-hackers-breached-its-exchange-online-accounts/)!
 
 You want your application secured? Invest in your talent. Review code. Improve your processes. Stay humble.
@@ -202,40 +202,44 @@ If our `balance` was `public`, what stops programmers who use this class from ac
 
 This enhances security by restricting direct access to sensitive information and promoting a more structured software design. By encapsulating components, you hide potentially vulnerable states and separate interactions between components.
 
-Encapsulation is understood very well from a programming perspective, but not so much from a general design perspective.
+Encapsulation is understood very well from a programming perspective, but less so from a software design perspective.
 
-There are some interesting cases and application I'd like to point out.
+Here are some interesting examples of encapsulation I've observed.
 
 1. In a recent pentest, we managed to find an SQL injection vulnerability to a PostgreSQL database. In MySQL and SQL Server, we can access other databases by calling `use xyz;` or `select * from xyz..table`. But — from my limited understanding — PostgreSQL **doesn’t allow access to other databases**. Theoretically, this means devs can logically segregate data while reaping security benefits. For instance, compromising a `config` database won't impact the `users` database.
 
     There are [workarounds](https://stackoverflow.com/questions/46324/possible-to-perform-cross-database-queries-with-postgresql) to bypass this restriction, but I think this is a good first step towards designing secure encapsulated systems, and I really hope we can see more of this across the IT (and OT[^ot]) industry.
     
-    [^ot]: OT, Operational Technology, are devices which typically involve physical actuators. The network protocols in this industry lack security and still have catching up to do.
+    [^ot]: OT, Operational Technology, are devices which typically involve physical actuators. Some network protocols in this industry lack security and have catching up to do.
    
-2. Common in regulated industries (such as finance) is the segregation of *customer identification data*. This is Personally Identifiable Information such as full name, phone number, home address, email address which may compromise customers' privacy if leaked. Customer data should be encapsulated in a separate database with strong encryption and access control.
+2. Common in regulated industries (such as finance) is the segregation of *customer identification data*, i.e. personal information such as name, ID number, phone number, home address, and email address. These may compromise a customers' privacy if leaked. Customer data should be encapsulated in a separate database with strong encryption and access control.
 
 ### 5. What a programmer finds useful, an attacker (often) will too.
 
 If you will, another story. During a penetration test, we encountered a *very old* piece of software with debug functions allowing the user to print arbitrary information (such as variables and the program stack) from the server. Understandably, tooling during Programming Antiquity wasn't great, so the developers came up with this function to aid sysadmins in reporting and troubleshooting. However, this function proved alarmingly insecure, allowing us to access and read all user passwords (including admins!) with ease. Additionally, the password for regular users was predictably simple, allowing one to swiftly escalate from zero to admin...
 
-Awareness is better these days, but this behaviour of insecure practices is still common. Leaving behind debug functions and logs could mean saving a day's worth of triaging (but could disclose file paths and source code! Very valuable for web attacks!). Web developers forget to remove source maps (which aid in reverse-engineering!). Embedded engineers leave behind UART ports (which also aid in reverse-engineering!).
+{% image "assets/information-disclosure-footguns.jpg", "jw-70", "Footguns come in many forms." %}
 
-Any tools left behind can be used for both good or malicious purposes. After all, devs and cybersecurity specialists have overlapping toolsets, think: gdb, browser devtools, logic analysers, and [rubber duckies](https://en.wikipedia.org/wiki/Rubber_duck_debugging). But sometimes the risk of malicious use outweighs the convenient goodness.
+<sup>Footguns come in many forms.</sup>{.caption}
+
+Awareness is better these days, but insecure practices are still common. Leaving behind debug mode could save a day's worth of triaging, but it could also disclose file paths and source code (very valuable for web attacks)! We see this elsewhere too. Web developers forget to remove source maps. Embedded engineers leave behind UART ports.
+
+Any tools left behind can be used for both good and malicious purposes. After all, devs and cybersecurity specialists have overlapping toolsets, think: gdb, browser devtools, logic analysers, and [rubber duckies](https://en.wikipedia.org/wiki/Rubber_duck_debugging). But sometimes the risk of malicious use outweighs the convenience.
 
 Here are some common conveniences which can *really* bite you in the butt:
 
-- **Leaving an admin page or internal app open to the public internet.** This is hella convenient because then you can login from anywhere. But it's not very secure because... you can login from anywhere! Attackers can use you the login page to brute-force usernames and potentially gain access.
+- **Leaving an admin page or internal app open to the public internet.** This is hella convenient because then you can login from anywhere. But it's not very secure because... you can login from anywhere! Attackers can use the login page to brute-force usernames and potentially gain access.
 - **[Information and version disclosures](#11-knowledge-is-power)**. These are things like error messages, swagger API pages, and version numbers. As we'll see later, this can expedite attacks.
 - **Using default or weak passwords for ease of remembering.** While convenient, weak passwords are more susceptible to brute force attacks and unauthorised access.
 
 The first step to breaking an application is to find out what it uses and what it does.
-On the flip side, the first step to securing your production environment is to strip out debug functionality, and sometimes this requires sacrificing convenience for security.
+On the flip side, the first step to securing your production environment is to strip out debug functionality and enable secure configurations. And sometimes this requires sacrificing convenience for security.
 
 ### 6. Assume Breach
 
 This is one of those mindsets to promote security in the Software Development Lifecycle (SDLC). This is meant to complement, rather than replace, ideas such as "Shift Left".
 
-In red teaming (Active Directory pentesting) scenarios, we often "assume breach", by simulating scenarios where 1) attackers have successfully broken in (via phishing, exploits, or physical connections), or 2) there is an impostor (aka malicious insider) among us! Often, we find corporate environments have insufficient oversight into their network environment.
+In red teaming (Active Directory pentesting) scenarios, we often "assume breach", by simulating scenarios where 1) attackers have successfully broken in (via phishing, exploits, or physical connections), or 2) there is an impostor (aka malicious insider) among us! Often, we find businesses have insufficient oversight into their network.
 
 Breaches are a stark reality in today's cybersecurity landscape. Instead of assuming that a segregated network is impenetrable, apply defence-in-depth and set appropriate security controls.
 
@@ -245,8 +249,8 @@ The events this year (2024) highlight how third-party components and underlying 
 
 - [Microsoft Exchange Online breached](https://www.bleepingcomputer.com/news/security/microsoft-reveals-how-hackers-breached-its-exchange-online-accounts/) - disclosed January 2024 - impacted numerous organisations, e.g. Hewlett Packard
 - The [xzutils backdoor](https://en.wikipedia.org/wiki/XZ_Utils_backdoor) - February 2024 - would have potentially affected millions of SSH installations, if not discovered in time
-- [Polyfill.io Supply Chain Attack](https://blog.qualys.com/vulnerabilities-threat-research/2024/06/28/polyfill-io-supply-chain-attack) - June 2024 - domain handover + delivery of malicious scripts via CDNs affecting 100K+ sites (potentially billions of users)
-- The [CrowdStrike incident](https://en.wikipedia.org/wiki/2024_CrowdStrike-related_IT_outages) (non-malicious) - July 2024 - impacted 8.5 million Windows computers, caused massive disruptions to airports and financial services
+- [Polyfill.io Supply Chain Attack](https://blog.qualys.com/vulnerabilities-threat-research/2024/06/28/polyfill-io-supply-chain-attack) - June 2024 - domain purchase + delivery of malicious scripts via CDNs affecting 100K+ sites (potentially billions of users)
+- The [CrowdStrike incident](https://en.wikipedia.org/wiki/2024_CrowdStrike-related_IT_outages) (non-malicious and unintentional) - July 2024 - impacted 8.5 million Windows computers, caused massive disruptions to airports and financial services
 - [Compromised network infrastructure in the US](https://www.bleepingcomputer.com/news/security/us-says-chinese-hackers-breached-multiple-telecom-providers/) - disclosed October 2024 - confidential communications leaked, further impact to be determined?
 
 {% image "assets/dependency.jpg", "jw-50", "What? Dependencies can be hacked? Adapted from XKCD #2347 - Dependency." %}
@@ -255,11 +259,11 @@ The events this year (2024) highlight how third-party components and underlying 
 
 Amidst this chaos, I think there's something we can pick out and learn from these incidents:
 
-- Why use a supply chain?
+- Why do we even use a supply chain?
 - Safeguard your supply chain.
 - Be sceptical of your supply chain.
 
-Let's start with a common piece of advice.
+Let's start by justifying supply chains with a common piece of advice.
 
 ### 7. Don't Roll Your Own Auth
 
@@ -267,10 +271,10 @@ Let's start with a common piece of advice.
 
 Reasons to roll your own auth:
 - **Customization**: Off-the-shelf solutions may not always meet your needs and requirements.
-- ???: I think that covers everything...
+- **Centralisation**: You want to take responsibility for your own security and not be reliant on third-party systems.
 
 Reasons to ***not*** roll your own auth:
-- **Security**: Developing a secure authentication system demands a high level of understanding in security vulnerabilities.
+- **Security**: Developing a secure authentication system demands a high level of understanding potential security vulnerabilities.
 - **Time and Resources**: Building a custom, fully-tested system can be time-consuming and resource-intensive.
 - **Maintenance**: Custom solutions require maintenance in the wake of evolving security threats and business requirements.
 
@@ -317,9 +321,10 @@ For this site (static site generator with npm dependencies), I use a hybrid appr
 
 ### 9. Don't (Solely) Rely on WAFs
 
-You think WAFs will protect your smelly derelict backlogged spaghetti codebase? Think again.
+You think {% abbr "WAFs", "Web Application Firewalls" %} will protect your smelly derelict backlogged spaghetti codebase? Think again.
 
-One time I was pentesting a PHP web app using an outdated web framework. I quickly discovered the version used and proceeded to execute RCE exploits. Unfortunately, the WAF blocked 
+{% details "Example: WAF did not protect against RCE.", "open" %}
+One time I was pentesting a PHP web app using an outdated web framework. I quickly discovered the version used and proceeded to execute {% abbr "RCE", "Remote Code Execution, a high-impact vulnerability class" %} exploits. Unfortunately, the WAF blocked 
 payloads based on common keywords: `system`, `phpinfo`, `fopen`. To bypass their denylist, I could try different PHP functions... but there’s a much easier trick.
 
 Most WAFs, to enhance performance, will ignore request bodies with body lengths above a certain limit. This means we can smuggle malicious payloads in plain sight by simply adding a big fat parameter.
@@ -344,7 +349,8 @@ Content-Length: 9000
 function=system&arg=whoami&bigfatparameter=AAAAAAAA...8000+ characters...AAA
 ```
 
-The result? We were able to bypass the WAF, execute commands, noodle around the filesystem, read the source code, and potentially infiltrate the rest of the company.
+The result? We were able to bypass the WAF, execute commands, noodle around the filesystem, read source code, and potentially infiltrate the company.
+{% enddetails %}
 
 {% alert "success" %}
 Simply applying a WAF is ineffective unless other countermeasures such as regular patches, logging, and monitoring are also applied.[^risk]
@@ -366,33 +372,33 @@ Apart from buggy auth and vulnerable components, there are a few other bug class
 
 <sup>Strings, amirite?</sup>{.caption}
 
-Despite its diminishing presence, **injection vulnerabilities** are still a dangerous, prevalent class of bugs. This includes vulnerabilities such as SQL injection (SQLi) and cross-site scripting (XSS). Discovery and exploitation techniques are widely documented and understood, underscoring the significant potential impact these vulnerabilities can have on application security.
+Despite its diminishing presence, **injection vulnerabilities** are still a dangerous, prevalent class of bugs. This includes vulnerabilities such as SQL injection (SQLi) and cross-site scripting (XSS). Discovery and exploitation techniques are widely documented and understood, underscoring the significant risk these vulnerabilities can have on application security.
 
-Let's address some common issues:
+Let's address some concerns:
 
 1. How do injection issues arise?
-    - Typically, they arise when accepting unfiltered text fields and query parameters in HTTP requests. For example:
+    - Typically, they arise when accepting unsanitised text fields and query parameters in HTTP requests. For example:
         - search function on a website (SQLi)
         - logging of user agents and parameters (SQLi)
         - trusting (failing to sanitise) a URL parameter (XSS)
         - Web 2.0 user content submission, e.g. comments, posts ({% abbr "SSTI", "Server-Side Template Injection" %})
         - many more subtle cases!
+    - Generally, using allowlists are better than denylists. Instead of preventing quotes in an address field, allow only letters, numbers, spaces, and commas.
 2. Can an application still be vulnerable to SQLi attacks even if the backend does not directly return database values in the response?
     - Yes. Attackers can exfiltrate data through other means, such as...
         - error-based techniques, i.e. stringifying data in an error message (very commonly overlooked);
         - [blind techniques, i.e. checking the status code, response body, or response time](/posts/automating-boolean-sql-injection-with-python); and
         - out-of-band techniques, i.e. checking DNS/HTTP requests.
-
- Here are some good examples I’ve seen:
-
-{% alert "success" %}
-- Validate everything. Numbers are validated. Enums are validated. For instance, gender must be one of “male”, “female”, or “other”. Any other values such as “attack helicopter” will be rejected.
-- Being untrusting towards all user/database values and sanitising with DOMPurify. This is especially crucial for CMSs.
-{% endalert %}
+3. What are some ways to protect against injection issues? Here are some good examples I’ve observed:
+    - **Input Validation**
+        - Numbers should be validated. Strings should be escaped. Enums should be validated against an allowlist.
+        - Don't trust user/database values. Sanitise user content to be inserted into HTML with sanitisers such as DOMPurify. This is especially crucial for CMSs and chatrooms.
+    - **Parameterized Queries**
+        - Use parameterized queries in database interactions to prevent SQL injection attacks. This approach separates SQL code from user input, reducing the risk of malicious code execution and data leaks.
 
 ### 11. Knowledge is Power
 
-**Information disclosure** is a severely underestimated issue, with the potential to accelerate attacks.
+**Information disclosure** is a severely underestimated issue with the potential to accelerate attacks.
 
 What might a typical hacking scenario look like? With thousands of exploits and vulnerabilities out there, I have no idea where to start. So I'll start by narrowing the possibilities. What tech are you using? What libraries, frameworks, versions? If I know all this, I can narrow my search drastically.
 
@@ -414,6 +420,7 @@ Here are some good tips to consider:
     HTTP/1.1 200 OK
     Server: Apache/2.4.49
     ```
+    
     Rather, return:
     ```http
     HTTP/1.1 200 OK
@@ -426,12 +433,12 @@ Here are some good tips to consider:
 
 **Logic** is the essence of software. Unfortunately, security flaws often arise from broken logic.
 
-- Business Logic Bypasses - These are bugs like: reusing a coupon, bypassing the chain of approval, bypassing a limit. Imagine how many more bugs there would be, with the "help" of AI.
-- Race Conditions - Popularised last year by [PortSwigger's whitepaper "Smashing the state machine"](https://portswigger.net/research/smashing-the-state-machine), these are subtle bugs which exploit concurrency issues or vulnerable "substates" (i.e. a request may alter the application state multiple times). Fixes could be anything from redesigning SQL schemas to shuffling a few lines of code.
+- **Business Logic Bypasses**: These are bugs like: reusing a coupon, bypassing the chain of approval, bypassing a limit. Imagine how many more bugs there would be, with the "help" of AI.
+- **Race Conditions**: Popularised last year by [PortSwigger's whitepaper "Smashing the state machine"](https://portswigger.net/research/smashing-the-state-machine), these are subtle bugs which exploit concurrency issues or vulnerable "substates" (i.e. a request may alter the application state multiple times). Fixes could be anything from redesigning SQL schemas to shuffling a few lines of code.
 
 These vulnerabilities tend to bypass controls such as:
-* permissions and access control ("only admins are allowed to do XYZ", but it turns out normal users can too!) and
-* limits ("only three books can be checked out from the library at a given time", but this was only enforced in the client-side JS!).
+* **permissions and access control** ("only admins are allowed to do XYZ", but it turns out normal users can too!) and
+* **limits** ("only three books can be checked out from the library at a given time", but this was only enforced in the client-side JS!).
 
 Most scanners don't tend to catch these, since business logic is unique to each environment. The impacts can be benign or severe. Maybe extra upvotes aren't too harmful. But a user gaining admin access is.
 
@@ -440,7 +447,7 @@ If you're interested in seeing a Business Logic Bypass story, you can read the e
 
 ## tl;dr and Takeaways
 
-- [Modern tech can still be insecure.](#1-myth-modern-tech-is-secure-and-bug-free) This is often attributed to [human factors and procedural gaps](#2-an-application-is-as-secure-as-its-weakest-link), which can be addressed by training, investment, and better management.
+- [Modern tech can still be insecure.](#1-myth-modern-tech-is-secure-and-bug-free) This can be attributed to [human factors and procedural gaps](#2-an-application-is-as-secure-as-its-weakest-link) and can be addressed by training, investment, and better management.
 - When architecting systems, consider [encapsulating components to enhance access control](#4-encapsulation-is-good-for-security).
 - [Knowledge is power; don't expose too much information.](#11-knowledge-is-power) Value your privacy. [Sometimes sacrificing convenience is essential to safeguarding your data.](#5-what-a-programmer-finds-useful-an-attacker-often-will-too)
 - All software components carry inherent risks.
