@@ -63,7 +63,7 @@ module.exports = function (eleventyConfig) {
   ));
 
   eleventyConfig.addShortcode('tag', (text, tag) => {
-    tag ??= text;
+    tag ??= text.toLowerCase();
     return `<a class="jtag" href="/tags/${tag}/">${text}</a>`;
   });
 
