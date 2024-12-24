@@ -271,7 +271,7 @@ Let's start by justifying supply chains with a common piece of advice.
 
 Reasons to roll your own auth:
 - **Customization**: Off-the-shelf solutions may not always meet your needs and requirements.
-- **Centralisation**: You want to take responsibility for your own security and not be reliant on third-party systems.
+- **Ownership**: You want to take responsibility for your own security and not be reliant on third-party systems.
 
 Reasons to ***not*** roll your own auth:
 - **Security**: Developing a secure authentication system demands a high level of understanding potential security vulnerabilities.
