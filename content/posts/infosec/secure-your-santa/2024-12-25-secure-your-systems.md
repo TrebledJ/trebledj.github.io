@@ -1,6 +1,6 @@
 ---
 title: 12 Days of Christmas – 2024 Cybersecurity Edition
-excerpt: Insights, observations, and reflections from a penetration tester on securing your ~~sh\*t~~ systems. For developers, hackers, and system administrators.
+excerpt: Insights, observations, and reflections from a penetration tester on how to better secure your ~~sh\*t~~ systems.
 tags: 
   - software-engineering
   - web
@@ -99,7 +99,7 @@ One time I came across a custom {% abbr "CMS", "Content Management System, a pla
     {
         "id": 5,
         "content": "The quick brown fox jumps over the lazy dog.",
-        "publish": false
+        "publish": true
     }
     ```
 
@@ -118,9 +118,9 @@ One time I came across a custom {% abbr "CMS", "Content Management System, a pla
     }
     ```
 
-    By design, all publishing should be done by the admin, normal users shouldn’t have rights to publish (hence, no `publish` parameter by default).
+    By design, all publishing should be done by the admin, **normal users shouldn’t have rights to publish** (hence, no `publish` parameter by default).
 
-On a whim, I copied the `"publish": true` param to `/user/post/save`.
+On a whim, I copied the `"publish": true` parameter to `/user/post/save`.
 
 ```http
 POST /api/v1/user/post/save HTTP/1.1
@@ -136,7 +136,7 @@ Content-Length: XXX
 }
 ```
 
-Oops — disaster! The post got published! It's apparent both endpoints use the same underlying logic. The `publish` parameter should have only been implemented for admins. The implications are somewhat severe, if you have user access — say an intern, a secretary, or a test account — you could bypass the usual approval process and publish something damning like “Megacorp is Filing for Bankruptcy!”.
+Oops, disaster! The post got published! It's apparent both endpoints use the same underlying logic. The `publish` parameter should have only been implemented for admins. The implications are somewhat severe, if you have user access — say an intern, a secretary, or a test account — you could bypass the usual approval process and publish something damning like “Megacorp is Filing for Bankruptcy!”.
 
 {% enddetails %}
 
@@ -289,7 +289,7 @@ To give you a taste of the complexity of auth security, here are a slew of test 
 <sup>5,427 iterations in: first try!</sup>{.caption}
 
 - Is your input properly checked and sanitised?
-- In a multi-step registration process, do you check whether the previous registration steps have completed?
+- In a multistep registration process, do you check whether the previous registration steps have completed?
 - Can your JWTs be tampered with? Is a strong key used?
 - Are your access tokens invalidated after logout? Are your refresh tokens invalidated after a refresh?
 - Do you properly hash and store your secrets?
@@ -324,7 +324,7 @@ For this site (static site generator with npm dependencies), I use a hybrid appr
 You think {% abbr "WAFs", "Web Application Firewalls" %} will protect your smelly derelict backlogged spaghetti codebase? Think again.
 
 {% details "Example: WAF did not protect against RCE.", "open" %}
-One time I was pentesting a PHP web app using an outdated web framework. I quickly discovered the version used and proceeded to execute {% abbr "RCE", "Remote Code Execution, a high-impact vulnerability class" %} exploits. Unfortunately, the WAF blocked 
+One time I was pentesting a PHP web app using an outdated web framework. I quickly discovered the framework version and proceeded to execute {% abbr "RCE", "Remote Code Execution, a high-impact vulnerability class" %} exploits available on the web. Unfortunately, the WAF blocked 
 payloads based on common keywords: `system`, `phpinfo`, `fopen`. To bypass their denylist, I could try different PHP functions... but there’s a much easier trick.
 
 Most WAFs, to enhance performance, will ignore request bodies with body lengths above a certain limit. This means we can smuggle malicious payloads in plain sight by simply adding a big fat parameter.
@@ -349,7 +349,7 @@ Content-Length: 9000
 function=system&arg=whoami&bigfatparameter=AAAAAAAA...8000+ characters...AAA
 ```
 
-The result? We were able to bypass the WAF, execute commands, noodle around the filesystem, read source code, and potentially infiltrate the company.
+The result? We were able to bypass the WAF, execute commands, noodle around the filesystem, read source code, and more.
 {% enddetails %}
 
 {% alert "success" %}
@@ -402,7 +402,7 @@ Let's address some concerns:
 
 What might a typical hacking scenario look like? With thousands of exploits and vulnerabilities out there, I have no idea where to start. So I'll start by narrowing the possibilities. What tech are you using? What libraries, frameworks, versions? If I know all this, I can narrow my search drastically.
 
-{% image "assets/enumeration-is-awesome.jpg", "jw-70", "On ExploitDB, searching for PHP exploits yields 7000+ results, whereas a more refined search for CMSimple v5 shows only 5 exploits — much more palatable!" %}
+{% image "assets/enumeration-is-awesome.jpg", "jw-85", "On ExploitDB, searching for PHP exploits yields 7000+ results, whereas a more refined search for CMSimple v5 shows only 5 exploits — much more palatable!" %}
 
 <sup>It's a lot easier to hunt for exploits when you know the target systems.</sup>{.caption}
 
