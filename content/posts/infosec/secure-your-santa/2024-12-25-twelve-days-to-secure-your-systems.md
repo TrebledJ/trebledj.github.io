@@ -57,7 +57,7 @@ A common saying in cybersecurity goes like this:
 
 This isn’t exactly true, depending on how you apply defences and controls; but it does highlight how a **single weak link compromises security**, bypassing the hard work applied elsewhere.
 
-{% image "assets/vulnerable-component.jpg", "jw-60", "TODO" %}
+{% image "assets/vulnerable-component.jpg", "jw-60", "Remember Log4Shell? Such an exciting Christmas." %}
 
 <sup>Remember [Log4Shell](https://en.wikipedia.org/wiki/Log4Shell)? Such an exciting Christmas.</sup>{.caption}
 
