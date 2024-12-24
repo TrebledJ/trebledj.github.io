@@ -368,6 +368,8 @@ Apart from buggy auth and vulnerable components, there are a few other bug class
 2. Information Disclosure (versions, file paths, error messages)
 3. Logic/Design Bugs (Business Logic, Race Conditions)
 
+These aren't the only bugs in the wild, but they're worth pointing out as I seem to encounter these in almost every application I test.
+
 ### 10. String concatenation considered dangerous /s
 
 {% image "assets/strings.jpg", "jw-60", "Strings, amirite?" %}
@@ -450,12 +452,12 @@ If you're interested in seeing a Business Logic Bypass story, you can read the e
 ## tl;dr and takeaways
 
 - [Modern tech can still be insecure.](#1-myth-modern-tech-is-secure-and-bug-free) This can be attributed to [human factors and procedural gaps](#2-an-application-is-as-secure-as-its-weakest-link) and can be addressed by training and better management. Use strong and memorable passwords. Write and automate tests.
-- When architecting systems, consider [encapsulating components to enhance access control](#4-encapsulation-is-good-for-security).
-- [Knowledge is power; don't expose too much information.](#11-knowledge-is-power) Value your privacy. [Sometimes sacrificing convenience is essential to safeguarding your data.](#5-what-a-programmer-finds-useful-an-attacker-often-will-too)
+- When architecting systems, consider [encapsulating components](#4-encapsulation-is-good-for-security) to enhance access control.
+- [Knowledge is power](#11-knowledge-is-power); don't expose too much information. Value your privacy. Sometimes [sacrificing convenience is essential](#5-what-a-programmer-finds-useful-an-attacker-often-will-too) to safeguarding your data.
 - All software components carry inherent risks.
-  - For in-house components, [understand the potential security risks and ensure thorough testing is applied](#7-dont-roll-your-own-auth).
-  - For external libraries and components, [regularly monitor for updates and patch security issues](#8-patch-your-systems).
-- [Assume breach](#6-assume-breach), apply defence-in-depth. [Don't rely on your "outer shield" to protect your internal environment.](#9-dont-solely-rely-on-wafs)
+  - For in-house components, [understand the potential security risks](#7-dont-roll-your-own-auth) and ensure thorough testing is performed.
+  - For external libraries and components, regularly monitor for updates and [patch security issues](#8-patch-your-systems).
+- [Assume breach](#6-assume-breach), apply defence-in-depth. [Don't rely on an "outer shield"](#9-dont-solely-rely-on-wafs) to protect your internal environment.
 - Pay attention to common issues which plague applications, such as [injection](#10-string-concatenation-considered-dangerous-s), [information disclosure](#11-knowledge-is-power), and [logic bugs](#12-elementary-dear-watson).
 - [Keep going and never give up.](https://www.youtube.com/watch?v=dQw4w9WgXcQ){.no-exlink}
 
