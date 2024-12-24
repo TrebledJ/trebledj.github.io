@@ -1,6 +1,6 @@
 ---
-title: 12 Days of Christmas – 2024 Cybersecurity Edition
-excerpt: Insights, observations, and reflections from a penetration tester on how to better secure your ~~sh\*t~~ systems.
+title: 12 Days of Christmas – Reflections from a Pentester
+excerpt: Secure Your ~~Sh\*tty~~ Systems, 2024 Edition
 tags: 
   - software-engineering
   - web
@@ -11,9 +11,9 @@ related:
     tags: [infosec]
 ---
 
-I've been pentesting various systems for a little more than a year, diving into a variety of web apps, mobile apps, IoT devices, desktop apps, and the occasional Active Directory network. Some were ancient projects wielding unmaintained code. Some were using popular modern tech stacks. Each software was unique, but a lot were plagued by common issues.
+Over the past year, I've been pentesting various systems, diving into a variety of web apps, mobile apps, IoT devices, desktop apps, and the occasional Active Directory network. Some were ancient projects wielding unmaintained code. Some were using popular modern tech stacks. Each software was unique, but a lot were plagued by common issues.
 
-So to end this year, I thought it would be nice to reflect on the technical shenanigans I've picked up, and to share some observations with the IT industry. In this post, I’ll present 12 observations/tips to help you secure your systems, supplemented by anecdotes from breaking terrible software. We'll go from non-technical comments to more technical bugs. (But not too technical, I promise, I'll save those for other posts.)
+So to end this year, I thought it would be nice to reflect on the technical shenanigans I've experienced, and to share some observations with the IT industry. In this post, I’ll present 12 observations/tips to help you secure your systems, supplemented by anecdotes from breaking terrible software. We'll go from non-technical comments to more technical bugs. (But not too technical, I promise, I'll save those for other posts.)
 
 1. [Humans (and processes) are the weakest link.](#humans-are-the-weakest-link)
 2. [General Comments](#general-comments)
@@ -144,7 +144,7 @@ This is just one illustration of the dangers of copy-and-paste. I’m sure there
 
 ## General comments
 
-During my pentesting experience, I observed some good and poor designs which can be generalised to wider statements about community/industry mindset. Here are my observations...
+During my pentesting experience, I observed countless poor designs, but also some well-hardened ones! Here are three such observations, generalised and applicable across the industry.
 
 ### 4. Encapsulation is good for security
 
@@ -202,7 +202,7 @@ If our `balance` was `public`, what stops programmers who use this class from ac
 
 This enhances security by restricting direct access to sensitive information and promoting a more structured software design. By encapsulating components, you hide potentially vulnerable states and separate interactions between components.
 
-Encapsulation is understood very well from a programming perspective, but less so from a software design perspective.
+Encapsulation is generally well-understood in computer programs, but less so from a systems design or software architecture perspective.
 
 Here are some interesting examples of encapsulation I've observed.
 
@@ -213,6 +213,8 @@ Here are some interesting examples of encapsulation I've observed.
     [^ot]: OT, Operational Technology, are devices which typically involve physical actuators. Some network protocols in this industry lack security and have catching up to do.
    
 2. Common in regulated industries (such as finance) is the segregation of *customer identification data*, i.e. personal information such as name, ID number, phone number, home address, and email address. These may compromise a customers' privacy if leaked. Customer data should be encapsulated in a separate database with strong encryption and access control.
+
+3. During several pentests, we discovered broken access controls simply due to public read/write access, which ideally should be disabled by default. But then again, access control was neither available nor considered at the design level, so there wasn't much to do except apply preventative/detective controls.
 
 ### 5. What a programmer finds useful, an attacker (often) will too
 
