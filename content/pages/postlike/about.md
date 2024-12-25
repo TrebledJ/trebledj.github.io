@@ -131,18 +131,9 @@ Things I'm interested in exploring:
 - Hack the Box (online CTFs + community)
 
 
-#### Board Games
-
-Ah, board games... one of my favourite pastimes. When I'm bored ~~game~~, you may find me playing the occasional game on Board Game Arena. Some of my favourite games are:
-
-- Race for the Galaxy
-- Hanabi
-- And more!
-
-
 ### Education
 
-I'm graduated from the [Hong Kong University of Science and Technology](https://hkust.edu.hk/) in May 2023, where I studied a combination of mathematics, computer science, and music. Fun times.
+I graduated from the [Hong Kong University of Science and Technology](https://hkust.edu.hk/) in May 2023, where I studied a combination of mathematics, computer science, and music. Fun times.
 
 
 {# ### Collaborating
