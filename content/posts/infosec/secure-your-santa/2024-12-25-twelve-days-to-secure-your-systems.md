@@ -1,6 +1,6 @@
 ---
 title: 12 Days of Christmas – Reflections from a Pentester
-excerpt: Secure Your ~~Sh\*tty~~ Systems, 2024 Edition
+excerpt: Secure Your Janky Systems, 2024 Edition
 tags: 
   - software-engineering
   - web
@@ -69,8 +69,8 @@ Ultimately, this comes down to humans and processes.
    - Driven by looming deadlines and milestones, devs may inadvertently overlook logical aspects, resulting in buggy software. Despite the advancements of modern technologies and AI, the human factor remains a fundamental component in software development.
 2. **Processes.** These are your workflows, CI/CD pipelines, monthly access reviews, etc.
    - Arguably, processes are also a human problem stemming from **inadequate management and supervision**. We humans are prone to forgetfulness, particularly when guidelines are communicated verbally rather than documented in writing. This underscores the significance of establishing structured processes.
-   - Absence of a **dependency management and maintenance process** allows vulnerable components to linger in your codebase like a festering wound. Unmaintained code and technical debt pile up, ever-increasing the risk of a system. Consider using an **{% abbr "SCA", "Software Component Analysis, basically a dependency analyser" %}** to automate dependency checks.
-   - Absence of **DevSecOps and security in the Software Development Lifecycle (SDLC)** increase the presence of easily exploitable vulnerabilities. These bugs, often considered low-hanging fruit, are favoured by ransomware groups seeking quick exploits. By using automated tools such as **{% abbr "SASTs", "Static App Security Testing, basically a source code scanner" %}** and **{% abbr "DASTs", "Dynamic App Security Testing, basically automates simple black-box pentests" %}**, you can identify common bugs thereby enhancing your application's security posture.
+   - Absence of a **dependency management and maintenance process** allows vulnerable components to linger in your codebase like a festering wound. Unmaintained code and technical debt pile up, ever-increasing the risk of a system. Consider using Software Component Analysis (SCA) to automate dependency checks.
+   - Absence of **DevSecOps and security in the Software Development Lifecycle (SDLC)** increase the presence of easily exploitable vulnerabilities. These bugs, often considered low-hanging fruit, are favoured by ransomware groups seeking quick exploits. By using automated tools such as Static/Dynamic Application Security Testing (SASTs and DASTs), you can identify common bugs and thus enhance your application's security posture.
    - Lack of **continuous auditing and oversight** may inadvertently lead to breaches. Don’t be surprised when your [legacy test accounts bite you in the butt](https://www.bleepingcomputer.com/news/security/microsoft-reveals-how-hackers-breached-its-exchange-online-accounts/)!
 
 You want your application secured? Invest in your talent. Review code. Improve your processes. Stay humble.
@@ -81,7 +81,7 @@ You want your application secured? Invest in your talent. Review code. Improve y
 
 <sup>*"Hi Disaster, I'm Paste! How do you do? And this is my friend Copy. We're so excited to work with you on this project and create great impact together!"*</sup>{.caption}
 
-One recurring joke among programmers is how “code is often copy and paste”. To no one’s surprise, this behaviour isn’t uncommon, but the consequences can be severe.
+One recurring joke among programmers is “code is often copy and pasted”. As it turns out, this can lead to severe consequences.
 
 {% details "Example: CMS", "open" %}
 
