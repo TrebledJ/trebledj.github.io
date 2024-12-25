@@ -94,7 +94,8 @@ blockquote {
     overflow: auto;
 
     border: none;
-    border-left: $border-width-thick solid #3642df;
+    // border-left: $border-width-thick solid #3642df;
+    border-left: $border-width-thick solid var(--accent-color);
 }
 
 html[data-theme=light] code {

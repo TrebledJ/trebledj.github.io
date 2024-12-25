@@ -4,6 +4,29 @@ title: About
 
 {% from "post/preview.html" import render_post_preview with context %}
 
+## About This Website
+
+This website breathed its first breath in summer of 2022. I had a bit of free time and wanted a place to share thoughts, music, etc. I also wanted it to be customisable; most {% abbr "mainstream CMSs", "content management systems (e.g. Weebly, Wix, Medium)" %} are limited and force my hands to be tied.
+
+You may see some posts "published" prior to 2022. Those are usually older projects or experiences which I've included for posterity. The dates there typically indicate the date the experience ended.
+
+### Optimised for Reading
+
+I strongly believe in a good, accessible reading experience. This means building content-first user experiences, optimising performance, applying responsive design, and following accessibility standards. This is why I love and incorporate elements such as Table of Contents and alerts/callouts.
+
+Readers shouldn't have to be ticked by text flowing off the screen, and they shouldn't be bombarded by ads on a sticky banner. Information deserves to be presented in a digestible format. Important points deserve to be highlighted.
+
+A number of websites these days prioritise cash flow through paywalls, subscriptions, and invasive ads, ruining user experience in the process. Sure, we have different objectives. Businesses often employ blog posts for marketing, SEO, and revenue-generating purposes. But I'm not a business, and I believe user experience comes first.
+
+Personally, I'm not against ads as long as they're non-invasive, don't ruin the reading experience, and respect privacy. I may or may not introduce ads in the future; but if I do, you can rest assured I'll carefully select an appropriate ad provider and place ads without compromising user experience.
+
+If you have any complaints, you know where to contact me. I'm open to suggestions.
+
+### Recent Site News
+
+{% set siteNews = collections.meta | head(3) | reverse %}
+<div class="post-preview-list mt-2">{% for post in siteNews %}{{ render_post_preview(post) | nl2br | brSafe | safe }}{% endfor %}</div>
+
 ## About Me
 
 {{site.author.bio}}
@@ -108,18 +131,9 @@ Things I'm interested in exploring:
 - Hack the Box (online CTFs + community)
 
 
-#### Board Games
-
-Ah, board games... one of my favourite pastimes. When I'm bored ~~game~~, you may find me playing the occasional game on Board Game Arena. Some of my favourite games are:
-
-- Race for the Galaxy
-- Hanabi
-- And more!
-
-
 ### Education
 
-I'm graduated from the [Hong Kong University of Science and Technology](https://hkust.edu.hk/) in May 2023, where I studied a combination of mathematics, computer science, and music. Fun times.
+I graduated from the [Hong Kong University of Science and Technology](https://hkust.edu.hk/) in May 2023, where I studied a combination of mathematics, computer science, and music. Fun times.
 
 
 {# ### Collaborating
@@ -134,17 +148,6 @@ I have several project ideas, the scope of which is beyond my capacity given my 
 
 If you’re interested in collaborating, hit me up. #}
 
-
-## About This Website
-
-This website breathed its first breath in summer of 2022. I had a bit of free time and wanted a place to share thoughts, music, etc. I also wanted it to be customisable; most {% abbr "mainstream CMSs", "content management systems (e.g. Weebly, Wix, Medium)" %} are limited and force my hands to be tied.
-
-You may see some posts "published" prior to 2022. Those are usually older projects or experiences which I've included for posterity. The dates there typically indicate the date the experience ended.
-
-Recent {% tag "site", "meta" %} news:
-
-{% set siteNews = collections.meta | head(3) | reverse %}
-<div class="post-preview-list mt-2">{% for post in siteNews %}{{ render_post_preview(post) | nl2br | brSafe | safe }}{% endfor %}</div>
 
 ## FAQ
 

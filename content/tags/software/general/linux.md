@@ -1,4 +1,4 @@
 ---
 ---
 
-Posts related to more Linux trickery and tomfoolery.
+Posts related to Linux trickery and tomfoolery.
