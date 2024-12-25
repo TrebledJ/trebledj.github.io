@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /stupid/
+
+Host: https://trebledj.me
+
+Sitemap: https://trebledj.me/sitemap.xml
