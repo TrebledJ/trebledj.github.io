@@ -31,16 +31,26 @@ module.exports = function (eleventyConfig) {
       if (process.env.ENVIRONMENT !== 'production')
         return null;
 
-      if (!src.endsWith('.js') ?? src.includes('third-party'))
+      if (!src.endsWith('.js') || src.endsWith('.min.js') || src.includes('/third-party/'))
         return null;
 
       return new Transform({
         transform(chunk, encoding, callback) {
-          minify(chunk.toString())
-            .then(res => {
-              callback(null, res.code);
-            });
+          this.chunks = this.chunks || [];
+          this.chunks.push(chunk.toString());
+          callback();
         },
+        flush(callback) {
+          const combined = this.chunks.join('');
+          minify(combined)
+            .then(res => {
+              this.push(res.code);
+              callback();
+            })
+            .catch(err => {
+              callback(err);
+            });
+        }
       });
     },
   });
