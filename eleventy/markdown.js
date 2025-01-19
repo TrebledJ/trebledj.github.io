@@ -12,7 +12,7 @@ function PrismAlias(target, aliases) {
   if (typeof aliases === 'string') {
     Prism.languages[aliases] = Prism.languages[target];
   } else if (Array.isArray(aliases)) {
-    aliases.map(a => {
+    aliases.forEach(a => {
       Prism.languages[a] = Prism.languages[target];
     });
   } else {

@@ -48,7 +48,7 @@ exports.default = function MarkdownItPrismAdapter(markdownit, useroptions) {
 
   // eslint-disable-next-line max-len
   // Adapted from https://github.com/markdown-it/markdown-it/blob/0fe7ccb4b7f30236fb05f623be6924961d296d3d/lib/renderer.mjs#L29
-  markdownit.renderer.rules.fence = function (tokens, idx, options, _env, slf) {
+  markdownit.renderer.rules.fence = function (tokens, idx, mdoptions, _env, slf) {
     const token = tokens[idx];
     const info = token.info ? unescapeAll(token.info).trim() : '';
     let langName;
@@ -76,10 +76,10 @@ exports.default = function MarkdownItPrismAdapter(markdownit, useroptions) {
       const tmpAttrs = token.attrs ? token.attrs.slice() : [];
 
       if (i < 0) {
-        tmpAttrs.push(['class', options.langPrefix + langName]);
+        tmpAttrs.push(['class', mdoptions.langPrefix + langName]);
       } else {
         tmpAttrs[i] = tmpAttrs[i].slice();
-        tmpAttrs[i][1] += ` ${options.langPrefix}${langName}`;
+        tmpAttrs[i][1] += ` ${mdoptions.langPrefix}${langName}`;
       }
 
       // Fake token just to render attributes
@@ -100,7 +100,7 @@ exports.default = function MarkdownItPrismAdapter(markdownit, useroptions) {
       // Some plugins such as toolbar venture into codeElement.parentElement.parentElement,
       // so we'll wrap the `pre` in an additional `div` for class purposes.
       // eslint-disable-next-line max-len
-      const result = `<div><pre${slf.renderAttrs(tmpToken)}><code class="${options.langPrefix}${langName}">${escaped}</code></pre></div>`;
+      const result = `<div><pre${slf.renderAttrs(tmpToken)}><code class="${mdoptions.langPrefix}${langName}">${escaped}</code></pre></div>`;
       const el = textToDOM(result);
       Prism.highlightElement(el.firstChild.firstChild.firstChild);
       const newResult = el.firstChild.firstChild.outerHTML;

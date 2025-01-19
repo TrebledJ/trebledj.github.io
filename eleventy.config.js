@@ -50,7 +50,7 @@ module.exports = function (eleventyConfig) {
             .catch(err => {
               callback(err);
             });
-        }
+        },
       });
     },
   });
