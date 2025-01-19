@@ -79,7 +79,7 @@
 		"entities": "^5.0.0",
 		"font-awesome": "^4.7.0",
 		"jquery": "^3.7.1",
-		"katex": "^0.16.10",
+		"katex": "^0.16.21",
 		"lunr": "^2.3.9",
 		"magnific-popup": "^1.2.0",
 		"prismjs": "^1.29.0",
