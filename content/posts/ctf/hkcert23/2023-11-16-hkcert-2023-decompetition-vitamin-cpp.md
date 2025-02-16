@@ -87,8 +87,8 @@ Let’s briefly review tries. What is a trie?
 
 Tries, or prefix trees, are data structures commonly used to efficiently store and retrieve strings. They are particularly useful for tasks like autocomplete or spell checking. The key idea behind tries is that each node in the tree represents a *prefix of a string*, and the edges represent the *characters* that can follow that prefix.
 
-{% image "https://theoryofprogramming.files.wordpress.com/2015/01/trie12.jpg", "jw-60 alpha-img", "A trie containing the words: *that*, *there*, *this*, *does*, and *did*." %}
-<sup>Example of trie containing the words *that*, *there*, *this*, *does*, and *did*. Each edge represents a letter to the next prefix. ([Source](https://theoryofprogramming.wordpress.com/2015/01/16/trie-tree-implementation/))</sup>{.caption}
+{% image "https://www.boardinfinity.com/blog/content/images/2023/02/Trie-1.png", "jw-60 alpha-img", "A trie containing the words: *and*, *ant*, *dad*, and *do*." %}
+<sup>Example of trie containing the words *and*, *ant*, *dad*, and *do*. Each edge represents a letter to the next prefix. ([Source](https://www.boardinfinity.com/blog/trie-data-structure/))</sup>{.caption}
 
 - In terms of matching an exact string, the complexity is similar to a hashmap: `O(n)` insert/search time, w.r.t. the length of the string. But a hashmap is typically faster as it requires fewer operations.
 - The power of tries comes with alphabetical ordering and prefix search (which is why they’re useful for autocomplete). Hashmaps can't do this.
