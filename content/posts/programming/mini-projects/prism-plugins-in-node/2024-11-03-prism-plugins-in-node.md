@@ -129,8 +129,10 @@ We'll reference [MarkdownIt's default fence rule](https://github.com/markdown-it
 {% alert "danger" %}
 The code presented below will override the `.renderer.rules.fence` rule completely, overwriting any previous implementations.
 
-If you use another plugin which reuses the fence rule (e.g. `markdown-it-prism`), consider calling code in this order: 1) the below code, 2) other code. This way no code is overwritten and lost.
+If you use another plugin which reuses the fence rule (e.g. `markdown-it-prism`), consider calling code in this order: 1) the below fence-override code, 2) other code. This way no code is overwritten and lost.
 {% endalert %}
+
+Here are the changes we'll make:
 
 1. Remove the default text-based highlighting `options.highlight`. We still need to escape the HTML because we'll substitute it in a HTML string.
 2. (Optional, if you want `diff` support.) Handle `diff-*` languages by loading the right language.
@@ -277,7 +279,7 @@ You can also add custom attributes with some simple CSS! For instance, I added a
 
 And here it is in action on some notes. Try viewing on both mobile and computer (or use your browser DevTools).
 
-```powershell {.command-line data-rw-prompt data-prompt="PS C:\Users\Chris>" data-output=2-100}
+```powershell {.command-line data-rw-prompt data-prompt="PS C:\Users\Bob>" data-output=2-100}
 Get-DomainTrust -domain dollarcorp.moneycorp.local
 
 SourceName      : dollarcorp.moneycorp.local
@@ -337,20 +339,20 @@ Running: LinkeDOM
 ```
 {% enddetails %}
 
-Moreover, domino has 0 dependencies — it's basically written from the ground up! JSDOM has 21 dependencies. A reduced set of dependencies reduces the attack surface of an application; and with increasing reports of supply chain attacks, it's good to limit such risks.
+Moreover, domino has 0 dependencies — it's basically written from the ground up! JSDOM has 21 dependencies. A lower number of dependencies reduces the attack surface of an application; and with increasing reports of [supply chain attacks](/posts/twelve-days-to-secure-your-systems/#software-components-and-the-supply-chain), it's good to limit such risks.
 
 ## Final Remarks
 
 I'll be the first to admit — this is a rather crude hack with some loose ends.^[It would be better to pass codeblock attributes directly to Prism without the extra stringification and parsing. Guess I'll leave this as an exercise for the front-end engineers.] But it works! Not to mention, it looks nice with enough CSS! And to some that's all that matters.
 
-For those interested in the code, you can check out the code here:
+For those interested in the code, you can check it out here:
 
 * [module](https://github.com/TrebledJ/trebledj.github.io/blob/e110c1861f566907019f4384b3eb5d7d7861ccc0/eleventy/detail/markdown-it/markdown-it-prism-adapter.js)
 * [example usage](https://github.com/TrebledJ/trebledj.github.io/blob/e110c1861f566907019f4384b3eb5d7d7861ccc0/eleventy/markdown.js#L74-L88)
 
 Just copy the module into your build and load it.
 
-Other mods:
+Here are a few other customisations to plugins I made.
 * copy-to-clipboard: [plugin](https://github.com/TrebledJ/trebledj.github.io/blob/e110c1861f566907019f4384b3eb5d7d7861ccc0/eleventy/detail/prism/prism-copy-to-clipboard.js) / [js](https://github.com/TrebledJ/trebledj.github.io/blob/e110c1861f566907019f4384b3eb5d7d7861ccc0/assets/js.bundle/common/prism-copy-to-clipboard.js) / [css](https://github.com/TrebledJ/trebledj.github.io/blob/e110c1861f566907019f4384b3eb5d7d7861ccc0/assets/css/prism/prism-custom.css)
 * line-numbers: [plugin](https://github.com/TrebledJ/trebledj.github.io/blob/e110c1861f566907019f4384b3eb5d7d7861ccc0/eleventy/detail/prism/prism-line-numbers.js) / [css](https://github.com/TrebledJ/trebledj.github.io/blob/e110c1861f566907019f4384b3eb5d7d7861ccc0/assets/css/prism/prism-line-numbers.css)
 * show-language: [plugin](https://github.com/TrebledJ/trebledj.github.io/blob/e110c1861f566907019f4384b3eb5d7d7861ccc0/eleventy/detail/prism/prism-show-language.js)
