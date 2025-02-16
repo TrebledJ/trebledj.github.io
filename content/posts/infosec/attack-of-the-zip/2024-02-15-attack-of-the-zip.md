@@ -318,7 +318,7 @@ To see why repetitive patterns facilitate compression, consider an analogy with 
 
 [^deflate]: This is the same compression algorithm used in gzip (commonly used for transferring files across the web) and PNGs.
 
-The well-known [42.zip](https://www.unforgettable.dk/) bomb is only 42KB, but contains 5 layers of zips upon zips. Unzipping the first layer yields a harmless 0.6MB. But recursively uncompressed, it yields an astronomical payload of {% abbr "4.5PB (petabytes, 15 zeros)", "4,503,599,626,321,920 bytes, to be exact" %}!
+The well-known [42.zip](https://web.archive.org/web/20250126204307/https://unforgettable.dk/) bomb is only 42KB, but contains 5 layers of zips upon zips. Unzipping the first layer yields a harmless 0.6MB. But recursively uncompressed, it yields an astronomical payload of {% abbr "4.5PB (petabytes, 15 zeros)", "4,503,599,626,321,920 bytes, to be exact" %}!
 
 Most decompression tools and virus scanners are wary of zip bombs, and only unzip the first (few) layers or stop after identifying a zip file.
  
