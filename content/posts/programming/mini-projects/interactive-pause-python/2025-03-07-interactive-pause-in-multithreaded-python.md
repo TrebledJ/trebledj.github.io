@@ -4,6 +4,7 @@ excerpt: It's like musical chairs, except SIGINT is a pause button and threads a
 tags:
   - python
   - web
+  - infosec
   - tutorial
 # thumbnail_src: assets/automating-boolean-sqli-thumbnail.png
 thumbnail_banner: true
