@@ -91,6 +91,9 @@
         text-align: center;
         line-height: $line-height-compact;
         margin-top: $space-half;
+        width: 90%;
+        margin-left: auto;
+        margin-right: auto;
     }
 
     b, strong {
@@ -214,6 +217,11 @@
     a.no-exlink::after
     {
         content: none;
+    }
+
+    a[id^="fnref"]
+    {
+        background-image: none;
     }
 }
 
