@@ -12,7 +12,7 @@ function PrismAlias(target, aliases) {
   if (typeof aliases === 'string') {
     Prism.languages[aliases] = Prism.languages[target];
   } else if (Array.isArray(aliases)) {
-    aliases.map(a => {
+    aliases.forEach(a => {
       Prism.languages[a] = Prism.languages[target];
     });
   } else {
@@ -66,7 +66,8 @@ module.exports = function (eleventyConfig) {
         // Load diff-highlight plugin after mdLib.use to avoid triggering warning.
         require('prismjs/plugins/command-line/prism-command-line');
         require('prismjs/plugins/toolbar/prism-toolbar');
-        require('prismjs/plugins/diff-highlight/prism-diff-highlight');
+        // require('prismjs/plugins/diff-highlight/prism-diff-highlight');
+        require('./detail/prism/prism-diff-highlight');
         // Load custom plugins.
         // require('prismjs/plugins/line-numbers/prism-line-numbers');
         require('./detail/prism/prism-line-numbers');

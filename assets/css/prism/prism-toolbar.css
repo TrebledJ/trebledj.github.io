@@ -27,7 +27,7 @@ div.code-toolbar > .toolbar > .toolbar-item > a,
 div.code-toolbar > .toolbar > .toolbar-item > button,
 div.code-toolbar > .toolbar > .toolbar-item > span {
 	color: var(--main-text-color);
-	font-size: .7em;
+	font-size: .8em;
 	padding: 0 .5em;
 	background-color: var(--toolbar-background-color);
 	/* box-shadow: 0 2px 0 0 rgba(0,0,0,0.2); */

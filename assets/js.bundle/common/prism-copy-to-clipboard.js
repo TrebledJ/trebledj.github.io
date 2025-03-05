@@ -98,6 +98,8 @@ document.querySelectorAll('.copy-to-clipboard-button').forEach(el => {
       for (let i = 0; i < children.length; i++) {
         if (children[i].tagName.toLowerCase() === 'pre') {
           return filterTextToCopy(children[i], children[i].textContent);
+        } else {
+          console.error("Error obtaining text, could not find PRE element.");
         }
       }
       return undefined;
@@ -122,11 +124,10 @@ document.querySelectorAll('.copy-to-clipboard-button').forEach(el => {
 const NEW_LINE_EXP = /\n(?!$)/g;
 
 function filterTextToCopy(preElement, code) {
-  // Filter out output lines.
-  // This may arise from the command-line or line-number plugins.
+  // Filter out output lines from the command-line or line-number plugins.
   const lineNumbersToSkip = preElement.getAttribute('data-output');
+  const lines = code.split(NEW_LINE_EXP);
   if (lineNumbersToSkip !== null) {
-    const lines = code.split(NEW_LINE_EXP);
     const linesNum = lines.length;
 
     lineNumbersToSkip.split(',').forEach(function (section) {
@@ -150,13 +151,30 @@ function filterTextToCopy(preElement, code) {
       }
     });
 
-    code = lines.filter(s => s !== undefined).join('\n');
+    code = lines.filter(s => s !== undefined);
   } else if (preElement.classList.contains('command-line')) {
     const nonOutputLines = preElement.querySelectorAll('.token.command');
     code = Array.prototype.slice.call(nonOutputLines)
-      .map(e => e.textContent)
-      .join('\n');
+      .map(e => e.textContent);
+  } else {
+    code = lines;
   }
+
+  // Filter out diff lines from the diff-highlight plugin.
+  let isDiffBlock = false;
+  for (let i = 0; i < preElement.classList.length; i++)
+    if (preElement.classList[i].startsWith('language-diff')) {
+      isDiffBlock = true;
+      break;
+    }
+
+  if (isDiffBlock) {
+    code = code
+      .map(line => line.startsWith('-') ? undefined : line.slice(1))
+      .filter(l => l !== undefined);
+  }
+
+  code = code.join('\n');
 
   return code;
 }

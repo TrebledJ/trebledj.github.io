@@ -43,16 +43,17 @@ a {
     text-decoration: none !important;
 
     background-image: linear-gradient(to right, currentColor, currentColor);
-    background-size: 0 0.1em;
+    background-size: .5rem 0.06em;
     background-position: 0 100%;
     background-repeat: no-repeat;
     transition: background-size $transition-duration linear;
+    cursor: pointer;
 }
 
 a:hover,
 a:focus,
 a:active {
-    background-size: 100% 0.1em;
+    background-size: 100% 0.06em;
 }
 
 a:has(> i:only-child) {
