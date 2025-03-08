@@ -6,29 +6,36 @@ tags:
   - web
   - infosec
   - tutorial
-# thumbnail_src: assets/automating-boolean-sqli-thumbnail.png
+  - pentesting
+thumbnail_src: assets/thumbnail.jpg
 thumbnail_banner: true
 ---
 
-Scanning the internet is not trivial. But Python excels at such network I/O tasks thanks to its simplicity and its vast ecosystem. Speedup is also easily achieved with built-in libraries such as concurrent.futures.
+{# 
+    .mov -> .mp4
+    ffmpeg -i demo.mov -c:v libx264 -vf format=yuv420p -movflags +faststart -q:v 0 -s 1280x720 demo.mp4
+    ffmpeg -i demo.mov -c:v libx264 -vf format=yuv420p -movflags +faststart demo.mp4
+#}
 
-When dealing with the internet, however, it’s not uncommon to encounter rate-limited endpoints and strongly firewalled sites. For penetration testing and red-teaming, opsec is also an important consideration. What does this mean for our automation? Features such as delay and interactive pause are crucial to ensuring successful execution on difficult sites.
+Scanning the internet is not trivial, but Python excels at such network I/O tasks thanks to its simplicity and its vast ecosystem of libraries. When dealing with the internet, however, it’s not uncommon to encounter rate-limited endpoints and strongly firewalled sites. For penetration testing and red-teaming, opsec is also an important consideration. This means features such as delay and interactive pause are crucial — I'd even say desirable — to ensuring success and low false positives.
 
-- **Delay** (or throttling) allows us to space out requests, to rate-limit the requests fired below the 1-thread threshold.
-- **Interactive Pause** allows the user to adapt to changing circumstances. These include situations such as sudden network congestion leading to increased response time, WAFs kicking in due to excessive requests, local network failures, and sudden drops in bandwidth. Tools such as [feroxbuster](https://github.com/epi052/feroxbuster) have interactive pause.
+- **Delay** (or throttling) allows us to rate-limit requests fired below the 1-thread threshold.
+- **Interactive Pause** allows the user to adapt to changing circumstances. These include situations such as sudden network congestion leading to increased response time, WAFs kicking in due to excessive requests, local network failures, and sudden drops in bandwidth. Tools such as [feroxbuster](https://github.com/epi052/feroxbuster) have interactive pause for runtime addition of filters and pruning of exploration paths.
 
 In this post, I’ll be sharing how delay and interactive pause can be added to multithreaded Python scripts to enhance flexibility without compromising functionality.
 
-I’ll primarily be using Python threads (via `concurrent.futures.ThreadPoolExecutor`). Pause will be initiated when the user hits Ctrl+C, which enters an interactive menu, and resumed when “c” or “continue” is entered.
+I’ll primarily be using Python threads via `concurrent.futures.ThreadPoolExecutor`. Python offers two other concurrency primitives: processes (`multiprocessing` / `ProcessPoolExecutor`) and green threads (`asyncio`). We won't discuss those today, but the gist is similar!
 
-{% image "assets/interactive-pause-plan.png", "jw-70 alpha-imgv", "Diagram of UI flow when pausing and resuming." %}
+Our objective is to pause the script when the user hits Ctrl+C, enter an interactive menu, then resume when “c” or “continue” is entered. We'll accomplish this with Python's pre-packaged `threading.Event` and `signal` libraries.
 
-<sup>Note: the first green box extends slightly to the right, because requests may still be waiting to be completed even after Ctrl+C is hit.</sup>
+{% image "assets/interactive-pause-plan.png", "jw-80 alpha-imgv", "Diagram of UI flow when pausing and resuming." %}
+
+<sup>Note: the first ***"Running"*** box extends slightly to the right, because threads may still be working even after Ctrl+C is hit. For instance, waiting for a response from an HTTP server.</sup>
 {.caption}
 
 ## A Tale of Two Scripts
 
-To demonstrate the changes, I'll present two scripts, a "before" and "after", then I'll highlight their differences.
+To best demonstrate the addition of our desired features, I'll be presenting two scripts, a "before" and "after". I'll then highlight and explain the changes.
 
 1. The "before" is a very basic multithreading script. No delay and pause.
 2. The "after" is a robust working example of multithreading with delay and pause.
@@ -46,12 +53,11 @@ from time import sleep
 
 
 def thread_do_stuff():
-    sleep(3) # Simulate an IO task, e.g. requests.get().
+    sleep(3)
 
 def thread_function(i):
     print(f"[thread] task started {i}")
-    thread_do_stuff()
-    print(f"[thread] task finished {i}")
+    thread_do_stuff() # Simulate an IO task, e.g. requests.get().
 
 def main():
     # Start an executor with 2 threads and 10 tasks.
@@ -81,13 +87,12 @@ if __name__ == '__main__':
 
 ### After
 
-{# TODO: re-record demo2 with: print statement "task {i} waiting" before event.wait() instead of "task finished" #}
 {% video "assets/demo2.mp4", "jw-80" %}
 
-<sup>Similar to the previous script, but includes a small delay between tasks and two interactive pauses. The first pause occurs while the worker threads are *running `event.wait()`*, instantly responding with "Interrupt detected". The second pause occurs while they are *working*, meaning they won't detect the interrupt until the next task.</sup>
+<sup>Similar to the previous script, but includes a small delay between tasks and two interactive pauses. The first pause occurs while the worker threads are *running `event.wait()`*, instantly responding with "Interrupt detected". The second pause occurs while they are *working* (which we assume is some blocking operation, like `requests.get()`), and the interrupt won't be detected until the next task.</sup>
 {.caption}
 
-```diff-python { data-label=mt_with_delay_and_pause.py  data-diff-add=2-3,7-39,43,46,51-66,76-80,93-112 }
+```diff-python { data-label=mt_with_delay_and_pause.py  data-diff-add=2-3,7-37,43-44,48-62,73-77,90-109 }
 import concurrent.futures
 import signal
 from threading import Event
@@ -125,18 +130,15 @@ def thread_delay(sec):
             raise RuntimeError('interrupt')
         else:
             print('[thread] Resuming...')
-            pass
 
 def thread_do_stuff():
-    sleep(3) # Simulate an IO task, e.g. requests.get().
-
-DELAY_SEC = 1
+    sleep(3)
 
 def thread_function(i):
-    thread_delay(DELAY_SEC) # Delay between tasks using threading.Event.
+    print(f"[thread] task waiting {i}")
+    thread_delay(1) # Delay between tasks using threading.Event.
     print(f"[thread] task started {i}")
-    thread_do_stuff()
-    print(f"[thread] task finished {i}")
+    thread_do_stuff() # Simulate an IO task, e.g. requests.get().
 
 # A simple interactive menu to display during the paused state!
 # Return True -> continue program. Return False -> quit.
@@ -374,39 +376,9 @@ def main_pause_menu():
             return False
 ```
 
-### Bonus: rich.progress Consideration
-
-If you're using `rich.progress` to liven up your UI, you may find the live progress bar conflicts with our custom pause menu. To disable the live progress, you can manually adjust the class members before entering the pause menu in `main()`:
-
-```python
-# Disable live progress.
-# prog is an instance of rich.progress.Progress.
-prog.update(prog.task_ids[0], visible=False, refresh=True)
-prog.disable = True
-prog.live.auto_refresh = False
-is_interactive = prog.live.console.is_interactive
-prog.live.console.is_interactive = False
-
-cont = main_pause_menu()
-# -- snip --
-resume_evt.set()
-
-# Re-enable live progress...
-prog.live.console.is_interactive = is_interactive
-prog.live.auto_refresh = True
-prog.disable = False
-prog.update(prog.task_ids[0], visible=True, refresh=True)
-
-# --
-if cont:
-    break
-```
-
-This is very hacky, because the properties aren't documented and could potentially change, but it works pretty well.
-
 ## Conclusion
 
-To show ~~off~~ how nice this looks in an interactive tool, here's a short clip where I integrated the techniques here into my [nifty little SQL injection automation](https://github.com/TrebledJ/bsqli.py) (for ethical hacking purposes).
+To show ~~off~~ this potential in an interactive tool, here's a short clip where I integrated the techniques here into my [nifty little SQL injection automation](https://github.com/TrebledJ/bsqli.py) (for ethical hacking purposes).
 
 {% video "assets/demo3.mp4", "jw-100" %}
 
@@ -442,7 +414,36 @@ This post demonstrated how to add interactive pausing to your multithreaded Pyth
 
 ## Appendix
 
-### Appendix A: Handling Future Results
+### Appendix A: Bonus - rich.progress
+
+If you're using `rich.progress` to liven up your UI, you may find the live progress bar conflicts with our custom pause menu. To disable the live progress, you can manually adjust the class members before entering the pause menu in `main()`:
+
+```python { data-diff-add=1-7,13-17 }
+# Disable live progress.
+# prog is an instance of rich.progress.Progress.
+prog.update(prog.task_ids[0], visible=False, refresh=True)
+prog.disable = True
+prog.live.auto_refresh = False
+is_interactive = prog.live.console.is_interactive
+prog.live.console.is_interactive = False
+
+cont = main_pause_menu()
+# -- snip --
+resume_evt.set()
+
+# Re-enable live progress...
+prog.live.console.is_interactive = is_interactive
+prog.live.auto_refresh = True
+prog.disable = False
+prog.update(prog.task_ids[0], visible=True, refresh=True)
+
+if cont:
+    break
+```
+
+This is very hacky, because the properties aren't documented and could potentially change, but it works pretty well.
+
+### Appendix B: Handling Future Results
 
 AFAIK, there are three main ways of handling future results from `concurrent.futures`. Keep in mind some approaches may be better for your script.
 
