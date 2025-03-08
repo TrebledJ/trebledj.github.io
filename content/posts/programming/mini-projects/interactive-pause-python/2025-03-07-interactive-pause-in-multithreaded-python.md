@@ -380,16 +380,6 @@ To show ~~off~~ this potential in an interactive tool, here's a short clip where
 <sup>On the left panel, we seamlessly execute various commands, pausing twice with Ctrl+C, with the option of configuring the delay, timeout, and log level.</sup>
 {.caption}
 
-### tl;dr
-
-- Use `threading.Event` to synchronise events (e.g. pause) and sleep.
-    - Use three events: one to signal pause, one to signal resume, and one to indicate resume or quit.
-    - Write a `delay()` function which calls `pause_event.wait(SLEEP_SEC)`.
-- Use `signal.signal` to customise Ctrl+C (which triggers SIGINT). The handler should call `pause_event.set()`.
-- Adjust the environment before and after the pause menu, such as temporarily restoring Python's SIGINT handler and disabling `rich`'s live progress bars.
-
-### Further Tasks
-
 This post demonstrated how to add interactive pausing to your multithreaded Python script with zero additional dependencies. Despite the simplicity, there are a few other things to explore that we haven't discussed:
 
 - **Pausing with processes or asyncio.** Each of these has their own Event objects. Processes have [`multiprocessing.Event`](https://docs.python.org/3/library/multiprocessing.html#multiprocessing.Event). asyncio has [asyncio.Event](https://docs.python.org/3/library/asyncio-sync.html#event). These are worth exploring, if your script uses either of those.
@@ -398,6 +388,15 @@ This post demonstrated how to add interactive pausing to your multithreaded Pyth
     - What if the user presses Ctrl+C? SIGINT (and signals, in general) are [always executed in the main thread](https://docs.python.org/3/library/signal.html).
     - What if the processing finishes without the user entering input? The thread receiving input would need to be killed.
 - **Off-by-One Delay.** Currently, our execution is **delay** → **work** → **delay** → **work**, but the first delay isn't actually needed. This should be fairly trivial to fix, but I decided to leave it out from the example to avoid overcomplication. Exercise for the reader and all that.
+
+
+### tl;dr
+
+- Use `threading.Event` to synchronise events (e.g. pause) and sleep.
+    - Use three events: one to signal pause, one to signal resume, and one to indicate resume or quit.
+    - Write a `delay()` function which calls `pause_event.wait(SLEEP_SEC)`.
+- Use `signal.signal` to customise Ctrl+C (which triggers SIGINT). The handler should call `pause_event.set()`.
+- Adjust the environment before and after the pause menu, such as temporarily restoring Python's SIGINT handler.
 
 ### References
 
