@@ -76,12 +76,12 @@ html[data-theme="light"] .hero-section {
                 overflow: hidden;
             }
             .post-title {
-                line-clamp: 2;
-                -webkit-line-clamp: 2;
+                line-clamp: 3;
+                -webkit-line-clamp: 3;
             }
             .post-summary p {
-                line-clamp: 1;
-                -webkit-line-clamp: 1;
+                line-clamp: 3;
+                -webkit-line-clamp: 3;
             }
             
             @include media-breakpoint-down(sm) {
@@ -90,8 +90,8 @@ html[data-theme="light"] .hero-section {
                     -webkit-line-clamp: 4;
                 }
                 .post-summary p {
-                    line-clamp: 2;
-                    -webkit-line-clamp: 2;
+                    line-clamp: 3;
+                    -webkit-line-clamp: 3;
                 }
                 .metadata-container {
                     display: none !important;
