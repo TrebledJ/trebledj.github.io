@@ -1,5 +1,5 @@
 ---
-title: "Digital Audio Synthesis for Dummies: Part 1"
+title: "Digital Audio Synthesis for Dummies: Part&nbsp;1"
 excerpt: An introductory discourse on audio processing. What makes audio tick?
 updated: '2023-03-09'
 tags:

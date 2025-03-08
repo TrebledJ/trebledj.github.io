@@ -17,7 +17,7 @@ eleventyExcludeFromCollections: true
     {% if post.data.permalink %}
       {% set absolutePostUrl = post.url | absoluteUrl(site.url) %}
       <entry>
-        <title>{{ post.data.title | stripBetweenTags(['sup', 'sub']) | striptags }}</title>
+        <title>{{ post.data.safeTitle }}</title>
         <description>{{ post.data.excerpt }}</description>
         <link href="{{ absolutePostUrl }}"/>
         <updated>{{ post.date | dateToRfc3339 }}</updated>

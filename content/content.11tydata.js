@@ -1,4 +1,5 @@
 const { getGitCommitDate } = require('../eleventy/detail/git-commit-date');
+const { stripBetweenTags } = require('../eleventy/detail/helpers');
 
 module.exports = {
   // Defaults.
@@ -30,5 +31,15 @@ module.exports = {
       // Posts will default to their own date or updated date.
       return undefined;
     },
-  },
+
+    safeTitle: data => {
+      if (!data.title) return data.title;
+      // No &nbsp, no tags, good for attributes, etc.
+      let title = data.title.replace('&nbsp;', ' ');
+      title = stripBetweenTags(title, ['sub', 'sup', 's']);
+      const HTML_TAG = /<\/?(?!\d)[^\s>\/=$<%]+(?:\s(?:\s*[^\s>\/=]+(?:\s*=\s*(?:"[^"]*"|'[^']*'|[^\s'">=]+(?=[\s>]))|(?=[\s/>])))+)?\s*\/?>/g;
+      title = title.replace(HTML_TAG, '');
+      return title;
+    },
+  }
 };

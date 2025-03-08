@@ -1,5 +1,5 @@
 ---
-title: Interactive Pause in Multi-Threaded Python with Zero Additional Dependencies
+title: Interactive Pause in Multi-Threaded, Vanilla Python
 excerpt: It's like musical chairs, except SIGINT is a pause button and threads are running around! (And nobody gets left behind.)
 tags:
   - python
