@@ -9,6 +9,7 @@ tags:
   - project
   - writeup
   - tutorial
+  - pentesting
 thumbnail_src: assets/automating-boolean-sqli-thumbnail.png
 thumbnail_banner: true
 preamble: |
