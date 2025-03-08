@@ -413,10 +413,13 @@ d-r--        10/14/2015   5:06 PM            Videos
 
 #### Code: `diff-highlight`
 
+TODO: overflowing text in diff codeblock has no padding on right.
+
 ```diff-js
 +function myFunction() {
    // …
 -  return true;
++  return "superlongstringasdlfjaksljdfklasjdasdlfnakldsjfkladjslfkjalkdfjlakjdlkfjadlkjflkadjfljalkdjfaljdlkj";
  }
 ```
 

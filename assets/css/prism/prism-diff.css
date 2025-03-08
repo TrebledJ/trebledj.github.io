@@ -55,10 +55,12 @@ html[data-theme=light] .token.inserted {
 
 /* More whitespace between +/- and start of line. */
 .token.prefix {
+	margin-left: 3px;
 	margin-right: 3px;
 }
 
 /* Required for full-width diff highlight lines. */
 pre[class*="language-diff-"] code {
-	display: inline-block;
+	display: inline-grid; /* ??? */
+	width: 100%;
 }

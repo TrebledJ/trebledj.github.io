@@ -42,11 +42,30 @@
 		}
 	}
 
+	function updateToLanguageDiffClass(element) {
+		var match;
+		for (var i = 0; i < element.classList.length; i++)
+			if (match = /^language-(.*)/g.exec(element.classList[i])) {
+				element.classList.remove(element.classList[i]);
+				element.classList.add('language-diff-' + match[1]);
+				return;
+			}
+		console.warn("Unable to find language-* class to update to language-diff-*.");
+	}
+
 
 	Prism.hooks.add('before-sanity-check', function (env) {
-		var lang = env.language;
 		var pre = env.element.parentElement;
 		if (pre.getAttribute('data-diff-add') || pre.getAttribute('data-diff-del')) {
+			if (!LANGUAGE_REGEX.test(env.language)) {
+				// Did not specify `diff-` in language. Auto add now.
+				env.language = 'diff-' + env.language;
+				env.grammar = undefined; // reset
+				
+				// Replace element class. // BUG: the old language-xxx classes are still rendered. This doesn't affect functionality, but we should investigate why all the same.
+				updateToLanguageDiffClass(env.element);
+				updateToLanguageDiffClass(env.element.parentElement);
+			}
 			var lines = env.code.split(NEW_LINE_EXP);
 			const added = new Set();
 			iterLineParam(lines, pre.getAttribute('data-diff-add'), (i) => {
@@ -66,6 +85,8 @@
 			}
 			env.code = lines.join('\n');
 		}
+
+		var lang = env.language;
 		if (LANGUAGE_REGEX.test(lang) && !env.grammar) {
 			env.grammar = Prism.languages[lang] = Prism.languages.diff;
 		}
