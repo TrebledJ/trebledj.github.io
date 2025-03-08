@@ -3,9 +3,8 @@ title: Interactive Pause in Multi-Threaded, Vanilla Python
 excerpt: It's like musical chairs, except SIGINT is a pause button and threads are running around! (And nobody gets left behind.)
 tags:
   - python
-  - web
-  - infosec
   - tutorial
+  - infosec
   - pentesting
 thumbnail_src: assets/thumbnail.jpg
 thumbnail_banner: true
@@ -389,6 +388,7 @@ This post demonstrated how to add interactive pausing to your multithreaded Pyth
     - What if the processing finishes without the user entering input? The thread receiving input would need to be killed.
 - **Off-by-One Delay.** Currently, our execution is **delay** → **work** → **delay** → **work**, but the first delay isn't actually needed. This should be fairly trivial to fix, but I decided to leave it out from the example to avoid overcomplication. Exercise for the reader and all that.
 
+<a id="logical-end-of-article"></a>
 
 ### tl;dr
 
