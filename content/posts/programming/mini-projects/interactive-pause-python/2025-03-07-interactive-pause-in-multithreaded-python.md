@@ -9,13 +9,8 @@ tags:
   - pentesting
 thumbnail_src: assets/thumbnail.jpg
 thumbnail_banner: true
+keywords: [threading, Event, threading.Event, signal, asyncio, multiprocessing, multithreading, concurrent.futures, ThreadPoolExecutor, ProcessPoolExecutor, pause, pausing, sleep, delay]
 ---
-
-{# 
-    .mov -> .mp4
-    ffmpeg -i demo.mov -c:v libx264 -vf format=yuv420p -movflags +faststart -q:v 0 -s 1280x720 demo.mp4
-    ffmpeg -i demo.mov -c:v libx264 -vf format=yuv420p -movflags +faststart demo.mp4
-#}
 
 Scanning the internet is not trivial, but Python excels at such network I/O tasks thanks to its simplicity and its vast ecosystem of libraries. When dealing with the internet, however, it’s not uncommon to encounter rate-limited endpoints and strongly firewalled sites. For penetration testing and red-teaming, opsec is also an important consideration. This means features such as delay and interactive pause are crucial — I'd even say desirable — to ensuring success and low false positives.
 
@@ -26,7 +21,7 @@ In this post, I’ll be sharing how delay and interactive pause can be added to 
 
 I’ll primarily be using Python threads via `concurrent.futures.ThreadPoolExecutor`. Python offers two other concurrency primitives: processes (`multiprocessing` / `ProcessPoolExecutor`) and green threads (`asyncio`). We won't discuss those today, but the gist is similar!
 
-Our objective is to pause the script when the user hits Ctrl+C, enter an interactive menu, then resume when “c” or “continue” is entered. We'll accomplish this with Python's pre-packaged `threading.Event` and `signal` libraries.
+Our objective is to pause the script when the user hits Ctrl+C, enter an interactive menu, then resume when “c” or “continue” is entered. We'll accomplish this with Python's pre-packaged `threading.Event` and `signal` libraries. (No additional dependencies!)
 
 {% image "assets/interactive-pause-plan.png", "jw-80 alpha-imgv", "Diagram of UI flow when pausing and resuming." %}
 
