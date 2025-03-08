@@ -13,6 +13,7 @@
 	var warningLogged = false;
 
 	const NEW_LINE_EXP = /\n(?!$)/g;
+
 	function iterLineParam(lines, lineNos, callback) {
 		if (!lineNos) return;
 		// Iterates over a line parameter, e.g. 1-4,5,8-10, and runs callback(i) for each line.
@@ -56,34 +57,60 @@
 
 	Prism.hooks.add('before-sanity-check', function (env) {
 		var pre = env.element.parentElement;
-		if (pre.getAttribute('data-diff-add') || pre.getAttribute('data-diff-del')) {
+		var resetEnv = false;
+		if (pre.getAttribute('data-diff') !== null) {
+			resetEnv = true;
+
+			// Auto-parse add/del lines.
+			const lines = env.code.split(NEW_LINE_EXP);
+			const newLines = [];
+			var add = 0; // +1 => add, -1 => del
+			for (const line of lines) {
+				if (line.includes("+++++")) {
+					add = add > 0 ? 0 : 1;
+				} else if (line.includes("-----")) {
+					add = add < 0 ? 0 : -1;
+				} else {
+					const prefix = (add > 0 ? '+' : add < 0 ? '-' : ' ');
+					newLines.push(prefix + line);
+				}
+			}
+
+			env.code = newLines.join('\n');
+		}
+		//  else if (pre.getAttribute('data-diff-add') || pre.getAttribute('data-diff-del')) {
+		// 	resetEnv = true;
+			
+		// 	var lines = env.code.split(NEW_LINE_EXP);
+		// 	const added = new Set();
+		// 	iterLineParam(lines, pre.getAttribute('data-diff-add'), (i) => {
+		// 		lines[i] = '+' + lines[i];
+		// 		added.add(i);
+		// 	});
+		// 	iterLineParam(lines, pre.getAttribute('data-diff-del'), (i) => {
+		// 		if (!added.has(i)) {
+		// 			lines[i] = '-' + lines[i];
+		// 			added.add(i);
+		// 		}
+		// 	});
+		// 	for (var i = 0; i < lines.length; i++) {
+		// 		if (!added.has(i)) {
+		// 			lines[i] = ' ' + lines[i];
+		// 		}
+		// 	}
+		// 	env.code = lines.join('\n');
+		// }
+
+		if (resetEnv) {
 			if (!LANGUAGE_REGEX.test(env.language)) {
 				// Did not specify `diff-` in language. Auto add now.
 				env.language = 'diff-' + env.language;
-				env.grammar = undefined; // reset
+				env.grammar = undefined;
 				
 				// Replace element class. // BUG: the old language-xxx classes are still rendered. This doesn't affect functionality, but we should investigate why all the same.
 				updateToLanguageDiffClass(env.element);
 				updateToLanguageDiffClass(env.element.parentElement);
 			}
-			var lines = env.code.split(NEW_LINE_EXP);
-			const added = new Set();
-			iterLineParam(lines, pre.getAttribute('data-diff-add'), (i) => {
-				lines[i] = '+' + lines[i];
-				added.add(i);
-			});
-			iterLineParam(lines, pre.getAttribute('data-diff-del'), (i) => {
-				if (!added.has(i)) {
-					lines[i] = '-' + lines[i];
-					added.add(i);
-				}
-			});
-			for (var i = 0; i < lines.length; i++) {
-				if (!added.has(i)) {
-					lines[i] = ' ' + lines[i];
-				}
-			}
-			env.code = lines.join('\n');
 		}
 
 		var lang = env.language;

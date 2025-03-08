@@ -86,13 +86,15 @@ if __name__ == '__main__':
 <sup>Similar to the previous script, but includes a small delay between tasks and two interactive pauses. The first pause occurs while the worker threads are *running `event.wait()`*, instantly responding with "Interrupt detected". The second pause occurs while they are *working* (which we assume is some blocking operation, like `requests.get()`), and the interrupt won't be detected until the next task.</sup>
 {.caption}
 
-```diff-python { data-label=mt_with_delay_and_pause.py  data-diff-add=2-3,7-37,43-44,48-62,73-77,90-109 }
+```python { data-label=mt_with_delay_and_pause.py  data-diff }
 import concurrent.futures
+# +++++
 import signal
 from threading import Event
+# +++++
 from time import sleep
 
-
+# +++++
 # Create global events which will be used across main and worker threads.
 pause_evt = Event()
 resume_evt = Event()
@@ -124,16 +126,20 @@ def thread_delay(sec):
             raise RuntimeError('interrupt')
         else:
             print('[thread] Resuming...')
+# +++++
 
 def thread_do_stuff():
     sleep(3)
 
 def thread_function(i):
+    # +++++
     print(f"[thread] task waiting {i}")
     thread_delay(1) # Delay between tasks using threading.Event.
+    # +++++
     print(f"[thread] task started {i}")
     thread_do_stuff() # Simulate an IO task, e.g. requests.get().
 
+# +++++
 # A simple interactive menu to display during the paused state!
 # Return True -> continue program. Return False -> quit.
 def main_pause_menu():
@@ -149,6 +155,7 @@ def main_pause_menu():
             return True
         elif x == 'n':
             return False
+# +++++
 
 def main():
     # Start an executor with 2 threads and 8 tasks.
@@ -159,11 +166,13 @@ def main():
             not_done.append(f)
         
         while True:
+            # +++++
             enable_custom_signal()
             while not pause_evt.is_set():
                 # Process results while waiting. The processing shouldn't take
                 # too long in order for the pause menu to show responsively
                 # after Ctrl+C is hit.
+                # +++++
                 done, not_done = concurrent.futures.wait(not_done, timeout=0.1)
                 for future in done:
                     # Handle thread result.
@@ -176,6 +185,7 @@ def main():
                     print('[main] Finished all tasks!')
                     return
 
+            # +++++
             print('[main] Triggered interrupt.')
             enable_py_signal()
             
@@ -196,6 +206,7 @@ def main():
             resume_evt.set() # Signal remaining threads to resume (and possibly quit).
             if not cont:
                 break
+            # +++++
 
 if __name__ == '__main__':
     main()
@@ -412,7 +423,8 @@ This post demonstrated how to add interactive pausing to your multithreaded Pyth
 
 If you're using `rich.progress` to liven up your UI, you may find the live progress bar conflicts with our custom pause menu. To disable the live progress, you can manually adjust the class members before entering the pause menu in `main()`:
 
-```python { data-diff-add=1-7,13-17 }
+```python { data-diff }
+# +++++
 # Disable live progress.
 # prog is an instance of rich.progress.Progress.
 prog.update(prog.task_ids[0], visible=False, refresh=True)
@@ -420,16 +432,19 @@ prog.disable = True
 prog.live.auto_refresh = False
 is_interactive = prog.live.console.is_interactive
 prog.live.console.is_interactive = False
+# +++++
 
 cont = main_pause_menu()
 # -- snip --
 resume_evt.set()
 
+# +++++
 # Re-enable live progress...
 prog.live.console.is_interactive = is_interactive
 prog.live.auto_refresh = True
 prog.disable = False
 prog.update(prog.task_ids[0], visible=True, refresh=True)
+# +++++
 
 if cont:
     break

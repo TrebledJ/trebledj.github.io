@@ -247,8 +247,8 @@ void mix(char cmix)
 Now if you run this through the compiler diff, it should respond with some lines:
 
 ```diff-asm
-- call    _ZSt3getILm0EKcP8TrieNodeERNSt13tuple_elementIXT_ESt4pairIT0_T1_EE4typeERS7_
-+ call    _ZSt3getILm0EKcP8TrieNodeERKNSt13tuple_elementIXT_ESt4pairIT0_T1_EE4typeERKS7_
+-call    _ZSt3getILm0EKcP8TrieNodeERNSt13tuple_elementIXT_ESt4pairIT0_T1_EE4typeERS7_
++call    _ZSt3getILm0EKcP8TrieNodeERKNSt13tuple_elementIXT_ESt4pairIT0_T1_EE4typeERKS7_
 ```
 
 Subtle. But there is a good reason why this occurs.
@@ -443,14 +443,17 @@ Our code is compiled with C++17—what an oddly specific standard!
 
 One cool feature introduced by this standard is **structured bindings**, which is as close as we can get to Python iterable unpacking.
 
-```diff-cpp
-  for (auto it = next_node.begin(); it != next_node.end(); ++it) {
--     auto pair = *it;
--     char ch = std::get<0>(pair);
--     TrieNode* node = std::get<1>(pair);
-+     auto [ch, node] = *it;
-      new_map[ch ^ cmix] = node;
-  }
+```cpp
+for (auto it = next_node.begin(); it != next_node.end(); ++it) {
+	// -----
+    auto pair = *it;
+    char ch = std::get<0>(pair);
+    TrieNode* node = std::get<1>(pair);
+	// +++++
+    auto [ch, node] = *it;
+	// +++++
+    new_map[ch ^ cmix] = node;
+}
 ```
 
 Since `it` is an iterator over key-value pairs, we can dereference, then bind (unpack) the pair to `ch` and `node`.
@@ -479,15 +482,21 @@ N.B. With optimisations, these indicators would be less obvious. Thankfully the 
 
 We're still short of our target though. Some diff lines stand out:
 
-```diff-asm
-   ; Extra stack variables!
--  sub     rsp, 0xc8
--  mov     [rbp-0xc8], rdi
-+  sub     rsp, 0xb8
-+  mov     [rbp-0xb8], rdi
-   ; Calling the wrong overload!
--  call    _ZSt3getILm0EKcP8TrieNodeERNSt13tuple_elementIXT_ESt4pairIT0_T1_EE4typeERS7_
-+  call    _ZSt3getILm0EKcP8TrieNodeERKNSt13tuple_elementIXT_ESt4pairIT0_T1_EE4typeERKS7_
+```diff-asm {data-diff}
+; Extra stack variables!
+; -----
+sub     rsp, 0xc8
+mov     [rbp-0xc8], rdi
+; +++++
+sub     rsp, 0xb8
+mov     [rbp-0xb8], rdi
+; +++++
+; Calling the wrong overload!
+; -----
+call    _ZSt3getILm0EKcP8TrieNodeERNSt13tuple_elementIXT_ESt4pairIT0_T1_EE4typeERS7_
+; +++++
+call    _ZSt3getILm0EKcP8TrieNodeERKNSt13tuple_elementIXT_ESt4pairIT0_T1_EE4typeERKS7_
+; +++++
 ```
 <sup>Extracted diff lines from compiler.py output. Red (-) indicates extra lines in our program. Green (+) indicates missing lines.</sup>{.caption}
 
@@ -496,18 +505,21 @@ We're still short of our target though. Some diff lines stand out:
 	- Larger subtraction = more stack memory allocated.
 2. It also looks like we called the wrong overload. The mangled names — simplified for readability — translate to:
 	```diff-cpp
-	- std::get<0>(std::pair<char, TrieNode*>&)
-    + std::get<0>(std::pair<char, TrieNode*> const&)
+	-std::get<0>(std::pair<char, TrieNode*>&)
+    +std::get<0>(std::pair<char, TrieNode*> const&)
 	```
 
 We can fix both these issues by qualifying our binding as `const&`.
 
-```diff-cpp
-  for (auto it = next_node.begin(); it != next_node.end(); ++it) {
--     auto [ch, node] = *it;
-+     const auto& [ch, node] = *it;
-      new_map[ch ^ cmix] = node;
-  }
+```cpp { data-diff }
+for (auto it = next_node.begin(); it != next_node.end(); ++it) {
+	// -----
+    auto [ch, node] = *it;
+	// +++++
+    const auto& [ch, node] = *it;
+	// +++++
+    new_map[ch ^ cmix] = node;
+}
 ```
 
 With `auto`, our binding was creating new `char` and `TrieNode*` copies. (Hence, the extra 16 bytes.) With `const auto&`, we take a constant reference.
@@ -522,12 +534,15 @@ Using const-refs is good practice for maintainability and performance (imagine c
 The astute may notice the above can be refactored slightly with the help of range-based `for`-loops. These were introduced in C++11, and are like Python `for`-`in` loops, but less powerful.
 
 {% details "Example" %}
-```diff-cpp
-- for (auto it = next_node.begin(); it != next_node.end(); ++it) {
--     const auto& [ch, node] = *it;
-+ for (const auto& [ch, node] : next_node) {
-      new_map[ch ^ cmix] = node;
-  }
+```cpp { data-diff }
+// -----
+for (auto it = next_node.begin(); it != next_node.end(); ++it) {
+    const auto& [ch, node] = *it;
+// +++++
+for (const auto& [ch, node] : next_node) {
+    // +++++
+    new_map[ch ^ cmix] = node;
+}
 ```
 
 {% enddetails %}

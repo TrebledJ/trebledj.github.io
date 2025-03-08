@@ -141,81 +141,96 @@ Here are the changes we'll make:
 
 The most important part is step 3, where we call Prism magic with `.highlightElement`.
 
-```diff-js
- markdownit.renderer.rules.fence = function (tokens, idx, options, _env, slf) {
-   ...
-+  const result = `<div><pre${preAttrs}><code class="${codeClasses}">${escaped}</code></pre></div>`
-+  const el = textToDOM(result)
-+  Prism.highlightElement(el.firstChild.firstChild.firstChild)
-+  return el.firstChild.firstChild.outerHTML
-   ...
- }
+```js { data-diff }
+markdownit.renderer.rules.fence = function (tokens, idx, options, _env, slf) {
+  ...
+  // +++++
+  const result = `<div><pre${preAttrs}><code class="${codeClasses}">${escaped}</code></pre></div>`
+  const el = textToDOM(result)
+  Prism.highlightElement(el.firstChild.firstChild.firstChild)
+  return el.firstChild.firstChild.outerHTML
+  // +++++
+  ...
+}
 ```
 
 {% details "See Full Changes" %}
-```diff-js
- markdownit.renderer.rules.fence = function (tokens, idx, options, _env, slf) {
-   const token = tokens[idx];
-   const info = token.info ? unescapeAll(token.info).trim() : '';
-   ...
+```js { data-diff }
+markdownit.renderer.rules.fence = function (tokens, idx, options, _env, slf) {
+  const token = tokens[idx];
+  const info = token.info ? unescapeAll(token.info).trim() : '';
+  ...
 
--  let highlighted
--  if (options.highlight) {
--    highlighted = options.highlight(token.content, langName, langAttrs) || escapeHtml(token.content)
--  } else {
--    highlighted = escapeHtml(token.content)
--  }
-+  const escaped = escapeHtml(token.content) // 1
+  // -----
+  let highlighted
+  if (options.highlight) {
+    highlighted = options.highlight(token.content, langName, langAttrs) || escapeHtml(token.content)
+  } else {
+    highlighted = escapeHtml(token.content)
+  }
+  // +++++
+  const escaped = escapeHtml(token.content) // 1
+  // +++++
 
--  if (highlighted.indexOf('<pre') === 0) {
--    return highlighted + '\n'
--  }
+  // -----
+  if (highlighted.indexOf('<pre') === 0) {
+    return highlighted + '\n'
+  }
+  // -----
 
-   // If language exists, inject class gently, without modifying original token.
-   // May be, one day we will add .deepClone() for token and simplify this part, but
-   // now we prefer to keep things local.
-   if (info) {
-     const i = token.attrIndex('class')
-     const tmpAttrs = token.attrs ? token.attrs.slice() : []
-     
-     if (i < 0) {
-       tmpAttrs.push(['class', options.langPrefix + langName])
-     } else {
-       tmpAttrs[i] = tmpAttrs[i].slice()
-       tmpAttrs[i][1] += ' ' + options.langPrefix + langName
-     }
-       
-     // Fake token just to render attributes
-     const tmpToken = {
-       attrs: tmpAttrs
-     }
-
-+    // Make sure language is loaded. // 2
-+    if (langName.startsWith('diff-')) {
-+      const diffRemovedRawName = langName.substring('diff-'.length)
-+      if (!Prism.languages[diffRemovedRawName])
-+        PrismLoad([diffRemovedRawName])
-+    } else {
-+      if (!Prism.languages[langName])
-+        PrismLoad([langName])
-+    }
+  // If language exists, inject class gently, without modifying original token.
+  // May be, one day we will add .deepClone() for token and simplify this part, but
+  // now we prefer to keep things local.
+  if (info) {
+    const i = token.attrIndex('class')
+    const tmpAttrs = token.attrs ? token.attrs.slice() : []
     
-     // 3, 4
-+    // Some plugins such as toolbar venture into codeElement.parentElement.parentElement,
-+    // so we'll wrap the `pre` in an additional `div` for class purposes.
-+    const preAttrs = slf.renderAttrs(tmpToken)
-+    const codeClasses = options.langPrefix + langName
-+    const result = `<div><pre${preAttrs}><code class="${codeClasses}">${escaped}</code></pre></div>`
-+    const el = textToDOM(result)
-+    Prism.highlightElement(el.firstChild.firstChild.firstChild)
-+    return el.firstChild.firstChild.outerHTML
--    return `<pre><code${slf.renderAttrs(tmpToken)}>${highlighted}</code></pre>\n`
-   }
+    if (i < 0) {
+      tmpAttrs.push(['class', options.langPrefix + langName])
+    } else {
+      tmpAttrs[i] = tmpAttrs[i].slice()
+      tmpAttrs[i][1] += ' ' + options.langPrefix + langName
+    }
+      
+    // Fake token just to render attributes
+    const tmpToken = {
+      attrs: tmpAttrs
+    }
 
-   // 4
-+  return `<pre${slf.renderAttrs(token)}><code>${escaped}</code></pre>\n`
--  return `<pre><code${slf.renderAttrs(token)}>${highlighted}</code></pre>\n`
- }
+    // +++++
+    // Make sure language is loaded. // 2
+    if (langName.startsWith('diff-')) {
+      const diffRemovedRawName = langName.substring('diff-'.length)
+      if (!Prism.languages[diffRemovedRawName])
+        PrismLoad([diffRemovedRawName])
+    } else {
+      if (!Prism.languages[langName])
+        PrismLoad([langName])
+    }
+    // +++++
+    
+    // 3, 4
+    // +++++
+    // Some plugins such as toolbar venture into codeElement.parentElement.parentElement,
+    // so we'll wrap the `pre` in an additional `div` for class purposes.
+    const preAttrs = slf.renderAttrs(tmpToken)
+    const codeClasses = options.langPrefix + langName
+    const result = `<div><pre${preAttrs}><code class="${codeClasses}">${escaped}</code></pre></div>`
+    const el = textToDOM(result)
+    Prism.highlightElement(el.firstChild.firstChild.firstChild)
+    return el.firstChild.firstChild.outerHTML
+    // -----
+    return `<pre><code${slf.renderAttrs(tmpToken)}>${highlighted}</code></pre>\n`
+    // -----
+  }
+
+  // 4
+  // +++++
+  return `<pre${slf.renderAttrs(token)}><code>${escaped}</code></pre>\n`
+  // -----
+  return `<pre><code${slf.renderAttrs(token)}>${highlighted}</code></pre>\n`
+  // -----
+}
 ```
 {% enddetails %}
 
