@@ -18,7 +18,7 @@ Scanning the internet is not trivial, but Python excels at such network I/O task
 
 In this post, I’ll be sharing how delay and interactive pause can be added to multithreaded Python scripts to enhance flexibility without compromising functionality.
 
-I’ll primarily be using Python threads via `concurrent.futures.ThreadPoolExecutor`. Python offers two other concurrency primitives: processes (`multiprocessing` / `ProcessPoolExecutor`) and green threads (`asyncio`). We won't discuss those today, but the gist is similar!
+I’ll be demonstrating with Python threads via `concurrent.futures.ThreadPoolExecutor`. Python offers two other concurrency primitives: processes (`multiprocessing` / `ProcessPoolExecutor`) and green threads (`asyncio`). We won't discuss those today, but the gist is similar!
 
 Our objective is to pause the script when the user hits Ctrl+C, enter an interactive menu, then resume when “c” or “continue” is entered. We'll accomplish this with Python's pre-packaged `threading.Event` and `signal` libraries. (No additional dependencies!)
 
@@ -34,7 +34,7 @@ To best demonstrate the addition of our desired features, I'll be presenting two
 1. The "before" is a very basic multithreading script. No delay and pause.
 2. The "after" is a robust working example of multithreading with delay and pause.
 
-### Before
+### Basic Script
 
 {% video "assets/demo1.mp4", "jw-80" %}
 
@@ -79,7 +79,7 @@ if __name__ == '__main__':
     main()
 ```
 
-### After
+### Fancy Script
 
 {% video "assets/demo2.mp4", "jw-80" %}
 
