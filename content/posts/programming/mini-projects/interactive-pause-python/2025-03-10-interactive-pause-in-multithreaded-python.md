@@ -392,7 +392,7 @@ To show ~~off~~ this potential in an interactive tool, here's a short clip where
 
 This post demonstrated how to add interactive pausing to your multithreaded Python script with zero additional dependencies. Despite the simplicity, there are a few other things to explore that we haven't discussed:
 
-- **Pausing with processes or asyncio.** Each of these has their own Event objects. Processes have [`multiprocessing.Event`](https://docs.python.org/3/library/multiprocessing.html#multiprocessing.Event). asyncio has [asyncio.Event](https://docs.python.org/3/library/asyncio-sync.html#event). These are worth exploring, if your script uses either of those.
+- **Pausing with processes or asyncio.** Each of these has their own Event objects. Processes have [`multiprocessing.Event`](https://docs.python.org/3/library/multiprocessing.html#multiprocessing.Event). asyncio has [asyncio.Event](https://docs.python.org/3/library/asyncio-sync.html#event). These are also worth exploring.
 - **Trigger pause with an arbitrary key.** Instead of relying on Ctrl+C and SIGINT, is it possible to listen for arbitrary keys and pause with them? This seems difficult to implement without additional dependencies and may require native API wrangling (see the `keyboard` package).
     - It is possible to capture input on a separate thread with `getch` implementations ([see here](https://stackoverflow.com/q/510357/10239789)). This blocks while waiting for input. However, issues arise when considering other UX aspects.
     - What if the user presses Ctrl+C? SIGINT (and signals, in general) are [always executed in the main thread](https://docs.python.org/3/library/signal.html).
