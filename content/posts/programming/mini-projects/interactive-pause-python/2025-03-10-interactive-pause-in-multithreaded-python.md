@@ -11,7 +11,7 @@ thumbnail_banner: true
 keywords: [threading, Event, threading.Event, signal, asyncio, multiprocessing, multithreading, concurrent.futures, ThreadPoolExecutor, ProcessPoolExecutor, pause, pausing, sleep, delay]
 ---
 
-Scanning the internet is not trivial, but Python excels at such network I/O tasks thanks to its simplicity and its vast ecosystem of libraries. When dealing with the internet, however, it’s not uncommon to encounter rate-limited endpoints and strongly firewalled sites. For penetration testing and red-teaming, opsec is also an important consideration. This means features such as delay and interactive pause are crucial — I'd even say desirable — to ensuring success and low false positives.
+Scanning the internet is not trivial, but Python excels at such network I/O tasks thanks to its simplicity and its vast ecosystem of libraries. Still, when dealing with the internet, it’s not uncommon to encounter rate-limited endpoints and strongly firewalled sites. For penetration testing and red-teaming, opsec is also an important consideration. This means features such as delay and interactive pause are crucial — I'd even say desirable — to ensuring success and low false positives.
 
 - **Delay** (or throttling) allows us to rate-limit requests fired below the 1-thread threshold.
 - **Interactive Pause** allows the user to adapt to changing circumstances. These include situations such as sudden network congestion leading to increased response time, WAFs kicking in due to excessive requests, local network failures, and sudden drops in bandwidth.^[ [feroxbuster](https://github.com/epi052/feroxbuster), a popular pentesting tool, has interactive pause for runtime addition of filters and pruning of exploration paths.]
