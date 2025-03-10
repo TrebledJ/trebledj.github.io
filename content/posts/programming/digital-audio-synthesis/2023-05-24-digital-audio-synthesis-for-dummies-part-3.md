@@ -1,5 +1,5 @@
 ---
-title: "Digital Audio Synthesis for Dummies: Part 3"
+title: "Digital Audio Synthesis for Dummies: Part&nbsp;3"
 excerpt: Efficiently streaming audio to speakers on embedded systems (with examples in STM32).
 tags:
   - tutorial

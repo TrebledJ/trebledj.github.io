@@ -8,7 +8,7 @@ permalink: feeds/recent.xml
         {% for post in collections.postsr | head(10) %}
             {% if post.feed != false %}
                 <item>
-                    <title>{{ post.data.title | stripBetweenTags(['sup', 'sub']) | striptags }}</title>
+                    <title>{{ post.data.safeTitle }}</title>
                     <description>{{ post.data.excerpt }}</description>
                     <pubDate>{{ post.date | dateToRfc3339 }}</pubDate>
                     <link>{{ post.url | absoluteUrl(site.url) }}</link>

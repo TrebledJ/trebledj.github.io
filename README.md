@@ -1,5 +1,5 @@
 # trebledj.me
- 
+
 [![Build](https://github.com/TrebledJ/trebledj.github.io/actions/workflows/src.build.yml/badge.svg)](https://github.com/TrebledJ/trebledj.github.io/actions/workflows/src.build.yml)
 [![Check Links](https://github.com/TrebledJ/trebledj.github.io/actions/workflows/site.links.yml/badge.svg)](https://github.com/TrebledJ/trebledj.github.io/actions/workflows/site.links.yml)
 [![Lint](https://github.com/TrebledJ/trebledj.github.io/actions/workflows/src.lint.yml/badge.svg)](https://github.com/TrebledJ/trebledj.github.io/actions/workflows/src.lint.yml)
@@ -19,8 +19,6 @@ This is not a legal notice; just a call to be human.
 
 
 ## Setup
-
-To build:
 
 ```sh
 # Quick-n'-dirty site generation with live server. Mainly for previewing markdown content.
@@ -72,6 +70,7 @@ This site was inspired and built from many libraries. Mentioning all of them wou
 * [Infinite Jekyll](https://github.com/tobiasahlin/infinite-jekyll) – Fit infinite lists on a page.
   * I attempted a [generalisation for SSGs: Infinite Loader](https://github.com/TrebledJ/infinite-loader).
 * [CSP Hashes](https://github.com/localnerve/csp-hashes) – Extract CSP hashes from HTML. Reduces attack vector, because we would need to use `unsafe-inline` otherwise...
+* [Magnific Popup](https://dimsemenov.com/plugins/magnific-popup/)
 
 ### Inspirations
 Indirect credits that deserve mentioning.
@@ -86,3 +85,9 @@ Indirect credits that deserve mentioning.
   * Things I like
     * Sticky TOC sidebar on right
     * Share buttons
+
+<!--
+.mov -> .mp4
+ffmpeg -i demo.mov -c:v libx264 -vf format=yuv420p -movflags +faststart -q:v 0 -s 1280x720 demo.mp4
+ffmpeg -i demo.mov -c:v libx264 -vf format=yuv420p -movflags +faststart demo.mp4
+-->

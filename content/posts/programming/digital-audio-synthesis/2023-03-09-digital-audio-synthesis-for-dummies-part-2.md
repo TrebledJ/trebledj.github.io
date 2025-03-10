@@ -1,5 +1,5 @@
 ---
-title: "Digital Audio Synthesis for Dummies: Part 2"
+title: "Digital Audio Synthesis for Dummies: Part&nbsp;2"
 excerpt: Generating audio signals for great good through additive synthesis and wavetable synthesis.
 tags:
   - tutorial

@@ -5,6 +5,7 @@ tags:
   - software-engineering
   - web
   - reflection
+  - pentesting
 thumbnail_src: assets/thumbnail.jpg
 thumbnail_banner: true
 related:

@@ -5,6 +5,7 @@ tags:
   - satire
   - infosec
   - programming
+  - pentesting
 thumbnail_src: assets/cow-thumbnail.png
 thumbnail_banner: true
 related:

@@ -417,6 +417,7 @@ d-r--        10/14/2015   5:06 PM            Videos
 +function myFunction() {
    // …
 -  return true;
++  return "superlongstringasdlfjaksljdfklasjdasdlfnakldsjfkladjslfkjalkdfjlakjdlkfjadlkjflkadjfljalkdjfaljdlkj";
  }
 ```
 

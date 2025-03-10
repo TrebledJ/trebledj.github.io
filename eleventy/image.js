@@ -147,19 +147,27 @@ module.exports = function (eleventyConfig) {
       .replaceAll(/\s{2,}/g, ' ');
   }
 
-  function wrapLightbox(img, title, metadata, ext) {
+  function wrapLightbox({
+    img, title, metadata, ext,
+  }) {
     const popup = metadata[ext][metadata[ext].length - 1].url;
     return `<a class="lightbox-single" title="${title}" href="${popup}">${img}</a>`;
   }
 
-  async function imageShortcode(src, classes, attrs) {
+  async function imageShortcode(src, classes, { enableLightbox, ...attrs }) {
     const { ext, options } = getOptions(src);
     const metadata = await eleventyImage(src, options);
     classes = amendClasses(classes ?? '');
 
     const img = makeImageFromMetadata(metadata, ext, classes, false, attrs);
-    if (process.env.ENABLE_LIGHTBOX)
-      return wrapLightbox(img, attrs.title ?? '', metadata, ext);
+    if (process.env.ENABLE_LIGHTBOX && enableLightbox) {
+      return wrapLightbox({
+        img,
+        title: attrs.title ?? '',
+        metadata,
+        ext,
+      });
+    }
     return img;
   }
 
@@ -227,7 +235,9 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addAsyncShortcode('image', async function (src, classes, title, alt) {
     const file = resolveResourcePath(this.page, src);
     // title = title ? eleventyConfig.getFilter('mdInline')(title) : title; // Doesn't really work with lightbox.
-    return imageShortcode(file, classes, { title, alt: alt ?? title, loading: 'lazy' });
+    return imageShortcode(file, classes, {
+      title, alt: alt ?? title, loading: 'lazy', enableLightbox: true,
+    });
   });
 
   eleventyConfig.addAsyncShortcode('hero', async function (src, classes, title, alt) {
@@ -235,7 +245,9 @@ module.exports = function (eleventyConfig) {
     // Load eagerly, to push first contentful paint.
     alt ??= title;
     const file = resolveResourcePath(this.page, src);
-    return imageShortcode(file, classes, { title, alt: alt ?? title, loading: 'eager' });
+    return imageShortcode(file, classes, {
+      title, alt: alt ?? title, loading: 'eager', enableLightbox: false,
+    });
   });
 
   // Synchronous shortcode. Useful for Nunjucks macro.

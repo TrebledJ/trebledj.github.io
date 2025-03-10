@@ -36,7 +36,7 @@
             <i class="far fa-clock post-meta-icon me-1"></i>
         </span>
         {% set words = post.content | default(content) | wordcountFocused %}
-        {% set minutes = ((words + 240) / 240) | int %}
+        {% set minutes = ((words + 225) / 225) | int %}
         <span class="fs-7">{{ minutes + " minute read" }}</span>
     </div>
 </div>
