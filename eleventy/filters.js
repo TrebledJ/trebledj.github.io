@@ -112,14 +112,15 @@ module.exports = function (eleventyConfig) {
         const children = leoa.parent().parent().children();
         // Find #leoa in body.
         let idx = 0;
-        while (idx < children.length && children[idx++] !== leoa.parent()[0]);
+        while (idx < children.length && children[idx++] !== leoa.parent()[0])
+          ;
         if (idx === children.length) {
           console.warn(`${this.page.inputPath}: Found #logical-end-of-article, but not a direct child of body.`);
         } else {
           children.slice(idx - 1).remove();
         }
       } else if (leoa.length > 1) {
-        console.warn(`${this.page.inputPath}: Found more than one #logical-end-of-article. Was the tag closed properly?`);
+        console.warn(`${this.page.inputPath}: Found > 1 #logical-end-of-article. Was the tag closed properly?`);
       }
 
       const article = $('.post-body').prop('innerText') ?? $('*').prop('innerText');

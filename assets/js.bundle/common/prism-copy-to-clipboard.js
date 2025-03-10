@@ -98,9 +98,8 @@ document.querySelectorAll('.copy-to-clipboard-button').forEach(el => {
       for (let i = 0; i < children.length; i++) {
         if (children[i].tagName.toLowerCase() === 'pre') {
           return filterTextToCopy(children[i], children[i].textContent);
-        } else {
-          console.error("Error obtaining text, could not find PRE element.");
         }
+        console.error('Error obtaining text, could not find PRE element.');
       }
       return undefined;
     },
@@ -170,7 +169,7 @@ function filterTextToCopy(preElement, code) {
 
   if (isDiffBlock) {
     code = code
-      .map(line => line.startsWith('-') ? undefined : line.slice(1))
+      .map(line => (line.startsWith('-') ? undefined : line.slice(1)))
       .filter(l => l !== undefined);
   }
 

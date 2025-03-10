@@ -147,7 +147,9 @@ module.exports = function (eleventyConfig) {
       .replaceAll(/\s{2,}/g, ' ');
   }
 
-  function wrapLightbox({ img, title, metadata, ext }) {
+  function wrapLightbox({
+    img, title, metadata, ext,
+  }) {
     const popup = metadata[ext][metadata[ext].length - 1].url;
     return `<a class="lightbox-single" title="${title}" href="${popup}">${img}</a>`;
   }
@@ -233,7 +235,9 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addAsyncShortcode('image', async function (src, classes, title, alt) {
     const file = resolveResourcePath(this.page, src);
     // title = title ? eleventyConfig.getFilter('mdInline')(title) : title; // Doesn't really work with lightbox.
-    return imageShortcode(file, classes, { title, alt: alt ?? title, loading: 'lazy', enableLightbox: true });
+    return imageShortcode(file, classes, {
+      title, alt: alt ?? title, loading: 'lazy', enableLightbox: true,
+    });
   });
 
   eleventyConfig.addAsyncShortcode('hero', async function (src, classes, title, alt) {
@@ -241,7 +245,9 @@ module.exports = function (eleventyConfig) {
     // Load eagerly, to push first contentful paint.
     alt ??= title;
     const file = resolveResourcePath(this.page, src);
-    return imageShortcode(file, classes, { title, alt: alt ?? title, loading: 'eager', enableLightbox: false });
+    return imageShortcode(file, classes, {
+      title, alt: alt ?? title, loading: 'eager', enableLightbox: false,
+    });
   });
 
   // Synchronous shortcode. Useful for Nunjucks macro.
