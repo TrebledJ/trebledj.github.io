@@ -1,6 +1,6 @@
 ---
-title: Interactive Pause in Multi-Threaded, Vanilla Python
-excerpt: It's like musical chairs, except SIGINT is a pause button and threads are running around! (And nobody gets left behind.)
+title: Interactive Pause in Multi-Threaded Python with No Additional Dependencies
+excerpt: It's like musical chairs for threads (except no one gets left behind)!
 tags:
   - python
   - tutorial
@@ -14,13 +14,11 @@ keywords: [threading, Event, threading.Event, signal, asyncio, multiprocessing, 
 Scanning the internet is not trivial, but Python excels at such network I/O tasks thanks to its simplicity and its vast ecosystem of libraries. Still, when dealing with the internet, it’s not uncommon to encounter rate-limited endpoints and strongly firewalled sites. For penetration testing and red-teaming, opsec is also an important consideration. This means features such as delay and interactive pause are crucial — I'd even say desirable — to ensuring success and low false positives.
 
 - **Delay** (or throttling) allows us to rate-limit requests fired below the 1-thread threshold.
-- **Interactive Pause** allows the user to adapt to changing circumstances. These include situations such as sudden network congestion leading to increased response time, WAFs kicking in due to excessive requests, local network failures, and sudden drops in bandwidth.^[ [feroxbuster](https://github.com/epi052/feroxbuster), a popular pentesting tool, has interactive pause for runtime addition of filters and pruning of exploration paths.]
+- **Interactive Pause** allows the user to adapt to changing circumstances. These include situations such as sudden network congestion leading to increased response time, WAFs kicking in due to excessive requests, local network failures, and sudden drops in bandwidth.^[ [feroxbuster](https://github.com/epi052/feroxbuster), a popular pentesting tool, has interactive pause for runtime addition of filters and pruning of exploration paths. Quite useful for reducing false positives and saving time!]
 
 In this post, I’ll be sharing how delay and interactive pause can be added to multithreaded Python scripts to enhance flexibility without compromising functionality.
 
-I’ll be demonstrating with Python threads via `concurrent.futures.ThreadPoolExecutor`. Python offers two other concurrency primitives: processes (`multiprocessing` / `ProcessPoolExecutor`) and green threads (`asyncio`). We won't discuss those today, but the gist is similar!
-
-Our objective is to pause the script when the user hits Ctrl+C, enter an interactive menu, then resume when “c” or “continue” is entered. We'll accomplish this with Python's pre-packaged `threading.Event` and `signal` libraries. (No additional dependencies!)
+Our objective is to pause the script when the user hits Ctrl+C, enter an interactive menu, then resume when “c” or “continue” is entered. We'll accomplish this with Python's pre-packaged `threading.Event` and `signal` libraries.
 
 {% image "assets/interactive-pause-plan.png", "jw-80 alpha-imgv", "Diagram of UI flow when pausing and resuming." %}
 
@@ -33,6 +31,8 @@ To best demonstrate the addition of our desired features, I'll be presenting two
 
 1. The "before" is a very basic multithreading script. No delay and pause.
 2. The "after" is a robust working example of multithreading with delay and pause.
+
+I’ll be demonstrating with Python threads via `concurrent.futures.ThreadPoolExecutor`. Python offers two other concurrency primitives: processes (`multiprocessing` / `ProcessPoolExecutor`) and green threads (`asyncio`). We won't discuss those today, but the gist is similar!
 
 ### Basic Script
 
@@ -101,7 +101,8 @@ resume_evt = Event()
 quit_evt = Event()
 # quit_evt can be a global bool variable too, since single write, multiple read
 # is thread-safe.
-    
+
+# Handle incoming Ctrl+C with `signal`.
 def handle_int_signal(signo, _frame):
     resume_evt.clear()
     pause_evt.set()
@@ -120,8 +121,8 @@ def enable_custom_signal():
 def thread_delay(sec):
     if pause_evt.wait(sec):
         print('[thread] Interrupt detected, waiting for resume.')
-        resume_evt.wait()
-        if quit_evt.is_set():
+        resume_evt.wait() # Block until resume is triggered.
+        if quit_evt.is_set(): # Indicate quit preference with a flag.
             print('[thread] Resumed, but still interrupted. Exiting thread.')
             raise RuntimeError('interrupt')
         else:
@@ -387,7 +388,7 @@ To show ~~off~~ this potential in an interactive tool, here's a short clip where
 
 {% video "assets/demo3.mp4", "jw-100" %}
 
-<sup>On the left panel, we seamlessly execute various commands, pausing twice with Ctrl+C, with the option of configuring the delay, timeout, and log level.</sup>
+<sup>On the left panel, we seamlessly execute various commands, pausing twice with Ctrl+C, with the option of configuring the delay, timeout, and log level. An updated version allows toggling the proxy!</sup>
 {.caption}
 
 This post demonstrated how to add interactive pausing to your multithreaded Python script with zero additional dependencies. Despite the simplicity, there are a few other things to explore that we haven't discussed:
@@ -484,7 +485,7 @@ AFAIK, there are three main ways of handling future results from `concurrent.fut
     ```
 2. `concurrent.futures.as_completed`. This returns an iterable of completed futures. Blocks main thread. Result handling runs in main thread.
    
-   This is not a reliable way to integrate with the flow demonstrated in this post.
+   This is **not** a reliable way to integrate with the flow demonstrated in this post.
     ```python
     with concurrent.futures.ThreadPoolExecutor(max_workers=2) as executor:
         futures = []
@@ -502,7 +503,7 @@ AFAIK, there are three main ways of handling future results from `concurrent.fut
     ```
 3. `future.add_done_callback()`. This fires a callback upon completion of each future. Does not block main thread. Result handling may not run in main thread.
 
-    Probably the "cleanest" way to integrate with the flow demonstrated in this post, unless you handle `future.result()` in a non-thread-safe manner, in which case this is a no-go.
+    Probably the "cleanest" way to integrate with the flow demonstrated in this post, unless you handle `future.result()` in a non-thread-safe manner, in which case... beware race conditions.
     ```python
     def callback(f):
         try:
