@@ -1,5 +1,5 @@
 ---
-title: Interactive Pause in Multi-Threaded Python with No Additional Dependencies
+title: Delay and Interactive Pause in Multi-Threaded Python
 excerpt: It's like musical chairs for threads (except no one gets left behind)!
 tags:
   - python
@@ -18,7 +18,7 @@ Scanning the internet is not trivial, but Python excels at such network I/O task
 
 In this post, I’ll be sharing how delay and interactive pause can be added to multithreaded Python scripts to enhance flexibility without compromising functionality.
 
-Our objective is to pause the script when the user hits Ctrl+C, enter an interactive menu, then resume when “c” or “continue” is entered. We'll accomplish this with Python's pre-packaged `threading.Event` and `signal` libraries.
+Our objective is to pause the script when the user hits Ctrl+C, enter an interactive menu, then resume when “c” or “continue” is entered. We'll accomplish this with Python's pre-packaged `threading.Event` and `signal` libraries. (No additional dependencies!)
 
 {% image "assets/interactive-pause-plan.png", "jw-80 alpha-imgv", "Diagram of UI flow when pausing and resuming." %}
 
