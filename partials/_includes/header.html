@@ -40,6 +40,10 @@
     <div id="scroll-progress-bar"></div>
 </header>
 
+{% if not site.banner.sticky %}
+    {% include "banner.html" %}
+{% endif %}
+
 <!-- Observee for Scroll-to-Top Intersection Observer -->
 <div id="top-of-the-morning-to-you"></div>
 

@@ -6,9 +6,11 @@
     {% js %}
         const root = document.querySelector(':root');
         const bannerHeight = $('#banner').outerHeight();
+        {% if site.banner.sticky %}
         if (bannerHeight) {
             root.style.setProperty('--header-extra', `${bannerHeight}px`);
         }
+        {% endif %}
 
         $('#banner .btn-close').on('click', function() {
             {% if site.banner.scope %}

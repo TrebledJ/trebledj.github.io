@@ -3,9 +3,6 @@
     {% include "head.html" %}
     <body>
         {% include "header.html" %}
-        {% if not site.banner.sticky %}
-            {% include "banner.html" %}
-        {% endif %}
         {{ content | safe }}
         {% include "footer.html" %}
 
