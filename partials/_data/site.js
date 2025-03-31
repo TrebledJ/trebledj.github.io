@@ -32,12 +32,7 @@ module.exports = function () {
       logo: 'profile-icon.jpg',
       /* eslint-disable max-len */
       shortbio: multiline(`
-      Passionate problem-solver,
-      software engineer, infosec enthusiast,
-      and amateur music composer.
-      I enjoy teaching others and thrive on learning new things.
-      When not immersed in programming, I can be found taking walks, reflecting on life, 
-      and occasionally indulging in CTF challenges.
+      Galactic Quantum Gunslinger (Schrödinger Division), Assistant Science Officer @ Vulcan High Command, Certified Offensive Waterblower
       `),
       bio: multiline(`
       Hi! (｡＾ ᴗ＾)ﾉ
@@ -83,18 +78,18 @@ module.exports = function () {
       combined: true, // Combines all lightbox images in a post into a single gallery.
     },
     banner: {
-      enabled: false,
-      sticky: true,
+      enabled: true,
+      sticky: false,
       closeButton: true,
-      disableInPosts: true, // Don't detract from content.
-      scope: 'local', // Possible values: 'session', 'local', ''.
+      disableInPosts: false, // Don't detract from content.
+      scope: 'session', // Possible values: 'session', 'local', ''.
       // bgColor: 'primary', // Any Bootstrap `bg-` values.
       // fgColor: 'black', // Any Bootstrap `text-` values.
-      icon: 'fas fa-comments',
-      icon_style: '--fa-animation-delay: 5s; --fa-animation-duration: 3s',
+      icon: 'fas fa-rocket',
+      icon_style: '--fa-animation-delay: 5s; --fa-animation-duration: 5s',
       /* eslint-disable max-len */
       content: multiline(`
-        Comments are back! Privacy-focused, without ads, bloatware, and trackers.
+        Check out my **FREE** [video course on **data structures** and **algorithms**](https://www.youtube.com/watch?v=dQw4w9WgXcQ). Increase your chances of getting hired at **MAMAA** by **100x**!!!
         `),
       /* eslint-enable max-len */
       hash() {
