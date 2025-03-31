@@ -200,3 +200,4 @@ Under the hood, DLLModularizer installs a kernel driver `dll2dllm.sys` responsib
 
 Users can take advantage of the early-bird offer and install the DLLModularizer Windows program with a free trial of up to 30 days. The program is available for both x86 and x64.
 
+/s
