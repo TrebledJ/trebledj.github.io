@@ -78,7 +78,7 @@ module.exports = function () {
       combined: true, // Combines all lightbox images in a post into a single gallery.
     },
     banner: {
-      enabled: true,
+      enabled: false,
       sticky: false,
       closeButton: true,
       disableInPosts: false, // Don't detract from content.
