@@ -24,7 +24,7 @@ AI proponents hail BOOMlang as **“the next Java”**, destined to take the wor
 
 “*BOOMlang has enabled us to embrace fearless concurrency in the face of AI and dwindling intelligence of tech hires*”, said Sanjit Randhawa, CTO of tech startup mumb.ai. “*Thanks to the power of the BOOM, we are continuously outpacing our competitors and breaking new ground.*”
 
-Under the hood, BOOMlang’s efficient runtime induces microshockwaves which magnetise molecules in the upper atmosphere and beam cosmic rays into GPUs, flipping bits and accelerating graphics computation at an overclock rate of 300%. Emacs developers are struggling to translate this feature into a command.
+Under the hood, BOOMlang’s efficient runtime induces microshockwaves which magnetise molecules in the upper atmosphere and beam cosmic rays into GPUs, [flipping bits](https://en.wikipedia.org/wiki/Soft_error#Cosmic_rays_creating_energetic_neutrons_and_protons) and accelerating graphics computation at an overclock rate of 300%. Emacs developers are struggling to translate this feature into a command.
 
 Said microshockwaves are triggered by utilising cross-platform instructions such as `VFMAMSGB` (Vectorised Fused Multiply-Add and Make Stuff Go Boom) — something {% abbr "ISA", "Instruction Set Architecture" %} authors didn’t even know existed!
 
@@ -92,7 +92,7 @@ In a stunning turn of events, Silicon Valley executives have announced the rise 
 
 Unlike IT (which deals with data) and OT (which controls industrial systems), ET operates on principles human scientists describe as "pure wizardry". Key features include:
 
-- **Telepathic Cloud Computing: No servers, just brainwaves.** By amplifying the collective power of organic brainwaves, the "ET Cloud" replaces the traditional cloud in a true serverless, decentralised model of a human hivemind. Costs are drastically lowered at the risk of individual mental health.
+- **Telepathic Cloud Computing: No servers, just brainwaves.** By amplifying the collective power of organic brainwaves, the "ET Cloud" replaces the traditional cloud with a true serverless, decentralised model existing purely within the human hivemind. Costs are drastically lowered at the risk of individual mental health.
 - **Anti-Gravity DevOps (AGDO): Code deploys itself... upwards.** By bending spacetime, AGDO rapidly deploys code from the physical realm to the metaphysical realm of the telepathic cloud.
 - **Self-Aware Firewalls: Hackers are instantly vaporised.** Firewalls gain sentience and offensive capabilities, striking fear into the hearts of script kiddies.
 
@@ -106,7 +106,7 @@ Despite the apparent risks, corporate giants and investors have jumped on the ET
 
 “*I think,*” said Lt. Him Cook, CEO of Apple, “*I think we've just step foot into the age of Internet 4.0.*”
 
-Regulatory bodies have swift taken action, with the EU recently slamming the aliens with **€420B** for GDPR violations after they probed a Belgium farmer without consent.
+Regulatory bodies have swiftly taken action, with the EU recently slamming the aliens with **€420B** for GDPR violations after they probed a Belgium farmer without consent.
 
 Experts predict that within one year, ET will replace all human jobs, though aliens assure us this is fine because they're "creating new opportunities in interstellar compliance".
 
