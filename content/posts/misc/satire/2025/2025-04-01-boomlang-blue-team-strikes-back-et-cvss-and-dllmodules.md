@@ -187,10 +187,12 @@ In a pre-recorded address, NIFTI declared:
 
 ## DLLs Are So 2024: Tech Visionary Lee Sik Koo Declares War on ‘Legacy Code’ with Revolutionary DLLMs
 
-Last Saturday, Hong Kong-based tech maverick Lee Sik Koo, founder of _Securely International Limited Unlimited_, unveiled **DLL Modules (DLLMs)**—a "game-changing, novel solution to combat privacy malpractice on Windows." Characterised by the cutting-edge `.dllm` file extension, these modules have already garnered praise for their "unprecedented performance improvements" across a "plethora of systems"—though independent benchmarks remain suspiciously absent.
+Last Saturday, Hong Kong-based tech maverick Lee Sik Koo, founder of *Securely International Limited Unlimited*, unveiled **DLL Modules (DLLMs)**—a "game-changing, novel solution to combat privacy malpractice on Windows." Characterised by the cutting-edge `.dllm` file extension, these modules have already garnered praise for their "unprecedented performance improvements" across a "plethora of systems"—though independent benchmarks remain suspiciously absent.
 
 > *I’d like to thank my mother and father — but more than that, I’d like to thank everyone’s mother and father — for this opportunity to reshape the hellhole known to some as Windows 11. Together, we will secure our families. We will secure schools. We will secure businesses. By migrating to .dllm, we embrace a new era of modular openness and integrity with zero tolerance to AI bullshit trained on your personal files and computer activity. DLLs are for the weak, but DLLMs are for the strong.*  
 > – **Lee Sik Koo, March 29, 2025**
+
+Lee's eccentric brother, Lee Sik Si, CTO of *Securely International Limited Unlimited* shared on a LinkedIn post: "*We are excited by the prospects of purifying Windows!*"
 
 Enthusiastic beta testers have flooded online forums with claims that DLLMs "triple boot speeds" and "eliminate all memory leaks forever." One anonymous developer raved, “*After converting just three DLLs to DLLMs, my PC stopped bluescreening and actually started paying my taxes for me!*”
 
