@@ -85,3 +85,4 @@
 {"rule":"MORFOLOGIK_RULE_EN_GB","sentence":"^\\QThe code is a bit of a handful, but it's uploaded on GitHub: TrebledJ/icon-minifier.\\E$"}
 {"rule":"IF_OF","sentence":"^\\QThe methodology is simple: collect download times from multiple points around the world, repeat this a couple times, and find the median.\\E$"}
 {"rule":"PERSONAL_PERSONNEL","sentence":"^\\QBy migrating to .dllm, we embrace a new era of modular openness and integrity with zero tolerance to AI bullshit trained on your personal files and computer activity.\\E$"}
+{"rule":"THE_SUPERLATIVE","sentence":"^\\QThus, it's important to apply the usual security controls including defence-in-depth and the principle of least privilege.\\E$"}
