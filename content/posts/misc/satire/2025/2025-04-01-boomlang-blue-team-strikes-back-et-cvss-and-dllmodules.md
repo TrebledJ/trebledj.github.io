@@ -24,9 +24,9 @@ AI proponents hail BOOMlang as **“the next Java”**, destined to take the wor
 
 “*BOOMlang has enabled us to embrace fearless concurrency in the face of AI and dwindling intelligence of tech hires*”, said Sanjit Randhawa, CTO of tech startup mumb.ai. “*Thanks to the power of the BOOM, we are continuously outpacing our competitors and breaking new ground.*”
 
-Under the hood, BOOMlang’s efficient runtime induces microshockwaves which magnetise molecules in the upper atmosphere and beam cosmic rays into GPUs, flipping bits and accelerating graphics computation at an overclock rate of 300%. Emacs developers are struggling to translate this feature into a command.
+Under the hood, BOOMlang’s efficient runtime induces microshockwaves which magnetise molecules in the upper atmosphere and beam cosmic rays into GPUs, [flipping bits](https://en.wikipedia.org/wiki/Soft_error#Cosmic_rays_creating_energetic_neutrons_and_protons) and accelerating graphics computation at an overclock rate of 300%. Emacs developers are struggling to translate this feature into a command.
 
-Said microshockwaves are triggered by utilising cross-platform instructions such as `VFMAMSGB` (Vectorised Fused Multiply-Add and Make Stuff Go Boom) — something ISA authors didn’t even know existed!
+Said microshockwaves are triggered by utilising cross-platform instructions such as `VFMAMSGB` (Vectorised Fused Multiply-Add and Make Stuff Go Boom) — something {% abbr "ISA", "Instruction Set Architecture" %} authors didn’t even know existed!
 
 ```asm
 ; Overclock your CPU by ignoring physics  
@@ -41,18 +41,18 @@ gp = BOOM.GP.start!(quality: :premium, toxicity: :high)
 BOOM.GP.emit!(gp, :blockchain)  # Immutable, decentralized trash  
 ```
 
-"Forget GC", exclaimed Nilus Vortalds, speaker at BoomCon25, "BOOMlang manufactures garbage at industrial scale."
+“*Forget GC*”, exclaimed Nilus Vortalds, speaker at BoomCon25, “*BOOMlang manufactures garbage at industrial scale.*”
 
 Senior citizens rejoice as the tech industry redefines the term “boomer”.
 
 
 ## Blue Team Strikes Back, APT 404 Demands Justice
 
-APT 404 recently released a security incident report detailing a reverse hack.
+{% abbr "APT", "Advanced Persistent Threat (something big, bad, and scary!)" %} 404 recently released a security incident report detailing a reverse hack.
 
 “We were simply going about our honest jobs, when suddenly— boom! — we became victims of a cyberattack”, said Li Jia Tan, Chief Relations Officer of APT 404 (Netherite Typhoon).
 
-The report provided a list of IOCs, including novel techniques employed by Blue Teams. At the helm is the Fast Inverse Beacon (FIB), a hand-crafted piece of C grounded in bit manipulation which inverts a C2 connection to achieve a reverse tunnel and obtain remote code execution on the source’s machine.
+The report provided a list of {% abbr "IOCs", "Indicators of Compromise" %}, including novel techniques employed by Blue Teams. At the helm is the **Fast Inverse Beacon (FIB)**, a hand-crafted piece of C grounded in bit manipulation which inverts a C2 connection to achieve a reverse tunnel and obtain remote code execution on the source’s machine.
 
 ```c
 beacon_t* fast_rbeacon( beacon_t* bhandler )
@@ -74,12 +74,12 @@ beacon_t* fast_rbeacon( beacon_t* bhandler )
 }
 ```
 
-<sup>Rare snippet of the Fast Inverse Beacon, a well-known FBI TTP, leaked on the Dark Web.</sup>
+<sup>Rare snippet of the Fast Inverse Beacon, a well-known FBI {% abbr "TTP", "Tactics, Techniques, and Procedures" %}, disclosed in APT 404's incident report.</sup>
 {.caption}
 
-Li disclosed their flagship hacking technique, **BFI (Buffer Interflow)**, was unable to prevent the reverse hack. Buffer Interflow exploits quantum mechanics inherent in every system by allocating memory and executing shellcode in quantum space, tunnelling through defences such as NX, PIE, and ASLR. “It’s like if ret2shellcode married race conditions; raw power and randomness mixed into a beautiful, primordial, quantum soup. But sadly it was unable to stop FIB.”
+Li disclosed their flagship hacking technique, **BFI (Buffer Interflow)**, was unable to prevent the reverse hack. Buffer Interflow exploits quantum mechanics inherent in every system by allocating memory and executing shellcode in quantum space, tunnelling through defences such as {% abbr "NX", "No eXecute" %}, {% abbr "PIE", "Position-Independent Executable" %}, and {% abbr "ASLR", "Address Space Layout Randomisation" %}. “It’s like if ret2shellcode married race conditions; raw power and randomness mixed into a beautiful, primordial, quantum soup. But sadly it was unable to stop FIB.”
 
-The **Federal Beacon Investigators (FBI)** claimed responsibility for the attack saying, “As bulwarks of national security, we have been constantly monitoring Dark Web forums and IPv8 addresses. Luckily, we caught wind of attacks planned on the IBF and decided a pre-emptive strike was necessary. Our research into subquantum MITM interception helped.”
+The **Federal Beacon Investigators (FBI)** claimed responsibility for the attack saying, “As bulwarks of national security, we have been constantly monitoring Dark Web forums and IPv8 addresses. Luckily, we caught wind of attacks planned on the IBF and decided a pre-emptive strike was necessary. Our research into subquantum {% abbr "MITM", "Man-in-the-Middle" %} interception helped.”
 
 The **International Bank of Fraternisation (IBF)** published a post thanking the FBI for its serious commitment to protecting public good and the capitalist interests of the 1%.
 
@@ -92,11 +92,11 @@ In a stunning turn of events, Silicon Valley executives have announced the rise 
 
 Unlike IT (which deals with data) and OT (which controls industrial systems), ET operates on principles human scientists describe as "pure wizardry". Key features include:
 
-- **Telepathic Cloud Computing: No servers, just brainwaves.** By amplifying the collective power of organic brainwaves, the "ET Cloud" replaces the traditional cloud in a true serverless, decentralised model of a human hivemind. Costs are drastically lowered at the risk of individual mental health.
+- **Telepathic Cloud Computing: No servers, just brainwaves.** By amplifying the collective power of organic brainwaves, the "ET Cloud" replaces the traditional cloud with a true serverless, decentralised model existing purely within the human hivemind. Costs are drastically lowered at the risk of individual mental health.
 - **Anti-Gravity DevOps (AGDO): Code deploys itself... upwards.** By bending spacetime, AGDO rapidly deploys code from the physical realm to the metaphysical realm of the telepathic cloud.
 - **Self-Aware Firewalls: Hackers are instantly vaporised.** Firewalls gain sentience and offensive capabilities, striking fear into the hearts of script kiddies.
 
-"Honestly, we don't even understand half of it," admitted a Google engineer, who was last seen floating three feet above his desk. "But the aliens said if we stop asking questions, they'll give us unlimited 8G Wi-Fi."
+“*Honestly, we don't even understand half of it,*” admitted a Google engineer, who was last seen floating three feet above his desk. “*But the aliens said if we stop asking questions, they'll give us unlimited 8G Wi-Fi.*”
 
 Despite the apparent risks, corporate giants and investors have jumped on the ET frenzy.
 
@@ -104,11 +104,11 @@ Despite the apparent risks, corporate giants and investors have jumped on the ET
 - On March 22nd Amazon launched **Prime Teleportation**, though delivery drones have unionised in protest.
 - On March 31st, Apple unveiled **iAlien**, a device that "just works" because it reads your mind (and possibly soul).
 
-"I think," said Lt. Him. Cook, CEO of Apple, "I think we've just step foot into the age of Internet 4.0."
+“*I think,*” said Lt. Him Cook, CEO of Apple, “*I think we've just step foot into the age of Internet 4.0.*”
 
-Regulatory bodies have swift taken action, with the EU recently slamming the aliens with **€420B** for GDPR violations after they probed a Belgium farmer without consent.
+Regulatory bodies have swiftly taken action, with the EU recently slamming the aliens with **€420B** for GDPR violations after they probed a Belgium farmer without consent.
 
-Experts predict that within five years, ET will replace all human jobs, though aliens assure us this is fine because they're "creating new opportunities in interstellar compliance".
+Experts predict that within one year, ET will replace all human jobs, though aliens assure us this is fine because they're "creating new opportunities in interstellar compliance".
 
 
 ## CVSS 4.1: New "Personalisation Metrics" for Shame-Based Blame Attribution
@@ -150,8 +150,8 @@ Now, CVSS 4.1 introduces two revolutionary additions to ensure vulnerabilities a
     | Authentication Bypass   | Manually Coded              | You              | High (*how could you?*)    | 7.8            |
 
     This metric has been **wildly popular** among:  
-    1. Application developers. "*Finally, a scapegoat for my XSS issues*," said a developer posting on Reddit.
-    2. Y Combinator founders (who delegate blame like pros). "*It's absolutely **great** seeing blame being assigned to the right places*", said Raul Graham, CEO of Y Combinator.
+    1. Application developers. “*Finally, a scapegoat for my XSS issues*,” said a developer on Reddit.
+    2. Y Combinator founders (who delegate blame like pros). “*It's absolutely **great** seeing blame being assigned to the right places*”, said Raul Graham, CEO of Y Combinator.
 
     Critics, however, argue this encourages corporate-level blame-dodging.
 
@@ -164,7 +164,7 @@ Now, CVSS 4.1 introduces two revolutionary additions to ensure vulnerabilities a
 
     Security experts were quick to mock the new metric. **Daniel Bernsteg**, author of the _Twurl_ library, quipped:
 
-    > _"If my code starts asking about the meaning of life, I’m rebooting it into a t2.micro and billing it for uptime."_
+    > “*If my code starts asking about the meaning of life, I’m rebooting it into a t2.micro and billing it for uptime.*”
 
 NIFTI has boldly started applying the metric to recent CVEs.
 
@@ -174,25 +174,27 @@ NIFTI has boldly started applying the metric to recent CVEs.
 | CVE-2025-1337   | It was discovered Meta's open source LLAMA4 model before versions 2.1 was poisoned by ‘Vibe Coders’. In the poisoned state, the model outputs limericks on every fifth prompt.                                                         | 8.1 (+Identity Theft)  |
 
 
-OpenAI and Anthropic have taken to X (formerly Twitter) to vent: "*We released our AI to help humanity, only for ‘vibe coders’ to demand **we** ‘fix’ **their** spaghetti prompts. The audacity. Last week alone, we got 300 CVSS reports blaming us for their garbage outputs.*"
+OpenAI and Anthropic have taken to X (formerly Twitter) to vent: “*We released our AI to help humanity, only for ‘vibe coders’ to demand **we** ‘fix’ **their** spaghetti prompts. The audacity. Last week alone, we got 300 CVSS reports blaming us for their garbage outputs.*”
 
 {% image "assets/schroot.jpg", "jw-40 p-2 floatr1", "User sch.root." %}
 
-**sch.root**, a concerned internet citizen, praised the update: "_Identity theft is not a joke. Millions of families suffer each year. People deserve the right to protect their data, their families, and their tailor-made bobbleheads._"
+**sch.root**, a concerned internet citizen, praised the update: “*Identity theft is not a joke. Millions of families suffer each year. People deserve the right to protect their data, their families, and their tailor-made bobbleheads.*”
 
 In a pre-recorded address, NIFTI declared:
 
-> "*As an organization dedicated to securing the international [American] public, we welcome feedback from all 300 million people on this [side of the] planet.*"
+> “*As an organization dedicated to securing the international [American] public, we welcome feedback from all 300 million people on this [side of the] planet.*”
 
 
 ## DLLs Are So 2024: Tech Visionary Lee Sik Koo Declares War on ‘Legacy Code’ with Revolutionary DLLMs
 
-Last Saturday, Hong Kong-based tech maverick Lee Sik Koo, founder of _Securely International Limited Unlimited_, unveiled **DLL Modules (DLLMs)**—a _"game-changing, novel solution to combat privacy malpractice on Windows."_ Characterised by the cutting-edge `.dllm` file extension, these modules have already garnered praise for their _"unprecedented performance improvements"_ across a _"plethora of systems"_—though independent benchmarks remain suspiciously absent.
+Last Saturday, Hong Kong-based tech maverick Lee Sik Koo, founder of *Securely International Limited Unlimited*, unveiled **DLL Modules (DLLMs)**—a "game-changing, novel solution to combat privacy malpractice on Windows." Characterised by the cutting-edge `.dllm` file extension, these modules have already garnered praise for their "unprecedented performance improvements" across a "plethora of systems"—though independent benchmarks remain suspiciously absent.
 
 > *I’d like to thank my mother and father — but more than that, I’d like to thank everyone’s mother and father — for this opportunity to reshape the hellhole known to some as Windows 11. Together, we will secure our families. We will secure schools. We will secure businesses. By migrating to .dllm, we embrace a new era of modular openness and integrity with zero tolerance to AI bullshit trained on your personal files and computer activity. DLLs are for the weak, but DLLMs are for the strong.*  
 > – **Lee Sik Koo, March 29, 2025**
 
-Enthusiastic beta testers have flooded online forums with claims that DLLMs "triple boot speeds" and "eliminate all memory leaks forever." One anonymous developer raved, "After converting just three DLLs to DLLMs, my PC stopped bluescreening and actually started paying my taxes for me!"
+Lee's eccentric brother, Lee Sik Si, CTO of *Securely International Limited Unlimited* shared on a LinkedIn post: "*We are excited by the prospects of purifying Windows!*"
+
+Enthusiastic beta testers have flooded online forums with claims that DLLMs "triple boot speeds" and "eliminate all memory leaks forever." One anonymous developer raved, “*After converting just three DLLs to DLLMs, my PC stopped bluescreening and actually started paying my taxes for me!*”
 
 However, sceptics point out that these testimonials suspiciously resemble AI-generated marketing copy—a fact Lee dismisses as "legacy thinker propaganda."
 
@@ -200,3 +202,4 @@ Under the hood, DLLModularizer installs a kernel driver `dll2dllm.sys` responsib
 
 Users can take advantage of the early-bird offer and install the DLLModularizer Windows program with a free trial of up to 30 days. The program is available for both x86 and x64.
 
+/s
