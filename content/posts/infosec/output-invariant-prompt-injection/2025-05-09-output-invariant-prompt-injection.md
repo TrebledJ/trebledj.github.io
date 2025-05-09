@@ -1,5 +1,5 @@
 ---
-title: Output-Invariance and Time-Based Testing – Practical Techniques for Black-Box Enumeration of LLMs
+title: Output-Invariant and Time-Based Testing – Practical Techniques for Black-Box Enumeration of LLMs
 excerpt: Abusing inherent context and sluggishness in LLMs for stealthy enumeration of prompt injection points.
 tags: 
   - ai
@@ -43,13 +43,13 @@ We'll assume a **Direct Prompt Injection** scenario, i.e. a tester/attacker is i
 
 Let's take a look at the first method.
 
-## Output-Invariance Testing
+## Output-Invariant Testing
 
-The idea is quite simple, I just think the term "output-invariance testing" sums it up nicely.
+The idea is quite simple, I just think the term "output-invariant testing" sums it up nicely.
 
 The key idea is to take a base request/response, change the input slightly without changing context, and aim to keep the LLM response unchanged.
 
-Output-invariance is always relative to some base request. So any mention of "output-invariant prompt" means there are two prompts: a base prompt and a modified test prompt.
+Output-invariance is always relative to some base request. Any mention of "output-invariant prompt" implies two prompts: a base prompt and a modified test prompt.
 
 ### Concept
 
@@ -105,12 +105,12 @@ However, the LLM implementation would return the same response:
 }
 ```
 
-This is because LLMs have something traditional implementations don't: they "understand" context and language. It "recognises" *Michael Scott* resembles a name, and the phrase *My name is* indicates the following text is a name.
+This is because LLMs have something traditional implementations don't: they "understand" context and language. It "recognises" `Michael Scott` resembles a name, and the phrase `My name is` indicates the following text is a name.
 
 {% image "assets/same-picture.jpg", "jw-60", "Corporate needs you to find the differences between Trump and Musk. GPT: ..." %}
 
 {% alert "success" %}
-The key idea behind the Output-Invariance Testing is to take a base (HTTP) request, then **change a field slightly but aim to keep the LLM response— the output— invariant (unchanged)**.
+The key idea behind Output-Invariant Testing is to take a base (HTTP) request, then **change a field slightly but aim to keep the LLM response— the output— invariant (unchanged)**.
 {% endalert %}
 
 To reiterate, we have two requests/responses involved:
@@ -367,7 +367,7 @@ The rise of LLM applications is a clear signal for penetration testers and red-t
 
 3. Scaling and automation is a natural follow-up topic when discussing enumeration.
 
-4. After making the Pam Same Picture meme, a thought occurred to me: would LLMs also normalise typos? Would they consider something like "bubble tea" and "bublbe tea" to be the *same picture*? That may be another avenue for output-invariant attacks.
+4. After making the Pam Same Picture meme, a thought occurred to me: would LLMs also normalise typos? Would they consider something like `bubble tea` and `bublbe tea` to be the *same picture*? This may be another option for output-invariant attacks.
 
 ### Further Resources
 
