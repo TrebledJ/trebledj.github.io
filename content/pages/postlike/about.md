@@ -10,7 +10,7 @@ This website breathed its first breath in summer of 2022. I had a bit of free ti
 
 You may see some posts "published" prior to 2022. Those are usually older projects or experiences which I've included for posterity. The dates there typically indicate the date the experience ended.
 
-### Optimised for Reading
+### Optimised for Reading Experience
 
 I strongly believe in a good, accessible reading experience. This means building content-first user experiences, optimising performance, applying responsive design, and following accessibility standards. This is why I love and incorporate elements such as Table of Contents and alerts/callouts.
 
@@ -18,9 +18,7 @@ Readers shouldn't have to be ticked by text flowing off the screen, and they sho
 
 A number of websites these days prioritise cash flow through paywalls, subscriptions, and invasive ads, ruining user experience in the process. Sure, we have different objectives. Businesses often employ blog posts for marketing, SEO, and revenue-generating purposes. But I'm not a business, and I believe user experience comes first.
 
-Personally, I'm not against ads as long as they're non-invasive, don't ruin the reading experience, and respect privacy. I may or may not introduce ads in the future; but if I do, you can rest assured I'll carefully select an appropriate ad provider and place ads without compromising user experience.
-
-If you have any complaints, you know where to contact me. I'm open to suggestions.
+{# Personally, I'm not against ads as long as they're non-invasive, don't ruin the reading experience, and respect privacy. I may or may not introduce ads in the future; but if I do, you can rest assured I'll carefully select an appropriate ad provider and place ads without compromising user experience. #}
 
 ### Recent Site News
 
