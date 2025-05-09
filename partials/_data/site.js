@@ -32,7 +32,12 @@ module.exports = function () {
       logo: 'profile-icon.jpg',
       /* eslint-disable max-len */
       shortbio: multiline(`
-      Galactic Quantum Gunslinger (Schrödinger Division), Assistant Science Officer @ Vulcan High Command, Certified Offensive Waterblower
+      Passionate problem-solver,
+      software engineer, infosec enthusiast,
+      and amateur music composer.
+      I enjoy teaching others and thrive on learning new things.
+      When not immersed in programming, I can be found taking walks, reflecting on life, 
+      and occasionally indulging in CTF challenges.
       `),
       bio: multiline(`
       Hi! (｡＾ ᴗ＾)ﾉ
@@ -106,12 +111,11 @@ module.exports = function () {
           // 'Capturing flags 🚩',
           // 'Writing articles on this site 📄',
           // 'Tinkering with this site 🌐',
-          'Napping (＿ ＿*) Z z z',
+          // 'Napping (＿ ＿*) Z z z',
           // 'Noodling with music ♪♪♪ ヽ(ˇ∀ˇ )ゞ',
           'Making koalaty memes 🐨 (－‸ლ)',
           'Baking an artificial singularity',
-          'Poking holes',
-          'Writing self-aware typewritten text',
+          'Poking holes in sh!7?y software',
         ],
       pauseDuration: 2500,
       keepPrefix: true,
