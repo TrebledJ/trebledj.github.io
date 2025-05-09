@@ -166,6 +166,8 @@ It turns out the output-invariant approach can be quite opsec-friendly. There is
 
 [^opsec-note]: Not sure how relevant this is, but with our output-invariant and time-based prompts, the *prompting tone* tends to be *passive* rather than *active*. Instead of giving the AI an *explicit direction* or *posing a question*, we're simply stating a normalcy. In English terms, our prompt is a *declarative* sentence, rather than an *imperative* or *interrogative* sentence. From my observations, this seems to have a higher rate of success with minimal effort. With imperative prompts, I often find myself cajoling the AI (which can be an immense time sink).
 
+If we also consider that defences may also scan LLM output (e.g. [one feature of LLM Guard](https://llm-guard.com/output_scanners/sensitive/)), then output-invariance would still perform well bypassing output scanning, assuming a safe base request is chosen.
+
 ### Blind Prompt Injection
 
 Blind prompt injection is something I've been toying in my head. I haven't seen much mention of it, but it could be a potential avenue of attack.
