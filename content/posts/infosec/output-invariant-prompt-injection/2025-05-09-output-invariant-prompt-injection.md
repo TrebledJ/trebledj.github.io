@@ -379,7 +379,7 @@ Some resources which I found insightful:
 
 ### tl;dr
 
-We want to answer two (very basic) questions:
+To recap, we want to answer two (very basic) questions:
 
 * Does backend haz LLM?
 * Iz parameter vulnerable to prompt injection?
@@ -421,7 +421,3 @@ Limitations:
 * Input fields may have special parsing rules which highlight keywords. For instance, a search query may discard stop words ("the", "is", "a") and focus on keywords instead.
 * The backend may be using a simpler NLP model instead of an LLM. Some chatbots do this.
 * Time-based testing is dependent on various factors, including the AI's initial prompt/task, the implementation, and server hardware.
-
-Detections and Mitigations
-
-* Left as an exercise for the reader.
