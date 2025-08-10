@@ -166,7 +166,7 @@ It turns out the output-invariant approach can be quite opsec-friendly. There is
 
 [^opsec-note]: Not sure how relevant this is, but with our output-invariant and time-based prompts, the *prompting tone* tends to be *passive* rather than *active*. Instead of giving the AI an *explicit direction* or *posing a question*, we're simply stating a normalcy. In English terms, our prompt is a *declarative* sentence, rather than an *imperative* or *interrogative* sentence. From my observations, this seems to have a higher rate of success with minimal effort. With imperative prompts, I often find myself cajoling the AI (which can be an immense time sink).
 
-If we also consider that defences may also scan LLM output (e.g. [one feature of LLM Guard](https://llm-guard.com/output_scanners/sensitive/)), then output-invariance would still perform well bypassing output scanning, assuming a safe base request is chosen.
+If we also consider that defences may also scan LLM output (e.g. [one feature of LLM Guard](https://protectai.github.io/llm-guard/output_scanners/sensitive/)), then output-invariance would still perform well bypassing output scanning, assuming a safe base request is chosen.
 
 ### Blind Prompt Injection
 
@@ -355,7 +355,7 @@ With code taking the form of natural language, it is difficult to secure 100% of
 
 Some readers may be wondering "How do we detect this kind of stealthy enumeration?". While this is an interesting question, I don't think it's the best question to ask from a risk/business perspective. I posit that a better question is: "How do we defend the *prompt injection attack surface* as a whole?" This is because— in my head— detecting stealthy enumeration is rarely the best use of resources.
 
-It's more effective to apply a holistic approach and detect risky/impactful prompt attacks instead, for instance: attacks which perform code execution or exfiltrate data. Tools such as [LLM Guard](https://llm-guard.com/input_scanners/anonymize/) already implement some kind of detection in this regard. A holistic approach also means applying the usual security concepts including defence-in-depth and the principle of least privilege.
+It's more effective to apply a holistic approach and detect risky/impactful prompt attacks instead, for instance: attacks which perform code execution or exfiltrate data. Tools such as [LLM Guard](https://protectai.github.io/llm-guard/input_scanners/anonymize/) already implement some kind of detection in this regard. A holistic approach also means applying the usual security concepts including defence-in-depth and the principle of least privilege.
 
 ## Conclusion
 
