@@ -11,7 +11,7 @@ on:
   # repository_dispatch:
   workflow_dispatch:
   schedule:
-    - cron: "00 11 * * 2,5" # HKT 7PM Tuesday/Friday
+    - cron: "00 11 * * 5" # HKT 7PM Friday
 
 jobs:
   check:
