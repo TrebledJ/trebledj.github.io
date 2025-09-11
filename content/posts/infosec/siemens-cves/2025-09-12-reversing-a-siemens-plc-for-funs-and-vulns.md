@@ -23,9 +23,9 @@ Under the sweltering heat of the Hong Kong summer, we entered a looming building
 
 This is a tale of the unexpected discovery of three CVEs in a Siemens logic controller, reverse engineering a bespoke architecture, and an authentication bypass obscured by proprietary file formats.
 
-- **`CVE-2024-54089`** – Weak Encryption Mechanism Vulnerability in Apogee PXC and Talon TC Devices
-- **`CVE-2024-54090`** – Out-of-Bounds Read Vulnerability in Apogee PXC and Talon TC Devices
-- **`CVE-2025-40757`** – Information Disclosure Vulnerability in Apogee PXC and Talon TC Devices
+- **`CVE-2024-54089`** – Weak Encryption Mechanism Vulnerability in Siemens Apogee PXC and Talon TC Devices
+- **`CVE-2024-54090`** – Out-of-Bounds Read Vulnerability in Siemens Apogee PXC and Talon TC Devices
+- **`CVE-2025-40757`** – Information Disclosure Vulnerability in Siemens Apogee PXC and Talon TC Devices
 
 ## Background
 
@@ -362,6 +362,6 @@ As of writing, no fix is planned by Siemens. The following mitigations and tempo
 
 Special thanks to Siemens ProductCERT team for coordinated disclosure. For more information on these vulnerabilities, please read the advisories published by Siemens. 
 
-- [**`CVE-2024-54089`**](https://cert-portal.siemens.com/productcert/html/ssa-615116.html) – Weak Encryption Mechanism Vulnerability in Apogee PXC and Talon TC Devices12
-- [**`CVE-2024-54090`**](https://cert-portal.siemens.com/productcert/html/ssa-615116.html) – Out-of-Bounds Read Vulnerability in Apogee PXC and Talon TC Devices13
-- [**`CVE-2025-40757`**](https://cert-portal.siemens.com/productcert/html/ssa-916339.html) – Information Disclosure Vulnerability in Apogee PXC and Talon TC Devices14
+- [**`CVE-2024-54089`**](https://cert-portal.siemens.com/productcert/html/ssa-615116.html) – Weak Encryption Mechanism Vulnerability in Siemens Apogee PXC and Talon TC Devices
+- [**`CVE-2024-54090`**](https://cert-portal.siemens.com/productcert/html/ssa-615116.html) – Out-of-Bounds Read Vulnerability in Siemens Apogee PXC and Talon TC Devices
+- [**`CVE-2025-40757`**](https://cert-portal.siemens.com/productcert/html/ssa-916339.html) – Information Disclosure Vulnerability in Siemens Apogee PXC and Talon TC Devices
