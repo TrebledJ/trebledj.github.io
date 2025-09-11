@@ -44,4 +44,7 @@
     {% endif %}
 
     <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+    {% if canonicalUrl %}
+        <link rel="canonical" href="{{canonicalUrl}}" />
+    {% endif %}
 </head>
