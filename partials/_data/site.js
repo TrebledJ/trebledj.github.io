@@ -23,7 +23,7 @@ module.exports = function () {
     url: `https://${domain}`,
     baseurl: '',
     language: 'en',
-    description: "TrebledJ's personal blog on programming, music, and memes.",
+    description: "TrebledJ's personal blog on programming, cybersecurity, music, and memes.",
 
     author: {
       alias: 'TrebledJ',
@@ -33,25 +33,22 @@ module.exports = function () {
       /* eslint-disable max-len */
       shortbio: multiline(`
       Passionate problem-solver,
-      software engineer, infosec enthusiast,
-      and amateur music composer.
-      I enjoy teaching others and thrive on learning new things.
-      When not immersed in programming, I can be found taking walks, reflecting on life, 
+      pentester,
+      and autodidact.
+      I thrive on learning new things and enjoy passing it on.
+      When not immersed in bughunting or programming, I can be found taking walks, composing a short tune, 
       and occasionally indulging in CTF challenges.
       `),
       bio: multiline(`
       Hi! (｡＾ ᴗ＾)ﾉ
       I'm Johnathan, a passionate problem-solver,
-      [software engineer](/tags/software-engineering/), [infosec enthusiast](/tags/infosec/),
-      and amateur [music composer](/tags/composition/).
-      I enjoy teaching others and thrive on learning new things.
-      When not immersed in [programming](/tags/programming/), I can be found taking walks, [reflecting on life](/tags/faith/), 
-      and occasionally indulging in [CTF challenges](/tags/ctf/).
+      pentester,
+      and autodidact.
+      I thrive on learning new things and enjoy passing it on.
+      When not immersed in bughunting or programming, I can be found taking walks, composing a short tune, 
+      and occasionally indulging in CTF challenges.
 
-      Lately, I've been diving deeper into penetration testing and working on a [variations on a theme](https://en.wikipedia.org/wiki/Variation_(music)).
-
-      When it comes to personal preferences, I have an affinity for the sleek allure of dark mode.
-      And yes, I must confess, I'm a fan of the ~~controversial~~ delightful combination of pineapple on pizza.
+      Pineapple on pizza rocks! ╚(•⌂•)╝
       `),
       /* eslint-enable max-len */
     },
@@ -105,7 +102,7 @@ module.exports = function () {
       selector: '#typewrite-text',
       strings:
         [
-          // 'Coding 💻',
+          'Coding 💻',
           // 'Playing with embedded systems ⚡️',
           // 'Composing (￣▽￣)/♫•*¨*•.¸¸♪',
           // 'Capturing flags 🚩',
