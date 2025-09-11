@@ -13,6 +13,7 @@ thumbnail_src: assets/smart-tray.jpg
 thumbnail_banner: true
 pitch: Programmed an embedded device for efficient smart-tracking of lab chemicals.
 related:
+archived: true
 ---
 
 Capstone project for my final semester at HKUST.

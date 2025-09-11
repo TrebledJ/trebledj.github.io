@@ -10,6 +10,7 @@ track_id: 1329504610
 score_id: 8527178
 related:
     posts: [buoyant-ecstasy, morning-rush]
+archived: true
 ---
 
 Composed in the student dorms during the Covid 2020 Spring.

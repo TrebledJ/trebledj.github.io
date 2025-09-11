@@ -8,6 +8,7 @@ tags:
   - programming
 thumbnail_src: assets/inspector-gadget.png
 use_math: true
+archived: true
 ---
 
 ### Challenge Description
