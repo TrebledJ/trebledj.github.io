@@ -184,7 +184,7 @@ A few tips here.
 
 	Sadly, I wasted 3 bubble teas worth of domain name to learn this valuable lesson. It's a shame that .xyz turned out this way. All those cool xyz websites and domain names out there... blocked by firewalls.
 
-	So I've opted for `trebledj.me`. I would've gone for .io, but it's thrice the price. At least the folks at domain.me seem [committed to security and combatting evil domains](https://domain.me/security/). Kudos to them.
+	So I've opted for `trebledj.me`. I would've gone for .io, but it's thrice the price. At least the folks at domain.me seem committed to security and combatting evil domains (https://domain[.]me/security/). Kudos to them.
 	{% enddetails %}
 
 4. **Choose a domain name provider/registrar.** GoDaddy, Domain.com, Namecheap are some well-known ones. They offer discounts, but security features may come with a premium. Cloudflare has security batteries included, but don't come with first-year discounts.
