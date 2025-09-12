@@ -2,9 +2,8 @@
 title: Reverse Engineering a Siemens Programmable Logic Controller for Funs and Vulns (CVE-2024-54089, CVE-2024-54090 & CVE-2025-40757)
 excerpt: When security by obscurity breaks...
 preamble: |
-    *This post is a personal mirror. The canonical post can be found on the DarkLab blog: https://blog.darklab.hk/2025/09/12/abc*
-canonicalUrl: https://blog.darklab.hk/2025/09/12/abc
-draft: true
+    *This post is a personal mirror. The canonical post can be found on the DarkLab blog: https://blog.darklab.hk/2025/09/12/reverse-engineering-a-siemens-programmable-logic-controller-for-funs-and-vulns/*
+canonicalUrl: https://blog.darklab.hk/2025/09/12/reverse-engineering-a-siemens-programmable-logic-controller-for-funs-and-vulns/
 tags:
   - reverse
   - embedded
