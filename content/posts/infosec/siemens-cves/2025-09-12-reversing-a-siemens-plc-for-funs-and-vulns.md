@@ -5,13 +5,13 @@ preamble: |
     *This post is a personal mirror. The canonical post can be found on the DarkLab blog: https://blog.darklab.hk/2025/09/12/reverse-engineering-a-siemens-programmable-logic-controller-for-funs-and-vulns/*
 canonicalUrl: https://blog.darklab.hk/2025/09/12/reverse-engineering-a-siemens-programmable-logic-controller-for-funs-and-vulns/
 tags:
-  - reverse
+  - research
   - embedded
   - pentesting
+  - reverse
   - c
   - cpp
   - writeup
-  - research
 thumbnail_src: assets/thumbnail.jpg
 thumbnail_banner: false
 related:
