@@ -12,8 +12,8 @@ tags:
   - cpp
   - writeup
   - research
-# thumbnail_src: assets/thumbnail.jpg
-# thumbnail_banner: false
+thumbnail_src: assets/thumbnail.jpg
+thumbnail_banner: false
 related:
     tags: [infosec]
 ---
