@@ -173,7 +173,7 @@ module.exports = function (eleventyConfig) {
 
   function thumbnailShortcode(post, classes) {
     classes = amendClasses(`${classes} thumbnail`);
-    
+
     if (process.env.ENVIRONMENT === 'fast') {
       // {% thumbnail %} is a major bottleneck, because:
       //  1) it's used in Nunjucks macros. This limits filters to only SYNCHRONOUS filters.
@@ -262,16 +262,16 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addShortcode('thumbnail', thumbnailShortcode);
   eleventyConfig.addTransform('imgThumbnail', async function (content) {
     // Inspired from https://multiline.co/mment/2022/08/eleventy-transforms-nunjucks-macros/
-    if (!this.outputPath || !this.outputPath.endsWith(".html"))
+    if (!this.outputPath || !this.outputPath.endsWith('.html'))
       return content;
 
     // Find all relevant placeholders on the page
-    const placeholderPattern = new RegExp("<!-- IMAGE {[^}]+} -->", "g");
+    const placeholderPattern = new RegExp('<!-- IMAGE {[^}]+} -->', 'g');
     const placeholders = content.match(placeholderPattern);
 
     if (placeholders) {
       return new Promise((resolve, reject) => {
-        const promises = placeholders.map(async (placeholder) => {
+        const promises = placeholders.map(async placeholder => {
           // Extract structured data properties
           const propertiesPattern = /{[^}]+}/;
           const propertiesString = placeholder.match(propertiesPattern);
@@ -282,7 +282,7 @@ module.exports = function (eleventyConfig) {
             // Business as usual.
             const { ext, options } = getOptions(src);
             const metadata = await eleventyImage(src, options);
-            const html = makeImageFromMetadata(metadata, ext, classes, true, { alt, loading: 'lazy' })
+            const html = makeImageFromMetadata(metadata, ext, classes, true, { alt, loading: 'lazy' });
             content = content.replace(placeholder, html);
           }
         });
@@ -290,7 +290,7 @@ module.exports = function (eleventyConfig) {
         // Wait for async work to finish or error out
         return Promise.all(promises)
           .then(() => resolve(content))
-          .catch((error) => reject(error));
+          .catch(error => reject(error));
       });
     }
     return content;

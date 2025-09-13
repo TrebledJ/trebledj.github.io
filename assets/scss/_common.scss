@@ -34,15 +34,13 @@ html {
 a {
     --bs-link-color-rgb: var(--link-color-rgb);
     --bs-link-hover-color-rgb: var(--link-color-rgb);
-    text-decoration-thickness: 1px;
     text-underline-offset: 1.5px;
+    text-decoration: none;
 }
 
 // // Animated underline.
 // // https://www.dannyguo.com/blog/animated-multiline-link-underlines-with-css
 // a {
-//     // See Note [!important].
-//     text-decoration: none !important;
 
 //     background-image: linear-gradient(to right, currentColor, currentColor);
 //     background-size: .5rem 0.06em;
@@ -60,10 +58,12 @@ a:active {
 
 a:has(> i:only-child) {
     background-image: none;
+    text-decoration: none;
 }
 
 .no-decoration {
     background-image: none;
+    text-decoration: none;
 }
 
 abbr,
