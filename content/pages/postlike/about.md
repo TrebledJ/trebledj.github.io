@@ -159,38 +159,6 @@ I didn't know what I wanted to do career-wise. So I looked for a subject I liked
 
 You mean you don't have a sense of humour?
 
-#### Why do you believe in all this Jesus stuff?
-
-Because I see value in it.
-
-{% details "Is there a God out there?", "open" %}
-I believe we were created with a purpose, for a purpose. It doesn't really make sense to me that we just poof'ed into existence from nothing. The [mathematician John Lennox argues](https://youtu.be/VrIvwPConv0?si=jxHqqO2IVNwmA8X2&t=124) like so:
-
-> But people are now desperate to show the universe created itself from nothing, which seems to me to be an immediate oxymoron. If I say "*x* created *y*", I'm assuming the existence of *x*, I have to explain the existence of *y*. If I say "*x* created *x*", I'm assuming the existence of *x*, I have to explain the existence of *x*.
-
-So yes, I believe there is a God out there.
-{% enddetails %}
-
-{% details "On Christianity", "open" %}
-It's worth mentioning that Christianity is a nuanced faith. Although we worship the same God (at least in name) as the God in the Catholic, Islamic, and Judaic faith, our principles and values are fundamentally different.
-
-But it gets murkier. Christianity itself has many branches and sub-branches (aka denominations and sub-denominations). Between branches, we disagree when it comes to emphasis on certain spiritual gifts, debatable metaphysical concepts, and other things.
-
-So just be aware that "Christianity" is an umbrella term for many similar beliefs, like Elgar's Enigma Variations.
-{% enddetails %}
-
-{% details "So why Christianity?", "open" %}
-My belief comes down to two factors: personal and factual.
-
-The personal stuff is rather cheesy and not really suited to a public webpage. So Imma skip it.
-
-If we look at the hard evidence, it becomes clear the Bible isn't merely a story book. It's the amalgamation of multiple authors preserved over thousands of years. Evidence? There's [plenty](https://www.gotquestions.org/Bible-reliable.html). Cross-references? [Tons](https://www.chrisharrison.net/index.php/visualizations/BibleViz#:~:text=63%2C779%20cross%20references). ~~Hotel? Trivago.~~
-{% enddetails %}
-
-Ultimately, my faith is both personal and communal. It forms a part of my identity, whilst being shared with others. And this communal, spiritual component bridges people together, even if we're from completely different backgrounds or hate each other's guts.
-
-This isn't much of an apologia, and perhaps I've left you with more questions than answers. But hopefully this rationale is sufficient for now. I'm open to (reasonable) questions.
-
 ### This Website
 
 #### Why doesn't your website support Internet Explorer and Opera Mini?

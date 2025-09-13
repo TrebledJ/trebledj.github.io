@@ -26,6 +26,7 @@ related:
     auto: true # Use an auto algorithm to determine whether a post is related.
     # See more params in related.js.
 draft: true  # Set true to not publish.
+archived: true  # Set true to archive. Link still exists, but won't be shown in any collection.
 feed: false  # Don't show in feed.
 noindex: true # Set true to add a noindex metadata, to indicate SE robots to not index this page.
 permalink: /posts/permalink/to/post/
@@ -36,6 +37,7 @@ sitemap:
 tocOptions: '{"tags":["h2","h3","h4"]}' # https://github.com/jdsteinbach/eleventy-plugin-toc?tab=readme-ov-file#options
 preamble: Short text which isn't included in the body proper and won't be included in embeds.
 eleventyExcludeFromCollections: true
+canonicalUrl: https://example.com
 ---
 
 markdown/html/liquid content here

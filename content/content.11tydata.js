@@ -8,7 +8,7 @@ module.exports = {
   showToc: false,
 
   eleventyComputed: {
-    eleventyExcludeFromCollections: data => (data.draft && !process.env.BUILD_DRAFTS),
+    eleventyExcludeFromCollections: data => data.archived || (data.draft && !process.env.BUILD_DRAFTS),
     permalink: data => (data.draft && !process.env.BUILD_DRAFTS ? false : data.permalink),
     hasPostedDate: data => {
       // Check if the file contains a date.

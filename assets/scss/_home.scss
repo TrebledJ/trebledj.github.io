@@ -45,6 +45,13 @@ html[data-theme="light"] .hero-section {
     .carousel {
         height: auto;
 
+        margin-top: -3rem; // Offset hack to allow transform + glow to not be clipped.
+        margin-bottom: 3rem; // Extend bottom to cover for upward shift.
+        
+        .carousel-inner {
+            padding-top: 3rem; // Offset hack to allow transform + glow to not be clipped.
+        }
+
         .post-preview {
             @media (hover: hover) {
                 &:hover {

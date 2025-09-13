@@ -8,6 +8,7 @@ tags:
   - programming
   - linux
   - notes
+  - research
   - writeup
 thumbnail_src: assets/drogon-thumbnail.png
 thumbnail_banner: true

@@ -99,3 +99,6 @@
 {% if isArticle %}
     {% include "utilities/metadata-article.html" %}
 {% endif %}
+
+{# How Google Search displays site name #}
+<script type="application/ld+json">{"@context": "https://schema.org","@type": "WebSite","name": "{{site.title | safe}}","url": "{{site.url}}"}</script>

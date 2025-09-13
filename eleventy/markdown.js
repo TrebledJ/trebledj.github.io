@@ -60,6 +60,9 @@ module.exports = function (eleventyConfig) {
     // Codeblocks and Syntax Highlighting
     mdLib.use(require('./detail/markdown-it/markdown-it-prism-adapter'), {
       init(_Prism) {
+        // Avoid "Language does not exist: " console logs
+        PrismLoad.silent = true;
+
         PrismAlias('cpp', ['csp']);
         PrismAlias('armasm', ['asm']);
         PrismLoad(['diff']);
