@@ -157,6 +157,7 @@ html[data-theme="dark"] {
         border: $border-width solid;
         border-color: var(--border-color) !important;
         background-image: none;
+        text-decoration: none;
     }
 
     .page-item:not(.faded) .page-link {
@@ -289,4 +290,5 @@ p.subheading {
 a.lightbox-single,
 .lightbox-gallery > a {
     background-image: none;
+    text-decoration: none;
 }

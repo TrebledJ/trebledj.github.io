@@ -77,7 +77,7 @@
     .center {
         text-align: center;
     }
-    
+
     .no-center {
         /* This class serves no purpose other than making markdown assign attribute lists correctly. (Needs some whitespace tuning.) */
         margin: 0;
@@ -96,12 +96,14 @@
         margin-right: auto;
     }
 
-    b, strong {
+    b,
+    strong {
         // Don't bold buttons, etc.
         color: var(--bold-color);
     }
 
-    a b, a strong {
+    a b,
+    a strong {
         color: inherit;
     }
 
@@ -202,11 +204,15 @@
         // cursor: inherit;
     }
 
+    a {
+        text-decoration: underline;
+        text-decoration-thickness: 1px;
+    }
+
     // External link indicator.
-    a[href^="http"]::after
-    {
+    a[href^="http"]::after {
         content: "↗";
-        font-family: system-ui,-apple-system,sans-serif;
+        font-family: system-ui, -apple-system, sans-serif;
         font-style: normal;
         font-weight: 800;
         color: var(--accent-color);
@@ -214,14 +220,14 @@
         font-size: .65em;
         line-height: .75;
     }
-    a.no-exlink::after
-    {
+    a.no-exlink::after {
         content: none;
     }
 
-    a[id^="fnref"]
-    {
+    a[id^="fnref"],
+    a.footnote-backref {
         background-image: none;
+        text-decoration: none;
     }
 }
 
