@@ -18,6 +18,11 @@ module.exports = function () {
     preview: 'preview.trebledj.pages.dev',
   }[process.env.DOMAIN_ENVIRONMENT || 'production'];
 
+  const extraNavPages = [];
+  if (process.env.ENVIRONMENT !== 'production') {
+    extraNavPages.push({ text: 'StyleGuide', url: '/styleguide' });
+  }
+
   return {
     title: "TrebledJ's Pages",
     url: `https://${domain}`,
@@ -58,6 +63,7 @@ module.exports = function () {
       { text: 'Posts', url: '/posts' },
       // { text: 'Projects', url: '/tags/project/' },
       { text: 'Music', url: '/music' },
+      ...extraNavPages,
     ],
     search: {
       // https://fontawesome.com/icons/

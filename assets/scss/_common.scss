@@ -34,21 +34,23 @@ html {
 a {
     --bs-link-color-rgb: var(--link-color-rgb);
     --bs-link-hover-color-rgb: var(--link-color-rgb);
+    text-decoration-thickness: 1px;
+    text-underline-offset: 1.5px;
 }
 
-// Animated underline.
-// https://www.dannyguo.com/blog/animated-multiline-link-underlines-with-css
-a {
-    // See Note [!important].
-    text-decoration: none !important;
+// // Animated underline.
+// // https://www.dannyguo.com/blog/animated-multiline-link-underlines-with-css
+// a {
+//     // See Note [!important].
+//     text-decoration: none !important;
 
-    background-image: linear-gradient(to right, currentColor, currentColor);
-    background-size: .5rem 0.06em;
-    background-position: 0 100%;
-    background-repeat: no-repeat;
-    transition: background-size $transition-duration linear;
-    cursor: pointer;
-}
+//     background-image: linear-gradient(to right, currentColor, currentColor);
+//     background-size: .5rem 0.06em;
+//     background-position: 0 100%;
+//     background-repeat: no-repeat;
+//     transition: background-size $transition-duration linear;
+//     cursor: pointer;
+// }
 
 a:hover,
 a:focus,
