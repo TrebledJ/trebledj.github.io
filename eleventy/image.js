@@ -142,8 +142,8 @@ module.exports = function (eleventyConfig) {
     attrs.style += `aspect-ratio: auto ${defsrc.width} / ${defsrc.height}`;
 
     const attrStr = Object.entries(attrs).map(e => `${e[0]}="${e[1]}"`).join(' ');
-    return `<img class="${classes.join(' ')}"
-            src="${defsrc.url}" ${attrStr} />`
+    return `<img class="${classes.join(' ').replace('"', '')}"
+            src="${defsrc.url.replace('"', '%22')}" ${attrStr} />`
       .replaceAll(/\s{2,}/g, ' ');
   }
 
@@ -173,7 +173,7 @@ module.exports = function (eleventyConfig) {
 
   function thumbnailShortcode(post, classes) {
     classes = amendClasses(`${classes} thumbnail`);
-
+    
     if (process.env.ENVIRONMENT === 'fast') {
       // {% thumbnail %} is a major bottleneck, because:
       //  1) it's used in Nunjucks macros. This limits filters to only SYNCHRONOUS filters.
@@ -189,6 +189,13 @@ module.exports = function (eleventyConfig) {
 
     const removeTagsRegex = /(<\w+>)|(<\/\w+>)/g;
     const alt = `Thumbnail for ${post.data.title.replace(removeTagsRegex, '')}`;
+
+    const properties = JSON.stringify({
+      alt,
+      src,
+      classes,
+    });
+    return `<!-- IMAGE ${properties} -->`;
 
     const { ext, options } = getOptions(src);
     eleventyImage(src, options);
@@ -253,6 +260,41 @@ module.exports = function (eleventyConfig) {
   // Synchronous shortcode. Useful for Nunjucks macro.
   // Doesn't work with remote URLs.
   eleventyConfig.addShortcode('thumbnail', thumbnailShortcode);
+  eleventyConfig.addTransform('imgThumbnail', async function (content) {
+    // Inspired from https://multiline.co/mment/2022/08/eleventy-transforms-nunjucks-macros/
+    if (!this.outputPath || !this.outputPath.endsWith(".html"))
+      return content;
+
+    // Find all relevant placeholders on the page
+    const placeholderPattern = new RegExp("<!-- IMAGE {[^}]+} -->", "g");
+    const placeholders = content.match(placeholderPattern);
+
+    if (placeholders) {
+      return new Promise((resolve, reject) => {
+        const promises = placeholders.map(async (placeholder) => {
+          // Extract structured data properties
+          const propertiesPattern = /{[^}]+}/;
+          const propertiesString = placeholder.match(propertiesPattern);
+
+          if (propertiesString) {
+            // Reconstruct parameters.
+            const { alt, src, classes } = JSON.parse(propertiesString);
+            // Business as usual.
+            const { ext, options } = getOptions(src);
+            const metadata = await eleventyImage(src, options);
+            const html = makeImageFromMetadata(metadata, ext, classes, true, { alt, loading: 'lazy' })
+            content = content.replace(placeholder, html);
+          }
+        });
+
+        // Wait for async work to finish or error out
+        return Promise.all(promises)
+          .then(() => resolve(content))
+          .catch((error) => reject(error));
+      });
+    }
+    return content;
+  });
 
   eleventyConfig.addShortcode('video', (src, classes) => {
     classes = amendClasses(classes);
