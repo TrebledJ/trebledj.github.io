@@ -2,6 +2,7 @@ const { DateTime } = require('luxon');
 const MarkdownIt = require('markdown-it');
 
 const cheerio = require('cheerio');
+const domino = require('domino');
 const { getRelatedPosts, getRelatedTags, getTagsByPrefix } = require('./detail/related');
 const { nonEmptyContainerSentinel } = require('./detail/utils');
 const selectHomePosts = require('./detail/select-home-posts');
@@ -10,6 +11,131 @@ const { stripBetweenTags } = require('./detail/helpers');
 
 function count(str, needle) {
   return (str.match(needle) || []).length;
+}
+
+const { performance } = require('perf_hooks');
+
+
+function getWordCountByDomino(content) {
+  // Load the content into a Domino document
+  const doc = domino.createWindow(content).document;
+
+  // Count words in <code> elements
+  const codeWords = Array.from(doc.querySelectorAll('code')).reduce((total, codeElement) => {
+    const text = codeElement.textContent || '';
+    return total + count(text, /[A-Za-z_][A-Za-z0-9_-]*/g);
+  }, 0);
+
+  // Remove auxiliary, non-textual elements
+  Array.from(doc.querySelectorAll('code, details:not([open]), img, .footnotes, .caption')).forEach(el => {
+    el.parentNode.removeChild(el);
+  });
+
+  const leoa = doc.getElementById('logical-end-of-article');
+  if (leoa) {
+    let body = leoa.parentNode;
+    let body_child = leoa;
+    while (body.tagName !== "BODY") {
+      body_child = body;
+      body = body.parentNode;
+      if (body === null)
+        throw new Error('expected body parent');
+    }
+    const children = Array.from(body.childNodes);
+    // Find #leoa in body
+    let idx = children.indexOf(body_child);
+    if (idx === -1) {
+      console.warn(`${this.page.inputPath}: Found #logical-end-of-article, but not a direct child of body.`);
+    } else {
+      // Remove all siblings after leoa
+      for (let i = children.length - 1; i >= idx; i--) {
+        body.removeChild(children[i]);
+      }
+    }
+  }
+
+  const article = doc.body.textContent;
+  const words = count(article, /[^\s]{3,}/g);
+
+  return words + codeWords;
+}
+
+function getWordCountByCheerio(content) {
+  // Load it with DOM wrapping. The extra HTML wrappers don't really matter,
+  // since we'll just call .innerText in the end.
+  const $ = cheerio.load(content);
+
+  const codeWords = $('code').toArray().map(e => (
+    count($(e).prop('innerText') ?? '', /[A-Za-z_][A-Za-z0-9_-]*/g)
+  )).reduce((a, b) => a + b, 0);
+
+  // Ignore auxiliary, non-textual elements.
+  $('code').remove();
+  $('details:not([open])').remove();
+  $('img').remove();
+  $('.footnotes').remove();
+  $('.caption').remove();
+
+  const leoa = $('#logical-end-of-article');
+  if (leoa.length === 1) {
+    const children = leoa.parent().parent().children();
+    // Find #leoa in body.
+    let idx = 0;
+    while (idx < children.length && children[idx++] !== leoa.parent()[0])
+      ;
+    if (idx === children.length) {
+      console.warn(`${this.page.inputPath}: Found #logical-end-of-article, but not a direct child of body.`);
+    } else {
+      children.slice(idx - 1).remove();
+    }
+  } else if (leoa.length > 1) {
+    console.warn(`${this.page.inputPath}: Found > 1 #logical-end-of-article. Was the tag closed properly?`);
+  }
+
+  const article = $('.post-body').prop('innerText') ?? $('*').prop('innerText');
+  const words = count(article, /[^\s]{3,}/g);
+  return words + codeWords;
+}
+
+let domino_win = 0;
+
+
+function getWordCount(content) {
+  const count = 5;
+  const domino_times = [];
+  for (let i = 0; i < count; i++) {
+    const domino_start = performance.now();
+    const wDomino = getWordCountByDomino(content);
+    const domino_end = performance.now();
+    domino_times.push(domino_end - domino_start);
+  }
+  const cheerio_times = [];
+  for (let i = 0; i < count; i++) {
+    const cheerio_start = performance.now();
+    const wCheerio = getWordCountByCheerio(content);
+    const cheerio_end = performance.now();
+    cheerio_times.push(cheerio_end - cheerio_start);
+  }
+
+  // console.log(`${this.page.inputPath}: Domino v Cheerio = ${wDomino} v ${wCheerio} (delta=${Math.abs(wDomino - wCheerio)})`);
+  // console.log(`Domino v Cheerio (Time) = ${(domino_end - domino_start).toFixed(2)}ms v ${(cheerio_end - cheerio_start).toFixed(2)}ms`);
+  if (content.length > 40000) {
+    if (median(domino_times) < median(cheerio_times))
+      domino_win++;
+    else
+      domino_win--;
+  }
+  console.log(`${this.page.inputPath}: ${domino_win} / Domino v Cheerio (Avg)  = ${median(domino_times).toFixed(2)}ms v ${median(cheerio_times).toFixed(2)}ms`);
+  // return wDomino;
+  return getWordCountByDomino(content);
+}
+
+function median(xs) {
+  xs.sort();
+  const med = Math.floor(xs.length / 2);
+  return xs.length % 2 ? xs[med] : (xs[med - 1] + xs[med]) / 2
+  // xs = xs.length < 5 ? xs : xs.slice()
+  // return xs.reduce((a, b) => a + b, 0) / xs.length;
 }
 
 module.exports = function (eleventyConfig) {
@@ -28,7 +154,7 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addFilter('contains', (array, e) => array.includes(e));
 
   eleventyConfig.addFilter('exclude', (array, items) => (
-    array.filter(e => (typeof (items) === 'string' ? e !== items : !items.includes(e)))
+    typeof (items) === 'string' ? array.filter(e => e !== items) : array.filter(e => !items.includes(e))
   ));
 
   eleventyConfig.addFilter('push', (array, item) => {
@@ -91,42 +217,7 @@ module.exports = function (eleventyConfig) {
   if (process.env.ENVIRONMENT === 'fast') {
     eleventyConfig.addFilter('wordcountFocused', content => count(content, /\s+/g));
   } else {
-    eleventyConfig.addFilter('wordcountFocused', function (content) {
-      // Load it with DOM wrapping. The extra HTML wrappers don't really matter,
-      // since we'll just call .innerText in the end.
-      const $ = cheerio.load(content);
-
-      const codeWords = $('code').toArray().map(e => (
-        count($(e).prop('innerText') ?? '', /[A-Za-z_][A-Za-z0-9_-]*/g)
-      )).reduce((a, b) => a + b, 0);
-
-      // Ignore auxiliary, non-textual elements.
-      $('code').remove();
-      $('details:not([open])').remove();
-      $('img').remove();
-      $('.footnotes').remove();
-      $('.caption').remove();
-
-      const leoa = $('#logical-end-of-article');
-      if (leoa.length === 1) {
-        const children = leoa.parent().parent().children();
-        // Find #leoa in body.
-        let idx = 0;
-        while (idx < children.length && children[idx++] !== leoa.parent()[0])
-          ;
-        if (idx === children.length) {
-          console.warn(`${this.page.inputPath}: Found #logical-end-of-article, but not a direct child of body.`);
-        } else {
-          children.slice(idx - 1).remove();
-        }
-      } else if (leoa.length > 1) {
-        console.warn(`${this.page.inputPath}: Found > 1 #logical-end-of-article. Was the tag closed properly?`);
-      }
-
-      const article = $('.post-body').prop('innerText') ?? $('*').prop('innerText');
-      const words = count(article, /[^\s]{3,}/g);
-      return words + codeWords;
-    });
+    eleventyConfig.addFilter('wordcountFocused', getWordCount);
   }
 
   // A filter to murder tags and their children brutally with regex. Please don't take this comment seriously.
