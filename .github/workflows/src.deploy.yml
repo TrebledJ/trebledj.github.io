@@ -76,7 +76,7 @@ jobs:
           echo '```' >> $GITHUB_STEP_SUMMARY
 
       - name: Commit & Push Site Build
-        uses: stefanzweifel/git-auto-commit-action@v5
+        uses: stefanzweifel/git-auto-commit-action@v6
         with:
           commit_message: Build site from GitHub Actions
           branch: site
