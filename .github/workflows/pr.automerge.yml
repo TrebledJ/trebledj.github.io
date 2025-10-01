@@ -57,7 +57,7 @@ jobs:
       - run: cp -r tmp/_site/ master/
 
       - name: Download PR Site
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v5
         with:
           name: ${{ needs.build.outputs.artifact }}
           path: pr/
