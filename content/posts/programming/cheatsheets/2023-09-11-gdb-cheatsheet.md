@@ -484,7 +484,7 @@ Printing bytes in Python is [difficult to do concisely](https://stackoverflow.co
 r <<<$(perl -e 'print "A"x4 . "\x01\x02"x2;')
 ```
 
-This uses a Bash [here-string](https://www.gnu.org/savannah-checkouts/gnu/bash/manual/bash.html#Here-Strings) to feed goodies into input. Not supported on all machines.
+This uses a Bash [here-string](https://www.gnu.org/software/bash/manual/bash.html#Here-Strings) to feed goodies into input. Not supported on all machines.
 
 <!--
 **Directly from GDB: Continue**

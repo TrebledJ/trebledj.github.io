@@ -144,30 +144,36 @@ module.exports = function () {
       {
         name: 'GitHub', icon: 'fab fa-github', color: 'rgb(150, 60, 180)', link: 'https://github.com/TrebledJ',
       },
-      // {
-      //   name: 'Mastodon (infosec.exchange)',
-      //   icon: 'fab fa-mastodon',
-      //   color: 'rgb(99, 101, 255)',
-      //   link: 'https://infosec.exchange/@trebledj',
-      // },
+      {
+        name: 'Mastodon (infosec.exchange)',
+        icon: 'fab fa-mastodon',
+        color: 'rgb(99, 101, 255)',
+        link: 'https://infosec.exchange/@trebledj',
+      },
+      {
+        name: 'Twitter/X',
+        icon: 'fab fa-twitter',
+        color: 'rgb(99, 101, 255)',
+        link: 'https://x.com/trebledjjj',
+      },
       {
         name: 'StackOverflow',
         icon: 'fab fa-stack-overflow',
         color: 'rgb(236, 124, 34)',
         link: 'https://stackoverflow.com/users/10239789/trebledj',
       },
-      {
-        name: 'CodinGame',
-        img: '/img/logos/codingame.webp',
-        link: 'https://www.codingame.com/profile/8444100ecb9723c1ec542346b0630aaa2821532',
-      },
+      // {
+      //  name: 'CodinGame',
+      //  img: '/img/logos/codingame.webp',
+      //  link: 'https://www.codingame.com/profile/8444100ecb9723c1ec542346b0630aaa2821532',
+      // },
       {
         name: 'SoundCloud',
         icon: 'fab fa-soundcloud',
         color: 'rgb(237, 110, 30)',
         link: 'https://soundcloud.com/trebledj',
       },
-      { name: 'MuseScore', img: '/img/logos/musescore.webp', link: 'https://musescore.com/user/20636901' },
+      // { name: 'MuseScore', img: '/img/logos/musescore.webp', link: 'https://musescore.com/user/20636901' },
       // {
       //   name: "Spotify",
       //   icon: "fab fa-spotify",
