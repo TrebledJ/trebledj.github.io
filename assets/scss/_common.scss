@@ -135,6 +135,13 @@ h6 {
     font-family: var(--default-font); // Default.
 }
 
+mark {
+    padding: .13em 0;
+    --bs-highlight-bg: var(--mark-color);
+    // border: 1px red solid;
+    color: inherit;
+}
+
 pre,
 .alert {
     border-radius: $border-radius !important;

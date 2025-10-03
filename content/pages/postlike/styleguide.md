@@ -473,6 +473,8 @@ Hello world!
 
 #### Code: `mark`
 
+Use `@@x@@` to highlight parts of code.
+
 ```js {data-label="prism-show-filename.js" .line-numbers data-start=13}
 Prism.plugins.toolbar.registerButton('show-filename', function (env) {
   var pre = env.element.parentNode;
@@ -480,16 +482,36 @@ Prism.plugins.toolbar.registerButton('show-filename', function (env) {
     return;
   }
 
-  var <mark>filename</mark> = pre.getAttribute('data-filename');
+  var @@filename@@ = pre.getAttribute('data-filename');
   if (!filename) {
       return;
   }
 
-  var element = document.createElement('span');
-  element.textContent = filename;
+@@  var element = document.createElement('span');
+  element.textContent = filename;@@
 
   return element;
 });
+```
+
+```cpp
+#include <iostream>
+
+int main() {
+  std::cout << @@xyz@@ << std::endl;
+  std::cout << @@xyz + 20 + foo()@@ << std::endl;
+}
+```
+
+```rust
+struct X {
+  i: i32,
+};
+
+fn main() {
+  let x = @@X{i:10}@@;
+  println!("{:?}", x);
+}
 ```
 
 ## Custom

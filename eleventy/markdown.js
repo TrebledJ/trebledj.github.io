@@ -3,9 +3,10 @@ import markdownItAttrs from 'markdown-it-attrs';
 import markdownItFootnote from 'markdown-it-footnote';
 import markdownItPrism from 'markdown-it-prism';
 import pluginTOC from 'eleventy-plugin-toc';
+import markdownItSpoiler from './detail/markdown-it/markdown-it-spoiler.js';
+// import markdownItMark from 'markdown-it-mark';
 
 import PrismLoad from 'prismjs/components/index.js';
-import markdownItSpoiler from './detail/markdown-it/markdown-it-spoiler.js';
 import markdownItPrismAdapter from './detail/markdown-it/markdown-it-prism-adapter.js';
 
 function PrismAlias(target, aliases) {
@@ -40,6 +41,8 @@ export default function (eleventyConfig) {
     });
 
     mdLib.use(markdownItSpoiler);
+    // mdLib.use(markdownItMark);
+
     mdLib.use(markdownItFootnote);
 
     mdLib.renderer.rules.footnote_block_open = () => (
@@ -71,6 +74,7 @@ export default function (eleventyConfig) {
           // Load diff-highlight plugin after mdLib.use to avoid triggering warning.
           await import('prismjs/plugins/command-line/prism-command-line.js');
           await import('prismjs/plugins/toolbar/prism-toolbar.js');
+          await import('prismjs/plugins/keep-markup/prism-keep-markup.js');
           // await import('prismjs/plugins/diff-highlight/prism-diff-highlight.js');
           await import('./detail/prism/prism-diff-highlight.js');
           // Load custom plugins.

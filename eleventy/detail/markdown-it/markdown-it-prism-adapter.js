@@ -4,7 +4,8 @@
 
 import PrismLoad from 'prismjs/components/index.js';
 import { escapeHtml, unescapeAll } from './markdown-it-utils.js';
-import * as domino from 'domino';
+// import * as domino from 'domino';
+import * as jsdom from 'jsdom';
 
 let _prism;
 if (typeof Prism === 'undefined') {
@@ -20,23 +21,57 @@ if (typeof Prism === 'undefined') {
 // This must run AFTER loading the base PrismJS (because they do some weird
 // shenanigans with window.Element), but BEFORE loading plugins.
 
+function textToDOM(text) {
+  return jsdom.JSDOM.fragment(text);
+}
+
 if (typeof window === 'undefined') {
-  global.window = domino.createWindow('');
+  global.window = (new jsdom.JSDOM('')).window;
   global.getComputedStyle = global.window.getComputedStyle;
   global.document = global.window.document;
 }
 
-function textToDOM(text) {
-  // domino: Use `template` as a workaround: https://github.com/fgnass/domino/issues/73
-  const templ = document.createElement('template');
-  templ.innerHTML = text;
-  return templ.content;
+// if (typeof window === 'undefined') {
+//   global.window = domino.createWindow('');
+//   global.getComputedStyle = global.window.getComputedStyle;
+//   global.document = global.window.document;
+// }
+
+// function textToDOM(text) {
+//   // domino: Use `template` as a workaround: https://github.com/fgnass/domino/issues/73
+//   const templ = document.createElement('template');
+//   templ.innerHTML = text;
+//   return templ.content;
+// }
+
+function parseMark(code) {
+  const atatDelims = code.split('@@');
+  if (atatDelims.length % 2 !== 1) {
+    // throw new Error(`expected an even number of '@@' characters (odd count of segments)`);
+    return code; // No change.
+  }
+
+  // // Iterate through "in"-segments and ensure no newlines.
+  // for (let i = 1; i < atatDelims.length; i += 2) {
+  //   if (atatDelims[i].includes('\n')) {
+  //     return code; // Fail.
+  //   }
+  // }
+
+  let reconstructed = '';
+  for (let i = 0; i < atatDelims.length; i++) {
+    reconstructed += atatDelims[i];
+    if (i < atatDelims.length - 1) {
+      reconstructed += (i % 2 === 0 ? '<mark>' : '</mark>');
+    }
+  }
+  return reconstructed;
 }
 
 // ------------------------------------------ //
 
 const DEFAULT_OPTIONS = {
-  init: () => {},
+  init: () => { },
   defaultLanguage: undefined,
   // ...
 };
@@ -97,10 +132,13 @@ export default function MarkdownItPrismAdapter(markdownit, useroptions) {
           PrismLoad([langName]);
       }
 
+      // Handle @@x@@ --> <mark>x</mark>.
+      const withMark = parseMark(escaped);
+
       // Some plugins such as toolbar venture into codeElement.parentElement.parentElement,
       // so we'll wrap the `pre` in an additional `div` for class purposes.
       // eslint-disable-next-line max-len
-      const result = `<div><pre${slf.renderAttrs(tmpToken)}><code class="${mdoptions.langPrefix}${langName}">${escaped}</code></pre></div>`;
+      const result = `<div><pre${slf.renderAttrs(tmpToken)}><code class="${mdoptions.langPrefix}${langName}">${withMark}</code></pre></div>`;
       const el = textToDOM(result);
       Prism.highlightElement(el.firstChild.firstChild.firstChild);
       const newResult = el.firstChild.firstChild.outerHTML;
