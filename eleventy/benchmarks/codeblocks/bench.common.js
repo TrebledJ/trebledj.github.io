@@ -1,5 +1,5 @@
-const PrismLoad = require('prismjs/components/');
-const { unescapeAll, escapeHtml } = require('./markdown-it-helpers');
+import PrismLoad from 'prismjs/components/';
+import { unescapeAll, escapeHtml } from './markdown-it-helpers.js';
 
 module.exports.setGlobals = function (_document) {
   if (typeof global.document !== 'undefined')

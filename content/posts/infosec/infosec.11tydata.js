@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   ogsection: 'cybersecurity',
   tags: [
     'infosec',

@@ -1,4 +1,4 @@
-const { decodeHTML } = require('entities');
+import { decodeHTML } from 'entities';
 
 const HTML_ESCAPE_TEST_RE = /[&<>"]/;
 const HTML_ESCAPE_REPLACE_RE = /[&<>"]/g;
@@ -13,7 +13,7 @@ function replaceUnsafeChar(ch) {
   return HTML_REPLACEMENTS[ch];
 }
 
-function escapeHtml(str) {
+export function escapeHtml(str) {
   if (HTML_ESCAPE_TEST_RE.test(str)) {
     return str.replace(HTML_ESCAPE_REPLACE_RE, replaceUnsafeChar);
   }
@@ -87,7 +87,7 @@ function replaceEntityPattern(match, name) {
 //   return str.replace(UNESCAPE_MD_RE, '$1');
 // }
 
-function unescapeAll(str) {
+export function unescapeAll(str) {
   if (str.indexOf('\\') < 0 && str.indexOf('&') < 0) { return str; }
 
   return str.replace(UNESCAPE_ALL_RE, function (match, escaped, entity) {
@@ -95,5 +95,3 @@ function unescapeAll(str) {
     return replaceEntityPattern(match, entity);
   });
 }
-
-module.exports = { escapeHtml, unescapeAll };

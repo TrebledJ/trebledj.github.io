@@ -1,6 +1,6 @@
 /* eslint-disable import/no-unresolved */
-const jsdom = require('jsdom');
-const { setGlobals, setRenderFenceRule } = require('./bench.common');
+import jsdom from 'jsdom';
+import { setGlobals, setRenderFenceRule } from './bench.common.js';
 
 const { JSDOM } = jsdom;
 

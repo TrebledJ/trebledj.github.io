@@ -137,7 +137,7 @@ const postProcess = (state, delimiters) => {
   }
 };
 
-module.exports = function (md, frontPriorMode = false) {
+export default function (md, frontPriorMode = false) {
   md.inline.ruler.before('emphasis', 'spoiler', tokenize(frontPriorMode));
   md.inline.ruler2.before('emphasis', 'spoiler', state => {
     postProcess(state, state.delimiters);

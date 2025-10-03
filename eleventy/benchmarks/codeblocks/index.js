@@ -1,10 +1,10 @@
 /* eslint-disable import/no-dynamic-require, no-console */
-const fs = require('fs');
-const PrismLoad = require('prismjs/components/');
-const MarkdownIt = require('markdown-it');
-const { Timer } = require('./stoolmark');
-const isEqualHTML = require('./isEqualHTML');
-const { plot } = require('./plotBenchmark');
+import fs from 'fs';
+import PrismLoad from 'prismjs/components/';
+import MarkdownIt from 'markdown-it';
+import { Timer } from './stoolmark.js';
+import { isEqualHTML } from './isEqualHTML.js';
+import { plot } from './plotBenchmark.js';
 
 // Setup markdown and prism.
 const md = MarkdownIt({
@@ -69,7 +69,7 @@ for (const { name, loaderFile } of cases) {
     seconds: (typeof seconds === 'undefined' ? undefined : seconds),
     /* eslint-enable no-undef */
     setup() {
-      const { setup } = require(loaderFile);
+      import { setup } from loaderFile;
       setup(md);
 
       // Sanity check: ensure rendered HTML is equivalent.

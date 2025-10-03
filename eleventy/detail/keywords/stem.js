@@ -71,7 +71,7 @@ const re_5 = /^(.+?)e$/;
 const re_5_1 = /ll$/;
 const re3_5 = new RegExp(`^${C}${v}[^aeiouwxy]$`);
 
-module.exports = function stem(w) {
+export function stem(w) {
   let stem;
   let suffix;
   let firstch;

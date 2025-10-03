@@ -2,9 +2,9 @@
  * A collection of useful markdown shortcodes to enhance reader experience.
  */
 
-const image = require('./image');
+import image from './image.js';
 
-module.exports = function (eleventyConfig) {
+export default function (eleventyConfig) {
   image(eleventyConfig);
 
   eleventyConfig.addShortcode('alert', (role, icon) => {

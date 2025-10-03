@@ -1,6 +1,6 @@
 // feedtags.js
 // List the tags to generate feeds for.
-module.exports = [
+export default [
   'posts',
   'programming',
   'music',

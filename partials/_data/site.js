@@ -1,4 +1,4 @@
-const csp = require('./csp');
+import csp from './csp.js';
 
 const multiline = text => text.trim().replace(/^[ \t]+/gm, '');
 
@@ -11,7 +11,7 @@ function djb2(str) {
   return hash >>> 0;
 }
 
-module.exports = function () {
+export default function () {
   const email = 'trebledjjj@gmail.com';
   const domain = {
     production: 'trebledj.me',

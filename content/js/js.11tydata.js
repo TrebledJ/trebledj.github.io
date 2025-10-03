@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   eleventyExcludeFromCollections: true,
   noindex: true,
   sitemap: {

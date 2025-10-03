@@ -1,4 +1,4 @@
-const { plot } = require('./plotBenchmark');
+import { plot } from './plotBenchmark.js';
 
 // Output data, to be plotted.
 const labels = ['A', 'B', 'C'];

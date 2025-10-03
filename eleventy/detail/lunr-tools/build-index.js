@@ -1,6 +1,6 @@
 // node build-index.js <../../../_site/search.json >index.json
 
-const lunr = require('lunr');
+import lunr from 'lunr';
 
 const { stdin } = process;
 const { stdout } = process;

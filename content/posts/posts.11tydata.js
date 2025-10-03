@@ -1,6 +1,6 @@
-const { getGitCommitDate } = require('../../eleventy/detail/git-commit-date');
+import { getGitCommitDate } from '../../eleventy/detail/git-commit-date.js';
 
-module.exports = {
+export default {
   tags: [
     'posts', // Don't change this tag. This tag is used to recognise blog posts.
   ],

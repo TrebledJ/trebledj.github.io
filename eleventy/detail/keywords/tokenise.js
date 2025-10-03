@@ -1,7 +1,7 @@
 /* eslint-disable */
 
-const fs = require('fs');
-const stopwords = fs.readFileSync('./eleventy/detail/keywords/stopwords.txt', 'utf8').split('\n');
+import fs from 'fs';
+export const stopwords = fs.readFileSync('./eleventy/detail/keywords/stopwords.txt', 'utf8').split('\n');
 
 const puncStart = '\\{\\[\\(<#&\\|';
 const puncEnd = '\\.\\?\\!:;\\}\\]\\)>';
@@ -37,7 +37,7 @@ const stopJoined = stopwords
 
 const regexStop = new RegExp(`(?<!-)(${stopJoined})(?!-)`, 'g');
 
-function tokenise(text) {
+export function tokenise(text) {
     return text
         .toLowerCase()
         .replace(regexStop, ' ')
@@ -45,5 +45,3 @@ function tokenise(text) {
         .replace(regex, ' ')
         .split(/\s+/g);
 }
-
-module.exports = { stopwords, tokenise };

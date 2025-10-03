@@ -1,11 +1,11 @@
 /* eslint-disable */
 
-// const process = require('./rake-js/dist/index').default;
+// import process from './rake-js/dist/index.js'.default;
 
-const stem = require('./stem');
-const { tokenise, stopwords } = require('./tokenise');
+import { stem } from './stem.js';
+import { tokenise, stopwords } from './tokenise.js';
 
-// const chalk = require('chalk');
+// import chalk from 'chalk';
 
 function exclude_stopwords(s) {
   if (!s)
@@ -27,7 +27,7 @@ function extract(content, useStemming) {
  * @param {*} content The text to extract keywords from.
  * @returns An array of key terms.
  */
-module.exports = function (content, useStemming) {
+export function findKeywords(content, useStemming) {
   useStemming ??= true;
   return extract(content, useStemming);
-};
+}

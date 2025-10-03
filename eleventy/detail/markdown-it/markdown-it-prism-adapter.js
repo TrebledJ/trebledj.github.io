@@ -2,12 +2,13 @@
 // Markdown-It Prism Adapter
 // ----------
 
-const PrismLoad = require('prismjs/components/');
-const { escapeHtml, unescapeAll } = require('./markdown-it-utils');
+import PrismLoad from 'prismjs/components/index.js';
+import { escapeHtml, unescapeAll } from './markdown-it-utils.js';
+import * as domino from 'domino';
 
 let _prism;
 if (typeof Prism === 'undefined') {
-  _prism = require('prismjs');
+  _prism = import('prismjs');
 } else {
   _prism = Prism;
 }
@@ -20,7 +21,6 @@ if (typeof Prism === 'undefined') {
 // shenanigans with window.Element), but BEFORE loading plugins.
 
 if (typeof window === 'undefined') {
-  const domino = require('domino');
   global.window = domino.createWindow('');
   global.getComputedStyle = global.window.getComputedStyle;
   global.document = global.window.document;
@@ -41,7 +41,7 @@ const DEFAULT_OPTIONS = {
   // ...
 };
 
-exports.default = function MarkdownItPrismAdapter(markdownit, useroptions) {
+export default function MarkdownItPrismAdapter(markdownit, useroptions) {
   const options = { ...DEFAULT_OPTIONS, ...useroptions };
 
   options.init(_prism);
@@ -113,6 +113,3 @@ exports.default = function MarkdownItPrismAdapter(markdownit, useroptions) {
     return `<pre${slf.renderAttrs(token)}><code>${escaped}</code></pre>\n`;
   };
 };
-
-module.exports = exports.default;
-module.exports.default = exports.default;

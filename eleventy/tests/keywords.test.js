@@ -1,5 +1,5 @@
 /* eslint-disable max-len */
-const keywords = require('../detail/keywords');
+import keywords from '../detail/keywords.js';
 
 test('keyword tokens', () => {
   expect(

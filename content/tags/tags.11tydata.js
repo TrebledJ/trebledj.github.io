@@ -5,7 +5,7 @@ function toTitleCase(str) {
   );
 }
 
-module.exports = {
+export default {
   eleventyExcludeFromCollections: false,
   layout: 'layouts/page-tag',
   sortByLatest: true,
