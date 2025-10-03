@@ -96,12 +96,13 @@ module.exports = function (eleventyConfig) {
       // since we'll just call .innerText in the end.
       const $ = cheerio.load(content);
 
-      const codeWords = $('code').toArray().map(e => (
-        count($(e).prop('innerText') ?? '', /[A-Za-z_][A-Za-z0-9_-]*/g)
-      )).reduce((a, b) => a + b, 0);
+      // const codeWords = $('code').toArray().map(e => (
+      //   count($(e).prop('innerText') ?? '', /[A-Za-z_][A-Za-z0-9_-]*/g)
+      // )).reduce((a, b) => a + b, 0);
+      const codeWords = 0;
 
       // Ignore auxiliary, non-textual elements.
-      $('code').remove();
+      $('pre').remove();
       $('details:not([open])').remove();
       $('img').remove();
       $('.footnotes').remove();
