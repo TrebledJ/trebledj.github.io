@@ -33,6 +33,7 @@ related:
   # See more params in related.js.
 noindex: true
 showToc: true
+tocOptions: '{"tags":["h2","h3","h4"]}'
 eleventyExcludeFromCollections: true
 ---
 
@@ -419,6 +420,13 @@ d-r--        10/14/2015   5:06 PM            Searches
 d-r--        10/14/2015   5:06 PM            Videos
 ```
 
+```sh {data-language=GDB .command-line data-prompt="gef>" data-continuation-prompt=">" data-continuation-str="  "}
+c  
+1  
+1  
+0
+```
+
 #### Code: `diff-highlight`
 
 ```diff-js
@@ -461,6 +469,27 @@ Prism.plugins.toolbar.registerButton('show-filename', function (env) {
 
 ```txt {data-label="Just a casual label."}
 Hello world!
+```
+
+#### Code: `mark`
+
+```js {data-label="prism-show-filename.js" .line-numbers data-start=13}
+Prism.plugins.toolbar.registerButton('show-filename', function (env) {
+  var pre = env.element.parentNode;
+  if (!pre || !/pre/i.test(pre.nodeName)) {
+    return;
+  }
+
+  var <mark>filename</mark> = pre.getAttribute('data-filename');
+  if (!filename) {
+      return;
+  }
+
+  var element = document.createElement('span');
+  element.textContent = filename;
+
+  return element;
+});
 ```
 
 ## Custom

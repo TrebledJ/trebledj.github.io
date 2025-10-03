@@ -34,6 +34,7 @@ redirect_from: [/link-to-post, /link-to-other-post] # Endpoints to redirect from
 sitemap:
   ignore: true # don't put in sitemap
   # more options: https://www.npmjs.com/package/@quasibit/eleventy-plugin-sitemap
+showToc: true # Set false to hide toc
 tocOptions: '{"tags":["h2","h3","h4"]}' # https://github.com/jdsteinbach/eleventy-plugin-toc?tab=readme-ov-file#options
 preamble: Short text which isn't included in the body proper and won't be included in embeds.
 eleventyExcludeFromCollections: true
