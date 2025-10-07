@@ -1,6 +1,6 @@
 ---
 title: "Sharing is Caring: Arbitrary Code Execution for Breakfast"
-excerpt: Turning happy little accidents into CTF challenges has never been more rewarding.
+excerpt: An introductory CTF challenge to binary exploitation in C++. And a new form of deserialization attack.
 tags:
   - pwn
   - ctf
@@ -13,11 +13,11 @@ related:
     tags: [infosec, ctf]
 ---
 
-Deserialization attacks have grown in popularity over the past decade, with major code execution flaws hitting giants such as [Microsoft Sharepoint](https://thehackernews.com/2025/07/hackers-exploit-sharepoint-zero-day.html?m=1)— even in 2025. But what if we could perform deserialization attacks in C++?
+Deserialization attacks have grown in popularity over the past decade, with code execution flaws hitting giants such as [Microsoft Sharepoint](https://www.cve.org/CVERecord?id=CVE-2025-53770)— even in 2025. But what if we could perform deserialization attacks in C++?
 
 Recently, I designed a CTF pwn challenge demonstrating deserialization attacks on a C++ program written with the [cereal library](https://github.com/USCiLab/cereal).
 
-In this post, we'll walk through this challenge, revisit C++ internals, and explore binary exploitation techniques beyond {% abbr "ROP", "Return-Oriented Programming" %}. We’ll learn how even a properly written C++ program could be vulnerable to remote code execution thanks to insecure deserialization.
+In this post, we'll walk through the challenge, revisit C++ internals, and explore binary exploitation techniques beyond {% abbr "ROP", "Return-Oriented Programming" %}. We’ll learn how even a properly written C++ program could be vulnerable to remote code execution thanks to insecure deserialization.
 
 ## The Challenge
 
@@ -140,10 +140,10 @@ If you're familiar, you may want to skip ahead to [the analysis](#analysis).
 
 ### What are shared pointers?
 
-Shared pointers (`std::shared_ptr`) are smart pointers in C++ that enable **multiple pointers** to manage the lifetime of a **single object**. They use **reference counting** to track how many `shared_ptr` objects point to the same dynamically allocated resource. The object is automatically deleted when the last remaining `shared_ptr` pointing to it is destroyed or reset. This provides automatic memory management while allowing shared ownership.
+Shared pointers (`std::shared_ptr`) are smart pointers in C++ that enable **multiple pointers** to manage the lifetime of a **single object**. They use **reference counting** to track how many shared pointers point to the same dynamically allocated resource. The object is automatically deleted when the last remaining `shared_ptr` pointing to it is destroyed or reset. This provides automatic memory management while allowing shared ownership.
 
 {% alert "success" %}
-Key Point for Exploitation: **Multiple** shared pointers may share a **single** object, which requires complex (de)serialization procedures to encode and decode.
+Key Point for Exploitation: Multiple shared pointers may share a single object. This often complicates serialization, and may lead to bugs if improperly implemented.
 {% endalert %}
 
 Example:
@@ -223,7 +223,7 @@ Key Points for Exploitation: 1) If an attacker controls the vpointer, they can h
 
 We all know what a string is in programming, but what does C++'s `std::string` look like?
 
-If we dig into the source code, we see the implementation is roughly equivalent to:
+If we dig into the source code, we see the (GCC) implementation is roughly equivalent to:
 
 ```cpp
 template <class CharT>
@@ -249,7 +249,7 @@ Key Point for Exploitation: If we control `buffer` and can observe the string, w
 
 First step: Understanding what we have, aka enumeration. What protections are in place? What attack primitives are available?
 
-Protections are typically easy to check. Running `checksec`, we see **NX**/**PIE** are enabled. This means shellcode is out of the question. By default, **ASLR** is also enabled, so we'll want some kind of address leak to do anything useful.
+Protections are typically easy to check. Running `checksec`, we see **NX** is enabled, which means shellcode is out of the question. **PIE** and, by default, **ASLR** are also enabled, so we'll want some kind of address leak to do anything useful.
 
 {% image "assets/breakfast_checksec.png", "jw-60", "Checksec shows most binary protections are enabled." %}
 
@@ -309,11 +309,11 @@ In the above code example, 2147483649 and 2147483650 refer to new objects with I
 
 We've figured out how Cereal handles shared references, but how can we apply it to the challenge?
 
-Well, what if *force* a shared reference, even if the deserialized types are *different*?
+Well, what if we *force* a shared reference, even if the deserialized types are *different*?
 
 ### Type Confusion Primitives
 
-It turns out Cereal does not perform type checking. So if the deserialization handles multiple types, we can abuse it for type confusion!
+It turns out Cereal does not perform type checking on shared pointers. If the deserialization handles multiple types, we can abuse it for type confusion!
 
 I'll share a deep-dive into the type confusion primitives in a future post. For now, it suffices to understand *what* primitives are available in this challenge and *how* to achieve those primitives.
 
@@ -343,12 +343,11 @@ struct Fruit {
 
 {% endtable %}
 
-For instance:
-- We have control over one type, say `Toast`.
-- We trick Cereal into thinking the second type (`Fruit`) is a `Toast`. This way, we force a `Fruit` and `Toast` to **share the same memory**.
-- When `Fruit` is used, C++ gets confuses. It tries to print `Fruit::name`, but instead it actually prints `*Toast::vptr` (the vtable entry of `Toast`). Calamity!
+If the table doesn't make sense, perhaps this diagram will help: 
 
 {% image "assets/breakfast_type_confusion.png", "jw-80 alpha-imgv", "Diagram of Type Confusion on Toast and Fruit." %}
+
+The program thinks the memory at `0x4000` is a  `Fruit`, but surprise!— it's actually a `Toast`. When `Fruit::name` is printed, what's actually printed is the vtable entry of `Toast`.
 
 Together, these primitives are enough to obtain arbitrary code execution!
 
@@ -405,7 +404,7 @@ std::cout << "t: " << *t << std::endl;
 std::cout << "f: " << *f << std::endl; // Vtable address leaked
 ```
 
-We can do a quick PoC with `xxd`, which will allow us to view nonprintable bytes. By changing the initial JSON's `value1.ptr_wrapper.data.spread` and `value2.ptr_wrapper.id` fields, we can induce the binary to spit out 8 weird bytes, which happen to be an address leak of `0x560864bd50c2`! (Hint: It's in little endian, so read the leaked number backwards.)
+We can do a quick PoC with `xxd`, which allows us to view nonprintable bytes. By changing the initial JSON's `value1.ptr_wrapper.data.spread` and `value2.ptr_wrapper.id` fields, we can induce the binary to spit out 8 weird bytes, which happen to be an address leak of `0x560864bd50c2`! (Hint: It's in little endian, so read the leaked number backwards.)
 
 {% image "assets/breakfast_test_with_xxd.png", "jw-100", "By controlling spread and Fruit's id, we were able to leak 8 bytes of the vtable entry." %}
 
