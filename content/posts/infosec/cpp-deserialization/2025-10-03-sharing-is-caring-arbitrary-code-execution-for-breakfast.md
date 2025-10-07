@@ -563,7 +563,7 @@ PCOP/JOP is similar, but end in different instructions.
     jmp [rax]
   ```
 
-The advantage of PCOP/JOP is that they don't rely on the stack, but rather on the state of the registers. Instead of stack-based instructions such as `pop` and `ret`, we prefer instructions such as `mov` and `call`.
+The advantage of PCOP/JOP is that they don't rely on the stack, preferring instructions such as `mov` and `call` over stack-based instructions such as `pop` and `ret`.
 
 - ROP Gadget: `pop rax; ret`.
 - PCOP/JOP Gadget: `mov rax, [rdi+8]; call [rax+0x10]`
@@ -603,7 +603,7 @@ constraints:
   [[rbp-0x78]] == NULL || [rbp-0x78] == NULL || [rbp-0x78] is a valid envp
 ```
 
-From here, we should check which conditions could be achieved; but to do so, we should first understand the state of the registers **at the moment the virtual function is called**. This calls for some breakpoints!
+Looks like we found 4 one-gadgets. Each gadget lists the offset along with the constraints required to successfully trigger a shell. But to satisfy the constraints, we should first understand the state of the registers **at the moment the virtual function is called**. This calls for some breakpoints!
 
 {% image "assets/breakfast_navigate_to_toast_eat_see_regs.png", "jw-100", "Disassembly and registers upon reaching Toast::eat(). Notice the register states of rax, rdi, rsi, and r13. These will be useful when hunting for gadgets." %}
 
@@ -620,7 +620,7 @@ By navigating to `Toast::eat()`, we notice the following interesting register st
 Our attention then turns to fulfilling the one-gadget constraints. I decided to look for gadgets supporting the third one-gadget (offset `0xef4ce`) due to the relatively simple conditions: we just need `rbx = r12 = 0`. We can hunt for gadgets with tools such as [`ROPgadget`](https://github.com/JonathanSalwan/ROPgadget) or [`xgadget`](https://github.com/entropic-security/xgadget). The gadgets we're looking for should:
 
 1. Overwrite (or provide some control over) the desired registers.
-2. The final `call` instruction of a gadget should jump to a desirable offset within `Congee`, e.g. `call [rax+0x10]`.
+2. The `call` instruction of each gadget should jump to a controllable location, such as an offset within `Congee`— `call [rax+0x10]`.
 3. We should also *exclude* gadgets relying on the stack. This means any gadget containing `pop`, `leave`, and `ret`.^[We exclude stack-based gadgets to simplify the exploit, even if an attack with such gadgets may be possible. The reason for doing so is that we don’t have direct control over stack memory. We would need the help of gadgets to push/modify the stack. Even then, modifying the stack without fine-grained control potentially crashes the program. So we explore other alternatives first.]
 
 {% image "assets/breakfast_finding_r12.png", "jw-100", "" %}
@@ -669,7 +669,7 @@ Congee Ingredients:
 |--------|----------------------------|---------------------------------------------------------------------------------------|
 | `0x00` | address of Congee + `0x08` | vpointer, points to offset `0x08`                                                     |
 | `0x08` | `libstdcpp + 0xf0a0c`      | first gadget, `mov r12, rsi; call qword ptr [rax+0x10];`                              |
-| `0x10` | `libstdcpp + 0xf5e83`      | second gadget, `mov rbx, rsi; mov rsi, rdi; mov rdi, r12; call qword ptr [rax+0x18];` |
+| `0x10` | `libstdcpp + 0xf5e83`      | second gadget, `mov rbx, rsi; ... call qword ptr [rax+0x18];` |
 | `0x18` | `libc + 0xef4ce`           | one-gadget, sweet sweet code execution!                                               |
 
 {% endtable %}
@@ -689,9 +689,9 @@ Putting it all together, we get ACE.
 
 Credit: Adapted from @erge’s and @lolc4t’s solutions.
 
-I'm sure this gadget chain feels closer to home for ROPpers. The chain works by setting `rdi` to `"/bin/sh"` and calling the `system` function. Despite the need for 6 quads in Congee, I find the chain rather fascinating as it condenses multiple steps into 2 key gadgets.
+I'm sure this gadget chain feels closer to home for ROPpers. The chain works by setting `rdi` to `"/bin/sh"` and calling the `system` function. Despite the need for 6 quads in Congee, I find the chain rather fascinating as it condenses multiple steps into 2 clever gadgets.
 
-Another nice aspect about this chain is that it does not rely on too much register state, only `rax` and `rdi` are used. (The libstdc++ and one-gadget chain relies on `rsi = 0` which may not always be the case.)
+Another nice aspect about this chain is that it does not rely on too much register state, only `rax` and `rdi` are used. (The libstdc++ and one-gadget chain rely on `rsi = 0` which may not always be the case.)
 
 Congee Ingredients:
 
@@ -708,13 +708,13 @@ Congee Ingredients:
 
 {% endtable %}
 
-The call flow is:
+Here's the call flow:
 1. VTable is at Congee address + `0x10` →
-2. gadget at `0x10` (set `rax` to `*(rdi+0x08)`, which is the second Congee entry, or in other words: Congee address + `0x18`) →
+2. gadget at `0x10` (set `rax` to `*(rdi+0x08)`, i.e. the second Congee entry, or in other words: `rax = rax + 0x18`) →
 3. gadget at `0x28` (set `rdi` to `"/bin/sh"`) →
 4. gadget at `0x18` (`system` ACE).
 
-To make the this gadget chain work, we require the system, binsh, and `0xa5688` gadget to be **contiguous in memory**. This is because after `mov rax` in the first gadget, the subsequent assembly will `call [rax+0x10]`, which triggers the second gadget to copy `[rax+0x08]` to `rdi` before `call [rax]`. Each entry in this relative `+0x10`, `+0x08`, and `+0x00` have their unique role to play.
+To make the this gadget chain work, we require the system, binsh, and `0xa5688` gadget to be **contiguous in memory**. This is because after `mov rax` in the first gadget, the subsequent assembly will `call [rax+0x10]`, which triggers the second gadget to copy `[rax+0x08]` before `call [rax]`. Each entry in this relative `+0x10`, `+0x08`, and `+0x00` structure has their unique role to play.
 
 The order of the other gadgets don’t matter as much. Here’s one of the solves from the CTF community. Notice how the first gadget (`libc + 0x1740b1`) is placed at the end of the Congee payload instead of at offset `0x10`.
 
