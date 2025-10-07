@@ -1,9 +1,9 @@
 // Modified from: https://github.com/saneef/eleventy-plugin-git-commit-date.
 
-const path = require('path');
-const spawn = require('cross-spawn');
+import path from 'path';
+import spawn from 'cross-spawn';
 
-function getGitCommitDate(filePath, options) {
+export function getGitCommitDate(filePath, options) {
   return options ? getGitCommitDateFiltered(filePath, options) : getGitCommitDateFast(filePath);
 }
 
@@ -76,5 +76,3 @@ function getGitCommitDateFiltered(filePath, options) {
 
   return undefined;
 }
-
-module.exports = { getGitCommitDate };

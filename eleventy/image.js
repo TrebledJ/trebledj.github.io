@@ -1,9 +1,9 @@
-const path = require('path');
-const cheerio = require('cheerio');
-const chalk = require('chalk');
-const eleventyImage = require('@11ty/eleventy-img');
+import path from 'path';
+import * as cheerio from 'cheerio';
+import chalk from 'chalk';
+import eleventyImage from '@11ty/eleventy-img';
 
-module.exports = function (eleventyConfig) {
+export default function (eleventyConfig) {
   const thumbWidth = 512; // Thumbnail default max width.
   const breakpoints = {
     production: [256, thumbWidth, 1024],

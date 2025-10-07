@@ -10,7 +10,7 @@
  * @param {number} nposts The number of posts to bucket into each topic.
  * @returns An object, keys are topics, values are post objects.
  */
-module.exports = function (posts, topics, nposts) {
+export function selectHomePosts(posts, topics, nposts) {
   if (!posts)
     throw new Error('Expected posts to be an array of posts, got falsy value.');
 

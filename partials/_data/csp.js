@@ -20,7 +20,7 @@ function compileCsp(...tags) {
   return tags.map(t => t.compile()).join('\n');
 }
 
-module.exports = compileCsp(
+export default compileCsp(
   tag('default'),
   tag('script')
     // In dev/prod builds, we would include CSP hashes in script-src. But this

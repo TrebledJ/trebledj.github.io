@@ -1,6 +1,6 @@
 /* eslint-disable import/no-unresolved */
-const linkedom = require('linkedom');
-const { setGlobals, setRenderFenceRule } = require('./bench.common');
+import linkedom from 'linkedom';
+import { setGlobals, setRenderFenceRule } from './bench.common.js';
 
 function textToDOM(text) {
   return linkedom.parseHTML(text).document;

@@ -1,11 +1,13 @@
-const markdownItAnchor = require('markdown-it-anchor');
-const markdownItAttrs = require('markdown-it-attrs');
-const markdownItFootnote = require('markdown-it-footnote');
-const markdownItPrism = require('markdown-it-prism');
-const pluginTOC = require('eleventy-plugin-toc');
+import markdownItAnchor from 'markdown-it-anchor';
+import markdownItAttrs from 'markdown-it-attrs';
+import markdownItFootnote from 'markdown-it-footnote';
+import markdownItPrism from 'markdown-it-prism';
+import pluginTOC from 'eleventy-plugin-toc';
+import markdownItSpoiler from './detail/markdown-it/markdown-it-spoiler.js';
+// import markdownItMark from 'markdown-it-mark';
 
-const PrismLoad = require('prismjs/components/');
-const markdownItSpoiler = require('./detail/markdown-it/markdown-it-spoiler');
+import PrismLoad from 'prismjs/components/index.js';
+import markdownItPrismAdapter from './detail/markdown-it/markdown-it-prism-adapter.js';
 
 function PrismAlias(target, aliases) {
   PrismLoad([target]);
@@ -20,7 +22,7 @@ function PrismAlias(target, aliases) {
   }
 }
 
-module.exports = function (eleventyConfig) {
+export default function (eleventyConfig) {
   eleventyConfig.amendLibrary('md', mdLib => {
     mdLib.use(markdownItAttrs, {
       leftDelimiter: '{',
@@ -39,6 +41,8 @@ module.exports = function (eleventyConfig) {
     });
 
     mdLib.use(markdownItSpoiler);
+    // mdLib.use(markdownItMark);
+
     mdLib.use(markdownItFootnote);
 
     mdLib.renderer.rules.footnote_block_open = () => (
@@ -58,7 +62,7 @@ module.exports = function (eleventyConfig) {
     };
 
     // Codeblocks and Syntax Highlighting
-    mdLib.use(require('./detail/markdown-it/markdown-it-prism-adapter'), {
+    mdLib.use(markdownItPrismAdapter, {
       init(_Prism) {
         // Avoid "Language does not exist: " console logs
         PrismLoad.silent = true;
@@ -66,16 +70,19 @@ module.exports = function (eleventyConfig) {
         PrismAlias('cpp', ['csp']);
         PrismAlias('armasm', ['asm']);
         PrismLoad(['diff']);
-        // Load diff-highlight plugin after mdLib.use to avoid triggering warning.
-        require('prismjs/plugins/command-line/prism-command-line');
-        require('prismjs/plugins/toolbar/prism-toolbar');
-        // require('prismjs/plugins/diff-highlight/prism-diff-highlight');
-        require('./detail/prism/prism-diff-highlight');
-        // Load custom plugins.
-        // require('prismjs/plugins/line-numbers/prism-line-numbers');
-        require('./detail/prism/prism-line-numbers');
-        require('./detail/prism/prism-show-language');
-        require('./detail/prism/prism-copy-to-clipboard');
+        (async function () {
+          // Load diff-highlight plugin after mdLib.use to avoid triggering warning.
+          await import('prismjs/plugins/command-line/prism-command-line.js');
+          await import('prismjs/plugins/toolbar/prism-toolbar.js');
+          await import('prismjs/plugins/keep-markup/prism-keep-markup.js');
+          // await import('prismjs/plugins/diff-highlight/prism-diff-highlight.js');
+          await import('./detail/prism/prism-diff-highlight.js');
+          // Load custom plugins.
+          // await import('prismjs/plugins/line-numbers/prism-line-numbers.js');
+          await import('./detail/prism/prism-line-numbers.js');
+          await import('./detail/prism/prism-show-language.js');
+          await import('./detail/prism/prism-copy-to-clipboard.js');
+        })();
       },
     });
 

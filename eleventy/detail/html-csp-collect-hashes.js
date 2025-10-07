@@ -24,8 +24,8 @@
  * SOFTWARE.
  */
 
-const crypto = require('crypto');
-const cheerio = require('cheerio');
+import crypto from 'crypto';
+import * as cheerio from 'cheerio';
 
 /**
  * Collect all CSP Hashes and fill the given `hashes` structure.
@@ -36,7 +36,7 @@ const cheerio = require('cheerio');
  * @param {String|Buffer} html - The html content
  * @param {Object} hashes - The hash structure to fill
  */
-module.exports = function (algo, html) {
+export default function (algo, html) {
   const hashes = {
     script: [],
     style: [],

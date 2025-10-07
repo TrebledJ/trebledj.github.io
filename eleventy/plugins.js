@@ -1,19 +1,21 @@
-const pluginRss = require('@11ty/eleventy-plugin-rss');
-// const pluginSyntaxHighlight = require('@11ty/eleventy-plugin-syntaxhighlight');
-const pluginNavigation = require('@11ty/eleventy-navigation');
-const pluginBundle = require('@11ty/eleventy-plugin-bundle');
-const { EleventyHtmlBasePlugin, EleventyRenderPlugin } = require('@11ty/eleventy');
-const eleventySass = require('eleventy-sass');
+import pluginRss from '@11ty/eleventy-plugin-rss';
+// import pluginSyntaxHighlight from '@11ty/eleventy-plugin-syntaxhighlight';
+import pluginNavigation from '@11ty/eleventy-navigation';
+import pluginBundle from '@11ty/eleventy-plugin-bundle';
+import { EleventyHtmlBasePlugin, EleventyRenderPlugin } from '@11ty/eleventy';
+// import eleventySass from 'eleventy-sass';
 // eslint-disable-next-line import/no-extraneous-dependencies
-const sitemap = require('@quasibit/eleventy-plugin-sitemap');
-const { minify } = require('terser');
-const CleanCSS = require('clean-css');
-const chalk = require('chalk');
+// import sitemap from '@quasibit/eleventy-plugin-sitemap';
+import { minify } from 'terser';
+import CleanCSS from 'clean-css';
+import chalk from 'chalk';
 
-const { modifyExternalLinksToOpenInSeparateTab } = require('./detail/helpers');
-const htmlcsp = require('./detail/html-csp-transform');
+import { modifyExternalLinksToOpenInSeparateTab } from './detail/helpers.js';
+import { htmlcsp } from './detail/html-csp-transform.js';
 
-module.exports = function (eleventyConfig) {
+import pluginFileMinification from './plugins.filemin.js'
+
+export default function (eleventyConfig) {
   eleventyConfig.addPlugin(pluginRss);
   // eleventyConfig.addPlugin(pluginSyntaxHighlight, {
   //   errorOnInvalidLanguage: true,
@@ -54,14 +56,14 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPlugin(EleventyRenderPlugin);
 
   // https://www.npmjs.com/package/@quasibit/eleventy-plugin-sitemap
-  eleventyConfig.addPlugin(sitemap, {
-    lastModifiedProperty: 'modified',
-    sitemap: {
-      hostname: 'https://trebledj.me',
-    },
-  });
+  // eleventyConfig.addPlugin(sitemap, {
+  //   lastModifiedProperty: 'modified',
+  //   sitemap: {
+  //     hostname: 'https://trebledj.me',
+  //   },
+  // });
 
-  eleventyConfig.addPlugin(eleventySass);
+  // eleventyConfig.addPlugin(eleventySass);
 
   eleventyConfig.addPlugin(eleventyConfig => {
     eleventyConfig.on('eleventy.before', () => {
@@ -89,7 +91,7 @@ module.exports = function (eleventyConfig) {
   });
 
   if (process.env.ENVIRONMENT === 'production') {
-    eleventyConfig.addPlugin(require('./plugins.filemin'));
+    eleventyConfig.addPlugin(pluginFileMinification);
   }
 
   // Other Transforms

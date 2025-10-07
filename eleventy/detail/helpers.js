@@ -1,12 +1,12 @@
-const cheerio = require('cheerio');
+import * as cheerio from 'cheerio';
 
-function stripBetweenTags(html, tags) {
+export function stripBetweenTags(html, tags) {
   const $ = cheerio.load(html, null, false);
   $(tags.join(',')).remove();
   return $.html();
 }
 
-function modifyExternalLinksToOpenInSeparateTab(html) {
+export function modifyExternalLinksToOpenInSeparateTab(html) {
   const $ = cheerio.load(html);
   [...$('a[href^=http]')].forEach(link => {
     // If rel attr exists, append the value.
@@ -25,5 +25,3 @@ function modifyExternalLinksToOpenInSeparateTab(html) {
   // // Anchors with href^=http will be treated as external links.
   // return html.replaceAll(/(<a\s+[^>]*href="https?:\/\/[^"]*")(?=[^>]*>)/gi, `$1 ${newAttributes}`);
 }
-
-module.exports = { stripBetweenTags, modifyExternalLinksToOpenInSeparateTab };

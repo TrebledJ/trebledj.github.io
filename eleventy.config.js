@@ -1,14 +1,14 @@
-const { Transform } = require('stream');
-const chalk = require('chalk');
-const { minify } = require('terser');
+import { Transform } from 'stream';
+import * as chalk from 'chalk';
+import { minify } from 'terser';
 
-const plugins = require('./eleventy/plugins');
-const filters = require('./eleventy/filters');
-const shortcodes = require('./eleventy/shortcodes');
-const markdown = require('./eleventy/markdown');
-const collections = require('./eleventy/collections');
+import plugins from './eleventy/plugins.js';
+import filters from './eleventy/filters.js';
+import shortcodes from './eleventy/shortcodes.js';
+import markdown from './eleventy/markdown.js';
+import collections from './eleventy/collections.js';
 
-module.exports = function (eleventyConfig) {
+export default async function (eleventyConfig) {
   process.env.ENVIRONMENT ??= 'development';
   // console.log(`environment: ${process.env.ENVIRONMENT}`);
 
@@ -97,7 +97,7 @@ module.exports = function (eleventyConfig) {
   shortcodes(eleventyConfig);
 
   // Customize Markdown library settings:
-  markdown(eleventyConfig);
+  await markdown(eleventyConfig);
 
   eleventyConfig.addNunjucksGlobal('throw', function (msg) {
     console.error(chalk.red(`[error] in ${this.page.inputPath}:`));

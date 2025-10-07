@@ -1,7 +1,7 @@
-const { getGitCommitDate } = require('../eleventy/detail/git-commit-date');
-const { stripBetweenTags } = require('../eleventy/detail/helpers');
+import { getGitCommitDate } from '../eleventy/detail/git-commit-date.js';
+import { stripBetweenTags } from '../eleventy/detail/helpers.js';
 
-module.exports = {
+export default {
   // Defaults.
   excerpt: '',
   tags: [],

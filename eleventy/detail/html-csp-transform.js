@@ -1,6 +1,6 @@
-const collectHashes = require('./html-csp-collect-hashes');
+import collectHashes from './html-csp-collect-hashes.js';
 
-module.exports = function (content) {
+export function htmlcsp(content) {
   if (this.page.outputPath?.endsWith?.('.html')) {
     const hashes = collectHashes('sha256', content);
 

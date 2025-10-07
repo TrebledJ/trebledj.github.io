@@ -1,4 +1,4 @@
-const chalk = require('chalk');
+import chalk from 'chalk';
 
 // Report cases which return an empty container.
 function expectNonEmpty(container, label, file) {
@@ -17,7 +17,7 @@ function expectNonEmpty(container, label, file) {
 }
 
 // A decorator to warn us when a returned container is empty.
-function nonEmptyContainerSentinel(label) {
+export function nonEmptyContainerSentinel(label) {
   return function (func) {
     return function (...args) {
       const result = func.call(this, ...args);
@@ -26,5 +26,3 @@ function nonEmptyContainerSentinel(label) {
     };
   };
 }
-
-module.exports = { nonEmptyContainerSentinel };

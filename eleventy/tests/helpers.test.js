@@ -1,6 +1,6 @@
 /* eslint-disable max-len */
-const fs = require('fs');
-const { stripBetweenTags, modifyExternalLinksToOpenInSeparateTab } = require('../detail/helpers');
+import fs from 'fs';
+import { stripBetweenTags, modifyExternalLinksToOpenInSeparateTab } from '../detail/helpers.js';
 
 test('stripBetweenTags: simple', () => {
   expect(stripBetweenTags('1<sub>abc</sub>2', ['sub'])).toBe('12');

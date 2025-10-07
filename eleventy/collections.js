@@ -1,4 +1,4 @@
-module.exports = function (eleventyConfig) {
+export default function (eleventyConfig) {
   eleventyConfig.addCollection('tagcount', collectionApi => {
     const counter = {};
     for (const tag of collectionApi.getFilteredByTag('posts').flatMap(post => post.data.tags)) {

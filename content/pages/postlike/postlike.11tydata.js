@@ -1,4 +1,4 @@
-const { getGitCommitDate } = require('../../../eleventy/detail/git-commit-date');
+import { getGitCommitDate } from '../../../eleventy/detail/git-commit-date.js';
 
 function getPostlikeDate(data) {
   if (process.env.ENVIRONMENT === 'production')
@@ -17,7 +17,7 @@ function getPostlikeDate(data) {
 //   return val;
 // }
 
-module.exports = {
+export default {
   layout: 'layouts/post-default',
   showToc: true,
   eleventyComputed: {

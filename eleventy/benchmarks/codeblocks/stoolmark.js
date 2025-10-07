@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 // Custom benchmark class.
 
-const { performance } = require('perf_hooks');
+import { performance } from 'perf_hooks';
 
 class Timer {
   constructor(name) {
@@ -99,4 +99,4 @@ class Timer {
   }
 }
 
-module.exports = { Timer };
+export default { Timer };

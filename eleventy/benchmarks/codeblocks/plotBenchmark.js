@@ -1,8 +1,8 @@
 /* eslint-disable no-console, import/no-unresolved */
 
 // Plot and export graphs, adapted from https://stackoverflow.com/a/71750361/10239789.
-const fs = require('fs');
-const { ChartJSNodeCanvas } = require('chartjs-node-canvas');
+import fs from 'fs';
+import { ChartJSNodeCanvas } from 'chartjs-node-canvas';
 
 const width = 800; // px
 const height = 800; // px
@@ -75,4 +75,4 @@ async function plot({
   return run(filename);
 }
 
-module.exports = { plot };
+export default { plot };

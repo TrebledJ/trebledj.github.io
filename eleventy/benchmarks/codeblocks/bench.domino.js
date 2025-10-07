@@ -1,6 +1,6 @@
 /* eslint-disable import/no-unresolved */
-const domino = require('domino');
-const { setGlobals, setRenderFenceRule } = require('./bench.common');
+import * as domino from 'domino';
+import { setGlobals, setRenderFenceRule } from './bench.common.js';
 
 function textToDOM(text) {
   // Use `template` as a workaround: https://github.com/fgnass/domino/issues/73

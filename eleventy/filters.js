@@ -1,18 +1,19 @@
-const { DateTime } = require('luxon');
-const MarkdownIt = require('markdown-it');
+import { DateTime } from 'luxon';
+import MarkdownIt from 'markdown-it';
+import MarkdownItAttrs from 'markdown-it-attrs';
 
-const cheerio = require('cheerio');
-const { getRelatedPosts, getRelatedTags, getTagsByPrefix } = require('./detail/related');
-const { nonEmptyContainerSentinel } = require('./detail/utils');
-const selectHomePosts = require('./detail/select-home-posts');
-const findKeywords = require('./detail/keywords');
-const { stripBetweenTags } = require('./detail/helpers');
+import * as cheerio from 'cheerio';
+import { getRelatedPosts, getRelatedTags, getTagsByPrefix } from './detail/related.js';
+import { nonEmptyContainerSentinel } from './detail/utils.js';
+import { selectHomePosts } from './detail/select-home-posts.js';
+import { findKeywords } from './detail/keywords/index.js';
+import { stripBetweenTags } from './detail/helpers.js';
 
 function count(str, needle) {
   return (str.match(needle) || []).length;
 }
 
-module.exports = function (eleventyConfig) {
+export default function (eleventyConfig) {
   // Formatting tokens for Luxon: https://moment.github.io/luxon/#/formatting?id=table-of-tokens
   eleventyConfig.addFilter('date', (dateObj, format, zone) => (
     DateTime.fromJSDate(
@@ -96,12 +97,13 @@ module.exports = function (eleventyConfig) {
       // since we'll just call .innerText in the end.
       const $ = cheerio.load(content);
 
-      const codeWords = $('code').toArray().map(e => (
-        count($(e).prop('innerText') ?? '', /[A-Za-z_][A-Za-z0-9_-]*/g)
-      )).reduce((a, b) => a + b, 0);
+      // const codeWords = $('code').toArray().map(e => (
+      //   count($(e).prop('innerText') ?? '', /[A-Za-z_][A-Za-z0-9_-]*/g)
+      // )).reduce((a, b) => a + b, 0);
+      const codeWords = 0;
 
       // Ignore auxiliary, non-textual elements.
-      $('code').remove();
+      $('pre').remove();
       $('details:not([open])').remove();
       $('img').remove();
       $('.footnotes').remove();
@@ -209,7 +211,7 @@ module.exports = function (eleventyConfig) {
     breaks: false,
     linkify: true,
   });
-  md.use(require('markdown-it-attrs'));
+  md.use(MarkdownItAttrs);
 
   eleventyConfig.addFilter('markdownify', markdownString => md.render(markdownString));
   eleventyConfig.addFilter('markdownifyInline', markdownString => md.renderInline(markdownString));

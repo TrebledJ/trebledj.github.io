@@ -98,7 +98,7 @@ html[data-theme="dark"] {
     font-size: 12px;
 
     transition: color 0.2s;
-    text-decoration: none;
+    text-decoration: none !important;
     background-image: none;
 
     // &,
