@@ -1,6 +1,6 @@
 ---
 title: "Sharing is Caring: Arbitrary Code Execution for Breakfast"
-excerpt: An introductory CTF challenge to binary exploitation in C++. And a new form of deserialization attack.
+excerpt: Binary exploitation in C++, gadget mania, and a new form of deserialization attack.
 tags:
   - pwn
   - ctf
@@ -13,11 +13,9 @@ related:
     tags: [infosec, ctf]
 ---
 
-Deserialization attacks have grown in popularity over the past decade, with code execution flaws hitting giants such as [Microsoft Sharepoint](https://www.cve.org/CVERecord?id=CVE-2025-53770)— even in 2025. But what if we could perform deserialization attacks in C++?
+Breakfast is a CTF challenge I designed for CrewCTF 2025. With deserialization attacks being in vogue, I wanted to explore the topic in C++ and as a result, found an interesting niche bug in the [cereal library](https://github.com/USCiLab/cereal). In this writeup, we'll revisit C++ internals and explore binary exploitation techniques beyond {% abbr "ROP", "Return-Oriented Programming" %}. We’ll learn how even a properly written C++ program could be vulnerable to remote code execution through insecure deserialization.
 
-Recently, I designed a CTF pwn challenge demonstrating deserialization attacks on a C++ program written with the [cereal library](https://github.com/USCiLab/cereal).
-
-In this post, we'll walk through the challenge, revisit C++ internals, and explore binary exploitation techniques beyond {% abbr "ROP", "Return-Oriented Programming" %}. We’ll learn how even a properly written C++ program could be vulnerable to remote code execution thanks to insecure deserialization.
+In a future post, I will share a more detailed writeup on the research. But for now, let's have fun and focus on the challenge. :)
 
 ## The Challenge
 
@@ -29,9 +27,9 @@ The CTF has ended, but the binaries are public! If you want to try solving it or
 - Solves: [11](https://github.com/Thehackerscrew/2025.crewc.tf/blob/32e7548fb6c25e5511194e75a142fbcc41aebc8f/api/v1/challenges/28/index.json)
 - Difficulty: Easy-Medium?  
 - Description:
-	> They say breakfast is the most important meal of the day. But sometimes you just need milk to avoid Confusing your favourite Type of cereal...
+	> They say breakfast is the most important meal of the day. But sometimes you just need milk to avoid Confusing your favourite Type of cereal…
 
-The code is short, but don't let that fool you. A lot of serialization stuff is abstracted by the [cereal library](https://github.com/USCiLab/cereal).
+The code is short, but don't let that fool you. A lot of complexity is abstracted away by the [cereal library](https://github.com/USCiLab/cereal).
 
 ```cpp {data-label=breakfast.cpp .line-numbers}
 #include <cereal/archives/json.hpp>
@@ -204,7 +202,7 @@ A **vtable** (virtual table) is the mechanism that enables runtime polymorphis
   {.no-center}
 
 - The vtable stores an **array of virtual functions**.
-- Each **object** of a virtual class **holds a virtual pointer** (vpointer) which points to the vtable they are instantiated with. The vpointer is a "hidden first member" and precedes other members.
+- Each **object** of a virtual class **holds a virtual pointer** (vpointer) which points to the vtable they are instantiated with. The vpointer is a “hidden first member” and precedes other members.
 - When a virtual function is called, dynamic dispatch is carried out by looking up the vtable then jumping to a function at a hard-coded offset. In assembly, this could be seen as a double dereference.
 	```asm
 	; precondition: rax contains the address of the object
@@ -305,7 +303,7 @@ For instance, here's a sample JSON cereal-isation containing shared references:
 ]
 ```
 
-In the above code example, 2147483649 and 2147483650 refer to new objects with ID 1 and 2. Memory is dynamically allocated and object data is deserialized. Afterwards, the deserializer encounters `"id": 1` which refers to the first object. No new data is deserialized, and the first `std::shared_ptr` is copied.
+In the above code example, 2147483649 and 2147483650 refer to new objects with ID 1 and 2. Memory is dynamically allocated, and object data is deserialized. Afterwards, the deserializer encounters `"id": 1` which refers to the first object. No new data is deserialized, and the first `std::shared_ptr` is copied.
 
 We've figured out how Cereal handles shared references, but how can we apply it to the challenge?
 
@@ -333,6 +331,8 @@ struct Fruit {
 };
 ```
 
+And the primitives available:
+
 {% table %}
 
 | If we deserialize a... | followed by a... | we get...                  | because we...            |
@@ -343,11 +343,11 @@ struct Fruit {
 
 {% endtable %}
 
-If the table doesn't make sense, perhaps this diagram will help: 
+If the table doesn't make sense, perhaps this diagram demonstrating an address leak will help:
 
 {% image "assets/breakfast_type_confusion.png", "jw-80 alpha-imgv", "Diagram of Type Confusion on Toast and Fruit." %}
 
-The program thinks the memory at `0x4000` is a  `Fruit`, but surprise!— it's actually a `Toast`. When `Fruit::name` is printed, what's actually printed is the vtable entry of `Toast`.
+The program thinks the memory at `0x4000` is a `Fruit`, but surprise!— it's actually a `Toast`. When `Fruit::name` is printed, what's actually printed is the vtable entry of `Toast`.
 
 Together, these primitives are enough to obtain arbitrary code execution!
 
@@ -457,7 +457,7 @@ Now that we have an address from the binary, we can continue on our warpath by l
 }
 ```
 
-We'll use the GOT entry of `malloc` as the string buffer. GOT entries are a fixed relative offset in the binary, so we can calculate it using our earlier vtable leak. When the string is printed, the GOT entry will be dereferenced and we get the address of `malloc`.
+We'll use the GOT entry of `malloc` as the string buffer. GOT entries are a fixed relative offset in the binary, so we can calculate it using our earlier vtable leak. When the string is printed, the GOT entry will be dereferenced and the address of `malloc` printed.
 
 ```python
 got_malloc = vtable_addr - e.sym['_ZN5Toast3eatEv'] + e.got['malloc']
@@ -472,7 +472,7 @@ libc_base = malloc_addr - libc.sym['malloc']
 During the final stage of type confusion, we will be controlling a malicious *vpointer* (not the *vtable*!). To actually get control flow hijacking, we want the vpointer to point to a vtable, which will be our custom-crafted payload placed among the 7 remaining quadwords of `Congee`. Thus, we need a heap address to the chunk where `Congee` will be allocated.
 {% enddetails %}
 
-To get a heap address leak, we can use the same memorty read primitive and target an address which *contains a heap address*. There are several approaches.
+To get a heap address leak, we can use the same memory read primitive and target an address which *contains a heap address*. There are several approaches.
 
 1. One way is to obtain the main arena, which can be found from libc offset `+0x203ac0`. This then necessitates a convoluted hunt for heap addresses through a sea of indirection.
 	```python
@@ -509,7 +509,7 @@ By observation, `Congee`’s address remains unchanged between iterations. This 
 
 {% image "assets/breakfast_congee_address_unchanged.png", "jw-100", "Notice how the address of the Congee object (c) is consistent across repeated deserializations." %}
 
-Interestingly, the offset of `c` from the *heap's base address* is constant, and we can calculate it to be `+0x131c0`... at least locally.
+Interestingly, the offset of `c` from the *heap's base address* is constant, and we can calculate it to be `+0x131c0`… at least locally.
 
 {% image "assets/breakfast_congee_heap_offset.png", "jw-100", "" %}
 
@@ -713,7 +713,7 @@ Here's the call flow:
 3. gadget at `0x28` (set `rdi` to `"/bin/sh"`) →
 4. gadget at `0x18` (`system` ACE).
 
-To make the this gadget chain work, we require the system, binsh, and `0xa5688` gadget to be **contiguous in memory**. This is because after `mov rax` in the first gadget, the subsequent assembly will `call [rax+0x10]`, which triggers the second gadget to copy `[rax+0x08]` before `call [rax]`. Each entry in this relative `+0x10`, `+0x08`, and `+0x00` structure has their unique role to play.
+To make this gadget chain work, we require the system, binsh, and `0xa5688` gadget to be **contiguous in memory**. This is because after `mov rax` in the first gadget, the subsequent assembly will `call [rax+0x10]`, which triggers the second gadget to copy `[rax+0x08]` before `call [rax]`. Each entry in this relative `+0x10`, `+0x08`, and `+0x00` structure has their unique role to play.
 
 The order of the other gadgets don’t matter as much. Here’s one of the solves from the CTF community. Notice how the first gadget (`libc + 0x1740b1`) is placed at the end of the Congee payload instead of at offset `0x10`.
 
