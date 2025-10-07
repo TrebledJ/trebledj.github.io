@@ -65,7 +65,7 @@
 		"markdown-it-anchor": "^9.2.0",
 		"markdown-it-attrs": "^4.3.1",
 		"markdown-it-footnote": "^4.0.0",
-		"markdown-it-prism": "^2.3.0",
+		"markdown-it-prism": "^2.3.1",
 		"npm-run-all": "^4.1.5",
 		"sass": "^1.78.0",
 		"sharp": "^0.33.3",
@@ -82,7 +82,7 @@
 		"katex": "^0.16.21",
 		"lunr": "^2.3.9",
 		"magnific-popup": "^1.2.0",
-		"prismjs": "^1.29.0",
+		"prismjs": "^1.30.0",
 		"sharer.js": "^0.5.1",
 		"typewriter-effect": "^2.21.0"
 	}
