@@ -1,91 +1,29 @@
+---js
+{
+  layout: "layouts/default-full",
+  permalink: "/index.html",
+  eleventyNavigation: {
+    key: "Home",
+    order: 1,
+  },
+  showToc: true,
+  eleventyComputed: {
+    carouselAutoInterval: ({ site }) => site.home.carouselAutoInterval,
+    npostsPerTab: ({ site }) => site.home.npostsPerTab,
+    featuredTracks: ({ site }) => site.home.featuredTracks,
+    professionalCategories: ({ site }) => site.home.professionalCategories,
+    humanitiesCategories: ({ site }) => site.home.humanitiesCategories,
+    projectCategories: ({ site }) => site.home.projectCategories,
+  },
+  redirect_from: ["/profile", "/cv"],
+}
 ---
-# The Home page.
-layout: layouts/default-full
-permalink: /index.html
-
-eleventyNavigation:
-  key: Home
-  order: 1
-showToc: true
-
-featuredTracks: [space-penguin, deja-vu-cycle-of-power]
-carouselAutoInterval: 10000
-npostsPerTab: 2
-
-professionalCategories:
-  -
-    name: Infosec
-    tag: infosec
-    icon: user-secret
-    about: Embark on a digital expedition across the land of cybersecurity.
-    excludeTags: [writeup, satire]
-  - 
-    name: Programming
-    tag: programming
-    icon: code
-    about: Prose and poetry expressed logically.
-    excludeTags: []
-  -
-    name: CTFs
-    tag: ctf
-    icon: flag
-    about: Let's learn cybersecurity through a gamified experience!
-    excludeTags: [writeup, satire]
-  - 
-    name: Embedded
-    tag: embedded
-    icon: bolt
-    about: Fiddling with microcontrollers and bare-metal systems.
-    excludeTags: []
-  #- 
-  #  name: Essays
-  #  tag: essay
-  #  about: Rants on various issues I'm concerned with.
-  #  excludeTags: []
-
-humanitiesCategories:
-  - 
-    name: Music
-    tag: composition
-    icon: music
-    about: Compositions by yours truly.
-    excludeTags: [music]
-  -
-    name: Faith
-    tag: faith
-    icon: cross
-    about: Musings of and for the soul.
-    excludeTags: []
-  -
-    name: Satire
-    tag: satire
-    icon: face-smile
-    about: Everyone needs a dose of laughter at times.
-    excludeTags: []
-
-projectCategories:
-  -
-    name: Projects
-    tag: project
-    icon: star
-    about: Adventurous undertakings!
-    excludeTags: [experience]
-  -
-    name: Experiences
-    tag: experience
-    icon: rocket
-    about: Journeys I've gone through.
-    excludeTags: [project]
-
-redirect_from: [/profile, /cv]
----
-
 <div id="home">
-   {% include "home/hero.html" %}
+  {% include "home/hero.html" %}
 
-   <div class="container">
-      {% include "home/about-me.html" %}
-      {% include "home/recents.html" %}
-      {% include "home/contact.html" %}
-   </div>
+  <div class="container">
+    {% include "home/about-me.html" %}
+    {% include "home/recents.html" %}
+    {% include "home/contact.html" %}
+  </div>
 </div>
