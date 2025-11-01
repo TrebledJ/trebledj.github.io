@@ -2,6 +2,8 @@
 title: Seaside Garden
 excerpt: A first attempt at songwriting.
 tags:
+  - composition
+  - music
   - song
   - piano
   - chamber

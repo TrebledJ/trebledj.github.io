@@ -2,9 +2,11 @@
 title: DUCTF 2023 – Wrong Signal
 excerpt: You straight to `oops()`. Right away.
 tags:
+  - ctf
   - reverse
   - python
   - programming
+  - writeup
 thumbnail_src: assets/straight-to-oops.jpg
 ---
 

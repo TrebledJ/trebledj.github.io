@@ -2,6 +2,7 @@
 title: <sub><sup>N[</sup></sub>Subtype Metaprogramming<sub><sup>]</sup></sub> is <sub><sup>N[</sup></sub>Mostly Harmless<sub><sup>]</sup></sub>
 excerpt: Inheritance go brrrrrrrr... abusing turing-complete typesystems to write fun programs in Python.
 tags:
+  - programming
   - ctf
   - types
   - python

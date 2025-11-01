@@ -3,6 +3,8 @@ title:  "The Breath of Life"
 excerpt: "Humans are complicated individuals even though we all start from two cells."
 updated: "2022-07-28"
 tags:
+  - composition
+  - music
   - minimalism
   - strings
 keywords: [ensemble, string ensemble, emotional, peaceful, serene]

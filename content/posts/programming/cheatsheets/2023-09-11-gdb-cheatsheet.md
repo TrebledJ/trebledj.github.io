@@ -2,6 +2,7 @@
 title: GDB/GEF Cheatsheet
 excerpt: Quick command reference on one of the most powerful tools for dynamic analysis.
 tags:
+  - programming
   - cheatsheet
   - infosec
   - ctf

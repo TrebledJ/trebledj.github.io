@@ -3,6 +3,8 @@ title:  "Joyride in D"
 excerpt: "Jetpack Joyride but without a jetpack, and in D."
 updated: "2022-07-28"
 tags:
+  - composition
+  - music
   - band
 keywords: [guitars, drums, upbeat]
 thumbnail_src: assets/joyride.jpg

@@ -2,6 +2,8 @@
 title: Déjà Vu – Cycle of Power
 excerpt: The first variation in a series exploring repetition and meaning in life.
 tags:
+  - composition
+  - music
   - faith
   - orchestral
   - fusion

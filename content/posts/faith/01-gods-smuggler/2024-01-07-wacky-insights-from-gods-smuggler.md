@@ -5,6 +5,7 @@ tags:
   - reading
   - reflection
   - notes
+  - faith
 thumbnail_src: assets/thumbnail.jpg
 related:
     tags: [faith]

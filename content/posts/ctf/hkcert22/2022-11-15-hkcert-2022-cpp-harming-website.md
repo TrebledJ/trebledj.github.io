@@ -2,8 +2,10 @@
 title: HKCERT CTF 2022 – C++harming Website
 excerpt: A harming website? Hope it doesn't harm my sleep!
 tags:
+  - ctf
   - reverse
   - cpp
+  - writeup
 thumbnail_src: assets/hkcert22-thumbnail.jpg
 ---
 

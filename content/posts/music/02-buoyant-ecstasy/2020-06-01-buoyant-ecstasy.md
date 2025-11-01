@@ -3,6 +3,10 @@ title:  "Buoyant Ecstasy"
 excerpt: "Pointillism is pretty interesting with a string ensemble!"
 updated: "2022-08-23"
 tags:
+  - composition
+  - music
+  - composition
+  - music
   - strings
   - hkust
 keywords: [oboe, major, minor, covid19]

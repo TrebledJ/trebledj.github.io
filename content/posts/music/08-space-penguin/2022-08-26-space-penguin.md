@@ -2,6 +2,8 @@
 title: "Space Penguin"
 excerpt: "And yet another school year begins."
 tags:
+  - composition
+  - music
   - electronica
   - synths
   - dubsy-wubsy

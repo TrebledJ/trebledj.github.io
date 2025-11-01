@@ -2,23 +2,28 @@ import chalk from 'chalk';
 
 /**
  * Helper function to convert a string pattern to a regex.
+ * Defines an additional /r flag which indicates a reverse list.
+ * 
  * @param {string} slug
  */
 function makeRelatedPostRegex(slug) {
   if (slug.startsWith('r/')) {
     const toks = slug.split('/');
-    if (toks.length > 2) {
-      // Discard first and last tokens.
-      const flags = toks[toks.length - 1];
-      const pat = toks.slice(1, toks.length - 1).join('/');
-      return {
-        regex: new RegExp(pat, `${flags.replace(/r/g, '')}g`),
-        flags: {
-          rev: flags.includes('r'),
-        },
-      };
+    if (toks.length > 3) {
+      throw new Error(`[related] Found pattern ${slug}, which looks like a regex pattern, but has too many slashes.`);
     }
-    throw new Error(`[related] Found pattern ${slug}, which looks like a regex pattern, but is missing some slashes.`);
+    if (toks.length < 3) {
+      throw new Error(`[related] Found pattern ${slug}, which looks like a regex pattern, but is missing some slashes.`);
+    }
+    // Discard first and last tokens.
+    const flags = toks[toks.length - 1];
+    const pat = toks.slice(1, toks.length - 1).join('/');
+    return {
+      regex: new RegExp(pat, `${flags.replace(/r/g, '')}g`),
+      flags: {
+        rev: flags.includes('r'),
+      },
+    };
   }
   // Match a full string.
   return { regex: new RegExp(`^${slug}$`), flags: {} };

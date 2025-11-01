@@ -2,10 +2,12 @@
 title: Output-Invariant and Time-Based Testing – Practical Techniques for Black-Box Enumeration of LLMs
 excerpt: Abusing inherent context and sluggishness in LLMs for stealthy enumeration of prompt injection points.
 tags: 
+  - infosec
   - ai
   - notes
   - pentesting
   - redteam
+  - research
   - writeup
 thumbnail_src: assets/thumbnail.jpg
 thumbnail_banner: true

@@ -2,8 +2,10 @@
 title: HKCERT CTF 2022 – Base64 Encryption
 excerpt: Frequency analysis with a touch of heuristics.
 tags:
+  - ctf
   - cryptography
   - python
+  - writeup
 thumbnail_src: assets/hkcert22-thumbnail.jpg
 use_math: true
 ---

@@ -2,6 +2,7 @@
 title: Dynamic Views Loading – Abusing Server Side Rendering in Drogon
 excerpt: What could go wrong releasing a C++ web server with "live reload" into the wild?
 tags:
+  - infosec
   - cpp
   - ctf
   - web

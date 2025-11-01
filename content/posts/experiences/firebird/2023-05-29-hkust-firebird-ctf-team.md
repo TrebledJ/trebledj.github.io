@@ -5,6 +5,7 @@ tags:
   - ctf
   - hkust
   - reflection
+  - experience
 thumbnail_src: ~/assets/img/posts/thumbnail/firebird.png
 pitch: Senior member of the HKUST Firebird CTF Team. Trained and mentoring new team members, remodularise project structure, and managing R&D projects.
 related:

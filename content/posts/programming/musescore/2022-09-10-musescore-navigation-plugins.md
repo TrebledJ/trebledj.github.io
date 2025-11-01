@@ -3,6 +3,7 @@ title:  MuseScore Navigation Plugins
 excerpt: Developing plugins to enhance the music editors' quality of life.
 updated: "2022-09-11"
 tags:
+  - programming
   - project
   - qml
   - js
