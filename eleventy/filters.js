@@ -246,4 +246,19 @@ export default function (eleventyConfig) {
     const db = new Date(b);
     return da > db ? da : db;
   });
+
+  eleventyConfig.addNunjucksGlobal('checkNonEmptyTag', (xs, tag, archived) => {
+    if (typeof xs.length !== 'number') {
+      throw new Error(`expected array but got ${xs.length}`);
+    }
+    if (!archived) {
+      if (xs.length === 0) {
+        console.warn(`Detected tag with no post: ${tag}. Consider adding \`archive: true\` to the frontmatter.`);
+      }
+    } else {
+      if (xs.length > 0) {
+        console.warn(`Detected tag with posts, and tag is archived. Consider removing the tag from the posts:\n${xs.map(x => x.page.filePathStem).join('\n')}.`)
+      }
+    }
+  });
 };

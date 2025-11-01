@@ -3,6 +3,8 @@ layout: layouts/page-default
 logo: tag
 ---
 
+{% set _xxx = checkNonEmptyTag(collections[tag], tag, archived) %}
+
 {# See Note [with context]. #}
 {% from "post/preview.html" import render_post_preview with context %}
 {% from "sidebars/sidebar-utils.html" import tags_sidebar with context %}
@@ -11,8 +13,10 @@ logo: tag
 
 <div class="page-content-container row gx-lg-5">
     <div class="col-lg-4">
-        {% set groups = [tag] | getRelatedTags(collections.tags, collections.tagcount) %}
-        {{ tags_sidebar("Related Tags", groups) }}
+        {% if not archived %} {# Avoid calling getRelatedTags on archived tags... #}
+            {% set groups = [tag] | getRelatedTags(collections.tags, collections.tagcount) %}
+            {{ tags_sidebar("Related Tags", groups) }}
+        {% endif %}
     </div>
 
     <div class="col-lg-8">
