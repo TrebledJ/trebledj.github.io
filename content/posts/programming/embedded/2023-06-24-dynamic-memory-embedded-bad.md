@@ -10,7 +10,7 @@ tags:
   - software-engineering
   - performance
   - notes
-thumbnail_src: assets/dynamic-memory-1.jpg
+thumbnail_src: assets/thumbnail.jpg
 # thumbnail_banner: true
 related:
     auto: true
