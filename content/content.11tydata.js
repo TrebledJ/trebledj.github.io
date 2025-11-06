@@ -1,6 +1,14 @@
 import { getGitCommitDate } from '../eleventy/detail/git-commit-date.js';
 import { stripBetweenTags } from '../eleventy/detail/helpers.js';
 
+const repl = [
+  ['&amp;', '&'],
+  ['&lt;', '<'],
+  ['&gt;', '>'],
+  ['&apos;', "'"],
+  ['&nbsp;', ' '],
+];
+
 export default {
   // Defaults.
   excerpt: '',
@@ -36,7 +44,9 @@ export default {
       if (!data.title)
         return data.title;
       // No &nbsp, no tags, good for attributes, etc.
-      let title = data.title.replace('&nbsp;', ' ');
+      let title = data.title;
+      for (const [from, to] of repl)
+        title = title.replace('&nbsp;', ' ');
       title = stripBetweenTags(title, ['sub', 'sup', 's']);
       // eslint-disable-next-line max-len, no-useless-escape
       const HTML_TAG = /<\/?(?!\d)[^\s>\/=$<%]+(?:\s(?:\s*[^\s>\/=]+(?:\s*=\s*(?:"[^"]*"|'[^']*'|[^\s'">=]+(?=[\s>]))|(?=[\s/>])))+)?\s*\/?>/g;
