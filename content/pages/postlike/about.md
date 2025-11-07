@@ -22,7 +22,7 @@ A number of websites these days prioritise cash flow through paywalls, subscript
 
 ### Recent Site News
 
-{% set siteNews = collections.meta | head(3) | reverse %}
+{% set siteNews = collections.meta | reverse | head(3) %}
 <div class="post-preview-list mt-2">{% for post in siteNews %}{{ render_post_preview(post) | nl2br | brSafe | safe }}{% endfor %}</div>
 
 ## About Me
