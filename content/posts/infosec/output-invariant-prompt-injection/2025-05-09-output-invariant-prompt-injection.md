@@ -13,6 +13,7 @@ thumbnail_src: assets/thumbnail.jpg
 thumbnail_banner: true
 related:
   tags: [infosec]
+featured: true
 preamble: |
   *Note: Given current trends, the terms "AI" and "LLM" will be used interchangeably in this post. I'll also use "traditional implementation" to refer to code without LLM/AI/NLP processes.*
 ---
