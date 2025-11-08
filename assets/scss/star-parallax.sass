@@ -23,7 +23,7 @@ $opacity: 0.64
   width: 1px
   height: 1px
   box-shadow: $shadows-small
-  animation			: animStar linear
+  animation			: animStar3 200s linear infinite
   
   &:after
     content: " "
@@ -39,7 +39,7 @@ $opacity: 0.64
   height: 2px
   background: transparent
   box-shadow: $shadows-medium
-  animation			: animStar2 linear
+  animation			: animStar3 150s linear infinite
     
   &:after
     content: " "
@@ -54,7 +54,7 @@ $opacity: 0.64
   width: 3px
   height: 3px
   box-shadow: $shadows-big
-  animation			: animStar3 linear
+  animation			: animStar3 100s linear infinite
     
   &:after
     content: " "
@@ -69,8 +69,7 @@ $opacity: 0.64
 #stars, #stars2, #stars3
   margin-left: -$container-negative-margin
   background: transparent
-  animation-timeline: scroll()
-  // animation-timeline: infinite
+  // animation-timeline: scroll()
   // top: 2000px
   opacity: $opacity
   color: $color
@@ -99,18 +98,18 @@ $opacity: 0.64
 //     -webkit-background-clip: text
 //     -webkit-text-fill-color: transparent
     
-@keyframes animStar
-  from	
-    transform: translateY(0px)
-  to		
-    transform: translateY(-1000px)
+// @keyframes animStar
+//   from	
+//     transform: translateY(0px)
+//   to		
+//     transform: translateY(-1000px)
     
     
-@keyframes animStar2
-  from	
-    transform: translateY(0px)
-  to		
-    transform: translateY(-1500px)
+// @keyframes animStar2
+//   from	
+//     transform: translateY(0px)
+//   to		
+//     transform: translateY(-1500px)
     
     
 @keyframes animStar3
