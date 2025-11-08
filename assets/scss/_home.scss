@@ -71,17 +71,6 @@ $collapse-function: ease-out;
         }
     }
 
-    .metadata-reading-time {
-        // Reading time.
-        display: grid;
-        grid-template-rows: 1fr;
-        transition: grid-template-rows $collapse-time $collapse-function;
-
-        & > * {
-            overflow: hidden;
-        }
-    }
-
     .metadata-tag-container {
         opacity: 1;
         // Collapse transition of height: https://keithjgrant.com/posts/2023/04/transitioning-to-height-auto/
@@ -91,11 +80,6 @@ $collapse-function: ease-out;
         & > * {
             overflow: hidden;
         }
-    }
-
-    div:has(> .post-posted-date)::after {
-        // No vertical pipe | after date metadata.
-        content: none;
     }
 }
 
@@ -139,9 +123,25 @@ $collapse-function: ease-out;
             flex-direction: column;
             justify-content: start;
         }
+
+        .metadata-reading-time {
+            // Reading time.
+            display: grid;
+            grid-template-rows: 1fr;
+            transition: all $collapse-time $collapse-function;
+    
+            & > * {
+                overflow: hidden;
+            }
+        }
         
         .metadata-container {
             flex-direction: column;
+        }
+
+        div:has(> .post-posted-date)::after {
+            // No vertical pipe | after date metadata.
+            content: none;
         }
 
         @media (hover: hover) {
@@ -177,24 +177,36 @@ $collapse-function: ease-out;
 }
 
 @include media-breakpoint-down(sm) {
-    .post-preview-container {
+    .post-preview {
         // Make similar to post-preview in /posts, by throwing away the padding between summary and metadata.
         .post-preview-metadata-container {
             padding: 1rem;
             padding-top: 0;
         }
-        .post-preview .post-content {
+        .post-content {
             padding-bottom: 0;
         }
-    }
 
-    .home-header.collapsed {
-        & + .collection-list {
-            .post-title {
-                margin-bottom: 0;
+        .metadata-reading-time {
+            opacity: 1;
+            // Collapse transition of height: https://keithjgrant.com/posts/2023/04/transitioning-to-height-auto/
+            display: flex;
+            align-items: center;
+            // grid-template-rows: 1fr;
+            transition: all $collapse-time $collapse-function;
+            & > * {
+                overflow: hidden;
             }
         }
     }
+
+    // .home-header.collapsed {
+    //     & + .collection-list {
+    //         .post-title {
+    //             margin-bottom: 0;
+    //         }
+    //     }
+    // }
 }
 
 .home-header {
@@ -239,6 +251,7 @@ $collapse-function: ease-out;
 
         .metadata-reading-time {
             // Reading time.
+            opacity: 0;
             grid-template-rows: 0fr;
         }
 
@@ -249,6 +262,11 @@ $collapse-function: ease-out;
 
         .post-preview-metadata-container {
             justify-content: start;
+        }
+
+        div:has(> .post-posted-date)::after {
+            // No vertical pipe | after date metadata.
+            content: none;
         }
     }
 }
