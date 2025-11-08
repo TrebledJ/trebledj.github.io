@@ -67,7 +67,9 @@
       const newLines = [];
       let add = 0; // +1 => add, -1 => del
       for (const line of lines) {
-        if (line.includes('+++++')) {
+        if (line.includes('=====')) {
+          add = 0;
+        } else if (line.includes('+++++')) {
           add = add > 0 ? 0 : 1;
         } else if (line.includes('-----')) {
           add = add < 0 ? 0 : -1;
