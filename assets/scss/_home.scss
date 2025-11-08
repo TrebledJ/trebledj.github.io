@@ -1,36 +1,3 @@
-.hero-fg {
-    width: 100vw;
-    height: 60vh;
-}
-
-.hero-section {
-    position: relative;
-    height: 80vh;
-    display: flex;
-    align-items: center;
-    overflow: hidden;
-}
-
-html[data-theme="dark"] .hero-section {
-    background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
-}
-
-html[data-theme="light"] .hero-section {
-    background: radial-gradient(ellipse at bottom, #eba85b 0%, #b6b5b0 100%);
-}
-
-.hero-fg > * {
-    position: relative;
-    z-index: 1;
-}
-
-#typewrite-text {
-    font-size: 1.5rem;
-    font-weight: 500;
-    min-height: 30px; // Avoid CLS.
-    text-align: center;
-}
-
 .about-me {
     .profile-img {
         width: 150px;
@@ -39,123 +6,10 @@ html[data-theme="light"] .hero-section {
     }
 }
 
-// --- Carousel ---
-
-#home {
-    .carousel {
-        height: auto;
-
-        margin-top: -3rem; // Offset hack to allow transform + glow to not be clipped.
-        margin-bottom: 3rem; // Extend bottom to cover for upward shift.
-        
-        .carousel-inner {
-            padding-top: 3rem; // Offset hack to allow transform + glow to not be clipped.
-        }
-
-        .post-preview {
-            @media (hover: hover) {
-                &:hover {
-                    transform: translate(-3px, -5px);
-                    box-shadow: 5px 15px 20px -5px rgba(5, 8, 17, 0.2);
-                }
-            }
-            
-            @include media-breakpoint-down(lg) {
-                .post-preview-container {
-                    min-height: 194px; // 2 rows of title.
-                }
-            }
-
-            @include media-breakpoint-up(lg) {
-                .post-content {
-                    width: 60%;
-                }
-                .post-thumbnail {
-                    width: 40%;
-                }
-            }
-
-            .post-title,
-            .post-summary p {
-                display: -webkit-box;
-                -webkit-box-orient: vertical;
-                text-overflow: ellipsis;
-                overflow: hidden;
-            }
-            .post-title {
-                line-clamp: 3;
-                -webkit-line-clamp: 3;
-            }
-            .post-summary p {
-                line-clamp: 3;
-                -webkit-line-clamp: 3;
-            }
-            
-            @include media-breakpoint-down(sm) {
-                .post-title {
-                    line-clamp: 4;
-                    -webkit-line-clamp: 4;
-                }
-                .post-summary p {
-                    line-clamp: 3;
-                    -webkit-line-clamp: 3;
-                }
-                .metadata-container {
-                    display: none !important;
-                }
-            }
-        }
-
-        // Small view, display only one post.
-        .collection-list {
-            @include media-breakpoint-up(md) {
-                padding: 0 1rem;
-            }
-
-            @include media-breakpoint-down(md) {
-                & .post-preview:nth-child(n+2) {
-                    display: none;
-                }
-            }
-        }
-    }
-
-    .carousel-control-container {
-        flex: 0 0 auto;
-        @include media-breakpoint-up(sm) {
-            width: 5%;
-        }
-        @include media-breakpoint-down(sm) {
-            width: 8%;
-        }
-    }
-
-    .carousel-content-container {
-        flex: 0 0 auto;
-        max-width: 1000px;
-        margin-left: auto;
-        margin-right: auto;
-        
-        @include media-breakpoint-up(sm) {
-            width: 90%;
-        }
-        @include media-breakpoint-down(sm) {
-            width: 84%;
-        }
-    }
-
-    .carousel-tab-group {
-        .btn {
-            --bs-btn-border-color: var(--border-color);
-            --bs-btn-border-width: 1px;
-            --bs-btn-color: var(--main-text-color);
-        }
-
-        .btn.active-tab {
-            --bs-btn-bg: var(--bs-primary);
-            --bs-btn-color: var(--bs-white);
-        }
-    }
+@property --thb-progress {
+    syntax: '<percentage>';
+    initial-value: 0%;
+    inherits: false;
 }
 
 #home {
@@ -173,50 +27,227 @@ html[data-theme="light"] .hero-section {
     }
 }
 
-.recent-posts {
-    line-height: $line-height-compact;
-
-    @include media-breakpoint-up(md) {
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-    }
-    @include media-breakpoint-down(md) {
-        flex-direction: column;
-        justify-content: left;
-    }
-}
-
-.carousel-title .btn,
+.home-header .btn,
 .recent-posts .btn {
     border: $border-width solid var(--border-color);
     background-color: var(--background-color);
     color: var(--bold-color) !important;
 }
 
-html[data-theme="light"] {
-    .carousel-control-prev-icon,
-    .carousel-control-next-icon {
-        filter: invert(100%);
+$collapse-time: .3s;
+$collapse-function: ease-out;
+
+.post-thumbnail-avg-color {
+    &:before {
+        content: "";
+        display: block;
+        position: relative;
+        border: 0.8rem solid var(--avg-color);
+        border-radius: 50%;
+    }
+    --avg-color: white;
+    position: absolute;
+    margin-left: -40px;
+    opacity: 0;
+    transition: opacity $collapse-time $collapse-function;
+}
+
+
+.post-preview-home {
+    // Expanded state.
+
+    .post-thumbnail {
+        mask-image: linear-gradient(to top right, rgba(0, 0, 0, 0) calc(2 * var(--thb-progress) - 100%), rgba(0, 0, 0, 1) calc(2 * var(--thb-progress)));
+        --thb-progress: 0%;
+        transition: --thb-progress $collapse-time $collapse-function, all $collapse-time $collapse-function;
+    }
+
+    .post-summary {
+        opacity: 1;
+        transition: all $collapse-time $collapse-function;
+
+        p {
+            margin-bottom: 0;
+        }
+    }
+
+    .metadata-reading-time {
+        // Reading time.
+        display: grid;
+        grid-template-rows: 1fr;
+        transition: grid-template-rows $collapse-time $collapse-function;
+
+        & > * {
+            overflow: hidden;
+        }
+    }
+
+    .metadata-tag-container {
+        opacity: 1;
+        // Collapse transition of height: https://keithjgrant.com/posts/2023/04/transitioning-to-height-auto/
+        display: grid;
+        grid-template-rows: 1fr;
+        transition: all $collapse-time $collapse-function;
+        & > * {
+            overflow: hidden;
+        }
+    }
+
+    div:has(> .post-posted-date)::after {
+        // No vertical pipe | after date metadata.
+        content: none;
     }
 }
 
-.tj-carousel-control-prev, .tj-carousel-control-next {
-    z-index: 1;
-    padding: 0;
-    color: #fff;
-    text-align: center;
-    background: 0 0;
-    border: 0;
-    opacity: .5;
-    transition: opacity .15s ease;
+@include media-breakpoint-up(sm) {
+    .post-preview-home {
+        border: none;
+        border-radius: 0;
+        margin-bottom: 0;
+
+
+        &:nth-child(2n+2) {
+            .post-preview-container {
+                // Image back on left.
+                flex-direction: row;
+            }
+        }
+
+        .post-title {
+            margin-top: 0; // In case previews are included in post-body (articles).
+            margin-bottom: $space-half;
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .post-thumbnail {
+            width: 20%;
+        }
+
+        .post-content {
+            padding-top: 0.5rem;
+            padding-bottom: 0.5rem;
+            width: 60%;
+        }
+
+        .post-preview-metadata-container {
+            width: 20%;
+            padding-top: 0.5rem;
+            padding-bottom: 0.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: start;
+        }
+        
+        .metadata-container {
+            flex-direction: column;
+        }
+
+        @media (hover: hover) {
+            &:hover {
+                .post-img-contain {
+                    transform: scale(2);
+                }
+
+                transform: none; // Disable the shift-up on-hover transform.
+            }
+        }
+
+        @media (hover: none) {
+            .post-img-contain {
+                transform: scale(1.5);
+            }
+        }
+
+        .post-img-contain {
+            transition: transform .3s ease-in-out;
+        }
+        transition: transform .3s ease-in-out;
+
+    }
+
+    .home-header.collapsed {
+        & + .collection-list {
+            .post-thumbnail-avg-color {
+                opacity: 1;
+            }
+        }
+    }
 }
 
 @include media-breakpoint-down(sm) {
-    // Small view, compress the preview.
-    #home {
-        .topic-title {
-            display: none;
+    .post-preview-container {
+        // Make similar to post-preview in /posts, by throwing away the padding between summary and metadata.
+        .post-preview-metadata-container {
+            padding: 1rem;
+            padding-top: 0;
+        }
+        .post-preview .post-content {
+            padding-bottom: 0;
+        }
+    }
+
+    .home-header.collapsed {
+        & + .collection-list {
+            .post-title {
+                margin-bottom: 0;
+            }
+        }
+    }
+}
+
+.home-header {
+    margin-bottom: .5rem;
+}
+
+.home-header > * {
+    display: block;
+    position: relative;
+    padding-left: 2rem;
+    cursor: pointer;
+
+    &:before {
+        content: '';
+        border-width: .8rem;
+        border-style: solid;
+        border-color: transparent transparent transparent var(--main-text-color);
+        position: absolute;
+        top: .2rem;
+        left: .5rem;
+        transform: rotate(90deg);
+        transform-origin: .2rem 50%;
+        transition: transform $collapse-time $collapse-function;
+    }
+}
+
+.home-header.collapsed {
+    & > *:before {
+        transform: rotate(-45deg);
+    }
+
+    & + .collection-list {
+        .post-thumbnail {
+            --thb-progress: 100%;
+            min-height: 0px;
+        }
+
+        .post-summary {
+            opacity: 0;
+            line-height: 0rem;
+        }
+
+        .metadata-reading-time {
+            // Reading time.
+            grid-template-rows: 0fr;
+        }
+
+        .metadata-tag-container {
+            opacity: 0;
+            grid-template-rows: 0fr;
+        }
+
+        .post-preview-metadata-container {
+            justify-content: start;
         }
     }
 }

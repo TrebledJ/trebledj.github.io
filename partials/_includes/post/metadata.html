@@ -31,18 +31,20 @@
     </div>
 
     {# Reading Time #}
-    <div class="d-flex flex-row align-items-center">
-        <span>
-            <i class="far fa-clock post-meta-icon me-1"></i>
-        </span>
-        {% set words = post.content | default(content) | wordcountFocused %}
-        {% set minutes = ((words + 225) / 225) | int %}
-        <span class="fs-7">{{ minutes + " minute read" }}</span>
-    </div>
+    {% block post_reading_time %}
+        <div class="d-flex flex-row align-items-center">
+            <span>
+                <i class="far fa-clock post-meta-icon me-1"></i>
+            </span>
+            {% set words = post.content | default(content) | wordcountFocused %}
+            {% set minutes = ((words + 225) / 225) | int %}
+            <span class="fs-7">{{ minutes + " minute read" }}</span>
+        </div>
+    {% endblock %}
 </div>
 
 {# Tags #}
-<div class="metadata-tag-container d-flex flex-row align-items-top">
+<div class="metadata-tag-container">
     {% block post_metadata_tags %}
         {% if tags.length > 0 %}
             <span>

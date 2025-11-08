@@ -163,6 +163,11 @@
     }
 }
 
+.metadata-tag-container {
+    display: flex;
+    align-items: start;
+}
+
 .post-minified-preview {
     // Vertical layout.
     .post-thumbnail {

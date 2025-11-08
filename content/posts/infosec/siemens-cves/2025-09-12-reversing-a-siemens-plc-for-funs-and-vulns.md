@@ -19,6 +19,7 @@ keywords: [plc, siemens, cve, vulnerability, exploit]
 thumbnail_banner: false
 related:
   tags: [infosec]
+featured: true
 ---
 
 Under the sweltering heat of the Hong Kong summer, we entered a looming building and kicked off what was supposed to be a simple penetration test. Little did we know, this ordeal would lead to panic-stricken emails, extra reports, and a few new CVEs.

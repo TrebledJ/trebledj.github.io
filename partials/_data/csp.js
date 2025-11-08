@@ -27,6 +27,7 @@ export default compileCsp(
     // step is skipped to optimise for speed, so for fast builds, we just use
     // unsafe-inline.
     .add(...(process.env.ENVIRONMENT === 'fast' ? ["'unsafe-inline'"] : []))
+    .add("'unsafe-hashes'")
     // .add('*.disqus.com', '*.disquscdn.com')
     .add('comments.trebledj.me')
     .add('code.jquery.com', 'cdn.jsdelivr.net')

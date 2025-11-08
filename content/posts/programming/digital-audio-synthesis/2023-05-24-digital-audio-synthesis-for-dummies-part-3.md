@@ -18,6 +18,7 @@ use_math: true
 related:
     posts: [r/digital-audio-synthesis-for-dummies-part-.*/r, stm32-midi-keyboard]
     auto: false
+featured: true
 ---
 
 > *Slap a timer, DMA, and DAC together, and BAM—non-blocking audio output!*  

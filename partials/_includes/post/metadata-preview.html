@@ -3,9 +3,9 @@
 
 {# Show simplified date. #}
 {% block post_metadata_date %}
-    <span>
+    {# <span>
         <i class="fas fa-calendar post-meta-icon me-1"></i>
-    </span>
+    </span> #}
     {# DON'T FORMAT!!! #}
     <span class="fs-7 post-posted-date">{{ post.page.date | date | safe }}</span>
 {% endblock %}
@@ -13,14 +13,22 @@
 {# Don't show updated date. #}
 {% block post_metadata_updated %}{% endblock %}
 
+{% block post_reading_time %}
+    <div class="metadata-reading-time">
+        {% set words = post.content | default(content) | wordcountFocused %}
+        {% set minutes = ((words + 225) / 225) | int %}
+        <span class="fs-7">{{ minutes + " minute read" }}</span>
+    </div>
+{% endblock %}
+
 {# Limit the number of tags. #}
 {% block post_metadata_tags %}
     {% if post.data.tags.length > 0 %}
-        <span>
+        {# <span>
             <i class="fas fa-tag post-meta-icon me-1 mt-2"></i>
-        </span>
+        </span> #}
         <div class="tag-list d-flex flex-row flex-wrap align-items-center">
-            {{render_tag_list(post.data.tags | exclude(excludeTags), 3)}}
+            {{render_tag_list(post.data.tags | exclude(excludeTags), taglimit)}}
         </div>
     {% endif %}
 {% endblock %}

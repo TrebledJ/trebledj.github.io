@@ -66,96 +66,33 @@ export default function () {
       ...extraNavPages,
     ],
     home: {
-      carouselAutoInterval: 10000,
-      npostsPerTab: 2,
-      featuredTracks: [
-        "relay",
-        "space-penguin",
-      ],
-      professionalCategories: [
-        {
-          name: "Research",
-          tag: "research",
-          icon: "microscope",
-          about: "Technical forays into the unknown.",
-          excludeTags: ["satire"],
+      topics: {
+        infosec: {
+          tags: ["research", "infosec", "cve", "embedded"],
+          max: 3,
+          excludeTags: ["satire", "reflection"],
         },
-        {
-          name: "Infosec",
-          tag: "infosec",
-          icon: "user-secret",
-          about: "Writeups and thoughts on cybersecurity.",
-          excludeTags: ["satire"],
+        programming: {
+          tags: ["programming", "embedded"],
+          max: 3,
+          excludeTags: ["satire", "reflection"],
         },
-        {
-          name: "Programming",
-          tag: "programming",
-          icon: "code",
-          about: "Prose and poetry expressed logically.",
+        music: {
+          tags: ["composition"],
+          max: 2,
           excludeTags: [],
         },
-        // {
-        //   name: "CTFs",
-        //   tag: "ctf",
-        //   icon: "flag",
-        //   about: "Let's learn cybersecurity through a gamified experience!",
-        //   excludeTags: ["writeup", "satire"],
+        // reflection: {
+        //   tags: ["reflection", "essay"],
+        //   min: 0,
+        //   max: 2
         // },
-        {
-          name: "Embedded",
-          tag: "embedded",
-          icon: "bolt",
-          about: "Fiddling with microcontrollers and bare-metal systems.",
+        humor: {
+          tags: ["satire"],
+          max: 2,
           excludeTags: [],
         },
-        // {
-        //   name: "Essays",
-        //   tag: "essay",
-        //   about: "Rants on various issues I'm concerned with.",
-        //   excludeTags: [],
-        // },
-      ],
-
-      humanitiesCategories: [
-        {
-          name: "Music",
-          tag: "composition",
-          icon: "music",
-          about: "Compositions by yours truly.",
-          excludeTags: ["music"],
-        },
-        {
-          name: "Faith",
-          tag: "faith",
-          icon: "cross",
-          about: "Musings of and for the soul.",
-          excludeTags: [],
-        },
-        {
-          name: "Satire",
-          tag: "satire",
-          icon: "face-smile",
-          about: "Everyone needs a dose of laughter at times.",
-          excludeTags: [],
-        }
-      ],
-
-      projectCategories: [
-        {
-          name: "Projects",
-          tag: "project",
-          icon: "star",
-          about: "Adventurous undertakings!",
-          excludeTags: ["experience"],
-        },
-        {
-          name: "Experiences",
-          tag: "experience",
-          icon: "rocket",
-          about: "Journeys I've gone through.",
-          excludeTags: ["project"],
-        }
-      ],
+      },
     },
     search: {
       // https://fontawesome.com/icons/

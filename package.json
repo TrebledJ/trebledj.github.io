@@ -79,6 +79,7 @@
 		"markdown-it-attrs": "^4.3.1",
 		"markdown-it-footnote": "^4.0.0",
 		"markdown-it-prism": "^3.0.0",
+		"node-vibrant": "^4.0.3",
 		"prismjs": "^1.29.0",
 		"sass": "^1.93.2",
 		"sharer.js": "^0.5.1",

@@ -1,0 +1,41 @@
+{# See Note [with context]. #}
+{% from "tag.html" import render_tag_list with context %}
+{% from "post/preview.html" import render_post_preview_for_home with context %}
+
+{% macro render_posts_by_topic(uniquePosts, postGroupedTopics, name, isDefaultExpanded) %}
+    {# Title #}
+    <div class="home-header mt-2 d-flex flex-row justify-content-between align-items-center{{"" if isDefaultExpanded else " collapsed"}}" onclick="this.classList.toggle('collapsed')">
+        <h3 id="{{name | slugify}}" class="mb-0">{{name}}</h3>
+    </div>
+
+    {# Posts #}
+    {% set topicPosts = uniquePosts[name] %}
+    <div class="collection-list">
+        {% for post in topicPosts %}
+            {{ render_post_preview_for_home(post, excludeTags=postGroupedTopics[name].excludeTags) }}
+        {% endfor %}
+    </div>
+{% endmacro %}
+
+<div class="mt-4">
+    <div class="mt-4 d-flex flex-row justify-content-between align-items-center">
+        <h2 id="posts" class="mb-0">Posts</h2>
+        <div>
+            <button class="btn btn-sm btn-primary" onclick="document.querySelectorAll('.home-header').forEach(e => e.classList.remove('collapsed'))">Expand All</button>
+            <button class="btn btn-sm btn-secondary" onclick="document.querySelectorAll('.home-header').forEach(e => e.classList.add('collapsed'))">Collapse All</button>
+        </div>
+    </div>
+
+    {# Seperate posts into unique lists. #}
+    {% set uniquePosts = collections.postsr | selectPostsWithAtLeastNPerTag(postGroupedTopics) %}
+
+    {# Recent Posts Section #}
+    {{render_posts_by_topic(uniquePosts, postGroupedTopics, "infosec", true)}}
+    {{render_posts_by_topic(uniquePosts, postGroupedTopics, "programming")}}
+
+    {# Recent Humanities Section #}
+    {{render_posts_by_topic(uniquePosts, postGroupedTopics, "music")}}
+
+    {# Recent Projects and Experiences Section #}
+    {{render_posts_by_topic(uniquePosts, postGroupedTopics, "humor")}}
+</div>

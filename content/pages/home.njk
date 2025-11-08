@@ -8,22 +8,20 @@
   },
   showToc: true,
   eleventyComputed: {
-    carouselAutoInterval: ({ site }) => site.home.carouselAutoInterval,
-    npostsPerTab: ({ site }) => site.home.npostsPerTab,
-    featuredTracks: ({ site }) => site.home.featuredTracks,
-    professionalCategories: ({ site }) => site.home.professionalCategories,
-    humanitiesCategories: ({ site }) => site.home.humanitiesCategories,
-    projectCategories: ({ site }) => site.home.projectCategories,
+    postGroupedTopics: ({ site }) => site.home.topics,
   },
   redirect_from: ["/profile", "/cv"],
+  tocOptions: '{"tags":["h2"]}', // h3 has issues being parsed???
 }
 ---
 <div id="home">
-  {% include "home/hero.html" %}
-
   <div class="container">
+    <div id="stars"></div>
+    <div id="stars2"></div>
+    <div id="stars3"></div>
+
     {% include "home/about-me.html" %}
-    {% include "home/recents.html" %}
+    {% include "home/recent-posts.html" %}
     {% include "home/contact.html" %}
   </div>
 </div>

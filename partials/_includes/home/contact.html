@@ -1,13 +1,23 @@
-<div class="contact">
-        <div class="row gx-4">
+<div class="contact mt-4">
+    <div class="row gx-4">
+        {# <div class="col-md-6"> #}
+            {# {% include "home/random-meme.html" %} #}
+            {# <h2>...</h2>
+            <div class="mx-auto d-flex justify-content-center align-items-center">
+                <p>This smol section is a WIP. Check back later?
+            </div> #}
+        {# </div> #}
+
+        <div class="col-md-6">
             {% if site.id.formcarry %}
                 {% include "home/contact-form.html" %}
             {% endif %}
+        </div>
 
-            {# <div class="col-md-6 px">
+        {# <div class="col-md-6 px">
                 <h2>Social</h2>
                 <p>Find me in these communities:</p>
                 {% include "author/social-links.html" %}
             </div> #}
-        </div>
+    </div>
 </div>

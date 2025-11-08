@@ -25,6 +25,7 @@ related:
   tags: [tag1, tag2, tag3]  # Any post containing all these tags is marked as related.
   auto: true # Use an auto algorithm to determine whether a post is related.
   # See more params in related.js.
+featured: true # Whether to force the post to be shown on the home page.
 draft: true  # Set true to not publish.
 archived: true  # Set true to archive. Link still exists, but won't be shown in any collection.
 feed: false  # Don't show in feed.

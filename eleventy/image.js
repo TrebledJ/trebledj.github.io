@@ -2,6 +2,8 @@ import path from 'path';
 import * as cheerio from 'cheerio';
 import chalk from 'chalk';
 import eleventyImage from '@11ty/eleventy-img';
+import { Vibrant } from "node-vibrant/node";
+
 
 export default function (eleventyConfig) {
   const thumbWidth = 512; // Thumbnail default max width.
@@ -171,6 +173,8 @@ export default function (eleventyConfig) {
     return img;
   }
 
+  const DEFAULT_THUMBNAIL = '/img/posts/thumbnail/default.webp';
+
   function thumbnailShortcode(post, classes) {
     classes = amendClasses(`${classes} thumbnail`);
 
@@ -181,7 +185,7 @@ export default function (eleventyConfig) {
       // Hence, it's a main target for optimisations.
 
       // Return a default dummy without any processing.
-      return `<img src="/img/posts/thumbnail/default.webp" class="${classes}" />`;
+      return `<img src="${DEFAULT_THUMBNAIL}" class="${classes}" />`;
     }
 
     const { page } = post;
@@ -257,43 +261,49 @@ export default function (eleventyConfig) {
     });
   });
 
-  // Synchronous shortcode. Useful for Nunjucks macro.
-  // Doesn't work with remote URLs.
-  eleventyConfig.addShortcode('thumbnail', thumbnailShortcode);
-  eleventyConfig.addTransform('imgThumbnail', async function (content) {
+  function asyncPlaceholderTransform(content, tag, func) {
     // Inspired from https://multiline.co/mment/2022/08/eleventy-transforms-nunjucks-macros/
     if (!this.outputPath || !this.outputPath.endsWith('.html'))
       return content;
 
     // Find all relevant placeholders on the page
-    const placeholderPattern = new RegExp('<!-- IMAGE {[^}]+} -->', 'g');
+    const placeholderPattern = new RegExp('<!-- ' + tag + ' {[^}]+} -->', 'g');
     const placeholders = content.match(placeholderPattern);
+    if (!placeholders)
+      return content;
 
-    if (placeholders) {
-      return new Promise((resolve, reject) => {
-        const promises = placeholders.map(async placeholder => {
-          // Extract structured data properties
-          const propertiesPattern = /{[^}]+}/;
-          const propertiesString = placeholder.match(propertiesPattern);
-
-          if (propertiesString) {
-            // Reconstruct parameters.
-            const { alt, src, classes } = JSON.parse(propertiesString);
-            // Business as usual.
-            const { ext, options } = getOptions(src);
-            const metadata = await eleventyImage(src, options);
-            const html = makeImageFromMetadata(metadata, ext, classes, true, { alt, loading: 'lazy' });
-            content = content.replace(placeholder, html);
-          }
-        });
-
-        // Wait for async work to finish or error out
-        return Promise.all(promises)
-          .then(() => resolve(content))
-          .catch(error => reject(error));
+    return new Promise((resolve, reject) => {
+      const promises = placeholders.map(async placeholder => {
+        // Extract structured data properties
+        const propertiesPattern = /{[^}]+}/;
+        const propertiesString = placeholder.match(propertiesPattern);
+        if (!propertiesString) {
+          throw new Error(`Attempting to resolve async placeholder ${tag}: ${placeholder}, but got no properties string.`);
+        }
+        // Reconstruct parameters.
+        const obj = JSON.parse(propertiesString[0].replaceAll('&quot;', '"'));
+        // Business as usual.
+        const repl = await func(obj);
+        content = content.replace(placeholder, repl);
       });
-    }
-    return content;
+
+      // Wait for async work to finish or error out
+      return Promise.all(promises)
+        .then(() => resolve(content))
+        .catch(error => reject(error));
+    });
+  }
+
+  // Synchronous shortcode. Useful for Nunjucks macro.
+  // Doesn't work with remote URLs.
+  eleventyConfig.addShortcode('thumbnail', thumbnailShortcode);
+  eleventyConfig.addTransform('imgThumbnail', async function (content) {
+    return asyncPlaceholderTransform.call(this, content, 'IMAGE', async ({ alt, src, classes }) => {
+      const { ext, options } = getOptions(src);
+      const metadata = await eleventyImage(src, options);
+      const html = makeImageFromMetadata(metadata, ext, classes, true, { alt, loading: 'lazy' });
+      return html;
+    });
   });
 
   eleventyConfig.addShortcode('video', (src, classes) => {
@@ -389,5 +399,23 @@ export default function (eleventyConfig) {
     containerClasses = containerClasses.join(' ');
 
     return `<div class="center rw mb-2 ${containerClasses}">${images}</div>`;
+  });
+
+  eleventyConfig.addNunjucksGlobal('getThumbnailMainColor', (post) => {
+    if (process.env.ENVIRONMENT === 'fast') {
+      return 'white';
+    }
+    const { page } = post;
+    const src = resolveResourcePath(page, post.data.thumbnail_src);
+    const properties = JSON.stringify({ src });
+    return `<!-- THUMBCOLOR ${properties} -->`;
+  });
+  eleventyConfig.addTransform('processThumbnailMainColor', async function (content) {
+    return asyncPlaceholderTransform.call(this, content, 'THUMBCOLOR', async ({ src }) => {
+      const opts = {};
+      const v = new Vibrant(src, opts);
+      const palette = await v.getPalette();
+      return palette.Vibrant.population > palette.DarkVibrant.population ? palette.Vibrant.hex : palette.DarkVibrant.hex;
+    });
   });
 };

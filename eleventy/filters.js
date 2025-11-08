@@ -5,7 +5,7 @@ import MarkdownItAttrs from 'markdown-it-attrs';
 import * as cheerio from 'cheerio';
 import { getRelatedPosts, getRelatedTags, getTagsByPrefix } from './detail/related.js';
 import { nonEmptyContainerSentinel } from './detail/utils.js';
-import { selectHomePosts } from './detail/select-home-posts.js';
+import { selectHomePosts, selectPostsWithAtLeastNPerTag } from './detail/select-home-posts.js';
 import { findKeywords } from './detail/keywords/index.js';
 import { stripBetweenTags } from './detail/helpers.js';
 
@@ -196,6 +196,7 @@ export default function (eleventyConfig) {
   eleventyConfig.addFilter('getRelatedTags', nonEmptyContainerSentinel('related tags')(getRelatedTags));
   eleventyConfig.addFilter('getTagsByPrefix', nonEmptyContainerSentinel('related tags by prefix')(getTagsByPrefix));
   eleventyConfig.addFilter('selectHomePosts', selectHomePosts);
+  eleventyConfig.addFilter('selectPostsWithAtLeastNPerTag', selectPostsWithAtLeastNPerTag);
 
   /**
    * Accepts an array of objects, and maps each object to a particular attr.
