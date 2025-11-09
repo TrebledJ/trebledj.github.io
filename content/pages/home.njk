@@ -23,5 +23,104 @@
     {% include "home/about-me.html" %}
     {% include "home/recent-posts.html" %}
     {% include "home/contact.html" %}
+
+    <script>
+    /* matrixy stuff
+      function randomChar() {
+        const s = 'モエヤキオカ7ケサスz152ヨタワ4ネヌナ98ヒ0ホア3ウ セ¦:"꞊ミラリ╌ツテニハソ▪—<>0|+*コシマムメ';
+        return s[Math.floor(Math.random()*s.length)];
+      }
+
+      var divs = [];
+      for (let i = 0; i < 16; i++) {
+        const div = document.createElement('div');
+        div.classList.add('starsm');
+        div.style.left = `${Math.floor(Math.random() * 400) + 200}px`;
+        div.style.top = `${Math.floor(Math.random() * 1000)}px`;
+        divs.push(div);
+        document.body.append(div);
+      }
+
+      function update() {
+        for (const div of divs) {
+          div.innerText = randomChar();
+        }
+      }
+
+      setInterval(update, 400);
+      */
+      // https://codepen.io/soulwire/pen/mEMPrK 
+      const RANDOM_CHARS = '!<>-_\\/[]{}—=+*^?#________';
+      class TextScramble {
+        constructor(el) {
+          this.el = el
+          this.update = this.update.bind(this)
+        }
+        setText(newText) {
+          const oldText = this.el.innerText
+          const length = Math.max(oldText.length, newText.length)
+          const promise = new Promise((resolve) => this.resolve = resolve)
+          this.queue = []
+          for (let i = 0; i < length; i++) {
+            const from = oldText[i] || ''
+            const to = newText[i] || ''
+            const start = Math.floor(Math.random() * 40)
+            const end = start + Math.floor(Math.random() * 40)
+            this.queue.push({ from, to, start, end })
+          }
+          cancelAnimationFrame(this.frameRequest)
+          this.frame = 0
+          this.update()
+          return promise
+        }
+        update() {
+          let output = ''
+          let complete = 0
+          for (let i = 0, n = this.queue.length; i < n; i++) {
+            let { from, to, start, end, char } = this.queue[i]
+            if (this.frame >= end) {
+              complete++
+              output += to
+            } else if (this.frame >= start) {
+              if (!char || Math.random() < 0.18) {
+                char = this.randomChar()
+                this.queue[i].char = char
+              }
+              output += `<span class="dud">${char}</span>`
+            } else {
+              output += from
+            }
+          }
+          this.el.innerHTML = output
+          if (complete === this.queue.length) {
+            this.resolve()
+          } else {
+            this.frameRequest = requestAnimationFrame(this.update)
+            this.frame++
+          }
+        }
+        randomChar() {
+          return RANDOM_CHARS[Math.floor(Math.random() * RANDOM_CHARS.length)]
+        }
+      }
+
+      const scrambleObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const fx = new TextScramble(entry.target);
+            fx.setText(entry.target.innerText);
+            observer.unobserve(entry.target);
+          }
+        });
+      }, {
+        rootMargin: '-80px 0px -60px 0px', // top, right, bottom, left
+        threshold: 0,
+      });
+
+      scrambleObserver.observe(document.querySelector('#about-me'));
+      scrambleObserver.observe(document.querySelector('#posts'));
+      scrambleObserver.observe(document.querySelector('#contact'));
+      document.querySelectorAll('h3').forEach(e => scrambleObserver.observe(e));
+    </script>
   </div>
 </div>
