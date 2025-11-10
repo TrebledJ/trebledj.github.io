@@ -202,6 +202,11 @@
     flex-wrap: wrap;
 }
 
+.metadata-reading-time {
+    display: flex;
+    align-items: center;
+}
+
 // Nested anchors: https://stackoverflow.com/a/52076345/10239789.
 .tag-list {
     pointer-events: none;

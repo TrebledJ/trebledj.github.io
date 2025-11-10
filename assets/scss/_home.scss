@@ -177,7 +177,7 @@ $collapse-function: ease-out;
 }
 
 @include media-breakpoint-down(sm) {
-    .post-preview {
+    .post-preview-home {
         // Make similar to post-preview in /posts, by throwing away the padding between summary and metadata.
         .post-preview-metadata-container {
             padding: 1rem;
