@@ -83,7 +83,7 @@
               output += to
             } else if (this.frame >= start) {
               if (!char || Math.random() < 0.15) {
-                while ((char = this.randomChar()) == this.queue[i].char);
+                while ((char = this.randomChar()) === this.queue[i].char);
                 this.queue[i].char = char
               }
               output += `<span class="dud">${char}</span>`
