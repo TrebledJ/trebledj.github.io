@@ -14,6 +14,7 @@ thumbnail_banner: true
 related:
   tags: [infosec]
 featured: true
+keywords: probe-pair, probe pair, llm, ai
 preamble: |
   *Note: Given current trends, the terms "AI" and "LLM" will be used interchangeably in this post. I'll also use "traditional implementation" to refer to code without LLM/AI/NLP processes.*
 ---
@@ -46,7 +47,11 @@ We'll assume a **Direct Prompt Injection** scenario, i.e. a tester/attacker is i
 
 Let's take a look at the first method.
 
-## Output-Invariant Testing
+## Output-Invariant (Probe-Pair) Testing
+
+{% alert "info" %}
+Update 2025.11.15: I realised a bit late that a term called [*probe-pair fuzzing*](https://portswigger.net/research/backslash-powered-scanning-hunting-unknown-vulnerability-classes) exists in the literature, presented by James Kettle some 9 years ago. It describes what I call "output invariance" quite neatly, in that you send two probes: a base request and a second request crafted to illicit "interesting behaviour".
+{% endalert %}
 
 The idea is quite simple, I just think the term "output-invariant testing" sums it up nicely.
 
