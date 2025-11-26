@@ -2,6 +2,7 @@
 title: Smart-Tracking Tray
 excerpt: Enhancing wet labs with IoT.
 tags:
+  - project
   - iot
   - embedded
   - cpp

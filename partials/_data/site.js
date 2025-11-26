@@ -65,6 +65,35 @@ export default function () {
       { text: 'Music', url: '/music' },
       ...extraNavPages,
     ],
+    home: {
+      topics: {
+        infosec: {
+          tags: ["research", "infosec", "cve", "embedded"],
+          max: 3,
+          excludeTags: ["satire", "reflection"],
+        },
+        programming: {
+          tags: ["programming", "embedded"],
+          max: 3,
+          excludeTags: ["satire", "reflection"],
+        },
+        music: {
+          tags: ["composition"],
+          max: 2,
+          excludeTags: [],
+        },
+        // reflection: {
+        //   tags: ["reflection", "essay"],
+        //   min: 0,
+        //   max: 2
+        // },
+        humor: {
+          tags: ["satire"],
+          max: 2,
+          excludeTags: [],
+        },
+      },
+    },
     search: {
       // https://fontawesome.com/icons/
       resultIcons: [

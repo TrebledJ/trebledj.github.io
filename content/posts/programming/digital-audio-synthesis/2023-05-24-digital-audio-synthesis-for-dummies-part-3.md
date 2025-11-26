@@ -2,6 +2,7 @@
 title: "Digital Audio Synthesis for Dummies: Part&nbsp;3"
 excerpt: Efficiently streaming audio to speakers on embedded systems (with examples in STM32).
 tags:
+  - programming
   - tutorial
   - dsp
   - embedded
@@ -17,6 +18,7 @@ use_math: true
 related:
     posts: [r/digital-audio-synthesis-for-dummies-part-.*/r, stm32-midi-keyboard]
     auto: false
+featured: true
 ---
 
 > *Slap a timer, DMA, and DAC together, and BAM—non-blocking audio output!*  

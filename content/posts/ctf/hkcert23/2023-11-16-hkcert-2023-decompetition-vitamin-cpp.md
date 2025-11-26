@@ -2,10 +2,12 @@
 title: "HKCERT CTF 2023 – Decompetition: Vitamin&nbsp;C++"
 excerpt: A beginner-friendly writeup to reverse-engineering C++ a lá decompetition. Years of complex shenanigans condensed!
 tags:
+  - ctf
   - reverse
   - cpp
   - tutorial
   - programming
+  - writeup
 thumbnail_src: assets/vitamin-cpp.webp
 thumbnail_banner: true
 ---

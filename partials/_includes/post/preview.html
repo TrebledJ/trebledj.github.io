@@ -38,6 +38,27 @@
     </article>
 {% endmacro %}
 
+{% macro render_post_preview_for_home(post, taglimit = 3, excludeTags = []) %}
+    <article class="post-preview post-preview-home dim-gentle">
+        <a href="{{post.url}}" tabindex="-1"></a>
+        <div class="post-preview-container d-flex">
+            {{ render_thumbnail(post) }}
+
+            <div class="post-content d-flex flex-column justify-content-between">
+                <div class="post-thumbnail-avg-color" style="--avg-color: {{ getThumbnailMainColor(post) }}">
+                </div>
+                
+                <div>
+                    {{ render_title(post) }}
+                </div>
+            </div>
+            <div class="post-preview-metadata-container">
+                {% include "post/metadata-preview.html" %}
+            </div>
+        </div>
+    </article>
+{% endmacro %}
+
 {# OBSOLE3T #}
 {% macro render_post_compressed_preview(post, taglimit = 3, excludeTags = []) %}
     <article class="post-compressed-preview dim-gentle">

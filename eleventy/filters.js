@@ -5,7 +5,7 @@ import MarkdownItAttrs from 'markdown-it-attrs';
 import * as cheerio from 'cheerio';
 import { getRelatedPosts, getRelatedTags, getTagsByPrefix } from './detail/related.js';
 import { nonEmptyContainerSentinel } from './detail/utils.js';
-import { selectHomePosts } from './detail/select-home-posts.js';
+import { selectHomePosts, selectPostsWithAtLeastNPerTag } from './detail/select-home-posts.js';
 import { findKeywords } from './detail/keywords/index.js';
 import { stripBetweenTags } from './detail/helpers.js';
 
@@ -196,6 +196,7 @@ export default function (eleventyConfig) {
   eleventyConfig.addFilter('getRelatedTags', nonEmptyContainerSentinel('related tags')(getRelatedTags));
   eleventyConfig.addFilter('getTagsByPrefix', nonEmptyContainerSentinel('related tags by prefix')(getTagsByPrefix));
   eleventyConfig.addFilter('selectHomePosts', selectHomePosts);
+  eleventyConfig.addFilter('selectPostsWithAtLeastNPerTag', selectPostsWithAtLeastNPerTag);
 
   /**
    * Accepts an array of objects, and maps each object to a particular attr.
@@ -245,5 +246,20 @@ export default function (eleventyConfig) {
     const da = new Date(a);
     const db = new Date(b);
     return da > db ? da : db;
+  });
+
+  eleventyConfig.addNunjucksGlobal('checkNonEmptyTag', (xs, tag, archived) => {
+    if (typeof xs.length !== 'number') {
+      throw new Error(`expected array but got ${xs.length}`);
+    }
+    if (!archived) {
+      if (xs.length === 0) {
+        console.warn(`Detected tag with no post: ${tag}. Consider adding \`archive: true\` to the frontmatter.`);
+      }
+    } else {
+      if (xs.length > 0) {
+        console.warn(`Detected tag with posts, and tag is archived. Consider removing the tag from the posts:\n${xs.map(x => x.page.filePathStem).join('\n')}.`)
+      }
+    }
   });
 };

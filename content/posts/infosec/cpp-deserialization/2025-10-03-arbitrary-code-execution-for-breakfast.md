@@ -2,18 +2,22 @@
 title: "Sharing is Caring: Arbitrary Code Execution for Breakfast"
 excerpt: Binary exploitation in C++, gadget mania, and a new form of deserialization attack.
 tags:
-  - pwn
   - ctf
+  - pwn
   - cpp
-  - research
+  - infosec
   - writeup
+  - research
+redirect_from:
+  - /posts/sharing-is-caring-arbitrary-code-execution-for-breakfast/
 thumbnail_src: assets/popashell.jpg
 thumbnail_banner: false
 related:
-    tags: [infosec, ctf]
+  tags: [infosec, ctf]
+  posts: [gdb-cheatsheet]
 ---
 
-Breakfast is a CTF challenge I designed for CrewCTF 2025. With deserialization attacks being in vogue, I wanted to explore the topic in C++ and as a result, found an interesting niche bug in the [cereal library](https://github.com/USCiLab/cereal). In this writeup, we'll revisit C++ internals and explore binary exploitation techniques beyond {% abbr "ROP", "Return-Oriented Programming" %}. We’ll learn how even a properly written C++ program could be vulnerable to remote code execution through insecure deserialization.
+**Breakfast** is a CTF challenge I designed for CrewCTF 2025. With deserialization attacks being in vogue, I wanted to explore the topic in C++ and as a result, found an interesting niche bug in the [cereal library](https://github.com/USCiLab/cereal). In this writeup, we'll revisit C++ internals and explore binary exploitation techniques beyond {% abbr "ROP", "Return-Oriented Programming" %}. We’ll learn how even a properly written C++ program could be vulnerable to remote code execution through insecure deserialization.
 
 In a future post, I will share a more detailed writeup on the research. But for now, let's have fun and focus on the challenge. :)
 

@@ -3,6 +3,8 @@ title:  "Reticence"
 excerpt: "Alternate title: sad.mp3."
 updated: "2022-07-26"
 tags:
+  - composition
+  - music
   - piano
   - strings
   - chamber

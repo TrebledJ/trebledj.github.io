@@ -163,6 +163,11 @@
     }
 }
 
+.metadata-tag-container {
+    display: flex;
+    align-items: start;
+}
+
 .post-minified-preview {
     // Vertical layout.
     .post-thumbnail {
@@ -195,6 +200,11 @@
 .post-preview-list {
     display: flex;
     flex-wrap: wrap;
+}
+
+.metadata-reading-time {
+    display: flex;
+    align-items: center;
 }
 
 // Nested anchors: https://stackoverflow.com/a/52076345/10239789.

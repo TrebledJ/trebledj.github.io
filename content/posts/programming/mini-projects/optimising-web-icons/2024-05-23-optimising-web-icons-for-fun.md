@@ -2,6 +2,7 @@
 title: Optimising Web Icons for Fun
 excerpt: Ejecting unused cargo for leaner performance.
 tags:
+  - programming
   - web
   - performance
   - meta

@@ -8,6 +8,9 @@
 const headerOffset = document.querySelector('header').offsetHeight + 20;
 
 let tags = ['h2', 'h3']; // Default.
+if (typeof tocOptions === 'string') {
+  tocOptions = JSON.parse(tocOptions);
+}
 if (tocOptions && tocOptions.tags && tocOptions.tags.length > 0) {
   const newTags = [];
   for (const t of tocOptions.tags) {

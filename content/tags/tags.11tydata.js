@@ -11,7 +11,7 @@ export default {
   sortByLatest: true,
   date: '2022-08-01',
   eleventyComputed: {
-    permalink: data => `/tags/${data.page.fileSlug}/index.html`,
+    permalink: data => data.archived ? false : `/tags/${data.page.fileSlug}/index.html`,
     title: data => data.title || toTitleCase(data.page.fileSlug),
     tag: data => data.page.fileSlug,
 

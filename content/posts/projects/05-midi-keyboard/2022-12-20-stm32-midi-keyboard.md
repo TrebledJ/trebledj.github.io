@@ -3,6 +3,7 @@ title: STM32 MIDI Keyboard
 excerpt: Boing boing plunk plunk. Constructing a MIDI keyboard from scratch.
 updated: "2022-12-25"
 tags:
+  - project
   - embedded
   - cpp
   - c

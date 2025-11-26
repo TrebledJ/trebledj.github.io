@@ -2,10 +2,12 @@
 title: HITCON 2023 – The Blade
 excerpt: Beginner-friendly writeup for a nifty Rust reversing challenge.
 tags:
+  - ctf
   - reverse
   - rust
   - python
   - programming
+  - writeup
 thumbnail_src: assets/hitcon-thumbnail.jpg
 preamble: |
   *This writeup is also intended for beginners. Anytime there's a set of questions, feel free to pause, challenge yourself, and think through them. :) If you want to follow along, you can grab the challenge binary [here](https://github.com/TrebledJ/ctf-binaries/tree/c8e9259c8f7d9cee149d99269d9b691cf54e53b9/hitcon-2023/the-blade).*

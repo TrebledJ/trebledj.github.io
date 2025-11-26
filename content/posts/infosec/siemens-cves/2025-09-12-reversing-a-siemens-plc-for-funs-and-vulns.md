@@ -2,20 +2,24 @@
 title: Reverse Engineering a Siemens Programmable Logic Controller for Funs and Vulns (CVE-2024-54089, CVE-2024-54090 & CVE-2025-40757)
 excerpt: When security by obscurity breaks...
 preamble: |
-    *This post is a personal mirror. The canonical post can be found on the DarkLab blog: https://blog.darklab.hk/2025/09/12/reverse-engineering-a-siemens-programmable-logic-controller-for-funs-and-vulns/*
+  *This post is a personal mirror. The canonical post can be found on the DarkLab blog: https://blog.darklab.hk/2025/09/12/reverse-engineering-a-siemens-programmable-logic-controller-for-funs-and-vulns/*
 canonicalUrl: https://blog.darklab.hk/2025/09/12/reverse-engineering-a-siemens-programmable-logic-controller-for-funs-and-vulns/
 tags:
   - research
   - embedded
-  - pentesting
   - reverse
-  - c
+  - cryptography
   - cpp
+  - pentesting
+  - infosec
   - writeup
+  - cve
 thumbnail_src: assets/thumbnail.jpg
+keywords: [plc, siemens, cve, vulnerability, exploit]
 thumbnail_banner: false
 related:
-    tags: [infosec]
+  tags: [infosec]
+featured: true
 ---
 
 Under the sweltering heat of the Hong Kong summer, we entered a looming building and kicked off what was supposed to be a simple penetration test. Little did we know, this ordeal would lead to panic-stricken emails, extra reports, and a few new CVEs.
@@ -233,7 +237,7 @@ char * FUN_008ba680(char *param_1)
 }
 ```
 
-*Hint: What is being returned and how is it computed? *
+*Hint: What is being returned and how is it computed?*
 
 Some lines might seem scary, but let’s work with what we observe and know: 
 
@@ -352,9 +356,9 @@ As of writing, no fix is planned by Siemens. The following mitigations and tempo
 
 1. Disable telnet. According to Siemens, telnet should be disabled by default, but in our experience, it is not uncommon for site administrators to enable it for convenience. We recommend disabling telnet to mitigate these vulnerabilities. 
 2. Change the default password for all accounts (*HIGH*, *MED*, *LOW*) even if unused. Choose strong passwords containing a mix of letters and digits.
-  - Do **not** choose passwords comprised solely of digits.
-  - Note that this does not prevent attackers with knowledge of the encryption algorithm from decrypting the passwords.
-  - Avoid password reuse. Do not use the same passwords as your workstations and other models.
+   - Do **not** choose passwords comprised solely of digits.
+   - Note that this does not prevent attackers with knowledge of the encryption algorithm from decrypting the passwords.
+   - Avoid password reuse. Do not use the same passwords as your workstations and other models.
 3. Apply detective controls such as network monitoring to identify suspicious traffic.
 
 ## Acknowledgements

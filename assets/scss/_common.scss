@@ -122,6 +122,7 @@ footer {
     font-size: 12px;
     background-color: var(--main-background-color);
     color: var(--main-text-color);
+    z-index: -2; // For star parallax.
 }
 
 h1,

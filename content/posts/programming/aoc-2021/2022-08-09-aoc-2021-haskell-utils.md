@@ -3,6 +3,7 @@ title: AOC 2021 Haskell Utils
 excerpt: An introduction and walkthrough of my haskell utilities.
 updated: "2022-08-09"
 tags:
+  - programming
   - aoc
   - haskell
   - functional

@@ -2,9 +2,10 @@
 title: 12 Days of Christmas – Reflections from a Pentester
 excerpt: Secure Your Janky Systems, 2024 Edition
 tags: 
+  - infosec
   - software-engineering
-  - web
   - reflection
+  - web
   - pentesting
 thumbnail_src: assets/thumbnail.jpg
 thumbnail_banner: true

@@ -2,6 +2,8 @@
 title: Midnight Enigma
 excerpt: A mysterious mix of minimalism and modal musings.
 tags:
+  - composition
+  - music
   - minimalism
   - fusion
   - synths

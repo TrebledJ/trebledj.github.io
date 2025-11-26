@@ -1,8 +1,8 @@
 export default {
   ogsection: 'music',
   tags: [
-    'composition',
-    'music',
+    // 'composition',
+    // 'music',
   ],
   layout: 'layouts/post-music',
   // thumbnail_banner: false,

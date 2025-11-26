@@ -2,6 +2,7 @@
 title: Automating Boolean-Based SQL Injection with Python
 excerpt: How to be efficiently lazy at finding hidden gems in predictable places – Database Edition
 tags:
+  - infosec
   - sql
   - python
   - web

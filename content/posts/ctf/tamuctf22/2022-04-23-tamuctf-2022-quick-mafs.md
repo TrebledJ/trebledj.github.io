@@ -2,10 +2,12 @@
 title: TAMUctf 2022 – Quick Mafs
 excerpt: ROP chaining on steroids.
 tags:
+  - ctf
   - reverse
   - pwn
   - python
   - programming
+  - writeup
 thumbnail_src: assets/inspector-gadget.png
 use_math: true
 archived: true

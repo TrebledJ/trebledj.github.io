@@ -2,6 +2,7 @@
 title: Browser-Based MIDI Editor
 excerpt: MIDI transcription and editing localised in your browser.
 tags:
+  - project
   - apps
   - js
   - python

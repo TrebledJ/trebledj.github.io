@@ -2,6 +2,7 @@
 title: "The Mathematics of Types"
 excerpt: "Programming isn't about mindlessly typing away on a keyboard. There is an aesthetic quality that comes with approaching a problem."
 tags:
+  - programming
   - mathematics
   - haskell
   - types

@@ -3,7 +3,8 @@
 
 name: Dependabot Reviewer
 
-on: pull_request_target
+on:
+# on: pull_request_target
 # on: workflow_dispatch 
 
 env:

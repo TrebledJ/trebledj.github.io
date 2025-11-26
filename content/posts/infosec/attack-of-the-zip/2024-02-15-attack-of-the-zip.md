@@ -2,6 +2,7 @@
 title: "From Compression to Compromise: Unmasking Zip File Threats"
 excerpt: Deep dive into zip file attacks and mitigations (with examples!).
 tags: 
+  - infosec
   - notes
   - web
   - python

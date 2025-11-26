@@ -2,6 +2,7 @@
 title: Delay and Interactive Pause in Multi-Threaded Python
 excerpt: It's like musical chairs for threads (except no one gets left behind)!
 tags:
+  - programming
   - python
   - tutorial
   - infosec

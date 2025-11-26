@@ -14,6 +14,9 @@
 
 .article-header .post-title {
     font-size: 40px;
+    @include media-breakpoint-down(md) {
+        font-size: 32px;
+    }
 
     // Don't break out of width.
     overflow-wrap: break-word;
