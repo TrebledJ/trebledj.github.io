@@ -1,6 +1,6 @@
 ---
 title: "Sharing is Caring: Arbitrary Code Execution for Breakfast"
-excerpt: Binary exploitation in C++, gadget mania, and a new form of deserialization attack.
+excerpt: A CTF challenge exploring binary exploitation in C++, gadget mania, and a new form of deserialization attack.
 tags:
   - ctf
   - pwn
