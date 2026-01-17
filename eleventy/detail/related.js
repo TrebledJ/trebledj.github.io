@@ -23,10 +23,17 @@ function makeRelatedPostRegex(slug) {
       flags: {
         rev: flags.includes('r'),
       },
+      collection: 'posts',
     };
-  }
+  } else if (slug.startsWith('/') && slug.indexOf('/', 1) !== -1) {
+    // slug matches ^/.../...
+    const [_, collection, ...rest] = slug.split('/');
+    const restslug = rest.join('/');
+    const recurse = makeRelatedPostRegex(restslug);
+    return { ...recurse, collection };
+  } 
   // Match a full string.
-  return { regex: new RegExp(`^${slug}$`), flags: {} };
+  return { regex: new RegExp(`^${slug}$`), flags: {}, collection: 'posts' };
 }
 
 /**
@@ -86,14 +93,21 @@ export function getRelatedPosts(posts, tags, related) {
 
   // Force related posts into the array.
   if (related.posts) {
+    const collections = this.ctx.collections;
+
     for (const slug of related.posts) {
       if (finalRelated.size >= numTargetPosts)
         break;
 
       // Find post(s)...
-      const { regex, flags } = makeRelatedPostRegex(slug);
-      const matches = posts.filter(e => e.page.fileSlug.match(regex));
-      if (!matches) {
+      const { regex, flags, collection } = makeRelatedPostRegex(slug);
+      if (collections[collection] === undefined) {
+        throw new Error(`[related] Found pattern ${slug}, but could not find collection '${collection}'.`);
+      }
+      const colPosts = collections[collection];
+
+      const matches = colPosts.filter(e => e.page.fileSlug.match(regex));
+      if (matches.length === 0) {
         console.error(chalk.red(
           `[related] No matches for post regex '${regex.source}' provided in related.posts of ${fileSlug}.`,
         ));

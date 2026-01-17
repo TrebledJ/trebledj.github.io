@@ -3,7 +3,7 @@
         {% hero thumbnail_src, "", title | stripBetweenTags(['sup', 'sub']) | striptags %}
     {% endif %}
     {% if preamble %}
-        <div class="post-preamble">
+        <div class="post-preamble" data-nosnippet>
             {{ preamble | md | safe }}
             <hr/>
         </div>

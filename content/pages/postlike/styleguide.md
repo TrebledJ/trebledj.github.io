@@ -24,7 +24,7 @@ comments: true
 related:
   disable: false # Whether to disable the related posts section. (`related: false`` also works.)
   posts: # Related will only contain these posts.
-    - /posts/remorse
+    - remorse
     - r/robocon-*/r
   tags: # Any post containing all these tags is marked as related.
     - cpp

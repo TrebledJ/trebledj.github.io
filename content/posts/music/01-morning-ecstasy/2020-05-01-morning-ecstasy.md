@@ -12,8 +12,8 @@ keywords: [guitars, drums, upbeat, glockenspiel]
 thumbnail_src: assets/candy-swirls.jpg
 track_id: 1329504610
 score_id: 8527178
-related:
-    posts: [buoyant-ecstasy, morning-rush]
+related: false
+    # posts: [buoyant-ecstasy, morning-rush]
 archived: true
 ---
 
