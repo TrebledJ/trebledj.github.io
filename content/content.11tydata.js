@@ -46,7 +46,7 @@ export default {
       // No &nbsp, no tags, good for attributes, etc.
       let title = data.title;
       for (const [from, to] of repl)
-        title = title.replace('&nbsp;', ' ');
+        title = title.replace(from, to);
       title = stripBetweenTags(title, ['sub', 'sup', 's']);
       // eslint-disable-next-line max-len, no-useless-escape
       const HTML_TAG = /<\/?(?!\d)[^\s>\/=$<%]+(?:\s(?:\s*[^\s>\/=]+(?:\s*=\s*(?:"[^"]*"|'[^']*'|[^\s'">=]+(?=[\s>]))|(?=[\s/>])))+)?\s*\/?>/g;

@@ -9,7 +9,7 @@ permalink: /search.json
         {{ comma() }}
 {
 "type": "post",
-"title": "{{post.data.safeTitle}}",
+"title": "{{post.data.safeTitle | safe}}",
 "excerpt": "{{post.data.excerpt}}",
 "keywords": {{((post.data.excerpt | mdInline) + post.content) | striptags | keywords | jsonify | safe}},
 "tags": {{post.data.tags | exclude("posts") | jsonify | safe}},
@@ -23,7 +23,7 @@ permalink: /search.json
         {% set clean = page.content | striptags %}
 {
 "type": "tag",
-"title": "{{page.data.safeTitle}}",
+"title": "{{page.data.safeTitle | safe}}",
 "excerpt": {{clean | truncateWords(20) | jsonify | safe}},
 "keywords": {{clean | keywords | jsonify | safe}},
 "tags": [],
