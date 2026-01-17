@@ -1,4 +1,5 @@
 import csp from './csp.js';
+import vulns from './vulns.js';
 
 const multiline = text => text.trim().replace(/^[ \t]+/gm, '');
 
@@ -62,6 +63,7 @@ export default function () {
       { text: 'About', url: '/about' },
       { text: 'Posts', url: '/posts' },
       // { text: 'Projects', url: '/tags/project/' },
+      { text: 'CVEs', url: '/vulnerability-research' },
       { text: 'Music', url: '/music' },
       ...extraNavPages,
     ],
@@ -94,6 +96,7 @@ export default function () {
         },
       },
     },
+    cves: vulns,
     search: {
       // https://fontawesome.com/icons/
       resultIcons: [
