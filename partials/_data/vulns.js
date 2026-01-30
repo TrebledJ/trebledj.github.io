@@ -66,7 +66,7 @@ const VULNS = [
                 name: 'CVE-2026-21967',
                 date: '2026-01-20',
                 severity: 'high / critical',
-                description: 'A server-side request forgery (SSRF) vulnerability has been identified in Oracle Hospitality OPERA 5, versions at and below 5.6.19.23, 5.6.25.17, 5.6.26.10, 5.6.27.4, 5.6.28.0. Attackers can leverage the vulnerability to disclose database credentials, invoke POST requests on arbitrary URLs, and enumerate internal networks. The compromised database accounts are used by the OPERA system for business operations and are thus configured with read and write privileges. This may lead to further disclosure of personally-identifiable information (PII) if the attacker has access to the database port.',
+                description: 'A server-side request forgery (SSRF) vulnerability has been identified in Oracle Hospitality OPERA 5, versions at and below 5.6.19.23, 5.6.25.17, 5.6.26.10, 5.6.27.4, 5.6.28.0. Attackers can leverage the vulnerability to disclose database credentials, invoke POST requests on arbitrary URLs, and enumerate internal networks. The compromised database accounts are used by the OPERA system for business operations and are thus configured with read/write privileges. This may lead to further disclosure of personally-identifiable information (PII) or disruption of business operations if the attacker has access to the database port.',
                 links: [
                     { url: 'https://www.oracle.com/security-alerts/cpujan2026.html', title: 'advisory' },
                     { url: 'https://blog.darklab.hk/2026/01/27/.../', title: 'writeup:main' },
