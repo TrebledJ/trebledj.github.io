@@ -1225,7 +1225,7 @@ Just because a library appears in this table does not necessarily mean you are i
 
 {% endtable %}
 
-### Conditions
+### Exploit Conditions
 
 Successful exploitation depends on various factors, but the main concerns are the *types deserialized* and their *order*. Code reviewers and testers should pay attention to the following:
 
