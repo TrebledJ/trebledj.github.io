@@ -2,12 +2,13 @@
 title: "Sharing is Caring: Insecure Deserialization in C++ with a Sprinkle of Type Confusion"
 excerpt: Exploring a hidden attack surface in statically-typed serialization libraries. "Let's serialize pointers and complex structures! What could possibly go wrong?"
 tags:
-  - research
   - cve
   - pwn
+  - research
   - cpp
   - infosec
   - writeup
+  - types
 thumbnail_src: assets/deserialization_meme_69.png
 thumbnail_banner: false
 tocOptions:
