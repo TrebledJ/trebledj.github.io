@@ -65,6 +65,7 @@ export default function () {
       // { text: 'Projects', url: '/tags/project/' },
       { text: 'CVEs', url: '/vulnerability-research' },
       { text: 'Music', url: '/music' },
+      { text: 'Webroll', url: '/webroll' },
       ...extraNavPages,
     ],
     home: {
