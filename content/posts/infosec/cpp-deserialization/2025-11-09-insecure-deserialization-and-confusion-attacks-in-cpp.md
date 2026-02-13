@@ -29,9 +29,9 @@ preamble: |
 
 Deserialization attacks have grown in popularity over the past decade, with major flaws hitting [tech giants](https://thehackernews.com/2025/07/hackers-exploit-sharepoint-zero-day.html) and [modern frameworks](https://react.dev/blog/2025/12/03/critical-security-vulnerability-in-react-server-components)— even in 2025.
 
-Late July, a question came to mind: "What if we took insecure deserialization and brought it to C++?" I’ve had fond memories using deserialization attacks to pop shells in CTFs, courses, and engagements, plus I enjoy tinkering with C++, so I decided to spend some personal time investigating this topic. Exploring this simple question resulted in a few late nights and an interesting— if not novel— subclass of bugs.
+Late July, a question came to mind: "What if we took insecure deserialization and brought it to C++?" I’ve had fond memories using deserialization attacks to pop shells in CTFs, courses, and engagements, plus I enjoy tinkering with C++, so I decided to spend some personal time investigating this topic. Exploring this simple question resulted in a few late nights and an interesting— to my knowledge, novel— subclass of bugs.
 
-This post presents my latest research, in which we’ll explore proof-of-concepts, do a bit of root cause analysis, and touch on Rust. I've also shared an [advisory][advisory] for those looking to patch.
+This post presents my latest research, in which we’ll explore proof-of-concepts, do a bit of root cause analysis, and touch on Rust. I've also shared an [advisory][advisory] for those looking to remediate.
 
 [advisory]: /advisories/cpp-deserialization/
 
