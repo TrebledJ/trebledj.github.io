@@ -46,7 +46,7 @@ const VULNS = [
     {
         type: 'group',
         name: 'Multiple Vulnerabilities in Oracle Hospitality OPERA 5',
-        tags: ['web'],
+        tags: ['web', 'java'],
         description: 'Oracle Hospitality OPERA is a property management system (PMS) used by hotels, resorts, and chains to manage daily operations such as reservations, check-ins, room assignments, billing, and revenue. At the time of writing, there are over 500 instances exposed to the public internet. Affected Software: Oracle Hospitality OPERA 5, versions at and below 5.6.19.23, 5.6.25.17, 5.6.26.10, 5.6.27.4, 5.6.28.0.',
         items: [
             {
