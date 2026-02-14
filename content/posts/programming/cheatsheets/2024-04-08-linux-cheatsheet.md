@@ -253,6 +253,9 @@ grep -rnw /path/to/somewhere/ -e 'pattern'
 
 Ref: https://stackoverflow.com/a/16957078/10239789
 
+Other useful flags:
+* `-A N`/`-B N`/`-C N`: context; prints `N` lines of context after/before/around the matched line
+
 ### xargs
 
 xargs is a versatile command-line utility that allows efficient execution of commands, making it a powerful tool for automation and batch processing.
@@ -492,9 +495,6 @@ nc 192.168.1.1 8080
 # 
 # Listen for a connection.
 nc -nlvp 4444
-# 
-# Listen persistently (keep listening after disconnect).
-nc -nklvp 4444
 ```
 
 ### Download Files
@@ -555,7 +555,8 @@ find . -type f -name '*complex*' -exec echo {} \;
 find . -type f \( -name '*complex*' -or -name 'query' \) -exec du -h {} \;
 ```
 
-
+Other useful flags:
+* `-mindepth N`/`-maxdepth N`: minimum/maximum recursion depth, e.g. `-maxdepth 1` would only operate on files *directly* within the current folder
 
 ## git gud
 
@@ -624,6 +625,59 @@ Okay, that's enough vim.
 Set line numbers.
 ```sh {data-lang-off}
 :set number
+```
+
+## tmux
+
+Actually decently useful? This is not a substitute for a tmux tutorial/introduction, the main goal is to be a simple cheatsheet. Go learn it in 5 minutes.
+
+```sh {data-lang-off .command-line data-prompt="$" data-filter-output="# "}
+# Start a new tmux session.
+tmux
+# Reuse a previous tmux session.
+tmux attach -t 0
+tmux attach -t custom-name
+```
+
+Must-know commands. (Note: `C-b` is `Ctrl+b`. `C-b d` means hit `Ctrl+b`, then press `d`.)
+
+```sh {data-language=tmux .command-line data-prompt="" data-filter-output="# "}
+C-b d       # Detach session (reconnect with tmux attach -t 0)
+# 
+# Navigate panes
+C-b (up/down/left/right)
+# 
+C-b c       # New window
+C-b n       # Next window
+C-b p       # Previous window
+C-b %       # Split pane (left/right)
+C-b "       # Split pane (up/down)"
+C-b x       # Close pane
+C-b &       # Close window
+C-b ?       # Help (common commands)
+```
+
+Useful commands.
+
+```sh {data-language=tmux .command-line data-prompt="" data-filter-output="# "}
+C-b (0-9)   # Jump to window #0-9
+C-b z       # Zoom/Unzoom pane (useful when needing to copy something with multiple lines)
+C-b ,       # Rename window
+# 
+# Toggle preset pane layout
+C-b alt-(1-5)
+C-b space   # Cycle through preset layouts
+# 
+# Copy mode
+C-b [
+C-b page-up # For scrolling
+C-c         # Exit copy mode (Ctrl+c)
+# 
+# Search output history (make sure you're in copy mode)
+/
+# 
+# Rename session (then use when tmux attach -t custom-name)
+C-b :rename-session custom-name
 ```
 
 ## Hacky Hack Hack
