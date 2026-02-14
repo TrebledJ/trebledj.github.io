@@ -59,6 +59,8 @@ const debounce = f => {
 const docElem = document.documentElement;
 const docBody = document.body;
 const articleEndElement = document.querySelector('#end-of-article');
+if (!articleEndElement)
+  throw Error('no #end-of-article found');
 
 const sectionsBottomUp = [...sections].reverse();
 let currentActive = 0;

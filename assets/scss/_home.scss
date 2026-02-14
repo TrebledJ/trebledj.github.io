@@ -178,6 +178,8 @@ $collapse-function: ease-out;
 
 @include media-breakpoint-down(sm) {
     .post-preview-home {
+        margin-bottom: 0.5rem;
+
         // Make similar to post-preview in /posts, by throwing away the padding between summary and metadata.
         .post-preview-metadata-container {
             padding: 1rem;
@@ -196,6 +198,27 @@ $collapse-function: ease-out;
             transition: all $collapse-time $collapse-function;
             & > * {
                 overflow: hidden;
+            }
+        }
+    }
+
+    // Thumbnail average color for small screens.
+    .home-header.collapsed {
+        & + .collection-list {
+            .post-thumbnail-avg-color {
+                opacity: 1;
+                z-index: -1;
+                margin-left: -1.2rem;
+                margin-top: -2rem;
+
+                &:before {
+                    border-radius: 0;
+                    border-top: 20px solid transparent;
+                    border-bottom: 20px solid transparent;
+                    border-right: 20px solid var(--avg-color);
+                    border-left: 0;
+                    transform: rotate(45deg);
+                }
             }
         }
     }

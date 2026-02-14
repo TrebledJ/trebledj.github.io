@@ -1,0 +1,21 @@
+---
+layout: layouts/page-default
+---
+
+{% set hasToc = showToc and (content | tocFast(tocOptions)) %}
+
+<div class="row flex-row-reverse gx-lg-5">
+    <div class="col-lg-4 d-none d-lg-block">
+        {% if hasToc %}
+            {% include "sidebars/toc-sidebar.html" %}
+        {% endif %}
+    </div>
+
+    <div class="col-lg-8 post-body-container">
+        {# Treat this as a post to get JS working. #}
+        <div class="post-body">
+            {{ content | safe }}
+            <a id="end-of-article"></a>
+        </div>
+    </div>
+</div>

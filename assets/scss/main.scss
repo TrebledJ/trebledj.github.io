@@ -131,6 +131,48 @@ html[data-theme="dark"] {
     }
 }
 
+.jseverity {
+    /* pointer-events: none; */
+    text-transform: uppercase;
+    color: #fff !important;
+    --stop: 50%;
+    background-image: linear-gradient(100deg, var(--c0) 0%, var(--c0) calc(var(--stop) - 10%), var(--c1) calc(var(--stop) + 10%), var(--c1) 100%);
+}
+
+.jseverity:hover {
+    filter: none !important;
+    animation: none !important;
+    background-size: auto;
+}
+
+.sev-low-0 {
+    --c0: green;
+    --stop: 35%;
+}
+.sev-low-1 {
+    --c1: green;
+}
+.sev-medium-0 {
+    --c0: darkgoldenrod;
+    --stop: 60%;
+}
+.sev-medium-1 {
+    --c1: darkgoldenrod;
+}
+.sev-high-0 {
+    --c0: maroon;
+    --stop: 35%;
+}
+.sev-high-1 {
+    --c1: maroon;
+}
+.sev-critical-0 {
+    --c0: blueviolet;
+}
+.sev-critical-1 {
+    --c1: blueviolet;
+}
+
 @keyframes tag-box {
     0% {
         box-shadow: var(--main-background-color);

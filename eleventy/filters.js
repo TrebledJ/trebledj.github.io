@@ -262,4 +262,13 @@ export default function (eleventyConfig) {
       }
     }
   });
+
+  eleventyConfig.addNunjucksGlobal('render_severity', (severity, href="#notes") => {
+    severity = severity.toLowerCase();
+    const sevs = severity.split('/');
+    const alts = sevs.length === 1 ? [`sev-${severity}-0`, `sev-${severity}-1`] : sevs.map((x, i) => `sev-${x.trim()}-${i}`);
+    if (href)
+      href = `href="${href}"`;
+    return `<a ${href} class="jtag jseverity ${alts.join(' ')}">${severity}</a>`;
+  });
 };
