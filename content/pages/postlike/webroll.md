@@ -2,7 +2,7 @@
 title: Webroll
 ---
 
-A curated list of awesome blog posts, papers, and resources by others on the web. This page is inspired by the concept of a [blogroll](https://indieweb.org/blogroll). For now, I'll mainly focus on sharing cool articles I've come across. Sorted by most recent reads at the top, per section. I'll try to better organise all this later.
+A curated list of awesome blog posts, papers, and resources by others on the web. This page is inspired by the concept of a [blogroll](https://indieweb.org/blogroll). For now, I'll mainly focus on sharing cool stuff I've come across. Sorted by most recent reads at the top, per section. I'll try to better organise all this later.
 
 ## Prose and Posts
 
