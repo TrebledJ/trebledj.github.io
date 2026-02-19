@@ -50,7 +50,7 @@
       setInterval(update, 400);
       */
       // https://codepen.io/soulwire/pen/mEMPrK 
-      const RANDOM_CHARS = '!<>-_\\/[]{}—=+*^?#________';
+      const RANDOM_CHARS = '!<>-_\\/[]{}—=+*^?#ツ¦:꞊コシ•______';
       class TextScramble {
         constructor(el) {
           this.el = el
@@ -65,7 +65,7 @@
             const from = oldText[i] || ''
             const to = newText[i] || ''
             const start = Math.floor(Math.random() * 40)
-            const end = start + Math.floor(Math.random() * 40)
+            const end = start + Math.floor(Math.random() * 30) // How long the scrambling lasts
             this.queue.push({ from, to, start, end })
           }
           cancelAnimationFrame(this.frameRequest)
@@ -82,7 +82,7 @@
               complete++
               output += to
             } else if (this.frame >= start) {
-              if (!char || Math.random() < 0.15) {
+              if (!char || Math.random() < 0.13) { // How often the thingy changes
                 while ((char = this.randomChar()) === this.queue[i].char);
                 this.queue[i].char = char
               }
@@ -124,3 +124,9 @@
     </script>
   </div>
 </div>
+
+{% inlinecss %}
+.dud {
+    opacity: 0.3
+}
+{% endinlinecss %}

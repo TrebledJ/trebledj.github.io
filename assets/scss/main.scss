@@ -86,8 +86,8 @@ html[data-theme="dark"] {
     display: inline-block;
     margin: 3px 2px;
     padding: 0px 4px;
-    background-color: transparent !important;
-    color: var(--main-text-color) !important;
+    background-color: transparent;
+    color: var(--main-text-color);
     border: $border-width solid var(--main-text-color);
     border-radius: $border-radius-small;
     position: relative;
@@ -115,13 +115,13 @@ html[data-theme="dark"] {
 
     @media (hover: hover) {
         &:not(.special):hover {
-            color: var(--contrast-color) !important;
+            color: var(--contrast-color);
             --clr: var(--link-color);
             animation: tag-box 3s infinite;
 
         }
         &.special:hover {
-            color: var(--contrast-color) !important;
+            color: var(--contrast-color);
             --clr: var(--special-color);
             animation: tag-box 3s infinite;
         }
@@ -143,6 +143,7 @@ html[data-theme="dark"] {
     filter: none !important;
     animation: none !important;
     background-size: auto;
+    color: none;
 }
 
 .sev-low-0 {
@@ -333,4 +334,8 @@ a.lightbox-single,
 .lightbox-gallery > a {
     background-image: none;
     text-decoration: none;
+}
+
+.soundcloud-track {
+    width: 100%;
 }
