@@ -1,6 +1,6 @@
 # trebledj.me
 
-[![Build](https://github.com/TrebledJ/trebledj.github.io/actions/workflows/src.build.yml/badge.svg)](https://github.com/TrebledJ/trebledj.github.io/actions/workflows/src.build.yml)
+[![Deploy](https://github.com/TrebledJ/trebledj.github.io/actions/workflows/src.deploy.yml/badge.svg)](https://github.com/TrebledJ/trebledj.github.io/actions/workflows/src.deploy.yml)
 [![Check Links](https://github.com/TrebledJ/trebledj.github.io/actions/workflows/site.links.yml/badge.svg)](https://github.com/TrebledJ/trebledj.github.io/actions/workflows/site.links.yml)
 [![Lint](https://github.com/TrebledJ/trebledj.github.io/actions/workflows/src.lint.yml/badge.svg)](https://github.com/TrebledJ/trebledj.github.io/actions/workflows/src.lint.yml)
 
