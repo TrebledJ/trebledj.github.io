@@ -249,9 +249,9 @@ export default function (eleventyConfig) {
   });
 
   eleventyConfig.addNunjucksGlobal('checkNonEmptyTag', (xs, tag, archived) => {
-    if (typeof xs.length !== 'number') {
-      throw new Error(`expected array but got ${xs.length}`);
-    }
+    if (xs === undefined)
+      xs = [];
+
     if (!archived) {
       if (xs.length === 0) {
         console.warn(`Detected tag with no post: ${tag}. Consider adding \`archive: true\` to the frontmatter.`);
