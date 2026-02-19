@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:base="https://trebledj.me">
+  <title>TrebledJ&#39;s Pages</title>
+  <subtitle>TrebledJ&#39;s personal blog on programming, cybersecurity, music, and memes.</subtitle>
+  <link href="https://trebledj.me/feeds/electronica.xml" rel="self"/>
+  <link href="https://trebledj.me"/>
+  <updated>2024-01-20T00:00:00Z</updated>
+  <id>https://trebledj.me</id>
+  <author>
+    <name>TrebledJ</name>
+    <email>trebledjjj@gmail.com</email>
+  </author>
+  
+    
+      
+      <entry>
+        <title>Relay</title>
+        <description>Electronica on racing light. A variation on one of my older pieces.</description>
+        <link href="https://trebledj.me/posts/relay/"/>
+        <updated>2024-01-20T00:00:00Z</updated>
+        <id>https://trebledj.me/posts/relay/</id>
+        <content xml:lang="en" type="html">&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;The people walking in darkness&lt;/em&gt;&lt;br /&gt;
+&lt;em&gt;have seen a great light;&lt;/em&gt;&lt;br /&gt;
+&lt;em&gt;on those living in the land of deep darkness&lt;/em&gt;&lt;br /&gt;
+&lt;em&gt;a light has dawned.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;– Isaiah 9:2&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;a class=&quot;lightbox-single&quot; title=&quot;This took a long while to make.&quot; href=&quot;https://trebledj.me/img/posts/music/15-relay/assets/relay-4864w.webp&quot;&gt;&lt;img class=&quot;mb-2 rw center jw-100 &quot; src=&quot;https://trebledj.me/img/posts/music/15-relay/assets/relay-4864w.webp&quot; loading=&quot;lazy&quot; decoding=&quot;async&quot; style=&quot;aspect-ratio: auto 4864 / 3328&quot; alt=&quot;Hand reaching out to a helping hand above.&quot; title=&quot;This took a long while to make.&quot; srcset=&quot;https://trebledj.me/img/posts/music/15-relay/assets/relay-256w.webp 256w, https://trebledj.me/img/posts/music/15-relay/assets/relay-512w.webp 512w, https://trebledj.me/img/posts/music/15-relay/assets/relay-1024w.webp 1024w, https://trebledj.me/img/posts/music/15-relay/assets/relay-4864w.webp 4864w&quot; sizes=&quot;(max-width: 256px) 256px, (max-width: 512px) 512px, (max-width: 1024px) 1024px, 4864px&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;What is a relay? A race—passing a baton from one to the next. The passing of packets by a router or a gateway server. Or used plainly as a verb without technicalities, a relay may simply mean to receive and pass on information.&lt;sup class=&quot;footnote-ref&quot;&gt;&lt;a href=&quot;https://trebledj.me/posts/relay/#fn1&quot; id=&quot;fnref1&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+&lt;p&gt;It&#39;s worth taking a moment to reflect: what are we relaying? As time passes, more responsibility falls on our shoulders—the responsibility to be helpful (or useful?) in society; the responsibility to mentor; the responsibility to work, to execute; the responsibility to lead.&lt;/p&gt;
+&lt;p&gt;What are we relaying? What torch are we passing on? What is our &lt;em&gt;light&lt;/em&gt;? And what keeps us moving?&lt;/p&gt;
+&lt;p&gt;The average human &lt;a href=&quot;https://www.gettysburg.edu/news/stories?id=79db7b34-630c-4f49-ad32-4ab9ea48e72b&quot;&gt;works 90,000 hours&lt;/a&gt;. There&#39;s only so much experience, wealth, and knowledge we can accrue.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;Light the torch and guide us through the dark.&lt;/em&gt;&lt;br /&gt;
+&lt;em&gt;Shadows, dispelled by balls of flame.&lt;/em&gt;&lt;br /&gt;
+&lt;em&gt;Relay to us this bright white shining spark.&lt;/em&gt;&lt;br /&gt;
+&lt;em&gt;Ready, for the race to carry on.&lt;/em&gt;&lt;br /&gt;
+&lt;sup&gt;&lt;em&gt;(Some words to go along with the climactic sections.)&lt;/em&gt;&lt;/sup&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr /&gt;
+&lt;p&gt;&lt;em&gt;Similar to &lt;a href=&quot;https://trebledj.me/posts/remorse&quot;&gt;Remorse&lt;/a&gt;, Relay was featured as part of a challenge in the HKUST Firebird CTF 2024 competition, a competition where teams hunt for hidden pieces of text.&lt;/em&gt;&lt;/p&gt;
+&lt;hr class=&quot;footnotes-sep&quot; /&gt;
+&lt;b&gt;Footnotes&lt;/b&gt;
+&lt;section class=&quot;footnotes&quot;&gt;
+&lt;ol class=&quot;footnotes-list&quot;&gt;
+&lt;li id=&quot;fn1&quot; class=&quot;footnote-item&quot;&gt;&lt;p&gt;It might also (in my mind) be a play-on of &amp;quot;&lt;strong&gt;r&lt;/strong&gt;hythmic d&lt;strong&gt;elay&lt;/strong&gt;&amp;quot;. &lt;a href=&quot;https://trebledj.me/posts/relay/#fnref1&quot; class=&quot;footnote-backref&quot;&gt;↩︎&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/section&gt;
+</content>
+        
+          <category>composition</category>
+        
+          <category>music</category>
+        
+          <category>electronica</category>
+        
+          <category>synths</category>
+        
+          <category>dubsy-wubsy</category>
+        
+          <category>modal</category>
+        
+          <category>faith</category>
+        
+      </entry>
+    
+  
+    
+      
+      <entry>
+        <title>Remorse</title>
+        <description>Hiding messages with counterpoint.</description>
+        <link href="https://trebledj.me/posts/remorse/"/>
+        <updated>2023-01-27T00:00:00Z</updated>
+        <id>https://trebledj.me/posts/remorse/</id>
+        <content xml:lang="en" type="html">&lt;p&gt;A reflection of the past, composed and mixed during my 7-day covid quarantine.&lt;/p&gt;
+&lt;p&gt;Time ebbs past,&lt;br /&gt;
+As anguish holds fast.&lt;br /&gt;
+Without you I’m filled with remorse,&lt;br /&gt;
+For you are my one driving force.&lt;/p&gt;
+&lt;p&gt;As the season turns,&lt;br /&gt;
+My heart still churns.&lt;br /&gt;
+I’ll leave my sins and remorse,&lt;br /&gt;
+Heading on a different course.&lt;/p&gt;
+&lt;hr /&gt;
+&lt;p&gt;The purpose of composing this piece is threefold: it served as an expression of faith and emotions, a challenge for a &lt;a href=&quot;https://trebledj.me/tags/ctf/&quot;&gt;Capture-the-Flag (CTF)&lt;/a&gt; competition, and an enjoyable way to pass quarantine. There wasn&#39;t any priority to a particular purpose; all of them seemed to develop together.&lt;/p&gt;
+&lt;p&gt;This piece was composed for the HKUST Firebird 2023 Internal CTF. Such competitions are designed to challenge players with cybersecurity know-how. Once players identify and exploit a vulnerability, they are rewarded with a &lt;em&gt;flag&lt;/em&gt; (a piece of text), which awards points to the player when submitted. Occasionally, some challenges deviate from the norm and test players in other areas. In this case, my challenge tested players in analysing music and patterns.&lt;/p&gt;
+&lt;p&gt;When composing this piece, I aimed to compose something listenable and motivic. I decided to keep constraints flexible within limits. If a music is too constrained, it sounds choked, inevitable, or unimaginative. Some music ciphers out there encode letters into pitches and duration. This was a bit too far for my liking, as it becomes painstakingly difficult to find a pleasurable tune.&lt;/p&gt;
+&lt;p&gt;As hinted by the title, I first translated the flag into Morse using an &lt;a href=&quot;https://onlineasciitools.com/convert-ascii-to-morse&quot;&gt;online converter&lt;/a&gt; with the extended Morse character set. This allowed for some punctuation such as &lt;code&gt;(&lt;/code&gt;, &lt;code&gt;-&lt;/code&gt;, &lt;code&gt;_&lt;/code&gt;, and funky non-ASCII characters such as &lt;code&gt;é&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;With plaintext, we need to encode at least 50 distinct letters. With Morse, we just need to encode 3 instead: &lt;code&gt;.&lt;/code&gt;, &lt;code&gt;-&lt;/code&gt;, and space (as a word separator). So things are relatively simple.&lt;/p&gt;
+&lt;p&gt;I toyed around with a few ideas of encoding these three characters. Eventually I ended up with this mapping:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;.&lt;/code&gt; → &amp;quot;Note On&amp;quot; in upper stave (treble clef)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-&lt;/code&gt; → &amp;quot;Note On&amp;quot; in lower stave (bass clef)&lt;/li&gt;
+&lt;li&gt;space → &amp;quot;Note On&amp;quot; in both staves&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;This lent the music well to a contrapuntal form, with the occasional grace-note or glissando to pack characters in a way that preserves the melodic contour. After composing the sheet music, I ended up mixing it with Reaper for some extra flair and charged resonance, making the night seem younger.&lt;/p&gt;
+&lt;p&gt;Enjoy the result!&lt;/p&gt;
+</content>
+        
+          <category>composition</category>
+        
+          <category>music</category>
+        
+          <category>faith</category>
+        
+          <category>piano</category>
+        
+          <category>counterpoint</category>
+        
+          <category>modal</category>
+        
+          <category>electronica</category>
+        
+          <category>dubsy-wubsy</category>
+        
+          <category>synths</category>
+        
+          <category>ctf</category>
+        
+          <category>writeup</category>
+        
+          <category>stego</category>
+        
+      </entry>
+    
+  
+    
+      
+      <entry>
+        <title>Space Penguin</title>
+        <description>And yet another school year begins.</description>
+        <link href="https://trebledj.me/posts/space-penguin/"/>
+        <updated>2022-08-26T00:00:00Z</updated>
+        <id>https://trebledj.me/posts/space-penguin/</id>
+        <content xml:lang="en" type="html">&lt;p&gt;Dedicated to everyone feeling stressed, down, lost, or under the weather.&lt;/p&gt;
+&lt;p&gt;As we all know, penguins are great swimmers. Sadly however they can&#39;t fly (or so we think!). But as the &lt;a href=&quot;https://learntofly.fandom.com/wiki/Learn_To_Fly_Wiki&quot;&gt;&amp;quot;Learn to Fly&amp;quot; game series&lt;/a&gt; teaches us, with enough dedication, penguins can indeed fly. And with each attempt they reach higher altitudes, even if simply done using a tiny booster rocket.&lt;/p&gt;
+&lt;p&gt;Hopefully this little piece may be a booster rocket for you.&lt;/p&gt;
+</content>
+        
+          <category>composition</category>
+        
+          <category>music</category>
+        
+          <category>electronica</category>
+        
+          <category>synths</category>
+        
+          <category>dubsy-wubsy</category>
+        
+      </entry>
+    
+  
+</feed>

