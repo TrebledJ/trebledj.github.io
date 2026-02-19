@@ -77,9 +77,16 @@ $collapse-function: ease-out;
         display: grid;
         grid-template-rows: 1fr;
         transition: all $collapse-time $collapse-function;
-        & > * {
-            overflow: hidden;
-        }
+
+        // Overflow hidden does not fit my use case because there is a visual clip with the tag glow effect; 
+        // and if I were to set overflow hidden ONLY on the collapsed state, the entire visual transition will clip which does not look nice.
+        // Instead of using `overflow: hidden` here, I use a weird max-height hack.
+        // Setting it to 1px works here because the metadata tag container is only one part of the box being expanded.
+        // Other than the tag box, the post description will also be expanded, so the tag container "races" it.
+        max-height: 1px;
+        // & > * {
+        //     overflow: hidden;
+        // }
     }
 }
 
@@ -129,7 +136,7 @@ $collapse-function: ease-out;
             display: grid;
             grid-template-rows: 1fr;
             transition: all $collapse-time $collapse-function;
-    
+
             & > * {
                 overflow: hidden;
             }
@@ -196,9 +203,6 @@ $collapse-function: ease-out;
             align-items: center;
             // grid-template-rows: 1fr;
             transition: all $collapse-time $collapse-function;
-            & > * {
-                overflow: hidden;
-            }
         }
     }
 
@@ -281,6 +285,10 @@ $collapse-function: ease-out;
         .metadata-tag-container {
             opacity: 0;
             grid-template-rows: 0fr;
+            max-height: 0;
+            // & > * {
+            //     overflow: hidden;
+            // }
         }
 
         .post-preview-metadata-container {
