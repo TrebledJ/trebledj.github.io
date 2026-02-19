@@ -11,6 +11,7 @@ https://domain.me/
 https://webhook.site/.+
 https://unsplash.com/photos/VTz5xU3zbeg
 https://seclists.org/oss-sec/2025/q4/114
+https://www.washingtonpost.com
 
 # Temporary fix due to issue with lychee parsing fragments.
 file://

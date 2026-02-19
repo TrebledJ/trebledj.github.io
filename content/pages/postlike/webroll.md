@@ -2,23 +2,31 @@
 title: Webroll
 ---
 
+{% macro t(s) %}<a class="jtag">{{s}}</a>{% endmacro %}
+
+{% inlinecss %}
+.jtag {
+    pointer-events: none;
+}
+{% endinlinecss %}
+
 A curated list of awesome blog posts, papers, and resources by others on the web. This page is inspired by the concept of a [blogroll](https://indieweb.org/blogroll). For now, I'll mainly focus on sharing cool stuff I've come across. Sorted by most recent reads at the top, per section. I'll try to better organise all this later.
 
 ## Prose and Posts
 
-- [Competence as Tragedy](https://crowprose.com/blog/competence-as-tragedy/) by crowprose {% tag "dev" %} {% tag "misc" %}, thoughtpiece
-- [The First Few Milliseconds of an HTTPS Connection](https://www.moserware.com/2009/06/first-few-milliseconds-of-https.html) by Moserware {% tag "web" %} {% tag "networking" %} {% tag "dev" %} {% tag "performance" %}
-- [Reverse Engineering TicketMaster's Rotating Barcodes (SafeTix)](https://conduition.io/coding/ticketmaster/) by conduition {% tag "writeup" %} {% tag "hacking" %} {% tag "reverse" %}
-- [boehs.org/llms.txt](https://boehs.org/llms.txt) {% tag "misc" %} {% tag "amusing" %}, counter-instructions for LLMs, based on the llms.txt standard
-- [Pwning Millions of Smart Weighing Machines with API and Hardware Hacking](https://spaceraccoon.dev/pwning-millions-smart-weighing-machines-api-hardware-hacking/) by spaceraccoon {% tag "hacking" %} {% tag "writeup" %} {% tag "networking" %}, web and Bluetooth hardware hacking; the dude has a lot of cool writeups in general
-- [Belgium is unsafe for CVD](https://floort.net/posts/belgium-unsafe-for-cvd/) by Floor Terra {% tag "infosec" %} {% tag "cvd" %} {% tag "misc" %} {% tag "amusing" %}, some insights and nuances in CVD (Coordinated Vulnerability Disclosure)
-- [CVE / NVD doesn’t work for open source and supply chain security](https://crashoverride.com/blog/cve-nvd-doesnt-work-for-open-source-and-supply-chain-security) by Mark Curphey {% tag "infosec" %} {% tag "misc" %} {% tag "cvd" %}, highlights multiple issues with CVE/NVD in the open source ecosystem
-- [Multiple Critical Vulnerabilities in Strapi Versions <=4.7.1](https://www.ghostccamm.com/blog/multi_strapi_vulns/) by ghostcamm {% tag "web" %} {% tag "hacking" %} {% tag "writeup" %}
-- [A virtual DOM in 200 lines of JavaScript](https://lazamar.github.io/virtual-dom/) by Marcelo Lazaroni {% tag "dev" %} {% tag "web" %}
-- [Exploring Mimikatz - Part 1 - WDigest](https://blog.xpnsec.com/exploring-mimikatz-part-1/) by xpn {% tag "hacking" %} {% tag "windows" %} {% tag "writeup" %}, in-depth dig into one of mimikatz's many modules
-- [How I hacked medium : The Rise Of Race Conditions](https://medium.com/@super_burgundy_weasel_439/how-i-hacked-medium-and-they-didnt-pay-me-f6c89cca3af7) by YouGotItComing {% tag "hacking" %} {% tag "cvd" %} {% tag "web" %} {% tag "writeup" %}, interesting intro to race conditions and some bug bounty drama
-- [On Hacking](https://stallman.org/articles/on-hacking.html) by Richard Stallman {% tag "hacking" %} {% tag "misc" %}, history and origins of the term "hacking"
-- [Evolution of Trust](https://ncase.me/trust/) by Nicky Case {% tag "learning" %} {% tag "misc" %}, interactive game on prisoner's dilemma, community, and trust
+- [Competence as Tragedy](https://crowprose.com/blog/competence-as-tragedy/) by crowprose {{ t("dev") }} {{ t("misc") }}, thoughtpiece
+- [The First Few Milliseconds of an HTTPS Connection](https://www.moserware.com/2009/06/first-few-milliseconds-of-https.html) by Moserware {{ t("web") }} {{ t("networking") }} {{ t("dev") }} {{ t("performance") }}
+- [Reverse Engineering TicketMaster's Rotating Barcodes (SafeTix)](https://conduition.io/coding/ticketmaster/) by conduition {{ t("writeup") }} {{ t("hacking") }} {{ t("reverse") }}
+- [boehs.org/llms.txt](https://boehs.org/llms.txt) {{ t("misc") }} {{ t("amusing") }}, counter-instructions for LLMs, based on the llms.txt standard
+- [Pwning Millions of Smart Weighing Machines with API and Hardware Hacking](https://spaceraccoon.dev/pwning-millions-smart-weighing-machines-api-hardware-hacking/) by spaceraccoon {{ t("hacking") }} {{ t("writeup") }} {{ t("networking") }}, web and Bluetooth hardware hacking; the dude has a lot of cool writeups in general
+- [Belgium is unsafe for CVD](https://floort.net/posts/belgium-unsafe-for-cvd/) by Floor Terra {{ t("infosec") }} {{ t("cvd") }} {{ t("misc") }} {{ t("amusing") }}, some insights and nuances in CVD (Coordinated Vulnerability Disclosure)
+- [CVE / NVD doesn’t work for open source and supply chain security](https://crashoverride.com/blog/cve-nvd-doesnt-work-for-open-source-and-supply-chain-security) by Mark Curphey {{ t("infosec") }} {{ t("misc") }} {{ t("cvd") }}, highlights multiple issues with CVE/NVD in the open source ecosystem
+- [Multiple Critical Vulnerabilities in Strapi Versions <=4.7.1](https://www.ghostccamm.com/blog/multi_strapi_vulns/) by ghostcamm {{ t("web") }} {{ t("hacking") }} {{ t("writeup") }}
+- [A virtual DOM in 200 lines of JavaScript](https://lazamar.github.io/virtual-dom/) by Marcelo Lazaroni {{ t("dev") }} {{ t("web") }}
+- [Exploring Mimikatz - Part 1 - WDigest](https://blog.xpnsec.com/exploring-mimikatz-part-1/) by xpn {{ t("hacking") }} {{ t("windows") }} {{ t("writeup") }}, in-depth dig into one of mimikatz's many modules
+- [How I hacked medium : The Rise Of Race Conditions](https://medium.com/@super_burgundy_weasel_439/how-i-hacked-medium-and-they-didnt-pay-me-f6c89cca3af7) by YouGotItComing {{ t("hacking") }} {{ t("cvd") }} {{ t("web") }} {{ t("writeup") }}, interesting intro to race conditions and some bug bounty drama
+- [On Hacking](https://stallman.org/articles/on-hacking.html) by Richard Stallman {{ t("hacking") }} {{ t("misc") }}, history and origins of the term "hacking"
+- [Evolution of Trust](https://ncase.me/trust/) by Nicky Case {{ t("learning") }} {{ t("misc") }}, interactive game on prisoner's dilemma, community, and trust
 
 ## Drama Delirium Detention Centre
 
@@ -37,11 +45,11 @@ Fun dev/infosec drama worth sharing. I share these not to ridicule, but because 
 
 Useful articles and resources, not necessarily from the indieweb.
 
-- [How AI Impacts Skill Formation](https://arxiv.org/abs/2601.20245) by Judy Hanwen Shen and Alex Tamkin {% tag "learning" %} {% tag "ai" %}, whitepaper, also provides some insights on how to best use AI
-- [Attacking and securing cloud identities in managed Kubernetes part 1: Amazon EKS](https://securitylabs.datadoghq.com/articles/amazon-eks-attacking-securing-cloud-identities/) by datadog securitylabs {% tag "hacking" %} {% tag "cloud" %} {% tag "writeup" %}, comprehensive reference for escalation scenarios in AWS EKS
-- [Windows Internals Resources](https://empyreal96.github.io/nt-info-depot/) {% tag "windows" %} {% tag "learning" %}, collection of useful resources on the guts of Windows
-- [How, and why, a journalist tricked news outlets into thinking chocolate makes you thin](https://www.washingtonpost.com/news/morning-mix/wp/2015/05/28/how-and-why-a-journalist-tricked-news-outlets-into-thinking-chocolate-makes-you-thin/) (paywalled) by The Washington Post {% tag "misc" %}, news article on a sting operation exposing bad journalism; IMO the science communication and infosecurity industry faces similar issues (sometimes)
-- [Orange Cyberdefense AD Attack Path Mindmaps](https://orange-cyberdefense.github.io/ocd-mindmaps/) {% tag "windows" %} {% tag "ad" %} {% tag "learning" %}
+- [How AI Impacts Skill Formation](https://arxiv.org/abs/2601.20245) by Judy Hanwen Shen and Alex Tamkin {{ t("learning") }} {{ t("ai") }}, whitepaper, also provides some insights on how to best use AI
+- [Attacking and securing cloud identities in managed Kubernetes part 1: Amazon EKS](https://securitylabs.datadoghq.com/articles/amazon-eks-attacking-securing-cloud-identities/) by datadog securitylabs {{ t("hacking") }} {{ t("cloud") }} {{ t("writeup") }}, comprehensive reference for escalation scenarios in AWS EKS
+- [Windows Internals Resources](https://empyreal96.github.io/nt-info-depot/) {{ t("windows") }} {{ t("learning") }}, collection of useful resources on the guts of Windows
+- [How, and why, a journalist tricked news outlets into thinking chocolate makes you thin](https://www.washingtonpost.com/news/morning-mix/wp/2015/05/28/how-and-why-a-journalist-tricked-news-outlets-into-thinking-chocolate-makes-you-thin/) (paywalled) by The Washington Post {{ t("misc") }}, news article on a sting operation exposing bad journalism; IMO the science communication and infosecurity industry faces similar issues (sometimes)
+- [Orange Cyberdefense AD Attack Path Mindmaps](https://orange-cyberdefense.github.io/ocd-mindmaps/) {{ t("windows") }} {{ t("ad") }} {{ t("learning") }}
 
 {# ### Quotes
 
@@ -49,9 +57,3 @@ Useful articles and resources, not necessarily from the indieweb.
 > \- Martin LeBlanc
 
 [Source](https://x.com/martinleblanc/status/466638260195041280?lang=en) #}
-
-{% inlinecss %}
-.jtag {
-    pointer-events: none;
-}
-{% endinlinecss %}
