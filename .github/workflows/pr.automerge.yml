@@ -6,6 +6,7 @@ name: Dependabot Reviewer
 on:
 # on: pull_request_target
 # on: workflow_dispatch 
+  workflow_dispatch:
 
 env:
   MASTER_REF: master
