@@ -357,6 +357,10 @@ Running: LinkeDOM
 
 Moreover, domino has 0 dependencies — it's basically written from the ground up! JSDOM has 21 dependencies. A lower number of dependencies reduces the attack surface of an application; and with increasing reports of [supply chain attacks](/posts/twelve-days-to-secure-your-systems/#software-components-and-the-supply-chain), it's good to limit such risks.
 
+{% alert "warning" %}
+Small update: In a funny twist of events, while I did end up choosing domino initially, I switched over to JSDOM later on. This is because I wanted to use the `prism-keep-markup` plugin to be able to apply `<mark>` highlighting inside code blocks. Under the hood, the plugin requires `document.createRange` which domino's API sadly does not provide. This is a temporary solution; which is to say, I was lazy and didn't want this roadblock to eat up too much time. I may or may not look towards handrolling/simulating `document.createRange` with a custom function. If you have an alternative, I would welcome it.
+{% endalert %}
+
 ## Final Remarks
 
 I'll be the first to admit — this is a rather crude hack with some loose ends.^[It would be better to pass codeblock attributes directly to Prism without the extra stringification and parsing. Guess I'll leave this as an exercise for the front-end engineers.] But it works! Not to mention, it looks nice with enough CSS! And to some that's all that matters.
