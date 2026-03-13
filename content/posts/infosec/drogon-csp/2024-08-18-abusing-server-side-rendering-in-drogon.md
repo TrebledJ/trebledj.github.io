@@ -366,7 +366,7 @@ Exercises for the reader:
 
 Blocking the keyword `syscall` will not work here. We can bypass it with a simple `sys" "call`, since adjacent strings are concatenated in C/C++ (`"a" "b" == "ab"`). To properly block such calls, we would need to block the functions invoking inline assembly, such as `asm`.
 
-Handy Reference: [Using Inline Assembly in C/C++](https://www.codeproject.com/Articles/15971/Using-Inline-Assembly-in-C-C)
+Handy Reference: [Using Inline Assembly in C/C++](https://web.archive.org/web/20250215062230/https://www.codeproject.com/Articles/15971/Using-Inline-Assembly-in-C-C)
 
 #### Local File Inclusion with  `#include`
 {# Need double space in header to avoid weird issue where "with" and "include" are jammed together in ToC. #}
