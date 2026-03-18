@@ -2,6 +2,5 @@ _site/
 assets/js/third-party/
 archive/
 scripts/
-eleventy/detail/keywords/rake-js/
 dist/
 *.min.js

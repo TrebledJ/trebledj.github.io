@@ -1,7 +1,5 @@
 /* eslint-disable */
 
-// import process from './rake-js/dist/index.js'.default;
-
 import { stem } from './stem.js';
 import { tokenise, stopwords } from './tokenise.js';
 

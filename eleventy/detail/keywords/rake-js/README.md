@@ -1,1 +1,0 @@
-Blatantly stolen from https://github.com/Anonyfox/rake-js.
