@@ -1,5 +1,5 @@
 /* eslint-disable max-len */
-import keywords from '../detail/keywords.js';
+import keywords from '../detail/keywords';
 
 test('keyword tokens', () => {
   expect(
