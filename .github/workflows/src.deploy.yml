@@ -109,4 +109,4 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         if: env.DEPLOY_TO_GHPAGES
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5
