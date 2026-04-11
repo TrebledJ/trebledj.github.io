@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        
+            
+                <item>
+                    <title>When Hospitality Software is Too Hospitable (CVE-2026-21966, CVE-2026-21967)</title>
+                    <description>An XSS Filter Bypass and a Curious SSRF in Oracle Hospitality OPERA</description>
+                    <pubDate>2026-02-13T00:00:00Z</pubDate>
+                    <link>https://trebledj.me/posts/oracle-opera-vulns/</link>
+                    
+                        <category>research</category>
+                    
+                        <category>web</category>
+                    
+                        <category>java</category>
+                    
+                        <category>pentesting</category>
+                    
+                        <category>infosec</category>
+                    
+                        <category>writeup</category>
+                    
+                        <category>cve</category>
+                    
+                </item>
+            
+        
+            
+                <item>
+                    <title>Sharing is Caring: Arbitrary Code Execution for Breakfast</title>
+                    <description>A CTF challenge exploring binary exploitation in C++, gadget mania, and a new form of deserialization attack.</description>
+                    <pubDate>2025-10-03T00:00:00Z</pubDate>
+                    <link>https://trebledj.me/posts/arbitrary-code-execution-for-breakfast/</link>
+                    
+                        <category>ctf</category>
+                    
+                        <category>pwn</category>
+                    
+                        <category>cpp</category>
+                    
+                        <category>infosec</category>
+                    
+                        <category>writeup</category>
+                    
+                        <category>research</category>
+                    
+                </item>
+            
+        
+            
+                <item>
+                    <title>Reverse Engineering a Siemens Programmable Logic Controller for Funs and Vulns (CVE-2024-54089, CVE-2024-54090 &amp;amp; CVE-2025-40757)</title>
+                    <description>When security by obscurity breaks...</description>
+                    <pubDate>2025-09-12T00:00:00Z</pubDate>
+                    <link>https://trebledj.me/posts/reversing-a-siemens-plc-for-funs-and-vulns/</link>
+                    
+                        <category>research</category>
+                    
+                        <category>embedded</category>
+                    
+                        <category>reverse</category>
+                    
+                        <category>cryptography</category>
+                    
+                        <category>cpp</category>
+                    
+                        <category>pentesting</category>
+                    
+                        <category>infosec</category>
+                    
+                        <category>writeup</category>
+                    
+                        <category>cve</category>
+                    
+                </item>
+            
+        
+            
+                <item>
+                    <title>Output-Invariant and Time-Based Testing – Practical Techniques for Black-Box Enumeration of LLMs</title>
+                    <description>Abusing inherent context and sluggishness in LLMs for stealthy enumeration of prompt injection points.</description>
+                    <pubDate>2025-05-09T00:00:00Z</pubDate>
+                    <link>https://trebledj.me/posts/output-invariant-prompt-injection/</link>
+                    
+                        <category>infosec</category>
+                    
+                        <category>ai</category>
+                    
+                        <category>notes</category>
+                    
+                        <category>pentesting</category>
+                    
+                        <category>redteam</category>
+                    
+                        <category>research</category>
+                    
+                        <category>writeup</category>
+                    
+                </item>
+            
+        
+            
+                <item>
+                    <title>5 Weekend Reads You Missed: BOOMlang v2, Blue Team Strikes Back, ET, CVSS 4.1, and DLLModules</title>
+                    <description>Breaking news, awesome stuff happened!</description>
+                    <pubDate>2025-04-01T00:00:00Z</pubDate>
+                    <link>https://trebledj.me/posts/boomlang-blue-team-strikes-back-et-cvss-and-dllmodules/</link>
+                    
+                        <category>satire</category>
+                    
+                        <category>infosec</category>
+                    
+                        <category>programming</category>
+                    
+                        <category>pentesting</category>
+                    
+                        <category>programming-languages</category>
+                    
+                        <category>windows</category>
+                    
+                </item>
+            
+        
+            
+                <item>
+                    <title>Delay and Interactive Pause in Multi-Threaded Python</title>
+                    <description>It&#39;s like musical chairs for threads (except no one gets left behind)!</description>
+                    <pubDate>2025-03-10T00:00:00Z</pubDate>
+                    <link>https://trebledj.me/posts/delay-and-interactive-pause-in-multithreaded-python/</link>
+                    
+                        <category>programming</category>
+                    
+                        <category>python</category>
+                    
+                        <category>tutorial</category>
+                    
+                        <category>infosec</category>
+                    
+                        <category>pentesting</category>
+                    
+                </item>
+            
+        
+            
+                <item>
+                    <title>12 Days of Christmas – Reflections from a Pentester</title>
+                    <description>Secure Your Janky Systems, 2024 Edition</description>
+                    <pubDate>2024-12-25T00:00:00Z</pubDate>
+                    <link>https://trebledj.me/posts/twelve-days-to-secure-your-systems/</link>
+                    
+                        <category>infosec</category>
+                    
+                        <category>software-engineering</category>
+                    
+                        <category>reflection</category>
+                    
+                        <category>web</category>
+                    
+                        <category>pentesting</category>
+                    
+                </item>
+            
+        
+            
+                <item>
+                    <title>How to Use PrismJS Plugins with NodeJS and MarkdownIt</title>
+                    <description>Improve your storytelling with these dead simple hacks for rendering fancy Prism plugins in Node!</description>
+                    <pubDate>2024-11-03T00:00:00Z</pubDate>
+                    <link>https://trebledj.me/posts/prism-plugins-in-node/</link>
+                    
+                        <category>programming</category>
+                    
+                        <category>web</category>
+                    
+                        <category>js</category>
+                    
+                        <category>tutorial</category>
+                    
+                        <category>meta</category>
+                    
+                        <category>performance</category>
+                    
+                </item>
+            
+        
+            
+                <item>
+                    <title>Dynamic Views Loading – Abusing Server Side Rendering in Drogon</title>
+                    <description>What could go wrong releasing a C++ web server with &quot;live reload&quot; into the wild?</description>
+                    <pubDate>2024-08-18T00:00:00Z</pubDate>
+                    <link>https://trebledj.me/posts/abusing-server-side-rendering-in-drogon/</link>
+                    
+                        <category>infosec</category>
+                    
+                        <category>cpp</category>
+                    
+                        <category>ctf</category>
+                    
+                        <category>web</category>
+                    
+                        <category>programming</category>
+                    
+                        <category>linux</category>
+                    
+                        <category>notes</category>
+                    
+                        <category>research</category>
+                    
+                        <category>writeup</category>
+                    
+                </item>
+            
+        
+            
+                <item>
+                    <title>Automating Boolean-Based SQL Injection with Python</title>
+                    <description>How to be efficiently lazy at finding hidden gems in predictable places – Database Edition</description>
+                    <pubDate>2024-08-10T00:00:00Z</pubDate>
+                    <link>https://trebledj.me/posts/automating-boolean-sql-injection-with-python/</link>
+                    
+                        <category>infosec</category>
+                    
+                        <category>sql</category>
+                    
+                        <category>python</category>
+                    
+                        <category>web</category>
+                    
+                        <category>programming</category>
+                    
+                        <category>project</category>
+                    
+                        <category>writeup</category>
+                    
+                        <category>tutorial</category>
+                    
+                        <category>pentesting</category>
+                    
+                </item>
+            
+        
+    </channel>
+</rss>
