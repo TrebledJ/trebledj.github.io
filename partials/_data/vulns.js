@@ -86,7 +86,7 @@ const VULNS = [
                 name: 'CVE-2026-7703',
                 date: '2026-05-03',
                 severity: 'high / critical',
-                description: 'An unauthenticated person with network access can obtain Remote Code Execution (RCE) by abusing the websocket API on the web server running on port 1338, which is open by default. This issue allows anyone on the network to take control of the Pixera media server, allowing them to run arbitrary commands, modify files, mine cryptocurrency, and pivot across connected networks.',
+                description: 'An unauthenticated person with network access can achieve Remote Code Execution (RCE) on a Pixera Two Media Server by abusing the websocket API on the web server running on port 1338, enabled by default. This allows anyone on the network to take control of the Pixera media server, allowing them to run arbitrary commands and pivot across connected networks.',
                 links: [
                     { url: '/advisories/pixera/', title: 'advisory' },
                 ],
@@ -96,7 +96,7 @@ const VULNS = [
                 name: 'CVE-2026-7704',
                 date: '2026-05-03',
                 severity: 'medium',
-                description: 'An unauthenticated person with network access can perform Arbitrary File Reads on the Pixera Media Server by targeting the web server hosted on port 1338. This allows anyone on the network to read any file on the Pixera media server.',
+                description: 'An unauthenticated person with network access can read arbitrary files on the Pixera Two Media Server by targeting the web server hosted on port 1338, enabled by default.',
                 links: [
                     { url: '/advisories/pixera/', title: 'advisory' },
                 ]
