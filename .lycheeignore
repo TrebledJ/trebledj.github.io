@@ -26,3 +26,4 @@ http://highlightjs.readthedocs.io/en/latest/style-guide.html
 http://attacker.site
 http://127.0.0.1:?[0-9]*/.*
 http://192.168.100.100
+http://target:?[0-9]*/.*
