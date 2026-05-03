@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:base="https://trebledj.me">
+  <title>TrebledJ&#39;s Pages</title>
+  <subtitle>TrebledJ&#39;s personal blog on programming, cybersecurity, music, and memes.</subtitle>
+  <link href="https://trebledj.me/feeds/advisory.xml" rel="self"/>
+  <link href="https://trebledj.me"/>
+  <updated>2026-05-03T00:00:00Z</updated>
+  <id>https://trebledj.me</id>
+  <author>
+    <name>TrebledJ</name>
+    <email>trebledjjj@gmail.com</email>
+  </author>
+  
+    
+      
+      <entry>
+        <title>Advisory: RCE and Arbitrary File Read in AV Stumpfl PIXERA &amp;lt; 25.2 R3</title>
+        <description>CVE-2026-7703, CVE-2026-7704</description>
+        <link href="https://trebledj.me/advisories/pixera/"/>
+        <updated>2026-05-03T00:00:00Z</updated>
+        <id>https://trebledj.me/advisories/pixera/</id>
+        <content xml:lang="en" type="html">&lt;h2 id=&quot;overview&quot; tabindex=&quot;-1&quot;&gt;&lt;a class=&quot;md-anchor&quot; href=&quot;https://trebledj.me/advisories/pixera/#overview&quot; aria-hidden=&quot;true&quot;&gt;&lt;/a&gt; Overview&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;Remote Code Execution (RCE) in PIXERA&lt;/li&gt;
+&lt;li&gt;Path Traversal in PIXERA&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&quot;affected-products&quot; tabindex=&quot;-1&quot;&gt;&lt;a class=&quot;md-anchor&quot; href=&quot;https://trebledj.me/advisories/pixera/#affected-products&quot; aria-hidden=&quot;true&quot;&gt;&lt;/a&gt; Affected Products&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Model: PIXERA Two Media Server&lt;/li&gt;
+&lt;li&gt;Software Version: &amp;lt; 25.2 R3&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;mitigation&quot; tabindex=&quot;-1&quot;&gt;&lt;a class=&quot;md-anchor&quot; href=&quot;https://trebledj.me/advisories/pixera/#mitigation&quot; aria-hidden=&quot;true&quot;&gt;&lt;/a&gt; Mitigation&lt;/h2&gt;
+&lt;p&gt;Upgrade to the latest PIXERA version.&lt;/p&gt;
+&lt;p&gt;The issue was fixed in PIXERA version 25.2 R3, released on 14 Oct 25. In this version, the affected web server and APIs are disabled by default. Extra care should be taken when allow-listing sensitive APIs such as filesystem, web-related, and system utility APIs. (Reference: &lt;a href=&quot;https://help.pixera.one/changelogs-version-overviews/pixera-252-overview-changelog#:~:text=Allowlist%20(accessible%20via%20top%20bar)%20to%20limit%20API%20access&quot;&gt;Changelog&lt;/a&gt;, &lt;a href=&quot;https://help.pixera.one/api/allowlist#:~:text=For%20security%20reasons%2C%20starting%20with%20version%2025.2%2C%20all%20API%20communication%20is%20disabled%20by%20default&quot;&gt;API Allowlist&lt;/a&gt;)&lt;/p&gt;
+&lt;p&gt;Some other ways to secure your PIXERA server and prevent unauthorised access:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Change the default password for VNC, if enabled.&lt;/li&gt;
+&lt;li&gt;If upgrading is not an option, consider the workaround of applying strict IP whitelisting on ports 1338 and 5900-5910 (VNC), restricting access to trusted sources. This may be configured in network devices.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;vulnerability-1-remote-code-execution-cve-2026-7703&quot; tabindex=&quot;-1&quot;&gt;&lt;a class=&quot;md-anchor&quot; href=&quot;https://trebledj.me/advisories/pixera/#vulnerability-1-remote-code-execution-cve-2026-7703&quot; aria-hidden=&quot;true&quot;&gt;&lt;/a&gt; Vulnerability 1 – Remote Code Execution (CVE-2026-7703)&lt;/h2&gt;
+&lt;h3 id=&quot;1-1-description&quot; tabindex=&quot;-1&quot;&gt;&lt;a class=&quot;md-anchor&quot; href=&quot;https://trebledj.me/advisories/pixera/#1-1-description&quot; aria-hidden=&quot;true&quot;&gt;&lt;/a&gt; 1.1. Description&lt;/h3&gt;
+&lt;p&gt;An unauthenticated person with network access can achieve Remote Code Execution (RCE) on PIXERA by abusing the websocket API on the web server running on port 1338, enabled by default. This issue allows anyone on the network to run arbitrary commands with Administrator privileges and pivot across connected networks.&lt;/p&gt;
+&lt;h3 id=&quot;1-2-poc&quot; tabindex=&quot;-1&quot;&gt;&lt;a class=&quot;md-anchor&quot; href=&quot;https://trebledj.me/advisories/pixera/#1-2-poc&quot; aria-hidden=&quot;true&quot;&gt;&lt;/a&gt; 1.2. PoC&lt;/h3&gt;
+&lt;p&gt;WebSocket Payload:&lt;/p&gt;
+&lt;div class=&quot;code-toolbar&quot;&gt;&lt;pre class=&quot;language-json&quot; tabindex=&quot;0&quot;&gt;&lt;code class=&quot;language-json&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;token property&quot;&gt;&quot;type&quot;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;Request&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;token property&quot;&gt;&quot;sequence&quot;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;100&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;token property&quot;&gt;&quot;address&quot;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;Utils.Redacted.redacted&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;token property&quot;&gt;&quot;params&quot;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;
+        &lt;span class=&quot;token string&quot;&gt;&quot;calc.exe&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;token string&quot;&gt;&quot;&quot;&lt;/span&gt;
+    &lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;div class=&quot;toolbar&quot;&gt;&lt;div class=&quot;toolbar-item&quot;&gt;&lt;span class=&quot;lang&quot;&gt;JSON&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;toolbar-item&quot;&gt;&lt;button class=&quot;copy-to-clipboard-button&quot; type=&quot;button&quot; title=&quot;Copy Code&quot;&gt;&lt;/button&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;p&gt;Certain parts of the PoC have been redacted in the interest of security.&lt;/p&gt;
+&lt;p&gt;&lt;a class=&quot;lightbox-single&quot; title=&quot;Run calc.exe in a local deployment&quot; href=&quot;https://trebledj.me/img/advisories/assets/pixera_1_rce_local_pop_calc-1500w.webp&quot;&gt;&lt;img class=&quot;mb-2 rw center jw-100 &quot; src=&quot;https://trebledj.me/img/advisories/assets/pixera_1_rce_local_pop_calc-1500w.webp&quot; loading=&quot;lazy&quot; decoding=&quot;async&quot; style=&quot;aspect-ratio: auto 1500 / 795&quot; alt=&quot;Run calc.exe in a local deployment&quot; title=&quot;Run calc.exe in a local deployment&quot; srcset=&quot;https://trebledj.me/img/advisories/assets/pixera_1_rce_local_pop_calc-256w.webp 256w, https://trebledj.me/img/advisories/assets/pixera_1_rce_local_pop_calc-512w.webp 512w, https://trebledj.me/img/advisories/assets/pixera_1_rce_local_pop_calc-1024w.webp 1024w, https://trebledj.me/img/advisories/assets/pixera_1_rce_local_pop_calc-1500w.webp 1500w&quot; sizes=&quot;(max-width: 256px) 256px, (max-width: 512px) 512px, (max-width: 1024px) 1024px, 1500px&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p class=&quot;caption&quot;&gt;&lt;sup&gt;Figure 1A: Run calc.exe in a local deployment.&lt;/sup&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a class=&quot;lightbox-single&quot; title=&quot;Obtain a reverse shell in a remote deployment&quot; href=&quot;https://trebledj.me/img/advisories/assets/pixera_1_rce_reverse_shell-1920w.webp&quot;&gt;&lt;img class=&quot;mb-2 rw center jw-100 &quot; src=&quot;https://trebledj.me/img/advisories/assets/pixera_1_rce_reverse_shell-1920w.webp&quot; loading=&quot;lazy&quot; decoding=&quot;async&quot; style=&quot;aspect-ratio: auto 1920 / 1080&quot; alt=&quot;Obtain a reverse shell in a remote deployment&quot; title=&quot;Obtain a reverse shell in a remote deployment&quot; srcset=&quot;https://trebledj.me/img/advisories/assets/pixera_1_rce_reverse_shell-256w.webp 256w, https://trebledj.me/img/advisories/assets/pixera_1_rce_reverse_shell-512w.webp 512w, https://trebledj.me/img/advisories/assets/pixera_1_rce_reverse_shell-1024w.webp 1024w, https://trebledj.me/img/advisories/assets/pixera_1_rce_reverse_shell-1920w.webp 1920w&quot; sizes=&quot;(max-width: 256px) 256px, (max-width: 512px) 512px, (max-width: 1024px) 1024px, 1920px&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p class=&quot;caption&quot;&gt;&lt;sup&gt;Figure 1B: Obtain a reverse shell in a remote deployment.&lt;/sup&gt;&lt;/p&gt;
+&lt;h3 id=&quot;1-3-impact&quot; tabindex=&quot;-1&quot;&gt;&lt;a class=&quot;md-anchor&quot; href=&quot;https://trebledj.me/advisories/pixera/#1-3-impact&quot; aria-hidden=&quot;true&quot;&gt;&lt;/a&gt; 1.3. Impact&lt;/h3&gt;
+&lt;p&gt;Commands are executed as the &lt;code&gt;avstumpfl&lt;/code&gt; user, which has Administrator privileges on the Windows server. Attackers can execute arbitrary commands on the media server, unlock further actions through UAC bypass, and pivot across the network.&lt;/p&gt;
+&lt;h3 id=&quot;1-4-severity&quot; tabindex=&quot;-1&quot;&gt;&lt;a class=&quot;md-anchor&quot; href=&quot;https://trebledj.me/advisories/pixera/#1-4-severity&quot; aria-hidden=&quot;true&quot;&gt;&lt;/a&gt; 1.4. Severity&lt;/h3&gt;
+&lt;p&gt;Suggested CVSS3 Vector: CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:H/A:H&lt;/p&gt;
+&lt;p&gt;Base Score: 9.4 (Critical)&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Attack Vector (AV): Network&lt;/li&gt;
+&lt;li&gt;Attack Complexity (AC): Low&lt;/li&gt;
+&lt;li&gt;Privileges Required (PR): None&lt;/li&gt;
+&lt;li&gt;User Interaction (UI): None&lt;/li&gt;
+&lt;li&gt;Scope (S): Unchanged&lt;/li&gt;
+&lt;li&gt;Confidentiality Loss (C): Low&lt;/li&gt;
+&lt;li&gt;Integrity Loss (I): High&lt;/li&gt;
+&lt;li&gt;Availability Loss (A): High&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Justification:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Low loss in confidentiality due to the nature of media servers. Media files are generally non-sensitive, especially ones meant to be displayed on-screen to an audience. The more severe impacts lie in loss of availability and the potential for network pivoting.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;vulnerability-2-path-traversal-cve-2026-7704&quot; tabindex=&quot;-1&quot;&gt;&lt;a class=&quot;md-anchor&quot; href=&quot;https://trebledj.me/advisories/pixera/#vulnerability-2-path-traversal-cve-2026-7704&quot; aria-hidden=&quot;true&quot;&gt;&lt;/a&gt; Vulnerability 2 – Path Traversal (CVE-2026-7704)&lt;/h2&gt;
+&lt;h3 id=&quot;2-1-description&quot; tabindex=&quot;-1&quot;&gt;&lt;a class=&quot;md-anchor&quot; href=&quot;https://trebledj.me/advisories/pixera/#2-1-description&quot; aria-hidden=&quot;true&quot;&gt;&lt;/a&gt; 2.1. Description&lt;/h3&gt;
+&lt;p&gt;A path traversal vulnerability was discovered in PIXERA, allowing unauthenticated users to read arbitrary files by targeting the web server on port 1338, enabled by default.&lt;/p&gt;
+&lt;h3 id=&quot;2-2-poc&quot; tabindex=&quot;-1&quot;&gt;&lt;a class=&quot;md-anchor&quot; href=&quot;https://trebledj.me/advisories/pixera/#2-2-poc&quot; aria-hidden=&quot;true&quot;&gt;&lt;/a&gt; 2.2. PoC&lt;/h3&gt;
+&lt;div class=&quot;code-toolbar&quot;&gt;&lt;pre data-lang-off=&quot;&quot; class=&quot;language-text&quot; tabindex=&quot;0&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;http://TARGET:1338/..&#92;..&#92;..&#92;..&#92;..&#92;..&#92;windows&#92;win.ini&lt;/code&gt;&lt;/pre&gt;&lt;div class=&quot;toolbar&quot;&gt;&lt;div class=&quot;toolbar-item&quot;&gt;&lt;button class=&quot;copy-to-clipboard-button&quot; type=&quot;button&quot; title=&quot;Copy Code&quot;&gt;&lt;/button&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;p&gt;&lt;a class=&quot;lightbox-single&quot; title=&quot;Path traversal to win.ini&quot; href=&quot;https://trebledj.me/img/advisories/assets/pixera_2_path_traversal_winini-1117w.webp&quot;&gt;&lt;img class=&quot;mb-2 rw center jw-100 &quot; src=&quot;https://trebledj.me/img/advisories/assets/pixera_2_path_traversal_winini-1117w.webp&quot; loading=&quot;lazy&quot; decoding=&quot;async&quot; style=&quot;aspect-ratio: auto 1117 / 316&quot; alt=&quot;Path traversal to win.ini&quot; title=&quot;Path traversal to win.ini&quot; srcset=&quot;https://trebledj.me/img/advisories/assets/pixera_2_path_traversal_winini-256w.webp 256w, https://trebledj.me/img/advisories/assets/pixera_2_path_traversal_winini-512w.webp 512w, https://trebledj.me/img/advisories/assets/pixera_2_path_traversal_winini-1024w.webp 1024w, https://trebledj.me/img/advisories/assets/pixera_2_path_traversal_winini-1117w.webp 1117w&quot; sizes=&quot;(max-width: 256px) 256px, (max-width: 512px) 512px, (max-width: 1024px) 1024px, 1117px&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p class=&quot;caption&quot;&gt;&lt;sup&gt;Figure 2A: Path traversal to win.ini&lt;/sup&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a class=&quot;lightbox-single&quot; title=&quot;Path traversal to a file containing the Pixera build version&quot; href=&quot;https://trebledj.me/img/advisories/assets/pixera_2_path_traversal_build_version-1313w.webp&quot;&gt;&lt;img class=&quot;mb-2 rw center jw-100 &quot; src=&quot;https://trebledj.me/img/advisories/assets/pixera_2_path_traversal_build_version-1313w.webp&quot; loading=&quot;lazy&quot; decoding=&quot;async&quot; style=&quot;aspect-ratio: auto 1313 / 234&quot; alt=&quot;Path traversal to a file containing the Pixera build version&quot; title=&quot;Path traversal to a file containing the Pixera build version&quot; srcset=&quot;https://trebledj.me/img/advisories/assets/pixera_2_path_traversal_build_version-256w.webp 256w, https://trebledj.me/img/advisories/assets/pixera_2_path_traversal_build_version-512w.webp 512w, https://trebledj.me/img/advisories/assets/pixera_2_path_traversal_build_version-1024w.webp 1024w, https://trebledj.me/img/advisories/assets/pixera_2_path_traversal_build_version-1313w.webp 1313w&quot; sizes=&quot;(max-width: 256px) 256px, (max-width: 512px) 512px, (max-width: 1024px) 1024px, 1313px&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p class=&quot;caption&quot;&gt;&lt;sup&gt;Figure 2B: Path traversal to a file containing the PIXERA build version.&lt;/sup&gt;&lt;/p&gt;
+&lt;h3 id=&quot;2-3-impact&quot; tabindex=&quot;-1&quot;&gt;&lt;a class=&quot;md-anchor&quot; href=&quot;https://trebledj.me/advisories/pixera/#2-3-impact&quot; aria-hidden=&quot;true&quot;&gt;&lt;/a&gt; 2.3. Impact&lt;/h3&gt;
+&lt;p&gt;The exploitation of this vulnerability can lead to unauthorized disclosure of information, potentially leading to system compromise. For instance, attackers may leverage this vulnerability to leak system files or registry data which may disclose login hashes to be cracked.&lt;/p&gt;
+&lt;h3 id=&quot;2-4-severity&quot; tabindex=&quot;-1&quot;&gt;&lt;a class=&quot;md-anchor&quot; href=&quot;https://trebledj.me/advisories/pixera/#2-4-severity&quot; aria-hidden=&quot;true&quot;&gt;&lt;/a&gt; 2.4. Severity&lt;/h3&gt;
+&lt;p&gt;Suggested CVSS3 Vector: CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:N/A:N&lt;/p&gt;
+&lt;p&gt;Base Score: 5.3 (Medium)&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Attack Vector (AV): Network&lt;/li&gt;
+&lt;li&gt;Attack Complexity (AC): Low&lt;/li&gt;
+&lt;li&gt;Privileges Required (PR): None&lt;/li&gt;
+&lt;li&gt;User Interaction (UI): None&lt;/li&gt;
+&lt;li&gt;Scope (S): Unchanged&lt;/li&gt;
+&lt;li&gt;Confidentiality Loss (C): Low&lt;/li&gt;
+&lt;li&gt;Integrity Loss (I): None&lt;/li&gt;
+&lt;li&gt;Availability Loss (A): None&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;timeline&quot; tabindex=&quot;-1&quot;&gt;&lt;a class=&quot;md-anchor&quot; href=&quot;https://trebledj.me/advisories/pixera/#timeline&quot; aria-hidden=&quot;true&quot;&gt;&lt;/a&gt; Timeline&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;2025.07.04 - Vulnerability reported to AV Stumpfl&lt;/li&gt;
+&lt;li&gt;2025.07.28 - Report received by AV Stumpfl&lt;/li&gt;
+&lt;li&gt;2025.09.16 - Disclosure to MITRE requesting CVE-ID (no response)&lt;/li&gt;
+&lt;li&gt;2025.10.14 - Patch released (25.2 R3) by AV Stumpfl&lt;/li&gt;
+&lt;li&gt;2026.04.15 - Disclosure to VulDB&lt;/li&gt;
+&lt;li&gt;2026.05.03 - Disclosure published by VulDB&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;credit&quot; tabindex=&quot;-1&quot;&gt;&lt;a class=&quot;md-anchor&quot; href=&quot;https://trebledj.me/advisories/pixera/#credit&quot; aria-hidden=&quot;true&quot;&gt;&lt;/a&gt; Credit&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Johnathan Law from PwC HK DarkLab&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+        
+          <category>advisory</category>
+        
+      </entry>
+    
+  
+</feed>
