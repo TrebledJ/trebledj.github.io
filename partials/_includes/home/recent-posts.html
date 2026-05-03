@@ -39,3 +39,9 @@
     {# Recent Projects and Experiences Section #}
     {{render_posts_by_topic(uniquePosts, postGroupedTopics, "humor")}}
 </div>
+
+<div class="mt-4">
+    <h2 id="recent-advisories" class="mb-0">Recent Security Advisories</h2>
+    {% set uniquePosts = collections.advisory | selectPostsWithAtLeastNPerTag(site.home.topics2) %}
+    {{render_posts_by_topic(uniquePosts, site.home.topics2, "advisory")}}
+</div>
