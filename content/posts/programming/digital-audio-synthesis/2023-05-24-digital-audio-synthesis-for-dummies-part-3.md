@@ -54,7 +54,9 @@ It turns out kitchens and embedded systems aren’t that different after all! Bo
 Timers in embedded systems are similar to those in the kitchen: they tick for a period of time and signal an event when finished. However, embedded timers are much fancier than kitchen timers, making them immensely useful in various applications. They can trigger repeatedly (via auto-reload), count up/down, and be used to generate rectangular (PWM) waves.
 
 {% image "https://1.bp.blogspot.com/-W_wLg9tjvjk/XF5-LcbkBNI/AAAAAAAAC90/UZ6YvftzhqM2H8vi0K0Si7bx-iSUMd6FgCLcBGAs/s640/timer.jpg", "jw-75", "Timers can be used to count at regular intervals." %}
-<sup>Timers have various applications, such as to count signals. (Source: EmbeddedTutor[^embeddedtutor])</sup>{.caption}
+
+<sup>Timers have various applications, such as to count signals. (Source: EmbeddedTutor[^embeddedtutor])</sup>
+{.caption}
 
 [^embeddedtutor]: [Timer/Counter in Embedded System](https://www.embeddedtutor.com/2019/02/timercounter-in-embedded-system.html)
 
@@ -69,7 +71,9 @@ The clock runs at a fixed frequency (168MHz on our board).
 By dividing against it, we can achieve lower frequencies.
 
 {% image "https://1.bp.blogspot.com/-VS5AN7VS4BI/XF6Z2Zm7UpI/AAAAAAAAC-Y/z3rkz9xGSsoycbS3_QB4OW6033YkvVu2gCLcBGAs/s640/prescaler.png", "" %}
-<sup>By using different prescalers, we can scale down the frequency according to our needs. (Source: EmbeddedTutor[^embeddedtutor])</sup>{.caption}
+
+<sup>By using different prescalers, we can scale down the frequency according to our needs. (Source: EmbeddedTutor[^embeddedtutor])</sup>
+{.caption}
 
 {% endalert %}
 

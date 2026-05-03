@@ -23,7 +23,9 @@ Zip files are *everywhere* in our daily lives, seamlessly integrated into our pe
 But as we know from *Silicon Valley*, zip files have the potential to be dangerous.
 
 {% image "assets/yikes-its-a-zip-bomb.jpg", "jw-80", "Filmmakers' impression of a zip bomb." %}
-<sup>YouTube: [Silicon Valley - The Ultimate Hack](https://www.youtube.com/watch?v=jnDk8BcqoR0)</sup>{.caption}
+
+<sup>YouTube: [Silicon Valley - The Ultimate Hack](https://www.youtube.com/watch?v=jnDk8BcqoR0)</sup>
+{.caption}
 
 In this post, we'll delve into the intriguing world of zip file attacks, exploring various attacks and mitigations involving zip files. These attacks allow attackers to potentially gain unauthorised file read/write privileges—or even cause denial of service. This calls for mitigations to bolster our systems’ defences.
 
