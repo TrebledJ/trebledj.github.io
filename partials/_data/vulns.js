@@ -75,6 +75,34 @@ const VULNS = [
             },
         ]
     },
+    {
+        type: 'group',
+        name: 'Multiple Vulnerabilities in Pixera Two Media Server',
+        tags: ['web'],
+        description: 'AV Stumpfl Pixera Two is a media server, a high-performance computer system designed to store, manage, and deliver multimedia content across professional audio-visual (AV) environments. Affected Software: Pixera Two Media Server < 25.2 R3',
+        items: [
+            {
+                type: 'cve',
+                name: 'CVE-2026-7703',
+                date: '2026-05-03',
+                severity: 'high / critical',
+                description: 'An unauthenticated person with network access can obtain Remote Code Execution (RCE) by abusing the websocket API on the web server running on port 1338, which is open by default. This issue allows anyone on the network to take control of the Pixera media server, allowing them to run arbitrary commands, modify files, mine cryptocurrency, and pivot across connected networks.',
+                links: [
+                    { url: 'https://gist.github.com/TrebledJ/585a20525e45549f299d282233632608', title: 'advisory' },
+                ],
+            },
+            {
+                type: 'cve',
+                name: 'CVE-2026-7704',
+                date: '2026-05-03',
+                severity: 'medium',
+                description: 'An unauthenticated person with network access can perform Arbitrary File Reads on the Pixera Media Server by targeting the web server hosted on port 1338. This allows anyone on the network to read any file on the Pixera media server.',
+                links: [
+                    { url: 'https://gist.github.com/TrebledJ/585a20525e45549f299d282233632608', title: 'advisory' },
+                ]
+            },
+        ]
+    },
 ];
 
 const vrAssignIndex = (vulns) => {
