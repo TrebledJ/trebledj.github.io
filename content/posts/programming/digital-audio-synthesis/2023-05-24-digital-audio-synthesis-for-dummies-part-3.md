@@ -205,10 +205,12 @@ Let's delve into our second topic today: digital-to-analogue converters (DACs).
 
 Audio comes in several forms: sound waves, electrical voltages, and binary data.
 
-{% image "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c7/CPT-Sound-ADC-DAC.svg/1200px-CPT-Sound-ADC-DAC.svg.png", "jw-85", "Tolkien's world looks nothing like the three realms here.", "Image showing how audio is represented in the analogue, electronic, and digital worlds." %}
+{% image "https://upload.wikimedia.org/wikipedia/commons/c/c7/CPT-Sound-ADC-DAC.svg", "jw-85", "Tolkien's world looks nothing like the three realms here.", "Image showing how audio is represented in the analogue, electronic, and digital worlds." %}
 
-<sup>Audio manifests in various forms. DACs transform our signal from the digital realm to the analogue world. (Source: Wikimedia Commons.)</sup>
+<sup>Audio manifests in various forms. DACs transform our signal from the digital realm to the analogue world. (Source: Pluke, [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0), via Wikimedia Commons.)</sup>
 {.caption}
+
+{# Note: original web page: https://commons.wikimedia.org/wiki/File:CPT-Sound-ADC-DAC.svg #}
 
 Since representations vastly differ, hence the need for interfaces to bridge the worlds. Between the digital and analogue realms, we have DACs and {% abbr "ADCs", "Analogue-to-Digital Converters" %} as mediators. Generally, DACs are used for output while ADCs are for input.
 

@@ -304,7 +304,7 @@ Zip bombs are designed to cripple computers, systems, and virus scanners (rather
 
 {% images "h-auto" %}
 {% image "https://i.redd.it/68j4sr9h3dg21.jpg" %}
-{% image "https://img.devrant.com/devrant/rant/r_674011_CfdZB.jpg" %}
+{% image "assets/zip_bomb_who_would_win.jpg" %}
 {% image "assets/unzip42.jpg" %}
 {% endimages %}
 

@@ -198,7 +198,7 @@ A **vtable** (virtual table) is the mechanism that enables runtime polymorphis
 
 - Each virtual class (any class containing virtual functions) has **one** corresponding virtual table (vtable).
   
-  {% image "https://pabloariasal.github.io/assets/img/posts/vtables/vpointer.png", "jw-100 alpha-img", "Example of how virtual classes, vtables, and overriding virtual functions is implemented. Credit: Pablo Arias" %}
+  {% image "assets/vtables_vpointer_example.png", "jw-100 alpha-img", "Example of how virtual classes, vtables, and overriding virtual functions is implemented. Credit: Pablo Arias" %}
   
   <sup>Example of how virtual classes, vtables, and overriding virtual functions is implemented. Credit: Pablo Arias</sup>
   {.caption}
@@ -215,7 +215,7 @@ A **vtable** (virtual table) is the mechanism that enables runtime polymorphis
 	call   rdx                 ; call the function
 	```
 
-For further reading, I recommend checking out: [Understanding Virtual Tables in C++ by Pablo Arias](https://pabloariasal.github.io/2017/06/10/understanding-virtual-tables/) and [this StackOverflow Q&A](https://stackoverflow.com/a/99341/10239789).
+For further reading, I recommend checking out: [Understanding Virtual Tables in C++ by Pablo Arias](https://web.archive.org/web/20260305120733/https://pabloariasal.github.io/2017/06/10/understanding-virtual-tables/) and [this StackOverflow Q&A](https://stackoverflow.com/a/99341/10239789).
 
 {% alert "success" %}
 Key Points for Exploitation: 1) If an attacker controls the vpointer, they can hijack control flow. 2) The vpointer is the first member of any object of a virtual class.
