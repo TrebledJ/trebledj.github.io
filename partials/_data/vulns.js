@@ -79,7 +79,7 @@ const VULNS = [
         type: 'group',
         name: 'Multiple Vulnerabilities in Pixera Two Media Server',
         tags: ['web'],
-        description: 'AV Stumpfl Pixera Two is a media server, a high-performance computer system designed to store, manage, and deliver multimedia content across professional audio-visual (AV) environments. Affected Software: Pixera Two Media Server < 25.2 R3',
+        description: 'AV Stumpfl Pixera Two is a media server, a high-performance computer system designed to store, manage, and deliver multimedia content across professional audio-visual (AV) environments. Affected Software: Pixera Two Media Server < 25.2 R3.',
         items: [
             {
                 type: 'cve',
