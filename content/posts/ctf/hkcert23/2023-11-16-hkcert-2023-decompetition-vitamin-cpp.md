@@ -90,7 +90,9 @@ Let’s briefly review tries. What is a trie?
 Tries, or prefix trees, are data structures commonly used to efficiently store and retrieve strings. They are particularly useful for tasks like autocomplete or spell checking. The key idea behind tries is that each node in the tree represents a *prefix of a string*, and the edges represent the *characters* that can follow that prefix.
 
 {% image "https://www.boardinfinity.com/blog/content/images/2023/02/Trie-1.png", "jw-60 alpha-img", "A trie containing the words: *and*, *ant*, *dad*, and *do*." %}
-<sup>Example of trie containing the words *and*, *ant*, *dad*, and *do*. Each edge represents a letter to the next prefix. ([Source](https://www.boardinfinity.com/blog/trie-data-structure/))</sup>{.caption}
+
+<sup>Example of trie containing the words *and*, *ant*, *dad*, and *do*. Each edge represents a letter to the next prefix. ([Source](https://www.boardinfinity.com/blog/trie-data-structure/))</sup>
+{.caption}
 
 - In terms of matching an exact string, the complexity is similar to a hashmap: `O(n)` insert/search time, w.r.t. the length of the string. But a hashmap is typically faster as it requires fewer operations.
 - The power of tries comes with alphabetical ordering and prefix search (which is why they’re useful for autocomplete). Hashmaps can't do this.
@@ -215,7 +217,9 @@ I'll leave the first two functions as an exercise for the reader. :)
 `mix()` seems to be a total oddball, as tries don't usually have such a function.
 
 {% image "assets/trienode-mix.jpg", "", "Ghidra decompilation of the TrieNode::mix function." %}
-<sup>Ghidra decompilation of `TrieNode::mix()`.</sup>{.caption}
+
+<sup>Ghidra decompilation of `TrieNode::mix()`.</sup>
+{.caption}
 
 {% details "`TrieNode::mix`: Possible Solution" %}
 ```cpp

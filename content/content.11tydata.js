@@ -30,10 +30,19 @@ export default {
     modified: data => {
       if (process.env.ENVIRONMENT !== 'production')
         return undefined;
-
+      
       if (!data.page.inputPath.includes('/posts/')) {
-        const date = getGitCommitDate(data.page.inputPath);
-        return date;
+        const pageDate = getGitCommitDate(data.page.inputPath, { keep: /^content/ });
+        const dates = [pageDate];
+        if (data.modifiedOn) {
+          for (const path of data.modifiedOn) {
+            dates.push(getGitCommitDate(path, { keep: /^content/ }));
+          }
+        }
+
+        // Get the latest modified time of the current page plus any dependent "modifiedOn" pages.
+        const latestDate = Math.max(...dates.filter(d => !!d));
+        return new Date(latestDate);
       }
 
       // Posts will default to their own date or updated date.

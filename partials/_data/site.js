@@ -96,6 +96,13 @@ export default function () {
           excludeTags: [],
         },
       },
+      topics2: {
+        advisory: {
+          tags: ["advisory"],
+          max: 5,
+          excludeTags: [],
+        },
+      },
     },
     cves: vulns,
     search: {

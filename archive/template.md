@@ -40,6 +40,7 @@ tocOptions: '{"tags":["h2","h3","h4"]}' # https://github.com/jdsteinbach/elevent
 preamble: Short text which isn't included in the body proper and won't be included in embeds.
 eleventyExcludeFromCollections: true
 canonicalUrl: https://example.com
+modifiedOn: ["partials/_data/vulns.js"] # Repository-relative path to a file relevant to this page. The modified date will be the latest commit date of these pages and this page. Mainly useful for non-post pages.
 ---
 
 markdown/html/liquid content here
