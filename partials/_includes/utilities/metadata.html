@@ -32,10 +32,13 @@
 {% set page_keywords = [] %}
 {% set page_keywords = page_keywords | push(site.author.alias | lower) %}
 {% if safeTitle %}
-    {% set page_keywords = page_keywords | push(safeTitle | lower | e) %}
+    {% set page_keywords = page_keywords | extend(safeTitle | lower | keywords) %}
 {% endif %}
 {% if excerpt %}
-    {% set page_keywords = page_keywords | push(safeExcerpt | lower | e) %}
+    {% set page_keywords = page_keywords | extend(safeExcerpt | lower | keywords) %}
+{% endif %}
+{% if social_description %}
+    {% set page_keywords = page_keywords | extend(social_description | lower | keywords) %}
 {% endif %}
 {% if tags %}
     {% set page_keywords = page_keywords | extend(tags | exclude('posts')) %}
@@ -76,7 +79,11 @@
 <meta property="twitter:title" content="{{ titleTagText | safe }}"/>
 
 {% if excerpt %}
-    {% set meta_desc = safeExcerpt + "\n\n" + (content | annihilate('.article-header, .post-preamble, .metadata-container, .metadata-tag-container, #toc-sidebar') | striptags | truncateWords(30)) %}
+    {% if social_description %}
+        {% set meta_desc = safeExcerpt + "\n\n" + social_description %}
+    {% else %}
+        {% set meta_desc = safeExcerpt + "\n\n" + (content | annihilate('.article-header, .post-preamble, .metadata-container, .metadata-tag-container, #toc-sidebar') | striptags | truncateWords(30)) %}
+    {% endif %}
 {% else %}
     {% set meta_desc = site.description %}
 {% endif %}

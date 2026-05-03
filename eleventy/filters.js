@@ -224,10 +224,11 @@ export default function (eleventyConfig) {
 
   if (process.env.ENVIRONMENT === 'fast') {
     // Keep things fast.
-    eleventyConfig.addFilter('keywords', content => content);
+    eleventyConfig.addFilter('keywordsWithCount', content => content);
+    eleventyConfig.addFilter('keywords', content => [content]);
   } else {
     // Extract a set of keywords and run-length-encode them to optimise size.
-    eleventyConfig.addFilter('keywords', function (content) {
+    eleventyConfig.addFilter('keywordsWithCount', function (content) {
       const res = findKeywords(content);
       const counter = new Map();
       for (const w of res) {
@@ -237,6 +238,10 @@ export default function (eleventyConfig) {
         ([w, n]) => Math.min(n ?? 0, 99).toString().padStart(2, '0') + w,
       );
       return lengthEncoded.join(' ');
+    });
+    eleventyConfig.addFilter('keywords', function (content) {
+      const res = findKeywords(content, false);
+      return [...new Set(res)];
     });
   }
 

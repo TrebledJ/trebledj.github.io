@@ -12,6 +12,8 @@ tags:
 thumbnail_src: ~/assets/img/to/thumbnail.jpg  # Start with ./... for images relative to your directory.
 thumbnail_banner: true # or false depending if you want the thumbnail to show on the post's page.
 keywords: key words  # Not really important.
+social_description: |
+  This description shows up when sharing the page over social media embeds.
 comments: true      # Enable comments.
 sharable: false     # Enable share buttons.
 use_math: false

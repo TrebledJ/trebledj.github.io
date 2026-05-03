@@ -11,7 +11,7 @@ permalink: /search.json
 "type": "post",
 "title": "{{post.data.safeTitle | safe}}",
 "excerpt": "{{post.data.excerpt}}",
-"keywords": {{((post.data.excerpt | mdInline) + post.content) | striptags | keywords | jsonify | safe}},
+"keywords": {{((post.data.excerpt | mdInline) + post.content) | striptags | keywordsWithCount | jsonify | safe}},
 "tags": {{post.data.tags | exclude("posts") | jsonify | safe}},
 "url": "{{post.url}}"
 }
@@ -25,7 +25,7 @@ permalink: /search.json
 "type": "tag",
 "title": "{{page.data.safeTitle | safe}}",
 "excerpt": {{clean | truncateWords(20) | jsonify | safe}},
-"keywords": {{clean | keywords | jsonify | safe}},
+"keywords": {{clean | keywordsWithCount | jsonify | safe}},
 "tags": [],
 "url": "{{page.url}}"
 }
