@@ -88,7 +88,7 @@ const VULNS = [
                 severity: 'high / critical',
                 description: 'An unauthenticated person with network access can obtain Remote Code Execution (RCE) by abusing the websocket API on the web server running on port 1338, which is open by default. This issue allows anyone on the network to take control of the Pixera media server, allowing them to run arbitrary commands, modify files, mine cryptocurrency, and pivot across connected networks.',
                 links: [
-                    { url: 'https://gist.github.com/TrebledJ/585a20525e45549f299d282233632608', title: 'advisory' },
+                    { url: '/advisories/pixera/', title: 'advisory' },
                 ],
             },
             {
@@ -98,7 +98,7 @@ const VULNS = [
                 severity: 'medium',
                 description: 'An unauthenticated person with network access can perform Arbitrary File Reads on the Pixera Media Server by targeting the web server hosted on port 1338. This allows anyone on the network to read any file on the Pixera media server.',
                 links: [
-                    { url: 'https://gist.github.com/TrebledJ/585a20525e45549f299d282233632608', title: 'advisory' },
+                    { url: '/advisories/pixera/', title: 'advisory' },
                 ]
             },
         ]
