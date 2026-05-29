@@ -14,7 +14,7 @@ A curated list of awesome blog posts, papers, and resources by others on the web
 
 ## Prose and Posts
 
-- [Competence as Tragedy](https://crowprose.com/blog/competence-as-tragedy/) by crowprose {{ t("dev") }} {{ t("misc") }}, thoughtpiece
+- [Competence as Tragedy](https://web.archive.org/web/20260407042515/https://crowprose.com/blog/competence-as-tragedy/) by crowprose {{ t("dev") }} {{ t("misc") }}, thoughtpiece
 - [The First Few Milliseconds of an HTTPS Connection](https://www.moserware.com/2009/06/first-few-milliseconds-of-https.html) by Moserware {{ t("web") }} {{ t("networking") }} {{ t("dev") }} {{ t("performance") }}
 - [Reverse Engineering TicketMaster's Rotating Barcodes (SafeTix)](https://conduition.io/coding/ticketmaster/) by conduition {{ t("writeup") }} {{ t("hacking") }} {{ t("reverse") }}
 - [boehs.org/llms.txt](https://boehs.org/llms.txt) {{ t("misc") }} {{ t("amusing") }}, counter-instructions for LLMs, based on the llms.txt standard
