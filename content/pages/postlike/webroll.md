@@ -32,6 +32,7 @@ A curated list of awesome blog posts, papers, and resources by others on the web
 
 Fun dev/infosec drama worth sharing. I share these not to ridicule, but because there's always something to learn from these interactions. And some of these are here simply for amusement.
 
+- [GitHub Issue (rsync) - Please don't vibe f*** up this software](https://github.com/RsyncProject/rsync/issues/929)
 - [AI Agent writes ad hominem blog post after having PR rejected](https://github.com/matplotlib/matplotlib/pull/31132) - GitHub Issue, an interesting interaction and situation
 - [.NET CVE-2025-55315](https://github.com/dotnet/aspnetcore/issues/64033) - GitHub Issue, drama around a 9.9-score request smuggling CVE
 - [notepad++ CVE-2025-56383](https://github.com/zer0t0/CVE-2025-56383-Proof-of-Concept/issues/1) - GitHub Issue, drama around risk and local vectors of a Notepad++ "CVE"
