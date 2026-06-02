@@ -51,7 +51,7 @@ jobs:
           echo "diff: $(which diff)"
 
       - name: Download Master Site
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
           ref: site
           path: tmp/
