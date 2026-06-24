@@ -1,6 +1,6 @@
 ---
 title: "Sharing is Caring: Insecure Deserialization of Shared References in C++"
-excerpt: Exploring a hidden attack surface in serialization libraries. "Let's serialize pointers and complex structures! What could possibly go wrong?"
+excerpt: Exploring a hidden attack surface in C++ serialization libraries. "Let's serialize pointers and complex structures! What could possibly go wrong?"
 tags:
   - cve
   - pwn
@@ -16,7 +16,8 @@ tocOptions:
   tags: [h2, h3, h4]
 related:
   tags: [infosec]
-  posts: [/advisory/cpp-deserialization,arbitrary-code-execution-for-breakfast, gdb-cheatsheet]
+  posts: [arbitrary-code-execution-for-breakfast, gdb-cheatsheet]
+#   posts: [/advisory/cpp-deserialization,arbitrary-code-execution-for-breakfast, gdb-cheatsheet]
 preamble: |
   > *There where it is we do not need the wall:*  
   > *He is all pine and I am apple orchard.*  
@@ -29,15 +30,14 @@ preamble: |
 
 Deserialization attacks have grown in popularity over the past decade, with major flaws hitting [tech giants](https://thehackernews.com/2025/07/hackers-exploit-sharepoint-zero-day.html) and [modern frameworks](https://react.dev/blog/2025/12/03/critical-security-vulnerability-in-react-server-components)— even in 2025.
 
-Late July, a question came to mind: "What if we took insecure deserialization and brought it to C++?" I’ve had fond memories using deserialization attacks to pop shells in CTFs, courses, and engagements, plus I enjoy tinkering with C++, so I decided to spend some personal time investigating this topic. Exploring this simple question resulted in a few late nights and an interesting— to my knowledge, novel— subclass of bugs.
+Last July, a question came to mind: "What if we took insecure deserialization and brought it to C++?" I’ve had fond memories using .NET and PHP deserialization attacks to pop shells in CTFs, courses, and engagements, plus I enjoy tinkering with C++, so I decided to spend some personal time investigating this topic. Exploring this simple question resulted in a few late nights and an interesting— to my knowledge, novel— subclass of bugs.
 
 This post presents my latest research, in which we’ll explore proof-of-concepts, do a bit of root cause analysis, and touch on Rust. I've also shared an [advisory][advisory] for those looking to remediate.
 
 [advisory]: /advisories/cpp-deserialization/
 
-{% image "assets/deserialization_party.jpg", "jw-60", "" %}
+{% image "assets/deserialization_party.jpg", "jw-60", "Well... I guess technically insecure deserialization is not entirely new in C++." %}
 
-(I would not call myself a pwn expert, so any corrections, suggestions, or insights are more than welcome.)
 
 ## tl;dr
 
@@ -49,7 +49,7 @@ This post presents my latest research, in which we’ll explore proof-of-concept
 
 ## Insecure Deserialization Redux
 
-When discussing insecure deserialization attacks, we typically think of a number of things: dynamic reflection, gadgets, POP chains, sweet sweet RCE.
+When discussing insecure deserialization attacks, we typically think of a number of things: dynamic reflection, gadgets, POP chains, sweet sweet RCE. In Java and .NET, insecure deserialization features dynamic reflection, allowing arbitrary class construction and method invocation, leading to RCE. In PHP, insecure deserialization involves abusing code written in special `__wakeup` and `construct()` methods, which may lead to RCE.
 
 But C++ only offers static reflection, and there is no automatic execution of untrusted data. Popular deserialization attacks won’t cut it; we need to rethink our approach in the context of a statically-typed, low-level language. What is a mechanism to exploit? What are our primitives? Can we still get that scrumptious RCE?
 
@@ -57,7 +57,7 @@ In the world of binary exploitation, primitives and gadgets exist in a low-level
 
 As with other languages, we start by assuming the serialized payload is attacker-controllable. From here, the deserialization API is an attack surface.^[Interestingly, some researchers take the opposite approach by considering the *serialization* API an attack surface. Here, a successful attack scenario usually involves rare preconditions of uninitialised data or type narrowing/widening issues which I guess would assume the developer doesn't read documentation, doesn’t properly test their code, or is actively sabotaging their software. It means an attacker needs to control the data prior to serialization. These are still scored as critical issues, to the chagrin of library authors. Examples are CVE-2020-11104, CVE-2020-11105 (Cereal), [CVE-2024-35326](https://github.com/yaml/libyaml/issues/302) (libyaml) (rejected).] Our attention then turns to finding the functions and conditions necessary for exploitation.
 
-## Sharing is Caring
+## How are references serialized?
 
 While noodling around, I realized a few libraries have an interesting feature: **serialization of references**. The concept is also described as “object identity preservation”, “object tracking”, “pointer serialization”, or “reference sharing”.
 
@@ -74,9 +74,10 @@ Alice and Bob share an address. What would serialization look like?
 Serialization libraries tend to take one of two approaches. Either duplicate the data and serialize `address` **twice**; or preserve the structure and serialize `address` **once**. Both implementations have their tradeoffs, but it is the latter we are concerned with.
 
 To preserve structure, it becomes necessary to have some **referencing mechanism** in the archive format. Let’s slightly modify the example:
-{% image "assets/deserialization_diagram_example_serialization.png", "jw-100", "" %}
 
-On the left, we have a simple graph represented in code and memory. On the right, we have its serialization in a dumbed down JSON format. Each node’s *data* is serialized once. Note that while `C` appears to be serialized twice, the second instance is merely a reference to the first. In this contrived serialization format, we use the `id` field to denote an object's identity.
+{% image "assets/deserialization_diagram_example_serialization.png", "jw-80", "" %}
+
+On the left, we have a simple graph represented in code and memory. On the right, we have its serialization in a contrived JSON format. Each node’s *data* is serialized once. Note that while `C` appears to be serialized twice, the second instance is merely a reference to the first. In this contrived serialization format, we use the `id` field to denote an object's identity.
 
 What does *deserialization* look like? On the first encounter of an ID, the contents are deserialized and the ID is associated with the object. On subsequent encounters, the previous object is reused.
 
@@ -88,7 +89,7 @@ Given this example, the hacker in you may wonder:
 - **What if a pointer/reference refers to an object with a completely different type?** (i.e. We change the scenario to serialize the code serializes other types and not just the `Node` type.)
 - **What if the referencing mechanism could be applied to non-referencing types?**
 
-All of these are potential attack vectors on the deserialization API. Some may lead to ~~boring~~ classic out-of-bound reads. Some may lead to DoS. In this post, we'll concern ourselves only with the last few questions, which put simply is this: can we abuse the referencing mechanism?
+All of these are potential attack vectors on the deserialization API. Some may lead to ~~boring~~ classic out-of-bound reads. Some may lead to DoS. In this post, we'll concern ourselves only with the last few questions, which put simply is this: **Can we abuse the referencing mechanism?**
 
 ## Understanding Our Targets
 
@@ -116,12 +117,18 @@ It's worth noting that the attack approach is unlike well-known attacks on `Bina
 
 Broadly speaking, a confusion attack exploits some (hidden) ambiguity in a system. Weird things can happen when two or more components disagree on the semantics of a property, variable, or memory region. Weird things which can make your computer explode— or more realistically, allow some remote hackerman into your system.
 
-Taking inspiration from [Orange Tsai’s sharing on confusion attacks in 2024](https://blog.orange.tw/posts/2024-08-confusion-attacks-en/), I’ll present a few different avenues for deserialization/confusion attacks along with potential attack primitives. Unlike Orange, however, I won’t be presenting any new strains of confusion attacks, and I certainly won’t be replicating his prowess or scale.
+Taking inspiration from [Orange Tsai’s sharing on confusion attacks in 2024](https://blog.orange.tw/posts/2024-08-confusion-attacks-en/), I’ll present a few different avenues for deserialization/confusion attacks along with attack primitives. Unlike Orange, however, I won’t be presenting any new strains of confusion attacks, and I certainly won’t be replicating his prowess or scale.
 
 We'll cover the following today:
 
 1. **Type Confusion**: Exploits the ambiguity in the structure and semantics of memory, ultimately, confusing pointers and data. What if pointers were treated as data? What if apples were pine cones?
 2. **Ownership Confusion**: Exploits the ambiguity of pointer ownership. What if we violate ownership and lifetime assumptions?
+
+In the rest of this post, we broadly define Insecure Deserialization of Pointers/References as this:
+
+{% alert "success" %}
+Insecure deserialization of references occurs when a library (which supports serialization of pointers/references) insecurely deserializes a reference such that an object of one type may be interpreted as a different type (i.e. type confusion).
+{% endalert %}
 
 ### 1. Type Confusion
 
@@ -131,7 +138,7 @@ Here’s a simple example. By confusing a string and an integer, it is possible 
 
 {% image "assets/deserialization_diagram_type_confusion.png", "jw-60 alpha-imgv", "" %}
 
-<sup>In C++, an `std::string` is a dynamically-sized character array, which is achieved by storing a pointer to heap-allocated memory.</sup>
+<sup>In C++, an `std::string` is a dynamically-sized character array, which is achieved by storing a pointer to heap-allocated memory. Left: The *actual* (or intended) type in memory. The *confused* object, how the program interprets the information.</sup>
 {.caption}
 
 At a very low level, such vulnerabilities boil down to confusion between pointers and data. If pointers are treated as data, there is the potential for address leakage (information disclosure). More severely, if attacker-controlled data are treated as pointers, it could lead to memory read/write and control flow hijacking primitives.
@@ -332,7 +339,7 @@ Under this scenario, it is possible to read arbitrary memory by controlling the 
 
 The diagram and conditions are portrayed with gcc/x64 in mind.
 
-#### 1.3. VTable Hijacking (Control Flow Hijacking)
+#### 1.3. fakevtable (Control Flow Hijacking via Fake VTables)
 
 Conditions:
 1. Deserialize a type `A` equivalent to a `uint64_t`.
@@ -346,7 +353,7 @@ Under this scenario, it is possible to hijack control flow by controlling a v-po
 
 {% details "What is a vtable?" %}
 
-To first understand VTable hijacking, we need to understand virtual classes, which is a feature of C++. I won't explain polymorphism and virtual classes in detail, but here's a refresher on the low-level implementation:
+To first understand the fakevtable primitive, we need to understand virtual classes, which is a feature of C++. I won't explain polymorphism and virtual classes in detail, but here's a refresher on the low-level implementation:
 
 - Each virtual class has **one** corresponding virtual table (vtable).
 - The vtable stores an **array of virtual functions**.
@@ -368,7 +375,7 @@ call   rdx                 ; call the function
 
 That's... pretty much it. For further reading, check out: [StackOverflow](https://stackoverflow.com/a/99341/10239789) and [Understanding Virtual Tables in C++ by Pablo Arias][vtable-pablo].
 
-[vtable-pablo]: https://pabloariasal.github.io/2017/06/10/understanding-virtual-tables/
+[vtable-pablo]: https://web.archive.org/web/20260305120733/https://pabloariasal.github.io/2017/06/10/understanding-virtual-tables/
 
 So how do we exploit this? There are two common ways:
 
@@ -379,11 +386,11 @@ On the next virtual function call, our fake entry will be triggered which would 
 
 {% enddetails %}
 
-{% details "Concrete Example 🔥: VTable Hijacking" %}
+{% details "Concrete Example 🔥: fakevtable" %}
 
 Similar to the Address Leak example, we'll start with some Cereal code:
 
-```cpp {data-label=vtable_hijacking.cpp}
+```cpp {data-label=fakevtable.cpp}
 #include <cereal/archives/json.hpp>
 #include <cereal/types/memory.hpp>
 #include <fstream>
@@ -469,8 +476,8 @@ Let's run this cleanly once to see what the archive and output look like.
 ```
 
 ```sh {.command-line data-prompt=$ data-output=3-10}
-g++ -I cereal-1.3.2/include vtable_hijacking.cpp -o vtable_hijacking
-./vtable_hijacking
+g++ -I cereal-1.3.2/include fakevtable.cpp -o fakevtable
+./fakevtable
 table: 0x55565d02d010 93829416013840
 
 a: 0x55567308bc20 42
@@ -507,7 +514,7 @@ Now let's run this again but hijack control flow using type confusion!
 
 Output:
 ```sh {.command-line data-prompt=$ data-output=2-6,8}
-./vtable_hijacking
+./fakevtable
 table: 0x5639c19fc010 94806061596688
 (copy address into data.json)
 
@@ -520,7 +527,7 @@ uid=0(root) gid=0(root) groups=0(root)
 
 We successfully redirected control flow to the `pwned` function!
 
-{% image "assets/deserialization_meme_very_nice.png", "", "" %}
+{% image "assets/deserialization_meme_very_nice.png", "jw-60", "" %}
 
 The code is slightly contrived in that we hard-coded a shell function, fake vtable, and address leak. But these can all be accomplished through other means.
 
@@ -588,19 +595,22 @@ Conditions:
 
 {% image "assets/deserialization_diagram_double_free_primitive.png", "jw-80 alpha-imgv", "" %}
 
-Normally, only one unique pointer should own a resource. (The resource's owner is *unique*.) But when multiple unique pointers hold the same object, that object will be freed multiple times! One scenario where this could be more easily exploited is with a container of unique pointers such as `vector<unique_ptr<T>>`.
+Normally, only one unique pointer should own a resource. (The resource's owner is *unique*.) In the diagram above, that is represented by the object at `0x5500`. But when multiple unique pointers hold the same object (`0x5580`), that object will be freed multiple times!
+
+One scenario where this could be exploited is with a container of unique pointers such as `vector<unique_ptr<T>>`.^[It is also possible to achieve a use-after-free (UAF) primitive if a second object remains active after the first one is deleted.]
 
 ```cpp
 {
-    std::vector<std::unique_ptr<T>> v;
-    v.push_back(std::make_unique(...));
-    v.push_back(std::make_unique(...));
-} // Destructor called, all pointers are freed.
+    A* a = new A;
+    std::vector<std::unique_ptr<A>> v;
+    v.push_back(std::unique_ptr<A>(a));
+    v.push_back(std::unique_ptr<A>(a));
+}
+// Destructor called, all pointers are freed.
+// free(): double free detected in tcache 2
 ```
 
-Alternatively, it is also possible to achieve a use-after-free (UAF) primitive if a second object remains active after the first one is deleted.
-
-The root cause is that Boost Serialization allows the `object_id` property for pretty much *anything*, but it's especially dangerous when pointers are mixed in. This means objects can have *shared ownership* properties simply by sharing the same `object_id`, even if the expected types do **not** have such properties. But the headaches don't end there. Boost Serialization also supports raw pointers which are nefarious for their ambiguous lifetime semantics.
+Boost's deserialization of unique pointers are also prone to this heap corruption. The root cause is the `object_id` property. Using `object_id`, any deserialized pointers can be *forced to have shared ownership semantics*.
 
 {% details "Concrete Example 🔥: Double Free" %}
 
@@ -706,7 +716,7 @@ free(): double free detected in tcache 2
 Aborted
 ```
 
-In this case, the double free was caught by protections available in recent libc versions. But it's not game over yet! It is possible to bypass these protections, say if we have more control over the number and order of deserializations (e.g. `std::vector<std::unique_ptr<T>>`). I’ll leave this as an exercise for the reader.
+In this case, the double free was caught by protections available in recent libc versions. But it's not game over yet! It is possible to bypass these protections, say if we have control over the number and order of deserializations (e.g. `std::vector<std::unique_ptr<T>>`). I’ll leave this as an exercise for the reader.
 
 {% enddetails %}
 
@@ -729,6 +739,12 @@ Conditions for an address leak in Cista:
 - The deserialized data is observable by the attacker.
 
 This may leak a heap/stack address which could be used to bypass ASLR.
+
+Consider what happens when we modify the offset to be 0.
+
+{% image "assets/deserialization_diagram_cista_self.png", "jw-100 alpha-imgv", "" %}
+
+After `deserialize()` is called, the pointer is updated to itself at 0x4010. So now the pointer is *also data*.
 
 {% details "Concrete Example 🔥: Address Leak in Cista", "open" %}
 Here's a quick example. Suppose we're serializing a `cista::raw::ptr`.
@@ -796,7 +812,7 @@ Now, suppose we set the offset to `0` instead of `-8`. What happens?
 @@0xe8@@,0xcd,0xab,0x90,0x55,0x55,0x00,0x00, // pa, replaced with pointer to ITSELF
 ```
 
-Upon deserialization, the last 8 bytes would be replaced with *the address of the same 8 bytes* (a pointer to *itself*!). User code wouldn't know any difference and `deserialized->pa->x` would contain an address.
+Upon deserialization, the last 8 bytes would be replaced with *the address of the same 8 bytes* (a pointer to *itself*). User code wouldn't know any difference and `deserialized->pa->x` would contain an address.
 
 When trying to read the data at `pa`, Cista will dereference the pointer **`0x555590abcde8`** and get the number 93825987759592. The data is the pointer!
 
@@ -947,7 +963,7 @@ println!("type confusion: {:#x?}", &*deserialized.b);
 
 Running this, we observe an address leak:
 
-```text
+```text {data-lang-off data-label=stdout}
 type confusion: (0x5, 0x55aecbf81e30)
 ```
 
@@ -1049,14 +1065,111 @@ rkyv = { version = "0.7", features = ["alloc", "validation"] }
 
 {% enddetails %}
 
-## Root Cause Analysis
+## Advisory
+
+Insecure deserialization of pointers under certain conditions may lead to type confusion, resulting in potential information disclosure, control flow hijacking, and arbitrary code execution.
+
+### Affected Software
+
+The following libraries are affected, with the assigned CVEs.
+
+{% table %}
+
+| CVE                          | Library             | Affected Versions                     | Status                                                                                                                                                                                                                                                                        |
+|------------------------------|---------------------|---------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| CVE-&#8288;2026-&#8288;11460 | Boost Serialization | All Known Versions (1.91.0 and below) | No patch available. Maintainer acknowledged but postponed indefinitely citing time concerns. See workarounds below.                                                                                                                                                           |
+| CVE-&#8288;2026-&#8288;11463 | Cereal              | All Known Versions (1.3.2 and below)  | No patch available. Unable to reach maintainer. See workarounds below.                                                                                                                                                                                                        |
+| CVE-&#8288;2025-&#8288;60887 | Cista               | All Known Versions (0.16 and below)   | No patch available. Maintainer cites low impact and priorities. "Reading untrusted data is not [the maintainer’s] use case", despite the library [claiming to be safe against untrusted input](https://github.com/felixguendling/cista/wiki/Security). See workarounds below. |
+| CVE-&#8288;2026-&#8288;9521  | Bitsery             | 5.2.4 and below                       | Fixed in 5.2.5.                                                                                                                                                                                                                                                               |
+| CVE-&#8288;2025-&#8288;60889 | HPX                 | All Known Versions (1.11.0 and below) | No patch available. Maintainer acknowledged but postponed citing non-critical severity level. See workarounds below.                                                                                                                                                          |
+
+{% endtable %}
+
+### Exploit Conditions
+
+Successful exploitation depends on various factors, but the main concerns are the *types deserialized* and their *order*. Any mention of "*under certain conditions*" refers to this section on exploit conditions. Code reviewers and testers should pay attention to the following:
+
+- For Boost Serialization, Cereal, Bitsery, and HPX, deserializations<sup>†</sup> of a type `shared_ptr<A>` followed by a type `shared_ptr<B>` are at risk. This applies to both `std::shared_ptr` and `boost::shared_ptr`.
+- Additionally, for Boost Serialization, deserializations<sup>†</sup> using the XML Archive of any type `A` followed by a pointer type<sup>††</sup> `P` are at risk. Deserializations using Text/Binary Archives of a pointer type<sup>††</sup> `P` followed by a pointer type<sup>††</sup> `Q` are at risk.
+- Additionally, for Bitsery, deserializations<sup>†</sup> of raw pointers (`PointerObserver`) are at risk.
+- For Cista, deserializations<sup>†</sup> using offset-based types from the `cista::raw` namespace are at risk. Offset-based types are types which contain an internal offset pointer and include but are not limited to `string`, `vector`, and `ptr`.
+
+<sup>†</sup>: Deserializations *occurring within the same archive*.  
+<sup>††</sup>: Pointer types include raw pointers, `std::unique_ptr`, `std::shared_ptr`, along with their Boost variants.  
+
+### PoC
+
+For a demonstration of a full exploit chain from address leak to RCE, check out the [breakfast CTF](/posts/arbitrary-code-execution-for-breakfast/) challenge.
+{# TODO: repos for github challenge? #}
+
+(Repositories containing sample challenges will be posted to GitHub at a later date.)
+{# TODO: update this when done #}
+
+### Impact
+
+{# {% alert "warning" %}
+**Read First: A Note on Severity/Scoring**
+
+Please understand that while the severity may appear to be critical, CVSS (CVSS-B, the base score, to be precise) is limited because it doesn't take into account threat and environmental factors, and is scored on a worst-case basis. Not to mention, the exploitability of these particular vulnerabilities depend on the classes used in conjunction with the libraries. Just because the library is used doesn't necessarily mean you are affected. I recommend understanding the exploit conditions before making a judgement.
+
+You may also consider [re-scoring](https://www.first.org/cvss/calculator/4-0) the vulnerabilities using CVSS-BTE (CVSS base score plus Threat/Environmental considerations) or using your best judgement to manage risk. For instance, perhaps you are using one of these libraries for (de)serializing state to a file but not over the network; in that case, your Modified Attack Vector (MAV) would be Local. Or it may be the case that you are only serializing but not deserializing data, in which case there is no risk.
+{% endalert %} #}
+
+The table below shows the *potential* impact a library faces.
+
+{% table %}
+
+| CVE                          | Library             | Information Disclosure (Address Leak) | Information Disclosure (Memory Read) | Arbitrary Code Execution |
+|------------------------------|---------------------|---------------------------------------|--------------------------------------|--------------------------|
+| CVE-&#8288;2026-&#8288;11460 | Boost Serialization | √                                     | √                                    | √                        |
+| CVE-&#8288;2026-&#8288;11463 | Cereal              | √                                     | √                                    | √                        |
+| CVE-&#8288;2026-&#8288;9521  | Bitsery             | √                                     | √                                    | √                        |
+| CVE-&#8288;2025-&#8288;60889 | HPX                 | √                                     | √                                    | √                        |
+| CVE-&#8288;2025-&#8288;60887 | Cista               | √                                     |                                      |                          |
+
+{% endtable %}
+
+{# [sc1]: https://www.first.org/cvss/calculator/4-0#CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:H/VI:H/VA:H/SC:N/SI:N/SA:N
+[sc2]: https://www.first.org/cvss/calculator/4-0#CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:H/VI:H/VA:H/SC:N/SI:N/SA:N #}
+
+√ = Potential Impact
+
+- **Information Disclosure (Address Leak)**: Under certain conditions, it is possible to disclose memory addresses which may be used by malicious actors to bypass protections such as ASLR and PIE. If the library is part of the kernel, it may lead to a KASLR bypass. Minor loss of confidentiality.
+- **Information Disclosure (Memory Read)**: Under certain conditions, it is possible to read arbitrary memory. Huge loss of confidentiality, under the majority of contexts.
+- **Arbitrary Code Execution**: Under certain conditions, it is possible to execute arbitrary code. On a macro scale, this may lead to {% abbr "LPE", "Local Privilege Escalation" %} or {% abbr "RCE", "Remote Code Execution" %} depending on the nature of the downstream application. For instance, if the archive is passed and deserialized via {% abbr "IPC", "Inter-Process Communication" %} or a file, the system is potentially vulnerable to {% abbr "LPE", "Local Privilege Escalation" %}. If the archive is deserialized over the network such as {% abbr "RPC", "Remote Procedure Call" %} or an HTTP API, the system is potentially vulnerable to {% abbr "RCE", "Remote Code Execution" %}. Huge loss of confidentiality, availability, and integrity.
+
+### Mitigations and Workarounds
+
+- Some libraries currently have no fix available despite communication with maintainers.
+- **Workaround**: Use alternative, non-referential data types which have simpler deserialization routines. This may impact performance due to extra conversions. For instance, instead of serialising a `vector<A*>`, use a flat `vector<A>` of unique objects and a `vector<size_t>` containing indexes to the first vector.
+- **Detective Controls**: Monitor untrusted channels. If the serialization payload comes from a file, this may mean logging and auditing file writes for potential unauthorized uploads or unexpected path traversal attacks. If the payload comes from a network, this may mean whitelisting/auditing connection sources and strengthening authentication (e.g. IP whitelisting).
+- Library-specific advice:
+    - For Boost Serialization, avoid deserializing multiple pointers within the same archive.
+    - For Cista, consider using types from the `cista::offset` namespace instead of `cista::raw`.
+
+### Timeline
+
+{% table %}
+
+| CVE                          | Library             | Discovered | Reported to Vendor | Reply from CNA | Published by CNA |
+|------------------------------|---------------------|------------|--------------------|----------------|------------------|
+| CVE-&#8288;2026-&#8288;11460 | Boost Serialization | 2025.08.02 | 2025.08.08         | 2026.06.07     | 2026.06.07       |
+| CVE-&#8288;2026-&#8288;11463 | Cereal              | 2025.08.06 | 2025.08.08         | 2026.06.07     | 2026.06.07       |
+| CVE-&#8288;2025-&#8288;60887 | Cista               | 2025.08.26 | 2025.08.27         | 2025.10.17     | 2026.04.28       |
+| CVE-&#8288;2026-&#8288;9521  | Bitsery             | 2025.08.30 | 2025.08.30         | 2026.05.26     | 2026.05.26       |
+| CVE-&#8288;2025-&#8288;60889 | HPX                 | 2025.09.03 | 2025.09.03         | 2025.10.17     | 2026.04.28       |
+
+{% endtable %}
+
+
+### Root Cause Analysis
 
 Earlier, I posed the question "What is a mechanism to exploit?", to which our answer was *serialization of references*. Under the hood, this often boils down to a simple shallow copy (aka a pointer copy, `new_ptr = old_ptr`) which skips further deserialization. In general terms, it can be expressed with the following pseudocode:
 
 ```cpp
 template<class T>
 void load_pointer(T*& new_ptr, int id) {
-    if (is_invalid_id(id) || id_to_obj_lookup[id] == nullptr) {
+    if (is_new_id(id)) {
         load_and_deserialize_object<T>(new_ptr);
         id_to_obj_lookup[id] = new_ptr;
     } else {
@@ -1165,7 +1278,7 @@ Patching our pseudocode example:
 ```cpp {data-diff}
 template<class T>
 void load_pointer(T*& new_ptr, int id) {
-    if (is_invalid_id(id) || id_to_obj_lookup[id] == nullptr) {
+    if (is_new_id(id)) {
         load_and_deserialize_object<T>(new_ptr);
         id_to_obj_lookup[id] = new_ptr;
 // +++++
@@ -1185,14 +1298,16 @@ void load_pointer(T*& new_ptr, int id) {
 
 What about polymorphism? This is a feature implemented in some libraries in this study. To handle polymorphism, we need to redefine (overload) type-equality for polymorphic classes. Instead of checking `A == B`, we want two classes `A` and `B` to be equal if either `A > B` (`B` is a subtype / derived class of `A`) or vice versa. This means we would need to traverse the inheritance chain.
 
-Root cause analysis of Ownership Confusion in Boost Serialization and of Type Confusion in Cista have been left as an exercise for the reader.
+Root cause analysis of Ownership Confusion in Boost Serialization and of Type Confusion in Cista have been left as an exercise for the reader.^["Since you've root-caused analysed the problem, why don't you submit a patch?" Easier said than done. Fixing such a bug requires non-trivial changes to the code structure. For some libraries such as Boost Serialization, it may require tough decisions, possibly dropping support for raw pointer serialization all together. For what it's worth, I have submitted a PR [fixing an old Boost Serialization CVE](https://github.com/boostorg/serialization/pull/332), but it remains to be merged, which I think says something about the ecosystem.]
+
 
 ## Concluding Notes
 
 ### On Vulnerability Scoring
 
-{# TODO: review the score! #}
-While these CVEs are scored a “critical” 9.8/10, this score assumes a *reasonable "worst-case" scenario* as warranted by the [CVSS guidelines](https://www.first.org/cvss/v3-1/user-guide#:~:text=3.7.-,Scoring%20Vulnerabilities%20in%20Software%20Libraries) [and](https://www.first.org/cvss/v3-1/examples#:~:text=worst%2Dcase%20scenario%20is%20a%20network%20attack) [examples](https://www.first.org/cvss/v3-1/examples#:~:text=We%20assume%20the%20latter%20as%20it%20is%20the%20reasonable%20worst%20case) for *software libraries*. Notably, the scoring also [assumes reasonable conditions](https://www.first.org/cvss/v3-1/user-guide#:~:text=Assume%20Vulnerable%20Configurations) required for successful exploitation, such as the deserialization of two shared pointers and the observability of certain types.
+CVSS is actually terrible at scoring these vulnerabilities due to the conditions involved. CVSS [assumes reasonable conditions](https://www.first.org/cvss/v3-1/user-guide#:~:text=Assume%20Vulnerable%20Configurations) required for successful exploitation and further assumes a *reasonable "worst-case" scenario* as warranted by the [CVSS guidelines](https://www.first.org/cvss/v3-1/user-guide#:~:text=3.7.-,Scoring%20Vulnerabilities%20in%20Software%20Libraries) [and](https://www.first.org/cvss/v3-1/examples#:~:text=worst%2Dcase%20scenario%20is%20a%20network%20attack) [examples](https://www.first.org/cvss/v3-1/examples#:~:text=We%20assume%20the%20latter%20as%20it%20is%20the%20reasonable%20worst%20case) for *software libraries*. By scoring according to CVSS, you would realise that a lot of them net a 9.8 Critical (in CVSS v3.1), assuming reasonable worst case. Do these vulnerabilities actually warrant a 9.8 Critical though? Depends who you ask.
+
+VulDB oddly scores it for Low Impact, which I disagree with, but it appears there is no way to appeal how it is scored.
 
 If we were discussing risk, exploitability, and overall real world impact, I would say these vulnerabilities are not a critical 9.8. But the CVSS system does not measure systems this way. [CVSS measures severity, not risk](https://www.first.org/cvss/v3-1/user-guide#:~:text=CVSS%20Measures%20Severity). When applied to downstream libraries, applications, and deployments, the risk and severity should be analysed independently.
 
@@ -1200,13 +1315,13 @@ The point is, CVSS has its pros and cons. CVSS is a rubric, and rubrics are mode
 
 ### On Memory Safety and Rust
 
-“Would Rust have fixed this?” — a certain infosec YouTuber
+“Would Rust have fixed this?”
 
 Perchance? Maybe? Not really?
 
 To be fair, Rust does its part in eliminating integer overflow (a whole class of runtime bugs!) by encouraging checked arithmetic. But unlike checked arithmetic, the deserialization attack surface is much more varied and dynamic, with complex types and logic. Thus, to secure serialization of references, type checks need to be explicitly programmed by the library author.
 
-rkyv, a Rust serialization library discussed earlier, exposes two APIs: an `unsafe` API prone to type confusion attacks, and— more notably— a safe API with extensive runtime type validation. If rkyv is deemed "more secure" against deserialization attacks, it would be thanks to its validation modules rather than Rust itself. Perhaps the case could be made that Rust fixes the issue by proxy of promoting a security-first mindset. But whether this is effectively executed (in general) depends on a developer's decisions.^[If people want performance, they'll prioritise performance. Someone (I forgot who and where) once said: Programming languages are built around communities and values. There is a sort of chicken-egg scenario where if the community values speed, then the language will aim to "satisfy that demand". On the flip side, it is more likely for those community members with strong values to be actively guiding the direction of the language (think: C++ standards committee or proposals). C++ has very much been driven by finance, games, big tech, and constrained systems (embedded/IoT/robotics), so it's understandable why performance is very much prioritised and security less so.]
+rkyv, a Rust serialization library discussed earlier, exposes two APIs: an `unsafe` API prone to type confusion attacks, and— more notably— a safe API with extensive runtime type validation. If rkyv is deemed "more secure" against deserialization attacks, it would be thanks to its validation modules rather than Rust itself. Perhaps the case could be made that Rust fixes the issue by proxy of promoting a security-first mindset. But whether this is effectively executed (in general) depends on a developer's decisions.
 
 ### Further Research
 

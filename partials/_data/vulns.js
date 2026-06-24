@@ -103,6 +103,69 @@ const VULNS = [
             },
         ]
     },
+    {
+        type: 'group',
+        name: 'Insecure Deserialization of Shared References in Multiple C++ Libraries',
+        tags: ['cpp', 'pwn'],
+        description: 'Insecure deserialization of pointers under certain conditions may lead to type confusion, resulting in potential information disclosure, control flow hijacking, and arbitrary code execution.',
+        items: [
+            {
+                type: 'cve',
+                name: 'CVE-2026-11460',
+                date: '2026-06-20',
+                severity: 'high',
+                description: 'Insecure deserialization of pointers in **Boost Serialization** may lead to confusion attacks, resulting in potential information disclosure, control flow hijacking, heap corruption, and arbitrary code execution.',
+                links: [
+                    { url: '/posts/insecure-deserialization-and-confusion-attacks-in-cpp/', title: 'writeup/advisory' },
+                    { url: 'https://github.com/boostorg/serialization', title: 'repo' },
+                ],
+            },
+            {
+                type: 'cve',
+                name: 'CVE-2026-11463',
+                date: '2026-06-20',
+                severity: 'medium / high',
+                description: 'Insecure deserialization of shared pointers in **Cereal** may lead to type confusion, resulting in potential information disclosure, control flow hijacking, and arbitrary code execution.',
+                links: [
+                    { url: '/posts/insecure-deserialization-and-confusion-attacks-in-cpp/', title: 'writeup/advisory' },
+                    { url: 'https://github.com/USCiLab/cereal', title: 'repo' },
+                ],
+            },
+            {
+                type: 'cve',
+                name: 'CVE-2026-9521',
+                date: '2026-06-20',
+                severity: 'medium / high',
+                description: 'Insecure deserialization of pointers in **Bitsery** v5.2.4 and below may lead to type confusion, resulting in potential information disclosure, control flow hijacking, and arbitrary code execution.',
+                links: [
+                    { url: '/posts/insecure-deserialization-and-confusion-attacks-in-cpp/', title: 'writeup/advisory' },
+                    { url: 'https://github.com/fraillt/bitsery', title: 'repo' },
+                ],
+            },
+            {
+                type: 'cve',
+                name: 'CVE-2025-60889',
+                date: '2026-06-20',
+                severity: 'medium / high',
+                description: 'Insecure deserialization of shared pointers in **HPX** may lead to type confusion, resulting in potential information disclosure, control flow hijacking, and arbitrary code execution.',
+                links: [
+                    { url: '/posts/insecure-deserialization-and-confusion-attacks-in-cpp/', title: 'writeup/advisory' },
+                    { url: 'https://github.com/TheHPXProject/hpx', title: 'repo' },
+                ],
+            },
+            {
+                type: 'cve',
+                name: 'CVE-2025-60887',
+                date: '2026-06-20',
+                severity: 'low',
+                description: 'Insecure deserialization of certain `cista::raw` types in **Cista** may lead to type confusion, resulting in potential address leaks and ASLR bypass.',
+                links: [
+                    { url: '/posts/insecure-deserialization-and-confusion-attacks-in-cpp/', title: 'writeup/advisory' },
+                    { url: 'https://github.com/felixguendling/cista', title: 'repo' },
+                ],
+            },
+        ]
+    },
 ];
 
 const vrAssignIndex = (vulns) => {
