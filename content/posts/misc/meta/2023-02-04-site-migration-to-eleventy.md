@@ -52,7 +52,7 @@ Not everything is rainbows and sunshine. Time to be salty now. Some things I fee
     {% alert "success" %}
         **Update!**
 
-        After digging through [GitHub issues](https://github.com/11ty/eleventy/issues/344), I finally got JS minifying to work using [Passthrough Copy](https://www.11ty.dev/docs/copy/) and an underlying [`transform` option](https://github.com/timkendrick/recursive-copy#usage).
+        After digging through [GitHub issues](https://github.com/11ty/buildawesome/issues/344), I finally got JS minifying to work using [Passthrough Copy](https://www.11ty.dev/docs/copy/) and an underlying [`transform` option](https://github.com/timkendrick/recursive-copy#usage).
     {% endalert %}
 - Less mature. Granted, new technology is always less mature. 11ty has fewer examples compared to Jekyll, but [the][starter-1] [ones][starter-2] that are available are pretty good.
 
