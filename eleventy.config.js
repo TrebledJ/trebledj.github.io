@@ -55,9 +55,9 @@ export default async function (eleventyConfig) {
     },
   });
   eleventyConfig.addPassthroughCopy({
-    './content/pages/slides': '/slides',
+    './content/pages/talks': '/talks',
   }, {
-    filter: ['**/*', '!**/*.html', '!**/*.md', '!**/*.pdf', '!**/*.js'],
+    filter: ['**/*', '!**/*.md'],
   });
 
   // Run Eleventy when these files change:

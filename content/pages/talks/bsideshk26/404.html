@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BSidesHK 2026 - Sharing is Caring - Introduction to Type Confusion by Exploiting C++ Shenanigans and Insecure Deserialization - Slidev</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Consolas:ital,wght@0,400;0,700;1,400;1,700&family=Inter:ital,wght@0,400;0,700;1,400;1,700&family=system-ui:ital,wght@0,400;0,700;1,400;1,700&family=-apple-system:ital,wght@0,400;0,700;1,400;1,700&family=sans-serif:ital,wght@0,400;0,700;1,400;1,700&family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&family=JetBrains+Mono:ital,wght@0,400;0,700;1,400;1,700&family=IBM+Plex+Mono:ital,wght@0,400;0,700;1,400;1,700&family=Fira+Code:ital,wght@0,400;0,700;1,400;1,700&family=monospace:ital,wght@0,400;0,700;1,400;1,700&display=swap" type="text/css">
+<link rel="preload" as="image" href="/talks/bsideshk26/assets/warmup_shape_1.png">
+<link rel="preload" as="image" href="/talks/bsideshk26/assets/warmup_shape_2.png">
+<link rel="preload" as="image" href="/talks/bsideshk26/assets/warmup_shape_3.png">
+<link rel="preload" as="image" href="/talks/bsideshk26/assets/warmup_shape_4.png">
+<link rel="preload" as="image" href="/talks/bsideshk26/assets/trebledj-circle.png">
+<link rel="preload" as="image" href="/talks/bsideshk26/assets/claude-firefox-bug.png">
+<link rel="preload" as="image" href="/talks/bsideshk26/assets/deserialization_meme_69.png">
+<link rel="preload" as="image" href="/talks/bsideshk26/assets/address-me.png">
+<link rel="preload" as="image" href="/talks/bsideshk26/assets/trade_offer_addr.png">
+<link rel="preload" as="image" href="/talks/bsideshk26/assets/spiderman-meme-1.avif">
+<link rel="preload" as="image" href="/talks/bsideshk26/assets/vtables.png">
+<link rel="preload" as="image" href="/talks/bsideshk26/assets/fakevnews.png">
+<link rel="preload" as="image" href="/talks/bsideshk26/assets/deserialization_diagram_example_serialization_no_code_seq_0.png">
+<link rel="preload" as="image" href="/talks/bsideshk26/assets/deserialization_diagram_example_serialization_no_code_seq_1.png">
+<link rel="preload" as="image" href="/talks/bsideshk26/assets/deserialization_diagram_example_serialization_no_code_seq_2.png">
+<link rel="preload" as="image" href="/talks/bsideshk26/assets/targets_monero.png">
+<link rel="preload" as="image" href="/talks/bsideshk26/assets/targets_walle.avif">
+<link rel="preload" as="image" href="/talks/bsideshk26/assets/targets_stonks.jpg">
+<link rel="preload" as="image" href="/talks/bsideshk26/assets/Modern_Problems_Require_Modern_Solutions.jpg">
+<link rel="preload" as="image" href="/talks/bsideshk26/assets/breakfast_full_script_demo.webp">
+<link rel="preload" as="image" href="/talks/bsideshk26/assets/confusionism.png">
+<link rel="preload" as="image" href="/talks/bsideshk26/assets/deserialization_diagram_double_free_primitive-1285w.webp">
+<link rel="preload" as="image" href="/talks/bsideshk26/assets/bart-copying.jpeg">
+<link rel="preload" as="image" href="/talks/bsideshk26/assets/deserialization_diagram_cista.png">
+<link rel="preload" as="image" href="/talks/bsideshk26/assets/deserialization_diagram_cista_self.png">
+<link rel="preload" as="image" href="/talks/bsideshk26/assets/spiderman-meme-2.webp">
+<link rel="preload" as="image" href="/talks/bsideshk26/assets/bubble-tea.jpg">
+<link rel="preload" as="image" href="/talks/bsideshk26/assets/bad_pun_virtual.png">
+<link rel="icon" href="https://cdn.jsdelivr.net/gh/slidevjs/slidev/assets/favicon.png">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta property="slidev:version" content="52.15.2">
+<meta name="description" content="&quot;## Sharing is Caring: Introduction to Type Confusion by Exploiting C++ Shenanigans and Insecure Deserialization\nA talk presented in BSidesHK 2026.\n&quot;">
+<meta property="og:title" content="BSidesHK 2026 - Sharing is Caring - Introduction to Type Confusion by Exploiting C++ Shenanigans and Insecure Deserialization - Slidev">
+<meta property="og:description" content="&quot;## Sharing is Caring: Introduction to Type Confusion by Exploiting C++ Shenanigans and Insecure Deserialization\nA talk presented in BSidesHK 2026.\n&quot;">  <script type="module" crossorigin src="/talks/bsideshk26/assets/index-BhB7XmXZ.js"></script>
+  <link rel="modulepreload" crossorigin href="/talks/bsideshk26/assets/_plugin-vue_export-helper-BDNMzG2s.js">
+  <link rel="modulepreload" crossorigin href="/talks/bsideshk26/assets/rolldown-runtime-QTnfLwEv.js">
+  <link rel="modulepreload" crossorigin href="/talks/bsideshk26/assets/utils-CmVawvVO-hQZj2U1W.js">
+  <link rel="modulepreload" crossorigin href="/talks/bsideshk26/assets/modules/shiki-CrcqEQc-.js">
+  <link rel="modulepreload" crossorigin href="/talks/bsideshk26/assets/slidev/env-Cp2GrN73.js">
+  <link rel="modulepreload" crossorigin href="/talks/bsideshk26/assets/slidev/useClicks-DKGX2Jm-.js">
+  <link rel="modulepreload" crossorigin href="/talks/bsideshk26/assets/modules/vue-Y67TCP8j.js">
+  <link rel="stylesheet" crossorigin href="/talks/bsideshk26/assets/modules/shiki-BhczoDnk.css">
+  <link rel="stylesheet" crossorigin href="/talks/bsideshk26/assets/index-Rt7RU8Zt.css">
+</head>
+<body>
+  <div id="app"></div>
+  <div id="mermaid-rendering-container"></div>
+  
+</body>
+</html>
