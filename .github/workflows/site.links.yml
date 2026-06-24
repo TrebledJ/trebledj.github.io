@@ -5,6 +5,10 @@
 # If you post and update your blog regularly, then fine by me. But I forsee myself taking a hiatus once
 # in a blue moon, and I rather the system alert me rather than me manually checking each week.
 
+# NOTE (TO SELF): This workflow relies on the `site` branch having pre-built.
+# If you're wondering why links aren't fixed (or not ignored) after updating some files,
+# it could be that you haven't updated the `site` branch.
+
 name: Check Broken Links
 
 on:
