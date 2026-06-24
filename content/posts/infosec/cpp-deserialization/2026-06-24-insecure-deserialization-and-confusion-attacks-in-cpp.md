@@ -138,7 +138,7 @@ Here’s a simple example. By confusing a string and an integer, it is possible 
 
 {% image "assets/deserialization_diagram_type_confusion.png", "jw-60 alpha-imgv", "" %}
 
-<sup>In C++, an `std::string` is a dynamically-sized character array, which is achieved by storing a pointer to heap-allocated memory. Left: The *actual* (or intended) type in memory. The *confused* object, how the program interprets the information.</sup>
+<sup>In C++, an `std::string` is a dynamically-sized character array, which is achieved by storing a pointer to heap-allocated memory. Left: The *intended* type in memory (what type the bytes were intended for). Right: The *confused* type (how the program eventually interprets the bytes).</sup>
 {.caption}
 
 At a very low level, such vulnerabilities boil down to confusion between pointers and data. If pointers are treated as data, there is the potential for address leakage (information disclosure). More severely, if attacker-controlled data are treated as pointers, it could lead to memory read/write and control flow hijacking primitives.
@@ -157,6 +157,9 @@ Conditions:
 3. The deserialized object of type `B` is outputted and observable by the attacker (e.g. network request, `std::cout`, rendered on UI).
 
 {% image "assets/deserialization_diagram_address_leak_primitive.png", "jw-60 alpha-imgv", "" %}
+
+<sup>Left: The *intended* type in memory (what type the bytes were intended for). Right: The *confused* type (how the program eventually interprets the bytes).</sup>
+{.caption}
 
 The above diagram demonstrates an address leak by confusing an `std::string` with a `uint64_t` (64-bit unsigned integer). When the `B` object is printed, `buffer` is interpreted as an integer instead of a pointer! If the string is stored as a stack/global variable, a stack/binary address can be leaked with short-string optimization (SSO). Otherwise, a heap address can be leaked.
 
@@ -335,6 +338,9 @@ Conditions:
 
 {% image "assets/deserialization_diagram_arbitrary_memory_read_primitive.png", "jw-60 alpha-imgv", "" %}
 
+<sup>Left: The *intended* type in memory (what type the bytes were intended for). Right: The *confused* type (how the program eventually interprets the bytes).</sup>
+{.caption}
+
 Under this scenario, it is possible to read arbitrary memory by controlling the first two members of type `A`, which correspond to the string buffer and size in type `B`. Controlling the third member may be important if the string is later modified (because then capacity is checked for possible resizing).
 
 The diagram and conditions are portrayed with gcc/x64 in mind.
@@ -347,6 +353,9 @@ Conditions:
 3. The deserialized object of type `B` has a virtual function which is called.
 
 {% image "assets/deserialization_diagram_vtable_hijacking_primitive.png", "jw-60 alpha-imgv", "" %}
+
+<sup>Left: The *intended* type in memory (what type the bytes were intended for). Right: The *confused* type (how the program eventually interprets the bytes).</sup>
+{.caption}
 
 Under this scenario, it is possible to hijack control flow by controlling a v-pointer. When the virtual function is triggered, a double dereference is performed on the v-pointer to obtain a function address, which is then called.
 
