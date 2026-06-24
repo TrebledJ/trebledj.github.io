@@ -234,7 +234,7 @@ export default function () {
       name: 'Humpty Dumpty',
       email: 'example@gmail.com',
       subject: 'I had a great fall!',
-      message: 'Got suggestions, feedback, or comments? Lemme know!',
+      message: 'Got suggestions, feedback, or comments? Lemme knowo!',
     },
   };
 };
