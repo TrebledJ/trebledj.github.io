@@ -117,6 +117,7 @@ const VULNS = [
                 description: 'Insecure deserialization of pointers in **Boost Serialization** may lead to confusion attacks, resulting in potential information disclosure, control flow hijacking, heap corruption, and arbitrary code execution.',
                 links: [
                     { url: '/posts/insecure-deserialization-and-confusion-attacks-in-cpp/', title: 'writeup/advisory' },
+                    { url: '/talks/pdfs/bsideshk26.pdf', title: 'talk' },
                     { url: 'https://github.com/boostorg/serialization', title: 'repo' },
                 ],
             },
@@ -128,6 +129,7 @@ const VULNS = [
                 description: 'Insecure deserialization of shared pointers in **Cereal** may lead to type confusion, resulting in potential information disclosure, control flow hijacking, and arbitrary code execution.',
                 links: [
                     { url: '/posts/insecure-deserialization-and-confusion-attacks-in-cpp/', title: 'writeup/advisory' },
+                    { url: '/talks/pdfs/bsideshk26.pdf', title: 'talk' },
                     { url: 'https://github.com/USCiLab/cereal', title: 'repo' },
                 ],
             },
@@ -139,6 +141,7 @@ const VULNS = [
                 description: 'Insecure deserialization of pointers in **Bitsery** v5.2.4 and below may lead to type confusion, resulting in potential information disclosure, control flow hijacking, and arbitrary code execution.',
                 links: [
                     { url: '/posts/insecure-deserialization-and-confusion-attacks-in-cpp/', title: 'writeup/advisory' },
+                    { url: '/talks/pdfs/bsideshk26.pdf', title: 'talk' },
                     { url: 'https://github.com/fraillt/bitsery', title: 'repo' },
                 ],
             },
@@ -150,6 +153,7 @@ const VULNS = [
                 description: 'Insecure deserialization of shared pointers in **HPX** may lead to type confusion, resulting in potential information disclosure, control flow hijacking, and arbitrary code execution.',
                 links: [
                     { url: '/posts/insecure-deserialization-and-confusion-attacks-in-cpp/', title: 'writeup/advisory' },
+                    { url: '/talks/pdfs/bsideshk26.pdf', title: 'talk' },
                     { url: 'https://github.com/TheHPXProject/hpx', title: 'repo' },
                 ],
             },
@@ -161,6 +165,7 @@ const VULNS = [
                 description: 'Insecure deserialization of certain `cista::raw` types in **Cista** may lead to type confusion, resulting in potential address leaks and ASLR bypass.',
                 links: [
                     { url: '/posts/insecure-deserialization-and-confusion-attacks-in-cpp/', title: 'writeup/advisory' },
+                    { url: '/talks/pdfs/bsideshk26.pdf', title: 'talk' },
                     { url: 'https://github.com/felixguendling/cista', title: 'repo' },
                 ],
             },
