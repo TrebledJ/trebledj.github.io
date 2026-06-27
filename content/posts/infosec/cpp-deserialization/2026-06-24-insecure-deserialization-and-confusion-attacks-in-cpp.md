@@ -26,6 +26,8 @@ preamble: |
   > *He only says, ‘Good fences make good neighbors.’*  
   > 
   > — Extract from *Mending Wall* by Robert Frost
+
+  This research was presented during BSidesHK 26. Check out the slides [*here*](/talks/pdfs/bsideshk26.pdf)!
 ---
 
 Deserialization attacks have grown in popularity over the past decade, with major flaws hitting [tech giants](https://thehackernews.com/2025/07/hackers-exploit-sharepoint-zero-day.html) and [modern frameworks](https://react.dev/blog/2025/12/03/critical-security-vulnerability-in-react-server-components)— even in 2025.
@@ -91,11 +93,11 @@ Given this example, the hacker in you may wonder:
 
 All of these are potential attack vectors on the deserialization API. Some may lead to ~~boring~~ classic out-of-bound reads. Some may lead to DoS. In this post, we'll concern ourselves only with the last few questions, which put simply is this: **Can we abuse the referencing mechanism?**
 
-## Understanding Our Targets
+## Who uses pointer/reference serialization?
 
-I deliberately chose libraries which support serialization of references. This automatically eliminates popular language-agnostic libraries (e.g. Protobufs, Msgpack) from our scope as they don't support the feature.
+Pointer serialization is often used in low-latency, decentralised, and distributed systems. In industry, this means use cases span cross-process communication (IPC/RPC), finance, cryptocurrency, IoT, robotics, and science. These are systems which require moving data across machines while preserving the data structure.
 
-Once we’ve culled the masses, we're left with libraries such as Boost Serialization, Cereal, Bitsery, and HPX. These libraries support the serialization of deep, complex structures with use cases spanning cross-process communication (IPC/RPC), finance, IoT, robotics, and science.
+I found five C++ libraries which support this feature, namely Boost Serialization, Cereal, Bitsery, and HPX. Other C++ serialization libraries exist such as nhlomann/json, or even popular language-agnostic libraries such as protobuf and msgpack. However, those libraries don't appear to support serialization of references, so we consider out-of-scope for this post.
 
 - **Boost Serialization**. Boost is a popular C++ library which extends the standard library with various classes and features. Boost *Serialization*, born in 2003, is only one module among a plethora of modules and supports features including versioning, multiple archive formats (binary, text, XML), and serialization support for numerous standard types.
 - **Cereal** is a slightly modern rehash of Boost Serialization, catering to C++11 features and modern formats such as JSON.
@@ -1090,7 +1092,7 @@ The following libraries are affected, with the assigned CVEs.
 | CVE-&#8288;2026-&#8288;11463 | Cereal              | All Known Versions (1.3.2 and below)  | No patch available. Unable to reach maintainer. See workarounds below.                                                                                                                                                                                                        |
 | CVE-&#8288;2025-&#8288;60887 | Cista               | All Known Versions (0.16 and below)   | No patch available. Maintainer cites low impact and priorities. "Reading untrusted data is not [the maintainer’s] use case", despite the library [claiming to be safe against untrusted input](https://github.com/felixguendling/cista/wiki/Security). See workarounds below. |
 | CVE-&#8288;2026-&#8288;9521  | Bitsery             | 5.2.4 and below                       | Fixed in 5.2.5.                                                                                                                                                                                                                                                               |
-| CVE-&#8288;2025-&#8288;60889 | HPX                 | All Known Versions (1.11.0 and below) | No patch available. Maintainer acknowledged but postponed citing non-critical severity level. See workarounds below.                                                                                                                                                          |
+| CVE-&#8288;2025-&#8288;60889 | HPX                 | All Known Versions (1.11.0 and below) | Patch available in [pull request](https://github.com/TheHPXProject/hpx/pull/7334).                                                                                                                                                                                            |
 
 {% endtable %}
 
