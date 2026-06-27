@@ -552,6 +552,6 @@ Do I expect the RCE issues to be fixed? Considering the purpose of DVLs... proba
 
 Although Dynamic Views Loading (DVL) seems appealing for implementing features such as user-generated content or dynamically adding plugins, DVL is a dangerous liability if left in the open. In this post, we've demonstrated multiple ways to exploit DVL, given file-write privileges. DVL is ill-suited for production-use and should only be used for its intended purpose — local testing in development environments.
 
-{% image "https://www.discoverhongkong.com/content/dam/dhk/gohk/2023/dragon-s-back/poi-4-960x720-a.jpg", "jw-80", "Dragon's Back in Hong Kong Island. Photo credit: Hong Kong Tourism Board." %}
+{% image "assets/dragonsback.jpg", "jw-80", "Dragon's Back in Hong Kong Island. Photo credit: [Hong Kong Tourism Board](https://www.discoverhongkong.com/content/dam/dhk/gohk/2023/dragon-s-back/poi-4-960x720-a.jpg)." %}
 
 <sup>Nice View: the *Dragon's Back* Hiking Trail in Hong Kong Island.</sup>{.caption}
