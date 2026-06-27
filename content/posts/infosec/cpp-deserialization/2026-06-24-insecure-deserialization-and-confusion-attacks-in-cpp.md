@@ -34,7 +34,7 @@ Last July, a question came to mind: "What if we took insecure deserialization an
 
 This post presents my latest research, in which we’ll explore proof-of-concepts, do a bit of root cause analysis, and touch on Rust. I've also shared an [advisory][advisory] for those looking to remediate.
 
-[advisory]: /advisories/cpp-deserialization/
+[advisory]: #advisory
 
 {% image "assets/deserialization_party.jpg", "jw-60", "Well... I guess technically insecure deserialization is not entirely new in C++." %}
 
