@@ -21,3 +21,6 @@ http://attacker.site
 http://127.0.0.1:?[0-9]*/.*
 http://192.168.100.100
 http://target:?[0-9]*/.*
+
+# slidev
+https://fonts.googleapis.com/css2
