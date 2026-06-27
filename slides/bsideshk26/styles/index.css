@@ -1,0 +1,91 @@
+/* Global styles with blue tint */
+*:has(> .slidev-layout) {
+  background: linear-gradient(135deg, #0a1628 0%, #1a2744 50%, #0d1f3c 100%);
+  color: #e8f0fe;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  position: relative;
+  overflow: hidden;
+}
+
+.slidev-layout.end {
+  background: linear-gradient(135deg, #0a1628 0%, #1a2744 50%, #0d1f3c 100%);
+  
+}
+
+.slidev-layout h1 + p {
+  /* Stupid seriph default. */
+  opacity: 1;
+}
+
+h1, h2, h3, h4, h5 {
+  color: #7ab7ff !important;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+s {
+  text-decoration-thickness: 3px;
+}
+
+/* Code block styling */
+.shiki {
+  background: rgba(10, 22, 40, 0.8) !important;
+  border: 1px solid rgba(70, 130, 255, 0.2);
+  border-radius: 8px;
+  font-family: 'JetBrains Mono', 'IBM Plex Mono', 'Fira Code', monospace !important;
+}
+
+/* Link styling */
+a {
+  color: #7ab7ff;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #9ac9ff;
+}
+
+/* Table styling */
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th {
+  background: rgba(70, 130, 255, 0.2);
+  color: #7ab7ff;
+  padding: 12px;
+  border: 1px solid rgba(70, 130, 255, 0.3);
+}
+
+td {
+  padding: 12px;
+  border: 1px solid rgba(70, 130, 255, 0.3);
+  color: #e8f0fe;
+}
+
+tbody tr:nth-child(even) {
+  background-color: rgba(81, 112, 180, 0.1);
+}
+
+/* tr:hover {
+  background: rgba(70, 130, 255, 0.05);
+} */
+
+/* Code text styling */
+code, .font-mono {
+  font-family: 'JetBrains Mono', 'IBM Plex Mono', 'Fira Code', monospace !important;
+}
+
+.two-cols-header {
+  gap: 4px;
+}
+
+.slidev-vclick-target:has(>.type-confusion-table) {
+  transition: all 1000ms ease;
+  /* max-height: 100px; */
+}
+
+.slidev-vclick-hidden:has(>.type-confusion-table) {
+  transform: scale(0);
+  max-height: 0;
+}
