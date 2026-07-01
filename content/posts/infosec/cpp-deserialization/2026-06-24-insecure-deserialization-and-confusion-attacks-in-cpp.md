@@ -27,7 +27,7 @@ preamble: |
   > 
   > — Extract from *Mending Wall* by Robert Frost
 
-  This research was presented during BSidesHK 26. Check out the slides [*here*](/talks/pdfs/bsideshk26.pdf)!
+  *This research was presented during BSidesHK 26. Check out the slides [*here*](/talks/pdfs/bsideshk26.pdf)!*
 ---
 
 Deserialization attacks have grown in popularity over the past decade, with major flaws hitting [tech giants](https://thehackernews.com/2025/07/hackers-exploit-sharepoint-zero-day.html) and [modern frameworks](https://react.dev/blog/2025/12/03/critical-security-vulnerability-in-react-server-components)— even in 2025.
