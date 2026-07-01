@@ -34,7 +34,7 @@ import { computed, ref } from 'vue'
 import { useSlideContext } from '@slidev/client'
 
 const { $slidev } = useSlideContext()
-const EXPORT = false;
+const EXPORT = false; // Stupid dumb hack
 const should_show_qrcode = ref(!EXPORT);
 
 // Get current slide number
