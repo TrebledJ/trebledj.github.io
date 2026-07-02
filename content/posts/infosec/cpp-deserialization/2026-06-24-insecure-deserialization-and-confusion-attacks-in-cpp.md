@@ -1116,27 +1116,6 @@ For a demonstration of a full exploit chain from address leak to RCE, check out 
 
 I've also uploaded [a couple CTF challenges and examples for each affected library](https://github.com/TrebledJ/vulnerability-research/tree/main/2025-cpp-deserialization/).
 
-Just presented my first talk at BSides HK last week! 
-
-C++. Type confusion. Insecure deserialization. What do these three seemingly unrelated topics have in common?
-
-Not much. Unless you count a small rabbit hole.
-
-Digging into this rabbit hole revealed a bug class affecting 5 C++ libraries, involving deep dives into vtables and shared pointers which, if the stars (bytes) align, grants arbitrary code execution.
-
-During the talk, I introduced type confusion, showing how to build primitives in C++. I also presented my new research, which netted 5 janky CVEs (some with CVSS 9.8, but that’s a rant for another time).
-
-Truly grateful to the friends who supported me on this journey, the organisers who made the event happen, the audience who entertained my shenanigans, and the awesome people I met whilst nervously w(h)etting my whistle over 5 cups of tea.
-
-Talk: [trebledj.me] https://trebledj.me/talks/pdfs/bsideshk26.pdf
-Writeup: [trebledj.me] https://trebledj.me/posts/insecure-deserialization-and-confusion-attacks-in-cpp/
-Resources (examples, CTF binaries): [github.com] https://github.com/TrebledJ/vulnerability-research/tree/main/2025-cpp-deserialization/playground
-
-Let’s connect and keep hacking! 🫪
-
-
-ENISA catalogues threats for OT FUI
-
 
 ### Impact
 
