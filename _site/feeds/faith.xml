@@ -1,0 +1,424 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:base="https://trebledj.me">
+  <title>TrebledJ&#39;s Pages</title>
+  <subtitle>TrebledJ&#39;s personal blog on programming, cybersecurity, music, and memes.</subtitle>
+  <link href="https://trebledj.me/feeds/faith.xml" rel="self"/>
+  <link href="https://trebledj.me"/>
+  <updated>2024-01-20T00:00:00Z</updated>
+  <id>https://trebledj.me</id>
+  <author>
+    <name>TrebledJ</name>
+    <email>trebledjjj@gmail.com</email>
+  </author>
+  
+    
+      
+      <entry>
+        <title>Relay</title>
+        <description>Electronica on racing light. A variation on one of my older pieces.</description>
+        <link href="https://trebledj.me/posts/relay/"/>
+        <updated>2024-01-20T00:00:00Z</updated>
+        <id>https://trebledj.me/posts/relay/</id>
+        <content xml:lang="en" type="html">&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;The people walking in darkness&lt;/em&gt;&lt;br /&gt;
+&lt;em&gt;have seen a great light;&lt;/em&gt;&lt;br /&gt;
+&lt;em&gt;on those living in the land of deep darkness&lt;/em&gt;&lt;br /&gt;
+&lt;em&gt;a light has dawned.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;– Isaiah 9:2&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;a class=&quot;lightbox-single&quot; title=&quot;This took a long while to make.&quot; href=&quot;https://trebledj.me/img/posts/music/15-relay/assets/relay-4864w.webp&quot;&gt;&lt;img class=&quot;mb-2 rw center jw-100 &quot; src=&quot;https://trebledj.me/img/posts/music/15-relay/assets/relay-4864w.webp&quot; loading=&quot;lazy&quot; decoding=&quot;async&quot; style=&quot;aspect-ratio: auto 4864 / 3328&quot; alt=&quot;Hand reaching out to a helping hand above.&quot; title=&quot;This took a long while to make.&quot; srcset=&quot;https://trebledj.me/img/posts/music/15-relay/assets/relay-256w.webp 256w, https://trebledj.me/img/posts/music/15-relay/assets/relay-512w.webp 512w, https://trebledj.me/img/posts/music/15-relay/assets/relay-1024w.webp 1024w, https://trebledj.me/img/posts/music/15-relay/assets/relay-4864w.webp 4864w&quot; sizes=&quot;(max-width: 256px) 256px, (max-width: 512px) 512px, (max-width: 1024px) 1024px, 4864px&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;What is a relay? A race—passing a baton from one to the next. The passing of packets by a router or a gateway server. Or used plainly as a verb without technicalities, a relay may simply mean to receive and pass on information.&lt;sup class=&quot;footnote-ref&quot;&gt;&lt;a href=&quot;https://trebledj.me/posts/relay/#fn1&quot; id=&quot;fnref1&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+&lt;p&gt;It&#39;s worth taking a moment to reflect: what are we relaying? As time passes, more responsibility falls on our shoulders—the responsibility to be helpful (or useful?) in society; the responsibility to mentor; the responsibility to work, to execute; the responsibility to lead.&lt;/p&gt;
+&lt;p&gt;What are we relaying? What torch are we passing on? What is our &lt;em&gt;light&lt;/em&gt;? And what keeps us moving?&lt;/p&gt;
+&lt;p&gt;The average human &lt;a href=&quot;https://www.gettysburg.edu/news/stories?id=79db7b34-630c-4f49-ad32-4ab9ea48e72b&quot;&gt;works 90,000 hours&lt;/a&gt;. There&#39;s only so much experience, wealth, and knowledge we can accrue.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;Light the torch and guide us through the dark.&lt;/em&gt;&lt;br /&gt;
+&lt;em&gt;Shadows, dispelled by balls of flame.&lt;/em&gt;&lt;br /&gt;
+&lt;em&gt;Relay to us this bright white shining spark.&lt;/em&gt;&lt;br /&gt;
+&lt;em&gt;Ready, for the race to carry on.&lt;/em&gt;&lt;br /&gt;
+&lt;sup&gt;&lt;em&gt;(Some words to go along with the climactic sections.)&lt;/em&gt;&lt;/sup&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr /&gt;
+&lt;p&gt;&lt;em&gt;Similar to &lt;a href=&quot;https://trebledj.me/posts/remorse&quot;&gt;Remorse&lt;/a&gt;, Relay was featured as part of a challenge in the HKUST Firebird CTF 2024 competition, a competition where teams hunt for hidden pieces of text.&lt;/em&gt;&lt;/p&gt;
+&lt;hr class=&quot;footnotes-sep&quot; /&gt;
+&lt;b&gt;Footnotes&lt;/b&gt;
+&lt;section class=&quot;footnotes&quot;&gt;
+&lt;ol class=&quot;footnotes-list&quot;&gt;
+&lt;li id=&quot;fn1&quot; class=&quot;footnote-item&quot;&gt;&lt;p&gt;It might also (in my mind) be a play-on of &amp;quot;&lt;strong&gt;r&lt;/strong&gt;hythmic d&lt;strong&gt;elay&lt;/strong&gt;&amp;quot;. &lt;a href=&quot;https://trebledj.me/posts/relay/#fnref1&quot; class=&quot;footnote-backref&quot;&gt;↩︎&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/section&gt;
+</content>
+        
+          <category>composition</category>
+        
+          <category>music</category>
+        
+          <category>electronica</category>
+        
+          <category>synths</category>
+        
+          <category>dubsy-wubsy</category>
+        
+          <category>modal</category>
+        
+          <category>faith</category>
+        
+      </entry>
+    
+  
+    
+      
+      <entry>
+        <title>5 Wacky Insights from God&#39;s Smuggler</title>
+        <description>Reflections on a story with an unconventional mission.</description>
+        <link href="https://trebledj.me/posts/wacky-insights-from-gods-smuggler/"/>
+        <updated>2024-01-07T00:00:00Z</updated>
+        <id>https://trebledj.me/posts/wacky-insights-from-gods-smuggler/</id>
+        <content xml:lang="en" type="html">&lt;p&gt;&lt;a class=&quot;lightbox-single&quot; title=&quot;Cover image of God&#39;s Smuggler.&quot; href=&quot;https://trebledj.me/img/posts/faith/01-gods-smuggler/assets/thumbnail-562w.webp&quot;&gt;&lt;img class=&quot;rw float-right m-1 jw-45 p-2&quot; src=&quot;https://trebledj.me/img/posts/faith/01-gods-smuggler/assets/thumbnail-562w.webp&quot; loading=&quot;lazy&quot; decoding=&quot;async&quot; style=&quot;aspect-ratio: auto 562 / 333&quot; alt=&quot;Cover image of God&#39;s Smuggler.&quot; title=&quot;Cover image of God&#39;s Smuggler.&quot; srcset=&quot;https://trebledj.me/img/posts/faith/01-gods-smuggler/assets/thumbnail-256w.webp 256w, https://trebledj.me/img/posts/faith/01-gods-smuggler/assets/thumbnail-512w.webp 512w, https://trebledj.me/img/posts/faith/01-gods-smuggler/assets/thumbnail-562w.webp 562w&quot; sizes=&quot;(max-width: 256px) 256px, (max-width: 512px) 512px, 562px&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Last year, a friend lent me his copy of &lt;ins&gt;God’s Smuggler&lt;/ins&gt;, an autobiography of Brother Andrew’s adventures behind the Iron Curtain (into Communist countries).&lt;/p&gt;
+&lt;p&gt;Over the first few chapters we&#39;re introduced to Brother Andrew, an adventurous fellow who served alongside his Dutch comrades in World War II. He is portrayed with a rebellious spirit and strong desire to make a difference to the world.&lt;/p&gt;
+&lt;p&gt;Through various encounters with God, Andrew’s faith deepened and his restlessness to share God’s message grew. As his character develops, his faith becomes a central source of courage, resilience, and a profound sense of purpose.&lt;/p&gt;
+&lt;p&gt;As I read this book, it struck me how the book offers scandalous perspectives to life—ones backed by faith and a dependence on God. To be honest, these perspectives are nothing new. We can find these ideas in the Bible directly... but it&#39;s interesting reading it from a modern POV, amirite?&lt;/p&gt;
+&lt;h2 id=&quot;1-cease-control&quot; tabindex=&quot;-1&quot;&gt;&lt;a class=&quot;md-anchor&quot; href=&quot;https://trebledj.me/posts/wacky-insights-from-gods-smuggler/#1-cease-control&quot; aria-hidden=&quot;true&quot;&gt;&lt;/a&gt; 1. Cease Control&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;And so, for the first of many times, I said the Prayer of God&#39;s Smuggler:&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;&#39;Lord, in my luggage I have Scripture that I want to take to Your children across this border. When You were on earth, You made blind eyes see. Now, I pray, make seeing eyes blind. Do not let the guards see those things You do not want them to see.&#39;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;– Brother Andrew, Lanterns in the Dark, Page 117.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;One aspect to living a Christ-fearing life lies in the &lt;em&gt;Cost of Discipleship&lt;/em&gt;: to give up plans and desires for the sake of Christ. With the amount of travelling Andrew goes through, it’s only a matter of time before stringent border checks catch up with him.&lt;/p&gt;
+&lt;p&gt;In another instance, this relinquishment is spelled out more explicitly—a direct plea, but also a humble deference to Christ.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;&#39;Lord,&#39; I went on, &#39;I know that no amount of cleverness on my part can get me through this border search. Dare I ask for a miracle? Let me take some of the Bibles out and leave them in the open where they will be seen. Then, Lord, I cannot possibly be depending on my own stratagems, can I? I will be depending utterly upon You.&#39;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;– Brother Andrew, The Greenhouse in the Garden, Page 185.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;This character reflects how we can live a Christ-directed life through prayer, rather than living a self-directed life.&lt;/p&gt;
+&lt;div class=&quot;center rw mb-2 h-auto lightbox-gallery&quot;&gt;
+&lt;a class=&quot;&quot; title=&quot;Self-directed life.&quot; href=&quot;https://trebledj.me/img/posts/faith/01-gods-smuggler/assets/fsl4-1-315w.webp&quot;&gt;&lt;img class=&quot;multi rw&quot; src=&quot;https://trebledj.me/img/posts/faith/01-gods-smuggler/assets/fsl4-1-315w.webp&quot; loading=&quot;lazy&quot; decoding=&quot;async&quot; style=&quot;width:44.44%;aspect-ratio: auto 315 / 160&quot; alt=&quot;Self is on the throne. Interests are directed by self, resulting in discord and frustration. Christ is outside the life.&quot; title=&quot;Self-directed life.&quot; srcset=&quot;https://trebledj.me/img/posts/faith/01-gods-smuggler/assets/fsl4-1-256w.webp 256w, https://trebledj.me/img/posts/faith/01-gods-smuggler/assets/fsl4-1-315w.webp 315w&quot; sizes=&quot;(max-width: 256px) 256px, 315px&quot; /&gt;&lt;/a&gt;
+&lt;a class=&quot;&quot; title=&quot;Christ-directed life.&quot; href=&quot;https://trebledj.me/img/posts/faith/01-gods-smuggler/assets/fsl4-2-336w.webp&quot;&gt;&lt;img class=&quot;multi rw&quot; src=&quot;https://trebledj.me/img/posts/faith/01-gods-smuggler/assets/fsl4-2-336w.webp&quot; loading=&quot;lazy&quot; decoding=&quot;async&quot; style=&quot;width:50.56%;aspect-ratio: auto 336 / 150&quot; alt=&quot;Christ is on the throne. Self is yielding to Christ. Interests are directed by Christ, resulting in harmony with God&#39;s plan.&quot; title=&quot;Christ-directed life.&quot; srcset=&quot;https://trebledj.me/img/posts/faith/01-gods-smuggler/assets/fsl4-2-256w.webp 256w, https://trebledj.me/img/posts/faith/01-gods-smuggler/assets/fsl4-2-336w.webp 336w&quot; sizes=&quot;(max-width: 256px) 256px, 336px&quot; /&gt;&lt;/a&gt;
+&lt;/div&gt;
+&lt;p&gt;This can be very difficult to accept. After all, it requires us to deny ourselves and carry a cross (figuratively of course; Luke 14:27). We might not live a life as exciting as Brother Andrew&#39;s, but we could still serve God and experience joy in the process.&lt;/p&gt;
+&lt;details&gt;&lt;summary&gt;Context&lt;/summary&gt;&lt;div class=&quot;details-content&quot;&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;The Yugoslav Government in 1957 permitted visitors to bring in only articles for their personal use. Anything new or anything in quantity was suspect because of the black market thriving all over the country. Printed material especially was liable to be confiscated at the border, no matter how small the quantity, because [coming] from out of the country, it was regarded as foreign propaganda. Now here I was with car and luggage literally bulging with tracts, Bibles, and portions of Bibles. How was I to get them past the border guard? And so, for the first of many times, I said the Prayer of God&#39;s Smuggler:&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;&#39;Lord, in my luggage I have Scripture that I want to take to Your children across this border. When You were on earth, You made blind eyes see. Now, I pray, make seeing eyes blind. Do not let the guards see those things You do not want them to see.&#39;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;And so, armed with this prayer, I started the motor and drove up to the barrier...&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;– Brother Andrew, Lanterns in the Dark, Page 117-118.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;In a separate trip to Romania…&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;It took me four hours to get across the Rumanian border. When I pulled up to the checkpoint on the other side of the Danube, I said to myself, &#39;Well, I&#39;m in luck. Only half a dozen cars. This will go swiftly.&#39;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;When forty minutes had passed and the first car was still being inspected, I thought, &#39;Poor fellow, they must have something on him to take so long.&#39;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;But when that car finally left and the next inspection took half an hour too, I began to worry. Literally everything that family was carrying had to be taken out and spread on the ground. Every car in the line was put through the same routine. The fourth inspection lasted for well over an hour. The guards took the driver inside and kept him there while they removed hubcaps, took his engine apart, removed seats.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;&#39;Dear Lord,&#39; I said, as at least there was just one car ahead of me, &#39;what am I going to do? Any serious inspection will show up those Rumanian Bibles right away.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;&#39;Lord,&#39; I went on, &#39;I know that no amount of cleverness on my part can get me through this border search. Dare I ask for a miracle? Let me take some of the Bibles out and leave them in the open where they will be seen. Then, Lord, I cannot possibly be depending on my own stratagems, can I? I will be depending utterly upon You.&#39;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;While the last car was going through its chilling inspection, I managed to take several Bibles from their hiding places and pile them on the seat beside me.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;It was my turn. I put the little VW in low gear, inched up to the officer standing at the left side of the road, handed him my papers, and started to get out. But his knee was against the door, holding it closed. He looked at my photograph in the passport, scribbled something down, shoved the papers back under my nose, and abruptly waved me on.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Surely thirty seconds had not passed. I started the engine and inched forward. Was I supposed to pull over, out of the way, where the car could be taken apart? Was I... surely I wasn&#39;t... I coasted forward, my foot poised above the brake. Nothing happened...&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;My heart was racing. Not with the excitement of the crossing, but with the excitement of having caught such a spectacular glimpse of God at work.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;– Brother Andrew, The Greenhouse in the Garden, Page 184-185.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;div class=&quot;details-collapse-bottom&quot;&gt;&lt;sub&gt;&lt;a class=&quot;details-collapse-button&quot;&gt;(collapse)&lt;/a&gt;&lt;/sub&gt;&lt;/div&gt;&lt;/div&gt;&lt;/details&gt;
+&lt;details&gt;&lt;summary&gt;Relevant Verses&lt;/summary&gt;&lt;div class=&quot;details-content&quot;&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;&lt;sup&gt;5&lt;/sup&gt;Trust in the Lord with all your heart &lt;br /&gt;and lean not on your own understanding;&lt;br /&gt;
+&lt;sup&gt;6&lt;/sup&gt;in all your ways acknowledge him, &lt;br /&gt;and he will make your paths straight.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;– Proverbs 3:5-6 (NIV)&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;div class=&quot;details-collapse-bottom&quot;&gt;&lt;sub&gt;&lt;a class=&quot;details-collapse-button&quot;&gt;(collapse)&lt;/a&gt;&lt;/sub&gt;&lt;/div&gt;&lt;/div&gt;&lt;/details&gt;
+&lt;h2 id=&quot;2-on-singleness&quot; tabindex=&quot;-1&quot;&gt;&lt;a class=&quot;md-anchor&quot; href=&quot;https://trebledj.me/posts/wacky-insights-from-gods-smuggler/#2-on-singleness&quot; aria-hidden=&quot;true&quot;&gt;&lt;/a&gt; 2. On Singleness&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;&#39;Some people, Lord, are built for the lonely walk.&#39;&lt;/em&gt;&lt;br /&gt;
+– Brother Andrew, The Third Prayer, Page 132.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;In this prayer, Andrew acknowledges some people are gifted for singleness. Despite social stigma, singleness is also a valid calling. Not everyone is called to be intertwined with another hooman.&lt;/p&gt;
+&lt;p&gt;This idea is reflected in 1 Corinthians 7:7, where the apostle Paul addresses singleness and marriage. Neither status should be looked down upon, as people are capable of serving God either way. Some people serve best when alone. Some serve better in a team, as a couple. It really depends on God&#39;s calling (1 Corinthians 7:17).&lt;/p&gt;
+&lt;details&gt;&lt;summary&gt;Context&lt;/summary&gt;&lt;div class=&quot;details-content&quot;&gt;
+&lt;p&gt;At the start of this chapter, Andrew prayed for a wife, but was directed to Isaiah 54:1: &amp;quot;&lt;em&gt;The children of the desolate are more than the children of the married.&lt;/em&gt;&amp;quot;, implying his ministry to the spiritually lost should come first before marriage. Yet, he prayed another prayer:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;&#39;Lord&#39;, I said one morning, sitting on the little iron fold-down bed in my room over the toolshed, &#39;I&#39;ve got to pray just one more time about this bachelor life You plan for me. Now I know about those children You promise the desolate, but Lord, You also promise the desolate a home!&#39; I quickly found the verse in Psalm 68, as though to refresh His memory: &amp;quot;God gives the desolate a home to dwell in.&amp;quot; &#39;It isn&#39;t that I don&#39;t thank You for this room about the toolshed, Lord. Just because it&#39;s dark and dank and mildewy and – doesn&#39;t mean I&#39;m not grateful. But, dear God, it is not a home. Not really. A home is where there&#39;s a wife and children – real ones.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;&#39;Lord, Paul prayed three times for release from the torn in the flesh that was bothering him. And you refused him. I have prayed twice for a wife. I am going to pray once more. Perhaps You will refuse me a third time, too, Lord, and if You do, I shall never again bring up the question. I&#39;m going to write it here in my Bible.&#39; I opened the Bible to the back cover and scribbled one last notation, &#39;Prayed ... for ... wife ... third time ... Witte, 7th July ... 1957.&#39; Then I closed the Bible with a snap, &#39;Some people, Lord, are built for the lonely walk. But not me, please. Not me.&#39;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;– Brother Andrew, &amp;quot;The Third Prayer&amp;quot;, Page 132.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Although much of the passage sees Andrew asking for a wife, I thought the last bit was amusing and deserves a bit of attention.&lt;/p&gt;
+&lt;p&gt;If anything, the casual tone of the prayer goes to show how close Andrew regards God, like an understanding friend.&lt;/p&gt;
+&lt;div class=&quot;details-collapse-bottom&quot;&gt;&lt;sub&gt;&lt;a class=&quot;details-collapse-button&quot;&gt;(collapse)&lt;/a&gt;&lt;/sub&gt;&lt;/div&gt;&lt;/div&gt;&lt;/details&gt;
+&lt;details&gt;&lt;summary&gt;Relevant Verses&lt;/summary&gt;&lt;div class=&quot;details-content&quot;&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;&lt;sup&gt;7&lt;/sup&gt;I wish that all men were as I am. But each man has his own gift from God; one has this gift, another has that.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;– 1 Corinthians 7:7 (NIV)&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;&lt;sup&gt;17&lt;/sup&gt;Nevertheless, each one should retain the place in life that the Lord assigned to him and to which God has called him. This is the rule I lay down in all the churches.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;– 1 Corinthians 7:17 (NIV)&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;div class=&quot;details-collapse-bottom&quot;&gt;&lt;sub&gt;&lt;a class=&quot;details-collapse-button&quot;&gt;(collapse)&lt;/a&gt;&lt;/sub&gt;&lt;/div&gt;&lt;/div&gt;&lt;/details&gt;
+&lt;h2 id=&quot;3-pray-continuously&quot; tabindex=&quot;-1&quot;&gt;&lt;a class=&quot;md-anchor&quot; href=&quot;https://trebledj.me/posts/wacky-insights-from-gods-smuggler/#3-pray-continuously&quot; aria-hidden=&quot;true&quot;&gt;&lt;/a&gt; 3. Pray Continuously&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;Only one of us would be talking at a time; the other would be constantly in prayer.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;– Brother Andrew, The Work Begins to Expand, Page 213.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;What&#39;s that? Missionaries discovered distributed computing and load balancing?&lt;/p&gt;
+&lt;p&gt;As Andrew&#39;s team and work grew, so did their modus operandi. And as absurd as it sounds, this principle is still carried on today.&lt;/p&gt;
+&lt;p&gt;It&#39;s interesting to muse on this &#39;technique&#39;. Clearly there will be situations where both members are occupied and unable to pray. So what&#39;s the dealio? The point, I think, is to (again) &lt;a href=&quot;https://trebledj.me/posts/wacky-insights-from-gods-smuggler/#1-cease-control&quot;&gt;cease control&lt;/a&gt;, i.e. to acknowledge God&#39;s hand on the matter. By praying, we rely not only on ourselves but also on the one with the high ground.&lt;/p&gt;
+&lt;details&gt;&lt;summary&gt;Context&lt;/summary&gt;&lt;div class=&quot;details-content&quot;&gt;
+&lt;p&gt;Andrew and his missionary partner Hans were crossing the border into Russia. As was custom, guards would inspect their papers and vehicle.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;At last came time for the inspection of the car itself. Hans and I had agreed ahead of time on the technique that we used ever afterwards whenever two people were crossing a border together. Only one of us would be talking at a time; the other would be constantly in prayer: prayer that God&#39;s will be done in each detail of the inspection, prayer for the country we were entering – beginning with these employees at the border.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;– Brother Andrew, The Work Begins to Expand, Page 213.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;div class=&quot;details-collapse-bottom&quot;&gt;&lt;sub&gt;&lt;a class=&quot;details-collapse-button&quot;&gt;(collapse)&lt;/a&gt;&lt;/sub&gt;&lt;/div&gt;&lt;/div&gt;&lt;/details&gt;
+&lt;details&gt;&lt;summary&gt;Relevant Verses&lt;/summary&gt;&lt;div class=&quot;details-content&quot;&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;&lt;sup&gt;17&lt;/sup&gt;pray continually;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;– 1 Thessalonians 5:17 (NIV)&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;&lt;sup&gt;6&lt;/sup&gt;Do not be anxious about anything, but in every situation, by prayer and petition, with thanksgiving, present your requests to God. &lt;sup&gt;7&lt;/sup&gt;And the peace of God, which transcends all understanding, will guard your hearts and your minds in Christ Jesus.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;– Philippians 4:6-7 (NIV)&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;div class=&quot;details-collapse-bottom&quot;&gt;&lt;sub&gt;&lt;a class=&quot;details-collapse-button&quot;&gt;(collapse)&lt;/a&gt;&lt;/sub&gt;&lt;/div&gt;&lt;/div&gt;&lt;/details&gt;
+&lt;h2 id=&quot;4-to-run-or-to-stand&quot; tabindex=&quot;-1&quot;&gt;&lt;a class=&quot;md-anchor&quot; href=&quot;https://trebledj.me/posts/wacky-insights-from-gods-smuggler/#4-to-run-or-to-stand&quot; aria-hidden=&quot;true&quot;&gt;&lt;/a&gt; 4. To run or to stand?&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;We stay because— if we go, who will be left to pray?&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;– Brother Andrew, The Greenhouse in the Garden, Page 194.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Ah– migration, the perennial exodus from one country to another. You would think wars and mass migration were left behind in the 20th century, but they still exist today. Wars aren&#39;t the only reason of migration; political storms and socioeconomic circumstances also lead to uncertainty, fear, and instability. No hooman worried only about their individual (or immediate family) life wants that...&lt;/p&gt;
+&lt;p&gt;The two passages quoted in this section offer unique perspectives which challenge our ideal of stability. What matters more? Comfort? Or God? ... Where are we called to?&lt;/p&gt;
+&lt;details&gt;&lt;summary&gt;Context&lt;/summary&gt;&lt;div class=&quot;details-content&quot;&gt;
+&lt;p&gt;While in Romania...&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;I met every shade of attitude, from the extreme of defeat to the extreme of courage. It was easy to sympathise with the defeated ones. &#39;What can we do?&#39; was such a natural reaction. So many had only one ambition: to get out of Rumania altogether.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Oddly though, the more devoted a Christian, the more likely he was to stay put. In Transylvania we visited such a family. These Christians had a poultry farm which was still at least partially their own property. However, the state had given them a production quota that was beyond their capacity to meet. When they failed to reach it, they had to buy enough eggs on the open market to make up the difference. Year after year this had happened, and the economic suffering was great.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;&#39;Why do you stay then? So that you can keep your farm?&#39; I asked.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;The farmer and his wife both looked shocked. &#39;Of course not,&#39; he said. &#39;In fact, we certainly will lose the farm. We stay because—&#39; he let his eyes travel across the valley—&#39;because if we go, who will be left to pray?&#39;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;– Brother Andrew, The Greenhouse in the Garden, Page 193-194.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;div class=&quot;details-collapse-bottom&quot;&gt;&lt;sub&gt;&lt;a class=&quot;details-collapse-button&quot;&gt;(collapse)&lt;/a&gt;&lt;/sub&gt;&lt;/div&gt;&lt;/div&gt;&lt;/details&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;We urged our listeners to reconsider the role of a Christian when his country is in trouble. Is it to run, or is it to stand?&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Life in Cuba in 1965 was not easy. But perhaps God had had His reasons for putting them in this place at this time. Perhaps they were to be His arms and legs and His healing hands in this situation, without whom He would have no representative in this land.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;– Brother Andrew, Twelve Apostles of Hope, Page 261.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;details&gt;&lt;summary&gt;Context&lt;/summary&gt;&lt;div class=&quot;details-content&quot;&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;Several months before our arrival, [Fidel Alejandro] Castro announced his plan to permit people to leave the country. Hundreds of thousands of people put their names on the list. However, only two planes flew out of Cuba each day. It would take ten years before even the 900,000 people on the original list could be flown out. Meanwhile, those who waited lost their jobs, their houses, and property. Yet 190 a day did leave, and others believed firmly that their turn would soon be coming. It was among these people who wanted to leave Cuba that we felt our trip had the greatest effect.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;As we had in Eastern Europe, we urged our listeners to reconsider the role of a Christian when his country is in trouble. Is it to run, or is it to stand? Life in Cuba in 1965 was not easy. But perhaps God had had His reasons for putting them in this place at this time. Perhaps they were to be His arms and legs and His healing hands in this situation, without whom He would have no representative in this land.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;One evening when I had said something like this, a stout, well-dressed man with a heavy black moustache stood up in the congregation. &#39;I am a Methodist minister,&#39; he told the group. &#39;For the last two years I have worked as a barber. But God has spoken to me this evening. I am going to return to the ministry. I am a shepherd who has left his sheep, but I am going back to them.&#39;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;There was pandemonium. Everyone in the church had to shake his hand. I heard shouts of joy, cries of &#39;&lt;em&gt;gracias, pastor!&lt;/em&gt;&#39;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;– Brother Andrew, Twelve Apostles of Hope, Page 261.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;div class=&quot;details-collapse-bottom&quot;&gt;&lt;sub&gt;&lt;a class=&quot;details-collapse-button&quot;&gt;(collapse)&lt;/a&gt;&lt;/sub&gt;&lt;/div&gt;&lt;/div&gt;&lt;/details&gt;
+&lt;details&gt;&lt;summary&gt;Relevant Verses&lt;/summary&gt;&lt;div class=&quot;details-content&quot;&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;&lt;sup&gt;3&lt;/sup&gt;Do nothing out of selfish ambition or vain conceit, but in humility consider others better than yourselves. &lt;sup&gt;4&lt;/sup&gt;Each of you should look not only to your own interests, but also to the interests of others.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;– Philippians 2:3-4 (NIV)&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;div class=&quot;details-collapse-bottom&quot;&gt;&lt;sub&gt;&lt;a class=&quot;details-collapse-button&quot;&gt;(collapse)&lt;/a&gt;&lt;/sub&gt;&lt;/div&gt;&lt;/div&gt;&lt;/details&gt;
+&lt;h2 id=&quot;5-technology-is-in-his-hands&quot; tabindex=&quot;-1&quot;&gt;&lt;a class=&quot;md-anchor&quot; href=&quot;https://trebledj.me/posts/wacky-insights-from-gods-smuggler/#5-technology-is-in-his-hands&quot; aria-hidden=&quot;true&quot;&gt;&lt;/a&gt; 5. Technology is in His Hands&lt;/h2&gt;
+&lt;p&gt;Perhaps one of the most thrilling aspects of &lt;em&gt;Brother Andrew&lt;/em&gt; is&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;his relationship with technology, and&lt;/li&gt;
+&lt;li&gt;how God uses technology (in surprising ways!).&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Of all technological innovations in the 20th century, much of the book was dominated by cars. It makes sense in hindsight. Andrew does a lot of travelling. Of course, he would need a car. It&#39;s the most flexible means of travel (and probably the most cost-effective).&lt;/p&gt;
+&lt;p&gt;It started off with impromptu driving lessons by a peer, Karl de Graaf. Imagine going about your work when all of a sudden, you&#39;re told to learn how to drive.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;&#39;Hello, Andy. Do you know how to drive?&#39;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;&#39;Drive?&#39;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;&#39;An automobile.&#39;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;&#39;No,&#39; I said, bewildered. &#39;No, I don&#39;t.&#39;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;&#39;Because last night in our prayers we had a word from the Lord about you. It&#39;s important for you to be able to drive.&#39;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;[...]&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;A week later the dike builder drove up to the door again.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;&#39;Have you been taking your driving lessons?&#39;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;&#39;Well – not exactly...&#39;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;&#39;Haven&#39;t you learned yet how important obedience is? I suppose I&#39;m going to have to teach you myself. Hop in.&#39;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;That afternoon I sat behind the wheel of a motor vehicle for the first time since that disastrous morning eleven years earlier when I had driven the Bren carrier full speed down the company street. Mr de Graaf returned again and again, and so skilled a teacher was he that a few weeks later I took my driving test and pass it the first time around—a rare thing in Holland. I still could see no reason why I—who didn&#39;t even own a bicycle any more—should be carrying an automobile driver&#39;s licence around in my pocket. But Mr de Graaf refused to speculate. &#39;That&#39;s the excitement in obedience,&#39; he said. &#39;Finding out later what God had in mind.&#39;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;– Brother Andrew, The Foundations are Laid, Page 109.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;A few page flips later, Andrew found a use for his driver&#39;s licence...&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;&#39;This is Andrew calling. How lucky to find you home in the middle of the day.&#39;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;&#39;I thought you were in Berlin.&#39;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;&#39;I am.&#39;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;&#39;We were sorry to hear about your father.&#39;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;&#39;Thank you. But this call is good news, Mr Whetstra. I just had to tell you. I have in my hand two pieces of paper. One is a letter from the Yugoslavian consulate in Holland turning down my request for a visa, and the other is my passport, stamped with a visa by the Yugoslav people here. I&#39;ve got it, Mr Whetstra! I&#39;m going behind the Curtain as a missionary!&#39;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;&#39;Andrew, you&#39;d better come home for your keys.&#39;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;&#39;I&#39;m sorry, Mr Whetstra, this is a bad connection. I thought you said keys.&#39;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;&#39;I did. To your Volkswagen. We&#39;ve talked it all over, and there&#39;s no untalking us. Mrs Whetstra and I decided months ago that if you got the visa, you also got our automobile. Come home and pick up the keys.&#39;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;– Brother Andrew, The Foundations are Laid Page 114&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Oh joy. Free car!&lt;/p&gt;
+&lt;p&gt;Even when the car engine died, God had an exercise planned.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;This was all His timing, and the question of the money was also in His hands. I was not worried, just fascinated to see how He was going to work it all out.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;details&gt;&lt;summary&gt;Context&lt;/summary&gt;&lt;div class=&quot;details-content&quot;&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;&#39;My crew leaves in ten minutes. They could have a new engine in for you in an hour, but you&#39;d have to pay them a good tip for staying overtime.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;&#39;How much would the whole thing cost, including the tip?&#39;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;&#39;Five hundred marks.&#39;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Without hesitation I said, &#39;Go ahead. I&#39;ll go and get some more money changed at the train station.&#39;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;It was on board the streetcar going to the station that I counted my money and realised that all I had with me would not make five hundred marks. There&#39;d be no help from the two students back at the garage: they were riding with me in the first place because they were flat broke.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Should I go back and cancel the work order? No. I could see God&#39;s hand too clearly in all of this. Stopping precisely at the emergency telephone, having the engine wear out here in Germany where it came from, rather than in some distant and hostile spot where replacement would have been impossible and questions awkward. I was far too familiar with the way Christ looks after the practical side of the ministry to miss these signs. This was all His timing, and the question of the money was also in His hands. I was not worried, just fascinated to see how He was going to work it all out.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;When I had changed every last guilder, it came—with the German money in my pocket—to 470 marks. Fifty shy of the amount I needed to pay the bill and to buy gasoline on the way home.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;&#39;Well,&#39; I said to myself, &#39;something will happen on the streetcar going back.&#39;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;But nothing did. I got to the garage to find the workmen just finishing up and my two passengers nowhere to be seen. They&#39;d gone for a walk, one of the men said, packing away his tools. The others were cleaning up too. I could delay the moment of reckoning no longer.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;And at that instant, the two young Dutchmen raced through the door, one of them waving something in his hand. &#39;Andy!&#39; he shouted. &#39;Craziest thing ever happened to me! We were just walking along the street when this lady came up to us and asked if we were Dutchmen. When I said yes, she gave me this bill! She said God wanted us to have it!&#39;
+The bill was for fifty marks.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;– Brother Andrew, The Work Begins to Expand, Page 203-204.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;div class=&quot;details-collapse-bottom&quot;&gt;&lt;sub&gt;&lt;a class=&quot;details-collapse-button&quot;&gt;(collapse)&lt;/a&gt;&lt;/sub&gt;&lt;/div&gt;&lt;/div&gt;&lt;/details&gt;
+&lt;p&gt;And finally, a modern take on technology:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;Although he sometimes walks the three miles to the Dutch offices of Open Doors, where all the modern technological wonders are in use, Andrew&#39;s personal workplace is not connected to the Internet and has no fax or answering machine.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;&#39;And I won&#39;t even consider installing one of those call-waiting monstrosities,&#39; he exclaimed, &#39;that interrupt one phone conversation to announce another.&#39; Technology, Andrew says, makes us far too accessible to the demands and pressures of the moment. &#39;Our first priority should be listening in patience and silence for the voice of God.&#39;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;– Brother Andrew, The Journey in the New Millennium, Page 277.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;This last statement is true. Sometimes I wonder if I place technology (apps, games, notifications) first, before God... and I shudder at the thought. Thankfully, most phones now come with &lt;em&gt;Do Not Disturb&lt;/em&gt;, but without self-discipline it&#39;s pointless.&lt;/p&gt;
+&lt;h2 id=&quot;concluding-remarks&quot; tabindex=&quot;-1&quot;&gt;&lt;a class=&quot;md-anchor&quot; href=&quot;https://trebledj.me/posts/wacky-insights-from-gods-smuggler/#concluding-remarks&quot; aria-hidden=&quot;true&quot;&gt;&lt;/a&gt; Concluding Remarks&lt;/h2&gt;
+&lt;p&gt;Quick recap:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Cease control. Live a Christ-directed life.&lt;/li&gt;
+&lt;li&gt;Singleness/&lt;abbr data-bs-placement=&quot;top&quot; data-bs-toggle=&quot;tooltip&quot; title=&quot;Cantonese slang for being single, without previous romantic relationships&quot;&gt;A0&lt;/abbr&gt; is nothing to be ashamed of.&lt;/li&gt;
+&lt;li&gt;Pray continuously.&lt;/li&gt;
+&lt;li&gt;What is your calling?&lt;/li&gt;
+&lt;li&gt;Technology is powerful, but it&#39;s even more powerful in God&#39;s hands.&lt;/li&gt;
+&lt;li&gt;Ultimately: Seek God&#39;s kingdom first. (Matthew 6:33)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Other interesting things:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;A congregation threw &lt;em&gt;paper aeroplanes&lt;/em&gt; to pass prayer requests across a large hall! (Page 217) Creative! Wonder if they broke any world records for number of paper planes thrown indoors.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;It was real joy reading this book. Every page sparked as much adventure and trepidation as &lt;ins&gt;Robinson Crusoe&lt;/ins&gt;. Maybe I&#39;ll read &lt;ins&gt;Light Force&lt;/ins&gt; next? My five insights don&#39;t do justice to the gracious work God has delivered through Andrew; but hopefully these insights may encourage us to (re)read &lt;ins&gt;God&#39;s Smuggler&lt;/ins&gt; (and by extension, the Bible) and explore the adventure within.&lt;/p&gt;
+&lt;p&gt;What insights did you discover reading &lt;ins&gt;God&#39;s Smuggler&lt;/ins&gt;? Do you have a favourite insight from this list? How can you apply these in your daily life?&lt;/p&gt;
+</content>
+        
+          <category>reading</category>
+        
+          <category>reflection</category>
+        
+          <category>notes</category>
+        
+          <category>faith</category>
+        
+      </entry>
+    
+  
+    
+      
+      <entry>
+        <title>Déjà Vu – Cycle of Power</title>
+        <description>The first variation in a series exploring repetition and meaning in life.</description>
+        <link href="https://trebledj.me/posts/deja-vu-cycle-of-power/"/>
+        <updated>2023-04-09T00:00:00Z</updated>
+        <id>https://trebledj.me/posts/deja-vu-cycle-of-power/</id>
+        <content xml:lang="en" type="html">&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;And in the days of those kings the God of heaven will set up a kingdom that shall never be destroyed, nor shall the kingdom be left to another people. It shall break in pieces all these kingdoms and bring them to an end, and it shall stand forever…&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;— Daniel 2:44 (NIV)&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Organisations, institutions, nations, governments, civilisations. Whether big or small, strong or weak, aggressive or meek, each eventually fades and another rises to take its place. Though on the outside, they seem different; in the inside, they are underscored by a common denominator: the human nature of selfishness and stupidity (or put bluntly, sin).&lt;/p&gt;
+&lt;p&gt;Does this mean we should dissolve into anarchy? Well, no. Organisation, with enough trust, is better than disorganisation. Proper care should be taken to manage resources, especially on a nation-wide level.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;What has been is what will be, and what has been done is what will be done, and there is nothing new under the sun.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;— Ecclesiastes 1:9 (NIV)&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&amp;quot;Gibberish, ChatGPT is new under the sun!&amp;quot; But if we take into account all history and the timeline of events, there’s really not much new. Did you know before computers were invented, a &lt;em&gt;computer&lt;/em&gt; used to be a &lt;a href=&quot;https://en.wikipedia.org/wiki/Computer_(occupation)&quot;&gt;job title&lt;/a&gt;? It wouldn’t be surprising if, later on, an &lt;em&gt;engineer&lt;/em&gt; or &lt;em&gt;artist&lt;/em&gt; refers to a computer program.&lt;/p&gt;
+&lt;p&gt;My point lies in the cycle of power and time. Developments, alliances, wars, laws, technologies, and disasters become mere motifs in the grand scheme of things. Standards of living, science, technology, and health have all improved over the past millennia, but nations still rage like a ceaseless tempest. Conflicts arise, almost inevitably, as if they were meant to be. Such is human nature.&lt;/p&gt;
+&lt;hr /&gt;
+&lt;p&gt;&lt;em&gt;Déjà Vu – Cycle of Power&lt;/em&gt; is my impression of all the above. The musical ideas in this piece were not without inspiration. Some notable inspirations were Fauré&#39;s melodic tune in &lt;em&gt;Libera Me&lt;/em&gt;, Holst&#39;s militaristic rhythm in &lt;em&gt;Mars&lt;/em&gt;, and John Adams’ minimalist works.&lt;/p&gt;
+&lt;p&gt;This piece is scored for orchestra, with repeated sections to capture the essence of a cycle. Throughout this timeless journey, civilisations rise and fall. They come in different shapes and sizes, from the grand to the subdued, from the pacifists to the militarists. A fleeting escape is made into a lucid dreamlike passage where flourishing arpeggios elevate us from reality; yet order lurks in the background. The piece culminates in an oddly familiar setting as history seemingly repeats itself.&lt;/p&gt;
+&lt;p&gt;Each motif and section comes to an end, their place taken by a new motif—and ultimately silence. But there’s a motif which doesn’t end—which can’t be captured on sheets of music.&lt;sup class=&quot;footnote-ref&quot;&gt;&lt;a href=&quot;https://trebledj.me/posts/deja-vu-cycle-of-power/#fn1&quot; id=&quot;fnref1&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+&lt;p&gt;Although the world we live in may seem like an inescapable matrix&lt;sup class=&quot;footnote-ref&quot;&gt;&lt;a href=&quot;https://trebledj.me/posts/deja-vu-cycle-of-power/#fn2&quot; id=&quot;fnref2&quot;&gt;2&lt;/a&gt;&lt;/sup&gt;, each of us has the opportunity to learn, to teach, to experience different perspectives, and to share the hope of something unseen—something more.&lt;/p&gt;
+&lt;p&gt;On this Easter Sunday (and well… all Easter Sundays), we commemorate the resurrection of Jesus Christ, remembering the glorious occasion of His power—and victory—over death, sin, and evil.&lt;/p&gt;
+&lt;hr class=&quot;footnotes-sep&quot; /&gt;
+&lt;b&gt;Footnotes&lt;/b&gt;
+&lt;section class=&quot;footnotes&quot;&gt;
+&lt;ol class=&quot;footnotes-list&quot;&gt;
+&lt;li id=&quot;fn1&quot; class=&quot;footnote-item&quot;&gt;&lt;p&gt;How do you apply dimension reduction on the infinite without discarding an &lt;em&gt;ounce&lt;/em&gt; of its beauty? Good luck trying to use PCA or whatever dimensionality reduction algorithm is popular at the time of reading. I mean, I suppose it&#39;s still possible to focus on some aspects and reduce accordingly. Maybe for a later time. &lt;a href=&quot;https://trebledj.me/posts/deja-vu-cycle-of-power/#fnref1&quot; class=&quot;footnote-backref&quot;&gt;↩︎&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&quot;fn2&quot; class=&quot;footnote-item&quot;&gt;&lt;p&gt;Alluding to the &lt;a href=&quot;https://en.wikipedia.org/wiki/The_Matrix&quot;&gt;movie&lt;/a&gt;. Go watch it if you haven’t already. &lt;sub&gt;&lt;em&gt;cough&lt;/em&gt; - You know who you are.&lt;/sub&gt; &lt;a href=&quot;https://trebledj.me/posts/deja-vu-cycle-of-power/#fnref2&quot; class=&quot;footnote-backref&quot;&gt;↩︎&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/section&gt;
+</content>
+        
+          <category>composition</category>
+        
+          <category>music</category>
+        
+          <category>faith</category>
+        
+          <category>orchestral</category>
+        
+          <category>fusion</category>
+        
+          <category>deja-vu</category>
+        
+          <category>essay</category>
+        
+      </entry>
+    
+  
+    
+      
+      <entry>
+        <title>Remorse</title>
+        <description>Hiding messages with counterpoint.</description>
+        <link href="https://trebledj.me/posts/remorse/"/>
+        <updated>2023-01-27T00:00:00Z</updated>
+        <id>https://trebledj.me/posts/remorse/</id>
+        <content xml:lang="en" type="html">&lt;p&gt;A reflection of the past, composed and mixed during my 7-day covid quarantine.&lt;/p&gt;
+&lt;p&gt;Time ebbs past,&lt;br /&gt;
+As anguish holds fast.&lt;br /&gt;
+Without you I’m filled with remorse,&lt;br /&gt;
+For you are my one driving force.&lt;/p&gt;
+&lt;p&gt;As the season turns,&lt;br /&gt;
+My heart still churns.&lt;br /&gt;
+I’ll leave my sins and remorse,&lt;br /&gt;
+Heading on a different course.&lt;/p&gt;
+&lt;hr /&gt;
+&lt;p&gt;The purpose of composing this piece is threefold: it served as an expression of faith and emotions, a challenge for a &lt;a href=&quot;https://trebledj.me/tags/ctf/&quot;&gt;Capture-the-Flag (CTF)&lt;/a&gt; competition, and an enjoyable way to pass quarantine. There wasn&#39;t any priority to a particular purpose; all of them seemed to develop together.&lt;/p&gt;
+&lt;p&gt;This piece was composed for the HKUST Firebird 2023 Internal CTF. Such competitions are designed to challenge players with cybersecurity know-how. Once players identify and exploit a vulnerability, they are rewarded with a &lt;em&gt;flag&lt;/em&gt; (a piece of text), which awards points to the player when submitted. Occasionally, some challenges deviate from the norm and test players in other areas. In this case, my challenge tested players in analysing music and patterns.&lt;/p&gt;
+&lt;p&gt;When composing this piece, I aimed to compose something listenable and motivic. I decided to keep constraints flexible within limits. If a music is too constrained, it sounds choked, inevitable, or unimaginative. Some music ciphers out there encode letters into pitches and duration. This was a bit too far for my liking, as it becomes painstakingly difficult to find a pleasurable tune.&lt;/p&gt;
+&lt;p&gt;As hinted by the title, I first translated the flag into Morse using an &lt;a href=&quot;https://onlineasciitools.com/convert-ascii-to-morse&quot;&gt;online converter&lt;/a&gt; with the extended Morse character set. This allowed for some punctuation such as &lt;code&gt;(&lt;/code&gt;, &lt;code&gt;-&lt;/code&gt;, &lt;code&gt;_&lt;/code&gt;, and funky non-ASCII characters such as &lt;code&gt;é&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;With plaintext, we need to encode at least 50 distinct letters. With Morse, we just need to encode 3 instead: &lt;code&gt;.&lt;/code&gt;, &lt;code&gt;-&lt;/code&gt;, and space (as a word separator). So things are relatively simple.&lt;/p&gt;
+&lt;p&gt;I toyed around with a few ideas of encoding these three characters. Eventually I ended up with this mapping:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;.&lt;/code&gt; → &amp;quot;Note On&amp;quot; in upper stave (treble clef)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-&lt;/code&gt; → &amp;quot;Note On&amp;quot; in lower stave (bass clef)&lt;/li&gt;
+&lt;li&gt;space → &amp;quot;Note On&amp;quot; in both staves&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;This lent the music well to a contrapuntal form, with the occasional grace-note or glissando to pack characters in a way that preserves the melodic contour. After composing the sheet music, I ended up mixing it with Reaper for some extra flair and charged resonance, making the night seem younger.&lt;/p&gt;
+&lt;p&gt;Enjoy the result!&lt;/p&gt;
+</content>
+        
+          <category>composition</category>
+        
+          <category>music</category>
+        
+          <category>faith</category>
+        
+          <category>piano</category>
+        
+          <category>counterpoint</category>
+        
+          <category>modal</category>
+        
+          <category>electronica</category>
+        
+          <category>dubsy-wubsy</category>
+        
+          <category>synths</category>
+        
+          <category>ctf</category>
+        
+          <category>writeup</category>
+        
+          <category>stego</category>
+        
+      </entry>
+    
+  
+</feed>

@@ -1,0 +1,66 @@
+/*
+ * New diff- syntax
+ */
+
+pre[class*="language-diff-"] {
+	--eleventy-code-padding: 1.25em;
+	padding-left: var(--eleventy-code-padding);
+	padding-right: var(--eleventy-code-padding);
+}
+.token.deleted {
+	background-color: hsla(0, 51%, 37%, 55%);
+	color: inherit;
+}
+.token.inserted {
+	background-color: hsla(126, 28%, 36%, 55%);
+	color: inherit;
+}
+
+html[data-theme=light] .token.deleted {
+	background-color: hsl(0, 51%, 83%, 50%);
+	color: inherit;
+}
+html[data-theme=light] .token.inserted {
+	background-color: hsl(126, 28%, 83%, 60%);
+	color: inherit;
+}
+
+/* Make the + and - characters unselectable for copy/paste */
+.token.prefix.unchanged,
+.token.prefix.inserted,
+.token.prefix.deleted {
+	-webkit-user-select: none;
+	user-select: none;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	padding-top: 2px;
+	padding-bottom: 2px;
+}
+.token.prefix.inserted,
+.token.prefix.deleted {
+	width: var(--eleventy-code-padding);
+	background-color: rgba(0,0,0,.2);
+}
+
+/* Optional: full-width background color */
+.token.inserted:not(.prefix),
+.token.deleted:not(.prefix) {
+	display: block;
+	margin-left: calc(-1 * var(--eleventy-code-padding));
+	margin-right: calc(-1 * var(--eleventy-code-padding));
+	text-decoration: none; /* override del, ins, mark defaults */
+	color: inherit; /* override del, ins, mark defaults */
+}
+
+/* More whitespace between +/- and start of line. */
+.token.prefix {
+	margin-left: 3px;
+	margin-right: 3px;
+}
+
+/* Required for full-width diff highlight lines. */
+pre[class*="language-diff-"] code {
+	display: inline-grid; /* ??? */
+	width: 100%;
+}

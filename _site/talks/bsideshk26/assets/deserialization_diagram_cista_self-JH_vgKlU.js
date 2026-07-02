@@ -1,0 +1,1 @@
+var e=`/talks/bsideshk26/assets/deserialization_diagram_cista_self-bnBj2tA1.png`;export{e as t};
