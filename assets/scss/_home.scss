@@ -81,9 +81,9 @@ $collapse-function: ease-out;
         // Overflow hidden does not fit my use case because there is a visual clip with the tag glow effect; 
         // and if I were to set overflow hidden ONLY on the collapsed state, the entire visual transition will clip which does not look nice.
         // Instead of using `overflow: hidden` here, I use a weird max-height hack.
-        // Setting it to 1px works here because the metadata tag container is only one part of the box being expanded.
+        // Setting it to a fixed px works here because the metadata tag container is only one part of the box being expanded.
         // Other than the tag box, the post description will also be expanded, so the tag container "races" it.
-        max-height: 1px;
+        max-height: 100px;
         // & > * {
         //     overflow: hidden;
         // }
@@ -208,6 +208,9 @@ $collapse-function: ease-out;
 
     // Thumbnail average color for small screens.
     .home-header.collapsed {
+        .metadata-tag-container {
+            max-height: 1px;
+        }
         & + .collection-list {
             .post-thumbnail-avg-color {
                 opacity: 1;
